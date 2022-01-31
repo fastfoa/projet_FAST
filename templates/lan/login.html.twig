@@ -1,12 +1,119 @@
 {% extends 'lan/base.html.twig' %}
 
-{% block body %}
+{% block stylesheets %}
+    <style>
+        .body-fe
+        {
+            background-image: url("https://webgenius.foreach-academy.fr/wp-content/uploads/2022/01/fond-bleu-double-scaled.jpg");
+            background-position: center top;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            margin: 0;
+        }
+        .bar-top
+        {
+            width: 100%;
+            height: 80px;
+            color: white;           
+            vertical-align: top; 
+        }
+        .menu-top
+        {
+            width: 50%;
+            margin: auto;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .ul-fe li
+        {
+            display: inline;
+            margin-left : 10px;
+            margin-right : 10px;
+        }
+        .logo-top
+        {
+            height: 100%;
+            display: inline-block;
+        }
 
-<form >
-    <input type='text' placeholder='votre login'>
-    <br>
-    <input type='text' placeholder='votre mot de passe'>
-</form>
+        .work-content
+        {
+            width: auto;
+            padding: 10% 0 10% 0;
+            height:  auto;
+            background-color: #018FA5;
+            margin: 50px;
+        }
+
+        .bar-bottom
+        {
+            position: relative;
+            bottom: 30px;
+            height: 100px;
+            width: 100%;
+            background-color: #11284B;
+            text-align: center;
+        }
+
+        .boutonForm
+        {
+            background-color: #79a342;
+            color: white;
+            border-radius: 3px; 
+            border: none;
+            padding: 12px 24px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 15px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .boutonForm:hover
+        {
+            background-color: #f37262;
+        }
+
+        .form
+        {
+            border-radius: 3px;
+            background-color: #11284B;
+            margin: auto;
+            width: 40%;
+            text-align: center;
+            padding: 3%;
+        }
+
+        input
+        {
+            width: 50%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        h2
+        {
+            color: white;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+<div class='form'>
+    <form action="#">
+        <h2>Connectez-vous</h2>
+        <input type='mail' placeholder='Entrez votre adresse mail'>
+        <br>
+        <input type='password' placeholder='Entrez votre mot de passe'>
+        <br>
+        <br>
+        <button class='boutonForm' type='submit'>Se connecter</button>
+    </form>
+</div>
 
 
 {% endblock %}
