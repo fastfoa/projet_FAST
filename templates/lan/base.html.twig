@@ -1,106 +1,112 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
-        {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
-        <style>
-        .body-fe
-        {
-            background-image: url("https://webgenius.foreach-academy.fr/wp-content/uploads/2022/01/fond-bleu-double-scaled.jpg");
-            background-position: center top;
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            margin:0px;
-        }
-        .bar-top
-        {
-            width: 100%;
-            height: 80px;
-            color: white;           
-            vertical-align: top;
-            
-           
-        }
-        .menu-top
-        {
-            width: 70%;
-            margin: 0% 20%;
-            display: inline-block;
-            vertical-align: center;
-            text-align:center;
-            background-color: purple;
-            margin-top:-30px;
+	<head>
+		<meta charset="UTF-8">
+		<title>
+			{% block title %}Welcome!
+			{% endblock %}
+		</title>
+		<link
+		rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+		{# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
+		<style>
+			.body-fe {
+				background-image: url("https://webgenius.foreach-academy.fr/wp-content/uploads/2022/01/fond-bleu-double-scaled.jpg");
+				background-position: center top;
+				background-size: cover;
+				background-repeat: no-repeat;
+				background-attachment: fixed;
+				margin: 0;
+			}
+			.bar-top {
+				width: 100%;
+				height: 80px;
+				color: white;
+				vertical-align: top;
+                
+
+
+			}
+			.menu-top {
+				width: 70%;
+				margin: -30px 20% 0;
+				display: inline;
+				vertical-align: center;
+				text-align: center;
+				background-color: purple;
+              
+
+
+			}
+			.ul-fe li {
+				display: inline;
+				margin-left: 10px;
+				margin-right: 10px;
+                position: relative ;
+                top: -60px;
+                
+			}
+			.logo-top {
+				height: 100%;
+				display: inline;
+				margin: 10px;
+
+			}
+
+			.work-content {
+				width: 50%;
+				height: 400px;
+				background-color: #018FA5;
+				margin: 40px auto 10px;
+			}
+
+
+			.bar-bottom {
+				position: absolute;
+				bottom: 0;
+				height: 50px;
+				width: 100%;
+				background-color: #11284B;
+				text-align: center;
+                color:white;
+
+			}
 
             
-        }
-        .ul-fe li
-        {
-            display: inline;
-            margin-left : 10px;
-            margin-right : 10px;
-        }
-        .logo-top
-        {
-            height: 100%;
-            display: inline-block;
-            margin:10px;
+		</style>
+
+		{% block stylesheets %}
+			{{ encore_entry_link_tags('app') }}
+		{% endblock %}
+
+		{% block javascripts %}
+			{{ encore_entry_script_tags('app') }}
+		{% endblock %}
+	</head>
+	<body class="body-fe">
+
+		
+			<div class="bar-top">
+				<img class="logo-top" src="{{ asset('images/logo-foreach-blanc.png') }}">
+
+				<div class="menu-top">
+					<ul class="ul-fe">
+						<li>Accueil</li>
+						<li>L’Ecole</li>
+						<li>Actualités</li>
+						<li>Formations Développeur Web</li>
+						<li>Contactez-Nous !</li>
+					</ul>
+
+				</div>
+			</div>
+
+		
+		<div class="work-content"> {% block body %}{% endblock %}
+			</div>
+			<div class="bar-bottom"> Lorem ipsum dolor sit amet consectetur adipisicing elit.
             
-        }
+             </div>
 
-        .work-content
-        {
-            width: 50%;
-            height: 400px;
-            background-color: #018FA5;
-            margin: auto;
-            margin-top:40px;
-            margin-bottom: 10px;
-        }
-
-
-        .bar-bottom
-        {
-            position: absolute;
-            bottom: 0px;
-            height: 50px;
-            width: 100%;
-            background-color: #11284B;
-            text-align: center;
-            
-        }
-
-        </style>
-
-        {% block stylesheets %}
-            {{ encore_entry_link_tags('app') }}
-        {% endblock %}
-
-        {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
-        {% endblock %}
-    </head>
-    <body class="body-fe">
-        <div class="bar-top">
-            <img class="logo-top" src="{{ asset('images/logo-foreach-blanc.png') }}">
-            <div class="menu-top">
-                <ul class="ul-fe">
-                    <li>Accueil</li>
-                    <li>L’Ecole</li>
-                    <li>Actualités</li>
-                    <li>Formations Développeur Web</li>
-                    <li>Contactez-Nous !</li>
-                </ul>
-
-            </div>
-        </div>
-        <div class="work-content">
-        {% block body %}{% endblock %}
-        </div>
-        <div class="bar-bottom">
-        </div>
-        
-    </body>
-</html>
+		</body>
+	</html>
