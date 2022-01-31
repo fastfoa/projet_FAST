@@ -1,3 +1,19 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
 .font_contenue{
     background-color: #11284B;
+    width: 300px;
+    height: 250px;
+    text-align: center;
+}
+.font_contenue img{
+    padding-top: 20px;
+    padding-bottom: 40px;
+}
+.list_des_information li{
+    list-style-type: none;
+    color: #fff;
+    padding: 3px 0;
 }
