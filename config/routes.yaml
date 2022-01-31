@@ -1,3 +1,21 @@
 #index:
 #    path: /
 #    controller: App\Controller\DefaultController::index
+
+login:
+    path: /login
+    controller: App\Controller\LanController::login
+
+registerStudent:
+    path: /registerStudent
+    controller: App\Controller\LanController::registerStudent
+
+dashBoardStudent:
+    path: /dashBoardStudent
+    controller: App\Controller\LanController::dashBoardStudent
+
+dashBoardSchool:
+    path: /dashBoardSchool
+    controller: App\Controller\LanController::dashBoardSchool
+
+
