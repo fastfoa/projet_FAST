@@ -18,7 +18,12 @@ class LanController extends AbstractController
         ]);
     }
 
-
+public function inscription(): Response
+{
+return $this->render('lan/inscription.html.twig', [
+        'controller_name' => 'LanController',
+        ]);
+}
 public function login(): Response
 {
     return $this->render('lan/login.html.twig', [
