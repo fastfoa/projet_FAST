@@ -47,6 +47,11 @@ public function dashBoardSchool(): Response
     ]);
 }
 
-
+public function downloadFile(): Response
+{
+    return $this->render('lan/downloadFile.html.twig', [
+        'downloadFile' => 'LanController',
+    ]);
+}
 
 }
