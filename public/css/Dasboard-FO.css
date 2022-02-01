@@ -17,3 +17,17 @@
     color: #fff;
     padding: 3px 0;
 }
+.grand-rond{
+    height: 400px;
+    width: 400px;
+    border: 1px solid black;
+    background-color: red;
+    border-radius: 100%;
+}
+.petit-rond{
+    height: 200px;
+    width: 200px;
+    border: 1px solid black;
+    background-color: yellow;
+    border-radius: 100%;
+}

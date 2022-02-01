@@ -5,23 +5,26 @@
 {% endblock %}
 
 {% block body %}
-
-	<div class="contenue_personnel font_contenue">
-        <img src="{{asset('images/avatar_garcon.png')}}" alt="avatar_garcon">
-        <div class="contenue_personnel_information">
-            <ul class="list_des_information">
-                <li>Nom: Lebas</li>
-                <li>Prenom: Dylan</li>
-                <li>adress: 393 Rue du Général de Gaulle,<br>59700 Marcq-en-Barœul</li>
-                <li>Téléphone:0607080910</li>
-                <li>Email: Dylan@symbol-it.com</li>
-                <li>Date de naissance: 20/07/1995</li>
-            </ul>
+    <div class="container">
+        <div class="row">
+            <div class="font_contenue col-2">
+                <img src="{{asset('images/avatar_garcon.png')}}" alt="avatar_garcon">
+                    <ul class="list_des_information">
+                        <li>Nom: Lebas</li>
+                        <li>Prenom: Dylan</li>
+                        <li>adress: 393 Rue du Général de Gaulle,<br>59700 Marcq-en-Barœul</li>
+                        <li>Téléphone:0607080910</li>
+                        <li>Email: Dylan@symbol-it.com</li>
+                        <li>Date de naissance: 20/07/1995</li>
+                    </ul>
+            </div>
+            <div class="font_contenue col-10">
+                <div class="grand-rond">
+                    <div class="petit-rond">
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    <div class="contenue_info font_contenue">
-        
-    </div>
-
 
 {% endblock %}
