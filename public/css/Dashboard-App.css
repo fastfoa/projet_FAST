@@ -1,0 +1,48 @@
+
+		.profil {
+			height: 496px;
+			width: 300px;
+			background-color: #11284B;
+			border: 2px solid black;
+			opacity: 80%;
+			display: inline-block;
+            margin: auto;
+            border-radius: 15px;	 
+		}
+		.colortext{
+			color: white!important;
+		}
+        
+		.photoprofil {
+			height: 30%;
+			width: 60%;
+			margin: 1% 20%;
+			border: 2px solid black;
+			border-radius: 100%;
+		}
+
+		.profiltext {
+			color: black;
+		}
+
+		.menudash {
+			height: 400px;
+			width: 400px;
+			background-color: white;
+			border: 2px solid black;
+			opacity: 80%;
+			display: inline-block;
+            border-radius: 100%;
+		}
+        .rond{
+            height: 200px;
+			width: 200px;
+			background-color: red;
+			border: 2px solid black;
+			opacity: 80%;
+			display: inline-block;
+            border-radius: 100%;
+            margin: auto;
+			      padding: auto;
+	display: inline-block;
+        }
