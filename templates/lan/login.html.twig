@@ -11,6 +11,7 @@
             background-attachment: fixed;
             margin: 0;
         }
+        
         .bar-top
         {
             width: 100%;
@@ -18,6 +19,7 @@
             color: white;           
             vertical-align: top; 
         }
+        
         .menu-top
         {
             width: 50%;
@@ -25,12 +27,14 @@
             display: inline-block;
             vertical-align: middle;
         }
+        
         .ul-fe li
         {
             display: inline;
             margin-left : 10px;
             margin-right : 10px;
         }
+        
         .logo-top
         {
             height: 100%;
@@ -43,7 +47,7 @@
             padding: 10% 0 10% 0;
             height:  auto;
             background-color: #018FA5;
-            margin: 50px;
+            
         }
 
         .bar-bottom
@@ -85,7 +89,7 @@
             padding: 3%;
         }
 
-        input
+        input[type=text], input[type=password]
         {
             width: 50%;
             padding: 12px 20px;
@@ -94,26 +98,77 @@
             border-radius: 4px;
         }
 
+        input[type=checkbox]
+        {
+            margin: 8px 5px;
+        }
+
+        label
+        {
+            color: white;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        a
+        {
+            text-decoration: none;
+            font-family: Arial, Helvetica, sans-serif;
+            color: white;
+        }
+
+        a:hover
+        {
+            text-decoration: underline;
+            color: white;
+            background-color: #11284B;
+            opacity: 40%;
+        }
+
         h2
         {
             color: white;
             font-family: Arial, Helvetica, sans-serif;
         }
+
+        .logoWG
+        {
+            margin: auto;
+            background-color: #11284B;
+            width: 40%;
+            text-align: center;
+            padding: 3%;
+        }
     </style>
 {% endblock %}
 
 {% block body %}
+<div class="logoWG">
+    <img width="150" height="148" src="https://webgenius.foreach-academy.fr/wp-content/uploads/2022/01/Logo-Web-Genius-300x294.png" 
+    class="attachment-medium size-medium" alt="" loading="lazy" 
+    srcset="https://webgenius.foreach-academy.fr/wp-content/uploads/2022/01/Logo-Web-Genius-300x294.png 300w, 
+            https://webgenius.foreach-academy.fr/wp-content/uploads/2022/01/Logo-Web-Genius-1024x1004.png 1024w, 
+            https://webgenius.foreach-academy.fr/wp-content/uploads/2022/01/Logo-Web-Genius-768x753.png 768w, 
+            https://webgenius.foreach-academy.fr/wp-content/uploads/2022/01/Logo-Web-Genius-1536x1506.png 1536w, 
+            https://webgenius.foreach-academy.fr/wp-content/uploads/2022/01/Logo-Web-Genius-2048x2008.png 2048w">
+<div>
 <div class='form'>
     <form action="#">
         <h2>Connectez-vous</h2>
-        <input type='mail' placeholder='Entrez votre adresse mail'>
+        <input type='text' placeholder='Entrez votre adresse mail'>
         <br>
         <input type='password' placeholder='Entrez votre mot de passe'>
         <br>
+        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+        <label class="form-check-label" for="flexCheckDefault">
+            Se souvenir de moi
+        </label>
+        <br>
         <br>
         <button class='boutonForm' type='submit'>Se connecter</button>
+        <br>
+        <br>
+        <a href="#">Mot de passe oublié ?</a>
     </form>
 </div>
-
 
 {% endblock %}
