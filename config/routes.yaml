@@ -2,9 +2,9 @@
 #    path: /
 #    controller: App\Controller\DefaultController::index
 
-inscription:
-    path: /inscription
-    controller: App\Controller\LanController::inscription
+inscriptionEleve:
+    path: /inscriptionEleve
+    controller: App\Controller\LanController::inscriptionEleve
 
 login:
     path: /login
