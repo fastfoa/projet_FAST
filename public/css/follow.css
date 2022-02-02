@@ -6,65 +6,26 @@
         color:white;
     }
     
-    .saisie 
+.saisie 
     {
-        border: 1px solid white;
         background-color: #11284B;
+        border: 1px solid white;
         color: #79a342;
     }
 
-    .row {
-    text-align: center;
+.titreBloc
+    {
+        color: #79a342;
     }
 
-    .rate {
-    display: inline-block;
-    margin: 0;
-    padding: 0;
-    border: none;
+.row
+    {
+        text-align: center;
     }
 
-    input {
-    display: none;
+.dateSaisie
+    {
+        color: #79a342;
     }
 
-    label {
-    float: right;
-    font-size: 0;
-    color: #d9d9d9;
-    }
-
-    label:before {
-    content: "\f005";
-    font-family: FontAwesome;
-    font-size: 20px;
-    }
-
-    label:hover,
-    label:hover ~ label {
-    color: #f6c82c;
-    transition: 0.2s;
-    }
-
-    input:checked ~ label {
-    color: #f6c82c;
-    }
-
-    input:checked ~ label:hover,
-    input:checked ~ label:hover ~ label {
-    color: #FFED85;
-    transition: 0.2s;
-    }
-
-
-    /* Half-star*/
-
-    .star-half {
-    position: relative;
-    }
-
-    .star-half:before {
-    position: absolute;
-    content: "\f089";
-    padding-right: 0;
-    }
+  

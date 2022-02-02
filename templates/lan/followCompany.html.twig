@@ -1,8 +1,8 @@
 {% extends 'lan/base.html.twig' %}
 {% block title %}Suivi alternane{% endblock %}
-{#{% block myStylesheets %}
+{% block myStylesheets %}
        <link rel="stylesheet" href='{{ asset("css/follow.css")}}'>
-{% endblock %}#}
+{% endblock %}
 {% block body %}
    <div class="container">
         <!-- bandeau -->
@@ -26,27 +26,23 @@
             </div>
         </header>
 
-        <main class="col-12 mx-auto saisie"> Date : 
-            <div class="container">
+        <main class="col-12 mx-auto saisie"> 
+        
+            <div class="container">   <input class="dateSaisie my-2" type='date' placeholder='Date'>
                 <div class="row align-items-start">
                     <div class="col-6 mx-auto" >
-                        <h5 class="text-center">Opérations effectuées :</h5>
-                        <textarea class="form-control" rows="8" id="comment" name="text" placeholder="Tapez votre commentaire ici"></textarea>
+                     
+                        <h6 class="text-center titreBloc">Opérations effectuées :</h6>
+                        <textarea class="form-control" rows="4" id="comment" name="text" placeholder="Tapez votre commentaire ici"></textarea>
+                        <br>
+                        <textarea class="form-control" rows="1" id="comment" name="text" placeholder="Commentaire Tuteur"></textarea>
                     </div>
                     <div class="col-6 mx-auto" >
-                        <h5 class="text-center">Procédés utilisés :</h5>
-                        <textarea class="form-control" rows="8" id="comment" name="text" placeholder="Tapez votre commentaire ici"></textarea>
-                        
-
+                        <h6 class="text-center titreBloc">Procédés utilisés :</h6>
+                        <textarea class="form-control" rows="4" id="comment" name="text" placeholder="Tapez votre commentaire ici"></textarea>
+                        <br>
+                        <button class="boutonForm">Valider</button>                        
                     </div>
-                </div>
-
-                <div class="row">
-                  <div class="col-12 mx-auto my-2">
-                    <button type="button" class="boutonForm">Valider</button>
-                  </div>
-
-
                 </div>
             </div>
         </main>
