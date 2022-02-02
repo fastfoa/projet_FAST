@@ -18,4 +18,6 @@ dashBoardSchool:
     path: /dashBoardSchool
     controller: App\Controller\LanController::dashBoardSchool
 
-
+dashBoardEntrprise:
+    path: /dashBoardEntrprise
+    controller: App\Controller\LanController::dashBoardEntrprise

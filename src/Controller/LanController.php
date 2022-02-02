@@ -46,7 +46,12 @@ public function dashBoardSchool(): Response
         'controller_name' => 'LanController',
     ]);
 }
-
+public function dashBoardEntrprise(): Response
+{
+    return $this->render('lan/dashBoardEntrprise.html.twig', [
+        'controller_name' => 'LanController',
+    ]);
+}
 
 
 }
