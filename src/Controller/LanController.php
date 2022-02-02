@@ -54,4 +54,11 @@ public function dashBoardSkill(): Response
     ]);
 }
 
+public function getSkillToBe(): Response
+{
+    return $this->render('lan/getSkillToBe.html.twig', [
+        'controller_name' => 'LanController',
+    ]);
+}
+
 }

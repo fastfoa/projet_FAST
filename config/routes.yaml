@@ -22,3 +22,7 @@ dashBoardSkill:
     path: /dashBoardSkill
     controller: App\Controller\LanController::dashBoardSkill
 
+getSkillToBe:
+    path: /getSkillToBe
+    controller: App\Controller\LanController::getSkillToBe
+
