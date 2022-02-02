@@ -54,6 +54,13 @@ public function formulaire(): Response
     ]);
 }
 
+public function dash(): Response
+{
+    return $this->render('lan/dash.html.twig', [
+        'controller_name' => 'LanController',
+    ]);
+}
+
 
 
 }

@@ -27,21 +27,9 @@
 
 	</head>
 	<body class="body-fe">
-		<div class="container-fluid">
-			<div class=" row bar-top">
-				<img class="  logo-top ml-3" src="{{ asset('images/logo-foreach-blanc.png') }}">
 
-				<div class=" col-10 menu-top">
-					<ul class="ul-fe">
-						<li>Accueil</li>
-						<li>L’Ecole</li>
-						<li>Actualités</li>
-						<li>Formations Développeur Web</li>
-						<li>Contactez-Nous !</li>
-					</ul>
-				</div>
-			</div>
-		</div>
+		{% include 'lan/menu.html.twig' %}
+		
 		<div class="work-content"> {% block body %}{% endblock %}
 			</div>
 			<div class="bar-bottom ">
