@@ -8,7 +8,7 @@
     
 }
 .bar-top {
-    width: 100%;
+    width: 95%;
     height: 80px;
     color: white;
     vertical-align: top;
@@ -51,12 +51,20 @@
 
 
 .bar-bottom {
+   
     position: absolute;
     bottom: 0;
+    left: 0;
+    right: 0;
     height: 50px;
     width: 100%;
     background-color: #11284B;
     text-align: center;
     color:white;
+  
+
+
+    
+    
 
 }
