@@ -29,30 +29,35 @@
         <main class="col-12 mx-auto description">
         
             <div class="container">
-            <input type='date'>
+            
                 <div class="row align-items-start my-2">
-                    <div class="col-3 mx-auto" >
-                        <h5 class="text-center">Date :</h5>
-                    
-                    </div>
-                    <div class="col-6 mx-auto" >
+                        <div class="col-12 my-2 mx-auto">
+                          <h5 class="text-center">Date de réalisation :</h5>
+                          <input type='date' class="mx-auto my-2" >
+                        </div>
+                </div>
+                <div class="row align-items-start my-2">
+                    <div class="col-12 m-auto" >
                         <h5 class="text-center">Description / Objectif :</h5>
-                        <textarea class="form-control" rows="8" id="comment" name="text" placeholder="Tapez votre commentaire ici"></textarea>
-                        
-
+                        <textarea class="form-control" rows="4" id="comment" name="text" placeholder="Définisez les objectifs ici"></textarea>
                     </div>
-                     <div class="col-3 mx-auto" >
+                </div>
+                <div class="row align-items-start my-2">
+                    <div class="col-2 m-auto " >
                         <h5 class="text-center">Note :</h5>
-                        <textarea class="form-control" rows="8" id="comment" name="text" placeholder="Tapez votre commentaire ici"></textarea>
-                                   
-                        <h5 class="text-center">Commentaire :</h5>
-                        <textarea class="form-control" rows="8" id="comment" name="text" placeholder="Tapez votre commentaire ici"></textarea>
-                  </div>
+                        <input class="form-control" type="number" size="8px" min="0" max="20"name="text" placeholder="Notez ici">/20
+                    </div>
                 </div>
                 <div class="row align-items-start my-2 mx-auto text-center">
-                <div class="col-12 mx-auto">
-                <button type="button" class="boutonForm">Valider</button>
+                    <div class="col-12 m-auto">     
+                        <h5 class="text-center">Commentaire :</h5>
+                        <textarea class="form-control" rows="5" id="comment" name="text" placeholder="Tapez votre commentaire ici"></textarea>
+                    </div>
                 </div>
+                <div class="row align-items-start my-2 mx-auto text-center">
+                    <div class="col-12 m-auto">
+                        <button type="button" class="boutonForm">Valider</button>
+                    </div>
                 </div>
             </div>
         </main>
