@@ -2,6 +2,10 @@
 #    path: /
 #    controller: App\Controller\DefaultController::index
 
+inscriptionEleve:
+    path: /inscriptionEleve
+    controller: App\Controller\LanController::inscriptionEleve
+
 login:
     path: /login
     controller: App\Controller\LanController::login
@@ -29,6 +33,7 @@ getSkillToBe:
 formulaire:
     path: /formulaire
     controller: App\Controller\LanController::formulaire
+
 formulaireG:
     path: /formulaireG
     controller: App\Controller\LanController::formulaireG

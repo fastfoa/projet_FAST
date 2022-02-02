@@ -1,11 +1,10 @@
-    .body-fe {
+.body-fe {
     background-image: url("https://webgenius.foreach-academy.fr/wp-content/uploads/2022/01/fond-bleu-double-scaled.jpg");
     background-position: center top;
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
     margin: 0;
-    
 }
 
 .bar-top {
@@ -77,6 +76,7 @@
     text-align: center;
     color:white;
 }
+
 .boutonForm
 {
     background-color: #79a342;
@@ -96,13 +96,11 @@
     background-color: #f37262;
 }
 
-<<<<<<< HEAD
-h1, h2, h3, h4, h5, h6 {
+h1, h2, h3, h4, h5, h6 
+{
     font-family: Arial, Helvetica, sans-serif;
     color : white;
 }
-=======
-}
 
 
 .boutonForm
@@ -123,4 +121,3 @@ h1, h2, h3, h4, h5, h6 {
 {
     background-color: #f37262;
 }
->>>>>>> origin/symfo
