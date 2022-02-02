@@ -26,7 +26,10 @@ getSkillToBe:
     path: /getSkillToBe
     controller: App\Controller\LanController::getSkillToBe
 
-follow:
-    path: /follow
-    controller: App\Controller\LanController::follow
+followCompany:
+    path: /followCompany
+    controller: App\Controller\LanController::followCompany
 
+followTraining:
+    path: /followTraining
+    controller: App\Controller\LanController::followTraining
