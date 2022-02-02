@@ -26,3 +26,10 @@ getSkillToBe:
     path: /getSkillToBe
     controller: App\Controller\LanController::getSkillToBe
 
+formulaire:
+    path: /formulaire
+    controller: App\Controller\LanController::formulaire
+
+dash:
+    path: /dash
+    controller: App\Controller\LanController::dash

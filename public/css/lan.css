@@ -1,4 +1,4 @@
-.body-fe {
+    .body-fe {
     background-image: url("https://webgenius.foreach-academy.fr/wp-content/uploads/2022/01/fond-bleu-double-scaled.jpg");
     background-position: center top;
     background-size: cover;
@@ -7,14 +7,20 @@
     margin: 0;
     
 }
+
 .bar-top {
-    width: 95%;
     height: 80px;
+    background-color: crimson;
+}
+
+.text-light {
     color: white;
-    vertical-align: top;
-    
+    font-size: 20px;
+}
 
-
+.fit100 {
+    height: 100%;
+    width: 100%;
 }
 .menu-top {
     width: 70%;
@@ -35,12 +41,20 @@
     top: -60px;
     
 }
-.logo-top {
-    height: 100%;
-    display: inline;
-    margin: 10px;
 
+.logo-top {
+    width: 90px;
+    height: 90px;
 }
+
+.logo-top img {
+    width: 100%;
+    height: 100%;
+    object-fit: scale-down;
+}
+
+
+
 
 .work-content {
     width: 70%;
