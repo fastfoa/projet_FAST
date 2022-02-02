@@ -44,16 +44,13 @@
 
 		.form {
 			border-radius: 3px;
-			background-color: #11284B;
 			margin: auto;
 			text-align: center;
-			padding: 3%;
+			padding: 2%;
+			box-sizing: border-box;
 		}
 
-		.logoWG {
-			margin: auto;
-			padding: 3%;
-		}
+		
 
 		h2 {
 			color: white;
@@ -63,7 +60,6 @@
 		input[type=text],
 		input[type=password] {
 
-			padding: 12px 20px;
 			margin: 8px 0;
 			border: 1px solid #ccc;
 			border-radius: 4px;
@@ -88,6 +84,8 @@
 			cursor: pointer;
 			transition: 0.3s;
             margin-left: 10%;
+			margin-left: 40%;
+
 		}
 
 		.boutonForm:hover {
@@ -106,38 +104,19 @@
 			background-color: #11284B;
 			opacity: 40%;
 		}
-
-		.bar-bottom {
-			position: relative;
-			bottom: 30px;
-			height: 100px;
-			width: 100%;
-			background-color: #11284B;
-			text-align: center;
-		}
-		.inp {
-			text-align: center;
-			margin-left: 40%;
-		}
 		.text
 		{
-			margin-left: 40%;
+			margin-left: 35%;
+
 		}
 	</style>
 {% endblock %}
 
 {% block body %}
 
-	<div class='form'>
-		<div class="logoWG">
-			<img width="150" height="148" src="https://webgenius.foreach-academy.fr/wp-content/uploads/2022/01/Logo-Web-Genius-300x294.png" class="attachment-medium size-medium" alt="" loading="lazy" srcset="https://webgenius.foreach-academy.fr/wp-content/uploads/2022/01/Logo-Web-Genius-300x294.png 300w,
-						                https://webgenius.foreach-academy.fr/wp-content/uploads/2022/01/Logo-Web-Genius-1024x1004.png 1024w,
-						                https://webgenius.foreach-academy.fr/wp-content/uploads/2022/01/Logo-Web-Genius-768x753.png 768w,
-						                https://webgenius.foreach-academy.fr/wp-content/uploads/2022/01/Logo-Web-Genius-1536x1506.png 1536w,
-						                https://webgenius.foreach-academy.fr/wp-content/uploads/2022/01/Logo-Web-Genius-2048x2008.png 2048w">
-		</div>
-		<div class="container">
-    <div class="row text-center">
+	
+<div class="container">
+     <div class="row text-center">
         <h2 class="text">Inscription</h2>
     </div>
     <div class="row">
@@ -167,16 +146,17 @@
             <input type="text" id="fname" name="firstname" placeholder="Année"><br>
 
             <label for="email" class="ema"><i class="fa fa-envelope"></i> </label>
-            <input type="text" id="email" name="email" placeholder="Email"><br>
+            <input type="text" id="email" name="email" placeholder="Téléphone"><br>
 
             <label for="adr" class="add"><i class="fa fa-address-card-o"></i> </label>
-            <input type="text" id="adr" name="address" placeholder="Address"><br>
+            <input type="text" id="adr" name="address" placeholder="Date de Naissance"><br>
 
             <label for="Ville" class="vil"><i class="fa fa-institution"></i> </label>
             <input type="text" id="Ville" name="Ville" placeholder="Ville"><br>
         </div>
     </div>
 </div>
+
 				<br>
 				<button class='boutonForm' type='submit'>Se connecter</button>
 				<br>
