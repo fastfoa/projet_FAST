@@ -54,6 +54,14 @@ public function formulaire(): Response
     ]);
 }
 
+public function formulaireG(): Response
+{
+    return $this->render('lan/formulaireG.html.twig', [
+        'controller_name' => 'LanController',
+    ]);
+}
+
+
 public function dash(): Response
 {
     return $this->render('lan/dash.html.twig', [
