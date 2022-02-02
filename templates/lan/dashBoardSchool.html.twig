@@ -1,7 +1,7 @@
 {% extends 'lan/base.html.twig' %}
 
 {% block myStylesheets %}
-            <link href="{{ asset('css/Dasboard-Apprenti.css') }}" type="text/css" rel="stylesheet" />
+            <link href="{{ asset('css/Dasboard-FO.css') }}" type="text/css" rel="stylesheet" />
             
 {% endblock %}
 
@@ -11,7 +11,7 @@
             <div class="row">
                 <div class="col-lg-2 dashMenu sidebar d-flex flex-column list-group list-group-flush viewport-max ">
                     <a href="#" class="list-group-item list-group-item-action text-center bleu">
-                        <img src="{{ asset('images/olivier.jpeg') }}" alt="" class="img-fluid rounded-circle mr-2"> Olivier Carlier</a>
+                        <img src="{{ asset('images/moi.jpg') }}" alt="" class="img-fluid rounded-circle mr-2"> Alexis Santrain</a>
                     <a href="#" class="list-group-item list-group-item-action menu-items active">
                         <i class="fas fa-columns mr-2 fa-lg"></i>Dashboard</a>
                     <a href="#" class="list-group-item list-group-item-action menu-items bleu">
@@ -19,9 +19,7 @@
                     <a href="#" class="list-group-item list-group-item-action menu-items bleu">
                         <i class="fas fa-solid fa-bars-progress mr-2 fa-lg"></i>Suivi</a>
                     <a href="#" class="list-group-item list-group-item-action menu-items bleu">
-                        <i class="fas fa-info mr-2 fa-lg"></i>Infos Entreprise</a>
-					<a href="#" class="list-group-item list-group-item-action menu-items bleu">
-						<i class="fas fa-info mr-2 fa-lg"></i>Infos Organisme de Formation</a>
+                        <i class="fas fa-info mr-2 fa-lg"></i>Infos Eleves</a>
                     <a href="#" class="list-group-item list-group-item-action menu-items bleu">
                         <i class="fas fa-user-cog mr-2 fa-lg"></i>Mes information</a>
                 </div>
@@ -30,7 +28,7 @@
                     <div class="row">
                         <div class="col">
                             <h2 class="text-info">
-                                <small class="text-muted">Apprenti</small>
+                                <small class="text-muted">Foreach-Academy (espace OF)</small>
                             </h2>
                         </div>
                     </div>
@@ -40,7 +38,7 @@
                                 <div class="card-body carte bg-primary d-flex align-items-center justify-content-between">
                                     <i class="fas fa-users fa-2x"></i>
                                     <div class="inner-text text-center">
-                                        <h3><span class="badge vert badge-pill">1 en attente</span> Evaluation  </h3>
+                                        <h3><span class="badge vert badge-pill">21</span> Nombre d'apprenant   </h3>
                                     </div>
                                 </div>
                             </div>
@@ -65,8 +63,8 @@
                                     <i class="fas fa-thin fa-file fa-2x"></i>
                                     <div class="inner-text text-center">
                                         <h3>
-                                            <span class="badge vert badge-pill">2 en attente</span>
-                                            Exercises
+                                            <span class="badge vert badge-pill">1 session</span>
+                                            Formation En cours
                                         </h3>
 
                                     </div>
