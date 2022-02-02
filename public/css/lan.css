@@ -48,6 +48,7 @@
     height: 400px;
     background-color: #018FA5;
     margin: 40px auto 10px;
+    
 }
 
 
@@ -62,10 +63,51 @@
     background-color: #11284B;
     text-align: center;
     color:white;
-  
-
-
-    
-    
-
 }
+.boutonForm
+{
+    background-color: #79a342;
+    color: white;
+    border-radius: 3px; 
+    border: none;
+    padding: 12px 24px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 15px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.boutonForm:hover
+{
+    background-color: #f37262;
+}
+
+<<<<<<< HEAD
+h1, h2, h3, h4, h5, h6 {
+    font-family: Arial, Helvetica, sans-serif;
+    color : white;
+}
+=======
+}
+
+
+.boutonForm
+{
+    background-color: #79a342;
+    color: white;
+    border-radius: 3px; 
+    border: none;
+    padding: 12px 24px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 15px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.boutonForm:hover
+{
+    background-color: #f37262;
+}
+>>>>>>> origin/symfo
