@@ -2,21 +2,27 @@
 {% block title %}Apprenti!
 {% endblock %}
 {% block stylesheets %}
-
+  
 	<style>
-		.work-content {
-			width: 100%;
-			height: 800px;
-			background-color: #018FA5;
-			margin: 40px auto 10px;
-		}
+
 		.profil {
 			height: 696px;
 			width: 300px;
 			background-color: #11284B;
 			border: 2px solid black;
-			opacity: 80%;
-			display: inline-block;
+		
+			
+			margin: auto;
+			border-radius: 15px;
+		}
+
+		.profilmenu {
+			height: 696px;
+			width: 300px;
+			background-color: #11284B;
+			border: 2px solid black;
+		
+			
 			margin: 50px;
 			border-radius: 15px;
 		}
@@ -42,7 +48,7 @@
 			background-color: white;
 			border: 2px solid black;
 			opacity: 80%;
-			display: inline-block;
+			
 			border-radius: 100%;
 			margin: auto;
 		}
@@ -52,47 +58,43 @@
 			background-color: red;
 			border: 2px solid black;
 			opacity: 80%;
-			display: inline-block;
 			border-radius: 100%;
 			margin: auto;
-			padding: auto;
-			display: inline-block;
+		}
+		.container{
+			margin: 0;
 		}
 	</style>
 {% endblock %}
 {% block body %}
 	<div class="container">
 		<div class="row">
-			<div class="profil col-4">
+			<div class="col-4 profil">
 				<div class="profiltext">
 					<img class="photoprofil" src="https://us.123rf.com/450wm/yupiramos/yupiramos2004/yupiramos200436847/145498923-l-ic%C3%B4ne-de-caract%C3%A8re-avatar-ambulancier-masculin-vector-illustration-design.jpg?ver=6" alt="">
 					<ul class="colortext">
+					<br>
 						<li>Nom: King</li>
 						<br>
 						<li>Prenom: Karim</li>
 						<br>
 						<li>
-							Adresse: 145 rue de 
-																																					 toto,
-																																					  59000 Lille</li>
+							Adresse: 145 rue de toto, 59000 Lille</li>
 						<br>
 						<li>Téléphone : 06 07 08 09 10</li>
 						<br>
-						<li>Email : 
-																																					karimKingJS@toto.fr</li>
+						<li>Email : karimKingJS@toto.fr</li>
 						<br>
-						<li>Date de naissance :
-																																					  01/01/1920</li>
+						<li>Date de naissance : 01/01/1920</li>
 					</ul>
 				</div>
 			</div>
-			<div class="col-8">
-
-
+			<div class="col-6   profilmenu">
 				<div class="menudash">
 					<div class="rond">Livret d'apprentisage</div>
 				</div>
 			</div>
 		</div>
 	</div>
+  
 {% endblock %}
