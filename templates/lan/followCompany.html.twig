@@ -1,8 +1,7 @@
 {% extends 'lan/base.html.twig' %}
 {% block title %}Suivi alternane{% endblock %}
 {% block myStylesheets %}
-        <link rel="stylesheet" href='{{ asset("css/follow.css")}}'>
-        <link rel="stylesheet" href='{{ asset("css/login.css")}}'>  
+        <link rel="stylesheet" href='{{ asset("css/follow.css")}}'> 
 {% endblock %}
 {% block body %}
    <div class="container">
@@ -26,21 +25,28 @@
                 </div> 
             </div>
         </header>
-        <main class="col-12 mx-auto description">
+
+        <main class="col-12 mx-auto saisie"> Date : 
             <div class="container">
                 <div class="row align-items-start">
                     <div class="col-6 mx-auto" >
                         <h5 class="text-center">Opérations effectuées :</h5>
                         <textarea class="form-control" rows="8" id="comment" name="text" placeholder="Tapez votre commentaire ici"></textarea>
-                        <button type="button" class="boutonForm">Valider</button>
-
                     </div>
                     <div class="col-6 mx-auto" >
                         <h5 class="text-center">Procédés utilisés :</h5>
                         <textarea class="form-control" rows="8" id="comment" name="text" placeholder="Tapez votre commentaire ici"></textarea>
-                        <button type="button" class="boutonForm">Valider</button>
+                        
 
                     </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-12 mx-auto my-2">
+                    <button type="button" class="boutonForm">Valider</button>
+                  </div>
+
+
                 </div>
             </div>
         </main>

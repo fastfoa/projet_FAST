@@ -61,9 +61,9 @@ public function getSkillToBe(): Response
     ]);
 }
 
-public function follow(): Response
+public function followCompany(): Response
 {
-    return $this->render('lan/follow.html.twig', [
+    return $this->render('lan/followCompany.html.twig', [
         'controller_name' => 'LanController',
     ]);
 }
