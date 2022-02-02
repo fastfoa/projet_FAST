@@ -2,33 +2,87 @@
 
 {% block myStylesheets %}
             <link href="{{ asset('css/Dasboard-FO.css') }}" type="text/css" rel="stylesheet" />
+            
 {% endblock %}
 
 {% block body %}
-    <div class="container">
-        <div class="row">
-            <div class="font_contenue col-3">
-                <img src="{{asset('images/avatar_garcon.png')}}" alt="avatar_garcon">
-                    <ul class="list_des_information">
-                        <li>Nom: Lebas</li>
-                        <li>Prenom: Dylan</li>
-                        <li>Nom du centre de formation: Foreach-Academy</li>
-                        <li>adress: 393 Rue du Général de Gaulle,<br>59700 Marcq-en-Barœul</li>
-                        <li>Téléphone:0607080910</li>
-                        <li>Email: Dylan@symbol-it.com</li>
-                        <li>Date de naissance: 20/07/1995</li>
-                    </ul>
-            </div>
-            <div class="contenue_selection my-auto col-7">
-                <div class="contact">contacts:<br>(1 message en attente)</div>
-                <div class="grand-rond mx-auto ">
-                    <div class="petit-rond">
+    <section id="main">
+        <div class="container-fluid contenue">
+            <div class="row">
+                <div class="col-lg-2 dashMenu sidebar d-flex flex-column list-group list-group-flush viewport-max ">
+                    <a href="#" class="list-group-item list-group-item-action text-center bleu">
+                        <img src="{{ asset('images/moi.jpg') }}" alt="" class="img-fluid rounded-circle mr-2"> Alexis Santrain</a>
+                    <a href="#" class="list-group-item list-group-item-action menu-items active">
+                        <i class="fas fa-columns mr-2 fa-lg"></i>Dashboard</a>
+                    <a href="#" class="list-group-item list-group-item-action menu-items bleu">
+                        <i class="fas fa-thin fa-file mr-2 fa-lg"></i>Documents</a>
+                    <a href="#" class="list-group-item list-group-item-action menu-items bleu">
+                        <i class="fas fa-solid fa-bars-progress mr-2 fa-lg"></i>Suivi</a>
+                    <a href="#" class="list-group-item list-group-item-action menu-items bleu">
+                        <i class="fas fa-info mr-2 fa-lg"></i>Infos Eleves</a>
+                    <a href="#" class="list-group-item list-group-item-action menu-items bleu">
+                        <i class="fas fa-user-cog mr-2 fa-lg"></i>Mes information</a>
+                </div>
+                <!-- MAIN CARDS-->
+                <div class="col-lg-10">
+                    <div class="row">
+                        <div class="col">
+                            <h2 class="text-info">
+                                <small class="text-muted">Foreach-Academy (espace OF)</small>
+                            </h2>
+                        </div>
                     </div>
-                    
+                    <div class="row inform-cards">
+                        <div class=" col-sm-7 col-md-5 col-lg-4 p-4">
+                            <div class="card text-white my-2 rounded">
+                                <div class="card-body carte bg-primary d-flex align-items-center justify-content-between">
+                                    <i class="fas fa-users fa-2x"></i>
+                                    <div class="inner-text text-center">
+                                        <h3><span class="badge vert badge-pill">21</span> Nombre d'apprenant   </h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class=" col-sm-7 col-md-5 col-lg-4 p-4">
+                                <div class="card text-white my-2 rounded">
+                                    <div class="carte card-body bg-primary d-flex align-items-center justify-content-between">
+                                        <i class="fas fa-thin fa-file fa-2x"></i>
+                                        <div class="inner-text text-center">
+                                            <h3>
+                                                <span class="badge vert badge-pill">2 new</span>
+                                                <span class="badge badge-danger badge-pill">1 ABS</span>
+                                                Document
+                                            </h3>
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+                        <div class=" col-sm-7 col-md-5 col-lg-4 p-4">
+                            <div class="card text-white my-2 rounded">
+                                <div class="carte card-body bg-primary d-flex align-items-center justify-content-between">
+                                    <i class="fas fa-thin fa-file fa-2x"></i>
+                                    <div class="inner-text text-center">
+                                        <h3>
+                                            <span class="badge vert badge-pill">1 session</span>
+                                            Formation En cours
+                                        </h3>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>  
+                    </div>
+                    <!--
+                    <div class="row">
+                        
+                        <div class="col-sm-4">
+                                <canvas id="pieChart" width="400" height="400"></canvas>
+                        </div>
+                    </div>
+                    -->
+
                 </div>
             </div>
-        </div>
-    </div>
-    
+    </section>
 
 {% endblock %}
