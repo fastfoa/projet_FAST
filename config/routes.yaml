@@ -30,9 +30,9 @@ getSkillToBe:
     path: /getSkillToBe
     controller: App\Controller\LanController::getSkillToBe
 
-formulaire:
-    path: /formulaire
-    controller: App\Controller\LanController::formulaire
+formulaireEleve:
+    path: /formulaireEleve
+    controller: App\Controller\LanController::formulaireEleve
 
 formulaireG:
     path: /formulaireG
@@ -41,3 +41,15 @@ formulaireG:
 dash:
     path: /dash
     controller: App\Controller\LanController::dash
+
+followCompany:
+    path: /followCompany
+    controller: App\Controller\LanController::followCompany
+
+followTraining:
+    path: /followTraining
+    controller: App\Controller\LanController::followTraining
+
+test:
+    path: /test
+    controller: App\Controller\LanController::test
