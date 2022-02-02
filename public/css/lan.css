@@ -39,6 +39,7 @@
     height: 100%;
     display: inline;
     margin: 10px;
+    object-fit: fill;
 
 }
 
