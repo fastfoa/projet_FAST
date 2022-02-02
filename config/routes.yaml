@@ -18,4 +18,8 @@ dashBoardSchool:
     path: /dashBoardSchool
     controller: App\Controller\LanController::dashBoardSchool
 
+formulaire:
+    path: /formulaire
+    controller: App\Controller\LanController::formulaire
+
 

@@ -47,6 +47,13 @@ public function dashBoardSchool(): Response
     ]);
 }
 
+public function formulaire(): Response
+{
+    return $this->render('lan/formulaire.html.twig', [
+        'controller_name' => 'LanController',
+    ]);
+}
+
 
 
 }
