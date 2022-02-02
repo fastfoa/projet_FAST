@@ -67,3 +67,16 @@ a:hover
     background-color: #11284B;
     opacity: 40%;
 }
+
+.bar-bottom
+{
+    position: relative;
+    bottom: 30px;
+    height: 100px;
+    width: 100%;
+    background-color: #11284B;
+    text-align: center;
+}
+.dashMenu{
+    background-color: #11284B !important;
+}

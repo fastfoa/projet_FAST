@@ -40,7 +40,7 @@ public function registerStudent(): Response
 */
 public function dashBoardStudent(): Response
 {
-    return $this->render('lan/dashBoardStudent.html.twig', [
+    return $this->render('lan/DashboardApprenti.html.twig', [
         'controller_name' => 'LanController',
     ]);
 }
