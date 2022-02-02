@@ -47,12 +47,29 @@ public function dashBoardSchool(): Response
     ]);
 }
 
+<<<<<<< HEAD
 public function dashBoardSkill(): Response
 {
     return $this->render('lan/dashBoardSkill.html.twig', [
         'controller_name' => 'LanController',
     ]);
 }
+=======
+public function formulaire(): Response
+{
+    return $this->render('lan/formulaire.html.twig', [
+        'controller_name' => 'LanController',
+    ]);
+}
+
+public function dash(): Response
+{
+    return $this->render('lan/dash.html.twig', [
+        'controller_name' => 'LanController',
+    ]);
+}
+
+>>>>>>> formulaireg
 
 public function getSkillToBe(): Response
 {

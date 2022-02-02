@@ -1,0 +1,47 @@
+label
+{
+    height: 50px;
+    margin-bottom: 3px;
+}
+
+.contForm 
+{
+    background-color: #018FA5;
+}
+
+.colForm 
+{
+    background-color: gray;
+}
+
+.champs 
+{
+    height: 36px;
+    margin-bottom: 3px;
+    box-shadow: 10px 5px 5px gray;    
+}
+.dat
+{
+   margin-right: 10px;
+   padding-right:5%;
+}
+.vil
+{
+    margin-right: 10px;
+    padding-right:10%;
+}
+.add
+{
+    margin-right: 10px;
+    padding-right:5%;
+}
+.ema
+{
+    margin-right: 10px;
+    padding-right:8%;
+}
+.no
+{
+    margin-right: 10px;
+    padding-right:8%;
+}

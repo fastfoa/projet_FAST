@@ -18,6 +18,7 @@ dashBoardSchool:
     path: /dashBoardSchool
     controller: App\Controller\LanController::dashBoardSchool
 
+<<<<<<< HEAD
 dashBoardSkill:
     path: /dashBoardSkill
     controller: App\Controller\LanController::dashBoardSkill
@@ -25,4 +26,12 @@ dashBoardSkill:
 getSkillToBe:
     path: /getSkillToBe
     controller: App\Controller\LanController::getSkillToBe
+=======
+formulaire:
+    path: /formulaire
+    controller: App\Controller\LanController::formulaire
+>>>>>>> formulaireg
 
+dash:
+    path: /dash
+    controller: App\Controller\LanController::dash
