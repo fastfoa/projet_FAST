@@ -29,6 +29,9 @@ getSkillToBe:
 formulaire:
     path: /formulaire
     controller: App\Controller\LanController::formulaire
+formulaireG:
+    path: /formulaireG
+    controller: App\Controller\LanController::formulaireG
 
 dash:
     path: /dash
