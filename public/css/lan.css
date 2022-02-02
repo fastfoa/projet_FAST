@@ -10,18 +10,26 @@
 
 .bar-top {
     height: 80px;
-    background-color: crimson;
+   /* background-color: white;
+    opacity:0.50; */
 }
 
 .text-light {
     color: white;
     font-size: 20px;
+    /*margin-left: 15px; */
 }
 
 .fit100 {
     height: 100%;
     width: 100%;
 }
+.fith100 {
+    
+    width: 100%;
+}
+
+
 .menu-top {
     width: 70%;
     margin: -30px 20% 0;
@@ -43,8 +51,8 @@
 }
 
 .logo-top {
-    width: 90px;
-    height: 90px;
+    width: 150px;
+    height: 150px;
 }
 
 .logo-top img {
@@ -77,13 +85,14 @@
     text-align: center;
     color:white;
 }
+
 .boutonForm
 {
     background-color: #79a342;
     color: white;
     border-radius: 3px; 
     border: none;
-    padding: 12px 24px;
+    padding: 12px 20px;
     text-align: center;
     text-decoration: none;
     font-size: 15px;
@@ -96,24 +105,50 @@
     background-color: #f37262;
 }
 
-}
-
-
-.boutonForm
+.text-color-form
 {
-    background-color: #79a342;
     color: white;
-    border-radius: 3px; 
-    border: none;
-    padding: 12px 24px;
-    text-align: center;
-    text-decoration: none;
-    font-size: 15px;
-    cursor: pointer;
-    transition: 0.3s;
 }
 
-.boutonForm:hover
+.bg-bar-bottom
 {
-    background-color: #f37262;
+    background-color: #11284B;
 }
+
+.bg-work-content
+{
+    background-color:#018FA5;
+}
+
+
+.bg-bouton-form
+{
+    background-color:#79a342;
+}
+
+
+.bg-boutonForm:hover
+{
+ background-color:#f37262;
+}
+
+.font
+{
+    font-family: Arial, Helvetica, sans-serif, Roboto, Raleway ;
+    
+}
+
+
+
+
+
+/*
+font-family: Arial, Helvetica, sans-serif, Roboto, Raleway;
+font-size: 20px;
+ color: white; text
+#11284B; background bar-bottom
+#018FA5; background work-content
+#79a342; background bouton-form
+#f37262; background boutonForm:hover
+
+ */

@@ -47,14 +47,6 @@ public function dashBoardSchool(): Response
     ]);
 }
 
-<<<<<<< HEAD
-public function dashBoardSkill(): Response
-{
-    return $this->render('lan/dashBoardSkill.html.twig', [
-        'controller_name' => 'LanController',
-    ]);
-}
-=======
 public function formulaire(): Response
 {
     return $this->render('lan/formulaire.html.twig', [
@@ -69,7 +61,6 @@ public function dash(): Response
     ]);
 }
 
->>>>>>> formulaireg
 
 public function getSkillToBe(): Response
 {
