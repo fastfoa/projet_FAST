@@ -30,14 +30,14 @@ public function login(): Response
         'controller_name' => 'LanController',
     ]);
 }
-
+/*
 public function registerStudent(): Response
 {
     return $this->render('lan/registerStudent.html.twig', [
         'controller_name' => 'LanController',
     ]);
 }
-
+*/
 public function dashBoardStudent(): Response
 {
     return $this->render('lan/dashBoardStudent.html.twig', [

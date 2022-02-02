@@ -10,9 +10,9 @@ login:
     path: /login
     controller: App\Controller\LanController::login
 
-registerStudent:
-    path: /registerStudent
-    controller: App\Controller\LanController::registerStudent
+#registerStudent:
+#    path: /registerStudent
+#    controller: App\Controller\LanController::registerStudent
 
 dashBoardStudent:
     path: /dashBoardStudent
