@@ -25,6 +25,7 @@ dashBoardSchool:
 files:
     path: /files
     controller: App\Controller\LanController::files
+    
 dashBoardSkill:
     path: /dashBoardSkill
     controller: App\Controller\LanController::dashBoardSkill
