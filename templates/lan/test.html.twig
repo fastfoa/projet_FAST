@@ -1,0 +1,22 @@
+{% extends 'lan/base.html.twig' %}
+
+{% block myStylesheets %}
+    <link rel="stylesheet" href='{{ asset("css/inscriptionForm.css")}}'>  
+{% endblock %}
+
+{% block body %}
+
+<a href="{{ path('inscriptionEleve') }}">inscriptionEleve</a><br>
+<a href="{{ path('login') }}">login</a><br>
+<a href="{{ path('dashBoardStudent') }}">dashBoardStudent</a><br>
+<a href="{{ path('dashBoardSchool') }}">dashBoardSchool</a><br>
+<a href="{{ path('dashBoardSkill') }}">dashBoardSkill</a><br>
+<a href="{{ path('getSkillToBe') }}">getSkillToBe</a><br>
+<a href="{{ path('formulaireEleve') }}">formulaireEleve</a><br>
+<a href="{{ path('formulaireG') }}">formulaireG</a><br>
+<a href="{{ path('followCompany') }}">followCompany</a><br>
+<a href="{{ path('followTraining') }}">followTraining</a><br>
+<a href="{{ path('files') }}">files</a><br>
+<a href="{{ path('test') }}">TEST</a><br>
+
+{% endblock %}

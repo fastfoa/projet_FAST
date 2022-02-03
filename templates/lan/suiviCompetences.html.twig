@@ -1,92 +1,74 @@
 {% extends 'lan/base.html.twig' %}
 
 {% block myStylesheets %}
-	<link rel="stylesheet" href="{{asset("css/suiviCompetences.css")}}">
-	<link href="{{ asset('css/Dasboard-FO.css') }}" type="text/css" rel="stylesheet"/>
+            <link href="{{ asset('css/suiviCompetences.css') }}" type="text/css" rel="stylesheet" />
 {% endblock %}
 
 {% block body %}
-
-	<div
-		class='container'>
-		{# <div class="logoWG">
-				        <img width="150" height="148" src="https://webgenius.foreach-academy.fr/wp-content/uploads/2022/01/Logo-Web-Genius-300x294.png" 
-				        class="attachment-medium size-medium" alt="" loading="lazy">
-				    </div> #}
-
-		<section id="main">
-			<div class="container-fluid contenue">
-				<div class="row">
-					<div class="col-lg-2 dashMenu sidebar d-flex flex-column list-group list-group-flush viewport-max ">
-						<a href="#" class="list-group-item list-group-item-action text-center bleu">
-							<img src="{{ asset('images/moi.jpg') }}" alt="" class="img-fluid rounded-circle mr-2">
-							Alexis Santrain</a>
-						<a href="#" class="list-group-item list-group-item-action menu-items active">
-							<i class="fas fa-columns mr-2 fa-lg"></i>Dashboard</a>
-						<a href="#" class="list-group-item list-group-item-action menu-items bleu">
-							<i class="fas fa-thin fa-file mr-2 fa-lg"></i>Documents</a>
-						<a href="#" class="list-group-item list-group-item-action menu-items bleu">
-							<i class="fas fa-solid fa-bars-progress mr-2 fa-lg"></i>Suivi</a>
-						<a href="#" class="list-group-item list-group-item-action menu-items bleu">
-							<i class="fas fa-info mr-2 fa-lg"></i>Infos Eleves</a>
-						<a href="#" class="list-group-item list-group-item-action menu-items bleu">
-							<i class="fas fa-user-cog mr-2 fa-lg"></i>Mes information</a>
-					</div>
-					<!-- MAIN CARDS-->
-					<div class="col-lg-10">
-						<div class="row">
-							<div class="col">
-								<h2 class="text-info">
-									<small class="text-muted">Foreach-Academy (espace OF)</small>
-								</h2>
-								<div class="col-8">
-									<table>
-										<tbody>
-											<tr>
-												<td>Savoir-Etre</td>
-											</tr>
-											<tr>
-												<td class="td">TOTO EST SAGE</td>
-											</tr>
-										</tbody>
-										<tbody>
-											<tr>
-												<td>Savoir-Faire</td>
-											</tr>
-											<tr>
-												<td class="td">TOTO EST FORT EN MATH</td>
-												<td class="td">✅</td>
-											</tr>
-											<tr>
-												<td class="td">TOTO EST FORT EN FRANCAIS</td>
-												<td class="td">❌</td>
-											</tr>
-										</tbody>
-										<tbody>
-											<tr>
-												<td>TOTO</td>
-											</tr>
-											<tr>
-												<td class="td">Date</td>
-												<td class="td">Module</td>
-												<td class="td">Objectif</td>
-												<td class="td">Note</td>
-												<td class="td">Délivré par</td>
-											</tr>
-											<tr>
-												<td class="td">01/01</td>
-												<td class="td">CSS</td>
-												<td class="td">Mettre une div en forme</td>
-												<td class="td">5/5</td>
-												<td class="td">Toto</td>
-											</tr>
-										</tbody>
-									</table>
-								</div>
-							</div>
-						</div>
-						<div></div>
-
-					</div>
-
-				{% endblock %}
+    <section id="main">
+        <div class="container-fluid contenue">
+            <div class="row">
+                <div class="col-lg-2 dashMenu sidebar d-flex flex-column list-group list-group-flush viewport-max ">
+                    <a href="#" class="list-group-item list-group-item-action text-center bleu">
+                        <img src="{{ asset('images/olivier.jpeg') }}" alt="" class="img-fluid rounded-circle mr-2"> Olivier Carlier</a>
+                    <a href="#" class="list-group-item list-group-item-action menu-items bleu">
+                        <i class="fas fa-columns mr-2 fa-lg"></i>Dashboard</a>
+                    <a href="#" class="list-group-item list-group-item-action menu-items bleu">
+                        <i class="fas fa-thin fa-file mr-2 fa-lg"></i>Documents</a>
+                    <a href="#" class="list-group-item list-group-item-action menu-items active">
+                        <i class="fas fa-solid fa-bars-progress mr-2 fa-lg"></i>Suivi</a>
+                    <a href="#" class="list-group-item list-group-item-action menu-items bleu">
+                        <i class="fas fa-info mr-2 fa-lg"></i>Infos Entreprise</a>
+					<a href="#" class="list-group-item list-group-item-action menu-items bleu">
+						<i class="fas fa-info mr-2 fa-lg"></i>Infos Organisme de Formation</a>
+                    <a href="#" class="list-group-item list-group-item-action menu-items bleu">
+                        <i class="fas fa-user-cog mr-2 fa-lg"></i>Mes information</a>
+                </div>
+                <div class="col-8 tableau">
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td>Savoir-Etre</td>
+                            </tr>
+                            <tr>
+                                <td class="td">TOTO EST SAGE</td>
+                            </tr>
+                        </tbody>
+                        <tbody>
+                            <tr>
+                                <td>Savoir-Faire</td>
+                            </tr>
+                            <tr>
+                                <td class="td">TOTO EST FORT EN MATH</td>
+                                <td class="td">✅</td>
+                            </tr>
+                            <tr>
+                                <td class="td">TOTO EST FORT EN FRANCAIS</td>
+                                <td class="td">❌</td>
+                            </tr>
+                        </tbody>
+                        <tbody>
+                            <tr>
+                                <td>TOTO</td>
+                            </tr>
+                            <tr>
+                                <td class="td">Date</td>
+                                <td class="td">Module</td>
+                                <td class="td">Objectif</td>
+                                <td class="td">Note</td>
+                                <td class="td">Délivré par</td>
+                            </tr>
+                            <tr>
+                                <td class="td">01/01</td>
+                                <td class="td">CSS</td>
+                                <td class="td">Mettre une div en forme</td>
+                                <td class="td">5/5</td>
+                                <td class="td">Toto</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

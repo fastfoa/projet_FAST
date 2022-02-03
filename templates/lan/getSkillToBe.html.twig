@@ -4,11 +4,10 @@
         <link rel="stylesheet" href='{{ asset("css/skill.css")}}'>  
 {% endblock %}
 {% block body %}
-   <div class="container my-5">
+   <div class="container-fluid">
         <!-- bandeau -->
-        <div class="row">
-        <div class="col-12 mx-auto bandeau">
-            
+        <header class="col-12 mx-auto bandeau">
+            <div class="container-fluid">
                 <div class="row align-items-start">
                   <div class="col-4 mx-auto ">
                     <h5 class="text-center">VERHAEGHE</h5>
@@ -23,8 +22,10 @@
                     <h5 class="text-center">Au XX/XX/XXXX</h5>
                   </div>
                 </div> 
-        </div>
+            </div>
+        </header>
         <main class="col-12 mx-auto description">
+            <div class="container">
                 <div class="row align-items-start">
                     <div class="col-4 mx-auto" >
                         <h4 class="text-center">Evaluation</h4>
@@ -171,7 +172,7 @@
                         </textarea>
                         
                         <button type="button" class="boutonForm">Valider</button>
-       
+       </div>
                 </div>
             </div>
         </main>
