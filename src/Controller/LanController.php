@@ -18,35 +18,95 @@ class LanController extends AbstractController
         ]);
     }
 
-
-public function login(): Response
-{
-    return $this->render('lan/login.html.twig', [
-        'controller_name' => 'LanController',
-    ]);
-}
-
+    public function inscriptionEleve(): Response
+    {
+        return $this->render('lan/inscriptionEleve.html.twig', [
+            'controller_name' => 'LanController',
+        ]);
+    }
+    public function login(): Response
+    {
+        return $this->render('lan/login.html.twig', [
+            'controller_name' => 'LanController',
+        ]);
+    }
+    /*
 public function registerStudent(): Response
 {
     return $this->render('lan/registerStudent.html.twig', [
         'controller_name' => 'LanController',
     ]);
 }
+*/
+    public function dashBoardStudent(): Response
+    {
+        return $this->render('lan/DashboardApprenti.html.twig', [
+            'controller_name' => 'LanController',
+        ]);
+    }
 
-public function dashBoardStudent(): Response
-{
-    return $this->render('lan/dashBoardStudent.html.twig', [
-        'controller_name' => 'LanController',
-    ]);
-}
+    public function dashBoardSchool(): Response
+    {
+        return $this->render('lan/dashBoardSchool.html.twig', [
+            'controller_name' => 'LanController',
+        ]);
+    }
 
-public function dashBoardSchool(): Response
-{
-    return $this->render('lan/dashBoardSchool.html.twig', [
-        'controller_name' => 'LanController',
-    ]);
-}
+    public function dashBoardSkill(): Response
+    {
+        return $this->render('lan/dashBoardSkill.html.twig', [
+            'controller_name' => 'LanController',
+        ]);
+    }
+
+    public function formulaireEleve(): Response
+    {
+        return $this->render('lan/formulaireEleve.html.twig', [
+            'controller_name' => 'LanController',
+        ]);
+    }
+
+    public function formulaireG(): Response
+    {
+        return $this->render('lan/formulaireG.html.twig', [
+            'controller_name' => 'LanController',
+        ]);
+    }
 
 
+    public function dash(): Response
+    {
+        return $this->render('lan/dash.html.twig', [
+            'controller_name' => 'LanController',
+        ]);
+    }
 
+
+    public function getSkillToBe(): Response
+    {
+        return $this->render('lan/getSkillToBe.html.twig', [
+            'controller_name' => 'LanController',
+        ]);
+    }
+
+    public function followCompany(): Response
+    {
+        return $this->render('lan/followCompany.html.twig', [
+            'controller_name' => 'LanController',
+        ]);
+    }
+
+    public function followTraining(): Response
+    {
+        return $this->render('lan/followTraining.html.twig', [
+            'controller_name' => 'LanController',
+        ]);
+    }
+
+    public function test(): Response
+    {
+        return $this->render('lan/test.html.twig', [
+            'controller_name' => 'LanController',
+        ]);
+    }
 }
