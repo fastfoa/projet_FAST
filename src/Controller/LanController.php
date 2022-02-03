@@ -66,6 +66,13 @@ public function registerStudent(): Response
         ]);
     }
 
+    public function dashBoardEntrprise(): Response
+    {
+        return $this->render('lan/dashBoardEntrprise.html.twig', [
+            'controller_name' => 'LanController',
+        ]);
+    }
+
     public function formulaireEleve(): Response
     {
         return $this->render('lan/formulaireEleve.html.twig', [
