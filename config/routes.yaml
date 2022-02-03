@@ -34,6 +34,10 @@ getSkillToBe:
     path: /getSkillToBe
     controller: App\Controller\LanController::getSkillToBe
 
+suiviCompetences:
+    path: /suiviCompetences
+    controller: App\Controller\LanController::suiviCompetences
+    
 formulaireEleve:
     path: /formulaireEleve
     controller: App\Controller\LanController::formulaireEleve
