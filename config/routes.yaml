@@ -18,9 +18,9 @@ dashBoardSchool:
     path: /dashBoardSchool
     controller: App\Controller\LanController::dashBoardSchool
 
-downloadFile:
-    path: /downloadFile
-    controller: App\Controller\LanController::downloadFile
+Files:
+    path: /Files
+    controller: App\Controller\LanController::Files
 dashBoardSkill:
     path: /dashBoardSkill
     controller: App\Controller\LanController::dashBoardSkill
