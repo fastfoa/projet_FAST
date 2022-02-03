@@ -59,19 +59,13 @@ public function registerStudent(): Response
         ]);
     }
 
-public function Files(): Response
-{
-    return $this->render('lan/Files.html.twig', [
-        'controller_name' => 'LanController',
-    ]);
-}
-      
-public function dashBoardSkill(): Response
-{
-    return $this->render('lan/dashBoardSkill.html.twig', [
-        'controller_name' => 'LanController',
-    ]);
-}
+    public function files(): Response
+    {
+        return $this->render('lan/Files.html.twig', [
+            'controller_name' => 'LanController',
+        ]);
+    }
+
     public function formulaireEleve(): Response
     {
         return $this->render('lan/formulaireEleve.html.twig', [
