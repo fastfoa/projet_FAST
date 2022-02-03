@@ -110,6 +110,7 @@ public function registerStudent(): Response
         ]);
     }
 
+
     public function followTraining(): Response
     {
         return $this->render('lan/followTraining.html.twig', [
