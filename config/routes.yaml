@@ -56,3 +56,7 @@ followTraining:
 test:
     path: /test
     controller: App\Controller\LanController::test
+
+dashBoardEntrprise:
+    path: /dashBoardEntrprise
+    controller: App\Controller\LanController::dashBoardEntrprise
