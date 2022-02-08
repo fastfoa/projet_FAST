@@ -2,13 +2,17 @@
 #    path: /
 #    controller: App\Controller\DefaultController::index
 
+inscriptionEleve:
+    path: /inscriptionEleve
+    controller: App\Controller\LanController::inscriptionEleve
+
 login:
     path: /login
     controller: App\Controller\LanController::login
 
-registerStudent:
-    path: /registerStudent
-    controller: App\Controller\LanController::registerStudent
+#registerStudent:
+#    path: /registerStudent
+#    controller: App\Controller\LanController::registerStudent
 
 dashBoardStudent:
     path: /dashBoardStudent
@@ -18,6 +22,10 @@ dashBoardSchool:
     path: /dashBoardSchool
     controller: App\Controller\LanController::dashBoardSchool
 
+files:
+    path: /files
+    controller: App\Controller\LanController::files
+    
 dashBoardSkill:
     path: /dashBoardSkill
     controller: App\Controller\LanController::dashBoardSkill
@@ -26,3 +34,34 @@ getSkillToBe:
     path: /getSkillToBe
     controller: App\Controller\LanController::getSkillToBe
 
+suiviCompetences:
+    path: /suiviCompetences
+    controller: App\Controller\LanController::suiviCompetences
+    
+formulaireEleve:
+    path: /formulaireEleve
+    controller: App\Controller\LanController::formulaireEleve
+
+formulaireG:
+    path: /formulaireG
+    controller: App\Controller\LanController::formulaireG
+
+dash:
+    path: /dash
+    controller: App\Controller\LanController::dash
+
+followCompany:
+    path: /followCompany
+    controller: App\Controller\LanController::followCompany
+
+followTraining:
+    path: /followTraining
+    controller: App\Controller\LanController::followTraining
+
+test:
+    path: /test
+    controller: App\Controller\LanController::test
+
+dashBoardEntrprise:
+    path: /dashBoardEntrprise
+    controller: App\Controller\LanController::dashBoardEntrprise

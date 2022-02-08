@@ -1,14 +1,15 @@
 {% extends 'lan/base.html.twig' %}
 
 {% block myStylesheets %}
-<link rel="stylesheet" href="{{asset("css/login.css")}}">
+    <link rel="stylesheet" href="{{asset('css/login.css')}}">
 {% endblock %}
+
 
 {% block body %}
 
 <div class='form'>
     <div class="logoWG">
-        <img width="150" height="148" src="https://webgenius.foreach-academy.fr/wp-content/uploads/2022/01/Logo-Web-Genius-300x294.png" 
+        <img width="50" height="48" src="https://webgenius.foreach-academy.fr/wp-content/uploads/2022/01/Logo-Web-Genius-300x294.png" 
         class="attachment-medium size-medium" alt="" loading="lazy">
     </div>
     <form action="dashBoardSkill">
@@ -22,12 +23,9 @@
             Se souvenir de moi
         </label>
         <br>
-        <br>
         <button class='boutonForm' type='submit'>Se connecter</button>
-        <br>
         <br>
         <a href="#">Mot de passe oublié ?</a>
     </form>
 </div>
-
 {% endblock %}
