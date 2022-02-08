@@ -39,24 +39,34 @@
 {
     width:100%;
     height:100%;
-    border:1px solid black;
+    border:1px solid #007bff;
     border-collapse:collapse;
     padding:5px;
 }
 
 .demo th
 {
-    border:1px solid black;
+    border:1px solid #007bff;
     padding:5px;
     background:#018fa5;
 }
 
 .demo td
 {
-    border:1px solid black;
+    border:1px solid #007bff;
     text-align:center;
     padding:5px;
     background: #11284b;
     color: white;
     height: 35px;
+}
+
+.savoirs
+{
+    width: 30em;
+}
+
+.validation
+{
+    width: 5em;
 }
