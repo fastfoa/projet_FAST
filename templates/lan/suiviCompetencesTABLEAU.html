@@ -1,0 +1,110 @@
+{% extends 'lan/base.html.twig' %}
+
+{% block myStylesheets %}
+            <link href="{{ asset('css/suiviCompetences.css') }}" type="text/css" rel="stylesheet" />
+{% endblock %}
+
+{% block body %}
+    <section id="main">
+        <div class="container-fluid contenue">
+        <h1>Formation DWWM</h1>
+            <div class="row">
+                <div class="col-lg-2 dashMenu sidebar d-flex flex-column list-group list-group-flush viewport-max ">
+                    <a href="#" class="list-group-item list-group-item-action text-center bleu">
+                        <img src="{{ asset('images/olivier.jpeg') }}" alt="" class="img-fluid rounded-circle mr-2"> Olivier Carlier</a>
+                    <a href="#" class="list-group-item list-group-item-action menu-items bleu">
+                        <i class="fas fa-columns mr-2 fa-lg"></i>Dashboard</a>
+                    <a href="#" class="list-group-item list-group-item-action menu-items bleu">
+                        <i class="fas fa-thin fa-file mr-2 fa-lg"></i>Documents</a>
+                    <a href="#" class="list-group-item list-group-item-action menu-items active">
+                        <i class="fas fa-solid fa-bars-progress mr-2 fa-lg"></i>Suivi</a>
+                    <a href="#" class="list-group-item list-group-item-action menu-items bleu">
+                        <i class="fas fa-info mr-2 fa-lg"></i>Infos Entreprise</a>
+					<a href="#" class="list-group-item list-group-item-action menu-items bleu">
+						<i class="fas fa-info mr-2 fa-lg"></i>Infos Organisme de Formation</a>
+                    <a href="#" class="list-group-item list-group-item-action menu-items bleu">
+                        <i class="fas fa-user-cog mr-2 fa-lg"></i>Mes information</a>
+                </div>
+
+                <div class="col-8 tableau">
+                    <table class="demo">
+                        <thead>
+                            <tr>
+                                <th>Savoir-Etre</th>
+                                <th>Validation</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <tr>
+                                    <td class="td">Savoir-Etre n°1</td><td class="td">✅</td>
+                                </tr>
+                                <tr>
+                                    <td class="td">Savoir-Etre n°2</td><td class="td">❌</td>
+                                </tr>
+                                <tr>
+                                    <td class="td">Savoir-Etre n°3</td><td class="td">✅</td>
+                                </tr>
+                                <tr>
+                                    <td class="td">Savoir-Etre n°4</td><td class="td">❌</td>
+                                </tr>
+                                <tr>
+                                    <td class="td">Savoir-Etre n°5</td><td class="td">✅</td>
+                                </tr>
+                            </tr>
+                        <tbody>
+                    </table>
+                    <br>
+                    <table class="demo">
+                        <thead>
+                            <tr>
+                                <th>Savoir-Faire en entreprise</th>
+                                <th>Validation</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <tr>
+                                    <td class="td">Savoir-Faire n°1</td><td class="td">✅</td>
+                                </tr>
+                                <tr>
+                                    <td class="td">Savoir-Faire n°2</td><td class="td">❌</td>
+                                </tr>
+                                <tr>
+                                    <td class="td">Savoir-Faire n°3</td><td class="td">✅</td>
+                                </tr>
+                                <tr>
+                                    <td class="td">Savoir-Faire n°4</td><td class="td">❌</td>
+                                </tr>
+                                <tr>
+                                    <td class="td">Savoir-Faire n°5</td><td class="td">✅</td>
+                                </tr>
+                            </tr>
+                        <tbody>
+                    </table>
+                    <br>
+                    <table class="demo">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Module</th>
+                                <th>Objectif</th>
+                                <th>Note</th>
+                                <th>Délivré par</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td class="td">01/01</td>
+                            <td class="td">CSS</td>
+                            <td class="td">Mettre une div en forme</td>
+                            <td class="td">5/5</td>
+                            <td class="td">Toto</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
