@@ -26,3 +26,6 @@ getSkillToBe:
     path: /getSkillToBe
     controller: App\Controller\LanController::getSkillToBe
 
+session:
+    path: /session
+    controller: App\Controller\LanController::session

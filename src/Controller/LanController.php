@@ -61,4 +61,10 @@ public function getSkillToBe(): Response
     ]);
 }
 
+public function session(): Response
+{
+    return $this->render('lan/session.html.twig', [
+        'controller_name' => 'LanController',
+    ]);
+}
 }
