@@ -32,6 +32,12 @@ class Session
      */
     private $fin;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Formation::class)
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $formation;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -69,6 +75,18 @@ class Session
     public function setFin(\DateTimeInterface $fin): self
     {
         $this->fin = $fin;
+
+        return $this;
+    }
+
+    public function getFormation(): ?Formation
+    {
+        return $this->formation;
+    }
+
+    public function setFormation(?Formation $formation): self
+    {
+        $this->formation = $formation;
 
         return $this;
     }

@@ -134,7 +134,7 @@ public function registerStudent(): Response
     }
 
 
-    public function session(request $request): Response
+    public function session(Request $request): Response
     {
         $session =new Session();
 
@@ -150,12 +150,8 @@ public function registerStudent(): Response
 
         return $this->render('lan/session.html.twig', [
             'formulaire' => $form->createView(),
-
-    public function formations(): Response
-    {
-        return $this->render('lan/test.html.twig', [
-            'controller_name' => 'LanController',
-
         ]);
+
+   
     }
 }
