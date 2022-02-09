@@ -69,3 +69,8 @@ test:
 dashBoardEntrprise:
     path: /dashBoardEntrprise
     controller: App\Controller\LanController::dashBoardEntrprise
+
+formations:
+    path: /formations
+    controller: App\Controller\LanController::formations
+

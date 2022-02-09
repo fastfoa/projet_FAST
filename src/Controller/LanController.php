@@ -136,4 +136,11 @@ public function tableauSuiviCompetences(): Response
             'controller_name' => 'LanController',
         ]);
     }
+
+    public function formations(): Response
+    {
+        return $this->render('lan/test.html.twig', [
+            'controller_name' => 'LanController',
+        ]);
+    }
 }
