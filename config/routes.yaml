@@ -66,7 +66,13 @@ dashBoardEntrprise:
     path: /dashBoardEntrprise
     controller: App\Controller\LanController::dashBoardEntrprise
 
+
 session:
     path: /session
     controller: App\Controller\LanController::session
+
+formations:
+    path: /formations
+    controller: App\Controller\LanController::formations
+
 
