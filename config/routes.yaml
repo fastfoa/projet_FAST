@@ -65,3 +65,8 @@ test:
 dashBoardEntrprise:
     path: /dashBoardEntrprise
     controller: App\Controller\LanController::dashBoardEntrprise
+
+session:
+    path: /session
+    controller: App\Controller\LanController::session
+

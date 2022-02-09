@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+
+{{form(formulaire)}}
+<h1>Votre message</h1>
+
+
+            {{ form_start(formulaire) }}
+        <div class="input-field col s12 m6 l6">
+                {{ form_label(formulaire.nom, null, {'label_attr': {'class': 'jp_label'}}) }}
+                {{ form_widget(formulaire.nom,      {'attr':       {'placeholder': 'nom'}}) }}
+        </div>
+        <hr>
+        <div class="input-field col s12 m6 l6">
+                {{ form_label(formulaire.debut, null, {'label_attr': {'class': 'jp_label'}}) }}
+                {{ form_widget(formulaire.debut, {'attr': {'placeholder': 'debut'}}) }}
+        </div>
+
+		<div class="input-field col s12 m6 l6">
+                {{ form_label(formulaire.fin, null, {'label_attr': {'class': 'jp_label'}}) }}
+                {{ form_widget(formulaire.fin, {'attr': {'placeholder': 'fin'}}) }}
+        </div>
+        <hr>
+        <div class="jp_label"></div>
+        <button type="submit" >ENREGISTRER</button>
+    {{ form_end(formulaire) }}
+
+
+{% endblock %}
