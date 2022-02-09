@@ -65,3 +65,7 @@ test:
 dashBoardEntrprise:
     path: /dashBoardEntrprise
     controller: App\Controller\LanController::dashBoardEntrprise
+
+stageForm:
+    path: /stageForm
+    controller: App\Controller\LanController::stageForm

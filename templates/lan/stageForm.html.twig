@@ -1,0 +1,12 @@
+{% extends 'lan/base.html.twig' %}
+
+{% block myStylesheets %}
+    <link rel="stylesheet" href="{{asset("css/formulaire.css")}}">
+{% endblock %}
+
+
+{% block body %}
+
+{{form(form)}}
+
+{% endblock %}

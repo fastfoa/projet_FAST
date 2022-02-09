@@ -2,7 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
+use App\Form\StageFormType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -129,5 +132,38 @@ public function suiviCompetences(): Response
         return $this->render('lan/test.html.twig', [
             'controller_name' => 'LanController',
         ]);
+    }
+
+    public function stageForm(Request $request): Response
+    {
+        $contact = new User();
+        $form = $this->createForm(StageFormType::class, $contact);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            //expedier le mail 
+            $mail = $contact->getEmail();
+
+            $pw = $contact->getPassword();
+            $prenom = $contact->getPrenom();
+            $pw = $contact->getDateNaissance();
+            $prenom = $contact->getTelephone();
+            //enregistrer contact
+            $nom = $contact->getNom();
+            
+            $nom = strip_tags( $nom );
+            $contact->setNom( $nom );
+            $doctrine = $this->getDoctrine();
+            $entityManager = $doctrine->getManager();
+           
+            $entityManager->persist($contact); 
+            $entityManager->flush();
+            return new Response("formulaire OK $mail ");
+        }
+        return $this->render(
+            'lan/stageForm.html.twig', 
+            [
+                'form' => $form->createView()
+            ]);
+        
     }
 }
