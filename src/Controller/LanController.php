@@ -136,34 +136,33 @@ public function suiviCompetences(): Response
 
     public function stageForm(Request $request): Response
     {
-        $contact = new User();
-        $form = $this->createForm(StageFormType::class, $contact);
+        $user = new User();
+        $form = $this->createForm(StageFormType::class, $user);
         $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            //expedier le mail 
-            $mail = $contact->getEmail();
 
-            $pw = $contact->getPassword();
-            $prenom = $contact->getPrenom();
-            $pw = $contact->getDateNaissance();
-            $prenom = $contact->getTelephone();
-            //enregistrer contact
-            $nom = $contact->getNom();
-            
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $mail = $user->getEmail();
+            $pw = $user->getPassword();
+            $prenom = $user->getPrenom();
+            $dateNaissance = $user->getDateNaissance();
+            $tel = $user->getTelephone();
+
+            $nom = $user->getNom();
             $nom = strip_tags( $nom );
-            $contact->setNom( $nom );
+            //$user->setNom( $nom );
+
             $doctrine = $this->getDoctrine();
             $entityManager = $doctrine->getManager();
            
-            $entityManager->persist($contact); 
+            $entityManager->persist($user); 
             $entityManager->flush();
-            return new Response("formulaire OK $mail ");
+
+            return new Response("formulaire OK");
         }
-        return $this->render(
-            'lan/stageForm.html.twig', 
-            [
-                'form' => $form->createView()
-            ]);
-        
+
+        return $this->render( 'lan/stageForm.html.twig', [
+            'form' => $form->createView()
+        ]);
     }
 }
