@@ -101,6 +101,12 @@ public function suiviCompetences(): Response
         'controller_name' => 'LanController',
     ]);
 }
+public function tableauSuiviCompetences(): Response
+{
+    return $this->render('lan/tableauSuiviCompetences.html.twig', [
+        'controller_name' => 'LanController',
+    ]);
+}
 
     public function getSkillToBe(): Response
     {
