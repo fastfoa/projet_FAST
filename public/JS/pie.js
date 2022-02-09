@@ -3,10 +3,10 @@ var ctx = document.getElementById("pieChart");
 var myChart = new Chart(ctx, {
     type: 'pie',
     data: {
-        labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+        labels: ["front-end", "back-end", "base de donnée", "mobile", "sécurité", "relationnel"],
         datasets: [{
-            label: '# of Votes',
-            data: [12, 19, 3, 5, 2, 3],
+            label: 'avancement du block de compétence',
+            data: [100, 70, 50, 25, 5, 3],
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
                 'rgba(54, 162, 235, 0.2)',
