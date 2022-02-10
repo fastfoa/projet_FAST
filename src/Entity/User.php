@@ -76,6 +76,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $diplome;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Role::class)
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $role;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -189,12 +195,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getDateNaissance(): ?string
+    public function getDateNaissance(): ?\DateTimeInterface
     {
         return $this->dateNaissance;
     }
 
-    public function setDateNaissance(?string $dateNaissance): self
+    public function setDateNaissance(\DateTimeInterface $dateNaissance): self
     {
         $this->dateNaissance = $dateNaissance;
 
@@ -257,6 +263,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setDiplome(?string $diplome): self
     {
         $this->diplome = $diplome;
+
+        return $this;
+    }
+
+    public function getRole(): ?Role
+    {
+        return $this->role;
+    }
+
+    public function setRole(?Role $role): self
+    {
+        $this->role = $role;
 
         return $this;
     }

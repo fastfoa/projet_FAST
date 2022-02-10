@@ -13,7 +13,6 @@
                 <img width="50" height="48" src="https://webgenius.foreach-academy.fr/wp-content/uploads/2022/01/Logo-Web-Genius-300x294.png" 
                 class="attachment-medium size-medium" alt="" loading="lazy">
             </div>
-            <form action="#">
                 <h2>Je m'inscris</h2>
                 {{ form_widget(form.email, { 'attr': {'class': "inputEmail", 'placeholder': 'Entrez votre adresse email'} }) }}
                 {{ form_widget(form.password, { 'attr': {'class': "inputPassword", 'placeholder': 'Entrez votre mot de passe'} }) }}
@@ -26,23 +25,6 @@
                 <br>
                 <br>
                 {{ form_widget(form.save, { 'attr': {'class': "boutonForm"} }) }}
-            </form>
         </div>
     {{form_end(form)}}
-
-        {# <input type='text' placeholder='Entrez votre adresse mail'>
-        <br>
-        <input type='password' placeholder='Entrez votre mot de passe'>
-        <br>
-        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-        <label class="form-check-label" for="flexCheckDefault">
-            Se souvenir de moi
-        </label>
-        <br>
-        
-        <br>
-        <a href="#">Mot de passe oublié ?</a>
-    </form>
-</div> #}
-
 {% endblock %}
