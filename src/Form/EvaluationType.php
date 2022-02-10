@@ -16,16 +16,16 @@ class EvaluationType extends AbstractType
         $builder
             ->add('remarqueMS', TextareaType::class, [
                 'label' => 'Maître de stage',
-                'attr' => ['rows' => '2', 'placeholder' => 'Merci de saisir vos remarques']
+                'attr' => [ 'col'=>'5','rows' => '2', 'placeholder' => 'Merci de saisir vos remarques']
             ])
 
             ->add('remarqueApp', TextareaType::class, [
                 'label' => 'Apprenti',
-                'attr' => ['rows' => '2']
+                'attr' => ['col'=>'5','rows' => '2']
             ])
             ->add('remarqueOF', TextareaType::class, [
                 'label' => 'Foreach Academy',
-                'attr' => ['rows' => '2']
+                'attr' => ['col'=>'5','rows' => '2']
             ])
             ->add('note')
             ->add(
