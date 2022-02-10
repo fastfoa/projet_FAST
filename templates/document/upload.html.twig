@@ -1,0 +1,38 @@
+{% extends 'lan/base.html.twig' %}
+{% block myStylesheets %}
+        <link rel="stylesheet" href='{{ asset("css/follow.css")}}'>
+        <link rel="stylesheet" href='{{ asset("css/login.css")}}'> 
+        <link rel="stylesheet" href='{{ asset("css/lan.css")}}'> 
+{% endblock %}
+
+
+    {% block title %}UPLOAD FICHIER{% endblock %}
+
+
+{% block body %}
+<div>
+
+<h1 class="mx-auto col-12">Upload Document</h1>
+
+
+            {{ form_start(myForm) }}
+                <div class="input-field col s12 m6 l6">
+                   
+                    {{ form_widget(myForm.titre,      {'attr':       {'placeholder': 'Titre'}}) }}
+                </div>
+                <hr>
+                <div class="input-field col s12 m6 l6">
+                   
+                    {{ form_widget(myForm.fileName, {'attr': {'placeholder': 'message'}}) }}
+                </div>
+                <hr>
+                <div class="jp_label mx-auto col-12">
+                    <button class="boutonForm" type="submit" >Uploader</button>
+                </div>
+            {{ form_end(myForm) }}
+                
+                <div class="jp_label mx-auto my-2 col-12">
+                    <a href="{{ path( 'downloadlist') }}"><button class="boutonForm" target="_blank" alt="Retour"  >Retour</button></a>
+                 </div>
+</div>
+{% endblock %}
