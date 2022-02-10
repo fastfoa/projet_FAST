@@ -4,7 +4,7 @@ namespace App\Form;
 
 use App\Entity\Session;
 use App\Entity\Formation;
-
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -17,8 +17,14 @@ class SessionType extends AbstractType
     {
         $builder
             ->add('nom')
-            ->add('debut')
-            ->add('fin')
+            ->add('debut', DateType::class, [
+                'widget' => 'single_text',
+                'format' => 'yyyy-MM-dd',
+                'data' => new \DateTime() ])
+            ->add('fin', DateType::class, [
+                'widget' => 'single_text',
+                'format' => 'yyyy-MM-dd',
+                'data' => new \DateTime() ])
             ->add('formation', EntityType::class, [
                 'class' => Formation::class,
                 'choice_label' => 'nom',
