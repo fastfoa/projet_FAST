@@ -8,6 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Doctrine\Persistence\ManagerRegistry;
 
 class LanController extends AbstractController
 {
@@ -134,7 +135,7 @@ public function suiviCompetences(): Response
         ]);
     }
 
-    public function stageForm(Request $request): Response
+    public function stageForm(Request $request, ManagerRegistry $doctrine): Response
     {
         $user = new User();
         $form = $this->createForm(StageFormType::class, $user);
@@ -142,18 +143,29 @@ public function suiviCompetences(): Response
 
         if ($form->isSubmitted() && $form->isValid()) {
 
+            $entityManager = $doctrine->getManager();
+
             $mail = $user->getEmail();
+            $user->setEmail($mail);
+
             $pw = $user->getPassword();
+            $user->setPassword($pw);
+            
             $prenom = $user->getPrenom();
+            $user->setPrenom($prenom);
+
             $dateNaissance = $user->getDateNaissance();
+            $user->setDateNaissance($dateNaissance);
+
             $tel = $user->getTelephone();
+            $user->setTelephone($tel);
 
             $nom = $user->getNom();
-            $nom = strip_tags( $nom );
-            //$user->setNom( $nom );
+            //$nom = strip_tags( $nom );
+            $user->setNom($nom);
 
-            $doctrine = $this->getDoctrine();
-            $entityManager = $doctrine->getManager();
+            // $doctrine = $this->setDoctrine();
+            // $entityManager = $doctrine->setManager();
            
             $entityManager->persist($user); 
             $entityManager->flush();

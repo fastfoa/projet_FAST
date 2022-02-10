@@ -25,7 +25,7 @@
                 {{ form_widget(form.telephone, { 'attr': {'class': "inputTel", 'placeholder': 'Entrez votre numéro de téléphone'} }) }}
                 <br>
                 <br>
-                {{ form_row(form.save, { 'attr': {'class': "boutonForm", 'type': 'submit'} }) }}
+                {{ form_widget(form.save, { 'attr': {'class': "boutonForm"} }) }}
             </form>
         </div>
     {{form_end(form)}}
