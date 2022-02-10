@@ -1,8 +1,12 @@
 
 ###> symfony/framework-bundle ###
+.gitignore
+.env
+/.env
 /.env.local
 /.env.local.php
 /.env.*.local
+/config/services.yaml
 /config/secrets/prod/prod.decrypt.private.php
 /public/bundles/
 /var/
