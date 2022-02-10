@@ -28,19 +28,41 @@ class LanController extends AbstractController
         $form = $this->createForm(InscriptionAppType::class, $contact);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            //expedier le mail 
+            //enregistrer le mail 
             $mail = $contact->getEmail();
+            $mail = strip_tags( $mail );
+            $contact->setEmail( $mail );
 
+            //enregistrer le mail 
             $pw = $contact->getPassword();
+            $pw = strip_tags( $pw );
+            $contact->setPassword( $pw );
+
+            //enregistrer le prenom 
             $prenom = $contact->getPrenom();
-            $pw = $contact->getDateNaissance();
-            $adress = $contact->getAdresse();
-            $tel = $contact->getTelephone();
-            //enregistrer contact
-            $nom = $contact->getNom();
+            $prenom = strip_tags( $prenom );
+            $contact->setPrenom( $prenom );
+
+            //enregistrer le date naissance 
+            $date_naissance = $contact->getDateNaissance();
+            $date_naissance = strip_tags( $date_naissance );
+            $contact->setDateNaissance( $date_naissance );
             
+            //enregistrer le date adress 
+            $adress = $contact->getAdresse();
+            $adress = strip_tags( $adress );
+            $contact->setAdresse( $adress );
+
+            //enregistrer le date tel 
+            $tel = $contact->getTelephone();
+            $tel = strip_tags( $tel );
+            $contact->setTelephone( $tel );
+
+            //enregistrer nom
+            $nom = $contact->getNom();
             $nom = strip_tags( $nom );
             $contact->setNom( $nom );
+            
             $doctrine = $this->getDoctrine();
             $entityManager = $doctrine->getManager();
            
@@ -62,18 +84,36 @@ class LanController extends AbstractController
         $form = $this->createForm(InscriptionEntrepriseType::class, $contact);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            //expedier le mail 
+            //enregistrer le mail 
             $mail = $contact->getEmail();
+            $mail = strip_tags( $mail );
+            $contact->setEmail( $mail );
 
+            //enregistrer le pw 
             $pw = $contact->getPassword();
+            $pw = strip_tags( $pw );
+            $contact->setPassword( $pw );
+
+            //enregistrer le adress 
             $adress = $contact->getAdresse();
+            $adress = strip_tags( $adress );
+            $contact->setAdresse( $adress );
+
+            //enregistrer le adress 
             $tel = $contact->getTelephone();
+            $tel = strip_tags( $tel );
+            $contact->setTelephone( $tel );
+
+            //enregistrer le adress 
             $siret = $contact->getSiret();
+            $siret = strip_tags( $siret );
+            $contact->setSiret( $tel );
+            
             //enregistrer contact
             $nom = $contact->getNom();
-            
             $nom = strip_tags( $nom );
             $contact->setNom( $nom );
+
             $doctrine = $this->getDoctrine();
             $entityManager = $doctrine->getManager();
            
