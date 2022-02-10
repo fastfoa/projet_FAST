@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\InscriptionAppType;
+use App\Form\InscriptionEntrepriseType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -33,8 +34,8 @@ class LanController extends AbstractController
             $pw = $contact->getPassword();
             $prenom = $contact->getPrenom();
             $pw = $contact->getDateNaissance();
-            $prenom = $contact->getAdresse();
-            $prenom = $contact->getTelephone();
+            $adress = $contact->getAdresse();
+            $tel = $contact->getTelephone();
             //enregistrer contact
             $nom = $contact->getNom();
             
@@ -54,6 +55,40 @@ class LanController extends AbstractController
             ]);
         
     }
+
+    public function inscriptionEntreprise(Request $request): Response
+    {
+        $contact = new User();
+        $form = $this->createForm(InscriptionEntrepriseType::class, $contact);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            //expedier le mail 
+            $mail = $contact->getEmail();
+
+            $pw = $contact->getPassword();
+            $adress = $contact->getAdresse();
+            $tel = $contact->getTelephone();
+            $tel = $contact->getTelephone();
+            //enregistrer contact
+            $nom = $contact->getNom();
+            
+            $nom = strip_tags( $nom );
+            $contact->setNom( $nom );
+            $doctrine = $this->getDoctrine();
+            $entityManager = $doctrine->getManager();
+           
+            $entityManager->persist($contact); 
+            $entityManager->flush();
+            return new Response("formulaire OK $mail ");
+         }
+        return $this->render(
+            'lan/inscriptionEleve.html.twig', 
+            [
+                'form' => $form->createView()
+            ]);
+        
+    }
+
     public function login(): Response
     {
         return $this->render('lan/login.html.twig', [
