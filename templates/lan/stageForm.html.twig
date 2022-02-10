@@ -19,8 +19,11 @@
                 {{ form_widget(form.password, { 'attr': {'class': "inputPassword", 'placeholder': 'Entrez votre mot de passe'} }) }}
                 {{ form_widget(form.nom, { 'attr': {'class': "inputNom", 'placeholder': 'Entrez votre nom'} }) }}
                 {{ form_widget(form.prenom, { 'attr': {'class': "inputPrenom", 'placeholder': 'Entrez votre adresse prénom'} }) }}
+                <br>
+                {{ form_label(form.dateNaissance, 'Date de naissance')}}
                 {{ form_widget(form.dateNaissance, { 'attr': {'class': "dateNaissance"} }) }}
                 {{ form_widget(form.telephone, { 'attr': {'class': "inputTel", 'placeholder': 'Entrez votre numéro de téléphone'} }) }}
+                <br>
                 <br>
                 {{ form_row(form.save, { 'attr': {'class': "boutonForm", 'type': 'submit'} }) }}
             </form>
