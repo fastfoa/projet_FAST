@@ -68,7 +68,7 @@ class LanController extends AbstractController
             $pw = $contact->getPassword();
             $adress = $contact->getAdresse();
             $tel = $contact->getTelephone();
-            $tel = $contact->getTelephone();
+            $siret = $contact->getSiret();
             //enregistrer contact
             $nom = $contact->getNom();
             
@@ -82,7 +82,7 @@ class LanController extends AbstractController
             return new Response("formulaire OK $mail ");
          }
         return $this->render(
-            'lan/inscriptionEleve.html.twig', 
+            'lan/inscriptionEntreprise.html.twig', 
             [
                 'form' => $form->createView()
             ]);
