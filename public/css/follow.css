@@ -1,22 +1,24 @@
 @import url("//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css");
-.bandeau 
-    {
-        background-color: #11284B;
-        border: 1px solid white;
-        color:white;
-    }
-    .ensemble
-    {
-        border: 1px solid black;
-    }
-    .description 
-    {
-        border: 1px solid white;
-        background-color: #11284B;
-        color: #79a342;
-    }
+.bandeau {
+  background-color: #11284b;
+  border: 1px solid white;
+  color: white;
+}
 
-    .row {
-    text-align: center;
-    }
+.saisie {
+  background-color: #11284b;
+  border: 1px solid white;
+  color: #79a342;
+}
 
+.row {
+  text-align: center;
+}
+
+.titreBloc {
+  color: #79a342;
+}
+
+.dateSaisie {
+  color: #79a342;
+}

@@ -22,9 +22,10 @@ dashBoardSchool:
     path: /dashBoardSchool
     controller: App\Controller\LanController::dashBoardSchool
 
-Files:
-    path: /Files
-    controller: App\Controller\LanController::Files
+files:
+    path: /files
+    controller: App\Controller\LanController::files
+    
 dashBoardSkill:
     path: /dashBoardSkill
     controller: App\Controller\LanController::dashBoardSkill
@@ -33,6 +34,10 @@ getSkillToBe:
     path: /getSkillToBe
     controller: App\Controller\LanController::getSkillToBe
 
+suiviCompetences:
+    path: /suiviCompetences
+    controller: App\Controller\LanController::suiviCompetences
+    
 formulaireEleve:
     path: /formulaireEleve
     controller: App\Controller\LanController::formulaireEleve
@@ -56,3 +61,12 @@ followTraining:
 test:
     path: /test
     controller: App\Controller\LanController::test
+
+dashBoardEntrprise:
+    path: /dashBoardEntrprise
+    controller: App\Controller\LanController::dashBoardEntrprise
+
+formations:
+    path: /formations
+    controller: App\Controller\LanController::formations
+

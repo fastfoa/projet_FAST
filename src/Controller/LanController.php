@@ -59,19 +59,20 @@ public function registerStudent(): Response
         ]);
     }
 
-public function Files(): Response
-{
-    return $this->render('lan/Files.html.twig', [
-        'controller_name' => 'LanController',
-    ]);
-}
-      
-public function dashBoardSkill(): Response
-{
-    return $this->render('lan/dashBoardSkill.html.twig', [
-        'controller_name' => 'LanController',
-    ]);
-}
+    public function files(): Response
+    {
+        return $this->render('lan/Files.html.twig', [
+            'controller_name' => 'LanController',
+        ]);
+    }
+
+    public function dashBoardEntrprise(): Response
+    {
+        return $this->render('lan/dashBoardEntrprise.html.twig', [
+            'controller_name' => 'LanController',
+        ]);
+    }
+
     public function formulaireEleve(): Response
     {
         return $this->render('lan/formulaireEleve.html.twig', [
@@ -94,6 +95,12 @@ public function dashBoardSkill(): Response
         ]);
     }
 
+public function suiviCompetences(): Response
+{
+    return $this->render('lan/suiviCompetences.html.twig', [
+        'controller_name' => 'LanController',
+    ]);
+}
 
     public function getSkillToBe(): Response
     {
@@ -109,6 +116,7 @@ public function dashBoardSkill(): Response
         ]);
     }
 
+
     public function followTraining(): Response
     {
         return $this->render('lan/followTraining.html.twig', [
@@ -117,6 +125,13 @@ public function dashBoardSkill(): Response
     }
 
     public function test(): Response
+    {
+        return $this->render('lan/test.html.twig', [
+            'controller_name' => 'LanController',
+        ]);
+    }
+
+    public function formations(): Response
     {
         return $this->render('lan/test.html.twig', [
             'controller_name' => 'LanController',

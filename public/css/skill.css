@@ -1,17 +1,11 @@
 @import url("//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css");
-.bandeau 
-    {       
-            margin: auto;
-            background-size: cover;
-            background-color: #79a342;
-    }
-.description 
-    {
-        margin-top: 5px;
-    }
-    
-  
 
+.bandeau 
+{
+    background-color: #11284B;
+    border: 1px solid white;
+    color:white;
+}
     .row {
     text-align: center;
     }
