@@ -1,9 +1,15 @@
 {% extends 'lan/base.html.twig' %}
 
 {% block myStylesheets %}
+<link href="{{ asset('css/Dasboard-Entreprise.css') }}" type="text/css" rel="stylesheet" />
 	<style>
 		body{
 			text-align: center;
+			color: #fff;
+		}
+		h3{
+			padding-top:15px;
+			margin-bottom:15px;
 		}
 		.dat {
 			margin-right: 10px;
@@ -13,7 +19,11 @@
 			
 			border-radius: 4px;
 		}
-		
+		.date{
+			border: none;
+			margin: 0px;
+			padding: 0px;
+		}
 		
 		
 		.boutonForm {
@@ -26,6 +36,8 @@
 			font-size: 15px;
 			cursor: pointer;
 			transition: 0.3s;
+			margin-top:15px;
+			margin-bottom:15px;
 		}
 		.boutonForm:hover {
 			background-color: #f37262;
@@ -35,7 +47,13 @@
 {% endblock %}
 
 {% block body %}
-	<h3>Inscription Éléve</h3>
-	{{form(form)}}
+<section id="main">
+	<div class="container-fluid contenue">
+		<h3>Inscription Éléve</h3>
+		{{form(form)}}
+	</div>
+</section>
+
+	
 
 {% endblock %}

@@ -47,11 +47,11 @@ class InscriptionAppType extends AbstractType
                     'class' => 'dat'
                 ]
             ])
-            ->add('dateNaissance', NumberType::class,[
-                'label'=> false,
+            ->add('dateNaissance', DateType::class,[
+                'label'=> "Date de Naissance",
                 'attr' => [
-                    'placeholder' => 'prenom',
-                    'class' => 'dat'
+                    'placeholder' => 'date de Naissance',
+                    'class' => 'dat date'
                 ]
             ])
             ->add('adresse',TextType::class,[
