@@ -1,0 +1,97 @@
+{% extends 'lan/base.html.twig' %}
+
+{% block myStylesheets %}
+	<link rel="stylesheet" href="{{asset('css/login.css')}}">
+	<style>
+		.centrertextinscription {
+
+			text-align: center;
+		}
+		.centerbtn {
+			margin: 0 auto;
+		}
+	</style>
+{% endblock %}
+
+{% block body %}
+	<div class="container ">
+		<div class='form'>
+			<div class="logoWG">
+				<img width="50" height="48" src="https://webgenius.foreach-academy.fr/wp-content/uploads/2022/01/Logo-Web-Genius-300x294.png" class="attachment-medium size-medium" alt="" loading="lazy">
+			</div>
+			<div class="centrertextinscription">
+
+				<h1>
+					Inscription Formateur
+				</h1>
+			</div>
+
+			{{ form_start(form) }}
+
+
+			<div class="form-group mt-2 col-12 ">
+
+				{{ form_widget(form.email, {'attr': {'class':'form-control'}}
+				) }}
+
+			</div>
+			<div class="form-group mt-2 col-12">
+
+				{{ form_widget(form.password, {'attr': { 'class':'form-control'}}
+				) }}
+			</div>
+
+			
+			<div class="form-group mt-2 col-12">
+
+				{{ form_widget(form.nom, {'attr': { 'class':'form-control'}}
+				) }}
+			</div>
+
+			<div class="form-group mt-2 col-12">
+
+				{{ form_widget(form.prenom, {'attr': { 'class':'form-control'}}
+				) }}
+			</div>
+
+	
+			<div class="form-group mt-2 col-12">
+
+				{{ form_widget(form.siret, {'attr': {'class':'form-control'}})}}
+			</div>
+
+			<div class="form-group mt-2 col-12">
+
+				{{ form_widget(form.adresse, {'attr': {'class':'form-control'}})}}
+			</div>
+
+			
+			<div class="form-group mt-2 col-12">
+
+				{{ form_widget(form.session, {'attr': {'class':'form-control'}})}}
+			</div>
+
+			<div class="form-group mt-2 col-12">
+
+				{{ form_widget(form.telephone, {'attr': {'class':'form-control'}})}}
+			</div>
+
+
+
+			<div class="form-group mt-2 col-12">
+
+				{{ form_widget(form.diplome, {'attr': {'class':'form-control'}})}}
+			</div>
+
+			<div class="form-group mt-2 col-12">
+				{{ form_widget(form.dateNaissance)}}
+
+			</div>
+
+			{{ form_rest(form) }}
+
+			{{ form_end(form) }}
+		</div>
+	</div>
+
+{% endblock %}

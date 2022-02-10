@@ -6,6 +6,10 @@ inscriptionEleve:
     path: /inscriptionEleve
     controller: App\Controller\LanController::inscriptionEleve
 
+inscriptionFormateur:
+    path: /inscriptionFormateur
+    controller: App\Controller\LanController::inscriptionFormateur
+
 login:
     path: /login
     controller: App\Controller\LanController::login

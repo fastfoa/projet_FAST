@@ -5,6 +5,10 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Entity\User;
+use App\Form\FormateurType;
+use Symfony\Component\HttpFoundation\Request;
+use Doctrine\ORM\EntityManagerInterface;
 
 class LanController extends AbstractController
 {
@@ -24,6 +28,42 @@ class LanController extends AbstractController
             'controller_name' => 'LanController',
         ]);
     }
+
+    public function inscriptionFormateur(Request $request, EntityManagerInterface $manager)
+    {
+        $contact = new User();
+        $form = $this->createForm(FormateurType::class, $contact);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+         
+            $contact->getEmail();
+            $contact->getPassword();
+            $contact->getPrenom();
+            $contact->getDateNaissance();
+            $contact->getAdresse();
+            $contact->getTelephone();
+            $contact->getSession();
+            $contact->getSiret();
+            $contact->getDiplome();
+            $contact->getNom();
+
+
+
+            $doctrine = $this->getDoctrine();
+            $manager = $doctrine->getManager();
+
+            $manager->persist($contact);
+            $manager->flush();
+            return new Response("formulaire OK  ");
+        }
+        return $this->render(
+            'lan/inscriptionFormateurs.html.twig',
+            [
+                'form' => $form->createView()
+            ]
+        );
+    }
+
     public function login(): Response
     {
         return $this->render('lan/login.html.twig', [
@@ -95,12 +135,12 @@ public function registerStudent(): Response
         ]);
     }
 
-public function suiviCompetences(): Response
-{
-    return $this->render('lan/suiviCompetences.html.twig', [
-        'controller_name' => 'LanController',
-    ]);
-}
+    public function suiviCompetences(): Response
+    {
+        return $this->render('lan/suiviCompetences.html.twig', [
+            'controller_name' => 'LanController',
+        ]);
+    }
 
     public function getSkillToBe(): Response
     {
