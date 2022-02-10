@@ -2,12 +2,16 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
+use App\Form\InscriptionAppType;
+use App\Form\InscriptionEntrepriseType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Entity\User;
+
 use App\Form\FormateurType;
-use Symfony\Component\HttpFoundation\Request;
+
 use Doctrine\ORM\EntityManagerInterface;
 
 class LanController extends AbstractController
@@ -22,11 +26,71 @@ class LanController extends AbstractController
         ]);
     }
 
-    public function inscriptionEleve(): Response
+    public function inscriptionEleve(Request $request): Response
     {
-        return $this->render('lan/inscriptionEleve.html.twig', [
-            'controller_name' => 'LanController',
-        ]);
+        $contact = new User();
+        $form = $this->createForm(InscriptionAppType::class, $contact);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            //expedier le mail 
+            $mail = $contact->getEmail();
+
+            $pw = $contact->getPassword();
+            $prenom = $contact->getPrenom();
+            $pw = $contact->getDateNaissance();
+            $adress = $contact->getAdresse();
+            $tel = $contact->getTelephone();
+            //enregistrer contact
+            $nom = $contact->getNom();
+            
+            $nom = strip_tags( $nom );
+            $contact->setNom( $nom );
+            $doctrine = $this->getDoctrine();
+            $entityManager = $doctrine->getManager();
+           
+            $entityManager->persist($contact); 
+            $entityManager->flush();
+            return new Response("formulaire OK $mail ");
+         }
+        return $this->render(
+            'lan/inscriptionEleve.html.twig', 
+            [
+                'form' => $form->createView()
+            ]);
+        
+    }
+
+    public function inscriptionEntreprise(Request $request): Response
+    {
+        $contact = new User();
+        $form = $this->createForm(InscriptionEntrepriseType::class, $contact);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            //expedier le mail 
+            $mail = $contact->getEmail();
+
+            $pw = $contact->getPassword();
+            $adress = $contact->getAdresse();
+            $tel = $contact->getTelephone();
+            $tel = $contact->getTelephone();
+            //enregistrer contact
+            $nom = $contact->getNom();
+            
+            $nom = strip_tags( $nom );
+            $contact->setNom( $nom );
+            $doctrine = $this->getDoctrine();
+            $entityManager = $doctrine->getManager();
+           
+            $entityManager->persist($contact); 
+            $entityManager->flush();
+            return new Response("formulaire OK $mail ");
+         }
+        return $this->render(
+            'lan/inscriptionEleve.html.twig', 
+            [
+                'form' => $form->createView()
+            ]);
+        
     }
 
     public function inscriptionFormateur(Request $request, EntityManagerInterface $manager)
@@ -40,6 +104,8 @@ class LanController extends AbstractController
             $contact->getPassword();
             $contact->getPrenom();
             $contact->getDateNaissance();
+            $date_naissance = $contact->getDateNaissance();
+            $contact->setDateNaissance( $date_naissance );
             $contact->getAdresse();
             $contact->getTelephone();
             $contact->getSession();
