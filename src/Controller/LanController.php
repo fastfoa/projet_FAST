@@ -2,7 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
+use App\Form\InscriptionAppType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -18,11 +21,38 @@ class LanController extends AbstractController
         ]);
     }
 
-    public function inscriptionEleve(): Response
+    public function inscriptionEleve(Request $request): Response
     {
-        return $this->render('lan/inscriptionEleve.html.twig', [
-            'controller_name' => 'LanController',
-        ]);
+        $contact = new User();
+        $form = $this->createForm(InscriptionAppType::class, $contact);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            //expedier le mail 
+            $mail = $contact->getEmail();
+
+            $pw = $contact->getPassword();
+            $prenom = $contact->getPrenom();
+            $pw = $contact->getDateNaissance();
+            $prenom = $contact->getAdresse();
+            $prenom = $contact->getTelephone();
+            //enregistrer contact
+            $nom = $contact->getNom();
+            
+            $nom = strip_tags( $nom );
+            $contact->setNom( $nom );
+            $doctrine = $this->getDoctrine();
+            $entityManager = $doctrine->getManager();
+           
+            $entityManager->persist($contact); 
+            $entityManager->flush();
+            return new Response("formulaire OK $mail ");
+         }
+        return $this->render(
+            'lan/inscriptionEleve.html.twig', 
+            [
+                'form' => $form->createView()
+            ]);
+        
     }
     public function login(): Response
     {
