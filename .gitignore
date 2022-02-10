@@ -1,6 +1,7 @@
 
 ###> symfony/framework-bundle ###
 .env
+/config/services.yaml
 /.env.local
 /.env.local.php
 /.env.*.local
