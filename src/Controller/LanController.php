@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Evaluation;
+use App\Form\EvaluationType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -101,10 +103,21 @@ public function suiviCompetences(): Response
         'controller_name' => 'LanController',
     ]);
 }
+
 public function tableauSuiviCompetences(): Response
 {
     return $this->render('lan/tableauSuiviCompetences.html.twig', [
         'controller_name' => 'LanController',
+    ]);
+}
+
+public function formulaireEvaluation(): Response
+{   
+    $evaluation = new Evaluation();
+    $form =$this->createForm(EvaluationType::class, $evaluation);
+
+    return $this->render('lan/formulaireEvaluation.html.twig', [
+        'form' => $form->createView()
     ]);
 }
 

@@ -41,6 +41,10 @@ suiviCompetences:
 tableauSuiviCompetences:
     path: /tableauSuiviCompetences
     controller: App\Controller\LanController::tableauSuiviCompetences
+
+formulaireEvaluation:
+    path: /formulaireEvaluation
+    controller: App\Controller\LanController::formulaireEvaluation
     
 formulaireEleve:
     path: /formulaireEleve
