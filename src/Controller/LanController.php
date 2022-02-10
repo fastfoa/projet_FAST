@@ -45,7 +45,6 @@ class LanController extends AbstractController
 
             //enregistrer le date naissance 
             $date_naissance = $contact->getDateNaissance();
-            $date_naissance = strip_tags( $date_naissance );
             $contact->setDateNaissance( $date_naissance );
             
             //enregistrer le date adress 
@@ -62,7 +61,7 @@ class LanController extends AbstractController
             $nom = $contact->getNom();
             $nom = strip_tags( $nom );
             $contact->setNom( $nom );
-            
+
             $doctrine = $this->getDoctrine();
             $entityManager = $doctrine->getManager();
            

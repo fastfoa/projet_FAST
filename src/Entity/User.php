@@ -46,10 +46,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $prenom;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $dateNaissance;
+    
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -75,6 +72,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $diplome;
+
+    /**
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private $DateNaissance;
+
+    
 
     public function getId(): ?int
     {
@@ -189,17 +193,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getDateNaissance(): ?string
-    {
-        return $this->dateNaissance;
-    }
-
-    public function setDateNaissance(?string $dateNaissance): self
-    {
-        $this->dateNaissance = $dateNaissance;
-
-        return $this;
-    }
+    
 
     public function getAdresse(): ?string
     {
@@ -257,6 +251,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setDiplome(?string $diplome): self
     {
         $this->diplome = $diplome;
+
+        return $this;
+    }
+
+    public function getDateNaissance(): ?\DateTimeInterface
+    {
+        return $this->DateNaissance;
+    }
+
+    public function setDateNaissance(?\DateTimeInterface $DateNaissance): self
+    {
+        $this->DateNaissance = $DateNaissance;
 
         return $this;
     }
