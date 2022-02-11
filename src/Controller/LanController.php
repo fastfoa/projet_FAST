@@ -147,7 +147,6 @@ public function suiviCompetences(): Response
             $entityManager = $doctrine->getManager();
 
             $role->setRole(Role::class, 'ROLE_MAITRE');
-            
 
             $mail = $user->getEmail();
             $user->setEmail($mail);
