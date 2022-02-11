@@ -76,11 +76,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $diplome;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Role::class)
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $role;
+    // /**
+    //  * @ORM\ManyToOne(targetEntity=Role::class)
+    //  * @ORM\JoinColumn(nullable=false)
+    //  */
+    // private $role;
 
     public function getId(): ?int
     {
@@ -267,15 +267,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getRole(): ?Role
-    {
-        return $this->role;
-    }
+    // public function getRole(): ?Role
+    // {
+    //     return $this->role;
+    // }
 
-    public function setRole(?Role $role): self
-    {
-        $this->role = $role;
+    // public function setRole(?Role $role): self
+    // {
+    //     $this->role = $role;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 }

@@ -146,7 +146,9 @@ public function suiviCompetences(): Response
 
             $entityManager = $doctrine->getManager();
 
-            $role->setRole(Role::class, 'ROLE_MAITRE');
+            // $role->setRole(Role::class, 'ROLE_MAITRE');
+
+            $user->setRoles(['ROLE_MAITRE']);
 
             $mail = $user->getEmail();
             $user->setEmail($mail);
@@ -171,7 +173,7 @@ public function suiviCompetences(): Response
             // $entityManager = $doctrine->setManager();
            
             $entityManager->persist($user); 
-            $entityManager->persist($role); 
+            // $entityManager->persist($role); 
             $entityManager->flush();
 
             return new Response("formulaire OK");
