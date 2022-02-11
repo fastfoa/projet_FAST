@@ -12,6 +12,7 @@
 
 
 {% block body %}
+
 	<section id="main">
 		<div class="container-fluid contenue">
 			<div class="row">
@@ -41,6 +42,11 @@
                             <small class="text-muted">Documents</small>
                             
                         </h2>
+						{% for message in app.flashes('message') %}
+    						<div class="alert alert-success">
+       						 {{message}}
+    						</div>
+						{% endfor %}
                         <br>
                         
                         <a href="{{ path( 'upload') }}"><button class="btn btn-success my-2">+ Ajouter un document</button></a>
@@ -52,6 +58,7 @@
                                 <th>Nom du document	</th>
                                 <th>classe</th>
                                 <th>Format document</th>
+								<th>Suppression</th>
 	                        </tr>
 	                    </thead>
 	                    <tbody>
@@ -61,7 +68,14 @@
                                 <td>{{document.titre}}</td>
                                 <td>Alternance 1er Année</td> 
                                 <td><a href="{{ path( 'download',{'id':document.id} ) }}"><button class="btn btn-success"><i class="fas fa-file-pdf" style="font-size:20px;color:red;"></i> Telechargement</button></a></td>
-	                        </tr>   
+								<td>
+								<form method="post" class="col" action="{{path('delete',{'id':document.id})}}" onsubmit="return confirm('Voulez-vous vraiment supprimer ?');">
+										<input type="hidden" name="_method" value="SUP">
+										<input type="hidden" name="_token" value="{{csrf_token('SUP' ~ document.id)}}">
+										<input type="submit" class="btn btn-danger w-100" value="supprimer">
+                        		</form> 
+								</td>
+							</tr>   
                             {% endfor %}
 	                    </tbody>
                     </table>
