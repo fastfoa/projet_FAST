@@ -146,8 +146,6 @@ public function suiviCompetences(): Response
 
             $entityManager = $doctrine->getManager();
 
-            // $role->setRole(Role::class, 'ROLE_MAITRE');
-
             $user->setRoles(['ROLE_MAITRE']);
 
             $mail = $user->getEmail();
@@ -166,7 +164,7 @@ public function suiviCompetences(): Response
             $user->setTelephone($tel);
 
             $nom = $user->getNom();
-            //$nom = strip_tags( $nom );
+            $nom = strip_tags( $nom );
             $user->setNom($nom);
 
             // $doctrine = $this->setDoctrine();
