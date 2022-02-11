@@ -1,4 +1,11 @@
-.body-fe {
+h1, h2, h3, h4, h5, h6 
+{
+    font-family: Arial, Helvetica, sans-serif;
+    color : white;
+}
+
+.body-fe 
+{
     background-image: url("https://webgenius.foreach-academy.fr/wp-content/uploads/2022/01/fond-bleu-double-scaled.jpg");
     background-position: center top;
     background-size: cover;
@@ -7,40 +14,42 @@
     margin: 0;
 }
 
-.bar-top {
+.bar-top 
+{
     height: 80px;
    /* background-color: white;
     opacity:0.50; */
 }
 
-.text-light {
+.text-light 
+{
     color: white;
     font-size: 20px;
     /*margin-left: 15px; */
 }
 
-.fit100 {
+.fit100 
+{
     height: 100%;
     width: 100%;
 }
-.fith100 {
-    
+
+.fith100 
+{
     width: 100%;
 }
 
-
-.menu-top {
+.menu-top 
+{
     width: 70%;
     margin: -30px 20% 0;
     display: inline;
     vertical-align: center;
     text-align: center;
-   
-  
-
-
 }
-.ul-fe li {
+
+.ul-fe li 
+{
     display: inline;
     margin-left: 10px;
     margin-right: 10px;
@@ -60,10 +69,8 @@
     object-fit: scale-down;
 }
 
-
-
-
-.work-content {
+.work-content 
+{
     width: 70%;
     height: 400px;
     background-color: #018FA5;
@@ -71,9 +78,8 @@
     
 }
 
-
-.bar-bottom {
-   
+.bar-bottom 
+{
     position: absolute;
     bottom: 0;
     left: 0;
@@ -104,24 +110,15 @@
     background-color: #f37262;
 }
 
-
-h1, h2, h3, h4, h5, h6 
-{
-    font-family: Arial, Helvetica, sans-serif;
-    color : white;
-}
-
 .bg-work-content
 {
     background-color:#018FA5;
 }
 
-
 .bg-bouton-form
 {
     background-color:#79a342;
 }
-
 
 .bg-boutonForm:hover
 {
@@ -135,18 +132,12 @@ h1, h2, h3, h4, h5, h6
 }
 
 
-
-
-
-
 /*
-font-family: Arial, Helvetica, sans-serif, Roboto, Raleway;
-font-size: 20px;
- color: white; text
-#11284B; background bar-bottom
-#018FA5; background work-content
-#79a342; background bouton-form
-#f37262; background boutonForm:hover
-
+    font-family: Arial, Helvetica, sans-serif, Roboto, Raleway;
+    font-size: 20px;
+    color: white; text
+    #11284B; background bar-bottom
+    #018FA5; background work-content
+    #79a342; background bouton-form
+    #f37262; background boutonForm:hover
  */
-
