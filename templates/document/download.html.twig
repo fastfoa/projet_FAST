@@ -1,0 +1,17 @@
+{% extends 'lan/base.html.twig' %}
+
+
+    {% block title %}UPLOAD FICHIER{% endblock %}
+
+
+{% block body %}
+<div>
+
+  <h1>{{ document.titre }}</h1>
+  <h2>{{ document.fileNameOriginal }}</h2>
+  <br>
+  {{ absolute_url( asset( 'file' ))}}/{{ document.fileNameOriginal }}
+  </div>
+{% endblock %}
+
+

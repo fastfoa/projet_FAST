@@ -40,10 +40,9 @@
 }
 .demo td {
     border:1px solid black;
-    text-align:left
+    text-align:left;
     padding:5px;
     background: #11284b;
     color: white;
-    
     height: 35px;
 }

@@ -2,6 +2,7 @@
 #    path: /
 #    controller: App\Controller\DefaultController::index
 
+
 inscriptionEleve:
     path: /inscriptionEleve
     controller: App\Controller\LanController::inscriptionEleve
@@ -18,6 +19,7 @@ login:
 #    path: /registerStudent
 #    controller: App\Controller\LanController::registerStudent
 
+                                
 dashBoardStudent:
     path: /dashBoardStudent
     controller: App\Controller\LanController::dashBoardStudent
@@ -69,3 +71,17 @@ test:
 dashBoardEntrprise:
     path: /dashBoardEntrprise
     controller: App\Controller\LanController::dashBoardEntrprise
+                                    
+
+
+upload: 
+    path: /upload
+    controller: App\Controller\DocumentController::upload
+
+downloadlist:
+    path: /downloadlist
+    controller: App\Controller\DocumentController::downloadlist
+
+download:
+    path: /download/{id}
+    controller: App\Controller\DocumentController::download
