@@ -36,15 +36,15 @@ getSkillToBe:
 
 suiviCompetences:
     path: /suiviCompetences
-    controller: App\Controller\LanController::suiviCompetences
+    controller: App\Controller\SkillsController::suiviCompetences
 
 tableauSuiviCompetences:
     path: /tableauSuiviCompetences
-    controller: App\Controller\LanController::tableauSuiviCompetences
+    controller: App\Controller\SkillsController::tableauSuiviCompetences
 
 formulaireEvaluation:
     path: /formulaireEvaluation
-    controller: App\Controller\LanController::formulaireEvaluation
+    controller: App\Controller\SkillsController::formulaireEvaluation
     
 formulaireEleve:
     path: /formulaireEleve
