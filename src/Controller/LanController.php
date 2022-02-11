@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Role;
 use App\Entity\User;
 use App\Form\StageFormType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -145,6 +146,8 @@ public function suiviCompetences(): Response
 
             $entityManager = $doctrine->getManager();
 
+            $role->setRole(Role::class, 'ROLE_MAITRE');
+
             $mail = $user->getEmail();
             $user->setEmail($mail);
 
@@ -168,6 +171,7 @@ public function suiviCompetences(): Response
             // $entityManager = $doctrine->setManager();
            
             $entityManager->persist($user); 
+            $entityManager->persist($role); 
             $entityManager->flush();
 
             return new Response("formulaire OK");
