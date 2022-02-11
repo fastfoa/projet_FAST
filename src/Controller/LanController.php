@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\InscriptionAppType;
+use App\Form\InscriptionApp2Type;
+
 use App\Form\InscriptionEntrepriseType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -25,7 +27,7 @@ class LanController extends AbstractController
     public function inscriptionEleve(Request $request): Response
     {
         $contact = new User();
-        $form = $this->createForm(InscriptionAppType::class, $contact);
+        $form = $this->createForm(InscriptionApp2Type::class, $contact);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             //enregistrer le mail 

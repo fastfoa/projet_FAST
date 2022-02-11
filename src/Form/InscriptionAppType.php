@@ -46,12 +46,18 @@ class InscriptionAppType extends AbstractType
                     'placeholder' => 'prenom',
                     'class' => 'dat'
                 ]
-            ])
+            ])  
             ->add('dateNaissance', DateType::class, [
                 'widget' => 'single_text',
-                'format' => 'yyyy-MM-dd',
-                'data' => new \DateTime() 
-                
+                'attr' => [
+                    'placeholder' => 'date',
+                    'type' => 'text',
+                    'onfocusout' => "(this.type='text')",
+                    'onfocus' => "(this.type='date')"
+                    
+                ],
+                'label' => false,
+                'format' => 'yyyy-MM-dd'
             ])
             ->add('adresse',TextType::class,[
                 'label'=> false,
