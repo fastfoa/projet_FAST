@@ -27,7 +27,7 @@ class LanController extends AbstractController
     public function inscriptionEleve(Request $request): Response
     {
         $contact = new User();
-        $form = $this->createForm(InscriptionApp2Type::class, $contact);
+        $form = $this->createForm(InscriptionAppType::class, $contact);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             //enregistrer le mail 
