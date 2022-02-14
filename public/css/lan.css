@@ -4,6 +4,16 @@ h1, h2, h3, h4, h5, h6
     color : white;
 }
 
+.font
+{
+    font-family: Arial, Helvetica, sans-serif, Roboto, Raleway ;
+}
+* 
+{
+    margin: 0px;
+    padding: 0px;
+}
+
 .body-fe 
 {
     background-image: url("https://webgenius.foreach-academy.fr/wp-content/uploads/2022/01/fond-bleu-double-scaled.jpg");
@@ -19,13 +29,6 @@ h1, h2, h3, h4, h5, h6
     height: 80px;
    /* background-color: white;
     opacity:0.50; */
-}
-
-.text-light 
-{
-    color: white;
-    font-size: 20px;
-    /*margin-left: 15px; */
 }
 
 .fit100 
@@ -53,17 +56,18 @@ h1, h2, h3, h4, h5, h6
     display: inline;
     margin-left: 10px;
     margin-right: 10px;
-    position: relative ;
+    position: relative;
     top: -60px;
-    
 }
 
-.logo-top {
+.logo-top 
+{
     width: 150px;
     height: 150px;
 }
 
-.logo-top img {
+.logo-top img 
+{
     width: 100%;
     height: 100%;
     object-fit: scale-down;
@@ -73,9 +77,7 @@ h1, h2, h3, h4, h5, h6
 {
     width: 70%;
     height: 400px;
-    background-color: #018FA5;
-    margin: 40px auto 10px;
-    
+    margin: 40px auto 10px;   
 }
 
 .bar-bottom 
@@ -86,10 +88,62 @@ h1, h2, h3, h4, h5, h6
     right: 0;
     height: 5px;
     width: 100%;
-    background-color: #11284B;
     text-align: center;
-    color:white;
 }
+
+/* ************************************************* */
+/* ************************************************* */
+/* *****************   COLOR    ******************** */
+/* ************************************************* */
+/* ************************************************* */
+/*
+    font-family: Arial, Helvetica, sans-serif, Roboto, Raleway;
+    font-size: 20px;
+    color: white; text
+    #11284B; background bar-bottom
+    #018FA5; background work-content
+    #79a342; background bouton-form
+    #f37262; background boutonForm:hover
+ */
+
+ a
+ {
+     text-decoration: none;
+     font-family:   Arial, Helvetica, sans-serif;
+     color: white;
+ }
+
+ a:hover
+ {
+     text-decoration: underline;
+     color: white;
+     background-color: #11284B;
+     opacity: 40%;
+ }
+ 
+
+ .form
+ {
+     border-radius: 3px;
+     background-color: #11284B;
+     margin: auto;
+     width: 40%;
+     text-align: center;
+     padding: 3%;
+ }
+ 
+ 
+ 
+ input[type=text], input[type=password]
+ {
+     width: 70%;
+     padding: 12px 20px;
+     margin: 8px 0;
+     border: 1px solid #ccc;
+     border-radius: 4px;
+ }
+ 
+ 
 
 .boutonForm
 {
@@ -110,12 +164,7 @@ h1, h2, h3, h4, h5, h6
     background-color: #f37262;
 }
 
-.bg-work-content
-{
-    background-color:#018FA5;
-}
-
-.bg-bouton-form
+.bg-boutonForm
 {
     background-color:#79a342;
 }
@@ -125,19 +174,102 @@ h1, h2, h3, h4, h5, h6
  background-color:#f37262;
 }
 
-.font
+.table-normal 
 {
-    font-family: Arial, Helvetica, sans-serif, Roboto, Raleway ;
-    
+    width:100%;
+    height:100%;
+    border:1px solid black;
+    border-collapse:effondrer;
 }
 
 
-/*
-    font-family: Arial, Helvetica, sans-serif, Roboto, Raleway;
+
+.bg-body  		/* couleur fond du body */
+{
+    background-color:#018FA5;
+}
+
+.bg-workSpace  	/* couleur fond de la box de travail */
+{
+    background-color:#018FA5;
+}
+
+.bg-input	  	/* couleur fond des champs de saisie */
+{
+    background-color: aqua;
+}
+
+.bg-bar	  		/* couleur fond des bar ( menu, titre, ... ) */
+{
+    background-color: #11284B;
+}
+
+.txt-normal		/* text ordinaire */
+{
+    color:gray;
+    font-size: 17px;
+}
+
+.txt-bar		/* text en barre */
+{
+    color:white;
+    font-size: 17px;
+}
+
+.txt-error		/* text en cas d'erreur */
+{
+    color:red;
+    font-size: 17px;
+}
+
+.txt-label		/* text des label */
+{
+    color: black;
+    font-size: 17px;
+}
+
+.txt-title		/* text des titre */
+{
+    color:darkgreen;
     font-size: 20px;
-    color: white; text
-    #11284B; background bar-bottom
-    #018FA5; background work-content
-    #79a342; background bouton-form
-    #f37262; background boutonForm:hover
- */
+}
+
+
+label
+{
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+
+
+
+/* ********************************************* */
+
+.dashMenu{
+    background-color: #11284B !important;
+}
+
+
+.carte,
+.active {
+  background-color: #018fa5 !important;
+}
+
+.vert {
+  background-color: #79a342 !important;
+}
+
+.bleu {
+  background-color: red !important;
+  color: #fff;
+}
+
+
+
+
+
+
+
+
+

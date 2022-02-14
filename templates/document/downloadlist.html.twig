@@ -1,77 +1,76 @@
 {% extends 'lan/base.html.twig' %}
 
 {% block myStylesheets %}
-	<link href="{{ asset('css/Documents.css') }}" type="text/css" rel="stylesheet"/>
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-
-
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 {% endblock %}
 
-    {% block title %}UPLOAD FICHIER{% endblock %}
-
-
+{% block title %}LIST DES FICHIERS{% endblock %}
 
 {% block body %}
-	<section id="main">
-		<div class="container-fluid contenue">
-			<div class="row">
-				<div class="col-lg-2 dashMenu sidebar d-flex flex-column list-group list-group-flush viewport-max ">
-					<a href="#" class="list-group-item list-group-item-action text-center bleu">
-						<img src="{{ asset('images/olivier.jpeg') }}" alt="" class="img-fluid rounded-circle mr-2">
-						Olivier Carlier</a>
-					<a href="#" class="list-group-item list-group-item-action menu-items bleu">
-						<i class="fas fa-columns mr-2 fa-lg"></i>Dashboard</a>
-					<a href="#" class="list-group-item list-group-item-action menu-items  active">
-						<i class="fas fa-thin fa-file mr-2 fa-lg"></i>Documents</a>
-					<a href="#" class="list-group-item list-group-item-action menu-items bleu">
-						<i class="fas fa-solid fa-bars-progress mr-2 fa-lg"></i>Suivi</a>
-					<a href="#" class="list-group-item list-group-item-action menu-items bleu">
-						<i class="fas fa-info mr-2 fa-lg"></i>Infos Entreprise</a>
-					<a href="#" class="list-group-item list-group-item-action menu-items bleu">
-						<i class="fas fa-info mr-2 fa-lg"></i>Infos Organisme de Formation</a>
-					<a href="#" class="list-group-item list-group-item-action menu-items bleu">
-						<i class="fas fa-user-cog mr-2 fa-lg"></i>Mes information</a>
-				</div>
-				<!-- MAIN CARDS-->
-				<div class="col-lg-10">
-			<div class="row">
-               
-				<div class="col"> 
-                        <h2 class="text-info my-2">
-                            <small class="text-muted">Documents</small>
-                            
-                        </h2>
-                        <br>
-                        
-                        <a href="{{ path( 'upload') }}"><button class="btn btn-success my-2">+ Ajouter un document</button></a>
-                        <br>
-				    <table class="demo">
-	                    <thead>
-	                        <tr>
-                                <th>Date</th>
-                                <th>Nom du document	</th>
-                                <th>classe</th>
-                                <th>Format document</th>
-	                        </tr>
-	                    </thead>
-	                    <tbody>
-                            {% for document in listUp %}
-                            <tr>
-                                <td>10/02/2022</td>
-                                <td>{{document.titre}}</td>
-                                <td>Alternance 1er Année</td> 
-                                <td><a href="{{ path( 'download',{'id':document.id} ) }}"><button class="btn btn-success"><i class="fas fa-file-pdf" style="font-size:20px;color:red;"></i> Telechargement</button></a></td>
-	                        </tr>   
-                            {% endfor %}
-	                    </tbody>
-                    </table>
-                    <br>	
-                </div>
+	<div class="container-fluid contenue">
+		<div class="row">
+			<div class="col-lg-2 dashMenu sidebar d-flex flex-column list-group list-group-flush viewport-max ">
+				<a href="#" class="list-group-item list-group-item-action text-center bg-bar">
+					<img src="{{ asset('images/olivier.jpeg') }}" alt="" class="img-fluid rounded-circle mr-2">
+					Olivier Carlier</a>
+				<a href="#" class="list-group-item list-group-item-action menu-items bg-bar">
+					<i class="fas fa-columns mr-2 fa-lg"></i>Dashboard</a>
+				<a href="#" class="list-group-item list-group-item-action menu-items  active">
+					<i class="fas fa-thin fa-file mr-2 fa-lg"></i>Documents</a>
+				<a href="#" class="list-group-item list-group-item-action menu-items bg-bar">
+					<i class="fas fa-solid fa-bars-progress mr-2 fa-lg"></i>Suivi</a>
+				<a href="#" class="list-group-item list-group-item-action menu-items bg-bar">
+					<i class="fas fa-info mr-2 fa-lg"></i>Infos Entreprise</a>
+				<a href="#" class="list-group-item list-group-item-action menu-items bg-bar">
+					<i class="fas fa-info mr-2 fa-lg"></i>Infos Organisme de Formation</a>
+				<a href="#" class="list-group-item list-group-item-action menu-items bg-bar">
+					<i class="fas fa-user-cog mr-2 fa-lg"></i>Mes information</a>
 			</div>
-        </div>
-    </section>
-</div>
+			<!-- MAIN CARDS-->
+			<div class="col-lg-10">
+				<div class="row">
+					<div class="col-5">
+						<h2 class="text-info my-2">
+							<small class="text-muted">Documents</small>
+						</h2>
+					</div>
+					<div class="col-5">
+						<a href="{{ path( 'upload') }}">
+							<button class="btn btn-success my-2">+ Ajouter un document</button>
+						</a>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-12">
+						<table class="table-normal">
+							<thead>
+								<tr>
+									<th class="txt-bar bg-bar">Date</th>
+									<th class="txt-bar bg-bar">Nom du document</th>
+									<th class="txt-bar bg-bar">classe</th>
+									<th class="txt-bar bg-bar">Format document</th>
+								</tr>
+							</thead>
+							<tbody>
+								{% for document in listUp %}
+									<tr>
+										<td class="txt-normal">10/02/2022</td>
+										<td class="txt-normal">{{document.titre}}</td>
+										<td class="txt-normal">Alternance 1er Année</td>
+										<td class="txt-normal">
+											<a href="{{ path( 'download',{'id':document.id} ) }}">
+													<button class="btn btn-success">
+													<i class="fas fa-file-pdf" style="font-size:20px;color:red;"></i>
+													Telechargement</button>
+											</a>
+										</td>
+									</tr>
+								{% endfor %}
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 {% endblock %}
-
-
-
