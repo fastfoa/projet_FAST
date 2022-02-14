@@ -1,56 +1,42 @@
 {% extends 'lan/base.html.twig' %}
 
 {% block myStylesheets %}
-	<link href="{{ asset('css/Dasboard-Entreprise.css') }}" type="text/css" rel="stylesheet"/>
 	<style>
-		body {
+		h3{
+			text-align:center;
+		}
+		input{
+			display: block;
+			position: relative;
+			margin-left: auto;
+			margin-right: auto;
+			margin-top: 5px;
+			width: 300px;
+			height: 30px;
+		}
+		.btnTest{
+			margin-top: 100px;
 			text-align: center;
-			color: #fff;
-		}
-		h3 {
-			padding-top: 15px;
-			margin-bottom: 15px;
-		}
-		.dat {
-			margin: 8px 0;
-			padding-right: 10%;
-			border: 1px solid #ccc;
-
-			border-radius: 4px;
-		}
-		.date {
-			border: none;
-			margin: 0;
-			padding: 0;
-		}
-
-
-		.boutonForm {
-			background-color: #79a342;
-			color: white;
-			border-radius: 3px;
-			border: none;
-			padding: 12px 24px;
-			text-decoration: none;
-			font-size: 15px;
-			cursor: pointer;
-			transition: 0.3s;
-			margin-top: 20px;
-			margin-bottom: 20px;
-		}
-		.boutonForm:hover {
-			background-color: #f37262;
 		}
 	</style>
 {% endblock %}
 
 {% block body %}
-	<section id="main">
-		<div class="container-fluid contenue">
-			<h3>Inscription Entreprise</h3>
-			{{form(form)}}
-			</div>
-		</section>
+	<h3>Inscription Entreprise</h3>
+	<div class="row">
+		<div class="col-6">
+			{{form_widget(form.nom)}}
+			{{form_widget(form.siret)}}
+			{{form_widget(form.adresse)}}
+		</div>
+		<div class="col-6">
+			{{form_widget(form.email)}}
+			{{form_widget(form.password)}}
+			{{form_widget(form.telephone)}}
+		</div>
+		<div class="col-12 btnTest">
+			{{form_widget(form.inscrire)}}
+		</div>
+	</div>
 
-
-	{% endblock %}
+{% endblock %}

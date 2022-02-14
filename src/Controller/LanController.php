@@ -108,7 +108,7 @@ class LanController extends AbstractController
             //enregistrer le adress 
             $siret = $contact->getSiret();
             $siret = strip_tags( $siret );
-            $contact->setSiret( $tel );
+            $contact->setSiret( $siret );
             
             //enregistrer contact
             $nom = $contact->getNom();
