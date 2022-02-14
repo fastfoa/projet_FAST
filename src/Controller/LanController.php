@@ -69,7 +69,7 @@ class LanController extends AbstractController
            
             $entityManager->persist($contact); 
             $entityManager->flush();
-            return new Response("formulaire OK $mail ");
+            return $this->redirect($this->generateUrl('login'));
          }
         return $this->render(
             'lan/inscriptionEleve.html.twig', 
@@ -120,7 +120,7 @@ class LanController extends AbstractController
            
             $entityManager->persist($contact); 
             $entityManager->flush();
-            return new Response("formulaire OK $mail ");
+            return $this->redirect($this->generateUrl('login'));
          }
         return $this->render(
             'lan/inscriptionEntreprise.html.twig', 

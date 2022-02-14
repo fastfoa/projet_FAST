@@ -38,13 +38,7 @@ class InscriptionEntrepriseType extends AbstractType
                     'class' => 'dat'
                 ]
             ])
-            ->add('adresse',TextType::class,[
-                'label'=> false,
-                'attr' => [
-                    'placeholder' => 'adress',
-                    'class' => 'dat'
-                ]
-            ])
+            
             ->add('telephone', NumberType::class,[
                 'label'=> false,
                 'attr' => [
