@@ -16,22 +16,37 @@ class StageFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('email')
+            ->add('email', null,
+                    [ 'attr' => [ 'class' => "inputEmail myInput", 'placeholder' => 'Entrez votre adresse email' ] ]
+                )
             // ->add('roles')
-            ->add('password', PasswordType::class)
-            ->add('nom')
-            ->add('prenom')
+            ->add('password', PasswordType::class,
+                    [ 'attr' => [ 'class' => "inputPassword myInput", 'placeholder' => 'Entrez votre mot de passe' ] ]
+                )
+            ->add('nom', null,
+                    [ 'attr' => [ 'class' => "inputNom myInput", 'placeholder' => 'Entrez votre nom' ] ]
+                )
+            ->add('prenom', null,
+                    [ 'attr' => [ 'class' => "inputPrenom myInput", 'placeholder' => 'Entrez votre prénom' ] ]
+                )
             ->add('dateNaissance', DateType::class, [
+                'attr' => [ 'class' => "dateNaissance myInput" ],
                 'widget' => 'single_text',
                 'format' => 'yyyy-MM-dd',
                 'data' => new \DateTime() ]
             )
-            // ->add('adresse')
+            ->add('adresse', null,
+                    [ 'attr' => [ 'class' => "inputAdresse myInput", 'placeholder' => 'Entrez votre adresse' ] ]
+                )
             // ->add('session')
-            ->add('telephone')
+            ->add('telephone', null,
+                    [ 'attr' => [ 'class' => "inputTel myInput", 'placeholder' => 'Entrez votre numéro de téléphone' ] ]
+                )
             // ->add('siret')
             // ->add('diplome')
-            ->add('save', SubmitType::class, ['label' => "Je m'inscris"])
+            ->add('save', SubmitType::class,
+                    [ 'label' => "Je m'inscris", 'attr' => [ 'class' => "boutonForm" ] ]
+                )
         ;
     }
 

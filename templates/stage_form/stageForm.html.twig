@@ -1,0 +1,43 @@
+{% extends 'lan/base.html.twig' %}
+
+{% block myStylesheets %}
+    <link rel="stylesheet" href="{{asset("css/formulaireMaitre.css")}}">
+{% endblock %}
+
+
+{% block body %}
+
+    {{form_start(form)}}
+        <div class="row form">            
+            <div class="col-12 mb-3 mt-2">
+                <h2>Inscription maître de stage</h2>
+            </div>
+            <div class="col-6">
+                {{ form_widget(form.email) }}
+            </div>
+            <div class="col-6">
+                {{ form_widget(form.password) }}
+            </div>
+            <div class="col-6">
+                {{ form_widget(form.nom) }}
+            </div>
+            <div class="col-6">
+                {{ form_widget(form.prenom) }}
+            </div>
+            <div class="col-6 mt-2">
+                {{ form_label(form.dateNaissance, 'Date de naissance')}}
+                <br>
+                {{ form_widget(form.dateNaissance) }}
+            </div>
+            <div class="col-6">
+                {{ form_widget(form.adresse) }}
+            </div>
+            <div class="col-6">
+                {{ form_widget(form.telephone) }}
+            </div>
+            <div class="col-12 mt-3">
+                {{ form_widget(form.save) }}
+            </div>
+        </div>
+    {{form_end(form)}}
+{% endblock %}

@@ -100,12 +100,12 @@ public function registerStudent(): Response
         ]);
     }
 
-public function suiviCompetences(): Response
-{
-    return $this->render('lan/suiviCompetences.html.twig', [
-        'controller_name' => 'LanController',
-    ]);
-}
+    public function suiviCompetences(): Response
+    {
+        return $this->render('lan/suiviCompetences.html.twig', [
+            'controller_name' => 'LanController',
+        ]);
+    }
 
     public function getSkillToBe(): Response
     {
@@ -133,52 +133,6 @@ public function suiviCompetences(): Response
     {
         return $this->render('lan/test.html.twig', [
             'controller_name' => 'LanController',
-        ]);
-    }
-
-    public function stageForm(Request $request, ManagerRegistry $doctrine): Response
-    {
-        $user = new User();
-        $form = $this->createForm(StageFormType::class, $user);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-
-            $entityManager = $doctrine->getManager();
-
-            $user->setRoles(['ROLE_MAITRE']);
-
-            $mail = $user->getEmail();
-            $user->setEmail($mail);
-
-            $pw = $user->getPassword();
-            $user->setPassword($pw);
-            
-            $prenom = $user->getPrenom();
-            $user->setPrenom($prenom);
-
-            $dateNaissance = $user->getDateNaissance();
-            $user->setDateNaissance($dateNaissance);
-
-            $tel = $user->getTelephone();
-            $user->setTelephone($tel);
-
-            $nom = $user->getNom();
-            $nom = strip_tags( $nom );
-            $user->setNom($nom);
-
-            // $doctrine = $this->setDoctrine();
-            // $entityManager = $doctrine->setManager();
-           
-            $entityManager->persist($user); 
-            // $entityManager->persist($role); 
-            $entityManager->flush();
-
-            return new Response("formulaire OK");
-        }
-
-        return $this->render( 'lan/stageForm.html.twig', [
-            'form' => $form->createView()
         ]);
     }
 }
