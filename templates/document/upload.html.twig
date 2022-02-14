@@ -12,7 +12,7 @@
 {% block body %}
 <div>
 
-<h1 class="mx-auto col-12">Upload Document</h1>
+<h2 class="mx-auto col-12">Upload Document</h2>
 
 
             {{ form_start(myForm) }}
@@ -26,13 +26,28 @@
                     {{ form_widget(myForm.fileName, {'attr': {'placeholder': 'message'}}) }}
                 </div>
                 <hr>
+
+
+                <div class="form-group mx-auto col-12">
+                    <div id="campaign_channel" class="col-xs-6 mx-auto col-12">
+                        <input id="campaign_channel_1" type="checkbox" value="1" name="campaign[channel][]">
+                        <label for="campaign_channel_1">Apprentis</label>
+                        <input id="campaign_channel_2" type="checkbox" value="2" name="campaign[channel][]">
+                        <label for="campaign_channel_2">Maitre de stage</label>
+                        <input id="campaign_channel_3" type="checkbox" value="3" name="campaign[channel][]">
+                        <label for="campaign_channel_3">Formateur</label>
+                        <input id="campaign_channel_4" type="checkbox" value="4" name="campaign[channel][]">
+                        <label for="campaign_channel_4">Organisme de formation</label>
+                    </div>
+                </div>
+                <hr>
                 <div class="jp_label mx-auto col-12">
                     <button class="boutonForm" type="submit" >Uploader</button>
                 </div>
             {{ form_end(myForm) }}
                 
                 <div class="jp_label mx-auto my-2 col-12">
-                    <a href="{{ path( 'downloadlist') }}"><button class="boutonForm" target="_blank" alt="Retour"  >Retour</button></a>
+                    <a href="{{ path( 'downloadlist') }}"><button class="btn btn-danger" target="_blank" alt="Retour"  >Retour</button></a>
                  </div>
 </div>
 {% endblock %}

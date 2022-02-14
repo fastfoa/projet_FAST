@@ -14,6 +14,7 @@ use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\HeaderUtils;
 use Symfony\Component\Validator\Constraints\DateTime;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Doctrine\ORM\EntityManagerInterface;
 
 
 
@@ -84,6 +85,7 @@ class DocumentController extends AbstractController
                     $entityManager->persist($up); // On confie notre entit&#xE9; &#xE0; l'entity manager (on persist l'entit&#xE9;)
                     $entityManager->flush();
 
+                    $this->addFlash('message', "Document ajouté");
                     return $this->redirect('downloadlist');
                    
 
@@ -131,4 +133,18 @@ class DocumentController extends AbstractController
 
         return $r;
     }
+
+   
+    public function delete(Document $document, Request $request, EntityManagerInterface $om)
+    {
+        if($this->isCsrfTokenValid("SUP".$document->getId(), $request->get("_token"))){
+            $om->remove($document);
+            $om->flush();
+            $this->addFlash('message', "Document supprimé");
+            return $this->redirectToRoute("downloadlist");
+        }
+    }
+
+    
 }
+

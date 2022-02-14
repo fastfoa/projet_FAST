@@ -81,3 +81,9 @@ downloadlist:
 download:
     path: /download/{id}
     controller: App\Controller\DocumentController::download
+
+delete:
+    path: /delete/{id}
+    controller: App\Controller\DocumentController::delete
+
+    

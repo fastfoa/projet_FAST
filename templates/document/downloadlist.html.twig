@@ -29,6 +29,13 @@
 			<!-- MAIN CARDS-->
 			<div class="col-lg-10">
 				<div class="row">
+					{% for message in app.flashes('message') %}
+						<div class="alert alert-success">
+							{{message}}
+						</div>
+					{% endfor %}
+				</div>
+				<div class="row">
 					<div class="col-5">
 						<h2 class="text-info my-2">
 							<small class="text-muted">Documents</small>
