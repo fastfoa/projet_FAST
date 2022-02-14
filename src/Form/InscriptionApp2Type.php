@@ -20,8 +20,8 @@ class InscriptionApp2Type extends AbstractType
     {
         $builder
             ->addE('email', 'mail des parents', "col-2")
-            ->addS('nom', 'nom')
-            ->addD('dateNaissance', 'date naiss' )
+            ->addS('nom', 'nom', "col-2")
+            ->addD('dateNaissance', 'date naiss', "col-2" )
             ->add('inscrire', SubmitType::class,[
                 'attr' => [
                     'class' => 'boutonForm'

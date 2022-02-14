@@ -2,7 +2,16 @@
 
 {% block myStylesheets %}
 	<link href="{{ asset('css/Dasboard-Entreprise.css') }}" type="text/css" rel="stylesheet" />
-
+	<style>
+	.my_div div{
+		width: 50%;
+		display: inline;
+		margin-left: 15px;
+	}
+	.boutonForm{
+		display: in
+	}
+	</style>
 {% endblock %}
 
 {% block body %}
@@ -10,7 +19,7 @@
 	<div class="row">
 		<div class="col-3">
 		</div>
-		<div class="col-4">
+		<div class="my_div">
 			{{form(form)}}
 		</div>
 		<div class="col-3">
