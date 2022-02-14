@@ -18,23 +18,40 @@ class Competences
     private $id;
 
     /**
+     * @ORM\Column(type="integer")
+     */
+    private $idFormation;
+
+    /**
      * @ORM\Column(type="string", length=255)
      */
-    private $name;
+    private $competence;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getName(): ?string
+    public function getIdFormation(): ?int
     {
-        return $this->name;
+        return $this->idFormation;
     }
 
-    public function setName(string $name): self
+    public function setIdFormation(int $idFormation): self
     {
-        $this->name = $name;
+        $this->idFormation = $idFormation;
+
+        return $this;
+    }
+
+    public function getCompetence(): ?string
+    {
+        return $this->competence;
+    }
+
+    public function setCompetence(string $competence): self
+    {
+        $this->competence = $competence;
 
         return $this;
     }
