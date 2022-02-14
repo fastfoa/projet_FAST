@@ -2,13 +2,9 @@
 
 namespace App\Controller;
 
-<<<<<<< HEAD
 use App\Entity\User;
 use App\Form\InscriptionAppType;
 use App\Form\InscriptionEntrepriseType;
-=======
-
->>>>>>> symfo
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

@@ -6,6 +6,7 @@ use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class InscriptionEntrepriseType extends AbstractType
 {
@@ -23,6 +24,9 @@ class InscriptionEntrepriseType extends AbstractType
             ->add('telephone')
             ->add('siret')
             ->add('diplome')
+            ->add('publier', SubmitType::class, [
+                'label' => 'valider'
+            ]);
         ;
     }
 
