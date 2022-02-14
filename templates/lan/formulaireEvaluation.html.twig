@@ -47,8 +47,19 @@
 
 	<h3 class="text-center">Evaluation</h3>
 <div class="row">
-	<div class="myform col-6">
-		{{ form(form) }}
+	<div class="col-6">
+		{{ form_label(form.remarqueMS) }}
+		{{ form_widget(form.remarqueMS) }}
+		{{ form_label(form.remarqueApp) }}
+		{{ form_widget(form.remarqueApp) }}
 	</div>
+	<div class="col-6">
+		{{ form_label(form.remarqueOF) }}
+		{{ form_widget(form.remarqueOF) }}
+		{{ form_label(form.note) }}
+		{{ form_widget(form.note) }}
+	</div>
+
 </div>
 	{% endblock %}
+

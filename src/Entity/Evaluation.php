@@ -37,6 +37,12 @@ class Evaluation
      */
     private $note;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Competences::class)
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $competence;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -86,6 +92,18 @@ class Evaluation
     public function setNote(?int $note): self
     {
         $this->note = $note;
+
+        return $this;
+    }
+
+    public function getCompetence(): ?Competences
+    {
+        return $this->competence;
+    }
+
+    public function setCompetence(?Competences $competence): self
+    {
+        $this->competence = $competence;
 
         return $this;
     }

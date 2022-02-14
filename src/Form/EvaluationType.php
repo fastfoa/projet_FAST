@@ -8,6 +8,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\RangeType;
 
 class EvaluationType extends AbstractType
 {
@@ -27,7 +28,12 @@ class EvaluationType extends AbstractType
                 'label' => 'Foreach Academy',
                 'attr' => ['col'=>'5','rows' => '2']
             ])
-            ->add('note')
+            ->add('note',RangeType::class, [
+                'attr' => [
+                    'min' => 0,
+                    'max' => 5
+                ]
+            ])
             ->add(
                 'Envoyer',
                 SubmitType::class,
