@@ -16,6 +16,10 @@ use Doctrine\Persistence\ManagerRegistry;
 use App\Entity\Session;
 use App\Form\SessionType;
 
+use App\Form\FormateurType;
+
+use Doctrine\ORM\EntityManagerInterface;
+
 class LanController extends AbstractController
 {
     /**
@@ -36,51 +40,51 @@ class LanController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             //enregistrer le mail 
             $mail = $contact->getEmail();
-            $mail = strip_tags( $mail );
-            $contact->setEmail( $mail );
+            $mail = strip_tags($mail);
+            $contact->setEmail($mail);
 
             //enregistrer le mail 
             $pw = $contact->getPassword();
-            $pw = strip_tags( $pw );
-            $contact->setPassword( $pw );
+            $pw = strip_tags($pw);
+            $contact->setPassword($pw);
 
             //enregistrer le prenom 
             $prenom = $contact->getPrenom();
-            $prenom = strip_tags( $prenom );
-            $contact->setPrenom( $prenom );
+            $prenom = strip_tags($prenom);
+            $contact->setPrenom($prenom);
 
             //enregistrer le date naissance 
             $date_naissance = $contact->getDateNaissance();
-            $contact->setDateNaissance( $date_naissance );
-            
+            $contact->setDateNaissance($date_naissance);
+
             //enregistrer le date adress 
             $adress = $contact->getAdresse();
-            $adress = strip_tags( $adress );
-            $contact->setAdresse( $adress );
+            $adress = strip_tags($adress);
+            $contact->setAdresse($adress);
 
             //enregistrer le date tel 
             $tel = $contact->getTelephone();
-            $tel = strip_tags( $tel );
-            $contact->setTelephone( $tel );
+            $tel = strip_tags($tel);
+            $contact->setTelephone($tel);
 
             //enregistrer nom
             $nom = $contact->getNom();
-            $nom = strip_tags( $nom );
-            $contact->setNom( $nom );
+            $nom = strip_tags($nom);
+            $contact->setNom($nom);
 
             $doctrine = $this->getDoctrine();
             $entityManager = $doctrine->getManager();
-           
-            $entityManager->persist($contact); 
+
+            $entityManager->persist($contact);
             $entityManager->flush();
             return $this->redirect($this->generateUrl('login'));
-         }
+        }
         return $this->render(
-            'lan/inscriptionEleve.html.twig', 
+            'lan/inscriptionEleve.html.twig',
             [
                 'form' => $form->createView()
-            ]);
-        
+            ]
+        );
     }
 
     public function inscriptionEntreprise(Request $request): Response
@@ -91,47 +95,117 @@ class LanController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             //enregistrer le mail 
             $mail = $contact->getEmail();
-            $mail = strip_tags( $mail );
-            $contact->setEmail( $mail );
+            $mail = strip_tags($mail);
+            $contact->setEmail($mail);
 
             //enregistrer le pw 
             $pw = $contact->getPassword();
-            $pw = strip_tags( $pw );
-            $contact->setPassword( $pw );
+            $pw = strip_tags($pw);
+            $contact->setPassword($pw);
 
             //enregistrer le adress 
             $adress = $contact->getAdresse();
-            $adress = strip_tags( $adress );
-            $contact->setAdresse( $adress );
+            $adress = strip_tags($adress);
+            $contact->setAdresse($adress);
 
             //enregistrer le adress 
             $tel = $contact->getTelephone();
-            $tel = strip_tags( $tel );
-            $contact->setTelephone( $tel );
+            $tel = strip_tags($tel);
+            $contact->setTelephone($tel);
 
             //enregistrer le adress 
             $siret = $contact->getSiret();
-            $siret = strip_tags( $siret );
-            $contact->setSiret( $siret );
-            
+            $siret = strip_tags($siret);
+            $contact->setSiret($siret);
+
             //enregistrer contact
             $nom = $contact->getNom();
-            $nom = strip_tags( $nom );
-            $contact->setNom( $nom );
+            $nom = strip_tags($nom);
+            $contact->setNom($nom);
+
+            //enregistrer le date naissance 
+            $date_naissance = $contact->getDateNaissance();
+            $contact->setDateNaissance($date_naissance);
 
             $doctrine = $this->getDoctrine();
             $entityManager = $doctrine->getManager();
-           
-            $entityManager->persist($contact); 
+
+            $entityManager->persist($contact);
             $entityManager->flush();
             return $this->redirect($this->generateUrl('login'));
          }
         return $this->render(
-            'lan/inscriptionEntreprise.html.twig', 
+            'lan/inscriptionEntreprise.html.twig',
             [
                 'form' => $form->createView()
-            ]);
-        
+            ]
+        );
+    }
+
+    public function inscriptionFormateur(Request $request, EntityManagerInterface $manager)
+    {
+        $contact = new User();
+        $form = $this->createForm(FormateurType::class, $contact);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            //enregistrer le mail 
+            $mail = $contact->getEmail();
+            $mail = strip_tags($mail);
+            $contact->setEmail($mail);
+
+            //enregistrer le pw 
+            $pw = $contact->getPassword();
+            $pw = strip_tags($pw);
+            $contact->setPassword($pw);
+
+            //enregistrer le adress 
+            $adress = $contact->getAdresse();
+            $adress = strip_tags($adress);
+            $contact->setAdresse($adress);
+
+            //enregistrer le adress 
+            $tel = $contact->getTelephone();
+            $tel = strip_tags($tel);
+            $contact->setTelephone($tel);
+
+            //enregistrer le adress 
+            $siret = $contact->getSiret();
+            $siret = strip_tags($siret);
+            $contact->setSiret($siret);
+
+            //enregistrer contact
+            $nom = $contact->getNom();
+            $nom = strip_tags($nom);
+            $contact->setNom($nom);
+
+            //enregistrer prenom
+            $prenom = $contact->getPrenom();
+            $prenom = strip_tags($prenom);
+            $contact->setPrenom($prenom);
+
+            //enregistrer session
+            $session = $contact->getSession();
+            $session = strip_tags($session);
+            $contact->setSession($session);
+
+            //enregistrer diplome
+            $diplome = $contact->getDiplome();
+            $diplome = strip_tags($diplome);
+            $contact->setDiplome($diplome);
+
+            $doctrine = $this->getDoctrine();
+            $entityManager = $doctrine->getManager();
+
+            $entityManager->persist($contact);
+            $entityManager->flush();
+            return new Response("formulaire OK $mail ");
+        }
+        return $this->render(
+            'lan/inscriptionFormateurs.html.twig',
+            [
+                'form' => $form->createView()
+            ]
+        );
     }
 
     public function login(): Response

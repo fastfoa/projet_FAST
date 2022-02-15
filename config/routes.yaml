@@ -2,17 +2,26 @@
 #    path: /
 #    controller: App\Controller\DefaultController::index
 
+
 inscriptionEleve:
     path: /inscriptionEleve
     controller: App\Controller\LanController::inscriptionEleve
 
 inscriptionEntrepriseAS:
     path: /inscriptionEntrepriseAS
+
+inscriptionFormateur:
+    path: /inscriptionFormateur
+    controller: App\Controller\LanController::inscriptionFormateur
+    
+inscriptionEntreprise:
+    path: /inscriptionEntreprise
     controller: App\Controller\LanController::inscriptionEntreprise
 
 login:
     path: /login
     controller: App\Controller\LanController::login
+
                                 
 dashBoardStudent:
     path: /dashBoardStudent
@@ -105,3 +114,4 @@ InscriptionApprenti:
 InscriptionMA:
     path: /inscriptionMA
     controller: App\Controller\InscriptionController::InscriptionMA
+
