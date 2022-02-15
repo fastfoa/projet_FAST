@@ -78,6 +78,126 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $DateNaissance;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $NAF;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $Effectif;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $ConventionCollective;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $EmployeurPublic;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $CodeIDCCConvention;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $Genre;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $RepresentantLegal1;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $RepresentantLegal2;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $NIR;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $DepNaissance;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $CommuneNaissance;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $Nationalite;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $RegimeSocial;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $TravailleurHandicape;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $SportifHautNiveau;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $SituationAvantContrat;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $DernierDiplome;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $DerniereClasse;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $DiplomePlusHaut;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $CFA;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $DenominationCFAResponsable;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $NumeroUAICFA;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $DiplomeVise;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $IntitulePreciDiplomevise;
+
     
 
     public function getId(): ?int
@@ -263,6 +383,294 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setDateNaissance(?\DateTimeInterface $DateNaissance): self
     {
         $this->DateNaissance = $DateNaissance;
+
+        return $this;
+    }
+
+    public function getNAF(): ?string
+    {
+        return $this->NAF;
+    }
+
+    public function setNAF(?string $NAF): self
+    {
+        $this->NAF = $NAF;
+
+        return $this;
+    }
+
+    public function getEffectif(): ?int
+    {
+        return $this->Effectif;
+    }
+
+    public function setEffectif(?int $Effectif): self
+    {
+        $this->Effectif = $Effectif;
+
+        return $this;
+    }
+
+    public function getConventionCollective(): ?string
+    {
+        return $this->ConventionCollective;
+    }
+
+    public function setConventionCollective(?string $ConventionCollective): self
+    {
+        $this->ConventionCollective = $ConventionCollective;
+
+        return $this;
+    }
+
+    public function getEmployeurPublic(): ?bool
+    {
+        return $this->EmployeurPublic;
+    }
+
+    public function setEmployeurPublic(?bool $EmployeurPublic): self
+    {
+        $this->EmployeurPublic = $EmployeurPublic;
+
+        return $this;
+    }
+
+    public function getCodeIDCCConvention(): ?string
+    {
+        return $this->CodeIDCCConvention;
+    }
+
+    public function setCodeIDCCConvention(?string $CodeIDCCConvention): self
+    {
+        $this->CodeIDCCConvention = $CodeIDCCConvention;
+
+        return $this;
+    }
+
+    public function getGenre(): ?string
+    {
+        return $this->Genre;
+    }
+
+    public function setGenre(?string $Genre): self
+    {
+        $this->Genre = $Genre;
+
+        return $this;
+    }
+
+    public function getRepresentantLegal1(): ?string
+    {
+        return $this->RepresentantLegal1;
+    }
+
+    public function setRepresentantLegal1(?string $RepresentantLegal1): self
+    {
+        $this->RepresentantLegal1 = $RepresentantLegal1;
+
+        return $this;
+    }
+
+    public function getRepresentantLegal2(): ?string
+    {
+        return $this->RepresentantLegal2;
+    }
+
+    public function setRepresentantLegal2(?string $RepresentantLegal2): self
+    {
+        $this->RepresentantLegal2 = $RepresentantLegal2;
+
+        return $this;
+    }
+
+    public function getNIR(): ?string
+    {
+        return $this->NIR;
+    }
+
+    public function setNIR(?string $NIR): self
+    {
+        $this->NIR = $NIR;
+
+        return $this;
+    }
+
+    public function getDepNaissance(): ?string
+    {
+        return $this->DepNaissance;
+    }
+
+    public function setDepNaissance(?string $DepNaissance): self
+    {
+        $this->DepNaissance = $DepNaissance;
+
+        return $this;
+    }
+
+    public function getCommuneNaissance(): ?string
+    {
+        return $this->CommuneNaissance;
+    }
+
+    public function setCommuneNaissance(?string $CommuneNaissance): self
+    {
+        $this->CommuneNaissance = $CommuneNaissance;
+
+        return $this;
+    }
+
+    public function getNationalite(): ?string
+    {
+        return $this->Nationalite;
+    }
+
+    public function setNationalite(?string $Nationalite): self
+    {
+        $this->Nationalite = $Nationalite;
+
+        return $this;
+    }
+
+    public function getRegimeSocial(): ?string
+    {
+        return $this->RegimeSocial;
+    }
+
+    public function setRegimeSocial(?string $RegimeSocial): self
+    {
+        $this->RegimeSocial = $RegimeSocial;
+
+        return $this;
+    }
+
+    public function getTravailleurHandicape(): ?string
+    {
+        return $this->TravailleurHandicape;
+    }
+
+    public function setTravailleurHandicape(?string $TravailleurHandicape): self
+    {
+        $this->TravailleurHandicape = $TravailleurHandicape;
+
+        return $this;
+    }
+
+    public function getSportifHautNiveau(): ?bool
+    {
+        return $this->SportifHautNiveau;
+    }
+
+    public function setSportifHautNiveau(?bool $SportifHautNiveau): self
+    {
+        $this->SportifHautNiveau = $SportifHautNiveau;
+
+        return $this;
+    }
+
+    public function getSituationAvantContrat(): ?string
+    {
+        return $this->SituationAvantContrat;
+    }
+
+    public function setSituationAvantContrat(?string $SituationAvantContrat): self
+    {
+        $this->SituationAvantContrat = $SituationAvantContrat;
+
+        return $this;
+    }
+
+    public function getDernierDiplome(): ?string
+    {
+        return $this->DernierDiplome;
+    }
+
+    public function setDernierDiplome(?string $DernierDiplome): self
+    {
+        $this->DernierDiplome = $DernierDiplome;
+
+        return $this;
+    }
+
+    public function getDerniereClasse(): ?string
+    {
+        return $this->DerniereClasse;
+    }
+
+    public function setDerniereClasse(?string $DerniereClasse): self
+    {
+        $this->DerniereClasse = $DerniereClasse;
+
+        return $this;
+    }
+
+    public function getDiplomePlusHaut(): ?string
+    {
+        return $this->DiplomePlusHaut;
+    }
+
+    public function setDiplomePlusHaut(?string $DiplomePlusHaut): self
+    {
+        $this->DiplomePlusHaut = $DiplomePlusHaut;
+
+        return $this;
+    }
+
+    public function getCFA(): ?bool
+    {
+        return $this->CFA;
+    }
+
+    public function setCFA(?bool $CFA): self
+    {
+        $this->CFA = $CFA;
+
+        return $this;
+    }
+
+    public function getDenominationCFAResponsable(): ?string
+    {
+        return $this->DenominationCFAResponsable;
+    }
+
+    public function setDenominationCFAResponsable(?string $DenominationCFAResponsable): self
+    {
+        $this->DenominationCFAResponsable = $DenominationCFAResponsable;
+
+        return $this;
+    }
+
+    public function getNumeroUAICFA(): ?string
+    {
+        return $this->NumeroUAICFA;
+    }
+
+    public function setNumeroUAICFA(?string $NumeroUAICFA): self
+    {
+        $this->NumeroUAICFA = $NumeroUAICFA;
+
+        return $this;
+    }
+
+    public function getDiplomeVise(): ?string
+    {
+        return $this->DiplomeVise;
+    }
+
+    public function setDiplomeVise(?string $DiplomeVise): self
+    {
+        $this->DiplomeVise = $DiplomeVise;
+
+        return $this;
+    }
+
+    public function getIntitulePreciDiplomevise(): ?string
+    {
+        return $this->IntitulePreciDiplomevise;
+    }
+
+    public function setIntitulePreciDiplomevise(?string $IntitulePreciDiplomevise): self
+    {
+        $this->IntitulePreciDiplomevise = $IntitulePreciDiplomevise;
 
         return $this;
     }
