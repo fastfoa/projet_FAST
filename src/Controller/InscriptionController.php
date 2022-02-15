@@ -30,10 +30,50 @@ class InscriptionController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) 
         {
-            //enregistrer le mail 
-            $mail = $user->getEmail();
-            $mail = strip_tags( $mail );
-            $user->setEmail( $mail );
+            //enregistrer le Nom 
+            $Nom = $user->getNom();
+            $Nom = strip_tags( $Nom );
+            $user->setNom( $Nom );
+
+            //enregistrer l'Adresse 
+            $Adresse = $user->getAdresse();
+            $Adresse = strip_tags( $Adresse );
+            $user->setAdresse( $Adresse );
+
+            //enregistrer le Telephone 
+            $Telephone = $user->getTelephone();
+            $Telephone = strip_tags( $Telephone );
+            $user->setTelephone( $Telephone );
+
+            //enregistrer le Siret 
+            $Siret = $user->getSiret();
+            $Siret = strip_tags( $Siret );
+            $user->setSiret( $Siret );
+
+            //enregistrer le NAF 
+            $NAF = $user->getNAF();
+            $NAF = strip_tags( $NAF );
+            $user->setNAF( $NAF );
+
+            //enregistrer le Effectif 
+            $Effectif = $user->getEffectif();
+            $Effectif = strip_tags( $Effectif );
+            $user->setEffectif( $Effectif );
+
+            //enregistrer la ConventionCollective 
+            $ConventionCollective = $user->getConventionCollective();
+            $ConventionCollective = strip_tags( $ConventionCollective );
+            $user->setEffectif( $ConventionCollective );
+
+            //enregistrer Employeur Public|| Public 
+            $EmployeurPublic = $user->getEmployeurPublic();
+            $EmployeurPublic = strip_tags( $EmployeurPublic );
+            $user->setEmployeurPublic( $EmployeurPublic );
+             
+            //enregistrer Employeur Public|| Public 
+            $CodeIDCCConvention = $user->getCodeIDCCConvention();
+            $CodeIDCCConvention = strip_tags( $CodeIDCCConvention );
+            $user->setCodeIDCCConvention( $CodeIDCCConvention );
 
             $doctrine = $this->getDoctrine();
             $entityManager = $doctrine->getManager();
@@ -156,7 +196,7 @@ class InscriptionController extends AbstractController
             $DiplomePlusHaut = $contact->getDiplomePlusHaut();
             $DiplomePlusHaut = strip_tags($DiplomePlusHaut);
             $contact->setDiplomePlusHaut($DiplomePlusHaut);
-            
+
             $doctrine = $this->getDoctrine();
             $entityManager = $doctrine->getManager();
 
