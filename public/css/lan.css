@@ -209,6 +209,20 @@ input[type=text], input[type=password], input[type=date], select
     border-collapse:effondrer;
 }
 
+.table-normal tr
+{
+    padding: 2px;
+    margin: 2px;
+    border: 1px  solid gray;
+
+}
+
+.table-normal td
+{
+    color:white;
+    font-size: 17px;
+}
+    
 
 .bg-body  		/* couleur fond du body */
 {
@@ -230,11 +244,12 @@ input[type=text], input[type=password], input[type=date], select
     background-color: #11284B;
 }
 
-.txt-normal		/* text ordinaire */
+.txt-normal 		/* text ordinaire */
 {
-    color:gray;
+    color:white;
     font-size: 17px;
 }
+
 
 .txt-bar		/* text en barre */
 {
