@@ -7,7 +7,9 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use App\Form\InscriptionEntrepriseType;
+use App\Form\InscriptionMAType;
 use App\Entity\User;
+use Doctrine\Persistence\ManagerRegistry;
 
 
 class InscriptionController extends AbstractController
@@ -46,11 +48,46 @@ class InscriptionController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
+    public function InscriptionMA(Request $request, ManagerRegistry $doctrine): Response
+    {
+        $user = new User();
+        $form = $this->createForm(InscriptionMAType::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $entityManager = $doctrine->getManager();
+
+            $user->setRoles(['ROLE_MA']);
+
+            $email = $user->getEmail();
+            $user->setEmail($email);
+
+            $adresse = $user->getAdresse();
+            $user->setAdresse($adresse);
+            
+            $prenom = $user->getPrenom();
+            $user->setPrenom($prenom);
+
+            $dateNaissance = $user->getDateNaissance();
+            $user->setDateNaissance($dateNaissance);
+
+            $tel = $user->getTelephone();
+            $user->setTelephone($tel);
+
+            $nom = $user->getNom();
+            $nom = strip_tags( $nom );
+            $user->setNom($nom);
+
+            $entityManager->persist($user); 
+            $entityManager->flush();
+
+            return $this->redirect($this->generateUrl('login'));
+        }
+
+        return $this->render( 'inscription/inscriptionMA.html.twig', [
+            'form' => $form->createView()
+        ]);
+    }
 }
-
-
-//InscriptionEntreprise
-
-//InscriptionApprenti:
-
-//InscriptionMA:
