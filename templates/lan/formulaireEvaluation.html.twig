@@ -1,6 +1,7 @@
 {% extends 'lan/base.html.twig' %}
 
 {% block myStylesheets %}
+
 	<style>
 		.myform label{
 			
@@ -12,7 +13,7 @@
 			text-align: left;
 			color:white;
 			padding: 2%;
-			box-sizing: border-box;
+			box-sizing: border-box;       
 			
 			
 			
@@ -45,21 +46,25 @@
 
 {% block body %}
 
+<div class="container-fluid">
 	<h3 class="text-center">Evaluation</h3>
-<div class="row">
-	<div class="col-6">
-		{{ form_label(form.remarqueMS) }}
-		{{ form_widget(form.remarqueMS) }}
-		{{ form_label(form.remarqueApp) }}
-		{{ form_widget(form.remarqueApp) }}
-	</div>
-	<div class="col-6">
-		{{ form_label(form.remarqueOF) }}
-		{{ form_widget(form.remarqueOF) }}
-		{{ form_label(form.note) }}
-		{{ form_widget(form.note) }}
-	</div>
 
+	<div class="row">
+		<div class="col-6">
+			{{ form_label(form.remarqueMS) }}
+			{{ form_widget(form.remarqueMS) }}
+			{{ form_label(form.remarqueApp) }}
+			{{ form_widget(form.remarqueApp) }}
+		</div>
+		<div class="col-6">
+			{{ form_label(form.remarqueOF) }}
+			{{ form_widget(form.remarqueOF) }}
+			{{ form_label(form.note) }}
+			{{ form_widget(form.note) }}
+		</div>
+
+
+	</div>
 </div>
 	{% endblock %}
 
