@@ -4,6 +4,8 @@ namespace App\Form;
 
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -65,10 +67,15 @@ class InscriptionEntrepriseType extends AbstractType
             ->add('CodeIDCCConvention', NumberType::class,[
                 'label'=> false,
                 'attr' => [
-                    'placeholder' => 'EmployeurPublic'
+                    'placeholder' => 'CodeIDCCConvention'
                 ]
             ])
-        ;
+            ->add('save', SubmitType::class,[
+                'label'=> "Je m'inscris",
+                'attr' => [
+                    'class' => 'boutonForm'
+                ]
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
