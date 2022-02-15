@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\InscriptionAppType;
+use App\Form\InscriptionApp2Type;
+
 use App\Form\InscriptionEntrepriseType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -32,32 +34,53 @@ class LanController extends AbstractController
         $form = $this->createForm(InscriptionAppType::class, $contact);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            //expedier le mail 
+            //enregistrer le mail 
             $mail = $contact->getEmail();
+            $mail = strip_tags($mail);
+            $contact->setEmail($mail);
 
+            //enregistrer le mail 
             $pw = $contact->getPassword();
+            $pw = strip_tags($pw);
+            $contact->setPassword($pw);
+
+            //enregistrer le prenom 
             $prenom = $contact->getPrenom();
-            $pw = $contact->getDateNaissance();
+            $prenom = strip_tags($prenom);
+            $contact->setPrenom($prenom);
+
+            //enregistrer le date naissance 
+            $date_naissance = $contact->getDateNaissance();
+            $contact->setDateNaissance($date_naissance);
+
+            //enregistrer le date adress 
             $adress = $contact->getAdresse();
+            $adress = strip_tags($adress);
+            $contact->setAdresse($adress);
+
+            //enregistrer le date tel 
             $tel = $contact->getTelephone();
-            //enregistrer contact
+            $tel = strip_tags($tel);
+            $contact->setTelephone($tel);
+
+            //enregistrer nom
             $nom = $contact->getNom();
-            
-            $nom = strip_tags( $nom );
-            $contact->setNom( $nom );
+            $nom = strip_tags($nom);
+            $contact->setNom($nom);
+
             $doctrine = $this->getDoctrine();
             $entityManager = $doctrine->getManager();
-           
-            $entityManager->persist($contact); 
+
+            $entityManager->persist($contact);
             $entityManager->flush();
             return new Response("formulaire OK $mail ");
-         }
+        }
         return $this->render(
-            'lan/inscriptionEleve.html.twig', 
+            'lan/inscriptionEleve.html.twig',
             [
                 'form' => $form->createView()
-            ]);
-        
+            ]
+        );
     }
 
     public function inscriptionEntreprise(Request $request): Response
@@ -66,31 +89,53 @@ class LanController extends AbstractController
         $form = $this->createForm(InscriptionEntrepriseType::class, $contact);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            //expedier le mail 
+            //enregistrer le mail 
             $mail = $contact->getEmail();
+            $mail = strip_tags($mail);
+            $contact->setEmail($mail);
 
+            //enregistrer le pw 
             $pw = $contact->getPassword();
+            $pw = strip_tags($pw);
+            $contact->setPassword($pw);
+
+            //enregistrer le adress 
             $adress = $contact->getAdresse();
+            $adress = strip_tags($adress);
+            $contact->setAdresse($adress);
+
+            //enregistrer le adress 
             $tel = $contact->getTelephone();
-            $tel = $contact->getTelephone();
+            $tel = strip_tags($tel);
+            $contact->setTelephone($tel);
+
+            //enregistrer le adress 
+            $siret = $contact->getSiret();
+            $siret = strip_tags($siret);
+            $contact->setSiret($siret);
+
             //enregistrer contact
             $nom = $contact->getNom();
-            
-            $nom = strip_tags( $nom );
-            $contact->setNom( $nom );
+            $nom = strip_tags($nom);
+            $contact->setNom($nom);
+
+            //enregistrer le date naissance 
+            $date_naissance = $contact->getDateNaissance();
+            $contact->setDateNaissance($date_naissance);
+
             $doctrine = $this->getDoctrine();
             $entityManager = $doctrine->getManager();
-           
-            $entityManager->persist($contact); 
+
+            $entityManager->persist($contact);
             $entityManager->flush();
             return new Response("formulaire OK $mail ");
-         }
+        }
         return $this->render(
-            'lan/inscriptionEleve.html.twig', 
+            'lan/inscriptionEntreprise.html.twig',
             [
                 'form' => $form->createView()
-            ]);
-        
+            ]
+        );
     }
 
     public function inscriptionFormateur(Request $request, EntityManagerInterface $manager)
@@ -99,28 +144,57 @@ class LanController extends AbstractController
         $form = $this->createForm(FormateurType::class, $contact);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-         
-            $contact->getEmail();
-            $contact->getPassword();
-            $contact->getPrenom();
-            $contact->getDateNaissance();
-            $date_naissance = $contact->getDateNaissance();
-            $contact->setDateNaissance( $date_naissance );
-            $contact->getAdresse();
-            $contact->getTelephone();
-            $contact->getSession();
-            $contact->getSiret();
-            $contact->getDiplome();
-            $contact->getNom();
+            //enregistrer le mail 
+            $mail = $contact->getEmail();
+            $mail = strip_tags($mail);
+            $contact->setEmail($mail);
 
+            //enregistrer le pw 
+            $pw = $contact->getPassword();
+            $pw = strip_tags($pw);
+            $contact->setPassword($pw);
 
+            //enregistrer le adress 
+            $adress = $contact->getAdresse();
+            $adress = strip_tags($adress);
+            $contact->setAdresse($adress);
+
+            //enregistrer le adress 
+            $tel = $contact->getTelephone();
+            $tel = strip_tags($tel);
+            $contact->setTelephone($tel);
+
+            //enregistrer le adress 
+            $siret = $contact->getSiret();
+            $siret = strip_tags($siret);
+            $contact->setSiret($siret);
+
+            //enregistrer contact
+            $nom = $contact->getNom();
+            $nom = strip_tags($nom);
+            $contact->setNom($nom);
+
+            //enregistrer prenom
+            $prenom = $contact->getPrenom();
+            $prenom = strip_tags($prenom);
+            $contact->setPrenom($prenom);
+
+            //enregistrer session
+            $session = $contact->getSession();
+            $session = strip_tags($session);
+            $contact->setSession($session);
+
+            //enregistrer diplome
+            $diplome = $contact->getDiplome();
+            $diplome = strip_tags($diplome);
+            $contact->setDiplome($diplome);
 
             $doctrine = $this->getDoctrine();
-            $manager = $doctrine->getManager();
+            $entityManager = $doctrine->getManager();
 
-            $manager->persist($contact);
-            $manager->flush();
-            return new Response("formulaire OK  ");
+            $entityManager->persist($contact);
+            $entityManager->flush();
+            return new Response("formulaire OK $mail ");
         }
         return $this->render(
             'lan/inscriptionFormateurs.html.twig',

@@ -1,114 +1,48 @@
 {% extends 'lan/base.html.twig' %}
 
 {% block myStylesheets %}
-
 	<style>
-		.centrertextinscription {
-
-			text-align: center;
+		h3{
+			text-align:center;
 		}
-		.btncenter{
-				text-align: center;
-				
+		input{
+			display: block;
+			position: relative;
+			margin-left: auto;
+			margin-right: auto;
+			margin-top: 5px;
+			width: 300px;
+			height: 30px;
+		}
+		.btnTest{
+			margin-top: 100px;
+			text-align: center;
 		}
 	</style>
 {% endblock %}
 
 {% block body %}
-	<div class="container ">
-		<div class='form'>
-
-			<div class="centrertextinscription">
-
-				<h1>
-					Inscription Formateur
-				</h1>
-			</div>
-
-			{{ form_start(form) }}
-			<div class="row">
-				<div class="col-3"></div>
-				<div class="form-group mt-2">
-
-					{{ form_widget(form.email, {'attr': {'class':'form-control'}}
-					) }}
-				</div>
-				<div class="col-2"></div>
-				<div class="form-group mt-2">
-
-					{{ form_widget(form.password, {'attr': { 'class':'form-control'}}
-					) }}
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-3"></div>
-				<div class="form-group mt-2">
-
-					{{ form_widget(form.nom, {'attr': { 'class':'form-control'}}
-					) }}
-				</div>
-				<div class="col-2"></div>
-				<div class="form-group mt-2">
-
-					{{ form_widget(form.prenom, {'attr': { 'class':'form-control'}}
-					) }}
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-3"></div>
-				<div class="form-group mt-2">
-
-					{{ form_widget(form.siret, {'attr': { 'class':'form-control'}}
-					) }}
-				</div>
-				<div class="col-2"></div>
-				<div class="form-group mt-2">
-
-					{{ form_widget(form.adresse, {'attr': { 'class':'form-control'}}
-					) }}
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-3"></div>
-				<div class="form-group mt-2">
-
-					{{ form_widget(form.session, {'attr': { 'class':'form-control'}}
-					) }}
-				</div>
-				<div class="col-2"></div>
-				<div class="form-group mt-2">
-
-					{{ form_widget(form.telephone, {'attr': { 'class':'form-control'}}
-					) }}
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-3"></div>
-				<div class="form-group mt-2">
-
-					{{ form_widget(form.diplome, {'attr': { 'class':'form-control'}}
-					) }}
-				</div>
-				<div class="col-2"><br>
-					Date de naissance :</div>
-				<div class="form-group mt-2">
-
-					{{ form_widget(form.dateNaissance, {'attr': { 'class':'form-control'}}
-					) }}
-				</div>
-			</div>
-			<div class="row">
-
-				<div class="btncenter">
-
-					{{ form_widget(form.publier, {'attr': {'class':'boutonForm'}})}}
-
-				</div>
-			</div>
-			{{ form_rest(form) }}
-
-			{{ form_end(form) }}
+	<h3>Inscription Entreprise</h3>
+	<div class="row">
+		<div class="col-6">
+		{{ form_start(form) }}
+			{{form_widget(form.nom)}}
+			{{form_widget(form.email)}}
+			{{form_widget(form.adresse)}}
+				{{form_widget(form.siret)}}
+			{{form_widget(form.dateNaissance)}}
 		</div>
+		<div class="col-6">
+			{{form_widget(form.prenom)}}
+			{{form_widget(form.password)}}
+			{{form_widget(form.telephone)}}
+				{{form_widget(form.session)}}
+			{{form_widget(form.diplome)}}
+		</div>
+		<div class="col-12 btnTest">
+			{{form_widget(form.inscrire)}}
+		</div>
+				{{ form_end(form) }}
 	</div>
 
 {% endblock %}

@@ -8,77 +8,98 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 
 class FormateurType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('email',  Null, [
+            ->add('email', EmailType::class,[
+                'label'=> false,
                 'attr' => [
-                    'placeholder' => "email",
+                    'placeholder' => 'email',
+                    'class' => 'dat'
+                ]
+            ])
+            ->add('password', PasswordType::class, [
+                'label'=> false,
+                'attr' => [
+                    'placeholder' => 'Mot de passe',
+                    'class' => 'dat'
+                ]
+            ])
+            ->add('nom', TextType::class,[
+                'label'=> false,
+                'attr' => [
+                    'placeholder' => 'nom',
+                    'class' => 'dat'
+                ]
+            ])
+            ->add('prenom',TextType::class,[
+                'label'=> false,
+                'attr' => [
+                    'placeholder' => 'Prenom',
+                    'class' => 'dat'
+                ]
+            ])
+            ->add('telephone', NumberType::class,[
+                'label'=> false,
+                'attr' => [
+                    'placeholder' => 'telephone',
+                    'class' => 'dat'
+                ]
+            ])
+            ->add('siret',TextType::class,[
+                'label'=> false,
+                'attr' => [
+                    'placeholder' => 'siret',
+                    'class' => 'dat'
+                ]
+            ])
+            ->add('adresse',TextType::class,[
+                'label'=> false,
+                'attr' => [
+                    'placeholder' => 'adresse',
+                    'class' => 'dat'
+                ]
+            ])
+            ->add('session',TextType::class,[
+                'label'=> false,
+                'attr' => [
+                    'placeholder' => 'session',
+                    'class' => 'dat'
+                ]
+            ])
            
-                ]
-            ],)
-            ->add('password',  Null, [
-               
+            ->add('diplome',TextType::class,[
+                'label'=> false,
                 'attr' => [
-                    'placeholder' => "password",
-                    
-                        ]
-            ],)
-            ->add('nom',  Null, [
-                'attr' => [
-                    'placeholder' => "nom",
-          
+                    'placeholder' => 'diplome',
+                    'class' => 'dat'
                 ]
-            ],)
-            ->add('prenom',  Null, [
-                'attr' => [
-                    'placeholder' => "prenom",
-               
-                ]
-            ],)
+            ])
             ->add('dateNaissance', DateType::class, [
-                 
-                    'widget' => 'single_text',
-                'format' => 'yyyy-MM-dd',
-                'data' => new \DateTime(), 
-            ],)
-            ->add('adresse',  Null, [
-                'attr' => [ 'placeholder' => "adresse",
-
-                ]
-            ],)
-            ->add('session',  Null, [
+                'widget' => 'single_text',
                 'attr' => [
-                    'placeholder' => "session",
-                 
-                ]
-            ],)
-            ->add('telephone',  Null, [
+                    'placeholder' => 'date',
+                    'type' => 'text',
+                    'onfocusout' => "(this.type='text')",
+                    'onfocus' => "(this.type='date')"
+                    
+                ],
+                'label' => false,
+                'format' => 'yyyy-MM-dd'
+            ])
+            ->add('inscrire', SubmitType::class,[
                 'attr' => [
-                    'placeholder' => "telephone",
-               
+                    'class' => 'boutonForm'
                 ]
-            ],)
-            ->add('siret',  Null, [
-                'attr' => [
-                    'placeholder' => "siret",
-  
-                ]
-            ],)
-            ->add('diplome',  Null, [
-
-                'attr' => [
-                    'placeholder' => "diplome",
-                   
-                ]
-            ],)
-            ->add('publier', SubmitType::class, [
-                'label' => 'Valider',
-                'attr' => ['class' => 'boutonForm'],
-            ]);;
+            ])
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
