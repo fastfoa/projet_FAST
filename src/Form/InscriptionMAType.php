@@ -7,21 +7,17 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class InscriptionEntrepriseType extends AbstractType
+class InscriptioMAType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('email')
             ->add('nom')
+            ->add('prenom')
             ->add('adresse')
             ->add('telephone')
-            ->add('siret')
-            ->add('NAF')
-            ->add('Effectif')
-            ->add('ConventionCollective')
-            ->add('EmployeurPublic')
-            ->add('CodeIDCCConvention')
+            ->add('DateNaissance')
         ;
     }
 

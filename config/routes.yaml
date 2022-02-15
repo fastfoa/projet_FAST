@@ -6,8 +6,8 @@ inscriptionEleve:
     path: /inscriptionEleve
     controller: App\Controller\LanController::inscriptionEleve
 
-inscriptionEntreprise:
-    path: /inscriptionEntreprise
+inscriptionEntrepriseAS:
+    path: /inscriptionEntrepriseAS
     controller: App\Controller\LanController::inscriptionEntreprise
 
 login:
@@ -69,3 +69,16 @@ test:
 dashBoardEntrprise:
     path: /dashBoardEntrprise
     controller: App\Controller\LanController::dashBoardEntrprise
+
+## ----------------- INSCRIPTION 
+InscriptionEntreprise:
+    path: /inscriptionEntreprise
+    controller: App\Controller\InscriptionController::InscriptionEntreprise
+
+InscriptionApprenti:
+    path: /inscriptionApprenti
+    controller: App\Controller\InscriptionController::InscriptionApprenti
+
+InscriptionMA:
+    path: /inscriptionMA
+    controller: App\Controller\InscriptionController::InscriptionMA
