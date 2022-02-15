@@ -19,27 +19,8 @@ class InscriptionAppType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('email', EmailType::class,[
-                'label'=> false,
-                'attr' => [
-                    'placeholder' => 'email',
-                    'class' => 'dat'
-                ]
-            ])
-            ->add('password', PasswordType::class, [
-                'label'=> false,
-                'attr' => [
-                    'placeholder' => 'Mot de passe',
-                    'class' => 'dat'
-                ]
-            ])
-            ->add('nom', TextType::class,[
-                'label'=> false,
-                'attr' => [
-                    'placeholder' => 'nom',
-                    'class' => 'dat'
-                ]
-            ])
+            
+            
             ->add('prenom',TextType::class,[
                 'label'=> false,
                 'attr' => [
