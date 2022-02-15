@@ -6,6 +6,10 @@ inscriptionEleve:
     path: /inscriptionEleve
     controller: App\Controller\LanController::inscriptionEleve
 
+inscriptionEntrepriseAS:
+    path: /inscriptionEntrepriseAS
+    controller: App\Controller\LanController::inscriptionEntreprise
+
 login:
     path: /login
     controller: App\Controller\LanController::login
@@ -89,3 +93,15 @@ session:
 formations:
     path: /formations
     controller: App\Controller\LanController::formations
+
+InscriptionEntreprise:
+    path: /inscriptionEntreprise
+    controller: App\Controller\InscriptionController::InscriptionEntreprise
+
+InscriptionApprenti:
+    path: /inscriptionApprenti
+    controller: App\Controller\InscriptionController::InscriptionApprenti
+
+InscriptionMA:
+    path: /inscriptionMA
+    controller: App\Controller\InscriptionController::InscriptionMA
