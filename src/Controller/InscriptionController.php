@@ -12,6 +12,8 @@ use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 
 
+use App\Form\InscriptionMAType;
+use Doctrine\Persistence\ManagerRegistry;
 
 
 class InscriptionController extends AbstractController
@@ -50,6 +52,47 @@ class InscriptionController extends AbstractController
         ]);
     }
 
+    public function InscriptionMA(Request $request, ManagerRegistry $doctrine): Response
+    {
+        $user = new User();
+        $form = $this->createForm(InscriptionMAType::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $entityManager = $doctrine->getManager();
+
+            $user->setRoles(['ROLE_MA']);
+
+            $email = $user->getEmail();
+            $user->setEmail($email);
+
+            $adresse = $user->getAdresse();
+            $user->setAdresse($adresse);
+            
+            $prenom = $user->getPrenom();
+            $user->setPrenom($prenom);
+
+            $tel = $user->getTelephone();
+            $user->setTelephone($tel);
+
+            $nom = $user->getNom();
+            $nom = strip_tags( $nom );
+            $user->setNom($nom);
+
+            $dateNaissance = $user->getDateNaissance();
+            $user->setDateNaissance($dateNaissance);
+
+            $entityManager->persist($user); 
+            $entityManager->flush();
+
+            return $this->redirect($this->generateUrl('login'));
+        }
+
+        return $this->render( 'inscription/inscriptionMA.html.twig', [
+            'form' => $form->createView()
+        ]);
+    }
 
     public function inscriptionFormateur(Request $request, EntityManagerInterface $manager)
     {
@@ -118,9 +161,3 @@ class InscriptionController extends AbstractController
         );
     }
 }
-
-//InscriptionEntreprise
-
-//InscriptionApprenti:
-
-//InscriptionMA:
