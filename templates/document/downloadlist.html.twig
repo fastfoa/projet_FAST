@@ -7,27 +7,8 @@
 {% block title %}LIST DES FICHIERS{% endblock %}
 
 {% block body %}
-	<div class="container-fluid contenue">
-		<div class="row">
-			<div class="col-lg-2 dashMenu sidebar d-flex flex-column list-group list-group-flush viewport-max ">
-				<a href="#" class="list-group-item list-group-item-action text-center bg-bar">
-					<img src="{{ asset('images/olivier.jpeg') }}" alt="" class="img-fluid rounded-circle mr-2">
-					Olivier Carlier</a>
-				<a href="#" class="list-group-item list-group-item-action menu-items bg-bar">
-					<i class="fas fa-columns mr-2 fa-lg"></i>Dashboard</a>
-				<a href="#" class="list-group-item list-group-item-action menu-items  active">
-					<i class="fas fa-thin fa-file mr-2 fa-lg"></i>Documents</a>
-				<a href="#" class="list-group-item list-group-item-action menu-items bg-bar">
-					<i class="fas fa-solid fa-bars-progress mr-2 fa-lg"></i>Suivi</a>
-				<a href="#" class="list-group-item list-group-item-action menu-items bg-bar">
-					<i class="fas fa-info mr-2 fa-lg"></i>Infos Entreprise</a>
-				<a href="#" class="list-group-item list-group-item-action menu-items bg-bar">
-					<i class="fas fa-info mr-2 fa-lg"></i>Infos Organisme de Formation</a>
-				<a href="#" class="list-group-item list-group-item-action menu-items bg-bar">
-					<i class="fas fa-user-cog mr-2 fa-lg"></i>Mes information</a>
-			</div>
+	<div class="container-fluid">
 			<!-- MAIN CARDS-->
-			<div class="col-lg-10">
 				<div class="row">
 					{% for message in app.flashes('message') %}
 						<div class="alert alert-success">
@@ -52,24 +33,32 @@
 						<table class="table-normal">
 							<thead>
 								<tr>
-									<th class="txt-bar bg-bar">Date</th>
-									<th class="txt-bar bg-bar">Nom du document</th>
-									<th class="txt-bar bg-bar">classe</th>
-									<th class="txt-bar bg-bar">Format document</th>
+									<th class="txt-bar text-center bg-bar">Date</th>
+									<th class="txt-bar text-center bg-bar">Nom du document</th>
+									<th class="txt-bar text-center bg-bar">Classe</th>
+									<th class="txt-bar text-center bg-bar">Format document</th>
+									<th class="txt-bar text-center bg-bar">Supprimer</th>
 								</tr>
 							</thead>
 							<tbody>
 								{% for document in listUp %}
 									<tr>
-										<td class="txt-normal">10/02/2022</td>
-										<td class="txt-normal">{{document.titre}}</td>
-										<td class="txt-normal">Alternance 1er Année</td>
-										<td class="txt-normal">
+										<td class="txt-normal text-center p-2">{{document.dateCreate|date('d/m/y')}}</td>
+										<td class="txt-normal text-center p-2">{{document.titre}}</td>
+										<td class="txt-normal text-center p-2">Alternance 1er Année</td>
+										<td class="txt-normal text-center p-2">
 											<a href="{{ path( 'download',{'id':document.id} ) }}">
 													<button class="btn btn-success">
 													<i class="fas fa-file-pdf" style="font-size:20px;color:red;"></i>
-													Telechargement</button>
+													Téléchargement</button>
 											</a>
+										</td>
+										<td>
+											<form method="post" class="col" action="{{path('delete',{'id':document.id})}}" onsubmit="return confirm('Voulez-vous vraiment supprimer ?');">
+												<input type="hidden" name="_method" value="SUP">
+												<input type="hidden" name="_token" value="{{csrf_token('SUP' ~ document.id)}}">
+												<input type="submit" class="btn btn-danger w-100" value="Supprimer">
+											</form>
 										</td>
 									</tr>
 								{% endfor %}
