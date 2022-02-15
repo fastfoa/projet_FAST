@@ -12,7 +12,7 @@ inscriptionEntrepriseAS:
 
 inscriptionFormateur:
     path: /inscriptionFormateur
-    controller: App\Controller\LanController::inscriptionFormateur
+    controller: App\Controller\InscriptionController::inscriptionFormateur
     
 inscriptionEntreprise:
     path: /inscriptionEntreprise
