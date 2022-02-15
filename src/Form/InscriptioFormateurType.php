@@ -21,7 +21,6 @@ class InscriptioFormateurType extends AbstractType
           
           
             ->add('Genre', TextType::class,[
-                'label'=> false,
                 'attr' => [
                     'placeholder' => 'genre',
                   
@@ -29,7 +28,6 @@ class InscriptioFormateurType extends AbstractType
             ])
           
            ->add('email', TextType::class,[
-               'label'=> false,
                'attr' => [
                    'placeholder' => 'email',
                  
@@ -37,21 +35,18 @@ class InscriptioFormateurType extends AbstractType
            ])
     
            ->add('nom', TextType::class,[
-               'label'=> false,
                'attr' => [
                    'placeholder' => 'nom',
                   
                ]
            ])
            ->add('prenom',TextType::class,[
-               'label'=> false,
                'attr' => [
                    'placeholder' => 'Prenom',
              
                ]
            ])
            ->add('telephone', NumberType::class,[
-               'label'=> false,
                'attr' => [
                    'placeholder' => 'telephone',
                
@@ -59,7 +54,6 @@ class InscriptioFormateurType extends AbstractType
            ])
         
            ->add('adresse',TextType::class,[
-               'label'=> false,
                'attr' => [
                    'placeholder' => 'adresse',
                  
@@ -68,38 +62,35 @@ class InscriptioFormateurType extends AbstractType
       
           
            ->add('diplome',TextType::class,[
-               'label'=> false,
                'attr' => [
                    'placeholder' => 'diplome',
                    
                 
                ]
            ])
-        //    ->add('dateNaissance', DateType::class, [
-        //        'widget' => 'single_text',
-        //        'attr' => [
-        //            'placeholder' => 'date',
-        //            'type' => 'text',
-        //            'onfocusout' => "(this.type='text')",
-        //            'onfocus' => "(this.type='date')"
+            ->add('dateNaissance', DateType::class, [
+                'widget' => 'single_text',
+                'attr' => [
+                    'placeholder' => 'date naissance',
+                    'type' => 'text',
+                    'onfocusout' => "(this.type='text')",
+                    'onfocus' => "(this.type='date')"
                    
-        //        ],
-        //        'label' => false,
-        //        'format' => 'yyyy-MM-dd'
-        //    ])
+                ],
+                'label' => false,
+                'format' => 'yyyy-MM-dd'
+            ])
+        /*
            ->add('dateNaissance', DateType::class, [
             'widget' => 'single_text',
             'required' => true,
             'label' => false,
             'format' => 'yyyy-MM-dd'
         ])
-    
-           ->add('inscrire', SubmitType::class,[
-               'attr' => [
-                   'class' => 'boutonForm'
-               ]
-           ])
-       ;
+        */
+        ->add('save', SubmitType::class,
+            [ 'label' => "Enregistrer", 'attr' => [ 'class' => "boutonForm" ] ]
+            );
     }
 
     public function configureOptions(OptionsResolver $resolver): void

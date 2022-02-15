@@ -3,10 +3,6 @@
 namespace App\Controller;
 
 use App\Entity\User;
-use App\Form\InscriptionAppType;
-use App\Form\InscriptionApp2Type;
-
-use App\Form\InscriptionEntrepriseType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -32,7 +28,7 @@ class LanController extends AbstractController
         ]);
     }
 
-    public function inscriptionEleve(Request $request): Response
+    public function inscriptionEleveOLD(Request $request): Response
     {
         $contact = new User();
         $form = $this->createForm(InscriptionAppType::class, $contact);
@@ -81,61 +77,6 @@ class LanController extends AbstractController
         }
         return $this->render(
             'lan/inscriptionEleve.html.twig',
-            [
-                'form' => $form->createView()
-            ]
-        );
-    }
-
-    public function inscriptionEntreprise(Request $request): Response
-    {
-        $contact = new User();
-        $form = $this->createForm(InscriptionEntrepriseType::class, $contact);
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            //enregistrer le mail 
-            $mail = $contact->getEmail();
-            $mail = strip_tags($mail);
-            $contact->setEmail($mail);
-
-            //enregistrer le pw 
-            $pw = $contact->getPassword();
-            $pw = strip_tags($pw);
-            $contact->setPassword($pw);
-
-            //enregistrer le adress 
-            $adress = $contact->getAdresse();
-            $adress = strip_tags($adress);
-            $contact->setAdresse($adress);
-
-            //enregistrer le adress 
-            $tel = $contact->getTelephone();
-            $tel = strip_tags($tel);
-            $contact->setTelephone($tel);
-
-            //enregistrer le adress 
-            $siret = $contact->getSiret();
-            $siret = strip_tags($siret);
-            $contact->setSiret($siret);
-
-            //enregistrer contact
-            $nom = $contact->getNom();
-            $nom = strip_tags($nom);
-            $contact->setNom($nom);
-
-            //enregistrer le date naissance 
-            $date_naissance = $contact->getDateNaissance();
-            $contact->setDateNaissance($date_naissance);
-
-            $doctrine = $this->getDoctrine();
-            $entityManager = $doctrine->getManager();
-
-            $entityManager->persist($contact);
-            $entityManager->flush();
-            return $this->redirect($this->generateUrl('login'));
-         }
-        return $this->render(
-            'lan/inscriptionEntreprise.html.twig',
             [
                 'form' => $form->createView()
             ]
@@ -260,7 +201,7 @@ class LanController extends AbstractController
          }
 
         return $this->render('lan/session.html.twig', [
-            'formulaire' => $form->createView(),
+            'form' => $form->createView(),
         ]);
 
    

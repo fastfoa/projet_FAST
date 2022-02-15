@@ -30,13 +30,21 @@ class InscriptionMAType extends AbstractType
             ->add('telephone', TextType::class,
                     [ 'attr' => [ 'placeholder' => 'Entrez votre numéro de téléphone' ] ]
                 )
-            ->add('dateNaissance', DateType::class,
-                    [ 'widget' => 'single_text',
-                    'format' => 'yyyy-MM-dd',
-                    'data' => new \DateTime() ]
-                )
+                ->add('dateNaissance', DateType::class, [
+                    'widget' => 'single_text',
+                    'attr' => [
+                        'placeholder' => 'date naissance',
+                        'type' => 'text',
+                        'onfocusout' => "(this.type='text')",
+                        'onfocus' => "(this.type='date')"
+                       
+                    ],
+                    'label' => false,
+                    'format' => 'yyyy-MM-dd'
+                ])
+    
             ->add('save', SubmitType::class,
-                    [ 'label' => "Je m'inscris", 'attr' => [ 'class' => "boutonForm" ] ]
+                    [ 'label' => "Enregistrer", 'attr' => [ 'class' => "boutonForm" ] ]
                 )
         ;
     }
