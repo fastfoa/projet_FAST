@@ -108,7 +108,7 @@ InscriptionEntreprise:
     controller: App\Controller\InscriptionController::InscriptionEntreprise
 
 InscriptionApprenti:
-    path: /inscriptionApprenti
+    path: /InscriptionApprenti
     controller: App\Controller\InscriptionController::InscriptionApprenti
 
 InscriptionMA:

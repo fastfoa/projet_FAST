@@ -6,6 +6,7 @@ use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -136,16 +137,21 @@ class InscriptionApprentiType extends AbstractType
                     'placeholder' => 'Dernier Diplome'
                 ]
             ])
-            ->add('DerniereClasse', TextType::class,[
+            ->add('ConventionCollective', TextType::class,[
                 'label'=> false,
                 'attr' => [
-                    'placeholder' => 'Derniere Classe'
+                    'placeholder' => 'Convention Collective'
                 ]
             ])
             ->add('DiplomePlusHaut', TextType::class,[
                 'label'=> false,
                 'attr' => [
                     'placeholder' => 'Diplome Plus Haut'
+                ]
+            ])
+            ->add('save', SubmitType::class,[
+                'attr' => [
+                    'class' => 'boutonForm'
                 ]
             ])
         ;

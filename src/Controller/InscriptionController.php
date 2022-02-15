@@ -8,7 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use App\Form\InscriptionEntrepriseType;
 use App\Entity\User;
-
+use App\Form\InscriptionApprentiType;
 
 class InscriptionController extends AbstractController
 {
@@ -87,10 +87,10 @@ class InscriptionController extends AbstractController
         ]);
     }
     
-    public function inscriptionEleve(Request $request): Response
+    public function InscriptionApprenti(Request $request): Response
     {
         $contact = new User();
-        $form = $this->createForm(InscriptionAppType::class, $contact);
+        $form = $this->createForm(InscriptionApprentiType::class, $contact);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
              //enregistrer le nom 
@@ -205,7 +205,7 @@ class InscriptionController extends AbstractController
             return $this->redirect($this->generateUrl('login'));
         }
         return $this->render(
-            'lan/inscriptionEleve.html.twig',
+            'lan/InscriptionApprenti.html.twig',
             [
                 'form' => $form->createView()
             ]
