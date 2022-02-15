@@ -1,0 +1,46 @@
+{% extends 'lan/base.html.twig' %}
+
+{% block myStylesheets %}
+	<style>
+	input[type=date]{
+		width: 70%;
+		margin: 10px  0px;
+	}
+	
+	</style>
+{% endblock %}
+{% block javascripts %}
+	<script></script>
+{% endblock %}
+
+{% block body %}
+	<div class="container bg-body ">
+
+		<div class="row bg-bar">
+			<h3>Inscription Formateur</h3>
+		</div>
+		{{ form_start(form) }}
+		<div class="row">
+			<div class="col-6 mx-auto">
+				{{form_widget(form.nom)}}
+				{{form_widget(form.email)}}
+				{{form_widget(form.adresse)}}
+				{{form_widget(form.dateNaissance)}}
+			</div>
+			<div class="col-6 mx-auto">
+				{{form_widget(form.prenom)}}
+				{{form_widget(form.Genre)}}
+				{{form_widget(form.telephone)}}
+				{{form_widget(form.diplome)}}
+			</div>
+
+		</div>
+		<div class="row">
+			<div class="col-1 mx-auto">
+				{{form_widget(form.inscrire)}}
+			</div>
+		</div>
+
+		{{ form_end(form) }}
+	</div>
+{% endblock %}

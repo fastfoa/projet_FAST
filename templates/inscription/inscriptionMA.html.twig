@@ -1,0 +1,32 @@
+{% extends 'lan/base.html.twig' %}
+
+{% block myStylesheets %}
+
+{% endblock %}
+
+{% block body %}
+<div class="container-fluid">
+{{form_start(form)}}
+	<h3>Inscription maître de stage</h3>
+	<div class="row">
+		<div class="col-6">
+			{{ form_widget(form.email) }}
+			{{ form_widget(form.nom) }}
+			{{ form_widget(form.prenom) }}
+		</div>
+		<div class="col-6">
+            {{ form_widget(form.adresse) }}
+			{{ form_widget(form.telephone) }}
+            <br>
+			{{ form_label(form.dateNaissance, 'Date de naissance')}}
+            {{ form_widget(form.dateNaissance) }}
+		</div>
+        <div class="row mx-auto">
+            <div class="col-12">
+                {{ form_widget(form.save) }}
+            </div>
+        </div>
+	</div>
+{{form_end(form)}}
+</div>
+{% endblock %}

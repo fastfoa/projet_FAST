@@ -2,18 +2,27 @@
 #    path: /
 #    controller: App\Controller\DefaultController::index
 
+
 inscriptionEleve:
     path: /inscriptionEleve
     controller: App\Controller\LanController::inscriptionEleve
+
+inscriptionEntrepriseAS:
+    path: /inscriptionEntrepriseAS
+
+inscriptionFormateur:
+    path: /inscriptionFormateur
+    controller: App\Controller\InscriptionController::inscriptionFormateur
+    
+inscriptionEntreprise:
+    path: /inscriptionEntreprise
+    controller: App\Controller\LanController::inscriptionEntreprise
 
 login:
     path: /login
     controller: App\Controller\LanController::login
 
-#registerStudent:
-#    path: /registerStudent
-#    controller: App\Controller\LanController::registerStudent
-
+                                
 dashBoardStudent:
     path: /dashBoardStudent
     controller: App\Controller\LanController::dashBoardStudent
@@ -22,6 +31,10 @@ dashBoardSchool:
     path: /dashBoardSchool
     controller: App\Controller\LanController::dashBoardSchool
 
+files:
+    path: /files
+    controller: App\Controller\LanController::files
+    
 dashBoardSkill:
     path: /dashBoardSkill
     controller: App\Controller\LanController::dashBoardSkill
@@ -30,6 +43,10 @@ getSkillToBe:
     path: /getSkillToBe
     controller: App\Controller\LanController::getSkillToBe
 
+suiviCompetences:
+    path: /suiviCompetences
+    controller: App\Controller\LanController::suiviCompetences
+    
 formulaireEleve:
     path: /formulaireEleve
     controller: App\Controller\LanController::formulaireEleve
@@ -53,3 +70,48 @@ followTraining:
 test:
     path: /test
     controller: App\Controller\LanController::test
+
+dashBoardEntrprise:
+    path: /dashBoardEntrprise
+    controller: App\Controller\LanController::dashBoardEntrprise
+
+upload: 
+    path: /upload
+    controller: App\Controller\DocumentController::upload
+
+downloadlist:
+    path: /downloadlist
+    controller: App\Controller\DocumentController::downloadlist
+
+download:
+    path: /download/{id}
+    controller: App\Controller\DocumentController::download
+
+delete:
+    path: /delete/{id}
+    controller: App\Controller\DocumentController::delete
+
+stageForm:
+    path: /stageForm
+    controller: App\Controller\StageFormController::stageForm
+
+session:
+    path: /session
+    controller: App\Controller\LanController::session
+
+formations:
+    path: /formations
+    controller: App\Controller\LanController::formations
+
+InscriptionEntreprise:
+    path: /inscriptionEntreprise
+    controller: App\Controller\InscriptionController::InscriptionEntreprise
+
+InscriptionApprenti:
+    path: /inscriptionApprenti
+    controller: App\Controller\InscriptionController::InscriptionApprenti
+
+InscriptionMA:
+    path: /inscriptionMA
+    controller: App\Controller\InscriptionController::InscriptionMA
+

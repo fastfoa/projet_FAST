@@ -1,32 +1,38 @@
 {% extends 'lan/base.html.twig' %}
-{% block stylesheets %}
-            {{ encore_entry_link_tags('app') }}
-        <link rel="stylesheet" href='{{ asset("css/skill.css")}}'>  
+{% block title %}Suivi alternane{% endblock %}
+{% block myStylesheets %}
+        <link rel="stylesheet" href='{{ asset("css/follow.css")}}'>
+        <link rel="stylesheet" href='{{ asset("css/login.css")}}'> 
+        <link rel="stylesheet" href='{{ asset("css/skill.css")}}'>   
 {% endblock %}
 {% block body %}
-   <div class="container-fluid">
+   <div class="container">
         <!-- bandeau -->
         <header class="col-12 mx-auto bandeau">
-            <div class="container-fluid">
-                <div class="row align-items-start">
+            <div class="container">
+                <div class="row align-items-start my-2">
                   <div class="col-4 mx-auto ">
-                    <h5 class="text-center">VERHAEGHE</h5>
-                    <h5 class="text-center">Rémi</h5>
+                    <h6 class="text-center">Apprenti : DUPOND Martin</h6>
+                    <h6 class="text-center">Formateur : DURAND Sophie</h6>
                   </div>
                   <div class="col-4 mx-auto my-auto ">
-                    <h2 class="text-center">Savoir Etre</h2>
-                    <h5></h5>
+                  
+                    <h2 class="text-center">Suivi alternance</h2>
+                    <br>
+                    <h4 class="text-center my-2">Savoir Etre</h4>
                   </div>
                   <div class="col-4 mx-auto ">
-                    <h5 class="text-center">Du XX/XX/XXXX</h5>
-                    <h5 class="text-center">Au XX/XX/XXXX</h5>
+                    <h6 class="text-center">Semaine Du 20/09/2021</h6>
+                    <h6 class="text-center">Au 15/03/2022</h6>
                   </div>
                 </div> 
             </div>
         </header>
         <main class="col-12 mx-auto description">
+        
             <div class="container">
-                <div class="row align-items-start">
+            
+                <div class="row align-items-start my-2">
                     <div class="col-4 mx-auto" >
                         <h4 class="text-center">Evaluation</h4>
                         <h5 class="text-center">Assiduité</h5>
@@ -165,15 +171,17 @@
                             <label class="star-half" for="rate1-star0-half" title="Horrific">0.5</label>
                         </fieldset>
                     </div>
-                    <div class="col-8 mx-auto" >
-                        <h3 class="text-center">Commentaire</h3>
-                        <textarea class="form-control" rows="8" id="comment" name="text" placeholder="Tapez votre commentaire ici">
-                        
-                        </textarea>
-                        
+                        <div class="col-8 m-auto" >
+                            <h5 class="text-center">Commentaire :</h5>
+                            <textarea class="form-control" rows="8" id="comment" name="text" placeholder="Tapez votre commentaire ici"></textarea>
+                        </div>
+                    <div class="col-4 m-auto">
                         <button type="button" class="boutonForm">Valider</button>
-       </div>
+       
+                    </div>
+                    
                 </div>
+               
             </div>
         </main>
     </div>
