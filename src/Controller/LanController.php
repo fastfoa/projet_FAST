@@ -2,10 +2,11 @@
 
 namespace App\Controller;
 
-
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Doctrine\Persistence\ManagerRegistry;
 
 class LanController extends AbstractController
 {
@@ -96,12 +97,12 @@ public function registerStudent(): Response
         ]);
     }
 
-public function suiviCompetences(): Response
-{
-    return $this->render('lan/suiviCompetences.html.twig', [
-        'controller_name' => 'LanController',
-    ]);
-}
+    public function suiviCompetences(): Response
+    {
+        return $this->render('lan/suiviCompetences.html.twig', [
+            'controller_name' => 'LanController',
+        ]);
+    }
 
     public function getSkillToBe(): Response
     {

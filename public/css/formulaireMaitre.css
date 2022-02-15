@@ -1,0 +1,14 @@
+.form
+{
+    text-align: center;
+    margin: auto;
+}
+
+.myInput
+{
+    width: 70%;
+    padding: 6px;
+    margin: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}

@@ -75,8 +75,8 @@ h1, h2, h3, h4, h5, h6
 
 .work-content 
 {
-    width: 70%;
-    height: 400px;
+    width: 90%;
+    /* height: 00px; */
     margin: 40px auto 10px;   
 }
 
@@ -183,7 +183,6 @@ h1, h2, h3, h4, h5, h6
 }
 
 
-
 .bg-body  		/* couleur fond du body */
 {
     background-color:#018FA5;
@@ -222,7 +221,7 @@ h1, h2, h3, h4, h5, h6
     font-size: 17px;
 }
 
-.txt-label		/* text des label */
+.txt-labelzoro		/* text des label */
 {
     color: black;
     font-size: 17px;
@@ -246,13 +245,13 @@ label
 
 /* ********************************************* */
 
-.dashMenu{
+.dashMenutoto{
     background-color: #11284B !important;
 }
 
 
-.carte,
-.active {
+.cartetoto,
+.activetoto {
   background-color: #018fa5 !important;
 }
 
