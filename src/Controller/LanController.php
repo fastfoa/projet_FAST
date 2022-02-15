@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\InscriptionAppType;
-use App\Form\InscriptionApp2Type;
 
 use App\Form\InscriptionEntrepriseType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
