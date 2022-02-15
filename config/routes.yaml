@@ -68,4 +68,4 @@ dashBoardEntrprise:
 
 stageForm:
     path: /stageForm
-    controller: App\Controller\LanController::stageForm
+    controller: App\Controller\StageFormController::stageForm
