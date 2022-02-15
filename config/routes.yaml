@@ -81,3 +81,11 @@ delete:
 stageForm:
     path: /stageForm
     controller: App\Controller\StageFormController::stageForm
+
+session:
+    path: /session
+    controller: App\Controller\LanController::session
+
+formations:
+    path: /formations
+    controller: App\Controller\LanController::formations

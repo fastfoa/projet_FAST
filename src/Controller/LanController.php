@@ -1,12 +1,14 @@
 <?php
 
 namespace App\Controller;
-
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\Persistence\ManagerRegistry;
+
+use App\Entity\Session;
+use App\Form\SessionType;
 
 class LanController extends AbstractController
 {
@@ -131,5 +133,27 @@ public function registerStudent(): Response
         return $this->render('lan/test.html.twig', [
             'controller_name' => 'LanController',
         ]);
+    }
+
+
+    public function session(Request $request): Response
+    {
+        $session =new Session();
+
+        $form = $this->createForm(SessionType::class,$session);
+         $form->handleRequest($request);
+         if($form->isSubmitted()&& $form->isValid())
+         {
+            $doctrine =$this->getDoctrine();
+            $em =$doctrine->getManager();
+            $em ->persist($session);
+            $em->flush();
+         }
+
+        return $this->render('lan/session.html.twig', [
+            'formulaire' => $form->createView(),
+        ]);
+
+   
     }
 }
