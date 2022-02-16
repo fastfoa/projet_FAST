@@ -89,7 +89,7 @@ class InscriptionApprentiType extends AbstractType
             ->add('NIR', TextType::class,[
                 'label'=> false,
                 'attr' => [
-                    'placeholder' => 'Representant Legal 2'
+                    'placeholder' => 'NIR'
                 ]
             ])
             ->add('DepNaissance', TextType::class,[
