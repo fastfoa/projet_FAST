@@ -7,27 +7,8 @@
 {% block title %}LIST DES FICHIERS{% endblock %}
 
 {% block body %}
-	<div class="container-fluid contenue">
-		<div class="row">
-			<div class="col-lg-2 dashMenu sidebar d-flex flex-column list-group list-group-flush viewport-max ">
-				<a href="#" class="list-group-item list-group-item-action text-center bg-bar">
-					<img src="{{ asset('images/olivier.jpeg') }}" alt="" class="img-fluid rounded-circle mr-2">
-					Olivier Carlier</a>
-				<a href="#" class="list-group-item list-group-item-action menu-items bg-bar">
-					<i class="fas fa-columns mr-2 fa-lg"></i>Dashboard</a>
-				<a href="#" class="list-group-item list-group-item-action menu-items  active">
-					<i class="fas fa-thin fa-file mr-2 fa-lg"></i>Documents</a>
-				<a href="#" class="list-group-item list-group-item-action menu-items bg-bar">
-					<i class="fas fa-solid fa-bars-progress mr-2 fa-lg"></i>Suivi</a>
-				<a href="#" class="list-group-item list-group-item-action menu-items bg-bar">
-					<i class="fas fa-info mr-2 fa-lg"></i>Infos Entreprise</a>
-				<a href="#" class="list-group-item list-group-item-action menu-items bg-bar">
-					<i class="fas fa-info mr-2 fa-lg"></i>Infos Organisme de Formation</a>
-				<a href="#" class="list-group-item list-group-item-action menu-items bg-bar">
-					<i class="fas fa-user-cog mr-2 fa-lg"></i>Mes information</a>
-			</div>
+	<div class="container-fluid bg-workSpace">
 			<!-- MAIN CARDS-->
-			<div class="col-lg-10">
 				<div class="row">
 					{% for message in app.flashes('message') %}
 						<div class="alert alert-success">
@@ -35,13 +16,13 @@
 						</div>
 					{% endfor %}
 				</div>
-				<div class="row">
-					<div class="col-5">
-						<h2 class="text-info my-2">
-							<small class="text-muted">Documents</small>
-						</h2>
+				<div class="row bg-bar">
+					<div class="col-12">
+						<h2>Documents</h2>
 					</div>
-					<div class="col-5">
+				</div>				
+				<div class="row bg">
+					<div class="col-12">
 						<a href="{{ path( 'upload') }}">
 							<button class="btn btn-success my-2">+ Ajouter un document</button>
 						</a>
@@ -54,21 +35,25 @@
 								<tr>
 									<th class="txt-bar bg-bar">Date</th>
 									<th class="txt-bar bg-bar">Nom du document</th>
-									<th class="txt-bar bg-bar">classe</th>
-									<th class="txt-bar bg-bar">Format document</th>
+									<th class="txt-bar bg-bar">Session</th>
+									<th class="txt-bar bg-bar">Destinataires</th>
+									<th class="txt-bar bg-bar">Action</th>
 								</tr>
 							</thead>
 							<tbody>
 								{% for document in listUp %}
 									<tr>
-										<td class="txt-normal">10/02/2022</td>
-										<td class="txt-normal">{{document.titre}}</td>
+										<td>{{document.dateCreate|date("d/m/y")}}</td>
+										<td>{{document.titre}}</td>
 										<td class="txt-normal">Alternance 1er Année</td>
-										<td class="txt-normal">
+										<td class="txt-normal">Tous</td>
+										<td>
 											<a href="{{ path( 'download',{'id':document.id} ) }}">
-													<button class="btn btn-success">
-													<i class="fas fa-file-pdf" style="font-size:20px;color:red;"></i>
-													Telechargement</button>
+													<i class="fas fa-solid fa-download" style="font-size:20px;color:green;"></i>
+											</a>
+											
+											<a href="{{ path( 'deletedocument',{'id':document.id} ) }}">
+													<div style="font-size:20px;color:red; display:inline ;">&nbspX</div>
 											</a>
 										</td>
 									</tr>
