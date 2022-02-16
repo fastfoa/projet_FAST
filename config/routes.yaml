@@ -80,10 +80,6 @@ stageForm:
     path: /stageForm
     controller: App\Controller\StageFormController::stageForm
 
-session:
-    path: /session
-    controller: App\Controller\LanController::session
-
 formations:
     path: /formations
     controller: App\Controller\LanController::formations
@@ -113,5 +109,35 @@ inscriptionEleve:
     
 addUser:
     path: /addUser/{role}
+    controller: App\Controller\InscriptionController::addUser
+    
+## App\Controller\DashController
+
+dashOFPrincipal:
+    path: /dashOFPrincipal
+    controller: App\Controller\DashController::dashOFPrincipal
+
+addSession:
+    path: /addSession
+    controller: App\Controller\DashController::addSession
+
+deleteSession:
+    path: /deleteSession/{session}
+    controller: App\Controller\DashController::deleteSession
+
+dashOFSession:
+    path: /dashOFSession/{session}
+    controller: App\Controller\DashController::dashOFSession
+
+formApprenti:
+    path: /formApprenti/{user}
+    controller: App\Controller\DashController::formApprenti
+
+listApprenti:
+    path: /listApprenti
+    controller: App\Controller\DashController::listApprenti
+
+addApprenti:
+    path: /listApprenti
     controller: App\Controller\InscriptionController::addUser
     
