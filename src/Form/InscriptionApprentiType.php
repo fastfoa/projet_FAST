@@ -9,7 +9,6 @@ use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 class InscriptionApprentiType extends AbstractType
@@ -128,14 +127,12 @@ class InscriptionApprentiType extends AbstractType
                 ],
             ])
             ->add('SportifHautNiveau', ChoiceType::class,[
-                'label'=> false,
-                'attr' => [
-                    'placeholder' => 'Sportif de Haut Niveau'
-                ],
+                'label'=> 'Sportif de Haut Niveau',
                 'choices'  => [
                     'OUI' => true,
                     'NON' => false,
                 ],
+                
             ])
             ->add('SituationAvantContrat', TextType::class,[
                 'label'=> false,

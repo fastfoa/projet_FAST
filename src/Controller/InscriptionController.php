@@ -434,11 +434,7 @@ class InscriptionController extends AbstractController
             return $this->redirect($this->generateUrl('login'));
         }
         return $this->render(
-<<<<<<< HEAD
-            'lan/InscriptionApprenti.html.twig',
-=======
             'inscription/inscriptionApprenti.html.twig',
->>>>>>> symfo
             [
                 'form' => $form->createView()
             ]
