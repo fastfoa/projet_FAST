@@ -71,7 +71,7 @@ class InscriptionEntrepriseType extends AbstractType
                 ]
             ])
             ->add('save', SubmitType::class,[
-                'label'=> "Je m'inscris",
+                'label'=> "Enregistrer",
                 'attr' => [
                     'class' => 'boutonForm'
                 ]

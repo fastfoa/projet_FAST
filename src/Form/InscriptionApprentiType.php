@@ -9,9 +9,9 @@ use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-
 class InscriptionApprentiType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
@@ -29,6 +29,10 @@ class InscriptionApprentiType extends AbstractType
                     'placeholder' => 'prenom'
                 ]
             ])
+            ->add('email', TextType::class,
+            [ 'attr' => [ 'placeholder' => 'Entrez votre adresse email' ] ]
+        )
+
             ->add('adresse', TextType::class,[
                 'label'=> false,
                 'attr' => [
@@ -47,11 +51,19 @@ class InscriptionApprentiType extends AbstractType
                     'placeholder' => 'diplome'
                 ]
             ])
-            ->add('DateNaissance', DateType::class,[
-                'label'=> false,
+
+
+            ->add('dateNaissance', DateType::class, [
+                'widget' => 'single_text',
                 'attr' => [
-                    'placeholder' => 'adresse'
-                ]
+                    'placeholder' => 'date',
+                    'type' => 'text',
+                    'onfocusout' => "(this.type='text')",
+                    'onfocus' => "(this.type='date')"
+                    
+                ],
+                'label' => false,
+                'format' => 'yyyy-MM-dd'
             ])
             ->add('Genre', ChoiceType::class,[
                 'label'=> false,
@@ -78,7 +90,7 @@ class InscriptionApprentiType extends AbstractType
             ->add('NIR', TextType::class,[
                 'label'=> false,
                 'attr' => [
-                    'placeholder' => 'Representant Legal 2'
+                    'placeholder' => 'NIR'
                 ]
             ])
             ->add('DepNaissance', TextType::class,[
@@ -150,6 +162,7 @@ class InscriptionApprentiType extends AbstractType
                 ]
             ])
             ->add('save', SubmitType::class,[
+                'label'=> "Enregistrer",
                 'attr' => [
                     'class' => 'boutonForm'
                 ]

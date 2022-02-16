@@ -1,9 +1,27 @@
-{% extends 'base.html.twig' %}
-
+{% extends 'lan/base.html.twig' %}
 
 {% block body %}
+<div class="container-fluid">
+		<div class="row bg-bar">
+			<h3>Création Session de Formation</h3>
+		</div>
+		<div class="row">
+			<div class="col-6 label-fe">
+            	{{form_start(form)}}
+					{{ form_label(form.nom) }}
+					{{ form_widget(form.nom) }}
+                    <br>
+					{{ form_label(form.debut) }}
+					{{ form_widget(form.debut) }}
+                    <br>
+					{{ form_label(form.fin) }}
+					{{ form_widget(form.fin) }}
+                    <br>
+					{{ form_label(form.formation) }}
+					{{ form_widget(form.formation) }}
+				{{form_end(form)}}
 
-{{ form(formulaire) }}
-
-
+			</div>
+		</div>
+</div>
 {% endblock %}

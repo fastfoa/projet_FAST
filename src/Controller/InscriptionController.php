@@ -7,8 +7,15 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use App\Form\InscriptionEntrepriseType;
+use App\Form\InscriptioFormateurType;
 use App\Entity\User;
+use Doctrine\ORM\EntityManagerInterface;
+use App\Form\InscriptionAppType;
 use App\Form\InscriptionApprentiType;
+use App\Form\InscriptionApp2Type;
+use App\Form\InscriptionMAType;
+use Doctrine\Persistence\ManagerRegistry;
+
 
 class InscriptionController extends AbstractController
 {
@@ -22,10 +29,10 @@ class InscriptionController extends AbstractController
         ]);
     }
 
-    public function InscriptionEntreprise( Request $request ): Response
+    public function inscriptionEntreprise(Request $request): Response
     {
         $user = new User();
-        $form = $this->createForm( InscriptionEntrepriseType::class, $user );
+        $form = $this->createForm(InscriptionEntrepriseType::class, $user);
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) 
@@ -77,8 +84,8 @@ class InscriptionController extends AbstractController
 
             $doctrine = $this->getDoctrine();
             $entityManager = $doctrine->getManager();
-           
-            $entityManager->persist($user); 
+
+            $entityManager->persist($user);
             $entityManager->flush();
             return $this->redirect($this->generateUrl('login'));
         }
@@ -87,7 +94,229 @@ class InscriptionController extends AbstractController
         ]);
     }
     
-    public function InscriptionApprenti(Request $request): Response
+
+
+    public function inscriptionMA(Request $request, ManagerRegistry $doctrine): Response
+    {
+        $user = new User();
+        $form = $this->createForm(InscriptionMAType::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $entityManager = $doctrine->getManager();
+
+            $user->setRoles(['ROLE_MA']);
+
+            $email = $user->getEmail();
+            $user->setEmail($email);
+
+            $adresse = $user->getAdresse();
+            $user->setAdresse($adresse);
+            
+            $prenom = $user->getPrenom();
+            $user->setPrenom($prenom);
+
+            $tel = $user->getTelephone();
+            $user->setTelephone($tel);
+
+            $nom = $user->getNom();
+            $nom = strip_tags( $nom );
+            $user->setNom($nom);
+
+            $dateNaissance = $user->getDateNaissance();
+            $user->setDateNaissance($dateNaissance);
+
+            $entityManager->persist($user); 
+            $entityManager->flush();
+
+            return $this->redirect($this->generateUrl('login'));
+        }
+
+        return $this->render( 'inscription/inscriptionMA.html.twig', [
+            'form' => $form->createView()
+        ]);
+    }
+
+    public function inscriptionFormateur(Request $request, EntityManagerInterface $manager)
+    {
+        $contact = new User();
+        $form = $this->createForm(InscriptioFormateurType::class, $contact);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            //enregistrer le mail 
+            $mail = $contact->getEmail();
+            $mail = strip_tags($mail);
+            $contact->setEmail($mail);
+
+            //enregistrer le genre 
+            $genre = $contact->getGenre();
+            $genre = strip_tags($genre);
+            $contact->setGenre($genre);
+
+            //enregistrer le adress 
+            $adress = $contact->getAdresse();
+            $adress = strip_tags($adress);
+            $contact->setAdresse($adress);
+
+            //enregistrer le adress 
+            $tel = $contact->getTelephone();
+            $tel = strip_tags($tel);
+            $contact->setTelephone($tel);
+
+            //enregistrer le adress 
+            $siret = $contact->getSiret();
+            $siret = strip_tags($siret);
+            $contact->setSiret($siret);
+
+            //enregistrer contact
+            $nom = $contact->getNom();
+            $nom = strip_tags($nom);
+            $contact->setNom($nom);
+
+            //enregistrer prenom
+            $prenom = $contact->getPrenom();
+            $prenom = strip_tags($prenom);
+            $contact->setPrenom($prenom);
+
+
+
+            //enregistrer diplome
+            $diplome = $contact->getDiplome();
+            $diplome = strip_tags($diplome);
+            $contact->setDiplome($diplome);
+
+            //enregistrer le date naissance 
+            $date_naissance = $contact->getDateNaissance();
+            $contact->setDateNaissance($date_naissance);
+
+            $doctrine = $this->getDoctrine();
+            $entityManager = $doctrine->getManager();
+
+            $entityManager->persist($contact);
+            $entityManager->flush();
+            return $this->redirect($this->generateUrl('login'));
+        }
+        return $this->render(
+            'inscription/inscriptionFormateurs.html.twig',
+            [
+                'form' => $form->createView()
+            ]
+        );
+    }
+
+    public function inscriptionEntrepriseSA(Request $request): Response
+    {
+        $contact = new User();
+        $form = $this->createForm(InscriptionEntrepriseType::class, $contact);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            //enregistrer le mail 
+            $mail = $contact->getEmail();
+            $mail = strip_tags($mail);
+            $contact->setEmail($mail);
+
+            //enregistrer le pw 
+            $pw = $contact->getPassword();
+            $pw = strip_tags($pw);
+            $contact->setPassword($pw);
+
+            //enregistrer le adress 
+            $adress = $contact->getAdresse();
+            $adress = strip_tags($adress);
+            $contact->setAdresse($adress);
+
+            //enregistrer le adress 
+            $tel = $contact->getTelephone();
+            $tel = strip_tags($tel);
+            $contact->setTelephone($tel);
+
+            //enregistrer le adress 
+            $siret = $contact->getSiret();
+            $siret = strip_tags($siret);
+            $contact->setSiret($siret);
+
+            //enregistrer contact
+            $nom = $contact->getNom();
+            $nom = strip_tags($nom);
+            $contact->setNom($nom);
+
+            //enregistrer le date naissance 
+            $date_naissance = $contact->getDateNaissance();
+            $contact->setDateNaissance($date_naissance);
+
+            $doctrine = $this->getDoctrine();
+            $entityManager = $doctrine->getManager();
+
+            $entityManager->persist($contact);
+            $entityManager->flush();
+            return $this->redirect($this->generateUrl('login'));
+         }
+        return $this->render(
+            'inscription/inscriptionEntreprise.html.twig',
+            [
+                'form' => $form->createView()
+            ]
+        );
+    }
+
+
+    public function inscriptionEleveAS(Request $request): Response
+    {
+        $contact = new User();
+        $form = $this->createForm(InscriptionApprentiType::class, $contact);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            //enregistrer le mail 
+            $mail = $contact->getEmail();
+            $mail = strip_tags($mail);
+            $contact->setEmail($mail);
+
+            //enregistrer le mail 
+            $pw = $contact->getPassword();
+            $pw = strip_tags($pw);
+            $contact->setPassword($pw);
+
+            //enregistrer le prenom 
+            $prenom = $contact->getPrenom();
+            $prenom = strip_tags($prenom);
+            $contact->setPrenom($prenom);
+
+            //enregistrer le date naissance 
+            $date_naissance = $contact->getDateNaissance();
+            $contact->setDateNaissance($date_naissance);
+
+            //enregistrer le date adress 
+            $adress = $contact->getAdresse();
+            $adress = strip_tags($adress);
+            $contact->setAdresse($adress);
+
+            //enregistrer le date tel 
+            $tel = $contact->getTelephone();
+            $tel = strip_tags($tel);
+            $contact->setTelephone($tel);
+
+            //enregistrer nom
+            $nom = $contact->getNom();
+            $nom = strip_tags($nom);
+            $contact->setNom($nom);
+
+            $doctrine = $this->getDoctrine();
+            $entityManager = $doctrine->getManager();
+
+            $entityManager->persist($contact);
+            $entityManager->flush();
+            return $this->redirect($this->generateUrl('login'));
+        }
+        return $this->render(
+            'inscription/inscriptionEleve.html.twig',
+            [
+                'form' => $form->createView()
+            ]
+        );
+    }
+
+    public function inscriptionApprenti(Request $request): Response
     {
         $contact = new User();
         $form = $this->createForm(InscriptionApprentiType::class, $contact);
@@ -205,17 +434,18 @@ class InscriptionController extends AbstractController
             return $this->redirect($this->generateUrl('login'));
         }
         return $this->render(
+<<<<<<< HEAD
             'lan/InscriptionApprenti.html.twig',
+=======
+            'inscription/inscriptionApprenti.html.twig',
+>>>>>>> symfo
             [
                 'form' => $form->createView()
             ]
         );
     }
+
+
+
+
 }
-
-
-//InscriptionEntreprise
-
-//InscriptionApprenti:
-
-//InscriptionMA:
