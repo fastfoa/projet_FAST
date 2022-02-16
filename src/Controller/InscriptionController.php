@@ -265,7 +265,7 @@ class InscriptionController extends AbstractController
     public function inscriptionEleveAS(Request $request): Response
     {
         $contact = new User();
-        $form = $this->createForm(InscriptionAppType::class, $contact);
+        $form = $this->createForm(InscriptionApprentiType::class, $contact);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             //enregistrer le mail 
