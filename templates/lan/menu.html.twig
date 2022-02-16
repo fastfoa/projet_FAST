@@ -6,29 +6,33 @@
 
 		<ul class="navbar-nav me-auto fith100">
 			<li class="nav-item active">
-				<a class="nav-link text-light" href="#">Accueil
+				<a class="nav-link text-light" href="{{ path('test')}}">Accueil
 					<span class="sr-only">(current)</span>
 				</a>
 			</li>
-				{% if is_granted('ROLE_ADMIN') %}
-                    <a class="nav-link" aria-current="page" href="{{ path('inscriptionMA')}}">Ajout article</a>
-                    <a class="nav-link" aria-current="page" href="{{ path('dashBoardEntrprise')}}">Les Brouillon</a>
-                {% endif %}
-			{# {% if menu is defined %}
-				{% for item in menu %}
+				
+			{% if menu is defined %}
+				{% for item, route in menu %}
 					<li class="nav-item">
-						<a class="nav-link text-light" href="{{item.route}}">{{item.label}}</a>
+						<a class="nav-link text-light" href="{{route}}">{{item}}</a>
 					</li>
 				{% endfor %}
-			{% endif %} #}
+			{% endif %} 
 		</ul>
 
-		{% if loginOn is defined %}
+
+		{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+            <a class="boutonForm my-2 my-sm-0 m-3" aria-current="page" href="{{ path('app_logout')}}">Déconnexion</a>
+        {% else %}
+            <a class="boutonForm my-2 my-sm-0 m-3" aria-current="page" href="{{ path('login')}}">Connexion</a>
+        {% endif %}
+
+		{# {% if loginOn is defined %}
             <a class="nav-link text-light" href="{{item.route}}">{{item.label}}</a>
             <button class="boutonForm my-2 my-sm-0 m-3  " type="submit">Deconnect</button>
 		{% else %}
 			<button class="boutonForm my-2 my-sm-0 m-3  " type="submit">Connexion</button>
-		{% endif %}
+		{% endif %} #}
 
 	</div>
 </nav>

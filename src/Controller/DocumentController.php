@@ -97,19 +97,22 @@ class DocumentController extends AbstractController
             'myForm' => $formulaire->createView(),
             ]);
     }
-
+   
     public function downloadlist(): Response
     {
         $doctrine = $this->getDoctrine();
         //$patro = $doctrine->getRepository(Patronyme::class)->find($id);
 
         $uploads = $doctrine->getRepository(Document::class)->findAll();
-       
+        $menu = [
+            "Documents"=>"downloadlist",
+            ];
 
         return $this->render(
         'document/downloadlist.html.twig', 
         [
-            'listUp' => $uploads
+            'listUp' => $uploads,
+            'menu' => $menu
         ]);    
 
     }
@@ -130,7 +133,7 @@ class DocumentController extends AbstractController
         $r->headers->set('Content-Disposition', $d);
         return $r;
     }
-   
+    
     public function deletedocument(Document $document )
     {
             $doctrine = $this->getDoctrine();

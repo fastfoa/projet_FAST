@@ -10,6 +10,7 @@ use App\Form\InscriptionEntrepriseType;
 use App\Form\InscriptioFormateurType;
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
+use App\Form\AddUserType;
 use App\Form\InscriptionAppType;
 use App\Form\InscriptionApprentiType;
 use App\Form\InscriptionApp2Type;
@@ -132,19 +133,8 @@ class InscriptionController extends AbstractController
 
             return $this->redirect($this->generateUrl('login'));
         }
-        // $menu = [
-        //     ["route"=>"inscriptionMA","label"=>"inscription"],
-        //     ["route"=>"dashBoardEntrprise","label"=>"dashBoardEntrprise"],
-        //     ["route"=>"followTraining","label"=>"Suivi alternance"],
-        //     ["route"=>"getSkillToBe","label"=>"Suivi alternance"],
-        //     ["route"=>"followCompany","label"=>"Suivi alternance"],
-        //     ["route"=>"suiviCompetences","label"=>"suivi Competences"],
-        //     ["route"=>"followTraining","label"=>"suivi Competences"],
-        //     ["route"=>"downloadlist","label"=>"Documents"],
-        //     ];
         return $this->render( 'inscription/inscriptionMA.html.twig', [
             'form' => $form->createView(),
-            // 'menu' => $menu
         ]);
     }
 
@@ -451,6 +441,46 @@ class InscriptionController extends AbstractController
         );
     }
 
+
+    public function addUser(Request $request,$role ): Response
+    {
+        $user = new User();
+
+        $roleMode = '';
+        $roleName = "";
+
+        if ( $role == 1 )
+        {
+            $roleMode = ['ROLE_APP'];
+            $roleName = "Apprenti";
+        } 
+        elseif ( $role == 2 )
+        {
+            $roleMode = ['ROLE_MA'];
+            $roleName = "Maitre d'aprentissage";
+        } 
+
+        $user->setRoles( $roleMode );
+        $form = $this->createForm(AddUserType::class, $user);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $doctrine = $this->getDoctrine();
+            $entityManager = $doctrine->getManager();
+
+
+            $entityManager->persist($user);
+            $entityManager->flush();
+            return $this->redirect($this->generateUrl('login'));
+        }
+        return $this->render(
+            'inscription/addUser.html.twig',
+            [
+                'form' => $form->createView(),
+                'titre' => $roleName
+            ]
+        );
+    }
 
 
 
