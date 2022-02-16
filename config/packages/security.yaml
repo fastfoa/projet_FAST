@@ -38,10 +38,10 @@ security:
          - { path: ^/admin, roles: ROLE_ADMIN }
          - { path: ^/admin, roles: ROLE_APP }
          - { path: ^/admin, roles: ROLE_ENT }
-         - { path: ^/admin, roles: ROLE_MANAGEROF }
+         - { path: ^/admin, roles: ROLE_OF }
          - { path: ^/admin, roles: ROLE_FORMATEUR }
-         - { path: ^/admin, roles: ROLE_MAITRE }
-        # - { path: ^/profile, roles: ROLE_USER }
+         - { path: ^/admin, roles: ROLE_MA }
+       # - { path: ^/profile, roles: ROLE_USER }
 
 when@test:
     security:
