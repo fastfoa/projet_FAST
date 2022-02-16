@@ -200,8 +200,15 @@ class LanController extends AbstractController
             $em->flush();
          }
 
+        $menu = 
+        [
+            "session" => 'dashSessio',
+            "reglement" => 'reglem',
+
+        ];
         return $this->render('lan/session.html.twig', [
             'form' => $form->createView(),
+            'menu' => $menu
         ]);
 
    

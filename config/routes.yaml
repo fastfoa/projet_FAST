@@ -111,3 +111,7 @@ inscriptionEleve:
     path: /inscriptionEleve
     controller: App\Controller\InscriptionController::inscriptionEleve
     
+addUser:
+    path: /addUser/{role}
+    controller: App\Controller\InscriptionController::addUser
+    
