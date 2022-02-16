@@ -7,13 +7,20 @@ inscriptionEleve:
     path: /inscriptionEleve
     controller: App\Controller\LanController::inscriptionEleve
 
+inscriptionEntrepriseAS:
+    path: /inscriptionEntrepriseAS
+
+inscriptionFormateur:
+    path: /inscriptionFormateur
+    controller: App\Controller\LanController::inscriptionFormateur
+    
+inscriptionEntreprise:
+    path: /inscriptionEntreprise
+    controller: App\Controller\LanController::inscriptionEntreprise
+
 login:
     path: /login
     controller: App\Controller\LanController::login
-
-#registerStudent:
-#    path: /registerStudent
-#    controller: App\Controller\LanController::registerStudent
 
                                 
 dashBoardStudent:
@@ -67,8 +74,6 @@ test:
 dashBoardEntrprise:
     path: /dashBoardEntrprise
     controller: App\Controller\LanController::dashBoardEntrprise
-                                    
-
 
 upload: 
     path: /upload
@@ -86,4 +91,27 @@ delete:
     path: /delete/{id}
     controller: App\Controller\DocumentController::delete
 
-    
+stageForm:
+    path: /stageForm
+    controller: App\Controller\StageFormController::stageForm
+
+session:
+    path: /session
+    controller: App\Controller\LanController::session
+
+formations:
+    path: /formations
+    controller: App\Controller\LanController::formations
+
+InscriptionEntreprise:
+    path: /inscriptionEntreprise
+    controller: App\Controller\InscriptionController::InscriptionEntreprise
+
+InscriptionApprenti:
+    path: /inscriptionApprenti
+    controller: App\Controller\InscriptionController::InscriptionApprenti
+
+InscriptionMA:
+    path: /inscriptionMA
+    controller: App\Controller\InscriptionController::InscriptionMA
+

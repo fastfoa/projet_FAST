@@ -23,13 +23,15 @@ class DocumentType extends AbstractType
                 'required' => false,
                 'constraints' => [
                     new File([
-                        'maxSize' => '1024k',
+                        'maxSize' => '10240k',
+                        /*
                         'mimeTypes' => [
                             'application/pdf',
                             'application/x-pdf',
                         ],
                         'mimeTypesMessage' => 'Please upload a valid PDF document',
-                    ])
+                        */
+                        ])
                 ],
             ]);
           

@@ -2,10 +2,23 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
+use App\Form\InscriptionAppType;
+use App\Form\InscriptionApp2Type;
 
+use App\Form\InscriptionEntrepriseType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Doctrine\Persistence\ManagerRegistry;
+
+use App\Entity\Session;
+use App\Form\SessionType;
+
+use App\Form\FormateurType;
+
+use Doctrine\ORM\EntityManagerInterface;
 
 class LanController extends AbstractController
 {
@@ -19,12 +32,182 @@ class LanController extends AbstractController
         ]);
     }
 
-    public function inscriptionEleve(): Response
+    public function inscriptionEleve(Request $request): Response
     {
-        return $this->render('lan/inscriptionEleve.html.twig', [
-            'controller_name' => 'LanController',
-        ]);
+        $contact = new User();
+        $form = $this->createForm(InscriptionAppType::class, $contact);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            //enregistrer le mail 
+            $mail = $contact->getEmail();
+            $mail = strip_tags($mail);
+            $contact->setEmail($mail);
+
+            //enregistrer le mail 
+            $pw = $contact->getPassword();
+            $pw = strip_tags($pw);
+            $contact->setPassword($pw);
+
+            //enregistrer le prenom 
+            $prenom = $contact->getPrenom();
+            $prenom = strip_tags($prenom);
+            $contact->setPrenom($prenom);
+
+            //enregistrer le date naissance 
+            $date_naissance = $contact->getDateNaissance();
+            $contact->setDateNaissance($date_naissance);
+
+            //enregistrer le date adress 
+            $adress = $contact->getAdresse();
+            $adress = strip_tags($adress);
+            $contact->setAdresse($adress);
+
+            //enregistrer le date tel 
+            $tel = $contact->getTelephone();
+            $tel = strip_tags($tel);
+            $contact->setTelephone($tel);
+
+            //enregistrer nom
+            $nom = $contact->getNom();
+            $nom = strip_tags($nom);
+            $contact->setNom($nom);
+
+            $doctrine = $this->getDoctrine();
+            $entityManager = $doctrine->getManager();
+
+            $entityManager->persist($contact);
+            $entityManager->flush();
+            return $this->redirect($this->generateUrl('login'));
+        }
+        return $this->render(
+            'lan/inscriptionEleve.html.twig',
+            [
+                'form' => $form->createView()
+            ]
+        );
     }
+
+    public function inscriptionEntreprise(Request $request): Response
+    {
+        $contact = new User();
+        $form = $this->createForm(InscriptionEntrepriseType::class, $contact);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            //enregistrer le mail 
+            $mail = $contact->getEmail();
+            $mail = strip_tags($mail);
+            $contact->setEmail($mail);
+
+            //enregistrer le pw 
+            $pw = $contact->getPassword();
+            $pw = strip_tags($pw);
+            $contact->setPassword($pw);
+
+            //enregistrer le adress 
+            $adress = $contact->getAdresse();
+            $adress = strip_tags($adress);
+            $contact->setAdresse($adress);
+
+            //enregistrer le adress 
+            $tel = $contact->getTelephone();
+            $tel = strip_tags($tel);
+            $contact->setTelephone($tel);
+
+            //enregistrer le adress 
+            $siret = $contact->getSiret();
+            $siret = strip_tags($siret);
+            $contact->setSiret($siret);
+
+            //enregistrer contact
+            $nom = $contact->getNom();
+            $nom = strip_tags($nom);
+            $contact->setNom($nom);
+
+            //enregistrer le date naissance 
+            $date_naissance = $contact->getDateNaissance();
+            $contact->setDateNaissance($date_naissance);
+
+            $doctrine = $this->getDoctrine();
+            $entityManager = $doctrine->getManager();
+
+            $entityManager->persist($contact);
+            $entityManager->flush();
+            return $this->redirect($this->generateUrl('login'));
+         }
+        return $this->render(
+            'lan/inscriptionEntreprise.html.twig',
+            [
+                'form' => $form->createView()
+            ]
+        );
+    }
+
+    public function inscriptionFormateur(Request $request, EntityManagerInterface $manager)
+    {
+        $contact = new User();
+        $form = $this->createForm(FormateurType::class, $contact);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            //enregistrer le mail 
+            $mail = $contact->getEmail();
+            $mail = strip_tags($mail);
+            $contact->setEmail($mail);
+
+            //enregistrer le pw 
+            $pw = $contact->getPassword();
+            $pw = strip_tags($pw);
+            $contact->setPassword($pw);
+
+            //enregistrer le adress 
+            $adress = $contact->getAdresse();
+            $adress = strip_tags($adress);
+            $contact->setAdresse($adress);
+
+            //enregistrer le adress 
+            $tel = $contact->getTelephone();
+            $tel = strip_tags($tel);
+            $contact->setTelephone($tel);
+
+            //enregistrer le adress 
+            $siret = $contact->getSiret();
+            $siret = strip_tags($siret);
+            $contact->setSiret($siret);
+
+            //enregistrer contact
+            $nom = $contact->getNom();
+            $nom = strip_tags($nom);
+            $contact->setNom($nom);
+
+            //enregistrer prenom
+            $prenom = $contact->getPrenom();
+            $prenom = strip_tags($prenom);
+            $contact->setPrenom($prenom);
+
+            //enregistrer session
+            $session = $contact->getSession();
+            $session = strip_tags($session);
+            $contact->setSession($session);
+
+            //enregistrer diplome
+            $diplome = $contact->getDiplome();
+            $diplome = strip_tags($diplome);
+            $contact->setDiplome($diplome);
+
+            $doctrine = $this->getDoctrine();
+            $entityManager = $doctrine->getManager();
+
+            $entityManager->persist($contact);
+            $entityManager->flush();
+            return new Response("formulaire OK $mail ");
+        }
+        return $this->render(
+            'lan/inscriptionFormateurs.html.twig',
+            [
+                'form' => $form->createView()
+            ]
+        );
+    }
+
     public function login(): Response
     {
         return $this->render('lan/login.html.twig', [
@@ -96,12 +279,12 @@ public function registerStudent(): Response
         ]);
     }
 
-public function suiviCompetences(): Response
-{
-    return $this->render('lan/suiviCompetences.html.twig', [
-        'controller_name' => 'LanController',
-    ]);
-}
+    public function suiviCompetences(): Response
+    {
+        return $this->render('lan/suiviCompetences.html.twig', [
+            'controller_name' => 'LanController',
+        ]);
+    }
 
     public function getSkillToBe(): Response
     {
@@ -130,5 +313,27 @@ public function suiviCompetences(): Response
         return $this->render('lan/test.html.twig', [
             'controller_name' => 'LanController',
         ]);
+    }
+
+
+    public function session(Request $request): Response
+    {
+        $session =new Session();
+
+        $form = $this->createForm(SessionType::class,$session);
+         $form->handleRequest($request);
+         if($form->isSubmitted()&& $form->isValid())
+         {
+            $doctrine =$this->getDoctrine();
+            $em =$doctrine->getManager();
+            $em ->persist($session);
+            $em->flush();
+         }
+
+        return $this->render('lan/session.html.twig', [
+            'formulaire' => $form->createView(),
+        ]);
+
+   
     }
 }
