@@ -9,11 +9,11 @@ login:
 
                                 
 dashBoardStudent:
-    path: /dashBoardStudent
+    path: app/dashBoardStudent
     controller: App\Controller\LanController::dashBoardStudent
 
 dashBoardSchool:
-    path: /dashBoardSchool
+    path: of/dashBoardSchool
     controller: App\Controller\LanController::dashBoardSchool
 
 files:
@@ -57,7 +57,7 @@ test:
     controller: App\Controller\LanController::test
 
 dashBoardEntrprise:
-    path: /dashBoardEntrprise
+    path: ent/dashBoardEntrprise
     controller: App\Controller\LanController::dashBoardEntrprise
 
 upload: 
