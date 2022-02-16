@@ -8,9 +8,7 @@
 
 {% block body %}
 	<div class="container-fluid bg-workSpace">
-		<div class="row">
 			<!-- MAIN CARDS-->
-			<div class="col-12">
 				<div class="row">
 					{% for message in app.flashes('message') %}
 						<div class="alert alert-success">
@@ -20,10 +18,10 @@
 				</div>
 				<div class="row bg-bar">
 					<div class="col-12">
-							<h2>Documents</h2>
+						<h2>Documents</h2>
 					</div>
-				</div>
-				<div class="row">
+				</div>				
+				<div class="row bg">
 					<div class="col-12">
 						<a href="{{ path( 'upload') }}">
 							<button class="btn btn-success my-2">+ Ajouter un document</button>
@@ -39,21 +37,23 @@
 									<th class="txt-bar bg-bar">Nom du document</th>
 									<th class="txt-bar bg-bar">Session</th>
 									<th class="txt-bar bg-bar">Destinataires</th>
-									<th class="txt-bar bg-bar">Format document</th>
+									<th class="txt-bar bg-bar">Action</th>
 								</tr>
 							</thead>
 							<tbody>
 								{% for document in listUp %}
 									<tr>
-										<td class="txt-normal">10/02/2022</td>
-										<td class="txt-normal">{{document.titre}}</td>
+										<td>{{document.dateCreate|date("d/m/y")}}</td>
+										<td>{{document.titre}}</td>
 										<td class="txt-normal">Alternance 1er Année</td>
 										<td class="txt-normal">Tous</td>
-										<td class="txt-normal">
+										<td>
 											<a href="{{ path( 'download',{'id':document.id} ) }}">
-													<button class="btn btn-success">
-													<i class="fas fa-file-pdf" style="font-size:20px;color:red;"></i>
-													Telechargement</button>
+													<i class="fas fa-solid fa-download" style="font-size:20px;color:green;"></i>
+											</a>
+											
+											<a href="{{ path( 'deletedocument',{'id':document.id} ) }}">
+													<div style="font-size:20px;color:red; display:inline ;">&nbspX</div>
 											</a>
 										</td>
 									</tr>

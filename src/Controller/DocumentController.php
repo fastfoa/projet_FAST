@@ -131,15 +131,14 @@ class DocumentController extends AbstractController
         return $r;
     }
    
-    public function delete(Document $document, Request $request, EntityManagerInterface $om)
+    public function deletedocument(Document $document )
     {
-        if($this->isCsrfTokenValid("SUP".$document->getId(), $request->get("_token"))){
+            $doctrine = $this->getDoctrine();
+            $om = $doctrine->getManager();
             $om->remove($document);
             $om->flush();
             $this->addFlash('message', "Document supprimé");
             return $this->redirectToRoute("downloadlist");
-        }
     }
-
-    
+  
 }

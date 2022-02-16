@@ -72,9 +72,9 @@ download:
     path: /download/{id}
     controller: App\Controller\DocumentController::download
 
-delete:
-    path: /delete/{id}
-    controller: App\Controller\DocumentController::delete
+deletedocument:
+    path: /deletedocument/{id}
+    controller: App\Controller\DocumentController::deletedocument
 
 stageForm:
     path: /stageForm
