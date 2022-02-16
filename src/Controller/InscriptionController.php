@@ -132,9 +132,19 @@ class InscriptionController extends AbstractController
 
             return $this->redirect($this->generateUrl('login'));
         }
-
+        // $menu = [
+        //     ["route"=>"inscriptionMA","label"=>"inscription"],
+        //     ["route"=>"dashBoardEntrprise","label"=>"dashBoardEntrprise"],
+        //     ["route"=>"followTraining","label"=>"Suivi alternance"],
+        //     ["route"=>"getSkillToBe","label"=>"Suivi alternance"],
+        //     ["route"=>"followCompany","label"=>"Suivi alternance"],
+        //     ["route"=>"suiviCompetences","label"=>"suivi Competences"],
+        //     ["route"=>"followTraining","label"=>"suivi Competences"],
+        //     ["route"=>"downloadlist","label"=>"Documents"],
+        //     ];
         return $this->render( 'inscription/inscriptionMA.html.twig', [
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            // 'menu' => $menu
         ]);
     }
 
@@ -322,10 +332,10 @@ class InscriptionController extends AbstractController
         $form = $this->createForm(InscriptionApprentiType::class, $contact);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-             //enregistrer le nom 
-             $nom = $contact->getNom();
-             $nom = strip_tags($nom);
-             $contact->setNom($nom);
+            //enregistrer le nom 
+            $nom = $contact->getNom();
+            $nom = strip_tags($nom);
+            $contact->setNom($nom);
 
             //enregistrer le prenom 
             $prenom = $contact->getPrenom();
