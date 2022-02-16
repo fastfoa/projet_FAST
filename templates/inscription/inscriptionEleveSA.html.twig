@@ -1,0 +1,47 @@
+{% extends 'lan/base.html.twig' %}
+
+{% block myStylesheets %}
+	
+	<style>
+		h3{
+			text-align:center;
+		}
+		input{
+			display: block;
+			position: relative;
+			margin-left: auto;
+			margin-right: auto;
+			margin-top: 5px;
+			width: 300px;
+			height: 30px;
+		}
+		.btnTest{
+			margin-top: 100px;
+			text-align: center;
+		}
+		
+	</style>
+{% endblock %}
+
+{% block body %}
+{{form_start(form)}}
+	<h3>Inscription Éléve</h3>
+	<div class="row">
+		<div class="col-6">
+			{{form_widget(form.prenom)}}
+			{{form_widget(form.email)}}
+			{{form_widget(form.adresse)}}
+			{{form_widget(form.telephone)}}
+		</div>
+		<div class="col-6">
+			{{form_widget(form.nom)}}
+			{{form_widget(form.password)}}
+			{{form_widget(form.dateNaissance)}}
+			
+		</div>
+		<div class="col-12 btnTest">
+			{{form_widget(form.inscrire)}}
+		</div>
+	</div>
+{{form_end(form)}}
+{% endblock %}

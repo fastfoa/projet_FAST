@@ -3,17 +3,9 @@
 #    controller: App\Controller\DefaultController::index
 
 
-inscriptionEleve:
-    path: /inscriptionEleve
-    controller: App\Controller\LanController::inscriptionEleve
-
 login:
     path: /login
     controller: App\Controller\LanController::login
-
-#registerStudent:
-#    path: /registerStudent
-#    controller: App\Controller\LanController::registerStudent
 
                                 
 dashBoardStudent:
@@ -67,8 +59,6 @@ test:
 dashBoardEntrprise:
     path: /dashBoardEntrprise
     controller: App\Controller\LanController::dashBoardEntrprise
-                                    
-
 
 upload: 
     path: /upload
@@ -82,8 +72,42 @@ download:
     path: /download/{id}
     controller: App\Controller\DocumentController::download
 
-delete:
-    path: /delete/{id}
-    controller: App\Controller\DocumentController::delete
+deletedocument:
+    path: /deletedocument/{id}
+    controller: App\Controller\DocumentController::deletedocument
 
+stageForm:
+    path: /stageForm
+    controller: App\Controller\StageFormController::stageForm
+
+session:
+    path: /session
+    controller: App\Controller\LanController::session
+
+formations:
+    path: /formations
+    controller: App\Controller\LanController::formations
+
+
+## App\Controller\InscriptionController
+
+inscriptionEntreprise:
+    path: /inscriptionEntreprise
+    controller: App\Controller\InscriptionController::inscriptionEntreprise
+
+inscriptionApprenti:
+    path: /inscriptionApprenti
+    controller: App\Controller\InscriptionController::inscriptionApprenti
+
+inscriptionMA:
+    path: /inscriptionMA
+    controller: App\Controller\InscriptionController::inscriptionMA
+
+inscriptionFormateur:
+    path: /inscriptionFormateur
+    controller: App\Controller\InscriptionController::inscriptionFormateur
+
+inscriptionEleve:
+    path: /inscriptionEleve
+    controller: App\Controller\InscriptionController::inscriptionEleve
     

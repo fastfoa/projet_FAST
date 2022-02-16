@@ -10,44 +10,61 @@
 
 
 {% block body %}
-<div>
-
-<h2 class="mx-auto col-12">Upload Document</h2>
-
-
+<div class="container bg-workSpace fit50 pb-2">
+    <div class="row bg-bar">
+        <h2 class="col-12 ">Upload Document</h2>
+    </div>
             {{ form_start(myForm) }}
-                <div class="input-field col s12 m6 l6">
-                   
-                    {{ form_widget(myForm.titre,      {'attr':       {'placeholder': 'Titre'}}) }}
+    <div class="row align-middle">           
+                <div class="input-field col-6 my-auto">
+                     {{ form_widget(myForm.titre, {'attr': {'placeholder': 'Titre'}}) }}
                 </div>
-                <hr>
-                <div class="input-field col s12 m6 l6">
-                   
-                    {{ form_widget(myForm.fileName, {'attr': {'placeholder': 'message'}}) }}
+                <div class="input-field col-6 my-auto">
+                     {{ form_widget(myForm.fileName, {'attr': {'placeholder': 'message'}}) }}
                 </div>
-                <hr>
-
-
-                <div class="form-group mx-auto col-12">
-                    <div id="campaign_channel" class="col-xs-6 mx-auto col-12">
-                        <input id="campaign_channel_1" type="checkbox" value="1" name="campaign[channel][]">
-                        <label for="campaign_channel_1">Apprentis</label>
-                        <input id="campaign_channel_2" type="checkbox" value="2" name="campaign[channel][]">
-                        <label for="campaign_channel_2">Maitre de stage</label>
-                        <input id="campaign_channel_3" type="checkbox" value="3" name="campaign[channel][]">
-                        <label for="campaign_channel_3">Formateur</label>
-                        <input id="campaign_channel_4" type="checkbox" value="4" name="campaign[channel][]">
-                        <label for="campaign_channel_4">Organisme de formation</label>
+    </div>
+    <div class="row mx-auto"> 
+        <div class="col-12 text-justify mx-5">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="1" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault">
+                            Apprentis
+                        </label>
                     </div>
-                </div>
-                <hr>
-                <div class="jp_label mx-auto col-12">
-                    <button class="boutonForm" type="submit" >Uploader</button>
-                </div>
-            {{ form_end(myForm) }}
-                
-                <div class="jp_label mx-auto my-2 col-12">
-                    <a href="{{ path( 'downloadlist') }}"><button class="btn btn-danger" target="_blank" alt="Retour"  >Retour</button></a>
+                    
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="2" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckChecked">
+                            Maitre de stage
+                        </label>
+                    </div>
+             
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="3" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault">
+                            Formateur
+                        </label>
+                    </div>
+                    
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="4" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckChecked">
+                            Organisme de formation
+                        </label>
+                    </div>
+                    <br>
+        </div>       
+    </div>  
+    <div class="row mb-2">
+                <div class="mx-auto col-6">
+                    <a href="{{ path( 'downloadlist') }}"><div class="btn btn-danger"  alt="Retour"  >Retour</div></a>
                  </div>
+                <div class="mx-auto col-6">
+                    <button class="btn btn-success" type="submit" >Uploader</button>
+                </div>
+        </div>
+    </div> 
+        {{ form_end(myForm) }}
 </div>
+   
 {% endblock %}

@@ -30,8 +30,6 @@ class DocumentController extends AbstractController
         ]);
     }
 
-
-
     public function upload(Request $request, SluggerInterface $slugger): Response
     {
         $up = new Document();
@@ -130,21 +128,17 @@ class DocumentController extends AbstractController
                         );
 
         $r->headers->set('Content-Disposition', $d);
-
         return $r;
     }
-
    
-    public function delete(Document $document, Request $request, EntityManagerInterface $om)
+    public function deletedocument(Document $document )
     {
-        if($this->isCsrfTokenValid("SUP".$document->getId(), $request->get("_token"))){
+            $doctrine = $this->getDoctrine();
+            $om = $doctrine->getManager();
             $om->remove($document);
             $om->flush();
             $this->addFlash('message', "Document supprimé");
             return $this->redirectToRoute("downloadlist");
-        }
     }
-
-    
+  
 }
-
