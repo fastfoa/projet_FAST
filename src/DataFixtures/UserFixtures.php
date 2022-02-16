@@ -15,7 +15,7 @@ class UserFixtures extends Fixture
         $user = new User();
         $user->setEmail("toto@titi.fr");
         $user->setRoles(["ROLE_APP"]);
-        $user->setPassword("0123");
+        $user->setPassword('$2y$13$Td/hy38QDVNeXhaQIz.jZOU23o0HVOe8LDLuYAK9aXQDYeNLff5aO'); // 0123
         $user->setNom("Titi");
         $user->setPrenom("Toto");
         $user->setAdresse("45 rue du champ");
@@ -42,7 +42,7 @@ class UserFixtures extends Fixture
         $user = new User();
         $user->setEmail("my@entreprise.fr");
         $user->setRoles(["ROLE_ENT"]);
-        $user->setPassword("0123");
+        $user->setPassword('$2y$13$Td/hy38QDVNeXhaQIz.jZOU23o0HVOe8LDLuYAK9aXQDYeNLff5aO'); // 0123
         $user->setNom("Google");
         $user->setAdresse("45 rue du javascript");
         $user->setTelephone("0728756614");
@@ -58,7 +58,7 @@ class UserFixtures extends Fixture
         $user = new User();
         $user->setEmail("the@maitre.fr");
         $user->setRoles(["ROLE_MA"]);
-        $user->setPassword("0000");
+        $user->setPassword('$2y$13$kvy/WURxT98Px/cM60DXZuIwGCH0gxDoD1OPA2xDSgPaowxzbnq96'); // 0000
         $user->setNom("Iam");
         $user->setPrenom("Zorro");
         $user->setAdresse("197 rue symfony");
@@ -70,7 +70,7 @@ class UserFixtures extends Fixture
         $user = new User();
         $user->setEmail("xavier@gmail.fr");
         $user->setRoles(["ROLE_FORMATEUR"]);
-        $user->setPassword("456");
+        $user->setPassword('$2y$13$pmUyYAeOOJqhq2lBadhRpOM4BmIV8ttyZURModBZ26za4WEimKS4i'); // 456
         $user->setNom("Bourget");
         $user->setPrenom("Xavier");
         $user->setAdresse("12 rue de la frite");
@@ -84,13 +84,20 @@ class UserFixtures extends Fixture
         $user = new User();
         $user->setEmail("foreach@academy.fr");
         $user->setRoles(["ROLE_OF"]);
-        $user->setPassword("789");
+        $user->setPassword('$2y$13$psh41BRs9DM2NbQbmswERufwjiWzX8WNqjGvIFgqGimHTNunlGSHm'); // 789
         $user->setNom("Foreach Academy");
         $user->setAdresse("393 Rue du général de Gaulle");
         $user->setTelephone("0342215457");
         $user->setCFA(true);
         $user->setDenominationCFAResponsable("foreachacademy - symbolit");
         $user->setNumeroUAICFA("dgjd66sd");
+        $manager->persist($user);
+
+        // Fixture Admin
+        $user = new User();
+        $user->setEmail("super@admin.fr");
+        $user->setRoles(["ROLE_ADMIN"]);
+        $user->setPassword('$2y$13$psh41BRs9DM2NbQbmswERufwjiWzX8WNqjGvIFgqGimHTNunlGSHm'); // 789
         $manager->persist($user);
 
         $manager->flush();
