@@ -48,6 +48,7 @@ class AppAuthenticator extends AbstractLoginFormAuthenticator
         if ($targetPath = $this->getTargetPath($request->getSession(), $firewallName)) {
             return new RedirectResponse($targetPath);
         }
+
         return new RedirectResponse($this->urlGenerator->generate('test'));
         // For example:
         //return new RedirectResponse($this->urlGenerator->generate('some_route'));
