@@ -21,7 +21,7 @@
     </div>
     <form method="post">
         {% if error %}
-            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+            <div class="alert alert-danger">Email ou mot de passe incorrect{#{ error.messageKey|trans(error.messageData, 'security') }#}</div>
         {% endif %}
 
         {% if app.user %}
@@ -32,15 +32,13 @@
 
         <h1 class="h3 mb-3 font-weight-normal">Connectez-vous</h1>
         <input type="email" placeholder='Entrez votre adresse mail' value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
-        <br>
-        <input type="password" placeholder='Entrez votre mot de passe' name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+        <input type="password" placeholder='Entrez votre mot de passe' name="password" id="inputPassword" class="form-control mt-2" autocomplete="current-password" required>
 
         <input type="hidden" name="_csrf_token"
             value="{{ csrf_token('authenticate') }}"
         >
-<br>
-        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-        <label class="form-check-label" for="flexCheckDefault">
+        <input class="form-check-input mt-3" type="checkbox" value="" id="flexCheckDefault">
+        <label class="form-check-label my-2" for="flexCheckDefault">
             Se souvenir de moi
         </label>
 
@@ -54,8 +52,8 @@
             </label>
         </div>
     #}
-<br><br>
-        <button class="boutonForm" type="submit">
+        <br>
+        <button class="boutonForm mb-2" type="submit">
             Se connecter
         </button>
         <br>
