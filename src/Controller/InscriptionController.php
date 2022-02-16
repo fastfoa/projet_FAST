@@ -473,11 +473,19 @@ class InscriptionController extends AbstractController
             $entityManager->flush();
             return $this->redirect($this->generateUrl('login'));
         }
+
+        $menu = [
+
+            [ 'label' => 'Session',
+               'route' => 'session'
+            ]
+        ];
         return $this->render(
             'inscription/addUser.html.twig',
             [
                 'form' => $form->createView(),
-                'titre' => $roleName
+                'titre' => $roleName,
+                'menu' => $menu
             ]
         );
     }
