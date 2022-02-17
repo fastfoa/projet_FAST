@@ -84,6 +84,18 @@ formations:
     path: /formations
     controller: App\Controller\LanController::formations
 
+documents:
+    path: /documents
+    controller: App\Controller\LanController::documents
+
+aide:
+    path: /aide
+    controller: App\Controller\LanController::aide
+
+monCompte:
+    path: /monCompte
+    controller: App\Controller\LanController::monCompte
+
 
 ## App\Controller\InscriptionController
 
@@ -108,8 +120,12 @@ inscriptionEleve:
     controller: App\Controller\InscriptionController::inscriptionEleve
     
 addUser:
-    path: /addUser/{role}
+    path: /addUser/{role}/{roleName}
     controller: App\Controller\InscriptionController::addUser
+
+addUserSession:
+    path: /addUserSession/{session}/{role}/{roleName}
+    controller: App\Controller\InscriptionController::addUserSession
     
 ## App\Controller\DashController
 
@@ -129,15 +145,44 @@ dashOFSession:
     path: /dashOFSession/{session}
     controller: App\Controller\DashController::dashOFSession
 
-formApprenti:
-    path: /formApprenti/{user}
-    controller: App\Controller\DashController::formApprenti
+editApprenti:
+    path: /feditApprenti/{userID}
+    controller: App\Controller\DashController::editApprenti
 
-listApprenti:
-    path: /listApprenti
-    controller: App\Controller\DashController::listApprenti
+editUser:
+    path: /editUser/{userID}
+    controller: App\Controller\DashController::editUser
 
-addApprenti:
-    path: /listApprenti
-    controller: App\Controller\InscriptionController::addUser
-    
+listApprentis:
+    path: /listApprentis/{session}
+    controller: App\Controller\DashController::listApprentis
+
+listUsersSession:
+    path: /listUsersSession/{session}/{role}/{roleName}
+    controller: App\Controller\DashController::listUsersSession
+
+listFormateurs:
+    path: /listFormateurs/{session}
+    controller: App\Controller\DashController::listFormateurs
+
+listMA:
+    path: /listMA/{session}
+    controller: App\Controller\DashController::listMA
+   
+
+
+listAllAprentis: 
+    path: /listAllAprentis
+    controller: App\Controller\DashController::listAllAprentis
+
+listAllFormateurs: 
+    path: /listAllFormateurs
+    controller: App\Controller\DashController::listAllFormateurs
+
+listAllEntreprises: 
+    path: /listAllEntreprises
+    controller: App\Controller\DashController::listAllEntreprises
+
+listAllMA: 
+    path: /listAllMA
+    controller: App\Controller\DashController::listAllMA

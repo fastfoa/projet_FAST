@@ -4,7 +4,7 @@
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 {% endblock %}
 
-{% block title %}Liste des apprentis{% endblock %}
+{% block title %}Liste des {{ roleName }}s {% endblock %}
 
 {% block body %}
 	<div class="container-fluid bg-workSpace">
@@ -13,13 +13,13 @@
 				</div>
 				<div class="row bg-bar">
 					<div class="col-12">
-						<h2>Liste Apprentis</h2>
+						<h2>Liste {{ roleName }}s</h2>
 					</div>
 				</div>				
 				<div class="row bg">
 					<div class="col-12">
-						<a href="{{ path( 'addUser', {'role':1}) }}">
-							<button class="btn btn-success my-2">+ Ajouter un apprenti</button>
+						<a href="{{ path( 'addUserSession', {'session':session.id, 'role':role, 'roleName':roleName }) }}">
+							<button class="btn btn-success my-2">+ Ajouter un {{ roleName }}</button>
 						</a>
 					</div>
 				</div>
@@ -27,8 +27,8 @@
 					<div class="col-12">
 						<table class="table-normal">
 							<thead>
-								<tr>
-									<th class="txt-bar bg-bar">Prenom</th>
+								<tr class="txt-bar bg-bar">
+									<th>Prenom</th>
 									<th class="txt-bar bg-bar">nom</th>
 									<th class="txt-bar bg-bar">Tél</th>
 									<th class="txt-bar bg-bar">Mail</th>
@@ -41,19 +41,13 @@
 										<td>{{item.prenom}}</td>
 										<td>{{item.nom}}</td>
 										<td>{{item.telephone}}</td>
-										<td>{{item.mail}}</td>
+										<td>{{item.email}}</td>
 										{#<td>{{session.formation}}</td>#}
 										<td>								
-											<a href="{{ path( 'formApprenti',{'session':item.id} ) }}">
+											<a href="{{ path( 'editUser',{'userID':item.id} ) }}">
 													<i class="fas fa-solid fa-download" style="font-size:20px;color:green;"></i>
 											</a>
                                         </td>
-                                        {#
-											<a href="{{ path( 'deleteSession',{'session':session.id} ) }}">
-													<div style="font-size:20px;color:red; display:inline ;">&nbspX</div>
-											</a>
-										</td>
-                                        #}
 									</tr>
 								{% endfor %}
 							</tbody>

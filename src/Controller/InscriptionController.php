@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 use App\Form\InscriptionEntrepriseType;
 use App\Form\InscriptioFormateurType;
 use App\Entity\User;
+use App\Entity\Session;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Form\AddUserType;
 use App\Form\InscriptionAppType;
@@ -442,54 +443,55 @@ class InscriptionController extends AbstractController
     }
 
 
-    public function addUser(Request $request,$role ): Response
+    public function addUserRaw(Request $request, $role, $roleName ) 
     {
         $user = new User();
 
-        $roleMode = '';
-        $roleName = "";
 
-        if ( $role == 1 )
-        {
-            $roleMode = ['ROLE_APP'];
-            $roleName = "Apprenti";
-        } 
-        elseif ( $role == 2 )
-        {
-            $roleMode = ['ROLE_MA'];
-            $roleName = "Maitre d'aprentissage";
-        } 
-
-        $user->setRoles( $roleMode );
         $form = $this->createForm(AddUserType::class, $user);
         $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) 
+        {
+            $user->setRoles( [$role] );
 
             $doctrine = $this->getDoctrine();
             $entityManager = $doctrine->getManager();
 
-
             $entityManager->persist($user);
             $entityManager->flush();
-            return $this->redirect($this->generateUrl('login'));
+            return $user->getId();
         }
-
-        $menu = [
-
-            [ 'label' => 'Session',
-               'route' => 'session'
-            ]
-        ];
         return $this->render(
             'inscription/addUser.html.twig',
             [
                 'form' => $form->createView(),
-                'titre' => $roleName,
-                'menu' => $menu
+                'roleName' => $roleName,
             ]
         );
     }
 
+    public function addUser(Request $request, $role, $roleName ): Response
+    {
+        $userID = $this->addUserRaw($request, $role, $roleName );
+        if ( is_int($userID) )
+        {
+            return $this->redirect($this->generateUrl('login'));
+        }
+        return $this->addUserRaw($request,  $role, $roleName );
+    }
+
+    public function addUserSession(Request $request, Session $session, $role, $roleName): Response
+    {
+        $userID = $this->addUserRaw($request, $role, $roleName );
+        if ( is_int($userID) )
+        {
+            // add à la session
+            // add
+            return $this->redirect($this->generateUrl('listUsersSession', array('session' => $session->getID(), 'role' => $role, 'roleName' => $roleName )));
+
+        }
+        return $userID;
+    }
 
 
 }

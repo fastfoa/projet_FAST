@@ -72,6 +72,8 @@ h1, h2, h3, h4, h5, h6
     top: -60px;
 }
 
+
+
 .logo-top 
 {
     width: 150px;
@@ -144,16 +146,6 @@ h1, h2, h3, h4, h5, h6
      padding: 3%;
  }
  
- .inputx{
-    display: block;
-    position: relative;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 5px;
-    width: 300px;
-    height: 30px;
-}
-
  
 input[type=text], input[type=password], input[type=date], select
 {

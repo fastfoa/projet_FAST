@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Controller\InscriptionController;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -29,12 +30,20 @@ class DashController extends AbstractController
     {
         $doctrine = $this->getDoctrine();
         $listSession = $doctrine->getRepository(Session::class)->findAll();
-       
 
+        $menu = 
+        [
+            'Sessions' => 'dashOFPrincipal', 
+            'Apprentis' => 'listAllAprentis', 
+            'Formateurs' => 'listAllFormateurs', 
+            'Maitres' => 'listAllMA', 
+            'Entreprises' => 'listAllEntreprises' 
+        ];
         return $this->render(
         'dash/dashOFPrincipal.html.twig', 
         [
-            'listSession' => $listSession
+            'listSession' => $listSession,
+            'menu' => $menu
         ]);    
     }
 
@@ -52,13 +61,18 @@ class DashController extends AbstractController
             $em->flush();
             return $this->redirectToRoute("dashOFPrincipal");         }
 
-        $menu = 
-        [
-            "sessions" => 'dashOFPrincipal',
-
-        ];
-        return $this->render('dash/addSession.html.twig', [
+            $menu = 
+            [
+                'Sessions' => 'dashOFPrincipal', 
+                'Apprentis' => 'listAllAprentis', 
+                'Formateurs' => 'listAllFormateurs', 
+                'Maitres' => 'listAllMA', 
+                'Entreprises' => 'listAllEntreprises' 
+            ];
+            return $this->render('dash/addSession.html.twig', [
             'form' => $form->createView(),
+            'menu' => $menu
+
         ]);
     }
    public function deleteSession(Session $session )
@@ -72,26 +86,106 @@ class DashController extends AbstractController
                                            
     public function dashOFSession(Session $session ): Response
     {
-       
+        $menu = 
+        [
+            'Sessions' => 'dashOFPrincipal', 
+            'Apprentis' => 'listAllAprentis', 
+            'Formateurs' => 'listAllFormateurs', 
+            'Maitres' => 'listAllMA', 
+            'Entreprises' => 'listAllEntreprises' 
+        ];
         return $this->render(
         'dash/dashOFSession.html.twig', 
         [
-            'session' => $session
+            'session' => $session,
+            'menu' => $menu
         ]);    
     }
 
-    public function listApprenti(): Response
+    public function listUsersSession(Session $session, $role, $roleName): Response
     {
         $doctrine = $this->getDoctrine();
         $list = $doctrine->getRepository(User::class)->findAll();
-       
+    
+        $menu = 
+        [
+            'Sessions' => 'dashOFPrincipal', 
+            'Apprentis' => 'listAllAprentis', 
+            'Formateurs' => 'listAllFormateurs', 
+            'Maitres' => 'listAllMA', 
+            'Entreprises' => 'listAllEntreprises' 
+        ];
 
         return $this->render(
-        'dash/listApprenti.html.twig', 
+        'dash/listUsersSession.html.twig', 
         [
-            'list' => $list
+            'list' => $list,
+            'session' => $session,
+            'menu' => $menu,
+            'roleName' => $roleName,
+            'role' => $role
         ]);    
     }
 
+    public function listApprentis(Session $session): Response
+    {
+        return $this->listUsersSession($session, 'ROLE_APP', 'Apprenti');
+    }
+
+    public function listFormateurs(Session $session): Response
+    {
+        return $this->listUsersSession($session, 'ROLE_FORMATEUR', 'Formateur');
+    }
+
+    public function listMA(Session $session): Response
+    {
+        return $this->listUsersSession($session, 'ROLE_MA', "Maitre d'apprentissage");
+    }
+
+  
+    public function listAll( $role,  $roleName ): Response
+    {
+        $doctrine = $this->getDoctrine();
+        $list = $doctrine->getRepository(User::class)->findAll();
+    
+        //return new Response( "toto");
+        $menu = 
+        [
+            'Sessions' => 'dashOFPrincipal', 
+            'Apprentis' => 'listAllAprentis', 
+            'Formateurs' => 'listAllFormateurs', 
+            'Maitres' => 'listAllMA', 
+            'Entreprises' => 'listAllEntreprises' 
+        ];
+
+        return $this->render(
+        'dash/listUser.html.twig', 
+        [
+            'list' => $list,
+            'menu' => $menu,
+            'role' => $role,
+            'roleName' => $roleName
+        ]);    
+    }
+    
+    public function listAllAprentis(): Response
+    {
+        return $this->listAll( 'MODE_APP', 'Apprenti' );
+    }
+    
+    public function listAllFormateurs(): Response
+    {
+        return $this->listAll( 'MODE_FORMATEUR','Formateur' );
+    }
+    
+    public function listAllEntreprises(): Response
+    {
+        return $this->listAll( 'MODE_ENT','Entreprise' );
+    }
+
+    public function listAllMA(): Response
+    {
+        return $this->listAll( 'MODE_MA', "Maitre d'apprentissage" );
+    }
 
 }
