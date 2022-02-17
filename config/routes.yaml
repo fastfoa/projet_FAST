@@ -110,4 +110,7 @@ inscriptionFormateur:
 inscriptionEleve:
     path: /inscriptionEleve
     controller: App\Controller\InscriptionController::inscriptionEleve
-    
+
+barSession:
+    path: /barSession
+    controller: App\Controller\BarController::barSession
