@@ -88,7 +88,6 @@ documents:
     path: /documents
     controller: App\Controller\LanController::documentOff
 
-
 aide:
     path: /aide
     controller: App\Controller\LanController::aide
