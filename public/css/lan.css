@@ -30,7 +30,7 @@ h1, h2, h3, h4, h5, h6
 }
 
 .nav-item .nav-link:hover  {
-    background-color: #0062cc;
+    background-color: #0062cc!important;
     color: rgb(253, 253, 253)!important;
     opacity: 100!important;
 } 
