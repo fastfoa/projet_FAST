@@ -24,6 +24,22 @@ h1, h2, h3, h4, h5, h6
     margin: 0;
 }
 
+.nav-item .nav-link{
+    color: #0062cc!important;
+    
+}
+
+.nav-item .nav-link:hover  {
+    background-color: #0062cc;
+    color: rgb(253, 253, 253)!important;
+    opacity: 100!important;
+} 
+.active, .btntoto {
+    background-color: #666;
+    color: white;
+  }
+
+
 .bar-top 
 {
     height: 80px;
@@ -292,7 +308,7 @@ label
 
 .cartetoto,
 .activetoto {
-  background-color: #018fa5 !important;
+  background-color: #92ccd4 !important;
 }
 
 .vert {
