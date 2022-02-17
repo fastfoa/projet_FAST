@@ -1,12 +1,12 @@
-<nav class="bar-top navbar navbar-expand-lg navbar-light text-light  ">
+<nav class="bar-top navbar navbar-expand-lg   ">
 	<div class="collapse navbar-collapse" id="navbarSupportedContent ">
 		<div class="logo-top">
 			<img src="{{ asset('images/logo-foreach-blanc.png') }}">
 		</div>
 
 		<ul class="navbar-nav me-auto fith100">
-			<li class="nav-item active">
-				<a class="nav-link text-light menuA" href="{{ path('test')}}">Accueil
+			<li class="nav-item ">
+				<a class="nav-link  " href="{{ path('test')}}">Accueil
 					<span class="sr-only">(current)</span>
 				</a>
 			</li>
@@ -14,18 +14,18 @@
 			{% if menu is defined %}
 				{% for item, route in menu %}
 					<li class="nav-item">
-						<a class="nav-link text-light menuA" href="{{ path(route) }}">{{item}}</a>
+						<a class="nav-link  " href="{{ path(route) }}">{{item}}</a>
 					</li>
 				{% endfor %}
 			{% endif %} 
 			<li class="nav-item">
-				<a class="nav-link text-light menuA" href="{{ path('documents') }}">documents</a>
+				<a class="nav-link  " href="{{ path('documents') }}">documents</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link text-light menuA" href="{{ path('aide') }}">aide</a>
+				<a class="nav-link  " href="{{ path('aide') }}">aide</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link text-light" href="{{ path('monCompte') }}">mon compte</a>
+				<a class="nav-link " href="{{ path('monCompte') }}">mon compte</a>
 			</li>
 		</ul>
 
