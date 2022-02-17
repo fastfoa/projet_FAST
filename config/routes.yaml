@@ -86,7 +86,8 @@ formations:
 
 documents:
     path: /documents
-    controller: App\Controller\LanController::documents
+    controller: App\Controller\LanController::documentOff
+
 
 aide:
     path: /aide
@@ -186,3 +187,4 @@ listAllEntreprises:
 listAllMA: 
     path: /listAllMA
     controller: App\Controller\DashController::listAllMA
+
