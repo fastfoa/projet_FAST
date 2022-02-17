@@ -182,6 +182,11 @@ class LanController extends AbstractController
         ]);
     }
 
-
+    public function aide(): Response
+    {
+        return $this->render('lan/aide.html.twig', [
+            'controller_name' => 'LanController',
+        ]);
+    }
 
 }
