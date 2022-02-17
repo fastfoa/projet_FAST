@@ -1,34 +1,36 @@
 {% extends 'lan/base.html.twig' %}
 
-{% block title %}Aide{% endblock %}
-
-{% block myStylesheets %}
+{% block title %}Aide
 {% endblock %}
 
 
 {% block body %}
+	<div class="container-fluid">
+		<div class="row text-center bg-bar">
+			<h1>Tutoriels d'aide</h1>
+		</div>
 
-<div class="container">
-    <div class="row text-center bg-bar">
-        <h4 class="text-center">Tutoriels d'aide</h4>
-    </div>
+		<div class="row">
+			<div class="col-12 bg-workSpace">
 
-    <div class="bg-workSpace">
-      
-  
-     {# liens vers les pdf des tutoriels des différentes interface utilisateurs  #}
-    <a class="nav-link" href="#">Interface apprenti</span></a>
-    
-    <a class="nav-link" href="#">Interface formateur</span></a>
-    
-    <a class="nav-link" href="#">Interface maitre d'apprentissage</span></a>
-    
-    <a class="nav-link" href="#">Interface organisme de formation</span></a>
 
-    <div class="row text-center">
-       </div>  
-    </div>
-    
-</div>
+				{# liens vers les pdf des tutoriels des différentes interface utilisateurs  #}
+				<a class="nav-link" href="#">
+                    <h2>Interface apprenti</h2>
+                </a>
 
+				<a class="nav-link" href="#">
+                    <h2>Interface formateur</h2>
+                </a>
+
+				<a class="nav-link" href="#">
+                    <h2>Interface maitre d'apprentissage</h2>
+                </a>
+
+				<a class="nav-link" href="#">
+                    <h2>Interface organisme de formation</h2>
+                </a>
+			</div>
+		</div>
+	</div>
 {% endblock %}
