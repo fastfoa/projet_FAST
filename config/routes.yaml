@@ -92,9 +92,7 @@ aide:
     path: /aide
     controller: App\Controller\LanController::aide
 
-monCompte:
-    path: /monCompte
-    controller: App\Controller\LanController::monCompte
+
 
 
 ## App\Controller\InscriptionController
