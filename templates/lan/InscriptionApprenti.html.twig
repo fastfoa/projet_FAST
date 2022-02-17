@@ -1,0 +1,54 @@
+{% extends 'lan/base.html.twig' %}
+
+{% block myStylesheets %}{% endblock %}
+
+{% block body %}
+	<div class="container-fluid">
+		{{form_start(form)}}
+		<h3>Inscription maître de stage</h3>
+		<div class="row">
+			<div class="col-6">
+				{{ form_widget(form.nom) }}
+				{{ form_widget(form.adresse) }}
+				{{ form_widget(form.diplome) }}
+				<br>
+				{{ form_label(form.Genre, 'Date de naissance')}}
+				{{ form_widget(form.Genre) }}
+				<br>
+				{{ form_widget(form.RepresentantLegal1) }}
+				{{ form_widget(form.NIR) }}
+				{{ form_widget(form.CommuneNaissance) }}
+				{{ form_widget(form.RegimeSocial) }}
+				<br>
+				{{ form_label(form.TravailleurHandicape,'Travailleur Handicape') }}
+				{{ form_widget(form.TravailleurHandicape) }}
+				<br>
+				{{ form_widget(form.DernierDiplome) }}
+			</div>
+			<div class="col-6">
+				{{ form_widget(form.prenom) }}
+				{{ form_widget(form.telephone) }}
+				<br>
+				{{ form_label(form.DateNaissance, 'Date de naissance')}}
+				{{ form_widget(form.DateNaissance) }}
+				<br>
+				{{ form_widget(form.ConventionCollective) }}
+				{{ form_widget(form.RepresentantLegal2) }}
+				{{ form_widget(form.DepNaissance) }}
+				{{ form_widget(form.Nationalite) }}
+				<br>
+				{{ form_label(form.SportifHautNiveau,'Sportif De Haut Niveau')}}
+				{{ form_widget(form.SportifHautNiveau) }}
+				<br>
+				{{ form_widget(form.SituationAvantContrat) }}
+				{{ form_widget(form.DiplomePlusHaut) }}
+			</div>
+			<div class="row mx-auto">
+				<div class="col-12">
+					{{ form_widget(form.save) }}
+				</div>
+			</div>
+		</div>
+		{{form_end(form)}}
+	</div>
+{% endblock %}

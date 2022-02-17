@@ -9,11 +9,11 @@ login:
 
                                 
 dashBoardStudent:
-    path: /dashBoardStudent
+    path: app/dashBoardStudent
     controller: App\Controller\LanController::dashBoardStudent
 
 dashBoardSchool:
-    path: /dashBoardSchool
+    path: of/dashBoardSchool
     controller: App\Controller\LanController::dashBoardSchool
 
 files:
@@ -57,7 +57,7 @@ test:
     controller: App\Controller\LanController::test
 
 dashBoardEntrprise:
-    path: /dashBoardEntrprise
+    path: ent/dashBoardEntrprise
     controller: App\Controller\LanController::dashBoardEntrprise
 
 upload: 
@@ -80,13 +80,21 @@ stageForm:
     path: /stageForm
     controller: App\Controller\StageFormController::stageForm
 
-session:
-    path: /session
-    controller: App\Controller\LanController::session
-
 formations:
     path: /formations
     controller: App\Controller\LanController::formations
+
+documents:
+    path: /documents
+    controller: App\Controller\LanController::documents
+
+aide:
+    path: /aide
+    controller: App\Controller\LanController::aide
+
+monCompte:
+    path: /monCompte
+    controller: App\Controller\LanController::monCompte
 
 
 ## App\Controller\InscriptionController
@@ -114,3 +122,73 @@ inscriptionEleve:
 barSession:
     path: /barSession
     controller: App\Controller\BarController::barSession
+    
+addUser:
+    path: /addUser/{role}/{roleName}
+    controller: App\Controller\InscriptionController::addUser
+
+addUserSession:
+    path: /addUserSession/{session}/{role}/{roleName}
+    controller: App\Controller\InscriptionController::addUserSession
+    
+## App\Controller\DashController
+
+dashOFPrincipal:
+    path: /dashOFPrincipal
+    controller: App\Controller\DashController::dashOFPrincipal
+
+addSession:
+    path: /addSession
+    controller: App\Controller\DashController::addSession
+
+deleteSession:
+    path: /deleteSession/{session}
+    controller: App\Controller\DashController::deleteSession
+
+dashOFSession:
+    path: /dashOFSession/{session}
+    controller: App\Controller\DashController::dashOFSession
+
+editApprenti:
+    path: /feditApprenti/{userID}
+    controller: App\Controller\DashController::editApprenti
+
+editUser:
+    path: /editUser/{userID}
+    controller: App\Controller\DashController::editUser
+
+listApprentis:
+    path: /listApprentis/{session}
+    controller: App\Controller\DashController::listApprentis
+
+listUsersSession:
+    path: /listUsersSession/{session}/{role}/{roleName}
+    controller: App\Controller\DashController::listUsersSession
+
+listFormateurs:
+    path: /listFormateurs/{session}
+    controller: App\Controller\DashController::listFormateurs
+
+listMA:
+    path: /listMA/{session}
+    controller: App\Controller\DashController::listMA
+   
+
+
+listAllAprentis: 
+    path: /listAllAprentis
+    controller: App\Controller\DashController::listAllAprentis
+
+listAllFormateurs: 
+    path: /listAllFormateurs
+    controller: App\Controller\DashController::listAllFormateurs
+
+listAllEntreprises: 
+    path: /listAllEntreprises
+    controller: App\Controller\DashController::listAllEntreprises
+
+listAllMA: 
+    path: /listAllMA
+    controller: App\Controller\DashController::listAllMA
+
+

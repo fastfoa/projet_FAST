@@ -9,7 +9,9 @@ use Symfony\Component\HttpFoundation\Request;
 use App\Form\InscriptionEntrepriseType;
 use App\Form\InscriptioFormateurType;
 use App\Entity\User;
+use App\Entity\Session;
 use Doctrine\ORM\EntityManagerInterface;
+use App\Form\AddUserType;
 use App\Form\InscriptionAppType;
 use App\Form\InscriptionApprentiType;
 use App\Form\InscriptionApp2Type;
@@ -132,9 +134,8 @@ class InscriptionController extends AbstractController
 
             return $this->redirect($this->generateUrl('login'));
         }
-
         return $this->render( 'inscription/inscriptionMA.html.twig', [
-            'form' => $form->createView()
+            'form' => $form->createView(),
         ]);
     }
 
@@ -264,7 +265,7 @@ class InscriptionController extends AbstractController
     public function inscriptionEleveAS(Request $request): Response
     {
         $contact = new User();
-        $form = $this->createForm(InscriptionAppType::class, $contact);
+        $form = $this->createForm(InscriptionApprentiType::class, $contact);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             //enregistrer le mail 
@@ -322,10 +323,10 @@ class InscriptionController extends AbstractController
         $form = $this->createForm(InscriptionApprentiType::class, $contact);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-             //enregistrer le nom 
-             $nom = $contact->getNom();
-             $nom = strip_tags($nom);
-             $contact->setNom($nom);
+            //enregistrer le nom 
+            $nom = $contact->getNom();
+            $nom = strip_tags($nom);
+            $contact->setNom($nom);
 
             //enregistrer le prenom 
             $prenom = $contact->getPrenom();
@@ -442,6 +443,55 @@ class InscriptionController extends AbstractController
     }
 
 
+    public function addUserRaw(Request $request, $role, $roleName ) 
+    {
+        $user = new User();
+
+
+        $form = $this->createForm(AddUserType::class, $user);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) 
+        {
+            $user->setRoles( [$role] );
+
+            $doctrine = $this->getDoctrine();
+            $entityManager = $doctrine->getManager();
+
+            $entityManager->persist($user);
+            $entityManager->flush();
+            return $user->getId();
+        }
+        return $this->render(
+            'inscription/addUser.html.twig',
+            [
+                'form' => $form->createView(),
+                'roleName' => $roleName,
+            ]
+        );
+    }
+
+    public function addUser(Request $request, $role, $roleName ): Response
+    {
+        $userID = $this->addUserRaw($request, $role, $roleName );
+        if ( is_int($userID) )
+        {
+            return $this->redirect($this->generateUrl('login'));
+        }
+        return $this->addUserRaw($request,  $role, $roleName );
+    }
+
+    public function addUserSession(Request $request, Session $session, $role, $roleName): Response
+    {
+        $userID = $this->addUserRaw($request, $role, $roleName );
+        if ( is_int($userID) )
+        {
+            // add à la session
+            // add
+            return $this->redirect($this->generateUrl('listUsersSession', array('session' => $session->getID(), 'role' => $role, 'roleName' => $roleName )));
+
+        }
+        return $userID;
+    }
 
 
 }
