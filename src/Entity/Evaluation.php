@@ -18,12 +18,12 @@ class Evaluation
     private $id;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text", nullable=true)
      */
-    private $remarqueMS;
+    private $remarqueMA;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text", nullable=true)
      */
     private $remarqueApp;
 
@@ -38,24 +38,44 @@ class Evaluation
     private $note;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Competences::class)
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\Column(type="integer", nullable=true)
      */
-    private $competence;
+
+     private $competenceID;
+
+     /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $appID;
+ 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $MAID;
+   
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $formateurID;
+    
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $sessionID;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getRemarqueMS(): ?string
+    public function getRemarqueMA(): ?string
     {
-        return $this->remarqueMS;
+        return $this->remarqueMA;
     }
 
-    public function setRemarqueMS(string $remarqueMS): self
+    public function setRemarqueMA(?string $remarqueMA): self
     {
-        $this->remarqueMS = $remarqueMS;
+        $this->remarqueMA = $remarqueMA;
 
         return $this;
     }
@@ -65,7 +85,7 @@ class Evaluation
         return $this->remarqueApp;
     }
 
-    public function setRemarqueApp(string $remarqueApp): self
+    public function setRemarqueApp(?string $remarqueApp): self
     {
         $this->remarqueApp = $remarqueApp;
 
@@ -96,14 +116,62 @@ class Evaluation
         return $this;
     }
 
-    public function getCompetence(): ?Competences
+    public function getCompetenceID(): ?int
     {
-        return $this->competence;
+        return $this->competenceID;
     }
 
-    public function setCompetence(?Competences $competence): self
+    public function setCompetenceID(?int $competenceID): self
     {
-        $this->competence = $competence;
+        $this->competenceID = $competenceID;
+
+        return $this;
+    }
+
+    public function getAppID(): ?int
+    {
+        return $this->appID;
+    }
+
+    public function setAppID(?int $appID): self
+    {
+        $this->appID = $appID;
+
+        return $this;
+    }
+
+    public function getMAID(): ?int
+    {
+        return $this->MAID;
+    }
+
+    public function setMAID(?int $MAID): self
+    {
+        $this->MAID = $MAID;
+
+        return $this;
+    }
+
+    public function getFormateurID(): ?int
+    {
+        return $this->formateurID;
+    }
+
+    public function setFormateurID(?int $formateurID): self
+    {
+        $this->formateurID = $formateurID;
+
+        return $this;
+    }
+
+    public function getSessionID(): ?int
+    {
+        return $this->sessionID;
+    }
+
+    public function setSessionID(?int $sessionID): self
+    {
+        $this->sessionID = $sessionID;
 
         return $this;
     }

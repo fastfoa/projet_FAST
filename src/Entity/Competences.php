@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\CompetencesRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -18,41 +20,28 @@ class Competences
     private $id;
 
     /**
-     * @ORM\Column(type="integer")
-     */
-    private $idFormation;
-
-    /**
      * @ORM\Column(type="string", length=255)
      */
-    private $competence;
+    private $name;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getIdFormation(): ?int
+    public function getName(): ?string
     {
-        return $this->idFormation;
+        return $this->name;
     }
 
-    public function setIdFormation(int $idFormation): self
+    public function setName(string $name): self
     {
-        $this->idFormation = $idFormation;
+        $this->name = $name;
 
         return $this;
     }
+  
 
-    public function getCompetence(): ?string
-    {
-        return $this->competence;
-    }
 
-    public function setCompetence(string $competence): self
-    {
-        $this->competence = $competence;
-
-        return $this;
-    }
+    
 }

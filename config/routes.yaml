@@ -43,8 +43,12 @@ tableauSuiviCompetences:
     controller: App\Controller\SkillsController::tableauSuiviCompetences
 
 formulaireEvaluation:
-    path: /formulaireEvaluation
+    path: /formulaireEvaluation/{session}/{competence}/{app}/{MA}/{formateur}
     controller: App\Controller\SkillsController::formulaireEvaluation
+    
+formulaireEvaluationr:
+    path: /formulaireEvaluationr/{competence}
+    controller: App\Controller\SkillsController::formulaireEvaluationr
     
 formulaireEleve:
     path: /formulaireEleve

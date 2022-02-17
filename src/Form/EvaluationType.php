@@ -29,20 +29,11 @@ class EvaluationType extends AbstractType
                 'label' => 'Foreach Academy',
                 'attr' => ['col'=>'5','rows' => '2']
             ])
-            ->add('note',ChoiceType::class, [
-                'choices' => [
-                    'non-evalué' => 'non-evalué',
-                    'non-acquis' => 'non-acquis',
-                    'maitrise fragile' => 'maitrise fragile',
-                    'maitrise satisfaisante' => 'maitrise satisfaisante',
-                    'maitrise très satisfaisante' => 'maitrise très satisfaisante'
-                ]
-            ])
             ->add(
                 'Envoyer',
                 SubmitType::class,
                 ['label' => 'Envoyer', 'attr' => ['style' => 'margin-top:10px']]
-            );;
+            );
     }
 
     public function configureOptions(OptionsResolver $resolver): void

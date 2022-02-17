@@ -2,13 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\FormationRepository;
+use App\Repository\NoteRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=FormationRepository::class)
+ * @ORM\Entity(repositoryClass=NoteRepository::class)
  */
-class Formation
+class Note
 {
     /**
      * @ORM\Id
@@ -38,5 +38,4 @@ class Formation
 
         return $this;
     }
-
 }
