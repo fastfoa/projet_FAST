@@ -72,6 +72,14 @@ h1, h2, h3, h4, h5, h6
     top: -60px;
 }
 
+.navbar-nav > li > a, .navbar-nav > li > a {
+    color: gray !important;
+}
+
+.navbar-nav > li > a:hover, .navbar-nav > li > a:focus {
+    background-color: white !important;
+    color: black !important;
+}
 
 
 .logo-top 
