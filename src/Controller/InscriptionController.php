@@ -16,6 +16,7 @@ use App\Form\InscriptionAppType;
 use App\Form\InscriptionApprentiType;
 use App\Form\InscriptionApp2Type;
 use App\Form\InscriptionMAType;
+use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use Doctrine\Persistence\ManagerRegistry;
 
 
@@ -446,26 +447,34 @@ class InscriptionController extends AbstractController
     public function addUserRaw(Request $request, $role, $roleName ) 
     {
         $user = new User();
-
-
         $form = $this->createForm(AddUserType::class, $user);
         $form->handleRequest($request);
+        $erreur = false;
+
         if ($form->isSubmitted() && $form->isValid()) 
         {
-            $user->setRoles( [$role] );
+            try
+            {
+                $user->setRoles( [$role] );
+                $doctrine = $this->getDoctrine();
+                $entityManager = $doctrine->getManager();
 
-            $doctrine = $this->getDoctrine();
-            $entityManager = $doctrine->getManager();
-
-            $entityManager->persist($user);
-            $entityManager->flush();
-            return $user->getId();
+                $entityManager->persist($user);
+                $entityManager->flush();
+                return $user->getId();
+            }
+            catch (\Exception $e)
+            {
+                $erreur = "L'adresse email est déjà utilisé !";
+            }
         }
+        
         return $this->render(
             'inscription/addUser.html.twig',
             [
                 'form' => $form->createView(),
                 'roleName' => $roleName,
+                'erreur' => $erreur
             ]
         );
     }
