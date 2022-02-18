@@ -187,3 +187,10 @@ listAllMA:
     path: /listAllMA
     controller: App\Controller\DashController::listAllMA
 
+
+# ********************** les Profils **************************
+
+
+profilOF_APP: 
+    path: /profilOF_APP/{app}
+    controller: App\Controller\ProfilController::profilOF_APP
