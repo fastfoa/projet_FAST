@@ -8,10 +8,19 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use App\Repository\UserRepository;
+use ContainerT2hE2KD\getDoctrine_QueryDqlCommandService;
+use Doctrine\DBAL\Connection;
+use PDO;
 
 use App\Form\FormateurType;
 
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+
+
+
 
 class LanController extends AbstractController
 {
@@ -134,6 +143,37 @@ class LanController extends AbstractController
     {
         return $this->render('lan/documentOff.html.twig');
     }
+
+    public function annuaire(): Response
+    {
+        return $this->render('lan/annuaire.html.twig');
+    }
+
+    public function annuaireData(): Response
+    {
+        //https://www.doctrine-project.org/projects/doctrine-orm/en/2.9/reference/native-sql.html
+        $dsn = "mysql:host=127.0.0.1;dbname=projet_FAST";
+        try {
+             $pdo = new PDO($dsn, 'xxx', 'xxx');
+        } catch (\PDOException $e) 
+        {
+             throw new \PDOException($e->getMessage(), (int)$e->getCode());
+        }
+        $rs = $pdo->prepare('SELECT nom FROM  user where roles=JSON({"ROLE_APP"}) '   );
+        $rs = $pdo->prepare('SELECT nom FROM  user' );
+        $rs->execute();
+        $user=[];
+        while(   $ligne = $rs->fetch(PDO::FETCH_ASSOC) )
+        {
+            if ( $ligne[  'nom' ] != null)
+                $user[] = $ligne[  'nom' ];
+        }
+
+        //return  new Response(  json_encode( $user )   );
+        return  new JsonResponse(   $user    );
+    }
+
+
 
 
 }

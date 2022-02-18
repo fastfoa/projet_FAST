@@ -187,3 +187,11 @@ listAllMA:
     path: /listAllMA
     controller: App\Controller\DashController::listAllMA
 
+annuaire:
+    path: /annuaire
+    controller: App\Controller\LanController::annuaire
+
+annuaireData:
+    path: /annuaireData
+    controller: App\Controller\LanController::annuaireData
+
