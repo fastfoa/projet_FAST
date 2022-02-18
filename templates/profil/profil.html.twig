@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block myStylesheets %}{% endblock %}
+
+
+{% block myJavascripts %}{% endblock %}
+
+{% block body %}
+    {% include 'civil.html.twig' %}
+
+    {% block OF %}
+    {% endblock OF %}
+ 
+    {% block Formateur %}
+    {% endblock Formateur %}
+
+    {% block MA %}
+    {% endblock MA %}
+
+    {% block ENT %}
+    {% endblock ENT %}
+
+{% endblock body %}
