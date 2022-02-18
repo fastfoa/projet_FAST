@@ -120,7 +120,7 @@ class LanController extends AbstractController
 
     public function test(): Response
     {
-        return $this->render('lan/test.html.twig', [
+        return $this->render('test.html.twig', [
             'controller_name' => 'LanController',
         ]);
     }
