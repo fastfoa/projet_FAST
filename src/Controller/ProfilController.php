@@ -20,11 +20,40 @@ class ProfilController extends AbstractController
         ]);
     }
 
-    public function profilOF_APP(User $app): Response
+    public function profilOF_APP(User $user): Response
     {
+        return $this->render('profil/profilOF_APP.html.twig', 
+        [
+            'user' => $user,
+            'fonction' => "Apprenti"        
+        ]);
+    }
+    
+    public function profilOF_Formateur(User $user): Response
+    {
+        return $this->render('profil/profilOF_Formateur.html.twig', 
+        [
+            'user' => $user,
+            'fonction' => "Formateur"        
+        ]);
+    }
+    
+    public function profilOF_MA(User $user): Response
+    {
+        return $this->render('profil/profilOF_MA.html.twig', 
+        [
+            'user' => $user,
+            'fonction' => "Maître d'Apprentissage"        
+        ]);
+    }
 
-        return $this->render('profil/profilOF_APP.html.twig', [
-            'app' => $app,        ]);
+    public function profilOF_Entreprise(User $user): Response
+    {
+        return $this->render('profil/profilOF_Entreprise.html.twig', 
+        [
+            'user' => $user,
+            'fonction' => "Entreprise"        
+        ]);
     }
     
 
