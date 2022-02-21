@@ -24,13 +24,22 @@ class InscriptionMAType extends AbstractType
             ->add('prenom', TextType::class,
                     [ 'attr' => [ 'placeholder' => 'Entrez votre prénom' ] ]
                 )
-            ->add('adresse', TextType::class,
+            ->add('post', TextType::class,
                     [ 'attr' => [ 'placeholder' => 'Entrez votre adresse' ] ]
                 )
             ->add('telephone', TextType::class,
                     [ 'attr' => [ 'placeholder' => 'Entrez votre numéro de téléphone' ] ]
                 )
-                ->add('dateNaissance', DateType::class, [
+            ->add('linkedin', TextType::class,
+                [ 'attr' => [ 'placeholder' => 'Entrez votre adrees linkedin' ] ]
+                )  
+            ->add('github', TextType::class,
+                [ 'attr' => [ 'placeholder' => 'Entrez votre adrees github' ] ]
+                )  
+            ->add('Web', TextType::class,
+                [ 'attr' => [ 'placeholder' => 'Entrez votre adrees web' ] ]
+                )  
+            ->add('dateNaissance', DateType::class, [
                     'widget' => 'single_text',
                     'attr' => [
                         'placeholder' => 'date naissance',
@@ -43,10 +52,9 @@ class InscriptionMAType extends AbstractType
                     'format' => 'yyyy-MM-dd'
                 ])
     
-            ->add('save', SubmitType::class,
+                ->add('save', SubmitType::class,
                     [ 'label' => "Enregistrer", 'attr' => [ 'class' => "boutonForm" ] ]
-                )
-        ;
+                );
     }
 
     public function configureOptions(OptionsResolver $resolver): void

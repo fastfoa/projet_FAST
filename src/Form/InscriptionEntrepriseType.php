@@ -70,12 +70,28 @@ class InscriptionEntrepriseType extends AbstractType
                     'placeholder' => 'CodeIDCCConvention'
                 ]
             ])
+            
+            ->add('linkedin', TextType::class,[
+                'label'=> false,
+                'attr' => [
+                    'placeholder' => 'linkedin'
+                ]
+            ])
+           
+            ->add('Web', TextType::class,[
+                'label'=> false,
+                'attr' => [
+                    'placeholder' => 'Web'
+                ]
+                ])
             ->add('save', SubmitType::class,[
                 'label'=> "Enregistrer",
                 'attr' => [
                     'class' => 'boutonForm'
-                ]
-            ]);
+                          ]
+            ]     );
+                
+
     }
 
     public function configureOptions(OptionsResolver $resolver): void

@@ -146,6 +146,7 @@ class InscriptionApprentiType extends AbstractType
                     'placeholder' => 'Dernier Diplome'
                 ]
             ])
+            
             ->add('ConventionCollective', TextType::class,[
                 'label'=> false,
                 'attr' => [
@@ -158,7 +159,33 @@ class InscriptionApprentiType extends AbstractType
                     'placeholder' => 'Diplome Plus Haut'
                 ]
             ])
-            ->add('save', SubmitType::class,[
+            
+            ->add('linkedin', TextType::class,[
+                'label'=> false,
+                'attr' => [
+                    'placeholder' => 'linkedin'
+                ]
+            ])
+            ->add('cv', TextType::class,[
+                'label'=> false,
+                'attr' => [
+                    'placeholder' => 'Cv'
+                ]
+            ])
+            ->add('github', TextType::class,[
+                'label'=> false,
+                'attr' => [
+                    'placeholder' => 'github'
+                ]
+            ])
+            
+            ->add('web', TextType::class,[
+                'label'=> false,
+                'attr' => [
+                    'placeholder' => 'Web'
+                ]
+                ])
+            ->add('Enregistrer', SubmitType::class,[
                 'label'=> "Enregistrer",
                 'attr' => [
                     'class' => 'boutonForm'
