@@ -1,4 +1,4 @@
-{% extends 'lan/base.html.twig' %}
+{% extends 'base.html.twig' %}
 
 {% block body %}
 <div class="container-fluid">
@@ -10,6 +10,11 @@
 				{{form_start(form)}}
 					{{ form_widget(form.email) }}
 				{{form_end(form)}}
+				{% if erreur != false %}
+					<div class='alert alert-danger' role='alert'>
+						{{erreur}}
+					</div>
+				{% endif %}
 			</div>
 		</div>
 </div>

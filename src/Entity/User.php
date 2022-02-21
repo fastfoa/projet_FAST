@@ -197,6 +197,46 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $IntitulePreciDiplomevise;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $linkedin;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $github;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $fonctionMA;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $posteApp;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $documentID;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $siteWebPro;
+
+    /**
+     * @ORM\Column(type="boolean", options={"default" : "0"})
+     */
+    private $RGPDOK = false;
+
+    /**
+     * @ORM\Column(type="boolean", options={"default" : "1"})
+     */
+    private $profilEnabled = true;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -679,6 +719,102 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setIntitulePreciDiplomevise(?string $IntitulePreciDiplomevise): self
     {
         $this->IntitulePreciDiplomevise = $IntitulePreciDiplomevise;
+
+        return $this;
+    }
+
+    public function getLinkedin(): ?string
+    {
+        return $this->linkedin;
+    }
+
+    public function setLinkedin(?string $linkedin): self
+    {
+        $this->linkedin = $linkedin;
+
+        return $this;
+    }
+
+    public function getGithub(): ?string
+    {
+        return $this->github;
+    }
+
+    public function setGithub(?string $github): self
+    {
+        $this->github = $github;
+
+        return $this;
+    }
+
+    public function getFonctionMA(): ?string
+    {
+        return $this->fonctionMA;
+    }
+
+    public function setFonctionMA(?string $fonctionMA): self
+    {
+        $this->fonctionMA = $fonctionMA;
+
+        return $this;
+    }
+
+    public function getPosteApp(): ?string
+    {
+        return $this->posteApp;
+    }
+
+    public function setPosteApp(?string $posteApp): self
+    {
+        $this->posteApp = $posteApp;
+
+        return $this;
+    }
+
+    public function getDocumentID(): ?int
+    {
+        return $this->documentID;
+    }
+
+    public function setDocumentID(?int $documentID): self
+    {
+        $this->documentID = $documentID;
+
+        return $this;
+    }
+
+    public function getSiteWebPro(): ?string
+    {
+        return $this->siteWebPro;
+    }
+
+    public function setSiteWebPro(?string $siteWebPro): self
+    {
+        $this->siteWebPro = $siteWebPro;
+
+        return $this;
+    }
+
+    public function getRGPDOK(): ?bool
+    {
+        return $this->RGPDOK;
+    }
+
+    public function setRGPDOK(bool $RGPDOK): self
+    {
+        $this->RGPDOK = $RGPDOK;
+
+        return $this;
+    }
+
+    public function getProfilEnabled(): ?bool
+    {
+        return $this->profilEnabled;
+    }
+
+    public function setProfilEnabled(bool $profilEnabled): self
+    {
+        $this->profilEnabled = $profilEnabled;
 
         return $this;
     }

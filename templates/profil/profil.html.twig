@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block myStylesheets %}{% endblock %}
+
+{% block myJavascripts %}{% endblock %}
+
+{% block body %}
+    {% include 'profil/civilite.html.twig' %}
+
+    <h4>vous etes le dans le template profil</h4>
+
+    {% block OF %}
+    {% endblock OF %}
+ 
+    {% block Formateur %}
+    {% endblock Formateur %}
+
+    {% block MA %}
+    {% endblock MA %}
+
+    {% block ENT %}
+    {% endblock ENT %}
+
+{% endblock body %}

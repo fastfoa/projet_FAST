@@ -1,93 +1,45 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
-        {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
-        <style>
-        .body-fe
-        {
-            background-image: url("https://webgenius.foreach-academy.fr/wp-content/uploads/2022/01/fond-bleu-double-scaled.jpg");
-            background-position: center top;
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-        }
-        .bar-top
-        {
-            width: 100%;
-            height: 80px;
-            color: white;           
-            vertical-align: top; 
-        }
-        .menu-top
-        {
-            width: 50%;
-            margin: auto;
-            display: inline-block;
-            vertical-align: middle;
-        }
-        .ul-fe li
-        {
-            display: inline;
-            margin-left : 10px;
-            margin-right : 10px;
-        }
-        .logo-top
-        {
-            height: 100%;
-            display: inline-block;
-        }
+	<head>
+		<meta charset="UTF-8">
+		<title>
+			{% block title %}Welcome!
+			{% endblock %}
+		</title>
+		<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+		{# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+		<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+		<link rel="stylesheet" href="{{asset("css/lan.css")}}">
 
-        .work-content
-        {
-            width: 100%;
-            height: 400px;
-            background-color: #018FA5;
-            margin: 30px;
-        }
+		{% block myStylesheets %}
+		{% endblock myStylesheets %}
 
+		{% block stylesheets %}
+			{{ encore_entry_link_tags('app') }}
+		{% endblock %}
 
-        .bar-bottom
-        {
-            position: absolute;
-            bottom: 30px;
-            height: 100px;
-            width: 100%;
-            background-color: #11284B;
-            text-align: center;
-        }
+		{% block javascripts %}
+			{{ encore_entry_script_tags('app') }}
+		{% endblock %}
 
-        </style>
+		{% block myJavascripts %}
+		{% endblock myJavascripts %}
 
-        {% block stylesheets %}
-            {{ encore_entry_link_tags('app') }}
-        {% endblock %}
+	</head>
+	<body class="body-fe">
 
-        {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
-        {% endblock %}
-    </head>
-    <body class="body-fe">
-        <div class="bar-top">
-            <img class="logo-top" src="{{ asset('images/logo-foreach-blanc.png') }}">
-            <div class="menu-top">
-                <ul class="ul-fe">
-                    <li>Accueil</li>
-                    <li>L’Ecole</li>
-                    <li>Actualités</li>
-                    <li>Formations Développeur Web</li>
-                    <li>Contactez-Nous !</li>
-                </ul>
-
-            </div>
-        </div>
-        <div class="work-content">
-        {% block body %}{% endblock %}
-        </div>
-        <div class="bar-bottom">
-        </div>
-        
-    </body>
+		{% include 'menu.html.twig' %}
+		
+		<div class="work-content"> 
+			{% block body %}
+			{% endblock body %}
+		</div>
+		{#
+		<div class="bar-bottom ">
+			Lorem ipsum dolor sit amet consectetur adipisicing elit.
+		</div>
+		#}
+	</body>
 </html>
