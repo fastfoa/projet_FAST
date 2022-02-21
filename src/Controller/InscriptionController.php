@@ -325,7 +325,7 @@ class InscriptionController extends AbstractController
         $contact = new User();
         $form = $this->createForm(InscriptionApprentiType::class, $contact);
         $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) { 
             //enregistrer le nom 
             $nom = $contact->getNom();
             $nom = strip_tags($nom);

@@ -80,6 +80,30 @@ class InscriptioFormateurType extends AbstractType
                 'label' => false,
                 'format' => 'yyyy-MM-dd'
             ])
+            ->add('linkedin',TextType::class,[
+                'attr' => [
+                    'placeholder' => 'linkedin',
+                  
+                ]
+            ])
+            ->add('github',TextType::class,[
+                'attr' => [
+                    'placeholder' => 'github',
+                  
+                ]
+            ])
+            ->add('CV',TextType::class,[
+                'attr' => [
+                    'placeholder' => 'CV',
+                  
+                ]
+            ])
+            ->add('Web',TextType::class,[
+                'attr' => [
+                    'placeholder' => 'Web',
+                  
+                ]
+            ])
         /*
            ->add('dateNaissance', DateType::class, [
             'widget' => 'single_text',

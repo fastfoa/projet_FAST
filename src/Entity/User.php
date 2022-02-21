@@ -237,6 +237,21 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $profilEnabled = true;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $post;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $web;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $Cv;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -815,6 +830,42 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setProfilEnabled(bool $profilEnabled): self
     {
         $this->profilEnabled = $profilEnabled;
+
+        return $this;
+    }
+
+    public function getPost(): ?string
+    {
+        return $this->post;
+    }
+
+    public function setPost(?string $post): self
+    {
+        $this->post = $post;
+
+        return $this;
+    }
+
+    public function getWeb(): ?string
+    {
+        return $this->web;
+    }
+
+    public function setWeb(string $web): self
+    {
+        $this->web = $web;
+
+        return $this;
+    }
+
+    public function getCv(): ?string
+    {
+        return $this->Cv;
+    }
+
+    public function setCv(?string $Cv): self
+    {
+        $this->Cv = $Cv;
 
         return $this;
     }
