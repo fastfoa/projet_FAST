@@ -14,6 +14,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use App\Form\AddUserType;
 use App\Form\InscriptionAppType;
 use App\Form\InscriptionApprentiType;
+use App\Form\InscriptionIndType;
 use App\Form\InscriptionApp2Type;
 use App\Form\InscriptionMAType;
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
@@ -43,9 +44,8 @@ class InscriptionController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) 
         {
             //enregistrer le Nom 
-            $Nom = $user->getNom();
-            $Nom = strip_tags( $Nom );
-            $user->setNom( $Nom );
+            $raisonSocial = $user->getRaisonSocial();
+            $user->setRaisonSocial($raisonSocial);
 
             //enregistrer l'Adresse 
             $Adresse = $user->getAdresse();
@@ -116,8 +116,8 @@ class InscriptionController extends AbstractController
             $email = $user->getEmail();
             $user->setEmail($email);
 
-            $adresse = $user->getAdresse();
-            $user->setAdresse($adresse);
+            $fonction = $user->getFonctionMA();
+            $user->setFonctionMA($fonction);
             
             $prenom = $user->getPrenom();
             $user->setPrenom($prenom);
@@ -445,6 +445,75 @@ class InscriptionController extends AbstractController
         );
     }
 
+    public function inscriptionInd(Request $request, ManagerRegistry $doctrine): Response
+    {
+        $user = new User();
+        $form = $this->createForm(InscriptionIndType::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $entityManager = $doctrine->getManager();
+
+            $user->setRoles(['ROLE_IND']);
+
+            $email = $user->getEmail();
+            $user->setEmail($email);
+
+            $adresse = $user->getAdresse();
+            $user->setAdresse($adresse);
+            
+            $prenom = $user->getPrenom();
+            $user->setPrenom($prenom);
+
+            $tel = $user->getTelephone();
+            $user->setTelephone($tel);
+
+            $nom = $user->getNom();
+            $nom = strip_tags( $nom );
+            $user->setNom($nom);
+
+            $raisonSocial = $user->getRaisonSocial();
+            $user->setRaisonSocial($raisonSocial);
+
+            $dateNaissance = $user->getDateNaissance();
+            $user->setDateNaissance($dateNaissance);
+
+            $fonction = $user->getFonctionMA();
+            $user->setFonctionMA($fonction);
+
+            $Siret = $user->getSiret();
+            $Siret = strip_tags( $Siret );
+            $user->setSiret( $Siret );
+
+            $NAF = $user->getNAF();
+            $NAF = strip_tags( $NAF );
+            $user->setNAF( $NAF );
+
+            $Effectif = $user->getEffectif();
+            $user->setEffectif( $Effectif );
+
+            $ConventionCollective = $user->getConventionCollective();
+            $ConventionCollective = strip_tags( $ConventionCollective );
+            $user->setConventionCollective( $ConventionCollective );
+
+            $EmployeurPublic = $user->getEmployeurPublic();
+            $EmployeurPublic = strip_tags( $EmployeurPublic );
+            $user->setEmployeurPublic( $EmployeurPublic );
+
+            $CodeIDCCConvention = $user->getCodeIDCCConvention();
+            $CodeIDCCConvention = strip_tags( $CodeIDCCConvention );
+            $user->setCodeIDCCConvention( $CodeIDCCConvention );
+
+            $entityManager->persist($user); 
+            $entityManager->flush();
+
+            return $this->redirect($this->generateUrl('login'));
+        }
+        return $this->render( 'inscription/inscriptionInd.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
 
     public function addUserRaw(Request $request, $role, $roleName ) 
     {
