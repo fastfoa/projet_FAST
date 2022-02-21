@@ -194,3 +194,9 @@ listAllMA:
 profilOF_APP: 
     path: /profilOF_APP/{app}
     controller: App\Controller\ProfilController::profilOF_APP
+
+# ********************** les evaluations  **************************
+
+saisiEvaluation: 
+    path: /saisiEvaluation/{competence}/{app}/{session}
+    controller: App\Controller\CompetenceController::saisiEvaluation
