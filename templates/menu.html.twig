@@ -24,9 +24,26 @@
 			<li class="nav-item">
 				<a class="nav-link  " href="{{ path('aide') }}">aide</a>
 			</li>
-			<li class="nav-item">
-				<a class="nav-link " href="{{ path('monCompte') }}">mon compte</a>
-			</li>
+			{% if is_granted('ROLE_APP') %}
+				<li class="nav-item">
+					<a class="nav-link " href="{{ path('monCompteAPP') }}">mon Compte</a>
+				</li>
+			{% endif %}
+			{% if is_granted('ROLE_ENT') %}
+				<li class="nav-item">
+					<a class="nav-link " href="{{ path('monCompteEntreprise') }}">mon Compte </a>
+				</li>
+			{% endif %}
+			{% if is_granted('ROLE_MA') %}
+				<li class="nav-item">
+					<a class="nav-link " href="{{ path('monCompteMA') }}">mon Compte </a>
+				</li>
+			{% endif %}
+			{% if is_granted('ROLE_FORMATEUR') %}
+				<li class="nav-item">
+					<a class="nav-link " href="{{ path('monCompteFormateur') }}">mon Compte </a>
+				</li>
+			{% endif %}
 		</ul>
 
 

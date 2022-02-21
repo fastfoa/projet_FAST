@@ -92,9 +92,22 @@ aide:
     path: /aide
     controller: App\Controller\LanController::aide
 
-monCompte:
-    path: /monCompte
-    controller: App\Controller\LanController::monCompte
+monCompteAPP:
+    path: monCompteAPP
+    controller: App\Controller\ModifInfoPersoController::monCompteAPP
+
+monCompteEntreprise:
+    path: /monCompteEntreprise
+    controller: App\Controller\ModifInfoPersoController::monCompteEntreprise
+
+monCompteMA:
+    path: /monCompteMA
+    controller: App\Controller\ModifInfoPersoController::monCompteMA
+
+monCompteFormateur:
+    path: /monCompteFormateur
+    controller: App\Controller\ModifInfoPersoController::monCompteFormateur
+
 
 
 ## App\Controller\InscriptionController
