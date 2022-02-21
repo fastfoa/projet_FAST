@@ -22,6 +22,8 @@
 					{{form_widget(form.SportifHautNiveau)}}
                     {{form_widget(form.SituationAvantContrat)}}
 					{{form_widget(form.DiplomePlusHaut)}}
+					{{form_widget(form.linkedin)}}
+					{{form_widget(form.github)}}
 			</div>
 			<div class="col-6">
                     {{form_widget(form.diplome)}}
@@ -36,12 +38,13 @@
                     {{form_widget(form.TravailleurHandicape)}}
 					{{form_widget(form.DernierDiplome)}}
                     {{form_widget(form.ConventionCollective)}}
-					
+					{{form_widget(form.cv)}}
+					{{form_widget(form.web)}}
 			</div>
 		</div>
 		<div class="row">
 			<div class="col-12">
-				{{ form_widget(form.save) }}
+				{{ form_widget(form.Enregistrer) }}
 			</div>
 		</div>
 		{{form_end(form)}}
