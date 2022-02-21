@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+{% block myStylesheets %}
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+{% endblock %}
+
+{% block title %}OF - Liste des sessions{% endblock %}
+
+{% block body %}
+	<div class="container-fluid bg-workSpace">
+			<!-- MAIN CARDS-->
+				<div class="row">
+				</div>
+				<div class="row bg-bar">
+					<div class="col-12">
+						<h2>Listes des session en cours</h2>
+					</div>
+				</div>				
+				<div class="row bg">
+					<div class="col-12">
+						<a href="{{ path( 'addSession') }}">
+							<button class="btn btn-success my-2">+ Ajouter une session</button>
+						</a>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-12">
+						<table class="table-normal">
+							<thead>
+								<tr>
+									<th class="txt-bar bg-bar">Début</th>
+									<th class="txt-bar bg-bar">Fin</th>
+									<th class="txt-bar bg-bar">Nom</th>
+									<th class="txt-bar bg-bar">Formation</th>
+									<th class="txt-bar bg-bar">Action</th>
+								</tr>
+							</thead>
+							<tbody>
+								{% for session in listSession %}
+									<tr>
+										<td>{{session.debut|date("d/m/y")}}</td>
+										<td>{{session.fin|date("d/m/y")}}</td>
+										<td>{{session.nom}}</td>
+										<td>DWWM</td>
+										{#<td>{{session.formation}}</td>#}
+										<td>								
+											<a href="{{ path( 'dashOFSession',{'session':session.id} ) }}">
+													<i class="fas fa-solid fa-download" style="font-size:20px;color:green;"></i>
+											</a>
+											
+											<a href="{{ path( 'deleteSession',{'session':session.id} ) }}">
+													<div style="font-size:20px;color:red; display:inline ;">&nbspX</div>
+											</a>
+										</td>
+									</tr>
+								{% endfor %}
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

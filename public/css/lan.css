@@ -1,0 +1,340 @@
+h1, h2, h3, h4, h5, h6 
+{
+    font-family: Arial, Helvetica, sans-serif;
+    color : white;
+}
+
+.font
+{
+    font-family: Arial, Helvetica, sans-serif, Roboto, Raleway ;
+}
+* 
+{
+    margin: 0px;
+    padding: 0px;
+}
+
+.body-fe 
+{
+    background-image: url("https://webgenius.foreach-academy.fr/wp-content/uploads/2022/01/fond-bleu-double-scaled.jpg");
+    background-position: center top;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    margin: 0;
+}
+
+.nav-item .nav-link{
+    color: #0062cc!important;
+    
+}
+
+.nav-item .nav-link:hover  {
+    background-color: #0062cc!important;
+    color: rgb(253, 253, 253)!important;
+    opacity: 100!important;
+} 
+.active, .btntoto {
+    background-color: #666;
+    color: white;
+  }
+
+
+.bar-top 
+{
+    height: 80px;
+   /* background-color: white;
+    opacity:0.50; */
+}
+
+.fit100 
+{
+    height: 100%;
+    width: 100%;
+}
+
+.fit50
+{
+    height: 50%;
+    width: 50%;
+}
+
+.fith100 
+{
+    width: 100%;
+}
+
+.fith50 
+{
+    width: 50%;
+    margin: auto;
+}
+
+.menu-top 
+{
+    width: 70%;
+    margin: -30px 20% 0;
+    display: inline;
+    vertical-align: center;
+    text-align: center;
+}
+
+.ul-fe li 
+{
+    display: inline;
+    margin-left: 10px;
+    margin-right: 10px;
+    position: relative;
+    top: -60px;
+}
+
+.navbar-nav > li > a, .navbar-nav > li > a {
+    color: gray !important;
+}
+
+.navbar-nav > li > a:hover, .navbar-nav > li > a:focus {
+    background-color: white !important;
+    color: black !important;
+}
+
+
+.logo-top 
+{
+    width: 150px;
+    height: 150px;
+}
+
+.logo-top img 
+{
+    width: 100%;
+    height: 100%;
+    object-fit: scale-down;
+}
+
+.work-content 
+{
+    width: 90%;
+    /* height: 00px; */
+    margin: 40px auto 10px;   
+}
+
+.bar-bottom 
+{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    width: 100%;
+    text-align: center;
+}
+
+.textArea{
+    width:70% ;
+}
+
+/* ************************************************* */
+/* ************************************************* */
+/* *****************   COLOR    ******************** */
+/* ************************************************* */
+/* ************************************************* */
+/*
+    font-family: Arial, Helvetica, sans-serif, Roboto, Raleway;
+    font-size: 20px;
+    color: white; text
+    #11284B; background bar-bottom
+    #018FA5; background work-content
+    #79a342; background bouton-form
+    #f37262; background boutonForm:hover
+ */
+
+ a
+ {
+     text-decoration: none;
+     font-family:   Arial, Helvetica, sans-serif;
+     color: white;
+ }
+
+ a:hover
+ {
+     text-decoration: underline;
+     color: white;
+     background-color: #11284B;
+     opacity: 40%;
+ }
+ 
+
+ .form
+ {
+     border-radius: 3px;
+     background-color: #11284B;
+     margin: auto;
+     width: 40%;
+     text-align: center;
+     padding: 3%;
+ }
+ 
+ 
+input[type=text], input[type=password], input[type=date], select
+{
+   width: 70%;
+   height: 15px;
+   font-size: 20px;
+   border: 1px solid #ccc;
+   padding: 15px 0px 15px 10px;
+   margin: 3px 0px 3px 0px;
+   /*border-radius: 4px*/;
+}
+
+.label-fe label
+{
+   width: 300px;
+   height: 15px;
+   font-size: 30px;
+   padding: 15px 0px 15px 10px;
+   margin: 3px 0px 3px 0px;
+   /*border-radius: 4px*/;
+}
+
+
+
+.boutonForm
+{
+    background-color: #79a342;
+    color: white;
+    border-radius: 3px; 
+    border: none;
+    padding: 12px 20px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 15px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.boutonForm:hover
+{
+    background-color: #f37262;
+}
+
+.bg-boutonForm
+{
+    background-color:#79a342;
+}
+
+.bg-boutonForm:hover
+{
+ background-color:#f37262;
+}
+
+.table-normal 
+{
+    width:100%;
+    height:100%;
+    border:1px solid black;
+    border-collapse:effondrer;
+}
+
+.table-normal tr
+{
+    padding: 2px;
+    margin: 2px;
+    border: 1px  solid gray;
+
+}
+
+.table-normal td
+{
+    color:white;
+    font-size: 17px;
+}
+    
+
+.bg-body  		/* couleur fond du body */
+{
+    background-color:#018FA5;
+}
+
+.bg-workSpace  	/* couleur fond de la box de travail */
+{
+    background-color:#018FA5;
+}
+
+.bg-input	  	/* couleur fond des champs de saisie */
+{
+    background-color: aqua;
+}
+
+.bg-bar	  		/* couleur fond des bar ( menu, titre, ... ) */
+{
+    background-color: #11284B;
+}
+
+.txt-normal 		/* text ordinaire */
+{
+    color:white;
+    font-size: 25px;
+}
+
+
+.txt-bar		/* text en barre */
+{
+    color:white;
+    font-size: 17px;
+}
+
+.txt-error		/* text en cas d'erreur */
+{
+    color:red;
+    font-size: 17px;
+}
+
+.txt-labelzoro		/* text des label */
+{
+    color: black;
+    font-size: 17px;
+}
+
+.txt-title		/* text des titre */
+{
+    color:darkgreen;
+    font-size: 20px;
+}
+
+
+label
+{
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+
+
+
+/* ********************************************* */
+
+.dashMenutoto{
+    background-color: #11284B !important;
+}
+
+
+.cartetoto,
+.activetoto {
+  background-color: #92ccd4 !important;
+}
+
+.vert {
+  background-color: #79a342 !important;
+}
+
+.bleu {
+  background-color: blue !important;
+  color: #fff;
+}
+
+.red {
+    background-color: red !important;
+    color: #fff;
+  }
+
+  

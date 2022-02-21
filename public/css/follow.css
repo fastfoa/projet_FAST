@@ -1,0 +1,24 @@
+@import url("//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css");
+.bandeau {
+  background-color: #11284b;
+  border: 1px solid white;
+  color: white;
+}
+
+.saisie {
+  background-color: #11284b;
+  border: 1px solid white;
+  color: #79a342;
+}
+
+.row {
+  text-align: center;
+}
+
+.titreBloc {
+  color: #79a342;
+}
+
+.dateSaisie {
+  color: #79a342;
+}
