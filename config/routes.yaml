@@ -86,7 +86,7 @@ formations:
 
 documents:
     path: /documents
-    controller: App\Controller\LanController::documents
+    controller: App\Controller\LanController::documentOff
 
 aide:
     path: /aide

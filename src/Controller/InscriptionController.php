@@ -34,6 +34,8 @@ class InscriptionController extends AbstractController
     public function inscriptionEntreprise(Request $request): Response
     {
         $user = new User();
+
+        //$user->setNom( 'toto');
         $form = $this->createForm(InscriptionEntrepriseType::class, $user);
 
         $form->handleRequest($request);
