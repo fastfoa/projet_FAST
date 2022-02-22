@@ -134,6 +134,6 @@ class LanController extends AbstractController
     {
         return $this->render('documentOff.html.twig');
     }
-
+    
 
 }
