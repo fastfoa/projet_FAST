@@ -204,6 +204,10 @@ annuaireData:
     controller: App\Controller\LanController::annuaireData
 
 
+resultAnnuaire:
+    path: /resultAnnuaire
+    controller: App\Controller\LanController::resultAnnuaire
+
 # ********************** les Profils **************************
 
 profilOF_APP: 

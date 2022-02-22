@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use PDO;
 
-function getSQLRaw($query)
+function getPDO()
 {
     $dsn = "mysql:host=127.0.0.1;dbname=projet_FAST";
     try {
@@ -12,21 +12,67 @@ function getSQLRaw($query)
     } catch (\PDOException $e) {
         throw new \PDOException($e->getMessage(), (int)$e->getCode());
     }
+    return $pdo; 
+}
+
+
+function getSQLRaw($query)
+{
+    $pdo = getPDO();
     $rs = $pdo->prepare($query);
     return $rs->execute();
 }
+
+function getSQLList($query)
+{
+    $pdo = getPDO();
+    $rs = $pdo->prepare($query);
+    $rs->execute();
+    $res = [];
+    while ($ligne = $rs->fetch(PDO::FETCH_NUM)) 
+    {
+        if ( $ligne[0] != null )
+        $res[] = $ligne[0];
+    }
+    return $res;
+}
+
+function getSQLArrayKV($query)
+{
+    $pdo = getPDO();
+    $rs = $pdo->prepare($query);
+    $rs->execute();
+    $res = [];
+    while ($ligne = $rs->fetch(PDO::FETCH_ASSOC)) 
+    {   if ($ligne['v'] != null  )
+        $res[ $ligne['k'] ] = $ligne['v'];
+    }
+    return $res;
+}
+
 function getSQLArrayAssoc($query)
 {
-    $rs = getSQLRaw($query);
+    $pdo = getPDO();
+    $rs = $pdo->prepare($query);
+    $rs->execute();
     $res = [];
-    while ($ligne = $rs->fetch(PDO::FETCH_ASSOC)) {
+    while ($ligne = $rs->fetch(PDO::FETCH_ASSOC)) 
+    {
         $res[] = $ligne;
     }
     return $res;
 }
 
+function getSQLSingle($query)
+{
+    $pdo = getPDO();
+    $rs = $pdo->prepare($query);
+    return  $rs->fetch(PDO::FETCH_NUM )[0];
+}
+
 function getSQLSingleAssoc($query)
 {
-    $rs = getSQLRaw($query);
-    return  $rs->fetch(PDO::FETCH_ASSOC);
+    $pdo = getPDO();
+    $rs = $pdo->prepare($query);
+    return  $rs->fetch(PDO::FETCH_ASSOC );
 }

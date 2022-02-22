@@ -74,7 +74,7 @@ input[type=submit] {
 <p>Start typing:</p>
 
 <!--Make sure the form has the autocomplete function switched off:-->
-<form autocomplete="off" action="/action_page.php">
+<form autocomplete="off" action="{{ path('resultAnnuaire') }}">
   <div class="autocomplete" style="width:300px;">
     <input id="myInput" type="text" name="myCountry" placeholder="Country">
   </div>
@@ -83,12 +83,15 @@ input[type=submit] {
 
 <script>
 function autocomplete(inp, arr) {
+
+  console.log( arr );
   /*the autocomplete function takes two arguments,
   the text field element and an array of possible autocompleted values:*/
   var currentFocus;
   /*execute a function when someone writes in the text field:*/
   inp.addEventListener("input", function(e) {
       var a, b, i, val = this.value;
+      console.log( val );
       /*close any already open lists of autocompleted values*/
       closeAllLists();
       if (!val) { return false;}
@@ -100,20 +103,30 @@ function autocomplete(inp, arr) {
       /*append the DIV element as a child of the autocomplete container:*/
       this.parentNode.appendChild(a);
       /*for each item in the array...*/
-      for (i = 0; i < arr.length; i++) {
+      //for (i = 0; i < arr.length; i++) {
+      for ( [xkey, xval ] of Object.entries(arr) )  {
+        var item = xval;
+        var itemId = xkey;
+        console.log( itemId );
+        
         /*check if the item starts with the same letters as the text field value:*/
-        if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+        if (item.substr(0, val.length).toUpperCase() == val.toUpperCase()) {
           /*create a DIV element for each matching element:*/
           b = document.createElement("DIV");
           /*make the matching letters bold:*/
-          b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
-          b.innerHTML += arr[i].substr(val.length);
+          b.innerHTML = "<strong>" + item.substr(0, val.length) + "</strong>";
+          b.innerHTML += item.substr(val.length);
           /*insert a input field that will hold the current array item's value:*/
-          b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
+          b.innerHTML += "<input type='hidden' value='" + itemId + "'>";
           /*execute a function when someone clicks on the item value (DIV element):*/
-          b.addEventListener("click", function(e) {
+          b.addEventListener("click", function(e) 
+          {
+              console.log( "klik");
               /*insert the value for the autocomplete text field:*/
-              inp.value = this.getElementsByTagName("input")[0].value;
+              var id =  this.getElementsByTagName("input")[0].value;
+              inp.value = arr[ id ];
+              console.log( inp.value );
+              console.log( id );
               /*close the list of autocompleted values,
               (or any other open lists of autocompleted values:*/
               closeAllLists();
@@ -190,7 +203,6 @@ $.ajax({
         url: '{{path('annuaireData')}}',
         async: false,
         success : function(data) {
-            console.log("Data: " + data );
             //user  = JSON.parse( data );
             user  =  data ;
             //user  =  data ;
