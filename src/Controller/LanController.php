@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\User;
 use Doctrine\DBAL\Connection;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -12,7 +11,11 @@ use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use App\Repository\UserRepository;
 use ContainerT2hE2KD\getDoctrine_QueryDqlCommandService;
-use App\Lib\PDO;
+//use App\Lib\PDO;
+use PDO;
+
+use App\Entity\User;
+use App\Entity\Session;
 
 use App\Form\FormateurType;
 
@@ -149,13 +152,36 @@ class LanController extends AbstractController
         return $this->render('lan/annuaire.html.twig');
     }
 
-    public function annuaireData(): Response
+    public function annuaireR($role): Response
     {
-        $user = getSQLArrayAssoc( 'SELECT nom FROM  user' );    
-        return  new JsonResponse(   $user    );
+        return $this->render('lan/annuaire.html.twig');
     }
 
-    //annuaireDatar()
+    public function annuaireRS($role, Session $session): Response
+    {
+        return $this->render('lan/annuaire.html.twig');
+    }
+
+    public function annuaireData(): Response
+    {
+        return  new Response( 'hello'  );
+
+        $dsn = "mysql:host=127.0.0.1;dbname=projet_FAST";
+        try {
+            $pdo = new PDO($dsn, 'xxx', 'xxx');
+        } catch (\PDOException $e) {
+            throw new \PDOException($e->getMessage(), (int)$e->getCode());
+        }
+        $rs = $pdo->prepare('SELECT nom FROM  user');
+        $res = [];
+        while ($ligne = $rs->fetch(PDO::FETCH_NUM)) {
+            $res[] = $ligne[0];
+        }
+        
+        //$user = getSQLArray( 'SELECT nom FROM  user' );    
+        return  new JsonResponse(   $res    );
+    }
+
     public function annuaireDataRepository( UserRepository $userRepository ): Response
     {
         //OK en DQL
