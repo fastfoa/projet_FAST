@@ -566,6 +566,20 @@ class InscriptionController extends AbstractController
         if ( is_int($userID) )
         {
             // add à la session
+            $doctrine = $this->getDoctrine();
+            $entityManager = $doctrine->getManager();
+            $user = $entityManager->getRepository(User::class)->find($userID);
+            $session = $entityManager->getRepository(Session::class)->find($session);
+
+            if (!$user) {
+                throw $this->createNotFoundException(
+                    'No user found for id '.$userID
+                );
+            }
+
+            $user->addSession($session);
+            $entityManager->flush();
+
             // add
             return $this->redirect($this->generateUrl('listUsersSession', array('session' => $session->getID(), 'role' => $role, 'roleName' => $roleName )));
 
