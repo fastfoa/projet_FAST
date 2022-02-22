@@ -20,6 +20,8 @@ class ProfilController extends AbstractController
         ]);
     }
 
+    // Organisme de Formation regarde les infos de :    
+    // l'apprenti 
     public function profilOF_APP(User $user): Response
     {
         return $this->render('profil/profilOF_APP.html.twig', 
@@ -27,8 +29,8 @@ class ProfilController extends AbstractController
             'user' => $user,
             'fonction' => "Apprenti"        
         ]);
-    }
-    
+    }    
+    // formateur
     public function profilOF_Formateur(User $user): Response
     {
         return $this->render('profil/profilOF_Formateur.html.twig', 
@@ -36,8 +38,8 @@ class ProfilController extends AbstractController
             'user' => $user,
             'fonction' => "Formateur"        
         ]);
-    }
-    
+    }       
+    // maitre d'apprentissage
     public function profilOF_MA(User $user): Response
     {
         return $this->render('profil/profilOF_MA.html.twig', 
@@ -45,8 +47,8 @@ class ProfilController extends AbstractController
             'user' => $user,
             'fonction' => "Maître d'Apprentissage"        
         ]);
-    }
-
+    }    
+    // l'entreprise
     public function profilOF_Entreprise(User $user): Response
     {
         return $this->render('profil/profilOF_Entreprise.html.twig', 
@@ -56,6 +58,139 @@ class ProfilController extends AbstractController
         ]);
     }
     
+    // L'Apprenti regarde les infos de:
+    // l'OF
+    public function profilAPP_OF(User $user): Response
+    {
+        return $this->render('profil/profilAPP_OF.html.twig', 
+        [
+            'user' => $user,
+            'fonction' => "Organisme de Formation"        
+        ]);
+    }
+    // formateur
+    public function profilAPP_Formateur(User $user): Response
+    {
+        return $this->render('profil/profilAPP_Formateur.html.twig', 
+        [
+            'user' => $user,
+            'fonction' => "Formateur"        
+        ]);
+    }
+    // maître d'apprentissage 
+    public function profilAPP_MA(User $user): Response
+    {
+        return $this->render('profil/profilAPP_MA.html.twig', 
+        [
+            'user' => $user,
+            'fonction' => "Maître d'apprentissage"        
+        ]);
+    }
+    // l'entreprise
+    public function profilAPP_Entreprise(User $user): Response
+    {
+        return $this->render('profil/profilAPP_Entreprise.html.twig', 
+        [
+            'user' => $user,
+            'fonction' => "Entreprise"        
+        ]);
+    }
 
+    // Le Formateur regarde les infos de :
+    //l'OF
+    public function profilFOR_OF(User $user): Response
+    {
+        return $this->render('profil/profilFOR_OF.html.twig', 
+        [
+            'user' => $user,
+            'fonction' => "Organisme de formation"        
+        ]);
+    }        
+    // l'apprenti
+    public function profilFOR_APP(User $user): Response
+    {
+        return $this->render('profil/profilFOR_APP.html.twig', 
+        [
+            'user' => $user,
+            'fonction' => "Apprenti"        
+        ]);
+    }
+    // maître d'apprentissage
+    public function profilFOR_MA(User $user): Response
+    {
+         return $this->render('profil/profilFOR_MA.html.twig', 
+         [
+             'user' => $user,
+             'fonction' => "Maître d'apprentissage"
+         ]);
+    }
+    // l'entreprise
+    public function profilFOR_Entreprise(User $user): Response
+    {
+         return $this->render('profil/profilFOR_Entreprise.html.twig', 
+         [
+             'user' => $user,
+             'fonction' => "Entreprise"
+         ]);
+    }
 
+    // maître d'apprentissage regarde les infos de :
+    // l'OF
+    public function profilMA_OF(User $user): Response
+    {
+        return $this->render('profil/profilMA_OF.html.twig', 
+        [
+            'user' => $user,
+            'fonction' => "Organisme de formation"        
+        ]);
+    }         
+    // l'apprenti
+    public function profilMA_APP(User $user): Response
+    {
+        return $this->render('profil/profilMA_APP.html.twig', 
+        [
+            'user' => $user,
+            'fonction' => "Apprenti"        
+        ]);
+    } 
+    // Formateur
+    public function profilMA_FOR(User $user): Response
+    {
+         return $this->render('profil/profilMA_FOR.html.twig', 
+         [
+             'user' => $user,
+             'fonction' => "Formateur"
+         ]);
+    } 
+
+        // L'entreprise regarde les infos de :
+    // l'OF
+    public function profilENT_OF(User $user): Response
+    {
+        return $this->render('profil/profilENT_OF.html.twig', 
+        [
+            'user' => $user,
+            'fonction' => "Organisme de formation"        
+        ]);
+    }         
+    // l'apprenti
+    public function profilENT_APP(User $user): Response
+    {
+        return $this->render('profil/profilENT_APP.html.twig', 
+        [
+            'user' => $user,
+            'fonction' => "Apprenti"        
+        ]);
+    } 
+    // Formateur
+    public function profilENT_FOR(User $user): Response
+    {
+         return $this->render('profil/profilENT_FOR.html.twig', 
+         [
+             'user' => $user,
+             'fonction' => "Formateur"
+         ]);
+    } 
+  
+     
 }
