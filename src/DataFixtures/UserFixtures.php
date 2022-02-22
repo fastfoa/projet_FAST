@@ -15,7 +15,7 @@ class UserFixtures extends Fixture
         $user = new User();
         $user->setEmail("toto@titi.fr");
         $user->setRoles(["ROLE_APP"]);
-        $user->setPassword('$2y$13$Td/hy38QDVNeXhaQIz.jZOU23o0HVOe8LDLuYAK9aXQDYeNLff5aO'); // 0123
+        $user->setPassword('$2y$13$Td/hy38QDVNeXhaQIz.jZOU23o0HVOe8LDLuYAK9aXQDYeNLff5aO'); // 9876
         $user->setNom("Titi");
         $user->setPrenom("Toto");
         $user->setAdresse("45 rue du champ");

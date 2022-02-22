@@ -32,6 +32,10 @@
 				{{ form_widget(form.save) }}
 			</div>
 		</div>
+		{% if notification %}
+			<div class="alert alert-info">{{ notification }}</div>
+		{% endif %}
 		{{form_end(form)}}
 	</div>
+
 {% endblock %}

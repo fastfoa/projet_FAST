@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
 use App\Form\MonCompteAppType;
 use App\Form\MonCompteEntrepriseType;
 use App\Form\MonCompteFormateurType;
@@ -20,26 +21,20 @@ class ModifInfoPersoController extends AbstractController
     {
         $this->entityManager = $entityManager;
     }
-
+    
     public function monCompteAPP(Request $request, UserPasswordEncoderInterface $encoder): Response
     {
-        $notification = null; 
+        $notification = null;
         $contact = $this->getUser();
         $form = $this->createForm(MonCompteAppType::class, $contact);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $old_pwd = $form->get('old_password')->getData();
             
-            if ($encoder->isPasswordValid($contact, $old_pwd)) {
-                //enregistrer le nom nouveaux nom
-                $new_nom = $form->get('nom')->getData();
-                $new_nom = strip_tags($new_nom);
-                $contact->setNom($new_nom);
-                
-                //enregistrer le nom nouveaux prenom
-                $new_prenom = $form->get('prenom')->getData();
-                $new_prenom = strip_tags($new_prenom);
-                $contact->setPrenom($new_prenom);
+            
+                //enregistrer la nouvelle email
+                $new_email = $form->get('email')->getData();
+                $new_email = strip_tags($new_email);
+                $contact->setEmail($new_email);
 
                 //enregistrer la nouvelle adresse
                 $new_adresse = $form->get('adresse')->getData();
@@ -74,21 +69,28 @@ class ModifInfoPersoController extends AbstractController
                 $new_SportifHautNiveau = strip_tags($new_SportifHautNiveau);
                 $contact->setSportifHautNiveau($new_SportifHautNiveau);
 
+
+                //mdp
+                $old_pwd = $form->get('old_password')->getData();
+
+            if ($encoder->isPasswordValid($contact, $old_pwd)) {
+
                 // modification du mot de pass 
 
                 $new_pwd= $form->get('new_password')->getData();
                 $password = $encoder->encodePassword($contact, $new_pwd);
                 $contact->setPassword($password);
 
-                $entityManager->persist($contact);
-                $doctrine = $this->getDoctrine();
-                $entityManager = $doctrine->getManager();
-                $this->$entityManager->flush();
+                $this->entityManager->persist($contact);
+                // $doctrine = $this->getDoctrine();
+                // $entityManager = $doctrine->getManager();
+                $this->entityManager->flush();
                 $notification = "Vos information ont  été mis à jour.";
             }
         }
         return $this->render('mon_compte/monCompteApp.html.twig',[
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'notification' => $notification
         ]);
     }
     public function monCompteEntreprise(Request $request, UserPasswordEncoderInterface $encoder): Response
@@ -99,9 +101,11 @@ class ModifInfoPersoController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) 
         {
-            $old_pwd = $form->get('old_password')->getData();
+                //enregistrer la nouvelle email
+                $new_email = $form->get('email')->getData();
+                $new_email = strip_tags($new_email);
+                $contact->setEmail($new_email);
 
-            if ($encoder->isPasswordValid($contact, $old_pwd)) {
                 //enregistrer le nom nouveaux nom
                 $new_nom = $form->get('nom')->getData();
                 $new_nom = strip_tags($new_nom);
@@ -128,17 +132,21 @@ class ModifInfoPersoController extends AbstractController
                 $new_EmployeurPublic = $form->get('EmployeurPublic')->getData();
                 $new_EmployeurPublic = strip_tags($new_EmployeurPublic);
                 $contact->setEmployeurPublic($new_EmployeurPublic);
+
+                // modification du mot de pass 
+                $old_pwd = $form->get('old_password')->getData();
+
+            if ($encoder->isPasswordValid($contact, $old_pwd)) {
                 // modification du mot de pass 
 
                 $new_pwd= $form->get('new_password')->getData();
                 $password = $encoder->encodePassword($contact, $new_pwd);
                 $contact->setPassword($password);
 
-                $entityManager->persist($contact);
-
-                $doctrine = $this->getDoctrine();
-                $entityManager = $doctrine->getManager();
-                $this->$entityManager->flush();
+                $this->entityManager->persist($contact);
+                // $doctrine = $this->getDoctrine();
+                // $entityManager = $doctrine->getManager();
+                $this->entityManager->flush();
                 $notification = "Vos information ont  été mis à jour.";
             }
         }
@@ -175,18 +183,27 @@ class ModifInfoPersoController extends AbstractController
             $new_nom = strip_tags($new_nom);
             $contact->setNom($new_nom);
 
+            //enregistrer la nouvelle email
+            $new_email = $form->get('email')->getData();
+            $new_email = strip_tags($new_email);
+            $contact->setEmail($new_email);
 
-            // modification du mot de pass 
+             // modification du mot de pass 
+             $old_pwd = $form->get('old_password')->getData();
 
-            $new_pwd= $form->get('new_password')->getData();
-            $password = $encoder->encodePassword($contact, $new_pwd);
-            $contact->setPassword($password);
-
-            $entityManager->persist($contact);
-            $doctrine = $this->getDoctrine();
-            $entityManager = $doctrine->getManager();
-            $this->$entityManager->flush();
-            $notification = "Votre mot de passe a bien été mis à jour.";
+             if ($encoder->isPasswordValid($contact, $old_pwd)) {
+                 // modification du mot de pass 
+ 
+                 $new_pwd= $form->get('new_password')->getData();
+                 $password = $encoder->encodePassword($contact, $new_pwd);
+                 $contact->setPassword($password);
+ 
+                 $this->entityManager->persist($contact);
+                 // $doctrine = $this->getDoctrine();
+                 // $entityManager = $doctrine->getManager();
+                 $this->entityManager->flush();
+                 $notification = "Vos information ont  été mis à jour.";
+             }
         }
         return $this->render('mon_compte/monCompteMA.html.twig',[
             'form' => $form->createView()
@@ -217,19 +234,27 @@ class ModifInfoPersoController extends AbstractController
             $contact->setNom($new_nom);
 
 
+            //enregistrer la nouvelle email
+            $new_email = $form->get('email')->getData();
+            $new_email = strip_tags($new_email);
+            $contact->setEmail($new_email);
 
+             // modification du mot de pass 
+             $old_pwd = $form->get('old_password')->getData();
 
-            // modification du mot de pass 
-
-            $new_pwd= $form->get('new_password')->getData();
-            $password = $encoder->encodePassword($contact, $new_pwd);
-            $contact->setPassword($password);
-
-            $entityManager->persist($contact);
-            $doctrine = $this->getDoctrine();
-            $entityManager = $doctrine->getManager();
-            $this->$entityManager->flush();
-            $notification = "Votre mot de passe a bien été mis à jour.";
+             if ($encoder->isPasswordValid($contact, $old_pwd)) {
+                 // modification du mot de pass 
+ 
+                 $new_pwd= $form->get('new_password')->getData();
+                 $password = $encoder->encodePassword($contact, $new_pwd);
+                 $contact->setPassword($password);
+ 
+                 $this->entityManager->persist($contact);
+                 // $doctrine = $this->getDoctrine();
+                 // $entityManager = $doctrine->getManager();
+                 $this->entityManager->flush();
+                 $notification = "Vos information ont  été mis à jour.";
+             }
         }
         return $this->render('mon_compte/monCompteFormateur.html.twig',[
             'form' => $form->createView()

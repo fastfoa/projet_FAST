@@ -93,7 +93,7 @@ aide:
     controller: App\Controller\LanController::aide
 
 monCompteAPP:
-    path: monCompteAPP
+    path: /monCompteAPP
     controller: App\Controller\ModifInfoPersoController::monCompteAPP
 
 monCompteEntreprise:
