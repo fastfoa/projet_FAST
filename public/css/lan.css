@@ -324,4 +324,13 @@ label
     color: #fff;
   }
 
-  
+  .avatar
+{
+    width: 100px;
+    height: 100px;
+}
+
+hr
+{
+    border-top: 1px solid #ccc; 
+}

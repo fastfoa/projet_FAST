@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block myStylesheets %}
+<style>
+.avatar
+{
+    width: 100px;
+    height: 100px;
+}
+</style>
+{% endblock myStylesheets %}
+
+{% block myJavascripts %}{% endblock %}
+
+{% block body %}
+    <div class="container-fluid">
+        {% include 'profil/civilite.html.twig' %}
+
+        {% block OF %}
+        {% endblock OF %}
+    
+        {% block Formateur %}
+        {% endblock Formateur %}
+
+        {% block MA %}
+        {% endblock MA %}
+
+        {% block ENT %}
+        {% endblock ENT %}
+    </div>
+{% endblock body %}
