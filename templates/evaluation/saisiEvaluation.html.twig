@@ -15,7 +15,7 @@
 
 
 {% block body %}
-
+{{form_start(form)}}
 	<div class="container-fluid">
 		<div class="row bg-bar">
 			<h3 class="text-center">Evaluation {{ nameCompet }}</h3>
@@ -48,7 +48,9 @@
         </div>
 
 	</div>
-	
-
+	{% if message %}
+        <div class="alert-info">{{message}}</div>
+    {% endif %}
+{{form_end(form)}}
 
 {% endblock body %}
