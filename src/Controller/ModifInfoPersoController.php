@@ -53,10 +53,6 @@ class ModifInfoPersoController extends AbstractController
                 $new_telephone = strip_tags($new_telephone);
                 $contact->setTelephone($new_telephone);
 
-                //enregistrer le nouveaux diplome
-                $new_diplome = $form->get('diplome')->getData();
-                $new_diplome = strip_tags($new_diplome);
-                $contact->setDiplome($new_diplome);
 
                 //enregistrer le nouveaux new_RepresentantLegal1
                 $new_RepresentantLegal1 = $form->get('RepresentantLegal1')->getData();
@@ -68,17 +64,7 @@ class ModifInfoPersoController extends AbstractController
                 $new_RepresentantLegal2 = strip_tags($new_RepresentantLegal2);
                 $contact->setRepresentantLegal2($new_RepresentantLegal2);
 
-                //enregistrer le nouveaux new_RepresentantLegal2
-                $new_NIR = $form->get('NIR')->getData();
-                $new_NIR = strip_tags($new_NIR);
-                $contact->setNIR($new_NIR);
-
-                //enregistrer le nouveaux RegimeSocial
-                $new_RegimeSocial = $form->get('RegimeSocial')->getData();
-                $new_RegimeSocial = strip_tags($new_RegimeSocial);
-                $contact->setRegimeSocial($new_RegimeSocial);
-
-                //enregistrer le nouveaux RegimeSocial
+                //enregistrer le nouveaux tavailleurhadicapé
                 $new_TravailleurHandicape = $form->get('TravailleurHandicape')->getData();
                 $new_TravailleurHandicape = strip_tags($new_TravailleurHandicape);
                 $contact->setTravailleurHandicape($new_TravailleurHandicape);
@@ -87,26 +73,6 @@ class ModifInfoPersoController extends AbstractController
                 $new_SportifHautNiveau = $form->get('SportifHautNiveau')->getData();
                 $new_SportifHautNiveau = strip_tags($new_SportifHautNiveau);
                 $contact->setSportifHautNiveau($new_SportifHautNiveau);
-
-                //enregistrer le nouveaux SituationAvantContrat
-                $new_SituationAvantContrat = $form->get('SituationAvantContrat')->getData();
-                $new_SituationAvantContrat = strip_tags($new_SituationAvantContrat);
-                $contact->setSituationAvantContrat($new_SituationAvantContrat);
-
-                //enregistrer le nouveaux DernierDiplome
-                $new_DernierDiplome = $form->get('DernierDiplome')->getData();
-                $new_DernierDiplome = strip_tags($new_DernierDiplome);
-                $contact->setDernierDiplome($new_DernierDiplome);
-
-                //enregistrer le nouveaux DerniereClasse
-                $new_DerniereClasse = $form->get('DerniereClasse')->getData();
-                $new_DerniereClasse = strip_tags($new_DerniereClasse);
-                $contact->setDerniereClasse($new_DerniereClasse);
-
-                //enregistrer le nouveaux DerniereClasse
-                $new_DiplomePlusHaut = $form->get('DiplomePlusHaut')->getData();
-                $new_DiplomePlusHaut = strip_tags($new_DiplomePlusHaut);
-                $contact->setDiplomePlusHaut($new_DiplomePlusHaut);
 
                 // modification du mot de pass 
 
@@ -151,36 +117,17 @@ class ModifInfoPersoController extends AbstractController
                 $new_telephone = strip_tags($new_telephone);
                 $contact->setTelephone($new_telephone);
 
-                //enregistrer le nouveaux Siret
-                $new_Siret = $form->get('siret')->getData();
-                $new_Siret = strip_tags($new_Siret);
-                $contact->setSiret($new_Siret);
-
-                //enregistrer le nouveaux NAF
-                $new_NAF = $form->get('NAF')->getData();
-                $new_NAF = strip_tags($new_NAF);
-                $contact->setNAF($new_NAF);
+               
 
                 //enregistrer le nouveaux Effectif
                 $new_Effectif = $form->get('Effectif')->getData();
                 $new_Effectif = strip_tags($new_Effectif);
                 $contact->setEffectif($new_Effectif);
 
-                //enregistrer le nouveaux ConventionCollective
-                $new_ConventionCollective = $form->get('ConventionCollective')->getData();
-                $new_ConventionCollective = strip_tags($new_ConventionCollective);
-                $contact->setConventionCollective($new_ConventionCollective);
-
                 //enregistrer le nouveaux Public|| Public
                 $new_EmployeurPublic = $form->get('EmployeurPublic')->getData();
                 $new_EmployeurPublic = strip_tags($new_EmployeurPublic);
                 $contact->setEmployeurPublic($new_EmployeurPublic);
-
-                //enregistrer le nouveaux Public|| Public
-                $new_CodeIDCCConvention = $form->get('CodeIDCCConvention')->getData();
-                $new_CodeIDCCConvention = strip_tags($new_CodeIDCCConvention);
-                $contact->setCodeIDCCConvention($new_CodeIDCCConvention);
-
                 // modification du mot de pass 
 
                 $new_pwd= $form->get('new_password')->getData();
@@ -264,25 +211,12 @@ class ModifInfoPersoController extends AbstractController
             $new_telephone = strip_tags($new_telephone);
             $contact->setTelephone($new_telephone);
 
-            //enregistrer le nouveaux Siret
-            $new_Siret = $form->get('siret')->getData();
-            $new_Siret = strip_tags($new_Siret);
-            $contact->setSiret($new_Siret);
-
             //enregistrer le nom nouveaux nom
             $new_nom = $form->get('nom')->getData();
             $new_nom = strip_tags($new_nom);
             $contact->setNom($new_nom);
 
-            //enregistrer le nom nouveaux prenom
-            $new_prenom = $form->get('prenom')->getData();
-            $new_prenom = strip_tags($new_prenom);
-            $contact->setPrenom($new_prenom);
 
-            //enregistrer le nouveaux diplome
-            $new_diplome = $form->get('diplome')->getData();
-            $new_diplome = strip_tags($new_diplome);
-            $contact->setDiplome($new_diplome);
 
 
             // modification du mot de pass 
