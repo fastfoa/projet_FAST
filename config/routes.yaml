@@ -194,7 +194,18 @@ listAllMA:
 
 # ********************** les Profils **************************
 
-
 profilOF_APP: 
-    path: /profilOF_APP/{app}
+    path: /profilOF_APP/{user}
     controller: App\Controller\ProfilController::profilOF_APP
+
+profilOF_Formateur: 
+    path: /profilOF_Formateur/{user}
+    controller: App\Controller\ProfilController::profilOF_Formateur
+
+profilOF_MA: 
+    path: /profilOF_MA/{user}
+    controller: App\Controller\ProfilController::profilOF_MA
+
+profilOF_Entreprise: 
+    path: /profilOF_Entreprise/{user}
+    controller: App\Controller\ProfilController::profilOF_Entreprise
