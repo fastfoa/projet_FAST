@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block myStylesheets %}
+    <link rel="stylesheet" href='{{ asset("css/inscriptionForm.css")}}'>  
+{% endblock %}
+
+{% block body %}
+
+
+<a href="{{ path('login') }}">login</a><br>
+<a href="{{ path('dashBoardStudent') }}">dashBoardStudent</a><br>
+<a href="{{ path('dashBoardSchool') }}">dashBoardSchool</a><br>
+<a href="{{ path('dashBoardEntrprise') }}">dashBoardEntreprise</a><br>
+<a href="{{ path('dashBoardSkill') }}">dashboardskill</a><br>
+<a href="{{ path('followTraining') }}">followTraining</a><br>
+<a href="{{ path('getSkillToBe') }}">getSkillToBe</a><br>
+<a href="{{ path('formulaireEleve') }}">formulaireEleve</a><br>
+<a href="{{ path('formulaireG') }}">formulaireG</a><br>
+<a href="{{ path('followCompany') }}">followCompany</a><br>
+<a href="{{ path('suiviCompetences') }}">suiviCompetences</a><br>
+<a href="{{ path('files') }}">files</a><br>
+<hr>
+<a href="{{ path('downloadlist') }}">downloadlist </a><br>
+<a href="{{ path('inscriptionEntreprise') }}">inscriptionEntreprise </a><br>
+<a href="{{ path('inscriptionMA') }}">inscriptionMA </a><br>
+<a href="{{ path('inscriptionApprenti') }}">inscriptionApprenti </a><br>
+<a href="{{ path('inscriptionFormateur') }}">inscriptionFormateur </a><br>
+
+<a href="{{ path('addSession') }}">session </a><br>
+<a href="{{ path('dashOFPrincipal') }}">dashOFPrincipal </a><br>
+
+<a href="{{ path('test') }}">TEST</a><br>
+
+{% endblock %}
