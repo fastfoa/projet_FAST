@@ -64,21 +64,22 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         return $query->getResult();
     }
 
-    public function annuaireDataSQL( $role ): array
+    public function annuaireDataSQL( $role )
     {
-        $conn = $this->getConnection();
-
+        $conn = $this->getEntityManager()->getConnection();
         $sql = '
             SELECT nom FROM user u
             WHERE p.price > :price
             ORDER BY p.price ASC
             ';
         $sql = '
-            SELECT nom FROM user u';
+            SELECT u.id 
+            FROM user u';
+ //           WHERE u.nom = :nom';
 
         $stmt = $conn->prepare($sql);
 
-        //$resultSet = $stmt->executeQuery(['price' => $price]);
+        //$resultSet = $stmt->executeQuery(['nom' => 'Titi' ]);
         $resultSet = $stmt->executeQuery();
         return  $resultSet;
     }
