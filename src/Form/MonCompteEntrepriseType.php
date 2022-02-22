@@ -35,40 +35,16 @@ class MonCompteEntrepriseType extends AbstractType
                 'placeholder' => 'telephone'
             ]
         ])
-        ->add('siret', TextType::class,[
-            'label'=> false,
-            'attr' => [
-                'placeholder' => 'siret'
-            ]
-        ])
-        ->add('NAF', TextType::class,[
-            'label'=> false,
-            'attr' => [
-                'placeholder' => 'NAF'
-            ]
-        ])
         ->add('Effectif', NumberType::class,[
             'label'=> false,
             'attr' => [
                 'placeholder' => 'Effectif'
             ]
         ])
-        ->add('ConventionCollective', NumberType::class,[
-            'label'=> false,
-            'attr' => [
-                'placeholder' => 'ConventionCollective'
-            ]
-        ])
         ->add('EmployeurPublic', NumberType::class,[
             'label'=> false,
             'attr' => [
                 'placeholder' => 'EmployeurPublic'
-            ]
-        ])
-        ->add('CodeIDCCConvention', NumberType::class,[
-            'label'=> false,
-            'attr' => [
-                'placeholder' => 'CodeIDCCConvention'
             ]
         ])
         

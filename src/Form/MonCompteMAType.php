@@ -44,20 +44,6 @@ class MonCompteMAType extends AbstractType
             ->add('telephone', TextType::class,
                 [ 'attr' => [ 'placeholder' => 'Entrez votre numéro de téléphone' ] ]
             )
-            ->add('dateNaissance', DateType::class, [
-                'widget' => 'single_text',
-                'disabled' => true,
-                'attr' => [
-                    'placeholder' => 'date',
-                    'type' => 'text',
-                    'onfocusout' => "(this.type='text')",
-                    'onfocus' => "(this.type='date')",
-                    'style'=> 'color: white'
-                    
-                ],
-                'label' => false,
-                'format' => 'yyyy-MM-dd'
-            ])
             ->add('old_password', PasswordType::class,[
                 'label' => false,
                 'mapped'=> false,

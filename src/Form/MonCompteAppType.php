@@ -55,40 +55,8 @@ class MonCompteAppType extends AbstractType
                 'placeholder' => 'telephone'
             ]
         ])
-        ->add('diplome', TextType::class,[
-            'label'=> false,
-            'attr' => [
-                'placeholder' => 'diplome'
-            ]
-        ])
 
-
-        ->add('dateNaissance', DateType::class, [
-            'widget' => 'single_text',
-            'disabled' => true,
-            'attr' => [
-                'placeholder' => 'date',
-                'type' => 'text',
-                'onfocusout' => "(this.type='text')",
-                'onfocus' => "(this.type='date')",
-                'style'=> 'color: white'
-                
-            ],
-            'label' => false,
-            'format' => 'yyyy-MM-dd'
-        ])
-        ->add('Genre', ChoiceType::class,[
-            'label'=> false,
-            'disabled' => true,
-            'attr' => [
-                'placeholder' => 'Genre',
-                'style'=> 'color: white'
-            ],
-            'choices'  => [
-                'Homme' => true,
-                'Femme' => false,
-            ],
-        ])
+        
         ->add('RepresentantLegal1', TextType::class,[
             'label'=> false,
             'attr' => [
@@ -99,42 +67,6 @@ class MonCompteAppType extends AbstractType
             'label'=> false,
             'attr' => [
                 'placeholder' => 'Representant Legal 2'
-            ]
-        ])
-        ->add('NIR', TextType::class,[
-            'label'=> false,
-            'attr' => [
-                'placeholder' => 'NIR'
-            ]
-        ])
-        ->add('DepNaissance', TextType::class,[
-            'label'=> false,
-            'disabled' => true,
-            'attr' => [
-                'placeholder' => 'Departement de Naissance',
-                'style'=> 'color: white'
-            ]
-        ])
-        ->add('CommuneNaissance', TextType::class,[
-            'label'=> false,
-            'disabled' => true,
-            'attr' => [
-                'placeholder' => 'Commune de Naissance',
-                'style'=> 'color: white'
-            ]
-        ])
-        ->add('Nationalite', TextType::class,[
-            'label'=> false,
-            'disabled' => true,
-            'attr' => [
-                'placeholder' => 'Nationalite',
-                'style'=> 'color: white'
-            ]
-        ])
-        ->add('RegimeSocial', TextType::class,[
-            'label'=> false,
-            'attr' => [
-                'placeholder' => 'Regime Social'
             ]
         ])
         ->add('TravailleurHandicape', ChoiceType::class,[
@@ -154,36 +86,6 @@ class MonCompteAppType extends AbstractType
                 'NON' => false,
             ],
             
-        ])
-        ->add('SituationAvantContrat', TextType::class,[
-            'label'=> false,
-            'attr' => [
-                'placeholder' => 'Situation Avant Contrat'
-            ]
-        ])
-        ->add('DernierDiplome', TextType::class,[
-            'label'=> false,
-            'attr' => [
-                'placeholder' => 'Dernier Diplome'
-            ]
-        ])
-        ->add('DerniereClasse', TextType::class,[
-            'label'=> false,
-            'attr' => [
-                'placeholder' => 'Dernier classe'
-            ]
-        ])
-        ->add('ConventionCollective', TextType::class,[
-            'label'=> false,
-            'attr' => [
-                'placeholder' => 'Convention Collective'
-            ]
-        ])
-        ->add('DiplomePlusHaut', TextType::class,[
-            'label'=> false,
-            'attr' => [
-                'placeholder' => 'Diplome Plus Haut'
-            ]
         ])
         ->add('old_password', PasswordType::class,[
             'label' => false,

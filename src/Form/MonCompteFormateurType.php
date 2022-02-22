@@ -20,13 +20,6 @@ class MonCompteFormateurType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-        ->add('Genre', TextType::class,[
-            'disabled' => true,
-            'attr' => [
-                'placeholder' => 'genre',
-                'style'=> 'color: white'
-            ]
-        ])
       
        ->add('email', TextType::class,[
            'disabled' => true,
@@ -62,27 +55,6 @@ class MonCompteFormateurType extends AbstractType
              
            ]
        ])
-  
-      
-       ->add('diplome',TextType::class,[
-           'attr' => [
-               'placeholder' => 'diplome',
-               
-            
-           ]
-       ])
-        ->add('dateNaissance', DateType::class, [
-            'widget' => 'single_text',
-            'attr' => [
-                'placeholder' => 'date naissance',
-                'type' => 'text',
-                'onfocusout' => "(this.type='text')",
-                'onfocus' => "(this.type='date')"
-               
-            ],
-            'label' => false,
-            'format' => 'yyyy-MM-dd'
-        ])
         ->add('old_password', PasswordType::class,[
             'label' => false,
             'mapped'=> false,
