@@ -130,6 +130,8 @@ addUser:
 addUserSession:
     path: /addUserSession/{session}/{role}/{roleName}
     controller: App\Controller\InscriptionController::addUserSession
+
+
     
 ## App\Controller\DashController
 
@@ -149,6 +151,11 @@ dashOFSession:
     path: /dashOFSession/{session}
     controller: App\Controller\DashController::dashOFSession
 
+dashEntreprise:
+    path: /dashEntreprise/{entreprise}
+    controller: App\Controller\DashController::dashEntreprise
+
+
 editApprenti:
     path: /feditApprenti/{userID}
     controller: App\Controller\DashController::editApprenti
@@ -164,6 +171,10 @@ listApprentis:
 listUsersSession:
     path: /listUsersSession/{session}/{role}/{roleName}
     controller: App\Controller\DashController::listUsersSession
+
+listUsersEntreprise:
+    path: /listUsersEntreprise/{entreprise}/{role}/{roleName}
+    controller: App\Controller\DashController::listUsersEntreprise
 
 listFormateurs:
     path: /listFormateurs/{session}
@@ -183,6 +194,8 @@ listAllFormateurs:
     path: /listAllFormateurs
     controller: App\Controller\DashController::listAllFormateurs
 
+
+
 listAllEntreprises: 
     path: /listAllEntreprises
     controller: App\Controller\DashController::listAllEntreprises
@@ -197,3 +210,5 @@ listAllMA:
 profilOF_APP: 
     path: /profilOF_APP/{app}
     controller: App\Controller\ProfilController::profilOF_APP
+
+
