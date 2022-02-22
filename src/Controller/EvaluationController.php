@@ -10,7 +10,10 @@ use App\Entity\Competence;
 use App\Entity\User;
 use App\Entity\Session;
 use App\Form\EvaluationType;
+use App\Form\EvaluationAppType;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Security;
+
 
 
 
@@ -31,8 +34,18 @@ class EvaluationController extends AbstractController
 
     public function saisiEvaluation(Competence $competence, User $app, Session $session, Request $request): Response
     {
+
+        $user = $this->getUser();
+       // dd($user);
+        if(!empty($user))
+        {
+          $role = $user->getRoles()[0];
+          dd($role);
+        }
+    
         $message = false;
         $evaluation = new Evaluation();
+        $nom ="";
        
         $nameCompet = $competence->getName();
         $evaluation->setIdCompetence($competence->getId());
@@ -41,7 +54,7 @@ class EvaluationController extends AbstractController
         $evaluation->setIdFormateur(1);
         $evaluation->setIdSession($session->getId(1));
 
-        $form = $this->createForm(EvaluationType::class, $evaluation);
+        $form = $this->createForm(EvaluationAppType::class, $evaluation);
 
         $form->handleRequest($request);
 
@@ -52,13 +65,16 @@ class EvaluationController extends AbstractController
             $entityManager->persist($evaluation);
             $entityManager->flush();
             $message = "le formulaire a bien était pris en compte ";
+            $nom = "steeve madeen";
             
         }
 
         return $this->render('evaluation/saisiEvaluation.html.twig', [
                 'form' => $form->createView(),
                 'nameCompet' => $nameCompet,
-                'message' => $message
+                'message' => $message,
+                'nom'=>$nom
+                
             ]);
         
     }
