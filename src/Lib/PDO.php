@@ -8,7 +8,8 @@ function getPDO()
 {
     $dsn = "mysql:host=127.0.0.1;dbname=projet_FAST";
     try {
-        $pdo = new PDO($dsn, 'alexis.s', 'alexis.SQL@011012');
+        //$pdo = new PDO($dsn, 'alexis.s', 'alexis.SQL@011012');
+        $pdo = new PDO($dsn, 'xxx', 'xxx');
     } catch (\PDOException $e) {
         throw new \PDOException($e->getMessage(), (int)$e->getCode());
     }
@@ -67,12 +68,14 @@ function getSQLSingle($query)
 {
     $pdo = getPDO();
     $rs = $pdo->prepare($query);
-    return  $rs->fetch(PDO::FETCH_NUM )[0];
+    $rs->execute();
+    return  $rs->fetchColumn();
 }
 
 function getSQLSingleAssoc($query)
 {
     $pdo = getPDO();
     $rs = $pdo->prepare($query);
-    return  $rs->fetch(PDO::FETCH_ASSOC );
+    $rs->execute();
+    return  $rs->fetch( );
 }

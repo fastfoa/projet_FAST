@@ -164,9 +164,12 @@ class LanController extends AbstractController
 
     public function annuaireData(): Response
     {
-        $users = getSQLArrayKV( 'SELECT nom as v, id as k FROM  user' );
-
-        $users = 
+        //$users = getSQLArrayKV( 'SELECT nom as v, id as k FROM  user' );
+        $users = getSQLList( 'SELECT nom as v, id as k FROM  user' );
+        //$users = getSQLArrayAssoc( 'SELECT nom, id FROM  user' );
+        //$users = getSQLSingle( 'SELECT * FROM  user where id = 44' );
+        //$users = getSQLSingleAssoc( 'SELECT * FROM  user where id = 55' );
+        $usersf = 
         [ 
             "1" => "Titi",
             "2" => "Google",
