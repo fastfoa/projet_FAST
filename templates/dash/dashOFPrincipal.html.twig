@@ -41,7 +41,7 @@
 										<td>{{session.debut|date("d/m/y")}}</td>
 										<td>{{session.fin|date("d/m/y")}}</td>
 										<td>{{session.nom}}</td>
-										<td>{{formation}}</td>
+										<td>{{session.idformation}}</td>
 										{#<td>{{session.formation}}</td>#}
 										<td>								
 											<a href="{{ path( 'dashOFSession',{'session':session.id} ) }}">

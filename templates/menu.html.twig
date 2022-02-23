@@ -24,9 +24,12 @@
 			<li class="nav-item">
 				<a class="nav-link  " href="{{ path('aide') }}">aide</a>
 			</li>
-			{# <li class="nav-item">
-				<a class="nav-link " href="{{ path('monCompte') }}">mon Compte</a>
-			</li> #}
+			{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+				<li class="nav-item">
+					<a class="nav-link " href="{{ path('monCompte') }}">mon Compte</a>
+				</li>
+			{% endif %}
+
 		</ul>
 
 

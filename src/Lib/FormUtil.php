@@ -1,6 +1,5 @@
 <?php
-
-function filtreForm($form, $contact )
+function filtreForm($form, $contact)
 {
     $new_email = $form->get('email')->getData();
     $new_email = strip_tags($new_email);

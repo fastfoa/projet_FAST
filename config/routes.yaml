@@ -2,36 +2,14 @@
 #    path: /
 #    controller: App\Controller\DefaultController::index
 
-
 login:
     path: /login
-    controller: App\Controller\LanController::login
-
-                                
-dashBoardStudent:
-    path: app/dashBoardStudent
-    controller: App\Controller\LanController::dashBoardStudent
-
-# dashBoardSchool:
-#     path: of/dashBoardSchool
-#         controller: App\Controller\LanController::dashBoardSchool
+    controller: App\Controller\SecurityController::login
 
 files:
     path: /files
     controller: App\Controller\LanController::files
-    
-dashBoardSkill:
-    path: /dashBoardSkill
-    controller: App\Controller\LanController::dashBoardSkill
-
-getSkillToBe:
-    path: /getSkillToBe
-    controller: App\Controller\LanController::getSkillToBe
-
-suiviCompetences:
-    path: /suiviCompetences
-    controller: App\Controller\LanController::suiviCompetences
-    
+        
 formulaireEleve:
     path: /formulaireEleve
     controller: App\Controller\LanController::formulaireEleve
@@ -92,21 +70,9 @@ aide:
     path: /aide
     controller: App\Controller\LanController::aide
 
-monCompteAPP:
-    path: /monCompteAPP
-    controller: App\Controller\ModifInfoPersoController::monCompteAPP
-
-monCompteEntreprise:
-    path: /monCompteEntreprise
-    controller: App\Controller\ModifInfoPersoController::monCompteEntreprise
-
-monCompteMA:
-    path: /monCompteMA
-    controller: App\Controller\ModifInfoPersoController::monCompteMA
-
-monCompteFormateur:
-    path: /monCompteFormateur
-    controller: App\Controller\ModifInfoPersoController::monCompteFormateur
+monCompte:
+    path: /monCompte
+    controller: App\Controller\ModifInfoPersoController::monCompte
 
 ## App\Controller\InscriptionController
 
