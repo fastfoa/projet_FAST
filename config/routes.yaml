@@ -2,12 +2,11 @@
 #    path: /
 #    controller: App\Controller\DefaultController::index
 
-
 login:
     path: /login
     controller: App\Controller\LanController::login
 
-                                
+                               
 dashBoardStudent:
     path: app/dashBoardStudent
     controller: App\Controller\LanController::dashBoardStudent
@@ -60,6 +59,8 @@ dashBoardEntrprise:
     path: ent/dashBoardEntrprise
     controller: App\Controller\LanController::dashBoardEntrprise
 
+## App\Controller\DocumentController
+
 upload: 
     path: /upload
     controller: App\Controller\DocumentController::upload
@@ -79,6 +80,8 @@ deletedocument:
 stageForm:
     path: /stageForm
     controller: App\Controller\StageFormController::stageForm
+
+## App\Controller\LanController
 
 formations:
     path: /formations
@@ -194,3 +197,17 @@ listAllMA:
 profilOF_APP: 
     path: /profilOF_APP/{app}
     controller: App\Controller\ProfilController::profilOF_APP
+
+# ********************** RGPD **************************
+
+rgpdForm:
+    path: /rgpdForm
+    controller: App\Controller\RGPDController::rgpdForm
+
+rgpdIsOk:
+    path: /rgpdIsOk
+    controller: App\Controller\RGPDController::rgpdIsOk
+
+rgpdIsNok:
+    path: /rgpdIsNok
+    controller: App\Controller\RGPDController::rgpdIsNok

@@ -8,8 +8,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\Persistence\ManagerRegistry;
-
-use App\Form\FormateurType;
+use App\Form\RGPDType;
 
 use Doctrine\ORM\EntityManagerInterface;
 
@@ -134,6 +133,7 @@ class LanController extends AbstractController
     {
         return $this->render('documentOff.html.twig');
     }
+
 
 
 }
