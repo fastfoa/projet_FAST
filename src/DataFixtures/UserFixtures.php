@@ -57,7 +57,7 @@ class UserFixtures extends Fixture
         $user->setEffectif(500);
         $user->setConventionCollective("Convention collective");
         $user->setEmployeurPublic(false);
-        
+
         $user->setCodeIDCCConvention("8905");
         $manager->persist($user);
 
@@ -105,13 +105,13 @@ class UserFixtures extends Fixture
         // Fixture Organisme de formation
         
         $user = new User();
-        $user->setEmail("organisme@formation.fr");
+        $user->setEmail($faker->companyEmail);
         $user->setRoles(["ROLE_OF"]);
         $user->setPassword('$2y$13$psh41BRs9DM2NbQbmswERufwjiWzX8WNqjGvIFgqGimHTNunlGSHm'); // 789
-        $user->setSiret("rr4ndgrg45");
+        $user->setSiret($faker->siret);
         $user->setCFA(true);
-        $user->setAdresse("39 Rue du général");
-        $user->setTelephone("0342289457");
+        $user->setAdresse($faker->address);
+        $user->setTelephone($faker->phoneNumber);
         $user->setDenominationCFAResponsable("CFA Nord");
         $user->setNumeroUAICFA("dgjdg8sd");
         $user->setDiplomeVise("developpeur web et web mobile");
@@ -127,7 +127,7 @@ class UserFixtures extends Fixture
         // Fixture Admin
         for ($i = 0; $i <= 3; $i++) {
         $user = new User();
-        $user->setEmail("super@admin.fr");
+        $user->setEmail($faker->email);
         $user->setRoles(["ROLE_ADMIN"]);
         $user->setPassword('$2y$13$psh41BRs9DM2NbQbmswERufwjiWzX8WNqjGvIFgqGimHTNunlGSHm'); // 789
         $manager->persist($user);
@@ -137,7 +137,7 @@ class UserFixtures extends Fixture
 
          for ($i = 0; $i <= 10; $i++) {
          $user = new User();
-         $user->setEmail("you@entreprise.fr");
+         $user->setEmail($faker->companyEmail);
          $user->setRoles(["ROLE_IND"]);
          $user->setPassword('$2y$13$Td/hy38QDVNeXhaQIz.jZOU23o0HVOe8LDLuYAK9aXQDYeNLff5aO'); // 0123
          $user->setNom("Zuckerberg");
