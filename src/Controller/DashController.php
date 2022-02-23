@@ -11,8 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Session;
 use App\Entity\User;
 use App\Form\SessionType;
-
-
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class DashController extends AbstractController
 {
@@ -29,9 +28,14 @@ class DashController extends AbstractController
     public function dashOFPrincipal(): Response
     {
         $doctrine = $this->getDoctrine();
-        $listSession = $doctrine->getRepository(Session::class)->findAll();
-        $id = 1;
-        $formation = getSQLSingle( 'SELECT formation.nom  as formation FROM session INNER JOIN session ON formation.id=session.formation_id WHERE session.id = '.$id.';' );
+        //$listSession = $doctrine->getRepository(Session::class)->findAll();
+        $listSession = getSQLArrayAssoc('SELECT session.id, formation.nom as f, session.debut, session.fin, session.nom 
+        FROM session, formation 
+        WHERE formation.id=session.id_formation' );
+        
+
+
+        //return new JsonResponse( $listSession );
         $menu = 
         [
             'Sessions' => 'dashOFPrincipal', 
@@ -45,7 +49,6 @@ class DashController extends AbstractController
         [
             'listSession' => $listSession,
             'menu' => $menu,
-            'formation' => $formation
         ]);    
     }
 
