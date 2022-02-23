@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -60,6 +62,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $session;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Session", inversedBy="users")
+     */
+    private $sessions;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -236,6 +243,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="boolean", options={"default" : "1"})
      */
     private $profilEnabled = true;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $RaisonSocial;
+
+    public function __construct()
+    {
+        $this->sessions = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -815,6 +832,42 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setProfilEnabled(bool $profilEnabled): self
     {
         $this->profilEnabled = $profilEnabled;
+
+        return $this;
+    }
+
+    public function getRaisonSocial(): ?string
+    {
+        return $this->RaisonSocial;
+    }
+
+    public function setRaisonSocial(?string $RaisonSocial): self
+    {
+        $this->RaisonSocial = $RaisonSocial;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Session>
+     */
+    public function getSessions(): Collection
+    {
+        return $this->sessions;
+    }
+
+    public function addSession(Session $session): self
+    {
+        if (!$this->sessions->contains($session)) {
+            $this->sessions[] = $session;
+        }
+
+        return $this;
+    }
+
+    public function removeSession(Session $session): self
+    {
+        $this->sessions->removeElement($session);
 
         return $this;
     }

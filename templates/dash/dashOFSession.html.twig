@@ -23,17 +23,17 @@
         </div>        
 		<div class="row my-3">
             <div class="col-4 txt-normal"> 
-            <a href="{{ path( 'listUsersSession',{'session':session.id, 'role':'MODE_APP', 'roleName':'Apprenti' }) }}">
+            <a href="{{ path( 'listUsersSession',{'session':session.id, 'role':'ROLE_APP', 'roleName':'Apprenti' }) }}">
                 <div class="boutonForm">Apprenti</div>
             </a>
             </div>
             <div class="col-4 txt-normal"> 
-            <a href="{{ path( 'listUsersSession',{'session':session.id, 'role':'MODE_FORMATEUR', 'roleName':'Formateur'}) }}">
+            <a href="{{ path( 'listUsersSession',{'session':session.id, 'role':'ROLE_FORMATEUR', 'roleName':'Formateur'}) }}">
                 <div class="boutonForm">Formateur</div>
             </a>
             </div>
             <div class="col-4 txt-normal"> 
-            <a href="{{ path( 'listUsersSession',{'session':session.id, 'role':'MODE_MA', 'roleName':"Maitre d'apprentissage"}) }}">
+            <a href="{{ path( 'listUsersSession',{'session':session.id, 'role':'ROLE_MA', 'roleName':"Maitre d'apprentissage"}) }}">
                 <div class="boutonForm">Maitre Apprentissage</div>
             </a>
             </div>
