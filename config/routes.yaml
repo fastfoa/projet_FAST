@@ -14,7 +14,7 @@ dashBoardStudent:
 
 dashBoardSchool:
     path: of/dashBoardSchool
-    controller: App\Controller\LanController::dashBoardSchool
+        controller: App\Controller\LanController::dashBoardSchool
 
 files:
     path: /files
@@ -108,8 +108,6 @@ monCompteFormateur:
     path: /monCompteFormateur
     controller: App\Controller\ModifInfoPersoController::monCompteFormateur
 
-
-
 ## App\Controller\InscriptionController
 
 inscriptionEntreprise:
@@ -186,8 +184,6 @@ listMA:
     path: /listMA/{session}
     controller: App\Controller\DashController::listMA
    
-
-
 listAllAprentis: 
     path: /listAllAprentis
     controller: App\Controller\DashController::listAllAprentis

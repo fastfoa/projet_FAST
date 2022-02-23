@@ -10,50 +10,31 @@
 					<span class="sr-only">(current)</span>
 				</a>
 			</li>
-				
+
 			{% if menu is defined %}
 				{% for item, route in menu %}
 					<li class="nav-item">
 						<a class="nav-link  " href="{{ path(route) }}">{{item}}</a>
 					</li>
 				{% endfor %}
-			{% endif %} 
+			{% endif %}
 			<li class="nav-item">
 				<a class="nav-link  " href="{{ path('documents') }}">documents</a>
 			</li>
 			<li class="nav-item">
 				<a class="nav-link  " href="{{ path('aide') }}">aide</a>
 			</li>
-			{% if is_granted('ROLE_ADMIN') == false %}
-				{% if is_granted('ROLE_APP') %}
-					<li class="nav-item">
-						<a class="nav-link " href="{{ path('monCompteAPP') }}">mon Compte</a>
-					</li>
-				{% endif %}
-				{% if is_granted('ROLE_ENT') %}
-					<li class="nav-item">
-						<a class="nav-link " href="{{ path('monCompteEntreprise') }}">mon Compte </a>
-					</li>
-				{% endif %}
-				{% if is_granted('ROLE_MA') %}
-					<li class="nav-item">
-						<a class="nav-link " href="{{ path('monCompteMA') }}">mon Compte </a>
-					</li>
-				{% endif %}
-				{% if is_granted('ROLE_FORMATEUR') %}
-					<li class="nav-item">
-						<a class="nav-link " href="{{ path('monCompteFormateur') }}">mon Compte </a>
-					</li>
-				{% endif %}
-			{% endif %}
+			<li class="nav-item">
+				<a class="nav-link " href="{{ path('monCompte') }}">mon Compte</a>
+			</li>
 		</ul>
 
 
 		{% if is_granted('IS_AUTHENTICATED_FULLY') %}
-            <a class="boutonForm my-2 my-sm-0 m-3" aria-current="page" href="{{ path('app_logout')}}">Déconnexion</a>
-        {% else %}
-            <a class="boutonForm my-2 my-sm-0 m-3" aria-current="page" href="{{ path('login')}}">Connexion</a>
-        {% endif %}
+			<a class="boutonForm my-2 my-sm-0 m-3" aria-current="page" href="{{ path('app_logout')}}">Déconnexion</a>
+		{% else %}
+			<a class="boutonForm my-2 my-sm-0 m-3" aria-current="page" href="{{ path('login')}}">Connexion</a>
+		{% endif %}
 
 
 	</div>
