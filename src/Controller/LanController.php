@@ -154,7 +154,9 @@ class LanController extends AbstractController
 
     public function annuaireR($role): Response
     {
-        return $this->render('lan/annuaire.html.twig');
+        //$users = getSQLArrayKV( 'SELECT nom as v, id as k FROM  user' );
+        $users = getSQLList( 'SELECT nom as v, id as k FROM  user WHERE roles   = ' );
+        return  new JsonResponse(   $users    );
     }
 
     public function annuaireRS($role, Session $session): Response
@@ -169,28 +171,6 @@ class LanController extends AbstractController
         //$users = getSQLArrayAssoc( 'SELECT nom, id FROM  user' );
         //$users = getSQLSingle( 'SELECT * FROM  user where id = 44' );
         //$users = getSQLSingleAssoc( 'SELECT * FROM  user where id = 55' );
-        $usersf = 
-        [ 
-            "1" => "Titi",
-            "2" => "Google",
-            "22" => "Gilles",
-            "21" => "Gillou",
-            "3" => "Iam",
-            "31" => "Iom",
-            "4" => "Bourget",
-            "5" => "Foreach Academy"
-        ];
-        $usersx = 
-        [ 
-             "Titi",
-             "Google",
-             "Gilles",
-             "Gillou",
-             "Iam",
-             "Iom",
-             "Bourget",
-             "Foreach Academy"
-        ];
         return  new JsonResponse(   $users    );
     }
 

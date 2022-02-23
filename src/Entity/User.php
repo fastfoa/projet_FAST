@@ -237,6 +237,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $profilEnabled = true;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $RoleString;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -815,6 +820,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setProfilEnabled(bool $profilEnabled): self
     {
         $this->profilEnabled = $profilEnabled;
+
+        return $this;
+    }
+
+    public function getRoleString(): ?string
+    {
+        return $this->RoleString;
+    }
+
+    public function setRoleString(string $RoleString): self
+    {
+        $this->RoleString = $RoleString;
 
         return $this;
     }
