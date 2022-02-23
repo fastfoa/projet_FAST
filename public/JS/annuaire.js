@@ -6,7 +6,10 @@ $(document).ready(function () {
 
 function autocomplete(inp, arr) {
 
+    //value = arr.values().next().value;
+    //this.value = 'G';
     console.log(arr);
+    //console.log(this.value);
     /*the autocomplete function takes two arguments,
       the text field element and an array of possible autocompleted values:*/
     var currentFocus;
@@ -34,7 +37,7 @@ function autocomplete(inp, arr) {
         for ([xkey, xval] of Object.entries(arr)) {
             var item = xval;
             var itemId = xkey;
-            console.log(itemId);
+            //console.log(itemId);
 
             /*check if the item starts with the same letters as the text field value:*/
             if (item.substr(0, val.length).toUpperCase() == val.toUpperCase()) { /*create a DIV element for each matching element:*/
@@ -127,7 +130,7 @@ function autocomplete(inp, arr) {
 function _annuaire( elem, url ) 
 {
     var rect = elem.getBoundingClientRect();
-    console.log(rect.top, rect.right, rect.bottom, rect.left);
+    //console.log(rect.top, rect.right, rect.bottom, rect.left);
 
     $("#annuairePopup").css({ 
         position: "absolute",

@@ -7,7 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
-
+use App\Controller\ProfilController;
 use App\Entity\Session;
 use App\Entity\User;
 use App\Form\SessionType;
@@ -151,8 +151,15 @@ class DashController extends AbstractController
     public function listAll( $role,  $roleName ): Response
     {
         $doctrine = $this->getDoctrine();
-        $list = $doctrine->getRepository(User::class)->findAll();
+        //$list = $doctrine->getRepository(User::class)->findAll();
+        $list = getSQLArrayAssoc( 
+            "SELECT user.nom, user.prenom, user.telephone, user.email, user.id, s.nom as ns
+             FROM  user
+             LEFT JOIN user_in_session as us ON us.id_user=user.id 
+             LEFT JOIN session as s ON us.id_session=s.id 
+             WHERE user.role_string='$role'");
     
+
         //return new Response( "toto");
         $menu = 
         [
@@ -192,5 +199,7 @@ class DashController extends AbstractController
     {
         return $this->listAll( 'ROLE_MA', "Maitre d'apprentissage" );
     }
+
+
 
 }

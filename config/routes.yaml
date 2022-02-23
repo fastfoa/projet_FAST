@@ -131,8 +131,8 @@ editApprenti:
     controller: App\Controller\DashController::editApprenti
 
 editUser:
-    path: /editUser/{userID}
-    controller: App\Controller\DashController::editUser
+    path: /editUser/{user}
+    controller: App\Controller\ProfilController::editUser
 
 listApprentis:
     path: /listApprentis/{session}

@@ -20,10 +20,34 @@ class ProfilController extends AbstractController
         ]);
     }
 
+    public function editUser( User $user): Response
+    {
+        //$aut = $this->getUser();
+        //$roleViewer = $aut->getRoles()[0];
+        $roleViewer = 'ROLE_OF';
+        $roleTarget = $user->getRoleString();
+
+        //$user = $user->getId();
+        if ( $roleViewer ==  'ROLE_OF' )
+        {
+                 if ($roleTarget == 'ROLE_APP')
+                        return $this->profilOF_APP($user);
+            else if ($roleTarget == 'ROLE_FORMATEUR')
+                        return $this->profilOF_Formateur($user);
+            else if ($roleTarget == 'ROLE_MA')
+                        return  $this->profilOF_MA($user);
+            else if ($roleTarget == 'ROLE_ENT')
+                       return $this->profilOF_Entreprise($user);
+        }
+    }
+
+
+
     // Organisme de Formation regarde les infos de :    
     // l'apprenti 
     public function profilOF_APP(User $user): Response
     {
+        //dd( $user );
         return $this->render('profil/profilOF_APP.html.twig', 
         [
             'user' => $user,
