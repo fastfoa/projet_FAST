@@ -200,6 +200,26 @@ listAllMA:
     path: /listAllMA
     controller: App\Controller\DashController::listAllMA
 
+annuaire:
+    path: /annuaire/
+    controller: App\Controller\LanController::annuaire
+
+annuaireR:
+    path: /annuaireR/{role}
+    controller: App\Controller\LanController::annuaireR
+
+annuaireRS:
+    path: /annuaireRS/{role}/{session}
+    controller: App\Controller\LanController::annuaireRS
+
+annuaireData:
+    path: /annuaireData
+    controller: App\Controller\LanController::annuaireData
+
+
+resultAnnuaire:
+    path: /resultAnnuaire
+    controller: App\Controller\LanController::resultAnnuaire
 
 # ********************** les Profils **************************
 

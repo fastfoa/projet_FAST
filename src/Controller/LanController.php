@@ -2,16 +2,28 @@
 
 namespace App\Controller;
 
-use App\Entity\User;
+use Doctrine\DBAL\Connection;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use App\Repository\UserRepository;
+use ContainerT2hE2KD\getDoctrine_QueryDqlCommandService;
+use App\Lib\PDO;
+//use PDO;
+
+use App\Entity\User;
+use App\Entity\Session;
 
 use App\Form\FormateurType;
 
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+
+
+
 
 class LanController extends AbstractController
 {
@@ -134,6 +146,59 @@ class LanController extends AbstractController
     {
         return $this->render('documentOff.html.twig');
     }
-    
 
+    
+    public function annuaire(): Response
+    {
+        return $this->render('lan/annuairePopup.html.twig');
+    }
+
+    public function annuaireR($role): Response
+    {
+        return $this->render('lan/annuaire.html.twig');
+    }
+
+    public function annuaireRS($role, Session $session): Response
+    {
+        return $this->render('lan/annuaire.html.twig');
+    }
+
+    public function annuaireData(): Response
+    {
+        //$users = getSQLArrayKV( 'SELECT nom as v, id as k FROM  user' );
+        $users = getSQLList( 'SELECT nom as v, id as k FROM  user' );
+        //$users = getSQLArrayAssoc( 'SELECT nom, id FROM  user' );
+        //$users = getSQLSingle( 'SELECT * FROM  user where id = 44' );
+        //$users = getSQLSingleAssoc( 'SELECT * FROM  user where id = 55' );
+        $usersf = 
+        [ 
+            "1" => "Titi",
+            "2" => "Google",
+            "22" => "Gilles",
+            "21" => "Gillou",
+            "3" => "Iam",
+            "31" => "Iom",
+            "4" => "Bourget",
+            "5" => "Foreach Academy"
+        ];
+        $usersx = 
+        [ 
+             "Titi",
+             "Google",
+             "Gilles",
+             "Gillou",
+             "Iam",
+             "Iom",
+             "Bourget",
+             "Foreach Academy"
+        ];
+        return  new JsonResponse(   $users    );
+    }
+
+    public function annuaireDataRepository( UserRepository $userRepository ): Response
+    {
+        //OK en DQL
+        $user = $userRepository->annuaireDataNative( 'MODE_APP' );
+        return  new JsonResponse(   $user    );
+    }
 }
