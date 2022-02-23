@@ -149,7 +149,7 @@ class LanController extends AbstractController
 
     public function annuaire(): Response
     {
-        return $this->render('lan/annuaire.html.twig');
+        return $this->render('lan/annuairePopup.html.twig');
     }
 
     public function annuaireR($role): Response

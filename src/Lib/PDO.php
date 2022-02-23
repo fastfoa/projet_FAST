@@ -8,7 +8,7 @@ function getPDO()
 {
     $dsn = "mysql:host=127.0.0.1;dbname=projet_FAST";
     try {
-        $pdo = new PDO($dsn, 'xxx', 'xxx');
+        $pdo = new PDO($dsn, 'alexis.s', 'alexis.SQL@011012');
     } catch (\PDOException $e) {
         throw new \PDOException($e->getMessage(), (int)$e->getCode());
     }

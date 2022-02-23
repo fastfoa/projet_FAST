@@ -64,25 +64,45 @@ input[type=submit] {
   background-color: DodgerBlue !important; 
   color: #ffffff; 
 }
+.popup{
+  background-color: red;
+  height: 150px;
+  width: 350px;
+}
 </style>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <script>
-    window.onload = function() {
+     {# function testpopup() {
     $('#annuairePopup').modal('show');
-    };
+    }; #}
+
+    var returnIDPopup=0;
+    $(document).ready(function(){
+      $("#annuairePopup").hide();
+        $("#click").click(function(){
+          $("#annuairePopup").show();
+        })
+        $("#check").click(function(){
+          $("#aff").text( returnIDPopup);
+        })
+    })
 </script>
 
 </head>     
 <body>
-
-<div id="annuairePopup">
-<form autocomplete="off" action="/action_page.php">
-  <div class="autocomplete" style="width:300px;">
-    <input id="myInput" type="text" name="myCountry" placeholder="Country">
+  <div class="popup">
+    <div id="click">ok</div>
+    <div id="check">check</div>
+    <div id="aff"></div>
+    <div id="annuairePopup">
+      <form autocomplete="off" action="/action_page.php">
+        <div class="autocomplete" style="width:300px;">
+          <input id="myInput" type="text" name="myCountry" placeholder="Country">
+        </div>
+        <input id="envoyer" type="submit">
+      </form>
+    </div>
   </div>
-  <input type="submit">
-</form>
-</div>
 
 <script>
 function autocomplete(inp, arr) {
@@ -128,8 +148,10 @@ function autocomplete(inp, arr) {
               /*insert the value for the autocomplete text field:*/
               var id =  this.getElementsByTagName("input")[0].value;
               inp.value = arr[ id ];
+              returnIDPopup = id;
               console.log( inp.value );
               console.log( id );
+              $("#annuairePopup").hide();
               /*close the list of autocompleted values,
               (or any other open lists of autocompleted values:*/
               closeAllLists();
