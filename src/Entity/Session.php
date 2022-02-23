@@ -6,7 +6,6 @@ use App\Repository\SessionRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-
 /**
  * @ORM\Entity(repositoryClass=SessionRepository::class)
  */
@@ -35,20 +34,9 @@ class Session
     private $fin;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Formation::class)
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\Column(type="integer",   nullable=true)
      */
-    private $formation;
-
-    /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\User", mappedBy="sessions")
-     */
-    private $users;
-
-    public function __construct()
-    {
-        $this->users = new ArrayCollection();
-    }
+    private $idFormation;
 
     public function getId(): ?int
     {
@@ -91,42 +79,19 @@ class Session
         return $this;
     }
 
-    public function getFormation(): ?Formation
+    public function getIdFormation(): ?int
     {
-        return $this->formation;
+        return $this->idFormation;
     }
 
-    public function setFormation(?Formation $formation): self
+    public function setIdFormation(int $idFormation): self
     {
-        $this->formation = $formation;
+        $this->idFormation = $idFormation;
 
         return $this;
     }
 
-    /**
-     * @return Collection<int, User>
-     */
-    public function getUsers(): Collection
-    {
-        return $this->users;
-    }
 
-    public function addUser(User $user): self
-    {
-        if (!$this->users->contains($user)) {
-            $this->users[] = $user;
-            $user->addSession($this);
-        }
 
-        return $this;
-    }
 
-    public function removeUser(User $user): self
-    {
-        if ($this->users->removeElement($user)) {
-            $user->removeSession($this);
-        }
-
-        return $this;
-    }
 }
