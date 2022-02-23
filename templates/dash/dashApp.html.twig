@@ -1,0 +1,85 @@
+{% extends 'base.html.twig' %}
+{% block myStylesheets %}
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+{% endblock %}
+{% block body %}
+
+	<div class="container-fluid bg-workSpace">
+		<div
+			class="row bg-bar">
+			{# <h3>Entreprise {{entreprise.nom}}</h3> #}
+			<h3>Interface Apprenti</h3>
+		</div>
+
+		<div class="row my-3">
+
+			<div class="col-3 txt-normal">
+
+				<p>
+					<a class="boutonForm btn-primary" data-toggle="collapse" href="#collapseExample1" 
+                    role="button" aria-expanded="false" aria-controls="collapseExample">
+						Mon Formateur
+					</a>
+				</p>
+				<div class="collapse" id="collapseExample1">
+					<div class="bg-bar card-body">
+							 <h3> Dina Adam</h3>
+								06-98-76-54
+								Dina@hotmail.com
+					</div>
+				</div>
+
+			</div>
+
+			<div class="col-3 txt-normal">
+				<p>
+					<a class="boutonForm btn-primary" data-toggle="collapse" href="#collapseExample2"
+                     role="button" aria-expanded="false" aria-controls="collapseExample">
+						Organisme de formation
+					</a>
+				</p>
+				<div class="collapse" id="collapseExample2">
+					<div class="bg-bar card-body">
+					          <h3> Dina Adam</h3>
+								06-98-76-54
+								Dina@hotmail.com
+					</div>
+				</div>
+			</div>
+
+			<div class="col-3 txt-normal">
+				<p>
+					<a class="boutonForm btn-primary" data-toggle="collapse" href="#collapseExample3"
+                     role="button" aria-expanded="false" aria-controls="collapseExample">
+						Maître d'apprentissage
+					</a>
+				</p>
+				<div class="collapse" id="collapseExample3">
+					<div class="bg-bar card-body">
+						       <h3> Dina Adam</h3>
+								06-98-76-54
+								Dina@hotmail.com
+					</div>
+				</div>
+			</div>
+			
+            <div class="col-3 txt-normal">
+				<p>
+					<a class="boutonForm btn-primary" data-toggle="collapse" href="#collapseExample3"
+                     role="button" aria-expanded="false" aria-controls="collapseExample">
+						Entreprise accueillante
+					</a>
+				</p>
+				<div class="collapse" id="collapseExample3">
+					<div class="bg-bar card-body">
+						       <h3> Dina Adam</h3>
+								06-98-76-54
+								Dina@hotmail.com
+					</div>
+				</div>
+			</div>
+			
+		</div>
+		<div class="row my-3"></div>
+	</div>
+{% endblock %}

@@ -107,6 +107,24 @@ class DashController extends AbstractController
     }
     
    
+    public function dashApp(User $apprenti ): Response
+    {
+        $menuA = 
+        [
+            'Sessions' => 'dashOFPrincipal', 
+            'Apprentis' => 'listAllAprentis', 
+            'Formateurs' => 'listAllFormateurs', 
+            'Maitres' => 'listAllMA', 
+            'Entreprises' => 'listAllEntreprises' 
+        ];
+        return $this->render(
+        'dash/dashApp.html.twig', 
+        [
+            'apprenti' => $apprenti,
+            'menu' => $menuA
+        ]);    
+    }
+    
     
     public function dashOFSession(Session $session ): Response
     {

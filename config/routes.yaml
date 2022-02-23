@@ -154,6 +154,11 @@ dashOFSession:
 dashEntreprise:
     path: /dashEntreprise/{entreprise}
     controller: App\Controller\DashController::dashEntreprise
+    
+dashApp:
+    path: /dashApp/{apprenti}
+    controller: App\Controller\DashController::dashApp
+
 
 
 editApprenti:
