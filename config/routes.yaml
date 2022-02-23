@@ -12,9 +12,9 @@ dashBoardStudent:
     path: app/dashBoardStudent
     controller: App\Controller\LanController::dashBoardStudent
 
-dashBoardSchool:
-    path: of/dashBoardSchool
-        controller: App\Controller\LanController::dashBoardSchool
+# dashBoardSchool:
+#     path: of/dashBoardSchool
+#         controller: App\Controller\LanController::dashBoardSchool
 
 files:
     path: /files

@@ -30,7 +30,8 @@ class DashController extends AbstractController
     {
         $doctrine = $this->getDoctrine();
         $listSession = $doctrine->getRepository(Session::class)->findAll();
-
+        $id = 1;
+        $formation = getSQLSingle( 'SELECT formation.nom FROM formation INNER JOIN session ON formation.id=session.formation_id WHERE session.id = '.$id.';' );
         $menu = 
         [
             'Sessions' => 'dashOFPrincipal', 
@@ -43,7 +44,8 @@ class DashController extends AbstractController
         'dash/dashOFPrincipal.html.twig', 
         [
             'listSession' => $listSession,
-            'menu' => $menu
+            'menu' => $menu,
+            'formation' => $formation
         ]);    
     }
 
