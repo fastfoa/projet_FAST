@@ -162,7 +162,7 @@ h1, h2, h3, h4, h5, h6
  }
  
  
-input[type=text], input[type=password], input[type=date], select
+input[type=text], input[type=password], input[type=date], input[type=number], select
 {
    width: 70%;
    height: 15px;

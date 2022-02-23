@@ -6,6 +6,7 @@ use App\Entity\Session;
 use App\Entity\Formation;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -48,14 +49,15 @@ class SessionType extends AbstractType
                 'label' => 'date de fin',
                 'format' => 'yyyy-MM-dd'
             ])
-            ->add('formation', EntityType::class, [
-                'class' => Formation::class,
-                'choice_label' => 'nom',
-                'multiple' => false,
-                'expanded' => false,
-                'required' => true,
-                'data' => null,
-     
+
+            ->add('idFormation', ChoiceType::class,[
+                'label'=> 'Formation',
+                'choices'  => [
+                    'DWWM' => 1,
+                    'CDA' => 2,
+                    'Bachelor' => 3,
+                ],
+                
             ])
             ->add('save', SubmitType::class,
             [ 'label' => "Enregistrer", 'attr' => [ 'class' => "boutonForm" ] ]

@@ -2,36 +2,14 @@
 #    path: /
 #    controller: App\Controller\DefaultController::index
 
-
 login:
     path: /login
-    controller: App\Controller\LanController::login
-
-                                
-dashBoardStudent:
-    path: app/dashBoardStudent
-    controller: App\Controller\LanController::dashBoardStudent
-
-dashBoardSchool:
-    path: of/dashBoardSchool
-    controller: App\Controller\LanController::dashBoardSchool
+    controller: App\Controller\SecurityController::login
 
 files:
     path: /files
     controller: App\Controller\LanController::files
-    
-dashBoardSkill:
-    path: /dashBoardSkill
-    controller: App\Controller\LanController::dashBoardSkill
-
-getSkillToBe:
-    path: /getSkillToBe
-    controller: App\Controller\LanController::getSkillToBe
-
-suiviCompetences:
-    path: /suiviCompetences
-    controller: App\Controller\LanController::suiviCompetences
-    
+        
 formulaireEleve:
     path: /formulaireEleve
     controller: App\Controller\LanController::formulaireEleve
@@ -94,8 +72,7 @@ aide:
 
 monCompte:
     path: /monCompte
-    controller: App\Controller\LanController::monCompte
-
+    controller: App\Controller\ModifInfoPersoController::monCompte
 
 ## App\Controller\InscriptionController
 
@@ -110,6 +87,10 @@ inscriptionApprenti:
 inscriptionMA:
     path: /inscriptionMA
     controller: App\Controller\InscriptionController::inscriptionMA
+    
+inscriptionInd:
+    path: /inscriptionInd
+    controller: App\Controller\InscriptionController::inscriptionInd
 
 inscriptionFormateur:
     path: /inscriptionFormateur
@@ -169,8 +150,6 @@ listMA:
     path: /listMA/{session}
     controller: App\Controller\DashController::listMA
    
-
-
 listAllAprentis: 
     path: /listAllAprentis
     controller: App\Controller\DashController::listAllAprentis
@@ -187,9 +166,16 @@ listAllMA:
     path: /listAllMA
     controller: App\Controller\DashController::listAllMA
 
-annuaire:
-    path: /annuaire/
-    controller: App\Controller\LanController::annuaire
+
+# ********************** Annuaire **************************
+
+annuairePopup:
+    path: /annuairePopup
+    controller: App\Controller\LanController::annuairePopup
+
+annuaireTest:
+    path: /annuaireTest
+    controller: App\Controller\LanController::annuaireTest
 
 annuaireR:
     path: /annuaireR/{role}
@@ -199,14 +185,9 @@ annuaireRS:
     path: /annuaireRS/{role}/{session}
     controller: App\Controller\LanController::annuaireRS
 
-annuaireData:
-    path: /annuaireData
-    controller: App\Controller\LanController::annuaireData
-
-
-resultAnnuaire:
-    path: /resultAnnuaire
-    controller: App\Controller\LanController::resultAnnuaire
+annuaire:
+    path: /annuaire
+    controller: App\Controller\LanController::annuaire
 
 # ********************** les Profils **************************
 

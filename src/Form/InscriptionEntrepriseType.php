@@ -16,10 +16,10 @@ class InscriptionEntrepriseType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('nom', TextType::class,[
+            ->add('raisonSocial', TextType::class,[
                 'label'=> false,
                 'attr' => [
-                    'placeholder' => 'nom'
+                    'placeholder' => 'Raison Social'
                 ]
             ])
             ->add('adresse', TextType::class,[

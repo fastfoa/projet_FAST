@@ -1,0 +1,22 @@
+{% extends 'lan/base.html.twig' %}
+{% block myStylesheets %}
+    <style>
+    
+    .mon_compte p{
+        text-align:center;
+         color: #fff;
+         font-size: 20px;
+    }
+    </style>
+{% endblock %}
+
+{% block body %}
+    <div class="mon_compte">
+        <h1>Mon compte</h1>
+        <p>Bienvenue {{app.user.prenom}} dans votre compte.<br> C'est dans cet espace que vous allez pouvoir gérer toutes vos information personnelles<br></p>
+        <a href="{{path('compte_modif_password')}}">- Modifier mon mot de passe</a><br>
+        <a href="#">- Gérer mon adresses</a><br>
+        <hr>
+    </div>
+
+{% endblock %}

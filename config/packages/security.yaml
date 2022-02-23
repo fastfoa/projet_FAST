@@ -43,10 +43,11 @@ security:
          - { path: ^/of, roles: ROLE_OF }
          - { path: ^/formateur, roles: ROLE_FORMATEUR }
          - { path: ^/ma, roles: ROLE_MA }
+         - { path: ^/ind, roles: ROLE_IND }
         # - { path: ^/profile, roles: ROLE_USER }
 
     role_hierarchy:
-        ROLE_ADMIN: ROLE_APP, ROLE_ENT, ROLE_OF, ROLE_FORMATEUR, ROLE_MA
+        ROLE_ADMIN: ROLE_APP, ROLE_ENT, ROLE_OF, ROLE_FORMATEUR, ROLE_MA, ROLE_IND
 
 when@test:
     security:

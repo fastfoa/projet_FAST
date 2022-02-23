@@ -105,7 +105,12 @@ class DashController extends AbstractController
     public function listUsersSession(Session $session, $role, $roleName): Response
     {
         $doctrine = $this->getDoctrine();
-        $list = $doctrine->getRepository(User::class)->findAll();
+        $sessionID = $session->getId();
+        $list = getSQLArrayAssoc( 
+            "SELECT user.nom, user.prenom, user.telephone, user.email, user.id 
+             FROM  user_in_session as s 
+             LEFT JOIN user ON s.id_user=user.id 
+             WHERE s.id_session=$sessionID and user.role_string='$role'");
     
         $menu = 
         [
@@ -170,22 +175,22 @@ class DashController extends AbstractController
     
     public function listAllAprentis(): Response
     {
-        return $this->listAll( 'MODE_APP', 'Apprenti' );
+        return $this->listAll( 'ROLE_APP', 'Apprenti' );
     }
     
     public function listAllFormateurs(): Response
     {
-        return $this->listAll( 'MODE_FORMATEUR','Formateur' );
+        return $this->listAll( 'ROLE_FORMATEUR','Formateur' );
     }
     
     public function listAllEntreprises(): Response
     {
-        return $this->listAll( 'MODE_ENT','Entreprise' );
+        return $this->listAll( 'ROLE_ENT','Entreprise' );
     }
 
     public function listAllMA(): Response
     {
-        return $this->listAll( 'MODE_MA', "Maitre d'apprentissage" );
+        return $this->listAll( 'ROLE_MA', "Maitre d'apprentissage" );
     }
 
 }

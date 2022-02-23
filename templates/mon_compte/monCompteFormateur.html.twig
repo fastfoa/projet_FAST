@@ -1,23 +1,28 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+{{form_start(form)}}
 	<div class="container-fluid">
 		<div class="row bg-bar">
-			<h3>Inscription Formateur</h3>
+			<h3>Modification Information Formateur</h3>
 		</div>
 		<div class="row">
 			<div class="col-6">
-				{{form_start(form)}}
 				{{form_widget(form.nom)}}
 				{{form_widget(form.email)}}
 				{{form_widget(form.adresse)}}
-				{{form_widget(form.dateNaissance)}}
 				{{form_widget(form.prenom)}}
-				{{form_widget(form.Genre)}}
 				{{form_widget(form.telephone)}}
-				{{form_widget(form.diplome)}}
-				{{form_end(form)}}
+				{{ form_widget(form.old_password) }}
+				{{ form_widget(form.new_password) }}
+				
+			</div>
+		</div>
+		<div class="row mx-auto">
+			<div class="col-12">
+				{{ form_widget(form.save) }}
 			</div>
 		</div>
 	</div>
+{{form_end(form)}}
 {% endblock %}

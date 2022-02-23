@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -60,6 +62,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $session;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Session", inversedBy="users")
+     */
+    private $sessions;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -242,6 +249,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $RoleString;
 
+    /**
+    * @ORM\Column(type="string", length=255, nullable=true)
+    */
+    private $RaisonSocial;
+
+    public function __construct()
+    {
+        $this->sessions = new ArrayCollection();
+    }
+
+    
     public function getId(): ?int
     {
         return $this->id;
@@ -829,10 +847,43 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->RoleString;
     }
 
-    public function setRoleString(string $RoleString): self
+    public function setRoleString(string $RoleString) 
     {
         $this->RoleString = $RoleString;
+    }
+    
+    public function getRaisonSocial(): ?string
+    {
+        return $this->RaisonSocial;
+    }
 
+    public function setRaisonSocial(?string $RaisonSocial): self
+    {
+        $this->RaisonSocial = $RaisonSocial;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Session>
+     */
+    public function getSessions(): Collection
+    {
+        return $this->sessions;
+    }
+
+    public function addSession(Session $session): self
+    {
+        if (!$this->sessions->contains($session)) {
+            $this->sessions[] = $session;
+        }
+
+        return $this;
+    }
+
+    public function removeSession(Session $session): self
+    {
+        $this->sessions->removeElement($session);
         return $this;
     }
 }
