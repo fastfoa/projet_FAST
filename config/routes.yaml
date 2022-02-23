@@ -123,6 +123,10 @@ inscriptionApprenti:
 inscriptionMA:
     path: /inscriptionMA
     controller: App\Controller\InscriptionController::inscriptionMA
+    
+inscriptionInd:
+    path: /inscriptionInd
+    controller: App\Controller\InscriptionController::inscriptionInd
 
 inscriptionFormateur:
     path: /inscriptionFormateur
