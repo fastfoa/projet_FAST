@@ -9,14 +9,14 @@ use Doctrine\Persistence\ObjectManager;
 use Faker;
 
 class UserFixtures extends Fixture
-{        
-    
+{
+
 
     public function load(ObjectManager $manager): void
-    {   
+    {
         $faker = Faker\Factory::create('fr_FR');
-       
-        
+
+
         // Fixture Apprenant
         $user = new User();
         $user->setEmail("toto@titi.fr");
@@ -42,8 +42,8 @@ class UserFixtures extends Fixture
         $user->setDiplomePlusHaut("bac+5");
         $user->setDiplomeVise("Concepteur developpeur d'applications");
         $user->setIntitulePreciDiplomevise("Titre professionnel de concepteur et développeur d'applications");
-        $manager->persist($user);      
-        
+        $manager->persist($user);
+
         // Fixture Entreprise
         $user = new User();
         $user->setEmail("my@entreprise.fr");
@@ -104,59 +104,56 @@ class UserFixtures extends Fixture
         $user->setEmail("super@admin.fr");
         $user->setRoles(["ROLE_ADMIN"]);
         $user->setPassword('$2y$13$psh41BRs9DM2NbQbmswERufwjiWzX8WNqjGvIFgqGimHTNunlGSHm'); // 789
-        $manager->persist($user);           
+        $manager->persist($user);
 
         // Fixture Apprenant
-        $user = [];
-        for ($i=0; $i <= 20; $i++)
-        {
-        $user[$i] = new User();
-        $user[$i]->setEmail($faker->email);
-        $user[$i]->setRoles(["ROLE_APP"]);
-        $user[$i]->setPassword($faker->md5); // 0123
-        $user[$i]->setNom($faker->lastName);
-        $user[$i]->setPrenom($faker->firstName);
-        $user[$i]->setAdresse($faker->address);
-        $user[$i]->setSession("CDA");
-        $user[$i]->setTelephone($faker->phoneNumber);
-        $user[$i]->setDiplome("bac+5");
-        $user[$i]->setDateNaissance($faker->dateTimeBetween($startDate = '-25 years', $endDate = '-20 years', $timezone = null));
-        $user[$i]->setGenre("M");
-        $user[$i]->setNIR("545ehrr5h5");
-        $user[$i]->setDepNaissance($faker->departmentName);
-        $user[$i]->setCommuneNaissance($faker->city);
-        $user[$i]->setNationalite("Française");
-        $user[$i]->setTravailleurHandicape("Non");
-        $user[$i]->setSportifHautNiveau($faker->boolean);
-        $user[$i]->setSituationAvantContrat("Chomage");
-        $user[$i]->setDernierDiplome("bac+5");
-        $user[$i]->setDerniereClasse("ce1");
-        $user[$i]->setDiplomePlusHaut("bac+5");
-        $user[$i]->setDiplomeVise("Concepteur developpeur d'applications");
-        $user[$i]->setIntitulePreciDiplomevise("Titre professionnel de concepteur et développeur d'applications");
-
+        for ($i = 0; $i <= 20; $i++) {
+            $user = new User();
+            $user->setEmail($faker->email);
+            $user->setRoles(["ROLE_APP"]);
+            $user->setPassword($faker->md5); // 0123
+            $user->setNom($faker->lastName);
+            $user->setPrenom($faker->firstName);
+            $user->setAdresse($faker->address);
+            $user->setSession("CDA");
+            $user->setTelephone($faker->phoneNumber);
+            $user->setDiplome("bac+5");
+            $user->setDateNaissance($faker->dateTimeBetween($startDate = '-25 years', $endDate = '-20 years', $timezone = null));
+            $user->setGenre("M");
+            $user->setNIR("545ehrr5h5");
+            $user->setDepNaissance($faker->departmentName);
+            $user->setCommuneNaissance($faker->city);
+            $user->setNationalite("Française");
+            $user->setTravailleurHandicape("Non");
+            $user->setSportifHautNiveau($faker->boolean);
+            $user->setSituationAvantContrat("Chomage");
+            $user->setDernierDiplome("bac+5");
+            $user->setDerniereClasse("ce1");
+            $user->setDiplomePlusHaut("bac+5");
+            $user->setDiplomeVise("Concepteur developpeur d'applications");
+            $user->setIntitulePreciDiplomevise("Titre professionnel de concepteur et développeur d'applications");
+            $manager->persist($user);
         }
-       
-        
+
+
 
         // Fixture Entreprise
-        $user = [];
-        for ($j=0; $j <= 20; $j++)
-        { 
-        $user[$j] = new User();
-        $user[$j]->setEmail($faker->companyEmail);
-        $user[$j]->setRoles(["ROLE_ENT"]); 
-        $user[$j]->setPassword($faker->md5); // 0123
-        $user[$j]->setNom($faker->company);
-        $user[$j]->setAdresse($faker->address);
-        $user[$j]->setTelephone($faker->phoneNumber);
-        $user[$j]->setSiret($faker->siret);
-        $user[$j]->setNAF("dj580");
-        $user[$j]->setEffectif($faker->numberBetween($min = 1, $max = 9000));
-        $user[$j]->setConventionCollective("Convention collective 66");
-        $user[$j]->setEmployeurPublic($faker->boolean);
-        $user[$j]->setCodeIDCCConvention("8905");
-        $manager->persist($user[$j]);
+
+        for ($j = 0; $j <= 20; $j++) {
+            $user = new User();
+            $user->setEmail($faker->companyEmail);
+            $user->setRoles(["ROLE_ENT"]);
+            $user->setPassword( '000' ); // 0123
+            $user->setNom($faker->company);
+            $user->setAdresse($faker->address);
+            $user->setTelephone($faker->phoneNumber);
+            $user->setSiret($faker->siret);
+            $user->setNAF("dj580");
+            $user->setEffectif($faker->numberBetween($min = 1, $max = 9000));
+            $user->setConventionCollective("Convention collective 66");
+            $user->setEmployeurPublic($faker->boolean);
+            $user->setCodeIDCCConvention("8905");
+            $manager->persist($user);
         }
         $manager->flush();
     }
