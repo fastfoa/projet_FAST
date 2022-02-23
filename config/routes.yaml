@@ -110,6 +110,10 @@ inscriptionApprenti:
 inscriptionMA:
     path: /inscriptionMA
     controller: App\Controller\InscriptionController::inscriptionMA
+    
+inscriptionInd:
+    path: /inscriptionInd
+    controller: App\Controller\InscriptionController::inscriptionInd
 
 inscriptionFormateur:
     path: /inscriptionFormateur
@@ -206,9 +210,22 @@ listAllMA:
 
 
 
-
 profilOF_APP: 
-    path: /profilOF_APP/{app}
+    path: /profilOF_APP/{user}
     controller: App\Controller\ProfilController::profilOF_APP
 
+<<<<<<< HEAD
 
+=======
+profilOF_Formateur: 
+    path: /profilOF_Formateur/{user}
+    controller: App\Controller\ProfilController::profilOF_Formateur
+
+profilOF_MA: 
+    path: /profilOF_MA/{user}
+    controller: App\Controller\ProfilController::profilOF_MA
+
+profilOF_Entreprise: 
+    path: /profilOF_Entreprise/{user}
+    controller: App\Controller\ProfilController::profilOF_Entreprise
+>>>>>>> symfo
