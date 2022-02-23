@@ -204,7 +204,6 @@ class UserFixtures extends Fixture
             $user->setPrenom($faker->firstName);
             $user->setAdresse($faker->address);
             $user->setTelephone($faker->phoneNumber);
-            $user->setSession("CDA");
             $user->setDiplome("bac+5");
             $user->setDateNaissance($faker->dateTimeBetween($startDate = '-25 years', $endDate = '-20 years', $timezone = null));
             $user->setGenre("M");

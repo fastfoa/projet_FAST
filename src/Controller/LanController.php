@@ -11,8 +11,7 @@ use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use App\Repository\UserRepository;
 use ContainerT2hE2KD\getDoctrine_QueryDqlCommandService;
-use App\Lib\PDO;
-//use PDO;
+use App\Lib\PDOUtil;
 
 use App\Entity\User;
 use App\Entity\Session;
@@ -32,11 +31,11 @@ class LanController extends AbstractController
      */
     public function index(): Response
     {
-        return $this->render('base.html.twig', [
+        return $this->render('lan/index.html.twig', [
             'controller_name' => 'LanController',
         ]);
     }
-
+    /*
      public function login(): Response
     {
         return $this->render('login.html.twig', [
@@ -71,7 +70,7 @@ class LanController extends AbstractController
             'controller_name' => 'LanController',
         ]);
     }
-
+    
     public function dashBoardEntrprise(): Response
     {
         return $this->render('dashBoardEntrprise.html.twig', [
@@ -92,7 +91,6 @@ class LanController extends AbstractController
             'controller_name' => 'LanController',
         ]);
     }
-
 
     public function dash(): Response
     {
@@ -129,7 +127,7 @@ class LanController extends AbstractController
             'controller_name' => 'LanController',
         ]);
     }
-
+*/
     public function test(): Response
     {
         return $this->render('test.html.twig', [
@@ -170,7 +168,7 @@ class LanController extends AbstractController
         //$users = getSQLArrayAssoc( 'SELECT nom, id FROM  user' );
         //$users = getSQLSingle( 'SELECT * FROM  user where id = 44' );
         //$users = getSQLSingleAssoc( 'SELECT * FROM  user where id = 55' );
-        $usersf = 
+        $users = 
         [ 
             "1" => "Titi",
             "2" => "Google",
