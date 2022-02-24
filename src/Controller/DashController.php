@@ -29,8 +29,14 @@ class DashController extends AbstractController
     public function dashOFPrincipal(): Response
     {
         $doctrine = $this->getDoctrine();
-        $listSession = $doctrine->getRepository(Session::class)->findAll();
+        //$listSession = $doctrine->getRepository(Session::class)->findAll();
+        $listSession = getSQLArrayAssoc('SELECT session.id, formation.nom as f, session.debut, session.fin, session.nom 
+        FROM session, formation 
+        WHERE formation.id=session.id_formation' );
+        
 
+
+        //return new JsonResponse( $listSession );
         $menu = 
         [
             'Sessions' => 'dashOFPrincipal', 
@@ -43,10 +49,9 @@ class DashController extends AbstractController
         'dash/dashOFPrincipal.html.twig', 
         [
             'listSession' => $listSession,
-            'menu' => $menu
+            'menu' => $menu,
         ]);    
     }
-
     public function addSession(Request $request): Response
     {
         $session =new Session();
