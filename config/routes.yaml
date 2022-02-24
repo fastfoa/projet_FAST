@@ -2,36 +2,14 @@
 #    path: /
 #    controller: App\Controller\DefaultController::index
 
-
 login:
     path: /login
-    controller: App\Controller\LanController::login
-
-                                
-dashBoardStudent:
-    path: app/dashBoardStudent
-    controller: App\Controller\LanController::dashBoardStudent
-
-dashBoardSchool:
-    path: of/dashBoardSchool
-    controller: App\Controller\LanController::dashBoardSchool
+    controller: App\Controller\SecurityController::login
 
 files:
     path: /files
     controller: App\Controller\LanController::files
-    
-dashBoardSkill:
-    path: /dashBoardSkill
-    controller: App\Controller\LanController::dashBoardSkill
-
-getSkillToBe:
-    path: /getSkillToBe
-    controller: App\Controller\LanController::getSkillToBe
-
-suiviCompetences:
-    path: /suiviCompetences
-    controller: App\Controller\LanController::suiviCompetences
-    
+        
 formulaireEleve:
     path: /formulaireEleve
     controller: App\Controller\LanController::formulaireEleve
@@ -94,8 +72,7 @@ aide:
 
 monCompte:
     path: /monCompte
-    controller: App\Controller\LanController::monCompte
-
+    controller: App\Controller\ModifInfoPersoController::monCompte
 
 ## App\Controller\InscriptionController
 
@@ -154,8 +131,8 @@ editApprenti:
     controller: App\Controller\DashController::editApprenti
 
 editUser:
-    path: /editUser/{userID}
-    controller: App\Controller\DashController::editUser
+    path: /editUser/{user}
+    controller: App\Controller\ProfilController::editUser
 
 listApprentis:
     path: /listApprentis/{session}
@@ -173,8 +150,6 @@ listMA:
     path: /listMA/{session}
     controller: App\Controller\DashController::listMA
    
-
-
 listAllAprentis: 
     path: /listAllAprentis
     controller: App\Controller\DashController::listAllAprentis
@@ -191,6 +166,28 @@ listAllMA:
     path: /listAllMA
     controller: App\Controller\DashController::listAllMA
 
+
+# ********************** Annuaire **************************
+
+annuairePopup:
+    path: /annuairePopup
+    controller: App\Controller\LanController::annuairePopup
+
+annuaireTest:
+    path: /annuaireTest
+    controller: App\Controller\LanController::annuaireTest
+
+annuaireR:
+    path: /annuaireR/{role}
+    controller: App\Controller\LanController::annuaireR
+
+annuaireRS:
+    path: /annuaireRS/{role}/{session}
+    controller: App\Controller\LanController::annuaireRS
+
+annuaire:
+    path: /annuaire
+    controller: App\Controller\LanController::annuaire
 
 # ********************** les Profils **************************
 
@@ -210,9 +207,59 @@ profilOF_Entreprise:
     path: /profilOF_Entreprise/{user}
     controller: App\Controller\ProfilController::profilOF_Entreprise
 
-# ********************** les evaluations  **************************
+profilAPP_OF: 
+    path: /profilAPP_OF/{user}
+    controller: App\Controller\ProfilController::profilAPP_OF
 
-saisiEvaluation: 
-    path: /saisiEvaluation/{competence}/{app}/{session}
-    controller: App\Controller\EvaluationController::saisiEvaluation
+profilAPP_Formateur: 
+    path: /profilAPP_Formateur/{user}
+    controller: App\Controller\ProfilController::profilAPP_Formateur
 
+profilAPP_MA: 
+    path: /profilAPP_MA/{user}
+    controller: App\Controller\ProfilController::profilAPP_MA
+    
+profilAPP_Entreprise: 
+    path: /profilAPP_Entreprise/{user}
+    controller: App\Controller\ProfilController::profilAPP_Entreprise
+
+profilFOR_OF: 
+    path: /profilFOR_OF/{user}
+    controller: App\Controller\ProfilController::profilFOR_OF
+ 
+profilFOR_APP: 
+    path: /profilFOR_APP/{user}
+    controller: App\Controller\ProfilController::profilFOR_APP
+          
+profilFOR_MA: 
+    path: /profilFOR_MA/{user}
+    controller: App\Controller\ProfilController::profilFOR_MA
+     
+profilFOR_Entreprise: 
+    path: /profilFOR_Entreprise/{user}
+    controller: App\Controller\ProfilController::profilFOR_Entreprise
+
+profilMA_OF: 
+    path: /profilMA_OF/{user}
+    controller: App\Controller\ProfilController::profilMA_OF
+ 
+profilMA_APP: 
+    path: /profilMA_APP/{user}
+    controller: App\Controller\ProfilController::profilMA_APP
+          
+profilMA_FOR: 
+    path: /profilMA_FOR/{user}
+    controller: App\Controller\ProfilController::profilMA_FOR
+     
+profilENT_OF: 
+    path: /profilENT_OF/{user}
+    controller: App\Controller\ProfilController::profilENT_OF
+ 
+profilENT_APP: 
+    path: /profilENT_APP/{user}
+    controller: App\Controller\ProfilController::profilENT_APP
+          
+profilENT_FOR: 
+    path: /profilENT_FOR/{user}
+    controller: App\Controller\ProfilController::profilENT_FOR
+     
