@@ -5,7 +5,7 @@
 login:
     path: /login
     controller: App\Controller\SecurityController::login
-
+                               
 files:
     path: /files
     controller: App\Controller\LanController::files
@@ -38,6 +38,8 @@ dashBoardEntrprise:
     path: ent/dashBoardEntrprise
     controller: App\Controller\LanController::dashBoardEntrprise
 
+## App\Controller\DocumentController
+
 upload: 
     path: /upload
     controller: App\Controller\DocumentController::upload
@@ -57,6 +59,8 @@ deletedocument:
 stageForm:
     path: /stageForm
     controller: App\Controller\StageFormController::stageForm
+
+## App\Controller\LanController
 
 formations:
     path: /formations
@@ -113,6 +117,25 @@ addUserSession:
 dashOFPrincipal:
     path: /dashOFPrincipal
     controller: App\Controller\DashController::dashOFPrincipal
+
+dashAPP:
+    path: /dashAPP
+    controller: App\Controller\DashController::dashAPP
+
+dashEntreprise:
+    path: /dashEntreprise
+    controller: App\Controller\DashController::dashEntreprise
+
+dashFormateur:
+    path: /dashFormateur
+    controller: App\Controller\DashController::dashFormateur
+
+dashMA:
+    path: /dashMA
+    controller: App\Controller\DashController::dashMA
+
+
+## **************** SESSION
 
 addSession:
     path: /addSession
@@ -263,3 +286,8 @@ profilENT_FOR:
     path: /profilENT_FOR/{user}
     controller: App\Controller\ProfilController::profilENT_FOR
      
+# ********************** RGPD **************************
+
+rgpdForm:
+    path: /rgpdForm
+    controller: App\Controller\RGPDController::rgpdForm

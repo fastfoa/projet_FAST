@@ -10,13 +10,13 @@ use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use App\Repository\UserRepository;
-use ContainerT2hE2KD\getDoctrine_QueryDqlCommandService;
 use App\Lib\PDOUtil;
 
 use App\Entity\User;
 use App\Entity\Session;
 
 use App\Form\FormateurType;
+//use App\Form\RGPDType;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
