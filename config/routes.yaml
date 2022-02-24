@@ -262,4 +262,10 @@ profilENT_APP:
 profilENT_FOR: 
     path: /profilENT_FOR/{user}
     controller: App\Controller\ProfilController::profilENT_FOR
-     
+
+
+# ********************** les evaluations  **************************
+
+saisiEvaluation: 
+    path: /saisiEvaluation/{competence}/{app}/{session}
+    controller: App\Controller\EvaluationController::saisiEvaluation

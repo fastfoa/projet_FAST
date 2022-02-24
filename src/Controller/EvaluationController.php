@@ -65,7 +65,7 @@ class EvaluationController extends AbstractController
             $entityManager->persist($evaluation);
             $entityManager->flush();
             $message = "le formulaire a bien était pris en compte ";
-            $nom = "steeve madeen";
+           
             
         }
 
@@ -73,7 +73,6 @@ class EvaluationController extends AbstractController
                 'form' => $form->createView(),
                 'nameCompet' => $nameCompet,
                 'message' => $message,
-                'nom'=>$nom
                 
             ]);
         
