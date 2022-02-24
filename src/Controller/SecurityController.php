@@ -16,10 +16,16 @@ class SecurityController extends AbstractController
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
         $u = $this->getUser();
+
         //$t = $this->getDoctrine()->getManager()->getRepository(User::class)->find($u);
         if ($u) {
+            //dd( $u );
+            //$enabled = $u->getProfilEnabled();
+            //if ( $enabled == 0 )
+            //    return $this->redirectToRoute('logout');;
+            //return $this->redirectToRoute('dashOFPrincipal');
             return $this->redirectToRoute('rgpdForm');
-        }
+            }
         
         // $profil = getSQLSingle( 
         //     "SELECT profil_enabled as p

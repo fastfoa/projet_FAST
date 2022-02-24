@@ -80,6 +80,8 @@ class DashController extends AbstractController
 
         ]);
     }
+
+    
    public function deleteSession(Session $session )
     {
             $doctrine = $this->getDoctrine();
@@ -88,7 +90,31 @@ class DashController extends AbstractController
             $om->flush();
             return $this->redirectToRoute("dashOFPrincipal");
     }
-                                           
+                            
+    
+
+    public function dashEntreprise(): Response
+    {
+        $entreprise = $this->getUser();
+
+        $menu = 
+        [
+            'Sessions' => 'dashOFPrincipal', 
+            'Apprentis' => 'listAllAprentis', 
+            'Formateurs' => 'listAllFormateurs', 
+            'Maitres' => 'listAllMA', 
+            'Entreprises' => 'listAllEntreprises' 
+        ];
+        return $this->render(
+        'dash/dashEntreprise.html.twig', 
+        [
+            'entreprise' => $entreprise,
+            'menu' => $menu
+        ]);    
+    }
+    
+   
+    
     public function dashOFSession(Session $session ): Response
     {
         $menu = 
@@ -107,6 +133,30 @@ class DashController extends AbstractController
         ]);    
     }
 
+
+    public function listUsersEntreprise(Entreprise $entreprise, $role, $roleName): Response
+    {
+        $doctrine = $this->getDoctrine();
+        $list = $doctrine->getRepository(User::class)->findAll();
+    
+        $menu = 
+        [
+            'Sessions' => 'dashOFPrincipal', 
+            'Apprentis' => 'listAllAprentis', 
+            'Maitres' => 'listAllMA', 
+            'Entreprises' => 'listAllEntreprises' 
+        ];
+
+        return $this->render(
+        'dash/listUsersEntreprise.html.twig', 
+        [
+            'list' => $list,
+            'entreprise' => $entreprise,
+            'menu' => $menu,
+            'roleName' => $roleName,
+            'role' => $role
+        ]);    
+    }
     public function listUsersSession(Session $session, $role, $roleName): Response
     {
         $doctrine = $this->getDoctrine();
@@ -204,7 +254,5 @@ class DashController extends AbstractController
     {
         return $this->listAll( 'ROLE_MA', "Maitre d'apprentissage" );
     }
-
-
-
+  
 }
