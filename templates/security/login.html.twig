@@ -8,6 +8,11 @@
             width: 100%;
             height: 40px;
         }
+
+        .mycheck
+        {
+            width:auto;
+        }
     </style>
 {% endblock %}
 
@@ -37,7 +42,7 @@
         <input type="hidden" name="_csrf_token"
             value="{{ csrf_token('authenticate') }}"
         >
-        <input class="form-check-input mt-3" type="checkbox" value="" id="flexCheckDefault">
+        <input class="form-check-input mycheck mt-3" type="checkbox" value="" id="flexCheckDefault">
         <label class="form-check-label my-2" for="flexCheckDefault">
             Se souvenir de moi
         </label>
