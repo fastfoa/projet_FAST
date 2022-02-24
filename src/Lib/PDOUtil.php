@@ -9,6 +9,7 @@ use PDO;
         try {
             //$pdo = new PDO($dsn, 'alexis.s', 'alexis.SQL@011012');
             $pdo = new PDO($dsn, 'root', '');
+            //$pdo = new PDO($dsn, 'xxx', 'xxx');
         } catch (\PDOException $e) {
             throw new \PDOException($e->getMessage(), (int)$e->getCode());
         }
