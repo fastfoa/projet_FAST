@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
@@ -14,9 +15,17 @@ class SecurityController extends AbstractController
      */
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
-        if ($this->getUser()) {
+        $u = $this->getUser();
+        //$t = $this->getDoctrine()->getManager()->getRepository(User::class)->find($u);
+        if ($u) {
             return $this->redirectToRoute('rgpdForm');
         }
+        
+        // $profil = getSQLSingle( 
+        //     "SELECT profil_enabled as p
+        //      FROM  user
+        //      WHERE email='$t'");
+        //      return new JsonResponse($profil);
 
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
