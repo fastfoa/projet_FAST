@@ -8,6 +8,8 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use App\Form\RGPDType;
 
+use App\Entity\User;
+
 class RGPDController extends AbstractController
 {
     /**
@@ -20,89 +22,58 @@ class RGPDController extends AbstractController
         ]);
     }
 
-    
+
     public function rgpdForm(Request $request): Response
     {
         $user = $this->getUser();
         $id = $user->getId();
         $email = $user->getEmail();
         $rgpd = $user->getRGPDOK();
-        $role = $user->getRoles(); 
-        
+        $role = $user->getRoles()[0];
 
-            if ($rgpd) 
-            {
-                if ($role == 'ROLE_ADMIN')
-                {
-                    return $this->redirectToRoute('dashOFPrincipal');
-                }
-                    elseif ($role == 'ROLE_APP') {
-                        return $this->redirectToRoute('dashOFPrincipal');
-                    }
-                    elseif ($role == 'ROLE_ENT') {
-                        return $this->redirectToRoute('dashOFPrincipal');
-                    }
-                    elseif ($role == 'ROLE_OF') {
-                        return $this->redirectToRoute('dashOFPrincipal');
-                    }
-                    elseif ($role == 'ROLE_FORMATEUR') {
-                        return $this->redirectToRoute('dashOFPrincipal');
-                    }
-                    else //  ($role == 'ROLE_MA') 
-                    {
-                        return $this->redirectToRoute('dashOFPrincipal');
-                    }
+        $redirect = "login";
+
+        if ($rgpd) {
+            if ($role == 'ROLE_ADMIN') {
+                $redirect = 'dashOFPrincipal';
+            } elseif ($role == 'ROLE_APP') {
+                $redirect = 'dashAPP';
+            } elseif ($role == 'ROLE_ENT') {
+                $redirect = 'dashEntreprise';
+            } elseif ($role == 'ROLE_FORMATEUR') {
+                $redirect = 'dashFormateur';
+            } elseif ($role == 'ROLE_OF') {
+                $redirect = 'dashOFPrincipal';
+            } elseif ($role == 'ROLE_MA') {
+                $redirect = 'dashMA';
             }
+            return $this->redirectToRoute( $redirect);
+        } 
+        else 
+        {
+            $formulaire = $this->createForm(RGPDType::class, $user);
+            $formulaire->handleRequest($request);
 
-            else 
+            //dd( $role );
+
+            if ( $formulaire->isSubmitted() ) 
             {
-                $formulaire = $this->createForm(RGPDType::class, $user);
-                $formulaire->handleRequest($request);
-        
-                    if ($formulaire->isSubmitted() && $formulaire->isValid()) 
-                    {
-                        $RGPD = $formulaire->get('RGPDOK')->getData(); 
-                        if ($RGPD == false) 
-                        {
-                            return $this->redirectToRoute('login');
-                        
-
-                        } else {
-                            $user->setRGPDOK(true);
-                            $doctrine = $this->getDoctrine();
-                            $entityManager = $doctrine->getManager();
-                            $entityManager->persist($user);
-                            $entityManager->flush();
-                            return $this->redirectToRoute('dashOFPrincipal');
-                        }
-                    }
-                return $this->render('rgpd/rgpdForm.html.twig', 
+                    $user->setRGPDOK(true);
+                    $doctrine = $this->getDoctrine();
+                    $entityManager = $doctrine->getManager();
+                    $entityManager->persist($user);
+                    $entityManager->flush();
+                    return $this->redirectToRoute( $redirect);
+            }
+            return $this->render(
+                'rgpd/rgpdForm.html.twig',
                 [
-                'id' => $id,
-                'myForm' => $formulaire->createView(), 
-                ]);
-            }
-    
-    }
-
-    public function rgpdIsOk(Request $request): Response
-    {
-                
-        
-        
-                $user = $this->getUser();
-        
-                $user->setRGPDOK(true);
-                $doctrine = $this->getDoctrine();
-                $entityManager = $doctrine->getManager();
-                $entityManager->persist($user);
-                $entityManager->flush();
-                return $this->redirectToRoute('dashOFPrincipal');
-
+                    'id' => $id,
+                    'myForm' => $formulaire->createView(),
+                ]
+            );
+        }
     }
 
 
-
-    // public function rgpdIsNok(Request $request): Response
-    
 }

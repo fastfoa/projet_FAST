@@ -136,6 +136,25 @@ dashOFPrincipal:
     path: /dashOFPrincipal
     controller: App\Controller\DashController::dashOFPrincipal
 
+dashAPP:
+    path: /dashAPP
+    controller: App\Controller\DashController::dashAPP
+
+dashEntreprise:
+    path: /dashEntreprise
+    controller: App\Controller\DashController::dashEntreprise
+
+dashFormateur:
+    path: /dashFormateur
+    controller: App\Controller\DashController::dashFormateur
+
+dashMA:
+    path: /dashMA
+    controller: App\Controller\DashController::dashMA
+
+
+## **************** SESSION
+
 addSession:
     path: /addSession
     controller: App\Controller\DashController::addSession
@@ -203,11 +222,3 @@ profilOF_APP:
 rgpdForm:
     path: /rgpdForm
     controller: App\Controller\RGPDController::rgpdForm
-
-rgpdIsOk:
-    path: /rgpdIsOk
-    controller: App\Controller\RGPDController::rgpdIsOk
-
-rgpdIsNok:
-    path: /rgpdIsNok
-    controller: App\Controller\RGPDController::rgpdIsNok
