@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+	<div class="container-fluid">
+		<div class="row">
+			<div id="role0" class="boutonForm col-2 mx-2" onclick="selectAnnuaire(   this, '{{ path('annuaire') }}' );">ALL</div>
+			<div id="role1" class="boutonForm col-2 mx-2" onclick="selectAnnuaireR(  this, '{{ path('annuaire') }}', 'ROLE_APP' );">ROLE</div>
+			<div id="role2" class="boutonForm col-2 mx-2" onclick="selectAnnuaireRS( this, '{{ path('annuaire') }}', 'ROLE_APP', 1 );">ROLE SESS</div>
+			<div id="check" class="boutonForm col-2 mx-2">CHECK</div>
+			<div id="aff"></div>
+		</div>
+	</div>
+{% endblock body %}

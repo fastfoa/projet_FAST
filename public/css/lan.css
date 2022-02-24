@@ -25,7 +25,7 @@ h1, h2, h3, h4, h5, h6
 }
 
 .nav-item .nav-link{
-    color: #0062cc!important;
+    color: white!important;
     
 }
 
@@ -34,6 +34,7 @@ h1, h2, h3, h4, h5, h6
     color: rgb(253, 253, 253)!important;
     opacity: 100!important;
 } 
+
 .active, .btntoto {
     background-color: #666;
     color: white;
@@ -87,16 +88,6 @@ h1, h2, h3, h4, h5, h6
     position: relative;
     top: -60px;
 }
-
-.navbar-nav > li > a, .navbar-nav > li > a {
-    color: gray !important;
-}
-
-.navbar-nav > li > a:hover, .navbar-nav > li > a:focus {
-    background-color: white !important;
-    color: black !important;
-}
-
 
 .logo-top 
 {
@@ -171,7 +162,7 @@ h1, h2, h3, h4, h5, h6
  }
  
  
-input[type=text], input[type=password], input[type=date], select
+input[type=text], input[type=password], input[type=date], input[type=number], select
 {
    width: 70%;
    height: 15px;
@@ -333,4 +324,13 @@ label
     color: #fff;
   }
 
-  
+  .avatar
+{
+    width: 100px;
+    height: 100px;
+}
+
+hr
+{
+    border-top: 1px solid #ccc; 
+}

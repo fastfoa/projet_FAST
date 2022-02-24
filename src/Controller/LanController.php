@@ -2,16 +2,27 @@
 
 namespace App\Controller;
 
-use App\Entity\User;
+use Doctrine\DBAL\Connection;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use App\Repository\UserRepository;
+use App\Lib\PDOUtil;
+
+use App\Entity\User;
+use App\Entity\Session;
 
 use App\Form\FormateurType;
+//use App\Form\RGPDType;
 
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+
+
+
 
 class LanController extends AbstractController
 {
@@ -20,11 +31,11 @@ class LanController extends AbstractController
      */
     public function index(): Response
     {
-        return $this->render('base.html.twig', [
+        return $this->render('lan/index.html.twig', [
             'controller_name' => 'LanController',
         ]);
     }
-
+    /*
      public function login(): Response
     {
         return $this->render('login.html.twig', [
@@ -59,7 +70,7 @@ class LanController extends AbstractController
             'controller_name' => 'LanController',
         ]);
     }
-
+    
     public function dashBoardEntrprise(): Response
     {
         return $this->render('dashBoardEntrprise.html.twig', [
@@ -80,7 +91,6 @@ class LanController extends AbstractController
             'controller_name' => 'LanController',
         ]);
     }
-
 
     public function dash(): Response
     {
@@ -117,7 +127,7 @@ class LanController extends AbstractController
             'controller_name' => 'LanController',
         ]);
     }
-
+*/
     public function test(): Response
     {
         return $this->render('test.html.twig', [
@@ -135,5 +145,33 @@ class LanController extends AbstractController
         return $this->render('documentOff.html.twig');
     }
 
+    // **************************************************************
 
+    public function annuaireTest(): Response
+    {
+        return $this->render('lan/annuaireTest.html.twig');
+    }
+
+    public function annuairePopup(): Response
+    {
+        return $this->render('lan/annuairePopup.html.twig');
+    }
+
+    public function annuaire(): Response
+    {
+        $users = getSQLArrayKV( 'SELECT nom as v, id as k FROM  user' );
+        return  new JsonResponse(   $users    );
+    }
+
+    public function annuaireR($role): Response
+    {
+        $users = getSQLArrayKV( "SELECT user.nom as v, user.id as k, user.role_string, s.id_session FROM  user_in_session as s LEFT JOIN user ON s.id_user=user.id Where user.role_string='$role'");
+        return  new JsonResponse(   $users    );
+    }
+
+    public function annuaireRS($role, $session): Response
+    {
+        $users = getSQLArrayKV( "SELECT user.nom as v, user.id as k, user.role_string, s.id_session FROM  user_in_session as s LEFT JOIN user ON s.id_user=user.id Where s.id_session=$session and user.role_string='$role'");
+        return  new JsonResponse(   $users    );
+    }
 }

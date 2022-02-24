@@ -2,6 +2,7 @@
 
 {% block body %}
 <div class="container-fluid">
+
 		<div class="row bg-bar">
 			<h3>Création Session de Formation</h3>
 		</div>
@@ -17,8 +18,8 @@
 					{{ form_label(form.fin) }}
 					{{ form_widget(form.fin) }}
                     <br>
-					{{ form_label(form.formation) }}
-					{{ form_widget(form.formation) }}
+					{{ form_label(form.idFormation) }}
+					{{ form_widget(form.idFormation) }}
 				{{form_end(form)}}
 
 			</div>

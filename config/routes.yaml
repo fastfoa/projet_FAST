@@ -2,36 +2,14 @@
 #    path: /
 #    controller: App\Controller\DefaultController::index
 
-
 login:
     path: /login
-    controller: App\Controller\LanController::login
-
-                                
-dashBoardStudent:
-    path: app/dashBoardStudent
-    controller: App\Controller\LanController::dashBoardStudent
-
-dashBoardSchool:
-    path: of/dashBoardSchool
-    controller: App\Controller\LanController::dashBoardSchool
-
+    controller: App\Controller\SecurityController::login
+                               
 files:
     path: /files
     controller: App\Controller\LanController::files
-    
-dashBoardSkill:
-    path: /dashBoardSkill
-    controller: App\Controller\LanController::dashBoardSkill
-
-getSkillToBe:
-    path: /getSkillToBe
-    controller: App\Controller\LanController::getSkillToBe
-
-suiviCompetences:
-    path: /suiviCompetences
-    controller: App\Controller\LanController::suiviCompetences
-    
+        
 formulaireEleve:
     path: /formulaireEleve
     controller: App\Controller\LanController::formulaireEleve
@@ -39,10 +17,6 @@ formulaireEleve:
 formulaireG:
     path: /formulaireG
     controller: App\Controller\LanController::formulaireG
-
-dash:
-    path: /dash
-    controller: App\Controller\LanController::dash
 
 followCompany:
     path: /followCompany
@@ -55,10 +29,6 @@ followTraining:
 test:
     path: /test
     controller: App\Controller\LanController::test
-
-dashBoardEntrprise:
-    path: ent/dashBoardEntrprise
-    controller: App\Controller\LanController::dashBoardEntrprise
 
 upload: 
     path: /upload
@@ -80,6 +50,8 @@ stageForm:
     path: /stageForm
     controller: App\Controller\StageFormController::stageForm
 
+## App\Controller\LanController
+
 formations:
     path: /formations
     controller: App\Controller\LanController::formations
@@ -94,8 +66,7 @@ aide:
 
 monCompte:
     path: /monCompte
-    controller: App\Controller\LanController::monCompte
-
+    controller: App\Controller\ModifInfoPersoController::monCompte
 
 ## App\Controller\InscriptionController
 
@@ -110,6 +81,10 @@ inscriptionApprenti:
 inscriptionMA:
     path: /inscriptionMA
     controller: App\Controller\InscriptionController::inscriptionMA
+    
+inscriptionInd:
+    path: /inscriptionInd
+    controller: App\Controller\InscriptionController::inscriptionInd
 
 inscriptionFormateur:
     path: /inscriptionFormateur
@@ -118,6 +93,10 @@ inscriptionFormateur:
 inscriptionEleve:
     path: /inscriptionEleve
     controller: App\Controller\InscriptionController::inscriptionEleve
+
+barSession:
+    path: /barSession
+    controller: App\Controller\BarController::barSession
     
 addUser:
     path: /addUser/{role}/{roleName}
@@ -126,12 +105,35 @@ addUser:
 addUserSession:
     path: /addUserSession/{session}/{role}/{roleName}
     controller: App\Controller\InscriptionController::addUserSession
+
+
     
 ## App\Controller\DashController
 
 dashOFPrincipal:
     path: /dashOFPrincipal
     controller: App\Controller\DashController::dashOFPrincipal
+
+dashAPP:
+    path: /dashAPP
+    controller: App\Controller\DashController::dashAPP
+
+
+dashEntreprise:
+    path: /dashEntreprise
+    controller: App\Controller\DashController::dashEntreprise
+
+
+dashFormateur:
+    path: /dashFormateur
+    controller: App\Controller\DashController::dashFormateur
+
+dashMA:
+    path: /dashMA
+    controller: App\Controller\DashController::dashMA
+
+
+## **************** SESSION
 
 addSession:
     path: /addSession
@@ -145,13 +147,15 @@ dashOFSession:
     path: /dashOFSession/{session}
     controller: App\Controller\DashController::dashOFSession
 
+
+
 editApprenti:
     path: /feditApprenti/{userID}
     controller: App\Controller\DashController::editApprenti
 
 editUser:
-    path: /editUser/{userID}
-    controller: App\Controller\DashController::editUser
+    path: /editUser/{user}
+    controller: App\Controller\ProfilController::editUser
 
 listApprentis:
     path: /listApprentis/{session}
@@ -161,6 +165,10 @@ listUsersSession:
     path: /listUsersSession/{session}/{role}/{roleName}
     controller: App\Controller\DashController::listUsersSession
 
+listUsersEntreprise:
+    path: /listUsersEntreprise/{entreprise}/{role}/{roleName}
+    controller: App\Controller\DashController::listUsersEntreprise
+
 listFormateurs:
     path: /listFormateurs/{session}
     controller: App\Controller\DashController::listFormateurs
@@ -169,8 +177,6 @@ listMA:
     path: /listMA/{session}
     controller: App\Controller\DashController::listMA
    
-
-
 listAllAprentis: 
     path: /listAllAprentis
     controller: App\Controller\DashController::listAllAprentis
@@ -178,6 +184,8 @@ listAllAprentis:
 listAllFormateurs: 
     path: /listAllFormateurs
     controller: App\Controller\DashController::listAllFormateurs
+
+
 
 listAllEntreprises: 
     path: /listAllEntreprises
@@ -188,9 +196,104 @@ listAllMA:
     controller: App\Controller\DashController::listAllMA
 
 
+# ********************** Annuaire **************************
+
+annuairePopup:
+    path: /annuairePopup
+    controller: App\Controller\LanController::annuairePopup
+
+annuaireTest:
+    path: /annuaireTest
+    controller: App\Controller\LanController::annuaireTest
+
+annuaireR:
+    path: /annuaireR/{role}
+    controller: App\Controller\LanController::annuaireR
+
+annuaireRS:
+    path: /annuaireRS/{role}/{session}
+    controller: App\Controller\LanController::annuaireRS
+
+annuaire:
+    path: /annuaire
+    controller: App\Controller\LanController::annuaire
+
 # ********************** les Profils **************************
 
-
 profilOF_APP: 
-    path: /profilOF_APP/{app}
+    path: /profilOF_APP/{user}
     controller: App\Controller\ProfilController::profilOF_APP
+
+profilOF_Formateur: 
+    path: /profilOF_Formateur/{user}
+    controller: App\Controller\ProfilController::profilOF_Formateur
+
+profilOF_MA: 
+    path: /profilOF_MA/{user}
+    controller: App\Controller\ProfilController::profilOF_MA
+
+profilOF_Entreprise: 
+    path: /profilOF_Entreprise/{user}
+    controller: App\Controller\ProfilController::profilOF_Entreprise
+
+profilAPP_OF: 
+    path: /profilAPP_OF/{user}
+    controller: App\Controller\ProfilController::profilAPP_OF
+
+profilAPP_Formateur: 
+    path: /profilAPP_Formateur/{user}
+    controller: App\Controller\ProfilController::profilAPP_Formateur
+
+profilAPP_MA: 
+    path: /profilAPP_MA/{user}
+    controller: App\Controller\ProfilController::profilAPP_MA
+    
+profilAPP_Entreprise: 
+    path: /profilAPP_Entreprise/{user}
+    controller: App\Controller\ProfilController::profilAPP_Entreprise
+
+profilFOR_OF: 
+    path: /profilFOR_OF/{user}
+    controller: App\Controller\ProfilController::profilFOR_OF
+ 
+profilFOR_APP: 
+    path: /profilFOR_APP/{user}
+    controller: App\Controller\ProfilController::profilFOR_APP
+          
+profilFOR_MA: 
+    path: /profilFOR_MA/{user}
+    controller: App\Controller\ProfilController::profilFOR_MA
+     
+profilFOR_Entreprise: 
+    path: /profilFOR_Entreprise/{user}
+    controller: App\Controller\ProfilController::profilFOR_Entreprise
+
+profilMA_OF: 
+    path: /profilMA_OF/{user}
+    controller: App\Controller\ProfilController::profilMA_OF
+ 
+profilMA_APP: 
+    path: /profilMA_APP/{user}
+    controller: App\Controller\ProfilController::profilMA_APP
+          
+profilMA_FOR: 
+    path: /profilMA_FOR/{user}
+    controller: App\Controller\ProfilController::profilMA_FOR
+     
+profilENT_OF: 
+    path: /profilENT_OF/{user}
+    controller: App\Controller\ProfilController::profilENT_OF
+ 
+profilENT_APP: 
+    path: /profilENT_APP/{user}
+    controller: App\Controller\ProfilController::profilENT_APP
+          
+profilENT_FOR: 
+    path: /profilENT_FOR/{user}
+    controller: App\Controller\ProfilController::profilENT_FOR
+     
+# ********************** RGPD **************************
+
+rgpdForm:
+    path: /rgpdForm
+    controller: App\Controller\RGPDController::rgpdForm
