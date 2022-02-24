@@ -9,13 +9,12 @@ use App\Entity\Evaluation;
 use App\Entity\Competence;
 use App\Entity\User;
 use App\Entity\Session;
+use App\Entity\Formation;
+use App\Lib\PDOUtil;;
 use App\Form\EvaluationType;
 use App\Form\EvaluationAppType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Security;
-
-
-
 
 
 
@@ -73,8 +72,32 @@ class EvaluationController extends AbstractController
                 'form' => $form->createView(),
                 'nameCompet' => $nameCompet,
                 'message' => $message,
+                'app'=>$app
+            ]);
+    }
+
+    public function choiceCompetence(User $app, Session $session, Request $request): Response
+    {
+        $formationID = $session->getIdFormation();
+        $doctrine = $this->getDoctrine();
+        $formation = $doctrine->getRepository(Formation::class)->find( $formationID );
+        $nomFormation = $formation->getNom();
+        $list = getSQLArrayAssoc( 
+            "SELECT *  
+             FROM  competence as c 
+             WHERE c.id_formation=$formationID");
+        
+        $nomAPP= $app->getPrenom()." ".$app->getNom();
+
+        return $this->render('evaluation/choiceCompetence.html.twig', [
+            'user' => $app,    
+            'session' => $session,    
+            'nomFormation' => $nomFormation,    
+            'list'=>$list
                 
             ]);
-        
     }
+
+
+
 }

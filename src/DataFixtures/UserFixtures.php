@@ -51,7 +51,6 @@ class UserFixtures extends Fixture
             $user->setLinkedin("http://www.linkedin.com/%22");
             $user->setGithub("http://www.github.com/%22");
             $user->setSiteWebPro("http://www.mywebsite.com/%22");
-            $user->setRGPDOK($faker->boolean);
             $user->setProfilEnabled(true);
             $manager->persist($user);
         }
@@ -74,7 +73,6 @@ class UserFixtures extends Fixture
             $user->setGithub("http://www.github.com");
             $user->setSiteWebPro("http://www.mywebsite.com");
             $user->setFonctionMA("dev");
-            $user->setRGPDOK(true);
             $user->setProfilEnabled(true);
             $manager->persist($user);
         }
@@ -125,7 +123,6 @@ class UserFixtures extends Fixture
             $user->setLinkedin("http://www.linkedin.com");
             $user->setGithub("http://www.github.com");
             $user->setSiteWebPro("http://www.mywebsite.com");
-            $user->setRGPDOK(true);
             $user->setProfilEnabled(true);
             $manager->persist($user);
         }
@@ -149,7 +146,6 @@ class UserFixtures extends Fixture
             $user->setLinkedin("http://www.linkedin.com");
             $user->setGithub("http://www.github.com");
             $user->setSiteWebPro("http://www.mywebsite.com");
-            $user->setRGPDOK(true);
             $user->setProfilEnabled(true);
             $manager->persist($user);
         }

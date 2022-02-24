@@ -5,7 +5,7 @@
 login:
     path: /login
     controller: App\Controller\SecurityController::login
-
+                               
 files:
     path: /files
     controller: App\Controller\LanController::files
@@ -18,10 +18,6 @@ formulaireG:
     path: /formulaireG
     controller: App\Controller\LanController::formulaireG
 
-dash:
-    path: /dash
-    controller: App\Controller\LanController::dash
-
 followCompany:
     path: /followCompany
     controller: App\Controller\LanController::followCompany
@@ -33,10 +29,6 @@ followTraining:
 test:
     path: /test
     controller: App\Controller\LanController::test
-
-dashBoardEntrprise:
-    path: ent/dashBoardEntrprise
-    controller: App\Controller\LanController::dashBoardEntrprise
 
 upload: 
     path: /upload
@@ -57,6 +49,8 @@ deletedocument:
 stageForm:
     path: /stageForm
     controller: App\Controller\StageFormController::stageForm
+
+## App\Controller\LanController
 
 formations:
     path: /formations
@@ -99,6 +93,10 @@ inscriptionFormateur:
 inscriptionEleve:
     path: /inscriptionEleve
     controller: App\Controller\InscriptionController::inscriptionEleve
+
+barSession:
+    path: /barSession
+    controller: App\Controller\BarController::barSession
     
 addUser:
     path: /addUser/{role}/{roleName}
@@ -107,12 +105,35 @@ addUser:
 addUserSession:
     path: /addUserSession/{session}/{role}/{roleName}
     controller: App\Controller\InscriptionController::addUserSession
+
+
     
 ## App\Controller\DashController
 
 dashOFPrincipal:
     path: /dashOFPrincipal
     controller: App\Controller\DashController::dashOFPrincipal
+
+dashAPP:
+    path: /dashAPP
+    controller: App\Controller\DashController::dashAPP
+
+
+dashEntreprise:
+    path: /dashEntreprise
+    controller: App\Controller\DashController::dashEntreprise
+
+
+dashFormateur:
+    path: /dashFormateur
+    controller: App\Controller\DashController::dashFormateur
+
+dashMA:
+    path: /dashMA
+    controller: App\Controller\DashController::dashMA
+
+
+## **************** SESSION
 
 addSession:
     path: /addSession
@@ -125,6 +146,8 @@ deleteSession:
 dashOFSession:
     path: /dashOFSession/{session}
     controller: App\Controller\DashController::dashOFSession
+
+
 
 editApprenti:
     path: /feditApprenti/{userID}
@@ -142,6 +165,10 @@ listUsersSession:
     path: /listUsersSession/{session}/{role}/{roleName}
     controller: App\Controller\DashController::listUsersSession
 
+listUsersEntreprise:
+    path: /listUsersEntreprise/{entreprise}/{role}/{roleName}
+    controller: App\Controller\DashController::listUsersEntreprise
+
 listFormateurs:
     path: /listFormateurs/{session}
     controller: App\Controller\DashController::listFormateurs
@@ -157,6 +184,8 @@ listAllAprentis:
 listAllFormateurs: 
     path: /listAllFormateurs
     controller: App\Controller\DashController::listAllFormateurs
+
+
 
 listAllEntreprises: 
     path: /listAllEntreprises
@@ -262,10 +291,20 @@ profilENT_APP:
 profilENT_FOR: 
     path: /profilENT_FOR/{user}
     controller: App\Controller\ProfilController::profilENT_FOR
+     
+# ********************** RGPD **************************
 
+rgpdForm:
+    path: /rgpdForm
+    controller: App\Controller\RGPDController::rgpdForm
 
-# ********************** les evaluations  **************************
+# ********************** EVALUATION **************************
 
 saisiEvaluation: 
     path: /saisiEvaluation/{competence}/{app}/{session}
     controller: App\Controller\EvaluationController::saisiEvaluation
+
+choiceCompetence: 
+    path: /choiceCompetence/{app}/{session}
+    controller: App\Controller\EvaluationController::choiceCompetence
+
