@@ -2,20 +2,6 @@
 #    path: /
 #    controller: App\Controller\DefaultController::index
 
-
-login:
-    path: /login
-    controller: App\Controller\LanController::login
-
-                                
-dashBoardStudent:
-    path: app/dashBoardStudent
-    controller: App\Controller\LanController::dashBoardStudent
-
-dashBoardSchool:
-    path: of/dashBoardSchool
-    controller: App\Controller\LanController::dashBoardSchool
-
 files:
     path: /files
     controller: App\Controller\LanController::files
@@ -40,10 +26,6 @@ formulaireG:
     path: /formulaireG
     controller: App\Controller\LanController::formulaireG
 
-dash:
-    path: /dash
-    controller: App\Controller\LanController::dash
-
 followCompany:
     path: /followCompany
     controller: App\Controller\LanController::followCompany
@@ -55,10 +37,6 @@ followTraining:
 test:
     path: /test
     controller: App\Controller\LanController::test
-
-dashBoardEntrprise:
-    path: ent/dashBoardEntrprise
-    controller: App\Controller\LanController::dashBoardEntrprise
 
 upload: 
     path: /upload
