@@ -13,6 +13,9 @@ use App\Entity\Formation;
 use App\Lib\PDOUtil;;
 use App\Form\EvaluationType;
 use App\Form\EvaluationAppType;
+use App\Form\EvaluationFormateurType;
+use App\Form\EvaluationMAType;
+use App\Form\EvaluationOFType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Security;
 
@@ -39,7 +42,7 @@ class EvaluationController extends AbstractController
         if(!empty($user))
         {
           $role = $user->getRoles()[0];
-          dd($role);
+          //dd($role);
         }
     
         $message = false;
@@ -53,8 +56,18 @@ class EvaluationController extends AbstractController
         $evaluation->setIdFormateur(1);
         $evaluation->setIdSession($session->getId(1));
 
-        $form = $this->createForm(EvaluationAppType::class, $evaluation);
+        $type = EvaluationAppType::class;
 
+        if ( $role == "ROLE_APP")
+            $type = EvaluationAppType::class;
+        else if ( $role == "ROLE_OF")
+            $type = EvaluationOFType::class;
+        else if ( $role == "ROLE_FORMATEUR")
+            $type = EvaluationFormateurType::class;
+        else if ( $role == "ROLE_MA")
+            $type = EvaluationMAType::class;
+
+        $form = $this->createForm( $type, $evaluation);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

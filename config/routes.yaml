@@ -185,8 +185,6 @@ listAllFormateurs:
     path: /listAllFormateurs
     controller: App\Controller\DashController::listAllFormateurs
 
-
-
 listAllEntreprises: 
     path: /listAllEntreprises
     controller: App\Controller\DashController::listAllEntreprises
