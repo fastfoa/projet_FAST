@@ -6,6 +6,7 @@ use App\Form\MonCompteAppType;
 use App\Form\MonCompteEntrepriseType;
 use App\Form\MonCompteFormateurType;
 use App\Form\MonCompteMAType;
+use App\Form\MonCompteOFType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -58,6 +59,12 @@ class ModifInfoPersoController extends AbstractController
         {
             $type =  MonCompteFormateurType::class;
             $twig = 'mon_compte/monCompteFormateur.html.twig';
+            $titre = "Formateur";
+        }
+        else if ( $role == 'ROLE_OF')
+        {
+            $type =  MonCompteOFType::class;
+            $twig = 'mon_compte/monCompteOF.html.twig';
             $titre = "Formateur";
         }
         
