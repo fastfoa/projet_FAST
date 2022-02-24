@@ -1,5 +1,11 @@
 {% extends 'base.html.twig' %}
-
+{% block myStylesheets %}
+	<style>
+		input{
+			color: black !important;
+		}
+	</style>
+{% endblock myStylesheets %}
 
 {% block body %}
 	<div class="container-fluid">
@@ -7,8 +13,8 @@
 			<h3>Modification Information Apprenti</h3>
 		</div>
 		{{form_start(form)}}
-		<div class="row">
-			<div class="col-6">
+		<div class="row" >
+			<div class="col-6" >
 				{{form_widget(form.prenom)}}
 				{{form_widget(form.nom)}}
 				{{form_widget(form.email)}}
