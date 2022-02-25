@@ -31,6 +31,7 @@
 								<tr>
 									<th class="txt-bar bg-bar">Prenom</th>
 									<th class="txt-bar bg-bar">nom</th>
+									<th class="txt-bar bg-bar">session</th>
 									<th class="txt-bar bg-bar">Tél</th>
 									<th class="txt-bar bg-bar">Mail</th>
 									<th class="txt-bar bg-bar">Action</th>
@@ -41,11 +42,12 @@
 									<tr>
 										<td>{{item.prenom}}</td>
 										<td>{{item.nom}}</td>
+										<td>{{item.ns}}</td>
 										<td>{{item.telephone}}</td>
 										<td>{{item.email}}</td>
 										{#<td>{{session.formation}}</td>#}
 										<td>								
-											<a href="{{ path( 'editUser',{'userID':item.id} ) }}">
+											<a href="{{ path( 'editUser',{'user':item.id} ) }}">
 													<i class="fas fa-solid fa-download" style="font-size:20px;color:green;"></i>
 											</a>
                                         </td>

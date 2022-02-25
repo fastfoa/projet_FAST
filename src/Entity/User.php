@@ -107,8 +107,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $CodeIDCCConvention;
-
+    private $CodeIDCCConvention; //Identifiant de la Convention Collective 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
@@ -127,7 +126,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $NIR;
+    private $NIR; //Numéro d'Inscription au Répertoire de l'INSEE (n° Sécu)
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -192,7 +191,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $NumeroUAICFA;
+    private $NumeroUAICFA; //numéro de l'unité administrative immatriculée des OF-CFA
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -245,8 +244,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $profilEnabled = true;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255)
      */
+    private $RoleString;
+
+    /**
+    * @ORM\Column(type="string", length=255, nullable=true)
+    */
     private $RaisonSocial;
 
     public function __construct()
@@ -254,6 +258,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->sessions = new ArrayCollection();
     }
 
+    
     public function getId(): ?int
     {
         return $this->id;
@@ -836,6 +841,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    public function getRoleString(): ?string
+    {
+        return $this->RoleString;
+    }
+
+    public function setRoleString(string $RoleString) 
+    {
+        $this->RoleString = $RoleString;
+    }
+    
     public function getRaisonSocial(): ?string
     {
         return $this->RaisonSocial;
@@ -868,7 +883,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function removeSession(Session $session): self
     {
         $this->sessions->removeElement($session);
-
         return $this;
     }
 }

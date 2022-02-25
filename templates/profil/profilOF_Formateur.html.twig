@@ -8,7 +8,7 @@
 {% block OF %}
 <div class="row">
     <div class="col-3">    
-        <h5> {{user.dateNaissance|default('date naiss JJ/MM/AAAA')}} </h5>
+        <h5> {{user.dateNaissance|date("d/m/y")|default('date naiss JJ/MM/AAAA')}} </h5>
         <h5> {{user.adresse}} </h5>
         <h5> {{user.telephone|default('tél XX XX XX XX XX')}} </h5>
         <h3> {{user.DiplomePlusHaut|default('diplome')}} </h3>

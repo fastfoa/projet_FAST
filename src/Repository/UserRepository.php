@@ -3,6 +3,8 @@
 namespace App\Repository;
 
 use App\Entity\User;
+use App\Entity\MyString;
+use Doctrine\ORM\Query\ResultSetMapping;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
@@ -34,6 +36,52 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $user->setPassword($newHashedPassword);
         $this->_em->persist($user);
         $this->_em->flush();
+    }
+   
+    public function annuaireDataDQL( $role ): array
+    {
+        //$conn = $this->getEntityManager()->getConnection();
+
+
+        $em  = $this->getEntityManager();
+        $query = $em->createQuery(
+            "SELECT u.nom, u.prenom
+            FROM App\Entity\User u"
+        ); //->setParameter('price', $price);
+        $query->execute();
+        return $query->getResult();;
+    }
+
+    public function annuaireDataNative( $role ): array
+    {
+        //$conn = $this->getEntityManager()->getConnection();
+
+        $em  = $this->getEntityManager();
+        $rsm = new ResultSetMapping();
+        $query = $em->createNativeQuery('SELECT u.nom FROM user u', $rsm);
+        //$query->setParameter(1,  'jm' );
+                
+        return $query->getResult();
+    }
+
+    public function annuaireDataSQL( $role )
+    {
+        $conn = $this->getEntityManager()->getConnection();
+        $sql = '
+            SELECT nom FROM user u
+            WHERE p.price > :price
+            ORDER BY p.price ASC
+            ';
+        $sql = '
+            SELECT u.id 
+            FROM user u';
+ //           WHERE u.nom = :nom';
+
+        $stmt = $conn->prepare($sql);
+
+        //$resultSet = $stmt->executeQuery(['nom' => 'Titi' ]);
+        $resultSet = $stmt->executeQuery();
+        return  $resultSet;
     }
 
     // /**
