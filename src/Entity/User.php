@@ -249,9 +249,24 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $RoleString;
 
     /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $codePostal;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $telUrgence1;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $telUrgence2;
+
+    /**
     * @ORM\Column(type="string", length=255, nullable=true)
     */
-    private $RaisonSocial;
+    private $RaisonSocial; // pour une rôle unique de maitre d'apprentissage et entreprise, ex :indépendant
 
     public function __construct()
     {
@@ -883,6 +898,42 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function removeSession(Session $session): self
     {
         $this->sessions->removeElement($session);
+        return $this;
+    }
+
+    public function getCodePostal(): ?string
+    {
+        return $this->codePostal;
+    }
+
+    public function setCodePostal(?string $codePostal): self
+    {
+        $this->codePostal = $codePostal;
+
+        return $this;
+    }
+
+    public function getTelUrgence1(): ?string
+    {
+        return $this->telUrgence1;
+    }
+
+    public function setTelUrgence1(?string $telUrgence1): self
+    {
+        $this->telUrgence1 = $telUrgence1;
+
+        return $this;
+    }
+
+    public function getTelUrgence2(): ?string
+    {
+        return $this->telUrgence2;
+    }
+
+    public function setTelUrgence2(?string $telUrgence2): self
+    {
+        $this->telUrgence2 = $telUrgence2;
+
         return $this;
     }
 }
