@@ -36,7 +36,7 @@ class RGPDController extends AbstractController
             if ($role == 'ROLE_ADMIN') {
                 $redirect = 'dashOFPrincipal';
             } elseif ($role == 'ROLE_APP') {
-                $redirect = 'dashAPP';
+                $redirect = 'dashApp';
             } elseif ($role == 'ROLE_ENT') {
                 $redirect = 'dashEntreprise';
             } elseif ($role == 'ROLE_FORMATEUR') {

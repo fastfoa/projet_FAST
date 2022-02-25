@@ -336,8 +336,10 @@ class DashController extends AbstractController
         return $this->listAll( 'ROLE_MA', "Maitre d'apprentissage" );
     }
 
-    public function dashApp(User $apprenti ): Response
+    public function dashApp( ): Response
     {
+        $apprenti = $this->getUser();
+
         $menuA = 
         [
             'Sessions' => 'dashOFPrincipal', 
