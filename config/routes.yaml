@@ -68,6 +68,10 @@ monCompte:
     path: /monCompte
     controller: App\Controller\ModifInfoPersoController::monCompte
 
+compte_modif_password:
+    path: /modifier_mon_password
+    controller: App\Controller\CompteModifPasswordController::index
+
 ## App\Controller\InscriptionController
 
 inscriptionEntreprise:
