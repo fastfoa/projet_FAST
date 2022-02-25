@@ -260,9 +260,24 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $RoleString;
 
     /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $codePostal;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $telUrgence1;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $telUrgence2;
+
+    /**
     * @ORM\Column(type="string", length=255, nullable=true)
     */
-    private $RaisonSocial;
+    private $RaisonSocial; // pour une rôle unique de maitre d'apprentissage et entreprise, ex :indépendant
 
     public function __construct()
     {
@@ -897,6 +912,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+
     public function getIdDocContratTravail(): ?int
     {
         return $this->IdDocContratTravail;
@@ -905,9 +921,20 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setIdDocContratTravail(?int $IdDocContratTravail): self
     {
         $this->IdDocContratTravail = $IdDocContratTravail;
+    }
+
+    public function getCodePostal(): ?string
+    {
+        return $this->codePostal;
+    }
+
+    public function setCodePostal(?string $codePostal): self
+    {
+        $this->codePostal = $codePostal;
 
         return $this;
     }
+
 
     public function getIdDocConventionStage(): ?int
     {
@@ -917,7 +944,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setIdDocConventionStage(?int $IdDocConventionStage): self
     {
         $this->IdDocConventionStage = $IdDocConventionStage;
+    }
 
+    public function getTelUrgence1(): ?string
+    {
+        return $this->telUrgence1;
+    }
+
+    public function setTelUrgence1(?string $telUrgence1): self
+    {
+        $this->telUrgence1 = $telUrgence1;
         return $this;
     }
 
@@ -929,7 +965,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setIdDocCERFA(?int $IdDocCERFA): self
     {
         $this->IdDocCERFA = $IdDocCERFA;
+    }
 
+    public function getTelUrgence2(): ?string
+    {
+        return $this->telUrgence2;
+    }
+
+    public function setTelUrgence2(?string $telUrgence2): self
+    {
+        $this->telUrgence2 = $telUrgence2;
         return $this;
     }
 }
