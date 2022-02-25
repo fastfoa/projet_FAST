@@ -12,6 +12,16 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class CompteModifPasswordController extends AbstractController
 {
+    function checkRGPD()
+    {
+    //dd( $t );
+    $rgpd = $this->getUser()->getRGPDOK();
+
+    if (!$rgpd)
+        return $this->redirectToRoute( "rgpdForm" );
+    return null;
+    }
+    
     private $entityManager;
     public function __construct(EntityManagerInterface $entityManager)
     {
@@ -22,6 +32,10 @@ class CompteModifPasswordController extends AbstractController
      */
     public function index(Request $request, UserPasswordEncoderInterface $encoder): Response
     {
+        $ret = $this->checkRGPD();
+        if ( $ret )
+            return $ret;
+            
         $notification = null;
         $user = $this->getUser();
         $form = $this->createForm(ChangePasswordType::class, $user);

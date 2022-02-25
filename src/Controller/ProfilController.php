@@ -20,8 +20,22 @@ class ProfilController extends AbstractController
         ]);
     }
 
+    function checkRGPD()
+    {
+    //dd( $t );
+    $rgpd = $this->getUser()->getRGPDOK();
+
+    if (!$rgpd)
+        return $this->redirectToRoute( "rgpdForm" );
+    return null;
+    }
+
     public function editUser( User $user): Response
     {
+        $ret = $this->checkRGPD();
+        if ( $ret )
+            return $ret;
+            
         //$aut = $this->getUser();
         //$roleViewer = $aut->getRoles()[0];
         $roleViewer = 'ROLE_OF';
@@ -47,6 +61,10 @@ class ProfilController extends AbstractController
     // l'apprenti 
     public function profilOF_APP(User $user): Response
     {
+        $ret = $this->checkRGPD();
+        if ( $ret )
+            return $ret;
+            
         //dd( $user );
         return $this->render('profil/profilOF_APP.html.twig', 
         [
@@ -57,6 +75,10 @@ class ProfilController extends AbstractController
     // formateur
     public function profilOF_Formateur(User $user): Response
     {
+        $ret = $this->checkRGPD();
+        if ( $ret )
+            return $ret;
+            
         return $this->render('profil/profilOF_Formateur.html.twig', 
         [
             'user' => $user,
@@ -66,6 +88,10 @@ class ProfilController extends AbstractController
     // maitre d'apprentissage
     public function profilOF_MA(User $user): Response
     {
+        $ret = $this->checkRGPD();
+        if ( $ret )
+            return $ret;
+            
         return $this->render('profil/profilOF_MA.html.twig', 
         [
             'user' => $user,
@@ -75,6 +101,10 @@ class ProfilController extends AbstractController
     // l'entreprise
     public function profilOF_Entreprise(User $user): Response
     {
+        $ret = $this->checkRGPD();
+        if ( $ret )
+            return $ret;
+            
         return $this->render('profil/profilOF_Entreprise.html.twig', 
         [
             'user' => $user,
@@ -86,6 +116,10 @@ class ProfilController extends AbstractController
     // l'OF
     public function profilAPP_OF(User $user): Response
     {
+        $ret = $this->checkRGPD();
+        if ( $ret )
+            return $ret;
+            
         return $this->render('profil/profilAPP_OF.html.twig', 
         [
             'user' => $user,
@@ -95,6 +129,10 @@ class ProfilController extends AbstractController
     // formateur
     public function profilAPP_Formateur(User $user): Response
     {
+        $ret = $this->checkRGPD();
+        if ( $ret )
+            return $ret;
+            
         return $this->render('profil/profilAPP_Formateur.html.twig', 
         [
             'user' => $user,
@@ -104,6 +142,10 @@ class ProfilController extends AbstractController
     // maître d'apprentissage 
     public function profilAPP_MA(User $user): Response
     {
+        $ret = $this->checkRGPD();
+        if ( $ret )
+            return $ret;
+            
         return $this->render('profil/profilAPP_MA.html.twig', 
         [
             'user' => $user,
@@ -113,6 +155,10 @@ class ProfilController extends AbstractController
     // l'entreprise
     public function profilAPP_Entreprise(User $user): Response
     {
+        $ret = $this->checkRGPD();
+        if ( $ret )
+            return $ret;
+            
         return $this->render('profil/profilAPP_Entreprise.html.twig', 
         [
             'user' => $user,
@@ -124,6 +170,10 @@ class ProfilController extends AbstractController
     //l'OF
     public function profilFOR_OF(User $user): Response
     {
+        $ret = $this->checkRGPD();
+        if ( $ret )
+            return $ret;
+            
         return $this->render('profil/profilFOR_OF.html.twig', 
         [
             'user' => $user,
@@ -133,6 +183,10 @@ class ProfilController extends AbstractController
     // l'apprenti
     public function profilFOR_APP(User $user): Response
     {
+        $ret = $this->checkRGPD();
+        if ( $ret )
+            return $ret;
+            
         return $this->render('profil/profilFOR_APP.html.twig', 
         [
             'user' => $user,
@@ -142,6 +196,10 @@ class ProfilController extends AbstractController
     // maître d'apprentissage
     public function profilFOR_MA(User $user): Response
     {
+        $ret = $this->checkRGPD();
+        if ( $ret )
+            return $ret;
+            
          return $this->render('profil/profilFOR_MA.html.twig', 
          [
              'user' => $user,
@@ -151,6 +209,10 @@ class ProfilController extends AbstractController
     // l'entreprise
     public function profilFOR_Entreprise(User $user): Response
     {
+        $ret = $this->checkRGPD();
+        if ( $ret )
+            return $ret;
+            
          return $this->render('profil/profilFOR_Entreprise.html.twig', 
          [
              'user' => $user,
@@ -162,6 +224,10 @@ class ProfilController extends AbstractController
     // l'OF
     public function profilMA_OF(User $user): Response
     {
+        $ret = $this->checkRGPD();
+        if ( $ret )
+            return $ret;
+            
         return $this->render('profil/profilMA_OF.html.twig', 
         [
             'user' => $user,
@@ -171,6 +237,10 @@ class ProfilController extends AbstractController
     // l'apprenti
     public function profilMA_APP(User $user): Response
     {
+        $ret = $this->checkRGPD();
+        if ( $ret )
+            return $ret;
+            
         return $this->render('profil/profilMA_APP.html.twig', 
         [
             'user' => $user,
@@ -180,6 +250,10 @@ class ProfilController extends AbstractController
     // Formateur
     public function profilMA_FOR(User $user): Response
     {
+        $ret = $this->checkRGPD();
+        if ( $ret )
+            return $ret;
+            
          return $this->render('profil/profilMA_FOR.html.twig', 
          [
              'user' => $user,
@@ -191,6 +265,10 @@ class ProfilController extends AbstractController
     // l'OF
     public function profilENT_OF(User $user): Response
     {
+        $ret = $this->checkRGPD();
+        if ( $ret )
+            return $ret;
+            
         return $this->render('profil/profilENT_OF.html.twig', 
         [
             'user' => $user,
@@ -200,6 +278,10 @@ class ProfilController extends AbstractController
     // l'apprenti
     public function profilENT_APP(User $user): Response
     {
+        $ret = $this->checkRGPD();
+        if ( $ret )
+            return $ret;
+            
         return $this->render('profil/profilENT_APP.html.twig', 
         [
             'user' => $user,
@@ -209,6 +291,10 @@ class ProfilController extends AbstractController
     // Formateur
     public function profilENT_FOR(User $user): Response
     {
+        $ret = $this->checkRGPD();
+        if ( $ret )
+            return $ret;
+            
          return $this->render('profil/profilENT_FOR.html.twig', 
          [
              'user' => $user,

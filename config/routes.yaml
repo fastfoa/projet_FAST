@@ -5,6 +5,10 @@
 login:
     path: /login
     controller: App\Controller\SecurityController::login
+    
+profilEnabled:
+    path: /profilEnabled
+    controller: App\Controller\ProfilEnabledController::profilEnabled
                                
 files:
     path: /files
@@ -114,11 +118,12 @@ dashOFPrincipal:
     path: /dashOFPrincipal
     controller: App\Controller\DashController::dashOFPrincipal
 
-dashAPP:
-    path: /dashAPP
-    controller: App\Controller\DashController::dashAPP
+    
+dashApp:
+    path: /dashApp/{apprenti}
+    controller: App\Controller\DashController::dashApp
 
-
+    
 dashEntreprise:
     path: /dashEntreprise
     controller: App\Controller\DashController::dashEntreprise
