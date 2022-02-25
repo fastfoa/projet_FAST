@@ -134,7 +134,7 @@ class DashController extends AbstractController
     }
 
 
-    public function listUsersEntreprise(Entreprise $entreprise, $role, $roleName): Response
+    public function listUsersEntreprise(User $entreprise, $role, $roleName): Response
     {
         $doctrine = $this->getDoctrine();
         $list = $doctrine->getRepository(User::class)->findAll();
