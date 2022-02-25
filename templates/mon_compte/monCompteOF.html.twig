@@ -13,12 +13,11 @@
 				{{ form_widget(form.prenom) }}
 				{{ form_widget(form.adresse) }}
 				{{ form_widget(form.telephone) }}
-				{{ form_widget(form.old_password) }}
-				{{ form_widget(form.new_password) }}
+				<a href="{{path('compte_modif_password')}}" class="btn btn-success  mt-3">Mofier mon mot de pass</a>
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-12 mx-auto">
+			<div class="col-12 mx-auto mt-3">
 				{{ form_widget(form.save) }}
 			</div>
 		</div>

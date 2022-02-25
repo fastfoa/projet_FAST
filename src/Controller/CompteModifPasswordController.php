@@ -17,9 +17,7 @@ class CompteModifPasswordController extends AbstractController
     {
         $this->entityManager = $entityManager;
     }
-    /**
-     * @Route("modifier_mon_password", name="compte_modif_password")
-     */
+    
     public function index(Request $request, UserPasswordEncoderInterface $encoder): Response
     {
         $notification = null;
@@ -41,7 +39,7 @@ class CompteModifPasswordController extends AbstractController
                 $notification= "votre mot de passe actuel n'est pas le bon ";
             }            
         }
-        return $this->render('compte/compte_modif_password.html.twig',[
+        return $this->render('mon_compte/compte_modif_password.html.twig',[
             'form' => $form->createView(),
             'notification' => $notification
         ]);

@@ -28,13 +28,11 @@
 				{{form_widget(form.RepresentantLegal2)}}
 				<p style="color: #fff">Travailleur Handicape :</p>
 				{{form_widget(form.TravailleurHandicape)}}
-				{{form_widget(form.old_password)}}
-				{{form_widget(form.new_password)}}
-
+				<a href="{{path('compte_modif_password')}}" class="btn btn-success  mt-3">Mofier mon mot de pass</a>
 			</div>
 		</div>
 		<div class="row mx-auto">
-			<div class="col-12">
+			<div class="col-12 mt-3">
 				{{ form_widget(form.save) }}
 			</div>
 		</div>

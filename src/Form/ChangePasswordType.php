@@ -17,10 +17,6 @@ class ChangePasswordType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('email', EmailType::class,[
-                'disabled' => true,
-                'label'=> false
-            ])
             ->add('prenom', TextType::class,[
                 'disabled' => true,
                 'label'=> false
@@ -58,7 +54,7 @@ class ChangePasswordType extends AbstractType
                                         'placeholder' => 'Merci de saisir votre mot de passe'
                                     ]
             ])
-            ->add('submit', SubmitType::class, ['label' => "Mettre à jour"])
+            ->add('save', SubmitType::class, ['label' => "Mettre à jour"])
         ;
     }
 

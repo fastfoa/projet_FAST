@@ -16,11 +16,10 @@
         </div>
         <div class="col-6">
             {{ form_widget(form.Effectif)}}
-            {{ form_widget(form.old_password) }}
-            {{ form_widget(form.new_password) }}
+            <a href="{{path('compte_modif_password')}}" class="btn btn-success  mt-3">Mofier mon mot de pass</a>
         </div>
         <div class="row mx-auto">
-            <div class="col-12">
+            <div class="col-12 mt-3">
                 {{ form_widget(form.save) }}
             </div>
         </div>
