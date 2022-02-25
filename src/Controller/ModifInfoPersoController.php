@@ -34,7 +34,7 @@ class ModifInfoPersoController extends AbstractController
         $this->entityManager = $entityManager;
     }
 
-    public function monCompte(Request $request, UserPasswordEncoderInterface $encoder): Response
+    public function monCompte(Request $request ): Response
     {
         $ret = $this->checkRGPD();
         if ( $ret )
@@ -43,7 +43,7 @@ class ModifInfoPersoController extends AbstractController
         $notification = null;
         $contact = $this->getUser();
 
-        $role = $contact->getRoles()[0];
+        $role = $contact->getRoleString();
 
         //dd( $role );
         $type =  null;
@@ -95,7 +95,7 @@ class ModifInfoPersoController extends AbstractController
         
 
         $form = $this->createForm($type, $contact);
-
+        /*
         function filtreForm($form, $contact)
         {
             $new_email = $form->get('email')->getData();
@@ -160,23 +160,20 @@ class ModifInfoPersoController extends AbstractController
 
             return $contact;
         }
-
+        */
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $contact = filtreForm($form, $contact);
-
-            $old_pwd = $form->get('old_password')->getData();
+            //$contact = filtreForm($form, $contact);
+            /*
             if ($encoder->isPasswordValid($contact, $old_pwd)) {
-
                 // modification du mot de pass 
-
                 $new_pwd = $form->get('new_password')->getData();
                 $password = $encoder->encodePassword($contact, $new_pwd);
                 $contact->setPassword($password);
             }
-
+            */
             $this->entityManager->persist($contact);
             $this->entityManager->flush();
             $notification = "Vos information ont  été mis à jour.";
