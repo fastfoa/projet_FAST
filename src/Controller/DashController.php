@@ -30,7 +30,10 @@ class DashController extends AbstractController
     {
         $doctrine = $this->getDoctrine();
         //$listSession = $doctrine->getRepository(Session::class)->findAll();
-        $listSession = getSQLArrayAssoc('SELECT session.id, formation.nom as f, session.debut, session.fin, session.nom 
+        $login = $this->getParameter('loginDB');
+        $pw = $this->getParameter('PasswordDB');
+
+        $listSession = getSQLArrayAssoc($login, $pw, 'SELECT session.id, formation.nom as f, session.debut, session.fin, session.nom 
         FROM session, formation 
         WHERE formation.id=session.id_formation' );
         
@@ -161,7 +164,10 @@ class DashController extends AbstractController
     {
         $doctrine = $this->getDoctrine();
         $sessionID = $session->getId();
-        $list = getSQLArrayAssoc( 
+        $login = $this->getParameter('loginDB');
+        $pw = $this->getParameter('PasswordDB');
+
+        $list = getSQLArrayAssoc( $login, $pw, 
             "SELECT user.nom, user.prenom, user.telephone, user.email, user.id 
              FROM  user_in_session as s 
              LEFT JOIN user ON s.id_user=user.id 
@@ -207,7 +213,10 @@ class DashController extends AbstractController
     {
         $doctrine = $this->getDoctrine();
         //$list = $doctrine->getRepository(User::class)->findAll();
-        $list = getSQLArrayAssoc( 
+        $login = $this->getParameter('loginDB');
+        $pw = $this->getParameter('PasswordDB');
+
+        $list = getSQLArrayAssoc( $login, $pw,
             "SELECT user.nom, user.prenom, user.telephone, user.email, user.id, s.nom as ns
              FROM  user
              LEFT JOIN user_in_session as us ON us.id_user=user.id 
