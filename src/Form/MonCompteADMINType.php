@@ -1,28 +1,47 @@
 <?php
-
 namespace App\Form;
 
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class MonCompteEntrepriseType extends AbstractType
+class MonCompteADMINType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
         ->add('nom', TextType::class,[
             'label'=> false,
+            'disabled' => true,
             'attr' => [
-                'placeholder' => 'nom'
+                'placeholder' => 'nom',
+                'style'=> 'color: white'
             ]
         ])
+        ->add('prenom', TextType::class,[
+            'label'=> false,
+            'disabled' => true,
+            'attr' => [
+                'placeholder' => 'prenom',
+                'style'=> 'color: white'
+            ]
+        ])
+        ->add('email', TextType::class,[
+            'disabled' => true,
+            'attr' => [ 
+                'placeholder' => 'Entrez votre adresse email',
+                'style'=> 'color: white'
+                ] 
+        ])
+
         ->add('adresse', TextType::class,[
             'label'=> false,
             'attr' => [
@@ -35,13 +54,7 @@ class MonCompteEntrepriseType extends AbstractType
                 'placeholder' => 'telephone'
             ]
         ])
-        ->add('Effectif', NumberType::class,[
-            'label'=> false,
-            'attr' => [
-                'placeholder' => 'Effectif'
-            ]
-        ])
-        
+
         ->add('old_password', PasswordType::class,[
             'label' => false,
             'mapped'=> false,
@@ -76,7 +89,8 @@ class MonCompteEntrepriseType extends AbstractType
             'attr' => [
                 'class' => 'boutonForm'
             ]
-            ]);
+        ])
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void

@@ -2,9 +2,11 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Form\MonCompteADMINType;
 use App\Form\MonCompteAppType;
 use App\Form\MonCompteEntrepriseType;
 use App\Form\MonCompteFormateurType;
+use App\Form\MonCompteINDType;
 use App\Form\MonCompteMAType;
 use App\Form\MonCompteOFType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -65,6 +67,16 @@ class ModifInfoPersoController extends AbstractController
         {
             $type =  MonCompteOFType::class;
             $twig = 'mon_compte/monCompteOF.html.twig';
+            $titre = "Organisme de Formation";
+        }else if ( $role == 'ROLE_IND')
+        {
+            $type =  MonCompteINDType::class;
+            $twig = 'mon_compte/monCompteIND.html.twig';
+            $titre = "Formateur";
+        }else if ( $role == 'ROLE_ADMIN')
+        {
+            $type =  MonCompteADMINType::class;
+            $twig = 'mon_compte/monCompteADMIN.html.twig';
             $titre = "Formateur";
         }
         

@@ -42,12 +42,6 @@ class MonCompteFormateurType extends AbstractType
                'style'=> 'color: white'
            ]
        ])
-       ->add('telephone', NumberType::class,[
-           'attr' => [
-               'placeholder' => 'telephone',
-           
-           ]
-       ])
     
        ->add('adresse',TextType::class,[
            'attr' => [
