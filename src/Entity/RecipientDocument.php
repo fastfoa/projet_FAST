@@ -20,11 +20,6 @@ class RecipientDocument
     /**
      * @ORM\Column(type="integer")
      */
-    private $idSender;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
     private $idDocument;
 
     /**
@@ -40,18 +35,6 @@ class RecipientDocument
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getIdSender(): ?int
-    {
-        return $this->idSender;
-    }
-
-    public function setIdSender(int $idSender): self
-    {
-        $this->idSender = $idSender;
-
-        return $this;
     }
 
     public function getIdRecipient(): ?int
