@@ -41,6 +41,9 @@
     {% if is_granted('ROLE_OF') %}
         <a class="nav-link" href="#">Interface</span>{% if is_granted('ROLE_ADMIN') %}(organisme de formation){% endif %}</a>
     {% endif %}
+	{% if is_granted('ROLE_IND') %}
+        <a class="nav-link" href="#">Interface</span>{% if is_granted('ROLE_ADMIN') %}(organisme de formation){% endif %}</a>
+    {% endif %}
         <a class="nav-link" href="#">Comment Modifier c'est information</span></a>
         <a class="nav-link" href="#">Comment Conaitre les information Donées et confidentialité</span></a>
         <a class="nav-link" href="#"></span></a>
