@@ -35,6 +35,17 @@ class LanController extends AbstractController
             'controller_name' => 'LanController',
         ]);
     }
+
+    function checkRGPD()
+    {
+    //dd( $t );
+    $rgpd = $this->getUser()->getRGPDOK();
+
+    if (!$rgpd)
+        return $this->redirectToRoute( "rgpdForm" );
+    return null;
+    }
+
     /*
      public function login(): Response
     {
@@ -137,11 +148,19 @@ class LanController extends AbstractController
 
     public function aide(): Response
     {
+        $ret = $this->checkRGPD();
+        if ( $ret )
+            return $ret;
+
         return $this->render('aide.html.twig');
     }
 
     public function documentOff(): Response
     {
+        $ret = $this->checkRGPD();
+        if ( $ret )
+            return $ret;
+
         return $this->render('documentOff.html.twig');
     }
 
@@ -149,28 +168,48 @@ class LanController extends AbstractController
 
     public function annuaireTest(): Response
     {
+        $ret = $this->checkRGPD();
+        if ( $ret )
+            return $ret;
+
         return $this->render('lan/annuaireTest.html.twig');
     }
 
     public function annuairePopup(): Response
     {
+        $ret = $this->checkRGPD();
+        if ( $ret )
+            return $ret;
+
         return $this->render('lan/annuairePopup.html.twig');
     }
 
     public function annuaire(): Response
     {
+        $ret = $this->checkRGPD();
+        if ( $ret )
+            return $ret;
+            
         $users = getSQLArrayKV( 'SELECT nom as v, id as k FROM  user' );
         return  new JsonResponse(   $users    );
     }
 
     public function annuaireR($role): Response
     {
+        $ret = $this->checkRGPD();
+        if ( $ret )
+            return $ret;
+            
         $users = getSQLArrayKV( "SELECT user.nom as v, user.id as k, user.role_string, s.id_session FROM  user_in_session as s LEFT JOIN user ON s.id_user=user.id Where user.role_string='$role'");
         return  new JsonResponse(   $users    );
     }
 
     public function annuaireRS($role, $session): Response
     {
+        $ret = $this->checkRGPD();
+        if ( $ret )
+            return $ret;
+            
         $users = getSQLArrayKV( "SELECT user.nom as v, user.id as k, user.role_string, s.id_session FROM  user_in_session as s LEFT JOIN user ON s.id_user=user.id Where s.id_session=$session and user.role_string='$role'");
         return  new JsonResponse(   $users    );
     }
