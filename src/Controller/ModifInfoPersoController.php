@@ -24,7 +24,7 @@ class ModifInfoPersoController extends AbstractController
         return $this->redirectToRoute( "rgpdForm" );
     return null;
     }
-    
+
     private $entityManager;
     public function __construct(EntityManagerInterface $entityManager)
     {

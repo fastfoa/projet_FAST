@@ -28,12 +28,11 @@ class RGPDController extends AbstractController
         $user = $this->getUser();
         $id = $user->getId();
         $rgpd = $user->getRGPDOK();
-        $enabled = $user->getProfilEnabled();
         $role = $user->getRoles()[0];
 
         $redirect = "login";
 
-        if ($rgpd && $enabled) {
+        if ($rgpd) {
             if ($role == 'ROLE_ADMIN') {
                 $redirect = 'dashOFPrincipal';
             } elseif ($role == 'ROLE_APP') {
@@ -49,7 +48,7 @@ class RGPDController extends AbstractController
             }
             return $this->redirectToRoute( $redirect);
         } 
-        elseif (!$rgpd && $enabled)
+        elseif (!$rgpd)
         {
             $formulaire = $this->createForm(RGPDType::class, $user);
             $formulaire->handleRequest($request);

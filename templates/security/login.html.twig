@@ -26,7 +26,7 @@
     </div>
     <form method="post">
         {% if error %}
-            <div class="alert alert-danger">Email ou mot de passe incorrect{#{ error.messageKey|trans(error.messageData, 'security') }#}</div>
+            <div class="alert alert-danger">{{erreur}}{#{ error.messageKey|trans(error.messageData, 'security') }#}</div>
         {% endif %}
 
         {% if app.user %}
