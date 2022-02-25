@@ -49,6 +49,12 @@ class MonCompteFormateurType extends AbstractType
              
            ]
        ])
+       ->add('telephone', TextType::class,[
+        'label'=> false,
+        'attr' => [
+            'placeholder' => 'telephone'
+        ]
+    ])
 
         ->add('save', SubmitType::class,[
             'label'=> "Enregistrer",

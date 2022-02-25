@@ -137,7 +137,7 @@ class LanController extends AbstractController
 
     public function aide(): Response
     {
-        return $this->render('aide.html.twig');
+        return $this->render('lan/aide.html.twig');
     }
 
     public function documentOff(): Response
