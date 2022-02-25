@@ -189,8 +189,6 @@ listAllFormateurs:
     path: /listAllFormateurs
     controller: App\Controller\DashController::listAllFormateurs
 
-
-
 listAllEntreprises: 
     path: /listAllEntreprises
     controller: App\Controller\DashController::listAllEntreprises
@@ -301,3 +299,14 @@ profilENT_FOR:
 rgpdForm:
     path: /rgpdForm
     controller: App\Controller\RGPDController::rgpdForm
+
+# ********************** EVALUATION **************************
+
+saisiEvaluation: 
+    path: /saisiEvaluation/{competence}/{app}/{session}
+    controller: App\Controller\EvaluationController::saisiEvaluation
+
+choiceCompetence: 
+    path: /choiceCompetence/{app}/{session}
+    controller: App\Controller\EvaluationController::choiceCompetence
+
