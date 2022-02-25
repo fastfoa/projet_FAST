@@ -21,12 +21,15 @@ class AddUserType extends AbstractType
            ->add('email', TextType::class,[
                'attr' => [
                    'placeholder' => 'email',
+                   'class' => "boutonForm col-3 my-2"
                  
                ]
            ])
         ->add('save', SubmitType::class,
-            [ 'label' => "Enregistrer", 'attr' => [ 'class' => "boutonForm" ] ]
-            );
+            [ 'label' => "Enregistrer", 
+               'attr' => [ 'class' => "boutonForm col-3 my-2" ] 
+               ]
+                );
     }
 
     public function configureOptions(OptionsResolver $resolver): void

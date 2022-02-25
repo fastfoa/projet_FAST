@@ -14,8 +14,10 @@ use Doctrine\ORM\EntityManagerInterface;
 use App\Form\AddUserType;
 use App\Form\InscriptionAppType;
 use App\Form\InscriptionApprentiType;
+use App\Form\InscriptionIndType;
 use App\Form\InscriptionApp2Type;
 use App\Form\InscriptionMAType;
+use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use Doctrine\Persistence\ManagerRegistry;
 
 
@@ -31,18 +33,33 @@ class InscriptionController extends AbstractController
         ]);
     }
 
+    function checkRGPD()
+    {
+    //dd( $t );
+    $rgpd = $this->getUser()->getRGPDOK();
+
+    if (!$rgpd)
+        return $this->redirectToRoute( "rgpdForm" );
+    return null;
+    }
+
     public function inscriptionEntreprise(Request $request): Response
     {
+        $ret = $this->checkRGPD();
+        if ( $ret )
+            return $ret;
+
         $user = new User();
+
+        //$user->setNom( 'toto');
         $form = $this->createForm(InscriptionEntrepriseType::class, $user);
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) 
         {
             //enregistrer le Nom 
-            $Nom = $user->getNom();
-            $Nom = strip_tags( $Nom );
-            $user->setNom( $Nom );
+            $raisonSocial = $user->getRaisonSocial();
+            $user->setRaisonSocial($raisonSocial);
 
             //enregistrer l'Adresse 
             $Adresse = $user->getAdresse();
@@ -100,6 +117,10 @@ class InscriptionController extends AbstractController
 
     public function inscriptionMA(Request $request, ManagerRegistry $doctrine): Response
     {
+        $ret = $this->checkRGPD();
+        if ( $ret )
+            return $ret;
+
         $user = new User();
         $form = $this->createForm(InscriptionMAType::class, $user);
         $form->handleRequest($request);
@@ -113,8 +134,8 @@ class InscriptionController extends AbstractController
             $email = $user->getEmail();
             $user->setEmail($email);
 
-            $adresse = $user->getAdresse();
-            $user->setAdresse($adresse);
+            $fonction = $user->getFonctionMA();
+            $user->setFonctionMA($fonction);
             
             $prenom = $user->getPrenom();
             $user->setPrenom($prenom);
@@ -141,6 +162,10 @@ class InscriptionController extends AbstractController
 
     public function inscriptionFormateur(Request $request, EntityManagerInterface $manager)
     {
+        $ret = $this->checkRGPD();
+        if ( $ret )
+            return $ret;
+
         $contact = new User();
         $form = $this->createForm(InscriptioFormateurType::class, $contact);
         $form->handleRequest($request);
@@ -208,6 +233,10 @@ class InscriptionController extends AbstractController
 
     public function inscriptionEntrepriseSA(Request $request): Response
     {
+        $ret = $this->checkRGPD();
+        if ( $ret )
+            return $ret;
+
         $contact = new User();
         $form = $this->createForm(InscriptionEntrepriseType::class, $contact);
         $form->handleRequest($request);
@@ -264,6 +293,10 @@ class InscriptionController extends AbstractController
 
     public function inscriptionEleveAS(Request $request): Response
     {
+        $ret = $this->checkRGPD();
+        if ( $ret )
+            return $ret;
+
         $contact = new User();
         $form = $this->createForm(InscriptionApprentiType::class, $contact);
         $form->handleRequest($request);
@@ -319,6 +352,10 @@ class InscriptionController extends AbstractController
 
     public function inscriptionApprenti(Request $request): Response
     {
+        $ret = $this->checkRGPD();
+        if ( $ret )
+            return $ret;
+
         $contact = new User();
         $form = $this->createForm(InscriptionApprentiType::class, $contact);
         $form->handleRequest($request);
@@ -442,36 +479,125 @@ class InscriptionController extends AbstractController
         );
     }
 
+    public function inscriptionInd(Request $request, ManagerRegistry $doctrine): Response
+    {
+        $ret = $this->checkRGPD();
+        if ( $ret )
+            return $ret;
+
+        $user = new User();
+        $form = $this->createForm(InscriptionIndType::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $entityManager = $doctrine->getManager();
+
+            $user->setRoles(['ROLE_IND']);
+
+            $email = $user->getEmail();
+            $user->setEmail($email);
+
+            $adresse = $user->getAdresse();
+            $user->setAdresse($adresse);
+            
+            $prenom = $user->getPrenom();
+            $user->setPrenom($prenom);
+
+            $tel = $user->getTelephone();
+            $user->setTelephone($tel);
+
+            $nom = $user->getNom();
+            $nom = strip_tags( $nom );
+            $user->setNom($nom);
+
+            $raisonSocial = $user->getRaisonSocial();
+            $user->setRaisonSocial($raisonSocial);
+
+            $dateNaissance = $user->getDateNaissance();
+            $user->setDateNaissance($dateNaissance);
+
+            $fonction = $user->getFonctionMA();
+            $user->setFonctionMA($fonction);
+
+            $Siret = $user->getSiret();
+            $Siret = strip_tags( $Siret );
+            $user->setSiret( $Siret );
+
+            $NAF = $user->getNAF();
+            $NAF = strip_tags( $NAF );
+            $user->setNAF( $NAF );
+
+            $Effectif = $user->getEffectif();
+            $user->setEffectif( $Effectif );
+
+            $ConventionCollective = $user->getConventionCollective();
+            $ConventionCollective = strip_tags( $ConventionCollective );
+            $user->setConventionCollective( $ConventionCollective );
+
+            $EmployeurPublic = $user->getEmployeurPublic();
+            $EmployeurPublic = strip_tags( $EmployeurPublic );
+            $user->setEmployeurPublic( $EmployeurPublic );
+
+            $CodeIDCCConvention = $user->getCodeIDCCConvention();
+            $CodeIDCCConvention = strip_tags( $CodeIDCCConvention );
+            $user->setCodeIDCCConvention( $CodeIDCCConvention );
+
+            $entityManager->persist($user); 
+            $entityManager->flush();
+
+            return $this->redirect($this->generateUrl('login'));
+        }
+        return $this->render( 'inscription/inscriptionInd.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
 
     public function addUserRaw(Request $request, $role, $roleName ) 
     {
+        $ret = $this->checkRGPD();
+        if ( $ret )
+            return $ret;
+
         $user = new User();
-
-
         $form = $this->createForm(AddUserType::class, $user);
         $form->handleRequest($request);
+        $erreur = false;
+
         if ($form->isSubmitted() && $form->isValid()) 
         {
-            $user->setRoles( [$role] );
+            try
+            {
+                $user->setRoles( [$role] );
+                $doctrine = $this->getDoctrine();
+                $entityManager = $doctrine->getManager();
 
-            $doctrine = $this->getDoctrine();
-            $entityManager = $doctrine->getManager();
-
-            $entityManager->persist($user);
-            $entityManager->flush();
-            return $user->getId();
+                $entityManager->persist($user);
+                $entityManager->flush();
+                return $user->getId();
+            }
+            catch (\Exception $e)
+            {
+                $erreur = "L'adresse email est déjà utilisé !";
+            }
         }
+        
         return $this->render(
             'inscription/addUser.html.twig',
             [
                 'form' => $form->createView(),
                 'roleName' => $roleName,
+                'erreur' => $erreur
             ]
         );
     }
 
     public function addUser(Request $request, $role, $roleName ): Response
     {
+        $ret = $this->checkRGPD();
+        if ( $ret )
+            return $ret;
+
         $userID = $this->addUserRaw($request, $role, $roleName );
         if ( is_int($userID) )
         {
@@ -482,10 +608,28 @@ class InscriptionController extends AbstractController
 
     public function addUserSession(Request $request, Session $session, $role, $roleName): Response
     {
+        $ret = $this->checkRGPD();
+        if ( $ret )
+            return $ret;
+            
         $userID = $this->addUserRaw($request, $role, $roleName );
         if ( is_int($userID) )
         {
             // add à la session
+            $doctrine = $this->getDoctrine();
+            $entityManager = $doctrine->getManager();
+            $user = $entityManager->getRepository(User::class)->find($userID);
+            $session = $entityManager->getRepository(Session::class)->find($session);
+
+            if (!$user) {
+                throw $this->createNotFoundException(
+                    'No user found for id '.$userID
+                );
+            }
+
+            $user->addSession($session);
+            $entityManager->flush();
+
             // add
             return $this->redirect($this->generateUrl('listUsersSession', array('session' => $session->getID(), 'role' => $role, 'roleName' => $roleName )));
 

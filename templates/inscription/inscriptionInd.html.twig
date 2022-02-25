@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="container-fluid">
+		<div class="row bg-bar">
+			<h3>Inscription Indépendant</h3>
+		</div>
+		<div class="row">
+			<div class="col-6">
+				{{form_start(form)}}
+					{{ form_widget(form.email) }}
+					{{ form_widget(form.nom) }}
+					{{ form_widget(form.prenom) }}
+					{{ form_widget(form.raisonSocial) }}
+					{{ form_widget(form.adresse) }}
+					{{ form_widget(form.telephone) }}
+					{{ form_widget(form.dateNaissance) }}
+					{{ form_widget(form.fonctionMA) }}
+					{{ form_widget(form.siret) }}
+					{{ form_widget(form.NAF) }}
+					{{ form_widget(form.Effectif) }}
+					{{ form_widget(form.ConventionCollective) }}
+					{{ form_widget(form.EmployeurPublic) }}
+					{{ form_widget(form.CodeIDCCConvention) }}
+				{{form_end(form)}}
+			</div>
+		</div>
+</div>
+{% endblock %}

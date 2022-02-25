@@ -18,6 +18,11 @@ class Document
     private $id;
 
     /**
+     * @ORM\Column(type="integer")
+     */
+    private $IdOwner;
+    
+    /**
      * @ORM\Column(type="string", length=255)
      */
     private $fileName;
@@ -87,6 +92,18 @@ class Document
     public function setFileNameOriginal(string $fileNameOriginal): self
     {
         $this->fileNameOriginal = $fileNameOriginal;
+
+        return $this;
+    }
+
+    public function getIdOwner(): ?int
+    {
+        return $this->IdOwner;
+    }
+
+    public function setIdOwner(int $IdOwner): self
+    {
+        $this->IdOwner = $IdOwner;
 
         return $this;
     }

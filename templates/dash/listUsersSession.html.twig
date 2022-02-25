@@ -1,4 +1,4 @@
-{% extends 'lan/base.html.twig' %}
+{% extends 'base.html.twig' %}
 
 {% block myStylesheets %}
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
@@ -44,9 +44,14 @@
 										<td>{{item.email}}</td>
 										{#<td>{{session.formation}}</td>#}
 										<td>								
-											<a href="{{ path( 'editUser',{'userID':item.id} ) }}">
+											<a href="{{ path( 'editUser',{'user':item.id} ) }}">
 													<i class="fas fa-solid fa-download" style="font-size:20px;color:green;"></i>
 											</a>
+											{% if role == 'ROLE_APP' %}
+											<a href="{{ path( 'choiceCompetence',{'app':item.id, 'session':session.id, } ) }}">
+													EVAL
+											</a>
+											{% endif %}
                                         </td>
 									</tr>
 								{% endfor %}

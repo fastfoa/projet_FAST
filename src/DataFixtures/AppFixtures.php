@@ -10,17 +10,23 @@ class AppFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
-        $f = new Formation();
-        $f->setNom("DWWM");
-        $manager->persist($f);
+        $fd = new Formation();
+        $fd->setNom("DWWM");
+        $fd->setCodeRNCP("XXXX");
+        $fd->setCodeDiplome("XXXX");
+        $manager->persist($fd);
 
-        $f = new Formation();
-        $f->setNom("CDA");
-        $manager->persist($f);
+        $fc = new Formation();
+        $fc->setNom("CDA");
+        $fc->setCodeRNCP("XXXX");
+        $fc->setCodeDiplome("XXXX");
+        $manager->persist($fc);
 
-        $f = new Formation();
-        $f->setNom("Bachelor");
-        $manager->persist($f);
+        $fb = new Formation();
+        $fb->setNom("Bachelor");
+        $fb->setCodeRNCP("XXXX");
+        $fb->setCodeDiplome("XXXX");
+        $manager->persist($fb);
 
         $manager->flush();
     }

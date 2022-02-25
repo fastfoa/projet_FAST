@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<style>
+
+			* {
+				box-sizing: border-box;
+			}
+
+			body {
+				font: 16px Arial;
+			}
+
+			/*the container must be positioned relative:*/
+			.autocomplete {
+				position: relative;
+				display: inline-block;
+			}
+
+			input {
+				border: 1px solid transparent;
+				background-color: #f1f1f1;
+				padding: 10px;
+				font-size: 16px;
+			}
+
+			input[type=text] {
+				background-color: #f1f1f1;
+				width: 100%;
+			}
+
+			input[type=submit] {
+				background-color: DodgerBlue;
+				color: #fff;
+				cursor: pointer;
+			}
+
+			.autocomplete-items {
+				position: absolute;
+				border: 1px solid #d4d4d4;
+				border-bottom: none;
+				border-top: none;
+				z-index: 99;
+				/*position the autocomplete items to be the same width as the container:*/
+				top: 100%;
+				left: 0;
+				right: 0;
+			}
+
+			.autocomplete-items div {
+				padding: 10px;
+				cursor: pointer;
+				background-color: #fff;
+				border-bottom: 1px solid #d4d4d4;
+			}
+
+			/*when hovering an item:*/
+			.autocomplete-items div:hover {
+				background-color: #e9e9e9;
+			}
+
+			/*when navigating through the items using the arrow keys:*/
+			.autocomplete-active {
+				background-color: DodgerBlue !important;
+				color: #ffffff;
+			}
+			.popup {
+				background-color: red;
+				height: 150px;
+				width: 350px;
+			}
+		</style>
+		<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+		<script src="{{asset("/JS/annuaire.js")}}"></script>
+
+	</head>
+	<body>
+			<div id="role0" onclick="selectAnnuaire(   '{{ path('annuaire') }}' );">ALL</div>
+			<div id="role1" onclick="selectAnnuaireR(  '{{ path('annuaire') }}', 'ROLE_APP' );">ROLE</div>
+			<div id="role2" onclick="selectAnnuaireRS( '{{ path('annuaire') }}', 'ROLE_APP', 1 );">ROLE SESS</div>
+			<div id="check">CHECK</div>
+			<div id="aff"></div>
+
+
+      <br>
+      <br>
+      <br>
+			<div id="annuairePopup" class="popup">
+				<form autocomplete="off" action="">
+					<div class="autocomplete" style="width:300px;">
+						<input id="myInput" type="text" name="myCountry">
+					</div>
+					<input id="envoyer" type="submit">
+				</form>
+			</div>
+	</body>
+</html>

@@ -1,0 +1,21 @@
+{% extends 'profil/profil.html.twig' %}
+
+{% block myStylesheets %}{% endblock myStylesheets %}
+
+
+{% block myJavascripts %}{% endblock myJavascripts%}
+
+{% block OF %}
+<div class="row">
+    <div class="col-5  ">    
+        <h5> {{user.telephone}} </h5>
+        <h5> {{user.adresse}} </h5>
+        <h5> {{user.NIR|default('NSS X XXXXXX XXX XXX XX')}} </h5>
+        <h5> {{user.RepresentantLegal1|default('représentant légal 2')}} </h5>
+        <h5> {{user.RepresentantLegal2|default('représentant légal 2')}} </h5>
+    </div>
+    <div class="col-2">    
+    </div>
+</div>
+<hr>    
+{% endblock OF %}

@@ -1,4 +1,4 @@
-{% extends 'lan/base.html.twig' %}
+{% extends 'base.html.twig' %}
 
 {% block myStylesheets %}
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
@@ -41,7 +41,7 @@
 										<td>{{session.debut|date("d/m/y")}}</td>
 										<td>{{session.fin|date("d/m/y")}}</td>
 										<td>{{session.nom}}</td>
-										<td>DWWM</td>
+										<td>{{session.f}}</td>
 										{#<td>{{session.formation}}</td>#}
 										<td>								
 											<a href="{{ path( 'dashOFSession',{'session':session.id} ) }}">

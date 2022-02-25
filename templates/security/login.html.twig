@@ -1,4 +1,4 @@
-{% extends 'lan/base.html.twig' %}
+{% extends 'base.html.twig' %}
 
 {% block myStylesheets %}
     <link rel="stylesheet" href="{{asset('css/login.css')}}">
@@ -7,6 +7,11 @@
         {
             width: 100%;
             height: 40px;
+        }
+
+        .mycheck
+        {
+            width:auto;
         }
     </style>
 {% endblock %}
@@ -21,7 +26,7 @@
     </div>
     <form method="post">
         {% if error %}
-            <div class="alert alert-danger">Email ou mot de passe incorrect{#{ error.messageKey|trans(error.messageData, 'security') }#}</div>
+            <div class="alert alert-danger">{{erreur}}{#{ error.messageKey|trans(error.messageData, 'security') }#}</div>
         {% endif %}
 
         {% if app.user %}
@@ -37,7 +42,7 @@
         <input type="hidden" name="_csrf_token"
             value="{{ csrf_token('authenticate') }}"
         >
-        <input class="form-check-input mt-3" type="checkbox" value="" id="flexCheckDefault">
+        <input class="form-check-input mycheck mt-3" type="checkbox" value="" id="flexCheckDefault">
         <label class="form-check-label my-2" for="flexCheckDefault">
             Se souvenir de moi
         </label>
