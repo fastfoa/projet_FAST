@@ -29,9 +29,23 @@ class DocumentController extends AbstractController
             'controller_name' => 'DocumentController',
         ]);
     }
+    
+    function checkRGPD()
+    {
+    //dd( $t );
+    $rgpd = $this->getUser()->getRGPDOK();
+
+    if (!$rgpd)
+        return $this->redirectToRoute( "rgpdForm" );
+    return null;
+    }
 
     public function upload(Request $request, SluggerInterface $slugger): Response
     {
+        $ret = $this->checkRGPD();
+        if ( $ret )
+            return $ret;
+
         $up = new Document();
         $formulaire = $this->createForm(DocumentType::class, $up);
 
@@ -100,6 +114,10 @@ class DocumentController extends AbstractController
    
     public function downloadlist(): Response
     {
+        $ret = $this->checkRGPD();
+        if ( $ret )
+            return $ret;
+
         $doctrine = $this->getDoctrine();
         //$patro = $doctrine->getRepository(Patronyme::class)->find($id);
 
@@ -119,6 +137,10 @@ class DocumentController extends AbstractController
 
     public function download(Document $id): Response
     {
+        $ret = $this->checkRGPD();
+        if ( $ret )
+            return $ret;
+
         $file = $this->getParameter('path_upload')."/".$id->getFileName();
 
         $r = new BinaryFileResponse($file);
@@ -136,12 +158,16 @@ class DocumentController extends AbstractController
     
     public function deletedocument(Document $document )
     {
-            $doctrine = $this->getDoctrine();
-            $om = $doctrine->getManager();
-            $om->remove($document);
-            $om->flush();
-            $this->addFlash('message', "Document supprimé");
-            return $this->redirectToRoute("downloadlist");
+        $ret = $this->checkRGPD();
+        if ( $ret )
+            return $ret;
+    
+        $doctrine = $this->getDoctrine();
+        $om = $doctrine->getManager();
+        $om->remove($document);
+        $om->flush();
+        $this->addFlash('message', "Document supprimé");
+        return $this->redirectToRoute("downloadlist");
     }
   
 }

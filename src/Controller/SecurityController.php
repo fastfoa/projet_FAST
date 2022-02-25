@@ -24,7 +24,7 @@ class SecurityController extends AbstractController
             //if ( $enabled == 0 )
             //    return $this->redirectToRoute('logout');;
             //return $this->redirectToRoute('dashOFPrincipal');
-            return $this->redirectToRoute('rgpdForm');
+            return $this->redirectToRoute('profilEnabled');
             }
         
         // $profil = getSQLSingle( 
@@ -38,8 +38,9 @@ class SecurityController extends AbstractController
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
 
+        $erreur = "Email ou mot de passe incorrect";
        
-        return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
+        return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error, 'erreur' => $erreur]);
         // return $this->redirectToRoute('rgpdForm', ['last_username' => $lastUsername,  'error' => $error]);
     }
 
