@@ -1,9 +1,11 @@
 <?php
 
 
+
 use PDO;
 
-    function getPDO()
+
+    function getPDO( $login, $pw )
     {
         $dsn = "mysql:host=127.0.0.1;dbname=projet_FAST";
         try {
@@ -17,16 +19,16 @@ use PDO;
     }
 
 
-     function getSQLRaw($query)
+     function getSQLRaw( $login, $pw, $query)
     {
-        $pdo = getPDO();
+        $pdo = getPDO($login, $pw);
         $rs = $pdo->prepare($query);
         return $rs->execute();
     }
 
-     function getSQLList($query)
+     function getSQLList($login, $pw, $query)
     {
-        $pdo = getPDO();
+        $pdo = getPDO($login, $pw );
         $rs = $pdo->prepare($query);
         $rs->execute();
         $res = [];
@@ -37,9 +39,9 @@ use PDO;
         return $res;
     }
 
-     function getSQLArrayKV($query)
+     function getSQLArrayKV($login, $pw, $query)
     {
-        $pdo = getPDO();
+        $pdo = getPDO($login, $pw );
         $rs = $pdo->prepare($query);
         $rs->execute();
         $res = [];
@@ -50,9 +52,9 @@ use PDO;
         return $res;
     }
 
-     function getSQLArrayAssoc($query)
+     function getSQLArrayAssoc($login, $pw, $query)
     {
-        $pdo = getPDO();
+        $pdo = getPDO( $login, $pw, );
         $rs = $pdo->prepare($query);
         $rs->execute();
         $res = [];
@@ -62,17 +64,17 @@ use PDO;
         return $res;
     }
 
-     function getSQLSingle($query)
+     function getSQLSingle($login, $pw, $query)
     {
-        $pdo = getPDO();
+        $pdo = getPDO($login, $pw );
         $rs = $pdo->prepare($query);
         $rs->execute();
         return  $rs->fetchColumn();
     }
 
-     function getSQLSingleAssoc($query)
+     function getSQLSingleAssoc($login, $pw, $query)
     {
-        $pdo = getPDO();
+        $pdo = getPDO($login, $pw);
         $rs = $pdo->prepare($query);
         $rs->execute();
         return  $rs->fetch();
