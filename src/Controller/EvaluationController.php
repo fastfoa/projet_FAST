@@ -47,7 +47,6 @@ class EvaluationController extends AbstractController
     
         $message = false;
         $evaluation = new Evaluation();
-        $nom ="";
        
         $nameCompet = $competence->getName();
         $evaluation->setIdCompetence($competence->getId());
@@ -77,7 +76,6 @@ class EvaluationController extends AbstractController
             $entityManager->persist($evaluation);
             $entityManager->flush();
             $message = "le formulaire a bien était pris en compte ";
-            $nom = "steeve madeen";
         }
 
         return $this->render('evaluation/saisiEvaluation.html.twig', [
