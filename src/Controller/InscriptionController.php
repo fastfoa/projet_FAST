@@ -33,8 +33,22 @@ class InscriptionController extends AbstractController
         ]);
     }
 
+    function checkRGPD()
+    {
+    //dd( $t );
+    $rgpd = $this->getUser()->getRGPDOK();
+
+    if (!$rgpd)
+        return $this->redirectToRoute( "rgpdForm" );
+    return null;
+    }
+
     public function inscriptionEntreprise(Request $request): Response
     {
+        $ret = $this->checkRGPD();
+        if ( $ret )
+            return $ret;
+
         $user = new User();
 
         //$user->setNom( 'toto');
@@ -103,6 +117,10 @@ class InscriptionController extends AbstractController
 
     public function inscriptionMA(Request $request, ManagerRegistry $doctrine): Response
     {
+        $ret = $this->checkRGPD();
+        if ( $ret )
+            return $ret;
+
         $user = new User();
         $form = $this->createForm(InscriptionMAType::class, $user);
         $form->handleRequest($request);
@@ -144,6 +162,10 @@ class InscriptionController extends AbstractController
 
     public function inscriptionFormateur(Request $request, EntityManagerInterface $manager)
     {
+        $ret = $this->checkRGPD();
+        if ( $ret )
+            return $ret;
+
         $contact = new User();
         $form = $this->createForm(InscriptioFormateurType::class, $contact);
         $form->handleRequest($request);
@@ -211,6 +233,10 @@ class InscriptionController extends AbstractController
 
     public function inscriptionEntrepriseSA(Request $request): Response
     {
+        $ret = $this->checkRGPD();
+        if ( $ret )
+            return $ret;
+
         $contact = new User();
         $form = $this->createForm(InscriptionEntrepriseType::class, $contact);
         $form->handleRequest($request);
@@ -267,6 +293,10 @@ class InscriptionController extends AbstractController
 
     public function inscriptionEleveAS(Request $request): Response
     {
+        $ret = $this->checkRGPD();
+        if ( $ret )
+            return $ret;
+
         $contact = new User();
         $form = $this->createForm(InscriptionApprentiType::class, $contact);
         $form->handleRequest($request);
@@ -322,6 +352,10 @@ class InscriptionController extends AbstractController
 
     public function inscriptionApprenti(Request $request): Response
     {
+        $ret = $this->checkRGPD();
+        if ( $ret )
+            return $ret;
+
         $contact = new User();
         $form = $this->createForm(InscriptionApprentiType::class, $contact);
         $form->handleRequest($request);
@@ -447,6 +481,10 @@ class InscriptionController extends AbstractController
 
     public function inscriptionInd(Request $request, ManagerRegistry $doctrine): Response
     {
+        $ret = $this->checkRGPD();
+        if ( $ret )
+            return $ret;
+
         $user = new User();
         $form = $this->createForm(InscriptionIndType::class, $user);
         $form->handleRequest($request);
@@ -517,6 +555,10 @@ class InscriptionController extends AbstractController
 
     public function addUserRaw(Request $request, $role, $roleName ) 
     {
+        $ret = $this->checkRGPD();
+        if ( $ret )
+            return $ret;
+
         $user = new User();
         $form = $this->createForm(AddUserType::class, $user);
         $form->handleRequest($request);
@@ -552,6 +594,10 @@ class InscriptionController extends AbstractController
 
     public function addUser(Request $request, $role, $roleName ): Response
     {
+        $ret = $this->checkRGPD();
+        if ( $ret )
+            return $ret;
+
         $userID = $this->addUserRaw($request, $role, $roleName );
         if ( is_int($userID) )
         {
@@ -562,6 +608,10 @@ class InscriptionController extends AbstractController
 
     public function addUserSession(Request $request, Session $session, $role, $roleName): Response
     {
+        $ret = $this->checkRGPD();
+        if ( $ret )
+            return $ret;
+            
         $userID = $this->addUserRaw($request, $role, $roleName );
         if ( is_int($userID) )
         {

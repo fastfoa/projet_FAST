@@ -108,6 +108,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $CodeIDCCConvention; //Identifiant de la Convention Collective 
+   
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
@@ -226,7 +227,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @ORM\Column(type="integer", nullable=true)
      */
-    private $documentID;
+    private $IdDocContratTravail;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $IdDocConventionStage;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $IdDocCERFA;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
