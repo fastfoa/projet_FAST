@@ -47,6 +47,11 @@
 											<a href="{{ path( 'editUser',{'user':item.id} ) }}">
 													<i class="fas fa-solid fa-download" style="font-size:20px;color:green;"></i>
 											</a>
+											{% if role == 'ROLE_APP' %}
+											<a href="{{ path( 'choiceCompetence',{'app':item.id, 'session':session.id, } ) }}">
+													EVAL
+											</a>
+											{% endif %}
                                         </td>
 									</tr>
 								{% endfor %}
