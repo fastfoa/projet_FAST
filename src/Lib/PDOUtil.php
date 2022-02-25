@@ -1,16 +1,17 @@
 <?php
 
 
+
 use PDO;
 
-    function getPDO()
+
+    function getPDO( $login, $pw )
     {
-        
         $dsn = "mysql:host=127.0.0.1;dbname=projet_FAST";
         try {
-            //$pdo = new PDO($dsn, 'xxx', 'xxx');
-            //$pdo = new PDO($dsn, 'alexis.s', 'alexis.SQL@011012');
-            $pdo = new PDO($dsn, 'root', '');
+            $pdo = new PDO($dsn, 
+                $login,
+                $pw );
         } catch (\PDOException $e) {
             throw new \PDOException($e->getMessage(), (int)$e->getCode());
         }
@@ -18,16 +19,16 @@ use PDO;
     }
 
 
-     function getSQLRaw($query)
+     function getSQLRaw( $login, $pw, $query)
     {
-        $pdo = getPDO();
+        $pdo = getPDO($login, $pw);
         $rs = $pdo->prepare($query);
         return $rs->execute();
     }
 
-     function getSQLList($query)
+     function getSQLList($login, $pw, $query)
     {
-        $pdo = getPDO();
+        $pdo = getPDO($login, $pw );
         $rs = $pdo->prepare($query);
         $rs->execute();
         $res = [];
@@ -38,9 +39,9 @@ use PDO;
         return $res;
     }
 
-     function getSQLArrayKV($query)
+     function getSQLArrayKV($login, $pw, $query)
     {
-        $pdo = getPDO();
+        $pdo = getPDO($login, $pw );
         $rs = $pdo->prepare($query);
         $rs->execute();
         $res = [];
@@ -51,9 +52,9 @@ use PDO;
         return $res;
     }
 
-     function getSQLArrayAssoc($query)
+     function getSQLArrayAssoc($login, $pw, $query)
     {
-        $pdo = getPDO();
+        $pdo = getPDO( $login, $pw, );
         $rs = $pdo->prepare($query);
         $rs->execute();
         $res = [];
@@ -63,17 +64,17 @@ use PDO;
         return $res;
     }
 
-     function getSQLSingle($query)
+     function getSQLSingle($login, $pw, $query)
     {
-        $pdo = getPDO();
+        $pdo = getPDO($login, $pw );
         $rs = $pdo->prepare($query);
         $rs->execute();
         return  $rs->fetchColumn();
     }
 
-     function getSQLSingleAssoc($query)
+     function getSQLSingleAssoc($login, $pw, $query)
     {
-        $pdo = getPDO();
+        $pdo = getPDO($login, $pw);
         $rs = $pdo->prepare($query);
         $rs->execute();
         return  $rs->fetch();
