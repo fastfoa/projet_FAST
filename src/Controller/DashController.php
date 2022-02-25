@@ -335,5 +335,24 @@ class DashController extends AbstractController
             
         return $this->listAll( 'ROLE_MA', "Maitre d'apprentissage" );
     }
+
+    public function dashApp(User $apprenti ): Response
+    {
+        $menuA = 
+        [
+            'Sessions' => 'dashOFPrincipal', 
+            'Apprentis' => 'listAllAprentis', 
+            'Formateurs' => 'listAllFormateurs', 
+            'Maitres' => 'listAllMA', 
+            'Entreprises' => 'listAllEntreprises' 
+        ];
+        
+        return $this->render(
+        'dash/dashApp.html.twig', 
+        [
+            'apprenti' => $apprenti,
+            'menu' => $menuA
+        ]);    
+    }
   
 }
