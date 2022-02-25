@@ -78,7 +78,6 @@ class EvaluationController extends AbstractController
             $entityManager->flush();
             $message = "le formulaire a bien était pris en compte ";
             $nom = "steeve madeen";
-            
         }
 
         return $this->render('evaluation/saisiEvaluation.html.twig', [
