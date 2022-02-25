@@ -8,6 +8,15 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\RangeType;
+
+
+$builder->add('name', RangeType::class, [
+    'attr' => [
+        'min' => 5,
+        'max' => 50
+    ],
+]);
 
 class EvaluationAppType extends AbstractType
 {
@@ -42,10 +51,17 @@ class EvaluationAppType extends AbstractType
                     'placeholder' => 'remarque OF'    
                 ]
             ])
+
+            ->add('Note', RangeType::class,[
+                'attr' => [
+                    'class' => 'boutonForm'
+                ]
+            ])
             
            ->add('Enregistrer', SubmitType::class,[
                 'attr' => [
-                    'class' => 'boutonForm'
+                    'min' => 0,
+                    'max'=> 20
                 ]
             ])
         ;
