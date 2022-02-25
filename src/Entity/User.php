@@ -108,6 +108,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $CodeIDCCConvention; //Identifiant de la Convention Collective 
+   
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
@@ -226,7 +227,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @ORM\Column(type="integer", nullable=true)
      */
-    private $documentID;
+    private $IdDocContratTravail;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $IdDocConventionStage;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $IdDocCERFA;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -883,6 +894,42 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function removeSession(Session $session): self
     {
         $this->sessions->removeElement($session);
+        return $this;
+    }
+
+    public function getIdDocContratTravail(): ?int
+    {
+        return $this->IdDocContratTravail;
+    }
+
+    public function setIdDocContratTravail(?int $IdDocContratTravail): self
+    {
+        $this->IdDocContratTravail = $IdDocContratTravail;
+
+        return $this;
+    }
+
+    public function getIdDocConventionStage(): ?int
+    {
+        return $this->IdDocConventionStage;
+    }
+
+    public function setIdDocConventionStage(?int $IdDocConventionStage): self
+    {
+        $this->IdDocConventionStage = $IdDocConventionStage;
+
+        return $this;
+    }
+
+    public function getIdDocCERFA(): ?int
+    {
+        return $this->IdDocCERFA;
+    }
+
+    public function setIdDocCERFA(?int $IdDocCERFA): self
+    {
+        $this->IdDocCERFA = $IdDocCERFA;
+
         return $this;
     }
 }
