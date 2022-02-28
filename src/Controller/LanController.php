@@ -190,7 +190,7 @@ class LanController extends AbstractController
         if ( $ret )
             return $ret;
             
-        $users = getSQLArrayKV( 'SELECT nom as v, id as k FROM  user' );
+        $users = getSQLArrayKV( $this->getParameter('loginDB'), $this->getParameter('PasswordDB'),'SELECT nom as v, id as k FROM  user' );
         return  new JsonResponse(   $users    );
     }
 
@@ -200,7 +200,7 @@ class LanController extends AbstractController
         if ( $ret )
             return $ret;
             
-        $users = getSQLArrayKV( "SELECT user.nom as v, user.id as k, user.role_string, s.id_session FROM  user_in_session as s LEFT JOIN user ON s.id_user=user.id Where user.role_string='$role'");
+        $users = getSQLArrayKV($this->getParameter('loginDB'), $this->getParameter('PasswordDB'), "SELECT user.nom as v, user.id as k, user.role_string, s.id_session FROM  user_in_session as s LEFT JOIN user ON s.id_user=user.id Where user.role_string='$role'");
         return  new JsonResponse(   $users    );
     }
 
@@ -210,7 +210,7 @@ class LanController extends AbstractController
         if ( $ret )
             return $ret;
             
-        $users = getSQLArrayKV( "SELECT user.nom as v, user.id as k, user.role_string, s.id_session FROM  user_in_session as s LEFT JOIN user ON s.id_user=user.id Where s.id_session=$session and user.role_string='$role'");
+        $users = getSQLArrayKV( $this->getParameter('loginDB'), $this->getParameter('PasswordDB'),"SELECT user.nom as v, user.id as k, user.role_string, s.id_session FROM  user_in_session as s LEFT JOIN user ON s.id_user=user.id Where s.id_session=$session and user.role_string='$role'");
         return  new JsonResponse(   $users    );
     }
 }
