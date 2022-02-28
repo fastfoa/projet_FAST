@@ -1,6 +1,7 @@
 <?php
 namespace App\Controller;
 
+use App\Entity\RecipientDocument;
 use App\Entity\User;
 use App\Form\MonCompteAppType;
 use App\Form\MonCompteEntrepriseType;
@@ -88,7 +89,8 @@ class ModifInfoPersoController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $contact = filtreForm($form, $contact);
+            //$contact = filtreForm($form, $contact);
+
 
             $old_pwd = $form->get('old_password')->getData();
             if ($encoder->isPasswordValid($contact, $old_pwd)) {

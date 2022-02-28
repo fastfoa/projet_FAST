@@ -161,7 +161,7 @@ class LanController extends AbstractController
         if ( $ret )
             return $ret;
 
-        return $this->render('documentOff.html.twig');
+        return $this->render('lan/documentOff.html.twig');
     }
 
     // **************************************************************
