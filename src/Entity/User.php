@@ -9,7 +9,8 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-/**
+
+   /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @ORM\Table(name="`user`")
  */
@@ -255,20 +256,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $profilEnabled = true;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255)
      */
-    private $post;
+    private $RoleString;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $web;
+    private $codePostal;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $Cv;
+    private $telUrgence1;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $telUrgence2;
+
+    /**
+    * @ORM\Column(type="string", length=255, nullable=true)
+    */
+    private $RaisonSocial; // pour une rôle unique de maitre d'apprentissage et entreprise, ex :indépendant
+
+    public function __construct()
+    {
+        $this->sessions = new ArrayCollection();
+    }
+
+    
     public function getId(): ?int
     {
         return $this->id;
@@ -851,39 +868,115 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getPost(): ?string
+    public function getRoleString(): ?string
     {
-        return $this->post;
+        return $this->RoleString;
     }
 
-    public function setPost(?string $post): self
+    public function setRoleString(string $RoleString) 
     {
-        $this->post = $post;
+        $this->RoleString = $RoleString;
+    }
+    
+    public function getRaisonSocial(): ?string
+    {
+        return $this->RaisonSocial;
+    }
+
+    public function setRaisonSocial(?string $RaisonSocial): self
+    {
+        $this->RaisonSocial = $RaisonSocial;
 
         return $this;
     }
 
-    public function getWeb(): ?string
+    /**
+     * @return Collection<int, Session>
+     */
+    public function getSessions(): Collection
     {
-        return $this->web;
+        return $this->sessions;
     }
 
-    public function setWeb(string $web): self
+    public function addSession(Session $session): self
     {
-        $this->web = $web;
+        if (!$this->sessions->contains($session)) {
+            $this->sessions[] = $session;
+        }
 
         return $this;
     }
 
-    public function getCv(): ?string
+    public function removeSession(Session $session): self
     {
-        return $this->Cv;
+        $this->sessions->removeElement($session);
+        return $this;
     }
 
-    public function setCv(?string $Cv): self
-    {
-        $this->Cv = $Cv;
 
+    public function getIdDocContratTravail(): ?int
+    {
+        return $this->IdDocContratTravail;
+    }
+
+    public function setIdDocContratTravail(?int $IdDocContratTravail): self
+    {
+        $this->IdDocContratTravail = $IdDocContratTravail;
+    }
+
+    public function getCodePostal(): ?string
+    {
+        return $this->codePostal;
+    }
+
+    public function setCodePostal(?string $codePostal): self
+    {
+        $this->codePostal = $codePostal;
+
+        return $this;
+    }
+
+
+    public function getIdDocConventionStage(): ?int
+    {
+        return $this->IdDocConventionStage;
+    }
+
+    public function setIdDocConventionStage(?int $IdDocConventionStage): self
+    {
+        $this->IdDocConventionStage = $IdDocConventionStage;
+    }
+
+    public function getTelUrgence1(): ?string
+    {
+        return $this->telUrgence1;
+    }
+
+    public function setTelUrgence1(?string $telUrgence1): self
+    {
+        $this->telUrgence1 = $telUrgence1;
+        return $this;
+    }
+
+    public function getIdDocCERFA(): ?int
+    {
+        return $this->IdDocCERFA;
+    }
+
+    public function setIdDocCERFA(?int $IdDocCERFA): self
+    {
+        $this->IdDocCERFA = $IdDocCERFA;
+    }
+
+    public function getTelUrgence2(): ?string
+    {
+        return $this->telUrgence2;
+    }
+
+    public function setTelUrgence2(?string $telUrgence2): self
+    {
+        $this->telUrgence2 = $telUrgence2;
         return $this;
     }
 }
+ 
