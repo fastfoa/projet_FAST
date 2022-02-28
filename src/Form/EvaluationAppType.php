@@ -47,15 +47,7 @@ class EvaluationAppType extends AbstractType
                 ]
             ])
 
-            ->add('note', RangeType::class,[
-                'disabled'=>true,
-                
-                'attr' => [
-                    'label' => 'Note(champs réservé au responsable de formation)',
-                    'min' => 0,
-                    'max'=> 20
-                ]
-            ])
+            
             
            ->add('Enregistrer', SubmitType::class,[
             'attr' => [

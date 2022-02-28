@@ -13,7 +13,6 @@
 {% endblock myStylesheets %}
 
 
-
 {% block body %}
 	{{form_start(form)}}
 	<div class="container-fluid">
@@ -52,15 +51,17 @@
 			<div class="col-5 mt-3">
 				{{ form_widget(form.Enregistrer) }}
 			</div>
-			<div class="col-5 mt-3">
-			<input value=10 id='note' onchange="$('#resultRange').text(this.value)" type="range" min=0 max="20">
-			<div class="text-white" id="resultRange"></div>
-				{{ form_row(form.note, {'label': 'note (champs réservé à l organisme de formation)'}) }}
-				
-			{#	{{ form_widget(form.note) }}  #}
+			<div class="col-1 txt-normal  mt-3">
+				note :
+			</div>
+			<div class="col-3  mt-3">
+				{{ form_row(form.note) }}
+			</div>
+			<div class="col-3 mt-3">
+				<div class="txt-normal" id="resultRange"></div>
 			</div>
 		</div>
-		
+
 	</div>
 	{% if message %}
 		<div class="alert-info">{{message}}</div>

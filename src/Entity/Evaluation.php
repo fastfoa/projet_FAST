@@ -20,9 +20,9 @@ class Evaluation
     /**
      * @ORM\Column(type="text", nullable=true)
      */
-     private $remarqueAPP;
+    private $remarqueAPP;
 
-     /**
+    /**
      * @ORM\Column(type="text", nullable=true)
      */
     private $remarqueMA;
@@ -43,22 +43,22 @@ class Evaluation
      */
     private $idApp;
 
-   /**
+    /**
      * @ORM\Column(type="integer", nullable=true)
      */
     private $idMA;
 
-   /**
+    /**
      * @ORM\Column(type="integer",nullable=true )
      */
     private $idFormateur;
 
-   /**
+    /**
      * @ORM\Column(type="integer",nullable=true )
      */
     private $idSession;
 
-   /**
+    /**
      * @ORM\Column(type="integer", nullable=true)
      */
     private $idCompetence;
@@ -79,7 +79,7 @@ class Evaluation
      */
     private $dateFormateur;
 
-        /**
+    /**
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $dateOF;
@@ -92,7 +92,7 @@ class Evaluation
 
     public function getId(): ?int
     {
-        return $this->id;   
+        return $this->id;
     }
 
     public function getRemarqueAPP(): ?string

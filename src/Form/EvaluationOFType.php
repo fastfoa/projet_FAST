@@ -38,21 +38,22 @@ class EvaluationOFType extends AbstractType
                 ]
             ])
             ->add('remarqueOF', TextareaType::class, [
-                'required'=>false,
+                'required' => false,
                 'label' => false,
                 'attr' => [
                     'placeholder' => 'remarque OF'
                 ]
             ])
 
-            ->add('note', RangeType::class,[
-                'disabled'=>false,  
+            ->add('note', RangeType::class, [
+                'label' => false,
                 'attr' => [
-                    'label' => 'Note (champs réservé au responsable de formation)',
                     'min' => 0,
-                    'max'=> 20
-                ]  
+                    'max' => 20,
+                    'onchange' => "$('#resultRange').text(this.value)"
+                ],
             ])
+
 
 
             ->add('Enregistrer', SubmitType::class, [

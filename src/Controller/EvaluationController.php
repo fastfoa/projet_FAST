@@ -87,7 +87,8 @@ class EvaluationController extends AbstractController
                 'form' => $form->createView(),
                 'nameCompet' => $nameCompet,
                 'message' => $message,
-                'app'=>$app
+                'app'=>$app,
+                
             ]);
     }
 
