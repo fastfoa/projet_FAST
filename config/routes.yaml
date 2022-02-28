@@ -110,6 +110,9 @@ addUserSession:
     path: /addUserSession/{session}/{role}/{roleName}
     controller: App\Controller\InscriptionController::addUserSession
 
+userGeneralForm:
+    path: /userGeneralForm/{user}
+    controller: App\Controller\InscriptionController::userGeneralForm
 
     
 ## App\Controller\DashController

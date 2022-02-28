@@ -39,7 +39,7 @@ class Session
     private $idFormation;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $nombreHeure; //durée de la formation
 

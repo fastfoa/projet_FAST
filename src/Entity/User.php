@@ -58,15 +58,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $adresse;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $session;
-
-    /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Session", inversedBy="users")
-     */
-    private $sessions;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
