@@ -49,8 +49,15 @@
 			</div>
 		</div>
 		<div class="row mx-auto">
-			<div class="col-12 mt-3">
+			<div class="col-5 mt-3">
 				{{ form_widget(form.Enregistrer) }}
+			</div>
+			<div class="col-5 mt-3">
+			<input value=10 id='note' onchange="$('#resultRange').text(this.value)" type="range" min=0 max="20">
+			<div class="text-white" id="resultRange"></div>
+				{{ form_row(form.note, {'label': 'note (champs réservé à l organisme de formation)'}) }}
+				
+			{#	{{ form_widget(form.note) }}  #}
 			</div>
 		</div>
 		

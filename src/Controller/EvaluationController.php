@@ -39,9 +39,12 @@ class EvaluationController extends AbstractController
 
         $user = $this->getUser();
        // dd($user);
+        $role='';
         if(!empty($user))
         {
-          $role = $user->getRoles()[0];
+        //$role = $user->getRoles()[0];
+        $role= $user->getRoleString();
+
           //dd($role);
         }
     
@@ -52,9 +55,11 @@ class EvaluationController extends AbstractController
         $evaluation->setIdCompetence($competence->getId());
         $evaluation->setIdApp($app->getId());
         $evaluation->setIdMA(1);
+        $evaluation->setNote(1);
         $evaluation->setIdFormateur(1);
         $evaluation->setIdSession($session->getId(1));
-
+      
+        //dd( $evaluation );
         $type = EvaluationAppType::class;
 
         if ( $role == "ROLE_APP")
@@ -90,9 +95,11 @@ class EvaluationController extends AbstractController
     {
         $formationID = $session->getIdFormation();
         $doctrine = $this->getDoctrine();
+        $login = $this->getParameter('loginDB');
+        $pw = $this->getParameter('PasswordDB');
         $formation = $doctrine->getRepository(Formation::class)->find( $formationID );
         $nomFormation = $formation->getNom();
-        $list = getSQLArrayAssoc( 
+        $list = getSQLArrayAssoc( $login, $pw,
             "SELECT *  
              FROM  competence as c 
              WHERE c.id_formation=$formationID");

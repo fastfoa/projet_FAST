@@ -8,6 +8,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\RangeType;
 
 class EvaluationFormateurType extends AbstractType
 {
@@ -41,6 +42,15 @@ class EvaluationFormateurType extends AbstractType
                 'label' => false,
                 'attr' => [
                     'placeholder' => 'remarque OF'
+                ]
+            ])
+            ->add('note', RangeType::class,[
+                'disabled'=>true,
+                
+                'attr' => [
+                    'label' => 'Note (champs réservé au responsable de formation)',
+                    'min' => 0,
+                    'max'=> 20
                 ]
             ])
 
