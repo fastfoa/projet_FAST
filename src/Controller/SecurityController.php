@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Entity\User;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class SecurityController extends AbstractController
@@ -51,4 +52,17 @@ class SecurityController extends AbstractController
     {
         throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
     }
+
+    function checkRGPD()
+    {
+        $user = $this->getUser();
+        if ( $user == null )
+           return $this->redirectToRoute( "login" );
+         if ( !$user->getRGPDOK())
+            return $this->redirectToRoute( "rgpdForm" );
+        return null;
+    }
+
+
+
 }
