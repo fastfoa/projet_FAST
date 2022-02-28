@@ -12,7 +12,8 @@ use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
-class MonCompteMAType extends AbstractType
+
+class MonCompteINDType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {

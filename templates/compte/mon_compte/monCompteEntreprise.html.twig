@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+	<div class="container-fluid">
+		{{form_start(form)}}
+		<div class="row">
+			<div class="col-6">
+				<h3>Modification Information Entreprise</h3>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-6">
+				{{ form_widget(form.nom) }}
+				{{ form_widget(form.adresse) }}
+				{{ form_widget(form.telephone) }}
+				{{ form_widget(form.Effectif)}}
+			</div>
+		</div>
+		{% include 'buttonOK.html.twig' %}
+		{{form_end(form)}}
+	</div>
+{% endblock body %}

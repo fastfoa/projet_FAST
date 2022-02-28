@@ -34,6 +34,16 @@ class EvaluationController extends AbstractController
         ]);
     }
 
+    function checkRGPD()
+    {
+        $user = $this->getUser();
+        if ( $user == null )
+           return $this->redirectToRoute( "login" );
+         if ( !$user->getRGPDOK())
+            return $this->redirectToRoute( "rgpdForm" );
+        return null;
+    }
+
     public function saisiEvaluation(Competence $competence, User $app, Session $session, Request $request): Response
     {
 

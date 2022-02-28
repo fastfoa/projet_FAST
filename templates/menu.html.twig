@@ -3,7 +3,16 @@
 		<div class="logo-top">
 			<img src="{{ asset('images/logo-foreach-blanc.png') }}">
 		</div>
+	
+		{% if is_granted('IS_AUTHENTICATED_FULLY') %}
 
+		<button  class="boutonForm my-2 my-sm-0 m-3" onclick="rtn()"><i class="fa fa-undo"></i></button>
+		<script>
+			function rtn() {
+				window.history.back();
+				}
+		</script>
+		{% endif %}
 		<ul class="navbar-nav me-auto fith100">
 			<li class="nav-item ">
 				<a class="nav-link  " href="{{ path('test')}}">Accueil
@@ -19,14 +28,14 @@
 				{% endfor %}
 			{% endif %}
 			<li class="nav-item">
-				<a class="nav-link  " href="{{ path('documents') }}">documents</a>
+				<a class="nav-link  " href="{{ path('documents') }}">documenthèque</a>
 			</li>
 			<li class="nav-item">
 				<a class="nav-link  " href="{{ path('aide') }}">aide</a>
 			</li>
 			{% if is_granted('IS_AUTHENTICATED_FULLY') %}
 				<li class="nav-item">
-					<a class="nav-link " href="{{ path('monCompte') }}">mon Compte</a>
+					<a class="nav-link " href="{{ path('compte') }}">mon Compte</a>
 				</li>
 			{% endif %}
 
@@ -48,3 +57,14 @@
 
 	</div>
 </nav>
+	<!DOCTYPE html>
+		<html>
+			<head>
+				<title>Font Awesome Icons</title>
+				<meta name="viewport" content="width=device-width, initial-scale=1">
+				<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+			</head>
+			<body>
+			
+			</body>
+		</html>

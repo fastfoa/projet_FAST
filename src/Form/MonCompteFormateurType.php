@@ -42,12 +42,6 @@ class MonCompteFormateurType extends AbstractType
                'style'=> 'color: white'
            ]
        ])
-       ->add('telephone', NumberType::class,[
-           'attr' => [
-               'placeholder' => 'telephone',
-           
-           ]
-       ])
     
        ->add('adresse',TextType::class,[
            'attr' => [
@@ -55,35 +49,13 @@ class MonCompteFormateurType extends AbstractType
              
            ]
        ])
-        ->add('old_password', PasswordType::class,[
-            'label' => false,
-            'mapped'=> false,
-            'attr'  => [
-                'placeholder'=>'Veuillez saisir votre mot de passe actuel'
-            ]
-        ])
-        ->add('new_password', RepeatedType::class, [
-            'type'            => PasswordType::class,
-            'mapped'          => false,
-            'invalid_message' => 'le mot de passe et la confirmation doivent être identique.',
-            'label'           => false,
-            'required'        => true,
-            'first_options'   => [
-                'label' => false,
-                'attr'  => [
-                    'placeholder'=>'Merci de saisir votre nouveau mot de passe.'
-                    ]
-                ],
-            'second_options'    => [
-                'label'         => false,
-                'attr'          => [
-                    'placeholder'=>'Merci de confirmer votre nouveau mot de passe.'
-                    ]
-                ],
-                'attr'            => [
-                                    'placeholder' => 'Merci de saisir votre mot de passe'
-                                ]
-        ])
+       ->add('telephone', TextType::class,[
+        'label'=> false,
+        'attr' => [
+            'placeholder' => 'telephone'
+        ]
+    ])
+
         ->add('save', SubmitType::class,[
             'label'=> "Enregistrer",
             'attr' => [
