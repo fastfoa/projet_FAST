@@ -18,15 +18,12 @@ class CompteController extends AbstractController
     return null;
     }
 
-    /**
-     * @Route("/compte", name="compte")
-     */
-    public function index(): Response
+    public function monCompte(): Response
     {
         $ret = $this->checkRGPD();
         if ( $ret )
             return $ret;
-            
+
         return $this->render('compte/compte.html.twig');
     }
 }

@@ -1,4 +1,11 @@
 {% extends 'base.html.twig' %}
+{% block myStylesheets %}
+	<style>
+		input{
+			color: black !important;
+		}
+	</style>
+{% endblock myStylesheets %}
 
 {% block body %}
 {{form_start(form)}}
@@ -13,12 +20,11 @@
 				{{form_widget(form.adresse)}}
 				{{form_widget(form.prenom)}}
 				{{ form_widget(form.telephone) }} 
-				<a href="{{path('compte_modif_password')}}" class="btn btn-success  mt-3">Mofier mon mot de pass</a>
 			</div>
 		</div>
 		<div class="row mx-auto">
 			<div class="col-12 mt-3">
-				{{ form_widget(form.save) }}
+				{{ form_widget(form.save)}}
 			</div>
 		</div>
 	</div>
