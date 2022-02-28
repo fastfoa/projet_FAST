@@ -1,5 +1,11 @@
 {% extends 'base.html.twig' %}
-
+{% block myStylesheets %}
+	<style>
+		input{
+			color: black !important;
+		}
+	</style>
+{% endblock myStylesheets %}
 {% block body %}
 	{{form_start(form)}}
 	<div class="container-fluid">
