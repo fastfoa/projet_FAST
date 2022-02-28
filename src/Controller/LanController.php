@@ -38,13 +38,14 @@ class LanController extends AbstractController
 
     function checkRGPD()
     {
-    //dd( $t );
-    $rgpd = $this->getUser()->getRGPDOK();
-
-    if (!$rgpd)
-        return $this->redirectToRoute( "rgpdForm" );
-    return null;
+        $user = $this->getUser();
+        if ( $user == null )
+           return $this->redirectToRoute( "login" );
+         if ( !$user->getRGPDOK())
+            return $this->redirectToRoute( "rgpdForm" );
+        return null;
     }
+
 
     /*
      public function login(): Response
@@ -151,8 +152,7 @@ class LanController extends AbstractController
         $ret = $this->checkRGPD();
         if ( $ret )
             return $ret;
-
-        return $this->render('aide.html.twig');
+        return $this->render('lan/aide.html.twig');
     }
 
     public function documentOff(): Response
@@ -160,8 +160,7 @@ class LanController extends AbstractController
         $ret = $this->checkRGPD();
         if ( $ret )
             return $ret;
-
-        return $this->render('documentOff.html.twig');
+        return $this->render('lan/documentOff.html.twig');
     }
 
     // **************************************************************

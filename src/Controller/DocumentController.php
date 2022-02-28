@@ -15,6 +15,7 @@ use Symfony\Component\HttpFoundation\HeaderUtils;
 use Symfony\Component\Validator\Constraints\DateTime;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Doctrine\ORM\EntityManagerInterface;
+use App\Entity\User;
 
 
 
@@ -32,12 +33,12 @@ class DocumentController extends AbstractController
     
     function checkRGPD()
     {
-    //dd( $t );
-    $rgpd = $this->getUser()->getRGPDOK();
-
-    if (!$rgpd)
-        return $this->redirectToRoute( "rgpdForm" );
-    return null;
+        $user = $this->getUser();
+        if ( $user == null )
+           return $this->redirectToRoute( "login" );
+         if ( !$user->getRGPDOK())
+            return $this->redirectToRoute( "rgpdForm" );
+        return null;
     }
 
     public function upload(Request $request, SluggerInterface $slugger): Response
