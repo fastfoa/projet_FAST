@@ -44,8 +44,11 @@ class MonCompteOFType extends AbstractType
                 [ 'attr' => [ 'placeholder' => 'Entrez votre numéro de téléphone' ] ]
             )
             
-            ->add('save', SubmitType::class,
-            [ 'label' => "Enregistrer", 'attr' => [ 'class' => "boutonForm" ] ]
+            ->add('save', SubmitType::class,[ 
+                'label' => "Enregistrer", 
+                'attr' => [ 
+                    'class' => "boutonForm"
+                    ] ]
             )
         ;
     }
