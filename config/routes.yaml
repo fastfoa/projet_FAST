@@ -42,6 +42,10 @@ downloadlist:
     path: /downloadlist
     controller: App\Controller\DocumentController::downloadlist
 
+download1:
+    path: /download
+    controller: App\Controller\DocumentController::download
+
 download:
     path: /download/{id}
     controller: App\Controller\DocumentController::download
