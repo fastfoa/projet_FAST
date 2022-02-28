@@ -1,33 +1,23 @@
- {% extends 'base.html.twig' %}
+{% extends 'base.html.twig' %}
 
-{% block myStylesheets %}
-
-{% endblock %}
-{% block myStylesheets %}
-	<style>
-		input{
-			color: black !important;
-		}
-	</style>
-{% endblock myStylesheets %}
 
 {% block body %}
-<div class="container-fluid">
-{{form_start(form)}}
-    <h3>Modification Information Entreprise</h3>
-    <div class="row">
-        <div class="col-6">
-            {{ form_widget(form.nom) }}
-            {{ form_widget(form.adresse) }}
-			{{ form_widget(form.telephone) }}
-            {{ form_widget(form.Effectif)}}
-        </div>
-        <div class="row mx-auto">
-            <div class="col-12 mt-3">
-                {{ form_widget(form.save)}}
-            </div>
-        </div>
-    </div>
-{{form_end(form)}}
-</div>
-{% endblock %}
+	<div class="container-fluid">
+		{{form_start(form)}}
+		<div class="row">
+			<div class="col-6">
+				<h3>Modification Information Entreprise</h3>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-6">
+				{{ form_widget(form.nom) }}
+				{{ form_widget(form.adresse) }}
+				{{ form_widget(form.telephone) }}
+				{{ form_widget(form.Effectif)}}
+			</div>
+		</div>
+		{% include 'buttonOK.html.twig' %}
+		{{form_end(form)}}
+	</div>
+{% endblock body %}

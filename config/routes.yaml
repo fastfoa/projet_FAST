@@ -75,7 +75,7 @@ compte:
 
 modifInfoMonCompte:
     path: /modifInfoMonCompte
-    controller: App\Controller\ModifInfoPersoController::modifInfoMonCompte
+    controller: App\Controller\CompteController::modifInfoMonCompte
 
 compte_modif_password:
     path: /modifier_mon_password

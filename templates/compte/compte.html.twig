@@ -1,22 +1,21 @@
 {% extends 'base.html.twig' %}
-{% block myStylesheets %}
-    <style>
-    
-    .mon_compte p{
-        text-align:center;
-         color: #fff;
-         font-size: 20px;
-    }
-    </style>
-{% endblock %}
 
 {% block body %}
-     <div class="mon_compte">
-        <h1>Mon compte</h1>
-        <p>Bienvenue {{app.user.prenom}} dans votre compte.<br> C'est dans cet espace que vous allez pouvoir gérer toutes vos information personnelles<br></p>
-         <a href="#">- Modifier mon mot de passe</a><br> 
-        <a href="{{path('modifInfoMonCompte')}}">- mes information</a><br>
-        <hr>
-    </div> 
-
-{% endblock %}
+	<div class="container-fluid">
+		<div class="row bg-bar">
+			<h1>Mon compte</h1>
+		</div>
+		<div class="row txt-normal  bg-bar">
+			<div class="col-10">
+				{{user.prenom}} {{user.nom}} :  gérer vos informations personnelles
+			</div>
+		</div>
+	</div>
+	<div class="row  txt-normal my-3">
+		<div class="col-6">
+			<a href="#">- Modifier mon mot de passe</a><br>
+			<a href="{{path('modifInfoMonCompte')}}">- mes informations</a><br>
+		</div>
+	</div>
+</div>
+{% endblock body %}

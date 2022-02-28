@@ -1,16 +1,12 @@
 {% extends 'base.html.twig' %}
-{% block myStylesheets %}
-	<style>
-		input{
-			color: black !important;
-		}
-	</style>
-{% endblock myStylesheets %}
+
 {% block body %}
-{{form_start(form)}}
 	<div class="container-fluid">
+		{{form_start(form)}}
 		<div class="row bg-bar">
-			<h3>Modification Information Maitre Apprentissage</h3>
+			<div class="col-6">
+				<h3>Modification Information Maitre Apprentissage</h3>
+			</div>
 		</div>
 		<div class="row">
 			<div class="col-6">
@@ -21,11 +17,7 @@
 				{{ form_widget(form.telephone) }}
 			</div>
 		</div>
-		<div class="row">
-			<div class="col-12 mx-auto mt-3">
-				{{ form_widget(form.save)}}
-			</div>
-		</div>
+		{% include 'buttonOK.html.twig' %}
+		{{form_end(form)}}
 	</div>
-{{form_end(form)}}
 {% endblock %}
