@@ -9,6 +9,7 @@
 				<a class="nav-link  " href="{{ path('test')}}">Accueil
 					<span class="sr-only">(current)</span>
 				</a>
+				
 			</li>
 
 			{% if menu is defined %}
@@ -42,3 +43,13 @@
 
 	</div>
 </nav>
+<body>
+			
+				<a class="nav-link  " href="{{ path('test')}}">
+					<span class="sr-only">(current)</span>
+				</a>
+			<button class="nav-link" onclick="refresh({{ path('test')}})">retour</button>
+
+		
+
+</body>
