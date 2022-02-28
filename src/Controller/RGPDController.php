@@ -7,7 +7,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use App\Form\RGPDType;
-
 use App\Entity\User;
 
 class RGPDController extends AbstractController
@@ -22,6 +21,15 @@ class RGPDController extends AbstractController
         ]);
     }
 
+    function checkRGPD()
+    {
+        $user = $this->getUser();
+        if ( $user == null )
+           return $this->redirectToRoute( "login" );
+         if ( !$user->getRGPDOK())
+            return $this->redirectToRoute( "rgpdForm" );
+        return null;
+    }
 
     public function rgpdForm(Request $request): Response
     {

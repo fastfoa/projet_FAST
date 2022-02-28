@@ -68,9 +68,18 @@ aide:
     path: /aide
     controller: App\Controller\LanController::aide
 
-monCompte:
-    path: /monCompte
-    controller: App\Controller\ModifInfoPersoController::monCompte
+# compte
+compte:
+    path: /compte
+    controller: App\Controller\CompteController::monCompte
+
+modifInfoMonCompte:
+    path: /modifInfoMonCompte
+    controller: App\Controller\CompteController::modifInfoMonCompte
+
+compte_modif_password:
+    path: /modifier_mon_password
+    controller: App\Controller\CompteModifPasswordController::compte_modif_password
 
 ## App\Controller\InscriptionController
 
