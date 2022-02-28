@@ -1,0 +1,69 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+
+	<style>
+		.jumbo {
+			background-color: C6C5B9;
+			align-items: middle;
+			animation: Entrance 1s linear 0s 1 normal forwards;
+			height: 50%;
+			opacity: 0, 5;
+			/* animation: Out 1s linear 1s 1 normal forwards; */
+
+		}
+
+		.jumbo h1 {
+			color: green;
+		}
+
+		@keyframes Entrance {
+			0% {
+				opacity: 0;
+				transform: translateX(-50px);
+			}
+
+			100% {
+				opacity: 1;
+				transform: translateX(0);
+			}
+		}
+		@keyframes Out {
+			0% {
+				opacity: 1;
+				transform: translateX(0);
+			}
+
+			100% {
+				opacity: 0;
+				transform: translateX(-250px);
+			}
+		}
+	</style>
+
+</head>
+{% block RGPD %}
+	<div class="jumbotron jumbo mx-auto">
+		<h1 class="display-4">Bienvenue sur le Livret d'apprentissage Numérique</h1>
+		<p class="lead">Règlement général sur la protection des données (RGPD)</p>
+		<hr class="my-4">
+
+		<p>En vertu du RPGD,
+			<strong>il incombe aux propriétaires et aux opérateurs de sites web</strong>
+			de s'assurer que les données personnelles sont collectées et traitées légalement.</p>
+		<p>Le RGPD définit des règles spécifiques pour l'utilisation des cookies.</p>
+		<p>C'est pourquoi, en vertu du RGPD, le
+			<strong>consentement aux cookies</strong>
+			est la base juridique la plus fréquemment utilisée pour permettre aux sites web de traiter des données personnelles et d'utiliser des cookies.</p>
+		<p>Le RGPD exige qu'un site web
+			<strong>ne recueille les données personnelles des utilisateurs qu'après que ceux-ci aient donné leur consentement explicite aux fins spécifiques de leur utilisation.</strong>
+		</p>
+        {{ form_start(myForm) }}
+		<p class="lead">
+			<hr class="my-4">
+			<a class="btn btn-primary btn-lg float-right" href="https://www.foreach-academy.fr/mentions-legales" role="button">En savoir +</a>
+			<a class="btn btn-danger btn-lg" href="{{ path('app_logout')}}" role="button">Refuser</a>
+		</p>
+        {{ form_end(myForm) }}
+	</div>  
+{% endblock RGPD %}
+{% endblock body %}
