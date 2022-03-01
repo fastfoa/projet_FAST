@@ -42,6 +42,32 @@ class Document
      */
     private $fileNameOriginal;
 
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $OFormation;
+
+    /**
+     * @ORM\Column(type="boolean", options={"default" : "0"}, nullable=true)
+     */
+    private $MA;
+
+    /**
+     * @ORM\Column(type="boolean", options={"default" : "0"}, nullable=true)
+     */
+    private $formateur;
+
+    /**
+     * @ORM\Column(type="boolean", options={"default" : "0"}, nullable=true)
+     */
+    private $Entreprise;
+
+    /**
+     * @ORM\Column(type="boolean", options={"default" : "0"}, nullable=true)
+     */
+    private $Apprenti;
+
+
     public function getId(): ?int
     {
         return $this->id;
@@ -104,6 +130,67 @@ class Document
     public function setIdOwner(int $IdOwner): self
     {
         $this->IdOwner = $IdOwner;
+
+        return $this;
+    }
+
+
+    public function getMA(): ?bool
+    {
+        return $this->MA;
+    }
+
+    public function setMA(?bool $MA): self
+    {
+        $this->MA = $MA;
+
+        return $this;
+    }
+
+    public function getFormateur(): ?bool
+    {
+        return $this->formateur;
+    }
+
+    public function setFormateur(?bool $formateur): self
+    {
+        $this->formateur = $formateur;
+
+        return $this;
+    }
+
+    public function getEntreprise(): ?bool
+    {
+        return $this->Entreprise;
+    }
+
+    public function setEntreprise(?bool $Entreprise): self
+    {
+        $this->Entreprise = $Entreprise;
+
+        return $this;
+    }
+
+    public function getApprenti(): ?bool
+    {
+        return $this->Apprenti;
+    }
+
+    public function setApprenti(?bool $Apprenti): self
+    {
+        $this->Apprenti = $Apprenti;
+
+        return $this;
+    }
+
+    public function getOFormation(): ?bool
+    {
+        return $this->OFormation;
+    }
+
+    public function setOFormation(?bool $OFormation): self
+    {
+        $this->OFormation = $OFormation;
 
         return $this;
     }
