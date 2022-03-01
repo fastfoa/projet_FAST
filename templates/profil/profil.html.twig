@@ -44,18 +44,20 @@
                 </datalist>
             </div>
             <div class="col-4 mt-5">
-                <button onclick='seeDoc()' class="mt-4">CHECK</button>
+                    {% set v = 0 %}
+                    {% for d in docSend %}
+                    {% set v = v + 1 %}
+                        <div class="invisible {{d.id_document}}" id="{{v}}" data-id="{{d.id_document}}" titredoc="{{d.titre}}" datelu="{{d.date_read}}" style="color:white;">
+                            {{d.nom}}
+                        </div>
+                    {% endfor %}
+                <button onclick='seeDoc({{v}})' class="mt-4">CHECK</button>
                 <button onclick='downloadDoc("{{ path('download1') }}");'>
                     <i class="fas fa-solid fa-download" style="font-size:20px;color:green;"></i>
                 </button>
             </div>
         </div>
     </div>
-        {% for d in docSend %}
-            <div class="invisible {{d.id_document}}" data-id="{{d.id_document}}" titredoc="{{d.titre}}" datelu="{{d.date_read}}" style="color:white;">
-                {{d.nom}}
-            </div>
-        {% endfor %}
     <div class="row">
         <div  id='infosDoc' class="invisible col-6" style="color:black;background-color:white;height:50pt;overflow:auto;">
         </div>
@@ -63,25 +65,28 @@
 
     {% block myScdJavascripts %}
         <script>
-            function seeDoc()
+            function seeDoc(v)
             {
                 var valueI = $('#listDoc').val();
                 var idD = $('#documents option[value="' + valueI +'"]').attr('id');
 
                 if (!idD)
                     return alert("Fichier introuvable !");
-                    
-                if (idD == $('.'+idD).attr('data-id'))
-                {
-                    $("#infosDoc").removeClass('invisible').text($('.'+idD).attr('titredoc')+" envoyé à "+$('.'+idD).html());
-                    if ($('.'+idD).attr('datelu') == '')
-                        $('#infosDoc').append(' : non lu');
-                    else
-                        $('#infosDoc').append(' : lu le '+$('.'+idD).attr('datelu'));
-                }
 
-                else
-                    $("#infosDoc").removeClass('invisible').text(valueI+" n'a pas été envoyé");
+                for(let i=1; i<=v; i++)
+                {
+                    if (idD == $('.'+idD).attr('data-id'))
+                    {
+                        console.log(i + " - " + v);
+                        $("#infosDoc").removeClass('invisible').append($('.'+idD).attr('titredoc')+" envoyé à "+$('#'+i).html());
+                        if ($('.'+idD).attr('datelu') == '')
+                            $('#infosDoc').append(' : non lu<br>');
+                        else
+                            $('#infosDoc').append(' : lu le '+$('.'+idD).attr('datelu')+"<br>");
+                    }
+                    else
+                        $("#infosDoc").removeClass('invisible').text(valueI+" n'a pas été envoyé");
+                }
             }
 
             function downloadDoc(url)
