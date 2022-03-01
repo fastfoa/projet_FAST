@@ -109,3 +109,21 @@ use PDO;
           WHERE a.id_ma='$idMA'"
           );
     }
+
+    function getAppFromRoleSession($login, $pw, $role, $idSession )
+    {
+        return getSQLArrayAssoc( $login, $pw, 
+            "SELECT user.nom, user.prenom, user.id, user.email
+             FROM  user_in_session as s 
+             LEFT JOIN user ON s.id_user=user.id 
+             WHERE s.id_session=$idSession and user.role_string='$role'");
+    }
+
+    function getAppFromRole($login, $pw, $role )
+    {
+        return getSQLArrayAssoc( $login, $pw, 
+            "SELECT *
+             FROM user  
+             WHERE user.role_string='$role'");
+    }
+

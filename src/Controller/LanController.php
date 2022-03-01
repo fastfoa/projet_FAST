@@ -189,7 +189,10 @@ class LanController extends AbstractController
         if ( $ret )
             return $ret;
             
-        $users = getSQLArrayKV( 'SELECT nom as v, id as k FROM  user' );
+        $login = $this->getParameter('loginDB');
+        $pw = $this->getParameter('PasswordDB');
+    
+        $users = getSQLArrayKV( $login, $pw, 'SELECT nom as v, id as k FROM  user' );
         return  new JsonResponse(   $users    );
     }
 
@@ -198,8 +201,11 @@ class LanController extends AbstractController
         $ret = $this->checkRGPD();
         if ( $ret )
             return $ret;
-            
-        $users = getSQLArrayKV( "SELECT user.nom as v, user.id as k, user.role_string, s.id_session FROM  user_in_session as s LEFT JOIN user ON s.id_user=user.id Where user.role_string='$role'");
+
+        $login = $this->getParameter('loginDB');
+        $pw = $this->getParameter('PasswordDB');
+                
+        $users = getSQLArrayKV( $login, $pw, "SELECT user.nom as v, user.id as k, user.role_string, s.id_session FROM  user_in_session as s LEFT JOIN user ON s.id_user=user.id Where user.role_string='$role'");
         return  new JsonResponse(   $users    );
     }
 
@@ -208,8 +214,10 @@ class LanController extends AbstractController
         $ret = $this->checkRGPD();
         if ( $ret )
             return $ret;
-            
-        $users = getSQLArrayKV( "SELECT user.nom as v, user.id as k, user.role_string, s.id_session FROM  user_in_session as s LEFT JOIN user ON s.id_user=user.id Where s.id_session=$session and user.role_string='$role'");
+        $login = $this->getParameter('loginDB');
+        $pw = $this->getParameter('PasswordDB');
+                
+        $users = getSQLArrayKV( $login, $pw, "SELECT user.nom as v, user.id as k, user.role_string, s.id_session FROM  user_in_session as s LEFT JOIN user ON s.id_user=user.id Where s.id_session=$session and user.role_string='$role'");
         return  new JsonResponse(   $users    );
     }
 }
