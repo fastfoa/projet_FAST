@@ -126,6 +126,9 @@ class DashController extends AbstractController
         if ( $ret )
             return $ret;
 
+            $login = $this->getParameter('loginDB');
+        $pw = $this->getParameter('PasswordDB');
+    
         $entreprise = $this->getUser();
 
         $menu = 
@@ -140,7 +143,10 @@ class DashController extends AbstractController
         'dash/dashEntreprise.html.twig', 
         [
             'entreprise' => $entreprise,
-            'menu' => $menu
+            'app' => $app,
+            'MA' => $ma,
+            'OF' => $of,
+                        
         ]);    
     }
     
