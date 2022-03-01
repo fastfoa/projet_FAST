@@ -24,35 +24,47 @@
                 </div>
     </div>
     <div class="row mx-auto"> 
-        <div class="col-12 text-justify mx-5">
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="1" id="flexCheckDefault">
-                        <label class="form-check-label" for="flexCheckDefault">
-                            Apprentis
-                        </label>
+        <div class="col-12 text-justify">
+                <div class="row"> 
+                    <div class="form-check col-8">
+                            OF
                     </div>
-                    
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="2" id="flexCheckDefault">
-                        <label class="form-check-label" for="flexCheckChecked">
-                            Maitre de stage
-                        </label>
+                    <div class="form-check col-2">
+                            {{ form_widget(myForm.OFormation) }}
                     </div>
-             
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="3" id="flexCheckDefault">
-                        <label class="form-check-label" for="flexCheckDefault">
+                </div>
+                <div class="row"> 
+                    <div class="form-check col-8">
+                            {{ nameMA|default('pas de MA') }}
+                    </div>
+                    <div class="form-check col-2">
+                            {{ form_widget(myForm.MA) }}
+                    </div>
+                </div>
+                <div class="row"> 
+                    <div class="form-check col-8">
                             Formateur
-                        </label>
                     </div>
-                    
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="4" id="flexCheckDefault">
-                        <label class="form-check-label" for="flexCheckChecked">
-                            Organisme de formation
-                        </label>
+                    <div class="form-check col-2">
+                            {{ form_widget(myForm.formateur) }}
                     </div>
-                    <br>
+                </div>
+                <div class="row"> 
+                    <div class="form-check col-8">
+                            Entreprise
+                    </div>
+                    <div class="form-check col-2">
+                            {{ form_widget(myForm.entreprise) }}
+                    </div>
+                </div>
+                <div class="row"> 
+                    <div class="form-check col-8">
+                            Apprenti
+                    </div>
+                    <div class="form-check col-2">
+                            {{ form_widget(myForm.apprenti) }}
+                    </div>
+                </div>
         </div>       
     </div>  
     <div class="row mb-2">
