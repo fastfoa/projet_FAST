@@ -323,4 +323,16 @@ saisiEvaluation:
 choiceCompetence: 
     path: /choiceCompetence/{app}/{session}
     controller: App\Controller\EvaluationController::choiceCompetence
+# ************************Test*************************
+testannuaire:
+    path: /testAnnuaire
+    controller: App\Controller\TestannuaireController::app_testannuaire
 
+liste_session_role:
+    path: /testAnnuaire/{session}/{role}/
+    controller: App\Controller\TestannuaireController::liste_session_role
+
+
+liste_role:
+    path: /testAnnuaire/{role}/
+    controller: App\Controller\TestannuaireController::liste_role

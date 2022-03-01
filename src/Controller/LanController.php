@@ -165,51 +165,64 @@ class LanController extends AbstractController
 
     // **************************************************************
 
-    public function annuaireTest(): Response
-    {
-        $ret = $this->checkRGPD();
-        if ( $ret )
-            return $ret;
+    // public function annuaireTest(): Response
+    // {
+    //     $ret = $this->checkRGPD();
+    //     if ( $ret )
+    //         return $ret;
 
-        return $this->render('lan/annuaireTest.html.twig');
-    }
+    //     return $this->render('lan/annuaireTest.html.twig');
+    // }
 
-    public function annuairePopup(): Response
-    {
-        $ret = $this->checkRGPD();
-        if ( $ret )
-            return $ret;
+    // public function annuairePopup($listApp): Response
+    // {
+    //     $ret = $this->checkRGPD();
+    //     if ( $ret )
+    //         return $ret;
 
-        return $this->render('lan/annuairePopup.html.twig');
-    }
+    //     return $this->render('lan/annuairePopup.html.twig', 
+    //     [
+    //         'app' => $listApp,       
+    //     ]);
+    // }
 
-    public function annuaire(): Response
-    {
-        $ret = $this->checkRGPD();
-        if ( $ret )
-            return $ret;
+    // public function annuaire(): Response
+    // {
+    //     $ret = $this->checkRGPD();
+    //     if ( $ret )
+    //         return $ret;
             
-        $users = getSQLArrayKV( $this->getParameter('loginDB'), $this->getParameter('PasswordDB'),'SELECT nom as v, id as k FROM  user' );
-        return  new JsonResponse(   $users    );
-    }
+    //     $listApp = getSQLArrayAssoc($this->getParameter('loginDB'), $this->getParameter('PasswordDB'),
+    //     'SELECT prenom, role_string from user'                                            );
+    //     // return  new JsonResponse(   $users    );
+    //      return $this->annuairePopup( $listApp );
+    // }
 
-    public function annuaireR($role): Response
-    {
-        $ret = $this->checkRGPD();
-        if ( $ret )
-            return $ret;
+    // public function annuaireR($role): Response
+    // {
+    //     $ret = $this->checkRGPD();
+    //     if ( $ret )
+    //         return $ret;
             
-        $users = getSQLArrayKV($this->getParameter('loginDB'), $this->getParameter('PasswordDB'), "SELECT user.nom as v, user.id as k, user.role_string, s.id_session FROM  user_in_session as s LEFT JOIN user ON s.id_user=user.id Where user.role_string='$role'");
-        return  new JsonResponse(   $users    );
-    }
+    //     $listApp = getSQLArrayAssoc($this->getParameter('loginDB'), $this->getParameter('PasswordDB'),
+    //     "SELECT  user.nom, user.prenom, session.id, user.role_string FROM projet_FAST.user,projet_FAST.session where user.role_string= '$role'");
+    //     // return  new JsonResponse(   $users    );
+    //      return $this->annuairePopup( $listApp );
+    // }
 
-    public function annuaireRS($role, $session): Response
-    {
-        $ret = $this->checkRGPD();
-        if ( $ret )
-            return $ret;
+    // public function annuaireRS($role, $session): Response
+    // {
+    //     $ret = $this->checkRGPD();
+    //     if ( $ret )
+    //         return $ret;
             
-        $users = getSQLArrayKV( $this->getParameter('loginDB'), $this->getParameter('PasswordDB'),"SELECT user.nom as v, user.id as k, user.role_string, s.id_session FROM  user_in_session as s LEFT JOIN user ON s.id_user=user.id Where s.id_session=$session and user.role_string='$role'");
-        return  new JsonResponse(   $users    );
-    }
+    //     $listApp = getSQLArrayAssoc($this->getParameter('loginDB'), $this->getParameter('PasswordDB'),
+    //     "SELECT  user.nom, user.prenom, session.id, user.role_string FROM projet_FAST.user,projet_FAST.session where user.role_string= '$role' AND session.id='$session';");
+    //     // return  new JsonResponse(   $users    );
+    //      return $this->annuairePopup( $listApp );
+
+    // }
+
+    
+    
 }

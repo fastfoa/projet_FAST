@@ -12,10 +12,18 @@
 			<div class="row">
 					{{ form_widget(form.save) }}
 			</div>
-		{{form_start(form)}}
-			<div class="row">
-					<div class="boutonForm col-3 my-2" onclick="selectAnnuaireR(  this, '{{ path('annuaire') }}', 'ROLE_APP' );">Annuaire</div>
-			</div>
+
+			 <div class="row">
+            	<div class="col-3">  
+					<p class="text-light">recheche:</p> 
+                	<input list="app" type="text" id="listAPP">
+                	<datalist id="app">
+                    	{% for app in app %}
+                        	<option  value="{{app.nom}} , {{app.prenom}}">{{app.email}}</option>
+                    	{% endfor %}
+                	</datalist>
+            	</div>
+        	</div> 
 
 				{{form_end(form)}}
 				{% if erreur != false %}
