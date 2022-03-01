@@ -86,8 +86,7 @@ use PDO;
          FROM app_has_ma as a          
          RIGHT JOIN user as u ON u.id=a.id_ma 
          WHERE a.id_apprenti='$idApprenti'"
-     );
-
+         );
     }
 
     function getMAFromEnt($login, $pw, $idEntreprise )
@@ -97,18 +96,16 @@ use PDO;
          FROM mahas_ent as m          
          RIGHT JOIN user as u ON u.id=m.id_ma 
          WHERE m.id_ent='$idEntreprise'"
-     );
-
+         );
     }
 
 
-     function getAppFromMA($login, $pw, $idMA )
-     {
+    function getAppFromMA($login, $pw, $idMA )
+    {
          return getSQLSingleAssoc($login, $pw, 
          "SELECT u.nom, u.prenom, u.id, u.email, u.telephone, u.tel_urgence1, u.tel_urgence2, u.adresse                   
           FROM app_has_ma as a          
           RIGHT JOIN user as u ON u.id=a.id_apprenti 
           WHERE a.id_ma='$idMA'"
-      );
- 
-     }
+          );
+    }
