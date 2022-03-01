@@ -22,6 +22,17 @@ class StageFormController extends AbstractController
         ]);
     }
 
+    function checkRGPD()
+    {
+        $user = $this->getUser();
+        if ( $user == null )
+           return $this->redirectToRoute( "login" );
+         if ( !$user->getRGPDOK())
+            return $this->redirectToRoute( "rgpdForm" );
+        return null;
+    }
+
+
     public function stageForm(Request $request, ManagerRegistry $doctrine): Response
     {
         $user = new User();
