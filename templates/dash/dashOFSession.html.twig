@@ -26,6 +26,7 @@
             <a href="{{ path( 'listUsersSession',{'session':session.id, 'role':'ROLE_APP', 'roleName':'Apprenti' }) }}">
                 <div class="boutonForm">Apprenti</div>
             </a>
+            
             </div>
             <div class="col-4 txt-normal"> 
             <a href="{{ path( 'listUsersSession',{'session':session.id, 'role':'ROLE_FORMATEUR', 'roleName':'Formateur'}) }}">
@@ -41,4 +42,5 @@
 		<div class="row my-3">
         </div>        
 </div>
+
 {% endblock %}
