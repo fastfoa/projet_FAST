@@ -2,11 +2,11 @@
 
 {% block myStylesheets %}
 <style>
-.avatar
-{
-    width: 100px;
-    height: 100px;
-}
+    .avatar
+    {
+        width: 100px;
+        height: 100px;
+    }
 </style>
 {% endblock myStylesheets %}
 
@@ -42,34 +42,55 @@
                         <option id="{{doc.d_id}}" value="{{doc.d_titre}}">{{doc.d_fileName}}</option>
                     {% endfor %}
                 </datalist>
-
-                {# <a href="{{ path( 'download',{'id':doc.d_id} ) }}">
-                    <i class="fas fa-solid fa-download" style="font-size:20px;color:green;"></i>
-                </a> #}
+            </div>
+            <div class="col-4 mt-5">
+                <button onclick='seeDoc()' class="mt-4">CHECK</button>
                 <button onclick='downloadDoc("{{ path('download1') }}");'>
                     <i class="fas fa-solid fa-download" style="font-size:20px;color:green;"></i>
                 </button>
             </div>
         </div>
     </div>
-
+        {% for d in docSend %}
+            <div class="invisible {{d.id_document}}" data-id="{{d.id_document}}" titredoc="{{d.titre}}" datelu="{{d.date_read}}" style="color:white;">
+                {{d.nom}}
+            </div>
+        {% endfor %}
     <div class="row">
-        <div class="col-6">
-                {% for d in docSend %}
-                    <p style="color:white;">id="{{d.dId}}" value="{{d.uNom}}">{{d.idDestinataire}}</p>
-                {% endfor %}
+        <div  id='infosDoc' class="invisible col-6" style="color:black;background-color:white;height:50pt;overflow:auto;">
         </div>
     </div>
 
     {% block myScdJavascripts %}
         <script>
-            function downloadDoc(url)
+            function seeDoc()
             {
-                var idI = $('#listDoc').val();
-                var idD = $('#documents option[value="' + idI +'"]').attr('id');
+                var valueI = $('#listDoc').val();
+                var idD = $('#documents option[value="' + valueI +'"]').attr('id');
 
                 if (!idD)
-                    return alert("Aucun fichier n'a été sélectionné !");
+                    return alert("Fichier introuvable !");
+                    
+                if (idD == $('.'+idD).attr('data-id'))
+                {
+                    $("#infosDoc").removeClass('invisible').text($('.'+idD).attr('titredoc')+" envoyé à "+$('.'+idD).html());
+                    if ($('.'+idD).attr('datelu') == '')
+                        $('#infosDoc').append(' : non lu');
+                    else
+                        $('#infosDoc').append(' : lu le '+$('.'+idD).attr('datelu'));
+                }
+
+                else
+                    $("#infosDoc").removeClass('invisible').text(valueI+" n'a pas été envoyé");
+            }
+
+            function downloadDoc(url)
+            {
+                var valueI = $('#listDoc').val();
+                var idD = $('#documents option[value="' + valueI +'"]').attr('id');
+
+                if (!idD)
+                    return alert("Fichier introuvable !");
 
                 var link = url+"/"+idD;
                 window.location = link;

@@ -48,10 +48,8 @@ class ProfilController extends AbstractController
         WHERE user.id=document.id_owner AND user.id=".$user->getId());
 
         $docSend =  getSQLArrayAssoc($this->getParameter('loginDB'), $this->getParameter('PasswordDB'),
-        "SELECT user.id AS uId, user.nom AS uNom, document.id AS dId, document.id_owner AS dIdOwner,
-        recipient_document.id_recipient AS idDestinataire
-        FROM user, document, recipient_document
-        WHERE recipient_document.id_recipient=user.id AND document.id_owner=".$user->getId());
+        "SELECT u.nom, d.titre, r.id_document, r.date_read FROM document AS d, recipient_document AS r, user AS u
+        WHERE r.id_document=d.id AND u.id=r.id_recipient AND d.id_owner=".$user->getId());
 
         //$user = $user->getId();
         if ( $roleViewer ==  'ROLE_OF' )
@@ -67,8 +65,6 @@ class ProfilController extends AbstractController
         }
     }
 
-
-
     // Organisme de Formation regarde les infos de :    
     // l'apprenti 
     public function profilOF_APP(User $user, $listDoc, $docSend): Response
@@ -81,6 +77,7 @@ class ProfilController extends AbstractController
         return $this->render('profil/profilOF_APP.html.twig', 
         [
             'user' => $user,
+            
             'document' => $listDoc,
             'docSend' => $docSend,
             'fonction' => "Apprenti"        
@@ -97,6 +94,7 @@ class ProfilController extends AbstractController
         [
             'user' => $user,
             'document' => $listDoc,
+            
             'docSend' => $docSend,
             'fonction' => "Formateur"        
         ]);
@@ -112,6 +110,7 @@ class ProfilController extends AbstractController
         [
             'user' => $user,
             'document' => $listDoc,
+            
             'docSend' => $docSend,
             'fonction' => "Maître d'Apprentissage"        
         ]);
@@ -127,6 +126,7 @@ class ProfilController extends AbstractController
         [
             'user' => $user,
             'document' => $listDoc,
+            
             'docSend' => $docSend,
             'fonction' => "Entreprise"        
         ]);
@@ -144,6 +144,7 @@ class ProfilController extends AbstractController
         [
             'user' => $user,
             'document' => $listDoc,
+            
             'docSend' => $docSend,
             'fonction' => "Organisme de Formation"        
         ]);
@@ -158,6 +159,7 @@ class ProfilController extends AbstractController
         return $this->render('profil/profilAPP_Formateur.html.twig', 
         [
             'user' => $user,
+            
             'document' => $listDoc,
             'docSend' => $docSend,
             'fonction' => "Formateur"        
@@ -174,6 +176,7 @@ class ProfilController extends AbstractController
         [
             'user' => $user,
             'document' => $listDoc,
+            
             'docSend' => $docSend,
             'fonction' => "Maître d'apprentissage"        
         ]);
@@ -190,6 +193,7 @@ class ProfilController extends AbstractController
             'user' => $user,
             'document' => $listDoc,
             'docSend' => $docSend,
+            
             'fonction' => "Entreprise"        
         ]);
     }
@@ -206,6 +210,7 @@ class ProfilController extends AbstractController
         [
             'user' => $user,
             'document' => $listDoc,
+            
             'docSend' => $docSend,
             'fonction' => "Organisme de formation"        
         ]);
@@ -222,6 +227,7 @@ class ProfilController extends AbstractController
             'user' => $user,
             'document' => $listDoc,
             'docSend' => $docSend,
+            
             'fonction' => "Apprenti"        
         ]);
     }
@@ -236,6 +242,7 @@ class ProfilController extends AbstractController
          [
              'user' => $user,
              'document' => $listDoc,
+             
              'docSend' => $docSend,
              'fonction' => "Maître d'apprentissage"
          ]);
@@ -251,6 +258,7 @@ class ProfilController extends AbstractController
          [
              'user' => $user,
              'document' => $listDoc,
+             
              'docSend' => $docSend,
              'fonction' => "Entreprise"
          ]);
@@ -267,6 +275,7 @@ class ProfilController extends AbstractController
         return $this->render('profil/profilMA_OF.html.twig', 
         [
             'user' => $user,
+            
             'document' => $listDoc,
             'docSend' => $docSend,
             'fonction' => "Organisme de formation"        
@@ -284,6 +293,7 @@ class ProfilController extends AbstractController
             'user' => $user,
             'document' => $listDoc,
             'docSend' => $docSend,
+            
             'fonction' => "Apprenti"        
         ]);
     } 
@@ -299,6 +309,7 @@ class ProfilController extends AbstractController
              'user' => $user,
              'document' => $listDoc,
              'docSend' => $docSend,
+             
              'fonction' => "Formateur"
          ]);
     } 
@@ -315,6 +326,7 @@ class ProfilController extends AbstractController
         [
             'user' => $user,
             'document' => $listDoc,
+            
             'docSend' => $docSend,
             'fonction' => "Organisme de formation"        
         ]);
@@ -329,6 +341,7 @@ class ProfilController extends AbstractController
         return $this->render('profil/profilENT_APP.html.twig', 
         [
             'user' => $user,
+            
             'document' => $listDoc,
             'docSend' => $docSend,
             'fonction' => "Apprenti"        
@@ -345,6 +358,7 @@ class ProfilController extends AbstractController
          [
              'user' => $user,
              'document' => $listDoc,
+             
              'docSend' => $docSend,
              'fonction' => "Formateur"
          ]);
