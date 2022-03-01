@@ -236,6 +236,7 @@ annuaire:
 
 # ********************** les Profils **************************
 
+
 profilOF_APP: 
     path: /profilOF_APP/{user}
     controller: App\Controller\ProfilController::profilOF_APP
@@ -307,6 +308,7 @@ profilENT_APP:
 profilENT_FOR: 
     path: /profilENT_FOR/{user}
     controller: App\Controller\ProfilController::profilENT_FOR
+
      
 # ********************** RGPD **************************
 
@@ -333,6 +335,3 @@ liste_session_role:
     controller: App\Controller\TestannuaireController::liste_session_role
 
 
-liste_role:
-    path: /testAnnuaire/{role}/
-    controller: App\Controller\TestannuaireController::liste_role
