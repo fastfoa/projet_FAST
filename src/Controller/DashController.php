@@ -341,11 +341,7 @@ class DashController extends AbstractController
 
     // public function dashENTprincipalx(): Response
 
-    public function dashApp(User $apprenti ): Response
-
-
-    // public function dashApp( ): Response
-
+    public function dashApp( ): Response
     {
         $apprenti = $this->getUser();
 
