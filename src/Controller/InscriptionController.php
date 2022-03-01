@@ -565,7 +565,7 @@ class InscriptionController extends AbstractController
         $form->handleRequest($request);
         $erreur = false;
         $listApp = getSQLArrayAssoc($this->getParameter('loginDB'), $this->getParameter('PasswordDB'),
-        "SELECT prenom, role_string, nom, email  from user ");
+        "SELECT prenom, role_string, nom, email  from user WHERE role_string = '$role' ");
 
         if ($form->isSubmitted() && $form->isValid()) 
         {

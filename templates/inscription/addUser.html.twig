@@ -7,7 +7,9 @@
 		</div>
 		{{form_start(form)}}
 			<div class="row">
+				<div class="col-3">
 					{{ form_widget(form.email) }}
+				</div>
 			</div>
 			<div class="row">
 					{{ form_widget(form.save) }}
@@ -19,7 +21,7 @@
                 	<input list="app" type="text" id="listAPP">
                 	<datalist id="app">
                     	{% for app in app %}
-                        	<option  value="{{app.nom}} , {{app.prenom}}">{{app.email}}</option>
+                        	<option  value="{{app.nom}} , {{app.prenom}}, {{app.role_string}}">{{app.email}}</option>
                     	{% endfor %}
                 	</datalist>
             	</div>

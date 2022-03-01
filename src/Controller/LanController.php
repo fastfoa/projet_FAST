@@ -228,5 +228,4 @@ class LanController extends AbstractController
         $users = getSQLArrayKV( $login, $pw, "SELECT user.nom as v, user.id as k, user.role_string, s.id_session FROM  user_in_session as s LEFT JOIN user ON s.id_user=user.id Where s.id_session=$session and user.role_string='$role'");
         return  new JsonResponse(   $users    );
     }
->>>>>>> symfo
 }
