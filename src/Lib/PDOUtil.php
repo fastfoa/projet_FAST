@@ -8,21 +8,9 @@ use PDO;
     function getPDO( $login, $pw )
     {
         $dsn = "mysql:host=127.0.0.1;dbname=projet_FAST";
-        try {
-
-
-            //$pdo = new PDO($dsn, 'alexis.s', 'alexis.SQL@011012');
-            $pdo = new PDO($dsn, 'root', '');
-
-            $pdo = new PDO($dsn, 
-                $login,
-                $pw );
-
-
-            $pdo = new PDO($dsn, $login, $pw);
-            //$pdo = new PDO($dsn, 'xxx', 'xxx');
-            //$pdo = new PDO($dsn, 'alexis.s', 'alexis.SQL@011012');
-
+        try 
+        {
+           $pdo = new PDO($dsn, $login, $pw);
         } catch (\PDOException $e) {
             throw new \PDOException($e->getMessage(), (int)$e->getCode());
         }
@@ -102,10 +90,22 @@ use PDO;
 
     }
 
+    function getMAFromEnt($login, $pw, $idEntreprise )
+    {
+        return getSQLSingleAssoc($login, $pw, 
+        "SELECT u.nom, u.prenom, u.id, u.email, u.telephone                  
+         FROM mahas_ent as m          
+         RIGHT JOIN user as u ON u.id=m.id_ma 
+         WHERE m.id_ent='$idEntreprise'"
+     );
+
+    }
+
+
      function getAppFromMA($login, $pw, $idMA )
      {
          return getSQLSingleAssoc($login, $pw, 
-         "SELECT u.nom, u.prenom, u.id, u.role_string                   
+         "SELECT u.nom, u.prenom, u.id, u.email, u.telephone, u.tel_urgence1, u.tel_urgence2, u.adresse                   
           FROM app_has_ma as a          
           RIGHT JOIN user as u ON u.id=a.id_apprenti 
           WHERE a.id_ma='$idMA'"

@@ -23,7 +23,7 @@ class MAFixtures extends Fixture
         {
             $r = new AppHasMA();
             $r->setIdApprenti( $n );
-            $r->setIdMA( $faker->numberBetween(101, 160)  );
+            $r->setIdMA( $faker->numberBetween(101, 150)  );
             $manager->persist($r);
         }
         $manager->flush();

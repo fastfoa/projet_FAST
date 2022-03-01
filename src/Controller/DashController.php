@@ -130,6 +130,13 @@ class DashController extends AbstractController
         $pw = $this->getParameter('PasswordDB');
     
         $entreprise = $this->getUser();
+        //dd( $entreprise );
+    
+        $resMA = getMAFromEnt($login, $pw, $entreprise->getId() );
+        //dd( $resMA );
+        $resApp = getAppFromMA($login, $pw, $resMA['id'] );
+        //dd( $resApp );
+        $of = [ 'nom' => 'Vidal', 'prenom' => 'Jean-Philippe'];
 
         $menu = 
         [
@@ -143,8 +150,8 @@ class DashController extends AbstractController
         'dash/dashEntreprise.html.twig', 
         [
             'entreprise' => $entreprise,
-            'app' => $app,
-            'MA' => $ma,
+            'app' => $resApp,
+            'ma' => $resMA,
             'OF' => $of,
                         
         ]);    
