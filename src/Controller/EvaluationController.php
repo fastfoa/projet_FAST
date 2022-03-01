@@ -60,7 +60,15 @@ class EvaluationController extends AbstractController
     
         $message = false;
         $evaluation = new Evaluation();
-       
+
+        if ( $role == "ROLE_APP" )
+        {
+            $idMA = getMAFromApprenti($login, $pw, $user->getId() );
+            $idFormateur
+
+        }
+
+
         $nameCompet = $competence->getName();
         $evaluation->setIdCompetence($competence->getId());
         $evaluation->setIdApp($app->getId());

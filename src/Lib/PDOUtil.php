@@ -81,8 +81,10 @@ use PDO;
         return  $rs->fetch();
     }
 
+    // ***********************************************************
+
     function getMAFromApprenti($login, $pw, $idApprenti )
-    {
+        {
         return getSQLSingleAssoc($login, $pw, 
         "SELECT u.nom, u.prenom, u.id, u.role_string                   
          FROM app_has_ma as a          
