@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Document;
 use App\Form\DocumentType;
+use App\Form\DocumentExtType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -48,8 +49,9 @@ class DocumentController extends AbstractController
             return $ret;
 
         $up = new Document();
-        $formulaire = $this->createForm(DocumentType::class, $up);
-
+        $user = $this->getUser();
+        $roleString = $user->getRoleString();
+        $formulaire = $this->createForm(DocumentExtType::class, $up);
         $formulaire->handleRequest($request);
 
             if ($formulaire->isSubmitted() && $formulaire->isValid()) 
@@ -106,10 +108,37 @@ class DocumentController extends AbstractController
 
                 }
             }
+            $login = $this->getParameter('loginDB');
+            $pw = $this->getParameter('PasswordDB');
+    
+            $nameMA = "";
+            $nameOF = "";
+            $nameFormateur = "";
+            $nameApprenti = ""; 
+            $nameEntreprise ="";
+
+            if ( $roleString == 'ROLE_APP')
+            {
+                $resMA =  getMAFromApprenti($login, $pw, $user->getId() );
+                $nameMA = $resMA['prenom']." ".$resMA['nom'] ." (MA)"; 
+
+                if ( $nameMA['role_string'] == 'ROLE_IND' )
+                $resENT = $nameMA;    
+                else
+                    $resENT =  getENTFromMA($login, $pw, $resMA['id'] );
+
+                $nameMA = $resMA['prenom']." ".$resMA['nom'] ." (ENT)"; 
+            }
+
 
             return $this->render('document/upload.html.twig', 
             [
             'myForm' => $formulaire->createView(),
+            'nameOF' => $nameOF,
+            'nameMA' => $nameMA,
+            'nameFormateur' => $nameFormateur,
+            'nameApprenti' => $nameApprenti,
+            'nameEntreprise' => $nameEntreprise,
             ]);
     }
    
