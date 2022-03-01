@@ -73,10 +73,32 @@ use PDO;
         return  $rs->fetchColumn();
     }
 
-     function getSQLSingleAssoc($login, $pw, $query)
+    function getSQLSingleAssoc($login, $pw, $query)
     {
-        $pdo = getPDO($login, $pw);
+        $pdo = getPDO($login, $pw); 
         $rs = $pdo->prepare($query);
         $rs->execute();
         return  $rs->fetch();
     }
+
+    function getMAFromApprenti($login, $pw, $idApprenti )
+    {
+        return getSQLSingleAssoc($login, $pw, 
+        "SELECT u.nom, u.prenom, u.id, u.role_string                   
+         FROM app_has_ma as a          
+         RIGHT JOIN user as u ON u.id=a.id_ma 
+         WHERE a.id_apprenti='$idApprenti'"
+     );
+
+    }
+
+     function getAppFromMA($login, $pw, $idMA )
+     {
+         return getSQLSingleAssoc($login, $pw, 
+         "SELECT u.nom, u.prenom, u.id, u.role_string                   
+          FROM app_has_ma as a          
+          RIGHT JOIN user as u ON u.id=a.id_apprenti 
+          WHERE a.id_ma='$idMA'"
+      );
+ 
+     }
