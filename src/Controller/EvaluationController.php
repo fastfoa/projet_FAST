@@ -19,8 +19,6 @@ use App\Form\EvaluationOFType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Security;
 
-
-
 class EvaluationController extends AbstractController
 {
     
@@ -112,6 +110,10 @@ class EvaluationController extends AbstractController
 
     public function choiceCompetence(User $app, Session $session, Request $request): Response
     {
+
+        $login = $this->getParameter('loginDB');
+        $pw = $this->getParameter('PasswordDB');
+
         $formationID = $session->getIdFormation();
         $doctrine = $this->getDoctrine();
         $login = $this->getParameter('loginDB');
