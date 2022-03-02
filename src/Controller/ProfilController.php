@@ -47,27 +47,23 @@ class ProfilController extends AbstractController
         FROM document, user
         WHERE user.id=document.id_owner AND user.id=".$user->getId());
 
-        $docSend =  getSQLArrayAssoc($this->getParameter('loginDB'), $this->getParameter('PasswordDB'),
-        "SELECT u.nom, d.titre, r.id_document, r.date_read FROM document AS d, recipient_document AS r, user AS u
-        WHERE r.id_document=d.id AND u.id=r.id_recipient AND d.id_owner=".$user->getId());
-
         $id = $user->getId();
         if ( $roleViewer ==  'ROLE_OF' )
         {
                  if ($roleTarget == 'ROLE_APP')
-                        return $this->profilOF_APP($user, $id, $listDoc, $docSend);
+                        return $this->profilOF_APP($user, $id, $listDoc);
             else if ($roleTarget == 'ROLE_FORMATEUR')
-                        return $this->profilOF_Formateur($user, $id, $listDoc, $docSend);
+                        return $this->profilOF_Formateur($user, $id, $listDoc);
             else if ($roleTarget == 'ROLE_MA')
-                        return  $this->profilOF_MA($user, $id, $listDoc, $docSend);
+                        return  $this->profilOF_MA($user, $id, $listDoc);
             else if ($roleTarget == 'ROLE_ENT')
-                       return $this->profilOF_Entreprise($user, $id, $listDoc, $docSend);
+                       return $this->profilOF_Entreprise($user, $id, $listDoc);
         }
     }
 
     // Organisme de Formation regarde les infos de :    
     // l'apprenti 
-    public function profilOF_APP(User $user, $id, $listDoc, $docSend): Response
+    public function profilOF_APP(User $user, $id, $listDoc): Response
     {
         $ret = $this->checkRGPD();
         if ( $ret )
@@ -80,12 +76,12 @@ class ProfilController extends AbstractController
             'user' => $user,
             'id' => $id,
             'document' => $listDoc,
-            'docSend' => $docSend,
+            
             'fonction' => "Apprenti"        
         ]);
     }    
     // formateur
-    public function profilOF_Formateur(User $user, $id, $listDoc, $docSend): Response
+    public function profilOF_Formateur(User $user, $id, $listDoc): Response
     {
         $ret = $this->checkRGPD();
         if ( $ret )
@@ -96,12 +92,12 @@ class ProfilController extends AbstractController
             'user' => $user,
             'document' => $listDoc,
             'id' => $id,
-            'docSend' => $docSend,
+            
             'fonction' => "Formateur"        
         ]);
     }       
     // maitre d'apprentissage
-    public function profilOF_MA(User $user, $id, $listDoc, $docSend): Response
+    public function profilOF_MA(User $user, $id, $listDoc): Response
     {
         $ret = $this->checkRGPD();
         if ( $ret )
@@ -112,12 +108,12 @@ class ProfilController extends AbstractController
             'user' => $user,
             'document' => $listDoc,
             'id' => $id,
-            'docSend' => $docSend,
+            
             'fonction' => "Maître d'Apprentissage"        
         ]);
     }    
     // l'entreprise
-    public function profilOF_Entreprise(User $user, $id, $listDoc, $docSend): Response
+    public function profilOF_Entreprise(User $user, $id, $listDoc): Response
     {
         $ret = $this->checkRGPD();
         if ( $ret )
@@ -128,14 +124,14 @@ class ProfilController extends AbstractController
             'user' => $user,
             'document' => $listDoc,
             'id' => $id,
-            'docSend' => $docSend,
+            
             'fonction' => "Entreprise"        
         ]);
     }
     
     // L'Apprenti regarde les infos de:
     // l'OF
-    public function profilAPP_OF(User $user, $id, $listDoc, $docSend): Response
+    public function profilAPP_OF(User $user, $id, $listDoc): Response
     {
         $ret = $this->checkRGPD();
         if ( $ret )
@@ -146,12 +142,12 @@ class ProfilController extends AbstractController
             'user' => $user,
             'document' => $listDoc,
             'id' => $id,
-            'docSend' => $docSend,
+            
             'fonction' => "Organisme de Formation"        
         ]);
     }
     // formateur
-    public function profilAPP_Formateur(User $user, $id, $listDoc, $docSend): Response
+    public function profilAPP_Formateur(User $user, $id, $listDoc): Response
     {
         $ret = $this->checkRGPD();
         if ( $ret )
@@ -162,12 +158,12 @@ class ProfilController extends AbstractController
             'user' => $user,
             'id' => $id,
             'document' => $listDoc,
-            'docSend' => $docSend,
+            
             'fonction' => "Formateur"        
         ]);
     }
     // maître d'apprentissage 
-    public function profilAPP_MA(User $user, $id, $listDoc, $docSend): Response
+    public function profilAPP_MA(User $user, $id, $listDoc): Response
     {
         $ret = $this->checkRGPD();
         if ( $ret )
@@ -178,12 +174,12 @@ class ProfilController extends AbstractController
             'user' => $user,
             'document' => $listDoc,
             'id' => $id,
-            'docSend' => $docSend,
+            
             'fonction' => "Maître d'apprentissage"        
         ]);
     }
     // l'entreprise
-    public function profilAPP_Entreprise(User $user, $id, $listDoc, $docSend): Response
+    public function profilAPP_Entreprise(User $user, $id, $listDoc): Response
     {
         $ret = $this->checkRGPD();
         if ( $ret )
@@ -193,7 +189,7 @@ class ProfilController extends AbstractController
         [
             'user' => $user,
             'document' => $listDoc,
-            'docSend' => $docSend,
+            
             'id' => $id,
             'fonction' => "Entreprise"        
         ]);
@@ -201,7 +197,7 @@ class ProfilController extends AbstractController
 
     // Le Formateur regarde les infos de :
     //l'OF
-    public function profilFOR_OF(User $user, $id, $listDoc, $docSend): Response
+    public function profilFOR_OF(User $user, $id, $listDoc): Response
     {
         $ret = $this->checkRGPD();
         if ( $ret )
@@ -212,12 +208,12 @@ class ProfilController extends AbstractController
             'user' => $user,
             'document' => $listDoc,
             'id' => $id,
-            'docSend' => $docSend,
+            
             'fonction' => "Organisme de formation"        
         ]);
     }        
     // l'apprenti
-    public function profilFOR_APP(User $user, $id, $listDoc, $docSend): Response
+    public function profilFOR_APP(User $user, $id, $listDoc): Response
     {
         $ret = $this->checkRGPD();
         if ( $ret )
@@ -227,13 +223,13 @@ class ProfilController extends AbstractController
         [
             'user' => $user,
             'document' => $listDoc,
-            'docSend' => $docSend,
+            
             'id' => $id,
             'fonction' => "Apprenti"        
         ]);
     }
     // maître d'apprentissage
-    public function profilFOR_MA(User $user, $id, $listDoc, $docSend): Response
+    public function profilFOR_MA(User $user, $id, $listDoc): Response
     {
         $ret = $this->checkRGPD();
         if ( $ret )
@@ -244,12 +240,12 @@ class ProfilController extends AbstractController
              'user' => $user,
              'document' => $listDoc,
              'id' => $id,
-             'docSend' => $docSend,
+             
              'fonction' => "Maître d'apprentissage"
          ]);
     }
     // l'entreprise
-    public function profilFOR_Entreprise(User $user, $id, $listDoc, $docSend): Response
+    public function profilFOR_Entreprise(User $user, $id, $listDoc): Response
     {
         $ret = $this->checkRGPD();
         if ( $ret )
@@ -260,14 +256,14 @@ class ProfilController extends AbstractController
              'user' => $user,
              'document' => $listDoc,
              'id' => $id,
-             'docSend' => $docSend,
+             
              'fonction' => "Entreprise"
          ]);
     }
 
     // maître d'apprentissage regarde les infos de :
     // l'OF
-    public function profilMA_OF(User $user, $id, $listDoc, $docSend): Response
+    public function profilMA_OF(User $user, $id, $listDoc): Response
     {
         $ret = $this->checkRGPD();
         if ( $ret )
@@ -278,12 +274,12 @@ class ProfilController extends AbstractController
             'user' => $user,
             'id' => $id,
             'document' => $listDoc,
-            'docSend' => $docSend,
+            
             'fonction' => "Organisme de formation"        
         ]);
     }         
     // l'apprenti
-    public function profilMA_APP(User $user, $id, $listDoc, $docSend): Response
+    public function profilMA_APP(User $user, $id, $listDoc): Response
     {
         $ret = $this->checkRGPD();
         if ( $ret )
@@ -293,13 +289,13 @@ class ProfilController extends AbstractController
         [
             'user' => $user,
             'document' => $listDoc,
-            'docSend' => $docSend,
+            
             'id' => $id,
             'fonction' => "Apprenti"        
         ]);
     } 
     // Formateur
-    public function profilMA_FOR(User $user, $id, $listDoc, $docSend): Response
+    public function profilMA_FOR(User $user, $id, $listDoc): Response
     {
         $ret = $this->checkRGPD();
         if ( $ret )
@@ -309,7 +305,7 @@ class ProfilController extends AbstractController
          [
              'user' => $user,
              'document' => $listDoc,
-             'docSend' => $docSend,
+             
              'id' => $id,
              'fonction' => "Formateur"
          ]);
@@ -317,7 +313,7 @@ class ProfilController extends AbstractController
 
         // L'entreprise regarde les infos de :
     // l'OF
-    public function profilENT_OF(User $user, $id, $listDoc, $docSend): Response
+    public function profilENT_OF(User $user, $id, $listDoc): Response
     {
         $ret = $this->checkRGPD();
         if ( $ret )
@@ -328,12 +324,12 @@ class ProfilController extends AbstractController
             'user' => $user,
             'document' => $listDoc,
             'id' => $id,
-            'docSend' => $docSend,
+            
             'fonction' => "Organisme de formation"        
         ]);
     }         
     // l'apprenti
-    public function profilENT_APP(User $user, $id, $listDoc, $docSend): Response
+    public function profilENT_APP(User $user, $id, $listDoc): Response
     {
         $ret = $this->checkRGPD();
         if ( $ret )
@@ -344,12 +340,12 @@ class ProfilController extends AbstractController
             'user' => $user,
             'id' => $id,
             'document' => $listDoc,
-            'docSend' => $docSend,
+            
             'fonction' => "Apprenti"        
         ]);
     } 
     // Formateur
-    public function profilENT_FOR(User $user, $id, $listDoc, $docSend): Response
+    public function profilENT_FOR(User $user, $id, $listDoc): Response
     {
         $ret = $this->checkRGPD();
         if ( $ret )
@@ -360,7 +356,7 @@ class ProfilController extends AbstractController
              'user' => $user,
              'document' => $listDoc,
              'id' => $id,
-             'docSend' => $docSend,
+             
              'fonction' => "Formateur"
          ]);
     } 
