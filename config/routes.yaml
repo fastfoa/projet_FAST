@@ -155,8 +155,6 @@ dashOFSession:
     path: /dashOFSession/{session}
     controller: App\Controller\DashController::dashOFSession
 
-
-
 editApprenti:
     path: /feditApprenti/{userID}
     controller: App\Controller\DashController::editApprenti
