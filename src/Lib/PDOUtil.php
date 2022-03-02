@@ -151,7 +151,7 @@ use PDO;
              LEFT JOIN user ON s.id_user=user.id 
              WHERE s.id_session=$idSession and user.role_string='$role'");
     }
-
+    
     function getUsersFromRole($login, $pw, $role )
     {
         return getSQLArrayAssoc( $login, $pw, 

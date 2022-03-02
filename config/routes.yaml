@@ -328,4 +328,6 @@ choiceCompetence:
     path: /choiceCompetence/{app}/{session}
     controller: App\Controller\EvaluationController::choiceCompetence
 
-
+dashEval: 
+    path: /dashEval/{app}/{session}
+    controller: App\Controller\EvaluationController::dashEval
