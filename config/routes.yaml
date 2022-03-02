@@ -315,7 +315,7 @@ rgpdForm:
 # ********************** EVALUATION **************************
 
 saisiEvaluation: 
-    path: /saisiEvaluation/{competence}/{app}/{session}
+    path: /saisiEvaluation/{competence}/{app}
     controller: App\Controller\EvaluationController::saisiEvaluation
 
 choiceCompetence: 
