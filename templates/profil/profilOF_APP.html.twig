@@ -6,5 +6,16 @@
 {% block myJavascripts %}{% endblock myJavascripts%}
 
 {% block OF %}
-{{ include('profil/profilApp.html.twig') }} 
+{{ include('profil/profilApp.html.twig') }}
+<div class="row">
+	<div id="ma" class="col-6">
+        <h3>Maitre D'apprentissage :</h3>
+        {% for d in ma %}
+            <h5>Nom : {{d.nom}}</h5>
+            <h5>Prénom : {{d.prenom}}</h5>
+            <h5>Téléphone : {{d.telephone}}</h5>
+        {% endfor %}
+	</div>
+</div>
+<hr class="text-light">
 {% endblock OF %}
