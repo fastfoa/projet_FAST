@@ -340,4 +340,6 @@ liste_session_role:
     path: /testAnnuaire/{session}/{role}/
     controller: App\Controller\TestannuaireController::liste_session_role
 
-
+dashEval: 
+    path: /dashEval/{app}/{session}
+    controller: App\Controller\EvaluationController::dashEval

@@ -2,8 +2,8 @@
 
 namespace App\Entity;
 
-use App\Repository\EvaluationRepository;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\EvaluationRepository;
 
 /**
  * @ORM\Entity(repositoryClass=EvaluationRepository::class)
@@ -20,9 +20,9 @@ class Evaluation
     /**
      * @ORM\Column(type="text", nullable=true)
      */
-     private $remarqueAPP;
+    private $remarqueAPP;
 
-     /**
+    /**
      * @ORM\Column(type="text", nullable=true)
      */
     private $remarqueMA;
@@ -39,27 +39,27 @@ class Evaluation
 
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $idApp;
 
-   /**
-     * @ORM\Column(type="integer")
+    /**
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $idMA;
 
-   /**
-     * @ORM\Column(type="integer")
+    /**
+     * @ORM\Column(type="integer",nullable=true )
      */
     private $idFormateur;
 
-   /**
-     * @ORM\Column(type="integer")
+    /**
+     * @ORM\Column(type="integer",nullable=true )
      */
     private $idSession;
 
-   /**
-     * @ORM\Column(type="integer")
+    /**
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $idCompetence;
 
@@ -79,10 +79,15 @@ class Evaluation
      */
     private $dateFormateur;
 
-        /**
+    /**
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $dateOF;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $note;
 
 
     public function getId(): ?int
@@ -242,6 +247,18 @@ class Evaluation
     public function setDateOF(?\DateTimeInterface $dateOF): self
     {
         $this->dateOF = $dateOF;
+
+        return $this;
+    }
+
+    public function getNote(): ?int
+    {
+        return $this->note;
+    }
+
+    public function setNote(?int $note): self
+    {
+        $this->note = $note;
 
         return $this;
     }
