@@ -26,7 +26,7 @@ class UserFixtures extends Fixture
             $user->setRoles(["ROLE_APP"]);
             $user->setRoleString("ROLE_APP");
             $user->setEmail($faker->email);
-            $user->setPassword($hashPW); // 0123
+            $user->setPassword($hashPW); // 0000
             $user->setNom($faker->lastName);
             $user->setPrenom($faker->firstName);
             $user->setAdresse($faker->address);
@@ -58,13 +58,13 @@ class UserFixtures extends Fixture
         }
 
         // Fixture Maître d'apprentissage
-        for ($i = 0; $i < 60; $i++) 
+        for ($i = 0; $i < 100; $i++) 
         {
             $user = new User();
             $user->setRoles(["ROLE_MA"]);
             $user->setRoleString("ROLE_MA");
             $user->setEmail($faker->email);
-            $user->setPassword($hashPW); // 0123
+            $user->setPassword($hashPW); // 0000
             $user->setNom($faker->lastName);
             $user->setPrenom($faker->firstName);
             $user->setAdresse($faker->address);
@@ -79,13 +79,14 @@ class UserFixtures extends Fixture
             $manager->persist($user);
         }
         // Fixture Indépendant
+        /*
         for ($i = 0; $i < 40; $i++) {
             $user = new User();
             $user->setRoles(["ROLE_IND"]);
             $user->setRoleString("ROLE_IND");
             $user->setFonctionMA("PDG");
             $user->setEmail($faker->email);
-            $user->setPassword($hashPW); // 0123
+            $user->setPassword($hashPW); // 0000
             $user->setNom($faker->lastName);
             $user->setPrenom($faker->firstName);
             $user->setAdresse($faker->address);
@@ -105,7 +106,7 @@ class UserFixtures extends Fixture
             $user->setRGPDOK(true);
             $user->setProfilEnabled(true);
             $manager->persist($user);
-        }
+        }*/
         //200
         // Fixture Formateur
         for ($i = 0; $i < 50; $i++) 
@@ -114,7 +115,7 @@ class UserFixtures extends Fixture
             $user->setRoles(["ROLE_FORMATEUR"]);
             $user->setRoleString("ROLE_FORMATEUR");
             $user->setEmail($faker->email);
-            $user->setPassword($hashPW); // 0123
+            $user->setPassword($hashPW); // 0000
             $user->setNom($faker->lastName);
             $user->setPrenom($faker->firstName);
             $user->setAdresse($faker->address);
@@ -136,7 +137,7 @@ class UserFixtures extends Fixture
             $user->setRoles(["ROLE_ENT"]);
             $user->setRoleString("ROLE_ENT");
             $user->setEmail($faker->companyEmail);
-            $user->setPassword($hashPW); // 0123
+            $user->setPassword($hashPW); // 0000
             $user->setNom($faker->company);
             $user->setAdresse($faker->address);
             $user->setTelephone($faker->phoneNumber);
@@ -160,7 +161,7 @@ class UserFixtures extends Fixture
             $user->setRoles(["ROLE_ADMIN"]);
             $user->setRoleString("ROLE_ADMIN");
             $user->setEmail($faker->email);
-            $user->setPassword($hashPW); // 0123
+            $user->setPassword($hashPW); // 0000
             $user->setNom($faker->lastName);
             $user->setPrenom($faker->firstName);
             $user->setAdresse($faker->address);
@@ -176,7 +177,7 @@ class UserFixtures extends Fixture
         $user->setEmail("toto@titi.fr");
         $user->setRoles(["ROLE_APP"]);
         $user->setRoleString("ROLE_APP");
-        $user->setPassword($hashPW); // 0123
+        $user->setPassword($hashPW); // 0000
         $user->setNom("Titi");
         $user->setPrenom("Toto");
         $user->setAdresse("45 rue du champ");
@@ -204,7 +205,7 @@ class UserFixtures extends Fixture
         $user->setEmail("my@entreprise.fr");
         $user->setRoles(["ROLE_ENT"]);
         $user->setRoleString("ROLE_ENT");
-        $user->setPassword($hashPW); // 0123
+        $user->setPassword($hashPW); // 0000
         $user->setNom("Google");
         $user->setAdresse("45 rue du javascript");
         $user->setTelephone("0728756614");
@@ -234,7 +235,7 @@ class UserFixtures extends Fixture
         $user->setEmail("xavier@gmail.fr");
         $user->setRoles(["ROLE_FORMATEUR"]);
         $user->setRoleString("ROLE_FORMATEUR");
-        $user->setPassword($hashPW); // 456
+        $user->setPassword($hashPW); // 0000
         $user->setNom("Bourget");
         $user->setPrenom("Xavier");
         $user->setAdresse("12 rue de la frite");
@@ -249,7 +250,7 @@ class UserFixtures extends Fixture
         $user->setEmail("foreach@academy.fr");
         $user->setRoles(["ROLE_OF"]);
         $user->setRoleString("ROLE_OF");
-        $user->setPassword($hashPW); // 789
+        $user->setPassword($hashPW); // 0000
         $user->setNom("Foreach Academy");
         $user->setAdresse("393 Rue du général de Gaulle");
         $user->setTelephone("0342215457");
@@ -264,7 +265,7 @@ class UserFixtures extends Fixture
         $user->setEmail("super@admin.fr");
         $user->setRoles(["ROLE_ADMIN"]);
         $user->setRoleString("ROLE_ADMIN");
-        $user->setPassword($hashPW); // 789
+        $user->setPassword($hashPW); // 0000
         $manager->persist($user);
 
         $manager->flush();

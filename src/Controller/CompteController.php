@@ -26,9 +26,11 @@ class CompteController extends AbstractController
             return $this->redirectToRoute( "rgpdForm" );
         return null;
     }
-
-
-    public function monCompte(): Response
+    
+    /**
+     * @Route("/compte", name="compte")
+     */
+    public function index(): Response
     {
         $ret = $this->checkRGPD();
         if ( $ret )
@@ -103,7 +105,9 @@ class CompteController extends AbstractController
         
         return $this->render($twig, [
             'form' => $form->createView(),
-            'notification' => $notification
+            'notification' => $notification,
+            'menu' => getMenuFromRole( $this->getUser()->getRoleString() ),            
+
         ]);
     }
 }
