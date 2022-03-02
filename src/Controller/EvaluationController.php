@@ -100,7 +100,7 @@ class EvaluationController extends AbstractController
         $evaluation->setIdMA($MA['id']);
         $evaluation->setIdFormateur($Formateur['id']);
         $evaluation->setIdSession($idSession);
-        //$evaluation->setDateApp();
+        
         //$evaluation->setNote(1);
       
         $form = $this->createForm( $type, $evaluation);
@@ -113,22 +113,23 @@ class EvaluationController extends AbstractController
 
             if ( $role == "ROLE_APP" )
             {
-                $evaluation->setDateApp();
+                $evaluation->setDateApp(new \DateTime('now'));
             }   
             else if ( $role == "ROLE_MA" )
             {
-                $evaluation->setDateMA();
+                $evaluation->setDateMA(new \DateTime('now'));
             }
             else if ( $role == "ROLE_FORMATEUR" )
             {
-                $evaluation->setDateFormateur();
+                $evaluation->setDateFormateur(new \DateTime('now'));
             }
             else
             {
-                $evaluation->setDateOF();
+                $evaluation->setDateOF(new \DateTime('now'));
             }
     
-    
+            //setDate(new \DateTime('now'));
+            //current_date
 
 
             $entityManager->persist($evaluation);
