@@ -34,15 +34,13 @@ test:
     path: /test
     controller: App\Controller\LanController::test
 
-## ****************************  Document 
-
-getInfoDoc: 
-    path: /getInfoDoc/{iddr}
-    controller: App\Controller\DocumentController::getInfoDoc
-
 upload: 
     path: /upload
     controller: App\Controller\DocumentController::upload
+
+getInfoDoc: 
+    path: /getInfoDoc/{id}
+    controller: App\Controller\DocumentController::getInfoDoc
 
 downloadlist:
     path: /downloadlist

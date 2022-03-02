@@ -44,61 +44,56 @@ class EvaluationController extends AbstractController
     public function saisiEvaluation(Competence $competence, User $app, Request $request): Response
     {
 
+        $ret = $this->checkRGPD();
+        if ( $ret )
+            return $ret;
+
         $login = $this->getParameter('loginDB');
         $pw = $this->getParameter('PasswordDB');
-
-        $user = $this->getUser();
-        //dd($user);
-        $role='';
-        if(!empty($user))
-        {
-            //$role = $user->getRoles()[0];
-            $role= $user->getRoleString();
-        }
     
         $message = false;
+        $type = EvaluationAppType::class;
         $evaluation = new Evaluation();
 
-        $type = EvaluationAppType::class;
-        $App = $app;
-        $MA = "";
-        $Formateur = "";
+
+        $user       = $this->getUser();
+        $role       = $user->getRoleString();
+        
+        $user       = convertUserEntity2SQL( $login, $pw, $user->getId() );
+        $app        = convertUserEntity2SQL( $login, $pw, $app->getId() );
+        $formateur  = convertUserEntity2SQL( $login, $pw, getFormateursFromApprenti($login, $pw, $app['id'] )[0]['id']);
+        $MA  = convertUserEntity2SQL( $login, $pw, getMAFromApprenti($login, $pw, $app['id'] )['id']);
+        $OF         = getInfoOF();
+
 
         if ( $role == "ROLE_APP" )
         {
-            $App = $user;
-            $MA = getMAFromApprenti($login, $pw, $App->getId() );
-            $Formateur = getFormateursFromApprenti($login, $pw, $App->getId() )[0];
+            $app = $user;
             $type = EvaluationAppType::class;
         }   
         else if ( $role == "ROLE_MA" )
         {
             $MA = $user;
-            $App = getAppFromMA($login, $pw, $MA->getId() );
-            $Formateur = getFormateursFromApprenti($login, $pw, $App->getId() )[0];
             $type = EvaluationMAType::class;
         }
         else if ( $role == "ROLE_FORMATEUR" )
         {
-            $Formateur = $user;
-            $App = $app;
-            $MA = getMAFromApprenti( $login, $pw, $App->getId() );
+            $formateur = $user;
             $type = EvaluationFormateurType::class;
         }
         else
         {
-           $type = EvaluationOFType::class;
-           $MA = getMAFromApprenti( $login, $pw, $App->getId() );
-           $Formateur = getFormateursFromApprenti($login, $pw, $App->getId() )[0];
+            $user = $OF;
+            $type = EvaluationOFType::class;
         }
 
-        $idSession = getIdSessionFromApprenti( $login, $pw, $App->getId() );
+        $idSession = getIdSessionFromApprenti( $login, $pw, $app['id'] );
         //dd( $session );
         $nameCompet = $competence->getName();
         $evaluation->setIdCompetence($competence->getId());
-        $evaluation->setIdApp($App->getId());
+        $evaluation->setIdApp($app['id']);
         $evaluation->setIdMA($MA['id']);
-        $evaluation->setIdFormateur($Formateur['id']);
+        $evaluation->setIdFormateur($formateur['id']);
         $evaluation->setIdSession($idSession);
         
         //$evaluation->setNote(1);
@@ -113,42 +108,45 @@ class EvaluationController extends AbstractController
 
             if ( $role == "ROLE_APP" )
             {
-                $evaluation->setDateApp(new \DateTime('now'));
+                $evaluation->setDateApp( new \DateTime('now') );
             }   
             else if ( $role == "ROLE_MA" )
             {
-                $evaluation->setDateMA(new \DateTime('now'));
+                $evaluation->setDateMA( new \DateTime('now') );
             }
             else if ( $role == "ROLE_FORMATEUR" )
             {
-                $evaluation->setDateFormateur(new \DateTime('now'));
+                $evaluation->setDateFormateur( new \DateTime('now') );
             }
             else
             {
-                $evaluation->setDateOF(new \DateTime('now'));
+                $evaluation->setDateOF( new \DateTime('now') );
             }
     
-            //setDate(new \DateTime('now'));
-            //current_date
-
-
             $entityManager->persist($evaluation);
             $entityManager->flush();
             $message = "le formulaire a bien était pris en compte ";
         }
 
         return $this->render('evaluation/saisiEvaluation.html.twig', [
+                'MA' => $MA,
+                'OF' => $OF,
+                'formateur' => $formateur,
+                'app'=>$app,
+                
                 'form' => $form->createView(),
                 'nameCompet' => $nameCompet,
                 'message' => $message,
-                'app'=>$App,
-                
-                
+                'menu' => getMenuFromRole( $this->getUser()->getRoleString() ),            
             ]);
     }
 
     public function choiceCompetence(User $app, Session $session, Request $request): Response
     {
+        $ret = $this->checkRGPD();
+        if ( $ret )
+            return $ret;
+
         $login = $this->getParameter('loginDB');
         $pw = $this->getParameter('PasswordDB');
 
@@ -167,7 +165,8 @@ class EvaluationController extends AbstractController
             'user' => $app,    
             'session' => $session,    
             'nomFormation' => $nomFormation,    
-            'listCompetence'=>$listCompetence
+            'listCompetence'=>$listCompetence,
+            'menu' => getMenuFromRole( $this->getUser()->getRoleString() ),
             ]);
     }
 
@@ -200,24 +199,14 @@ class EvaluationController extends AbstractController
         //dd( $resApp );
         //$of = [ 'nom' => 'Vidal', 'prenom' => 'Jean-Philippe'];
 
-        $menuOF = 
-        [
-            'Sessions' => 'dashOFPrincipal', 
-            'Apprentis' => 'listAllAprentis', 
-            'Formateurs' => 'listAllFormateurs', 
-            'Maitres' => 'listAllMA', 
-            'Entreprises' => 'listAllEntreprises' 
-        ];
         return $this->render(
         'evaluation/dashEval.html.twig', 
         [
             'app' => $app,
-            'menu' => $menuOF,
+            'menu' => getMenuFromRole( $this->getUser()->getRoleString() ),            
             'session' => $session,    
             'nomFormation' => $nomFormation,    
             'listCompetence'=>$listCompetence         
         ]);    
     }
-    
-
 }

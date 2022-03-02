@@ -53,21 +53,11 @@ class DashController extends AbstractController
         WHERE formation.id=session.id_formation' );
         
 
-
-        //return new JsonResponse( $listSession );
-        $menu = 
-        [
-            'Sessions' => 'dashOFPrincipal', 
-            'Apprentis' => 'listAllAprentis', 
-            'Formateurs' => 'listAllFormateurs', 
-            'Maitres' => 'listAllMA', 
-            'Entreprises' => 'listAllEntreprises' 
-        ];
         return $this->render(
         'dash/dashOFPrincipal.html.twig', 
         [
             'listSession' => $listSession,
-            'menu' => $menu,
+            'menu' => getMenuFromRole( $this->getUser()->getRoleString() ),            
         ]);    
     }
     public function addSession(Request $request): Response
@@ -99,7 +89,8 @@ class DashController extends AbstractController
             ];
             return $this->render('dash/addSession.html.twig', [
             'form' => $form->createView(),
-            'menu' => $menu
+            'menu' => getMenuFromRole( $this->getUser()->getRoleString() ),            
+
 
         ]);
     }
@@ -122,6 +113,8 @@ class DashController extends AbstractController
 
     public function dashEntreprise(): Response
     {
+        $infoOF = getInfoOF();
+
         $ret = $this->checkRGPD();
         if ( $ret )
             return $ret;
@@ -136,23 +129,15 @@ class DashController extends AbstractController
         //dd( $resMA );
         $resApp = getAppFromMA($login, $pw, $resMA['id'] );
         //dd( $resApp );
-        $of = [ 'nom' => 'Vidal', 'prenom' => 'Jean-Philippe'];
 
-        $menu = 
-        [
-            'Sessions' => 'dashOFPrincipal', 
-            'Apprentis' => 'listAllAprentis', 
-            'Formateurs' => 'listAllFormateurs', 
-            'Maitres' => 'listAllMA', 
-            'Entreprises' => 'listAllEntreprises' 
-        ];
         return $this->render(
         'dash/dashEntreprise.html.twig', 
         [
             'entreprise' => $entreprise,
             'app' => $resApp,
             'ma' => $resMA,
-            'OF' => $of,
+            'OF' => $infoOF,
+            'menu' => getMenuFromRole( 'ROLE_ENT')
                         
         ]);    
     }
@@ -177,7 +162,7 @@ class DashController extends AbstractController
         'dash/dashOFSession.html.twig', 
         [
             'session' => $session,
-            'menu' => $menu
+            'menu' => getMenuFromRole( $this->getUser()->getRoleString() )
         ]);    
     }
 
@@ -191,21 +176,12 @@ class DashController extends AbstractController
         $doctrine = $this->getDoctrine();
         $list = $doctrine->getRepository(User::class)->findAll();
     
-        $menu = 
-        [
-            'Sessions' => 'dashOFPrincipal', 
-            'Apprentis' => 'listAllAprentis', 
-            'Maitres' => 'listAllMA', 
-            'Entreprises' => 'listAllEntreprises' 
-        ];
-
         return $this->render(
         'dash/listUsersEntreprise.html.twig', 
         [
             'list' => $list,
             'entreprise' => $entreprise,
-            'menu' => $menu,
-            'roleName' => $roleName,
+            'menu' => getMenuFromRole( $this->getUser()->getRoleString() ),            'roleName' => $roleName,
             'role' => $role
         ]);    
     }
@@ -226,21 +202,12 @@ class DashController extends AbstractController
              LEFT JOIN user ON s.id_user=user.id 
              WHERE s.id_session=$sessionID and user.role_string='$role'");
     
-        $menu = 
-        [
-            'Sessions' => 'dashOFPrincipal', 
-            'Apprentis' => 'listAllAprentis', 
-            'Formateurs' => 'listAllFormateurs', 
-            'Maitres' => 'listAllMA', 
-            'Entreprises' => 'listAllEntreprises' 
-        ];
-
         return $this->render(
         'dash/listUsersSession.html.twig', 
         [
             'list' => $list,
             'session' => $session,
-            'menu' => $menu,
+            'menu' => getMenuFromRole( $this->getUser()->getRoleString() ),            
             'roleName' => $roleName,
             'role' => $role
         ]);    
@@ -293,22 +260,11 @@ class DashController extends AbstractController
              WHERE user.role_string='$role'");
     
 
-        //return new Response( "toto");
-        $menu = 
-        [
-            'Sessions' => 'dashOFPrincipal', 
-            'Apprentis' => 'listAllAprentis', 
-            'Formateurs' => 'listAllFormateurs', 
-            'Maitres' => 'listAllMA', 
-            'Entreprises' => 'listAllEntreprises' 
-        ];
-
         return $this->render(
         'dash/listUser.html.twig', 
         [
             'list' => $list,
-            'menu' => $menu,
-            'role' => $role,
+            'menu' => getMenuFromRole( $this->getUser()->getRoleString() ),        'role' => $role,
             'roleName' => $roleName
         ]);    
     }
@@ -351,32 +307,20 @@ class DashController extends AbstractController
 
 
 
-
     // public function dashENTprincipalx(): Response
 
     public function dashApp(User $apprenti ): Response
-
-
-    // public function dashApp( ): Response
-
     {
+        $ret = $this->checkRGPD();
+        if ( $ret )
+            return $ret;
+
         $apprenti = $this->getUser();
 
-        $menuA = 
-        [
-            'Sessions' => 'dashOFPrincipal', 
-            'Apprentis' => 'listAllAprentis', 
-            'Formateurs' => 'listAllFormateurs', 
-            'Maitres' => 'listAllMA', 
-            'Entreprises' => 'listAllEntreprises' 
-        ];
-        
         return $this->render(
         'dash/dashApp.html.twig', 
         [
             'apprenti' => $apprenti,
-            'menu' => $menuA
-        ]);    
-    }
-  
+            'menu' => getMenuFromRole( $this->getUser()->getRoleString() )        ]);    
+    }  
 }

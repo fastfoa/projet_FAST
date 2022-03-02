@@ -393,6 +393,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setNom(?string $nom): self
     {
         $this->nom = $nom;
+        $this->RaisonSocial = $nom;
 
         return $this;
     }
@@ -896,6 +897,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setRaisonSocial(?string $RaisonSocial): self
     {
         $this->RaisonSocial = $RaisonSocial;
+        $this->nom = $RaisonSocial;
 
         return $this;
     }
