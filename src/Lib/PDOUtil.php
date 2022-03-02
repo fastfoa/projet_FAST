@@ -100,5 +100,35 @@ use PDO;
           RIGHT JOIN user as u ON u.id=a.id_apprenti 
           WHERE a.id_ma='$idMA'"
       );
- 
      }
+      function getENTFromMA($login, $pw, $idMA) 
+      {
+        return getSQLSingleAssoc($login, $pw,
+        "SELECT u.nom, u.id, u.role_string , u.raison_social                 
+         FROM mahas_ent as me          
+         RIGHT JOIN user as u ON u.id=me.id_ent 
+         WHERE me.id_ma=$idMA"
+        );
+      }
+
+      
+        function getSessionFromApp($login, $pw, $idApp)
+        {
+            return getSQLSingleAssoc( $login, $pw, 
+            "SELECT id_session 
+             FROM user_in_session 
+             WHERE id_user='$idApp'"
+            
+        );
+        }
+
+        function getUsersFromRoleSession($login, $pw, $role, $idSession )
+        {
+             return getSQLArrayAssoc( $login, $pw, 
+            "SELECT user.nom, user.prenom, user.id, user.email
+             FROM  user_in_session as s 
+             LEFT JOIN user ON s.id_user=user.id 
+             WHERE s.id_session=$idSession and user.role_string='$role'");
+        }
+      
+ 

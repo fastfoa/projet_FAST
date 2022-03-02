@@ -24,13 +24,16 @@
                 </div>
     </div>
     <div class="row mx-auto"> 
+
+    
         <div class="col-12 text-justify">
                 <div class="row"> 
                     <div class="form-check col-8">
-                            OF
+                            {{ nameOF|default('pas de OF') }}
                     </div>
                     <div class="form-check col-2">
                             {{ form_widget(myForm.OFormation) }}
+                            
                     </div>
                 </div>
                 <div class="row"> 
@@ -43,7 +46,7 @@
                 </div>
                 <div class="row"> 
                     <div class="form-check col-8">
-                            Formateur
+                            {{ nameFormateur|default('pas de Formateur') }}
                     </div>
                     <div class="form-check col-2">
                             {{ form_widget(myForm.formateur) }}
@@ -51,7 +54,7 @@
                 </div>
                 <div class="row"> 
                     <div class="form-check col-8">
-                            Entreprise
+                             {{ nameEntreprise|default('pas d Entreprise') }}
                     </div>
                     <div class="form-check col-2">
                             {{ form_widget(myForm.entreprise) }}
@@ -59,7 +62,7 @@
                 </div>
                 <div class="row"> 
                     <div class="form-check col-8">
-                            Apprenti
+                            {{ nameApprenti|default('pas de APP') }}
                     </div>
                     <div class="form-check col-2">
                             {{ form_widget(myForm.apprenti) }}

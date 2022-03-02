@@ -17,6 +17,8 @@ use Symfony\Component\Validator\Constraints\DateTime;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\User;
+use PDO;
+use App\Entity\Session;
 
 
 
@@ -43,7 +45,9 @@ class DocumentController extends AbstractController
     }
 
     public function upload(Request $request, SluggerInterface $slugger): Response
-    {
+    {   
+       
+         
         $ret = $this->checkRGPD();
         if ( $ret )
             return $ret;
@@ -117,20 +121,85 @@ class DocumentController extends AbstractController
             $nameApprenti = ""; 
             $nameEntreprise ="";
 
-            if ( $roleString == 'ROLE_APP')
+            if ( $roleString == 'ROLE_APP')   //App / MA / ENT / FOR / OF / IND
             {
-                $resMA =  getMAFromApprenti($login, $pw, $user->getId() );
+                $idApp = $user->getId(); 
+               
+                $resMA =  getMAFromApprenti($login, $pw, $idApp );
                 $nameMA = $resMA['prenom']." ".$resMA['nom'] ." (MA)"; 
+              
+                if ( $resMA['role_string'] == 'ROLE_IND' )
+                {
+                    $resENT = $nameMA;
+                }    
+                else 
+                {
 
-                if ( $nameMA['role_string'] == 'ROLE_IND' )
-                $resENT = $nameMA;    
-                else
                     $resENT =  getENTFromMA($login, $pw, $resMA['id'] );
+                    $nameEntreprise = $resENT['nom'] ." (ENT)"; 
+                }
+                $role= "ROLE_FORMATEUR";
+                
+                $resIdSession = getSessionFromApp($login, $pw, $idApp); 
+                $idSession = $resIdSession['id_session'];
+                $resFormateur =getUsersFromRoleSession($login, $pw, $role, $idSession);
+                $nameFormateur = $resFormateur[0]['prenom']." ".$resFormateur[0]['nom'] ." (FOR)";
 
-                $nameMA = $resMA['prenom']." ".$resMA['nom'] ." (ENT)"; 
+                $nameApprenti = ''; 
+
+                $nameOF = 'FOREACH';
+               
+                
             }
 
+            else if ($roleString == 'ROLE_MA') // MA / ENT* / FOR* / OF* / IND*/App*
+            {
+                $idMA = $user->getId(); 
+                $roleMA = $user->getRoles();
+                $nomMA = $user->getNom(); 
+                $prenomMA = $user->getPrenom(); 
+               
+                dump($nomMA);
+                dump($prenomMA);
+              
+                
+                if ( $roleMA[0] == 'ROLE_IND' ) 
+                {
+                    $resENT = $nameMA;
+                }    
+                else 
+                $resApp =  getAppFromMA($login, $pw, $idMA );
+                $nameApprenti= $resApp['prenom']." ".$resApp['nom'] ." (App)"; 
+              
+               
+                {
 
+                    $resENT =  getENTFromMA($login, $pw, $idMA );
+                    $nameEntreprise = $resENT['nom'] ." (ENT)"; 
+                }
+                $role= "ROLE_FORMATEUR";
+                
+                $resIdSession = getSessionFromApp($login, $pw, $resApp['id']); 
+                $idSession = $resIdSession['id_session'];
+                $resFormateur =getUsersFromRoleSession($login, $pw, $role, $idSession);
+                $nameFormateur = $resFormateur[0]['prenom']." ".$resFormateur[0]['nom'] ." (FOR)";
+
+                $nameMA = ''; 
+
+                $nameOF = 'FOREACH';
+            }
+            else if ($roleString == 'ROLE_OF')
+            {
+
+            }
+            else if ($roleString == 'ROLE_ENT' || $roleString == 'ROLE_IND')
+            {
+               
+            }
+            else if ($roleString == 'ROLE_FORMATEUR')
+            {
+
+            }
             return $this->render('document/upload.html.twig', 
             [
             'myForm' => $formulaire->createView(),
