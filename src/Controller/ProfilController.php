@@ -76,7 +76,6 @@ class ProfilController extends AbstractController
             'user' => $user,
             'id' => $id,
             'document' => $listDoc,
-            'docSend' => $docSend,
             'menu' => getMenuFromRole( $this->getUser()->getRoleString() ),            
             
             'fonction' => "Apprenti"        
@@ -93,7 +92,6 @@ class ProfilController extends AbstractController
         [
             'user' => $user,
             'document' => $listDoc,
-            'docSend' => $docSend,
             'menu' => getMenuFromRole( $this->getUser()->getRoleString() ),            
             'id' => $id,
             
@@ -111,7 +109,6 @@ class ProfilController extends AbstractController
         [
             'user' => $user,
             'document' => $listDoc,
-            'docSend' => $docSend,
             'fonction' => "Maître d'Apprentissage",        
             'menu' => getMenuFromRole( $this->getUser()->getRoleString() ),            
             'id' => $id,
@@ -130,7 +127,6 @@ class ProfilController extends AbstractController
         [
             'user' => $user,
             'document' => $listDoc,
-            'docSend' => $docSend,
             'fonction' => "Entreprise",        
             'menu' => getMenuFromRole( $this->getUser()->getRoleString() ),            
             'id' => $id,
@@ -151,7 +147,6 @@ class ProfilController extends AbstractController
         [
             'user' => $user,
             'document' => $listDoc,
-            'docSend' => $docSend,
             'fonction' => "Organisme de Formation",        
             'menu' => getMenuFromRole( $this->getUser()->getRoleString() ),            
             'id' => $id,
@@ -171,7 +166,6 @@ class ProfilController extends AbstractController
             'user' => $user,
             'id' => $id,
             'document' => $listDoc,
-            'docSend' => $docSend,
             'fonction' => "Formateur",        
             'menu' => getMenuFromRole( $this->getUser()->getRoleString() ),            
             
@@ -189,7 +183,6 @@ class ProfilController extends AbstractController
         [
             'user' => $user,
             'document' => $listDoc,
-            'docSend' => $docSend,
             'fonction' => "Maître d'apprentissage",        
             'menu' => getMenuFromRole( $this->getUser()->getRoleString() ),            
             'id' => $id,
@@ -208,10 +201,8 @@ class ProfilController extends AbstractController
         [
             'user' => $user,
             'document' => $listDoc,
-            'docSend' => $docSend,
             'fonction' => "Entreprise",        
             'menu' => getMenuFromRole( $this->getUser()->getRoleString() ),            
-            
             'id' => $id,
             'fonction' => "Entreprise"        
         ]);
@@ -229,7 +220,6 @@ class ProfilController extends AbstractController
         [
             'user' => $user,
             'document' => $listDoc,
-            'docSend' => $docSend,
             'fonction' => "Organisme de formation" ,       
             'menu' => getMenuFromRole( $this->getUser()->getRoleString() ),            
             'id' => $id,
@@ -248,10 +238,8 @@ class ProfilController extends AbstractController
         [
             'user' => $user,
             'document' => $listDoc,
-            'docSend' => $docSend,
             'fonction' => "Apprenti",        
             'menu' => getMenuFromRole( $this->getUser()->getRoleString() ),            
-            
             'id' => $id,
             'fonction' => "Apprenti"        
         ]);
@@ -267,12 +255,9 @@ class ProfilController extends AbstractController
          [
              'user' => $user,
              'document' => $listDoc,
-             'docSend' => $docSend,
              'fonction' => "Maître d'apprentissage",
              'menu' => getMenuFromRole( $this->getUser()->getRoleString() ),            
-        ]);
              'id' => $id,
-             
              'fonction' => "Maître d'apprentissage"
          ]);
     }
@@ -287,12 +272,9 @@ class ProfilController extends AbstractController
          [
              'user' => $user,
              'document' => $listDoc,
-             'docSend' => $docSend,
              'fonction' => "Entreprise",
              'menu' => getMenuFromRole( $this->getUser()->getRoleString() ),            
-            ]);
              'id' => $id,
-             
              'fonction' => "Entreprise"
          ]);
     }
@@ -310,10 +292,8 @@ class ProfilController extends AbstractController
             'user' => $user,
             'id' => $id,
             'document' => $listDoc,
-            'docSend' => $docSend,
             'fonction' => "Organisme de formation",        
             'menu' => getMenuFromRole( $this->getUser()->getRoleString() ),            
-            
             'fonction' => "Organisme de formation"        
         ]);
     }         
@@ -328,10 +308,8 @@ class ProfilController extends AbstractController
         [
             'user' => $user,
             'document' => $listDoc,
-            'docSend' => $docSend,
             'fonction' => "Apprenti",        
             'menu' => getMenuFromRole( $this->getUser()->getRoleString() ),            
-            
             'id' => $id,
             'fonction' => "Apprenti"        
         ]);
@@ -347,11 +325,8 @@ class ProfilController extends AbstractController
          [
              'user' => $user,
              'document' => $listDoc,
-             'docSend' => $docSend,
              'fonction' => "Formateur",
              'menu' => getMenuFromRole( $this->getUser()->getRoleString() ),            
-            ]);
-             
              'id' => $id,
              'fonction' => "Formateur"
          ]);
@@ -369,11 +344,9 @@ class ProfilController extends AbstractController
         [
             'user' => $user,
             'document' => $listDoc,
-            'docSend' => $docSend,
             'fonction' => "Organisme de formation",        
             'menu' => getMenuFromRole( $this->getUser()->getRoleString() ),            
             'id' => $id,
-            
             'fonction' => "Organisme de formation"        
         ]);
     }         
@@ -389,10 +362,8 @@ class ProfilController extends AbstractController
             'user' => $user,
             'id' => $id,
             'document' => $listDoc,
-            'docSend' => $docSend,
             'fonction' => "Apprenti",        
             'menu' => getMenuFromRole( $this->getUser()->getRoleString() ),            
-            
             'fonction' => "Apprenti"        
         ]);
     } 
@@ -407,12 +378,9 @@ class ProfilController extends AbstractController
          [
              'user' => $user,
              'document' => $listDoc,
-             'docSend' => $docSend,
              'fonction' => "Formateur",
              'menu' => getMenuFromRole( $this->getUser()->getRoleString() ),            
-            ]);
              'id' => $id,
-             
              'fonction' => "Formateur"
          ]);
     } 

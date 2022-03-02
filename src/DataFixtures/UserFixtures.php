@@ -58,7 +58,7 @@ class UserFixtures extends Fixture
         }
 
         // Fixture Maître d'apprentissage
-        for ($i = 0; $i < 60; $i++) 
+        for ($i = 0; $i < 100; $i++) 
         {
             $user = new User();
             $user->setRoles(["ROLE_MA"]);
@@ -79,6 +79,7 @@ class UserFixtures extends Fixture
             $manager->persist($user);
         }
         // Fixture Indépendant
+        /*
         for ($i = 0; $i < 40; $i++) {
             $user = new User();
             $user->setRoles(["ROLE_IND"]);
@@ -105,7 +106,7 @@ class UserFixtures extends Fixture
             $user->setRGPDOK(true);
             $user->setProfilEnabled(true);
             $manager->persist($user);
-        }
+        }*/
         //200
         // Fixture Formateur
         for ($i = 0; $i < 50; $i++) 
