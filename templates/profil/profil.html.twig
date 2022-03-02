@@ -10,7 +10,11 @@
 </style>
 {% endblock myStylesheets %}
 
-{% block myJavascripts %}{% endblock %}
+{% block myJavascripts %}
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+{% endblock %}
 
 {% block body %}
     <div class="container-fluid">
@@ -27,5 +31,49 @@
 
         {% block ENT %}
         {% endblock ENT %}
+
+        <div class="row">
+            <div class="col-6">    
+                <h3>Mes documents :</h3>
+                <label for="listDoc">Chercher un document :</label>
+                <input list="documents" type="text" id="listDoc">
+                <datalist id="documents">
+                    {% for doc in document %}
+                        <option id="{{doc.d_id}}" value="{{doc.d_titre}}">{{doc.d_fileName}}</option>
+                    {% endfor %}
+                </datalist>
+
+                {# <a href="{{ path( 'download',{'id':doc.d_id} ) }}">
+                    <i class="fas fa-solid fa-download" style="font-size:20px;color:green;"></i>
+                </a> #}
+                <button onclick='downloadDoc("{{ path('download1') }}");'>
+                    <i class="fas fa-solid fa-download" style="font-size:20px;color:green;"></i>
+                </button>
+            </div>
+        </div>
     </div>
+
+    <div class="row">
+        <div class="col-6">
+                {% for d in docSend %}
+                    <p style="color:white;">id="{{d.dId}}" value="{{d.uNom}}">{{d.idDestinataire}}</p>
+                {% endfor %}
+        </div>
+    </div>
+
+    {% block myScdJavascripts %}
+        <script>
+            function downloadDoc(url)
+            {
+                var idI = $('#listDoc').val();
+                var idD = $('#documents option[value="' + idI +'"]').attr('id');
+
+                if (!idD)
+                    return alert("Aucun fichier n'a été sélectionné !");
+
+                var link = url+"/"+idD;
+                window.location = link;
+            }
+        </script>
+    {% endblock myScdJavascripts %}
 {% endblock body %}

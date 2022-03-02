@@ -48,6 +48,10 @@ downloadlist:
     path: /downloadlist
     controller: App\Controller\DocumentController::downloadlist
 
+download1:
+    path: /download
+    controller: App\Controller\DocumentController::download
+
 download:
     path: /download/{id}
     controller: App\Controller\DocumentController::download
@@ -327,5 +331,13 @@ saisiEvaluation:
 choiceCompetence: 
     path: /choiceCompetence/{app}/{session}
     controller: App\Controller\EvaluationController::choiceCompetence
+# ************************Test*************************
+testannuaire:
+    path: /testAnnuaire
+    controller: App\Controller\TestannuaireController::app_testannuaire
+
+liste_session_role:
+    path: /testAnnuaire/{session}/{role}/
+    controller: App\Controller\TestannuaireController::liste_session_role
 
 

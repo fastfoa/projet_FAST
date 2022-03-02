@@ -564,6 +564,8 @@ class InscriptionController extends AbstractController
         $form = $this->createForm(AddUserType::class, $user);
         $form->handleRequest($request);
         $erreur = false;
+        $listApp = getSQLArrayAssoc($this->getParameter('loginDB'), $this->getParameter('PasswordDB'),
+        "SELECT prenom, role_string, nom, email  from user WHERE role_string = '$role' ");
 
         if ($form->isSubmitted() && $form->isValid()) 
         {
@@ -588,7 +590,8 @@ class InscriptionController extends AbstractController
             [
                 'form' => $form->createView(),
                 'roleName' => $roleName,
-                'erreur' => $erreur
+                'erreur' => $erreur,
+                'app' => $listApp
             ]
         );
     }
