@@ -165,6 +165,27 @@ class DashController extends AbstractController
         if ( $ret )
             return $ret;
 
+        $sessionID = $session->getId();
+        $login = $this->getParameter('loginDB');
+        $pw = $this->getParameter('PasswordDB');
+        $listAPP = getSQLArrayAssoc( $login, $pw, 
+        "SELECT user.nom, user.prenom, user.telephone, user.email, user.id 
+            FROM  user_in_session as s 
+            LEFT JOIN user ON s.id_user=user.id 
+            WHERE s.id_session=$sessionID and user.role_string='ROLE_APP'");
+
+        $listFORMATEUR = getSQLArrayAssoc( $login, $pw, 
+         "SELECT user.nom, user.prenom, user.telephone, user.email, user.id 
+             FROM  user_in_session as s 
+             LEFT JOIN user ON s.id_user=user.id 
+             WHERE s.id_session=$sessionID and user.role_string='ROLE_FORMATEUR'");
+
+        $listMA = getSQLArrayAssoc( $login, $pw, 
+        "SELECT user.nom, user.prenom, user.telephone, user.email, user.id 
+            FROM  user_in_session as s 
+            LEFT JOIN user ON s.id_user=user.id 
+            WHERE s.id_session=$sessionID and user.role_string='ROLE_MA'");
+
         $menu = 
         [
             'Sessions' => 'dashOFPrincipal', 
@@ -176,8 +197,12 @@ class DashController extends AbstractController
         return $this->render(
         'dash/dashOFSession.html.twig', 
         [
+            'listMA' => $listMA,
+            'listFORMATEUR' => $listFORMATEUR,
+            'listAPP' => $listAPP,
             'session' => $session,
-            'menu' => $menu
+            'menu' => $menu,
+
         ]);    
     }
 
