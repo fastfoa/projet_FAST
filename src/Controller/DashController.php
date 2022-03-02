@@ -126,7 +126,17 @@ class DashController extends AbstractController
         if ( $ret )
             return $ret;
 
+        $login = $this->getParameter('loginDB');
+        $pw = $this->getParameter('PasswordDB');
+    
         $entreprise = $this->getUser();
+        //dd( $entreprise );
+    
+        $resMA = getMAFromEnt($login, $pw, $entreprise->getId() );
+        //dd( $resMA );
+        $resApp = getAppFromMA($login, $pw, $resMA['id'] );
+        //dd( $resApp );
+        $of = [ 'nom' => 'Vidal', 'prenom' => 'Jean-Philippe'];
 
         $menu = 
         [
@@ -140,7 +150,10 @@ class DashController extends AbstractController
         'dash/dashEntreprise.html.twig', 
         [
             'entreprise' => $entreprise,
-            'menu' => $menu
+            'app' => $resApp,
+            'ma' => $resMA,
+            'OF' => $of,
+                        
         ]);    
     }
     
@@ -336,7 +349,16 @@ class DashController extends AbstractController
         return $this->listAll( 'ROLE_MA', "Maitre d'apprentissage" );
     }
 
-    public function dashApp( ): Response
+
+
+
+    // public function dashENTprincipalx(): Response
+
+    public function dashApp(User $apprenti ): Response
+
+
+    // public function dashApp( ): Response
+
     {
         $apprenti = $this->getUser();
 

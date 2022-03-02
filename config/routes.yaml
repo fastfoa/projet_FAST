@@ -34,8 +34,6 @@ test:
     path: /test
     controller: App\Controller\LanController::test
 
-##************************************** Documents
-
 upload: 
     path: /upload
     controller: App\Controller\DocumentController::upload
@@ -129,7 +127,9 @@ addUserSession:
     path: /addUserSession/{session}/{role}/{roleName}
     controller: App\Controller\InscriptionController::addUserSession
 
-
+userGeneralForm:
+    path: /userGeneralForm/{user}
+    controller: App\Controller\InscriptionController::userGeneralForm
     
 ## App\Controller\DashController
 
@@ -170,8 +170,6 @@ deleteSession:
 dashOFSession:
     path: /dashOFSession/{session}
     controller: App\Controller\DashController::dashOFSession
-
-
 
 editApprenti:
     path: /feditApprenti/{userID}
@@ -241,6 +239,7 @@ annuaire:
     controller: App\Controller\LanController::annuaire
 
 # ********************** les Profils **************************
+
 
 profilOF_APP: 
     path: /profilOF_APP/{user}
@@ -313,6 +312,7 @@ profilENT_APP:
 profilENT_FOR: 
     path: /profilENT_FOR/{user}
     controller: App\Controller\ProfilController::profilENT_FOR
+
      
 # ********************** RGPD **************************
 
@@ -323,10 +323,21 @@ rgpdForm:
 # ********************** EVALUATION **************************
 
 saisiEvaluation: 
-    path: /saisiEvaluation/{competence}/{app}/{session}
+    path: /saisiEvaluation/{competence}/{app}
     controller: App\Controller\EvaluationController::saisiEvaluation
 
 choiceCompetence: 
     path: /choiceCompetence/{app}/{session}
     controller: App\Controller\EvaluationController::choiceCompetence
+# ************************Test*************************
+testannuaire:
+    path: /testAnnuaire
+    controller: App\Controller\TestannuaireController::app_testannuaire
 
+liste_session_role:
+    path: /testAnnuaire/{session}/{role}/
+    controller: App\Controller\TestannuaireController::liste_session_role
+
+dashEval: 
+    path: /dashEval/{app}/{session}
+    controller: App\Controller\EvaluationController::dashEval

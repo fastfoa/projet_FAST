@@ -8,6 +8,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\RangeType;
 
 class EvaluationOFType extends AbstractType
 {
@@ -37,11 +38,22 @@ class EvaluationOFType extends AbstractType
                 ]
             ])
             ->add('remarqueOF', TextareaType::class, [
+                'required' => false,
                 'label' => false,
                 'attr' => [
                     'placeholder' => 'remarque OF'
                 ]
             ])
+
+            ->add('note', RangeType::class, [
+                'label' => false,
+                'attr' => [
+                    'min' => 0,
+                    'max' => 20,
+                    'onchange' => "$('#resultRange').text(this.value)"
+                ],
+            ])
+
 
 
             ->add('Enregistrer', SubmitType::class, [

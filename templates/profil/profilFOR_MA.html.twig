@@ -6,14 +6,5 @@
 {% block myJavascripts %}{% endblock myJavascripts%}
 
 {% block OF %}
-<div class="row">
-    <div class="col-5  ">    
-        <h5> {{user.telephone}} </h5>
-        <h5> {{user.fonctionMA|default('Fonction indisponible')}} </h5>
-        {#<h5> {{user.nom|default('Entreprise XXX')}} </h5>#}
-    </div>
-    <div class="col-2">    
-    </div>
-</div>
-<hr>    
+{{ include('profil/profilApp.html.twig') }}    
 {% endblock OF %}
