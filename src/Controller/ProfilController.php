@@ -43,6 +43,7 @@ class ProfilController extends AbstractController
         $roleViewer = 'ROLE_OF';
         $roleTarget = $user->getRoleString();
 
+        
         $listDoc = getSQLArrayAssoc($this->getParameter('loginDB'), $this->getParameter('PasswordDB'),
         "SELECT document.id AS d_id, document.titre AS d_titre, document.file_name AS d_fileName
         FROM document, user

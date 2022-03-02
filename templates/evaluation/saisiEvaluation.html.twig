@@ -28,41 +28,45 @@
 		</div>
 
 		<div class="row myarea">
-			<div class=" col-5 mt-3">
+			<div class=" col-6 mt-3">
+				<div class='txt-normal'>{{MA.prenom}} {{MA.nom}}</div>
 				{{ form_widget(form.remarqueMA) }}
 			</div>
-			<div class="col-5  mt-3">
-
+			<div class="col-6  mt-3">
+				<div class='txt-normal'>{{formateur.prenom}} {{formateur.nom}}</div>
 				{{ form_widget(form.remarqueFormateur) }}
-			</div>
+			</div>	
 		</div>
 
 		<div class="row myarea">
-			<div class="col-5 mt-3">
+			<div class="col-6 mt-3">
+				<div class='txt-normal'>{{app.prenom}} {{app.nom}}</div>
 				{{ form_widget(form.remarqueAPP) }}
 			</div>
-			<div class="col-5 mt-3">
+			<div class="col-6 mt-3">
+				<div class='txt-normal'>{{OF.prenom}} {{OF.nom}}</div>
 				{{ form_widget(form.remarqueOF) }}
-
-
 			</div>
 		</div>
 		<div class="row mx-auto">
 			<div class="col-5 mt-3">
 				{{ form_widget(form.Enregistrer) }}
 			</div>
-			<div class="col-1 txt-normal  mt-3">
-				note :
-			</div>
-			<div class="col-3  mt-3">
-				{{ form_row(form.note) }}
-			</div>
-			<div class="col-3 mt-3">
-				<div class="txt-normal" id="resultRange"></div>
-			</div>
+			{% if form.note is defined %}
+				<div class="col-1 txt-normal  mt-3">
+					note :
+				</div>
+				<div class="col-3  mt-3">
+					{{ form_row(form.note) }}
+				</div>
+				<div class="col-3 mt-3">
+					<div class="txt-normal" id="resultRange"></div>
+				</div>
+			{% endif %}
 		</div>
 
 	</div>
+	<br>
 	{% if message %}
 		<div class="alert-info">{{message}}</div>
 	{% endif %}
