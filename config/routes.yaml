@@ -34,9 +34,15 @@ test:
     path: /test
     controller: App\Controller\LanController::test
 
+##************************************** Documents
+
 upload: 
     path: /upload
     controller: App\Controller\DocumentController::upload
+
+getInfoDoc: 
+    path: /getInfoDoc/{id}
+    controller: App\Controller\DocumentController::getInfoDoc
 
 downloadlist:
     path: /downloadlist

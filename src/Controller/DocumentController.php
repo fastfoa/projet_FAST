@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Document;
+use App\Entity\RecipientDocument;
 use App\Form\DocumentType;
 use App\Form\DocumentExtType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -17,8 +18,7 @@ use Symfony\Component\Validator\Constraints\DateTime;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\User;
-
-
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class DocumentController extends AbstractController
 {
@@ -199,5 +199,17 @@ class DocumentController extends AbstractController
         $this->addFlash('message', "Document supprimé");
         return $this->redirectToRoute("downloadlist");
     }
-  
+
+    public function getInfoDoc(User $user )
+    {
+        $ret = $this->checkRGPD();
+        if ( $ret )
+            return $ret;
+
+        $a = getSQLArrayAssoc($this->getParameter('loginDB'), $this->getParameter('PasswordDB'),
+        "SELECT u.nom, u.prenom, u.raison_social, u.role_string, d.titre, r.id_document, r.date_read FROM document AS d, recipient_document AS r, user AS u
+        WHERE r.id_document=d.id AND u.id=r.id_recipient AND d.id_owner=".$user->getId());
+
+        return new JsonResponse([ "a" => $a]);
+    }
 }
