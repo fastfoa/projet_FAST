@@ -60,7 +60,6 @@ function getMenuFromRole($role)
         ]
         
     ];
-
     return $menu[ $role ];
 }
 
@@ -211,6 +210,17 @@ function getAppFromMA($login, $pw, $idMA)
           FROM app_has_ma as a          
           RIGHT JOIN user as u ON u.id=a.id_apprenti 
           WHERE a.id_ma='$idMA'"
+    );
+}
+
+function convertUserEntity2SQL($login, $pw, $id)
+{
+    return getSQLSingleAssoc(
+        $login,
+        $pw,
+        "SELECT *                   
+          FROM user          
+          WHERE id='$id'"
     );
 }
 
