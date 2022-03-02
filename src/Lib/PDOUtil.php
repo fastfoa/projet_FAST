@@ -79,6 +79,8 @@ use PDO;
         return  $rs->fetch();
     }
 
+// ********************************* requetes 
+
     function getMAFromApprenti($login, $pw, $idApprenti )
     {
         return getSQLSingleAssoc($login, $pw, 
@@ -110,7 +112,7 @@ use PDO;
           );
     }
 
-    function getAppFromRoleSession($login, $pw, $role, $idSession )
+    function getUsersFromRoleSession($login, $pw, $role, $idSession )
     {
         return getSQLArrayAssoc( $login, $pw, 
             "SELECT user.nom, user.prenom, user.id, user.email
@@ -119,7 +121,7 @@ use PDO;
              WHERE s.id_session=$idSession and user.role_string='$role'");
     }
 
-    function getAppFromRole($login, $pw, $role )
+    function getUsersFromRole($login, $pw, $role )
     {
         return getSQLArrayAssoc( $login, $pw, 
             "SELECT *
