@@ -98,6 +98,7 @@ use PDO;
          WHERE s.id = u.id_session and u.id_user='$idApprenti'"
          )['nom'];
     }
+// ********************************* requetes 
 
     function getMAFromApprenti($login, $pw, $idApprenti )
         {
