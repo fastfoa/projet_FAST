@@ -79,13 +79,47 @@ use PDO;
         return  $rs->fetch();
     }
 
+    // ***********************************************************
+
+    function getIdSessionFromApprenti($login, $pw, $idApprenti )
+        {
+        return getSQLSingleAssoc($login, $pw, 
+        "SELECT id_session                   
+         FROM user_in_session          
+         WHERE id_user='$idApprenti'"
+         )['id_session'];
+    }
+
+    function getNameSessionFromApprenti($login, $pw, $idApprenti )
+        {
+        return getSQLSingleAssoc($login, $pw, 
+        "SELECT s.nom                   
+         FROM user_in_session as u, session as s          
+         WHERE s.id = u.id_session and u.id_user='$idApprenti'"
+         )['nom'];
+    }
+// ********************************* requetes 
+
     function getMAFromApprenti($login, $pw, $idApprenti )
-    {
+        {
         return getSQLSingleAssoc($login, $pw, 
         "SELECT u.nom, u.prenom, u.id, u.role_string                   
          FROM app_has_ma as a          
          RIGHT JOIN user as u ON u.id=a.id_ma 
          WHERE a.id_apprenti='$idApprenti'"
+         );
+    }
+
+    function getFormateursFromApprenti($login, $pw, $idApprenti )
+    {
+        return getSQLArrayAssoc($login, $pw, 
+                "SELECT u.nom, u.prenom, u.id 
+                FROM user_in_session as us0, 
+                    user_in_session as us1, 
+                    user as u 
+                WHERE 
+                us0.id_session=us1.id_session and u.id=us1.id_user and u.role_string='ROLE_FORMATEUR' 
+                and us0.id_user='$idApprenti'"
          );
     }
 
@@ -99,7 +133,6 @@ use PDO;
          );
     }
 
-
     function getAppFromMA($login, $pw, $idMA )
     {
          return getSQLSingleAssoc($login, $pw, 
@@ -110,7 +143,7 @@ use PDO;
           );
     }
 
-    function getAppFromRoleSession($login, $pw, $role, $idSession )
+    function getUsersFromRoleSession($login, $pw, $role, $idSession )
     {
         return getSQLArrayAssoc( $login, $pw, 
             "SELECT user.nom, user.prenom, user.id, user.email
@@ -118,8 +151,8 @@ use PDO;
              LEFT JOIN user ON s.id_user=user.id 
              WHERE s.id_session=$idSession and user.role_string='$role'");
     }
-
-    function getAppFromRole($login, $pw, $role )
+    
+    function getUsersFromRole($login, $pw, $role )
     {
         return getSQLArrayAssoc( $login, $pw, 
             "SELECT *

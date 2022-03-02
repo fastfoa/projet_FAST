@@ -3,9 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\Document;
+use App\Entity\RecipientDocument;
 use App\Form\DocumentType;
 use App\Form\DocumentExtType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
@@ -199,5 +201,15 @@ class DocumentController extends AbstractController
         $this->addFlash('message', "Document supprimé");
         return $this->redirectToRoute("downloadlist");
     }
-  
+ 
+    public function getInfoDoc( RecipientDocument $iddr ): Response
+    {
+        $ret = $this->checkRGPD();
+        if ( $ret )
+            return $ret;
+
+        return new JsonResponse( [ 'id_document'=> $iddr->getIdDocument(), 
+                    'id_recipient'=> $iddr->getIdRecipient() ] );
+    }
+   
 }

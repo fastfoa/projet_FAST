@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block myStylesheets %}
+<style>
+.avatar
+{
+    width: 100px;
+    height: 100px;
+}
+</style>
+{% endblock myStylesheets %}
+
+{% block myJavascripts %}
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+{% endblock %}
+
+{% block body %}
+<div class="row">
+            <div class="col-6">    
+                <input list="app" type="text" id="listAPP">
+                <datalist id="app">
+                    {% for app in app %}
+                        <option  value="{{app.prenom}}">{{app.prenom}}</option>
+                    {% endfor %}
+                </datalist>
+            </div>
+        </div>
+{% endblock body %}

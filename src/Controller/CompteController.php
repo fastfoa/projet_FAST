@@ -26,9 +26,11 @@ class CompteController extends AbstractController
             return $this->redirectToRoute( "rgpdForm" );
         return null;
     }
-
-
-    public function monCompte(): Response
+    
+    /**
+     * @Route("/compte", name="compte")
+     */
+    public function index(): Response
     {
         $ret = $this->checkRGPD();
         if ( $ret )

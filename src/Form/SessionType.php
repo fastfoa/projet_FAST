@@ -59,10 +59,17 @@ class SessionType extends AbstractType
                 ],
                 
             ])
-            ->add('save', SubmitType::class,
-            [ 'label' => "Enregistrer", 'attr' => [ 'class' => "boutonForm" ] ]
-        )            ;
-        ;
+            
+            ->add('nombreHeure', TextType::class, [
+                'attr' => [
+                    'placeholder' => 'Durée de la session',
+                ]
+            ])
+            ->add('save', SubmitType::class,[
+                'label' => "Enregistrer",
+                'attr' => [ 'class' => "boutonForm" ]
+            ])
+            ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void

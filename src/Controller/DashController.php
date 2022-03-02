@@ -126,7 +126,7 @@ class DashController extends AbstractController
         if ( $ret )
             return $ret;
 
-            $login = $this->getParameter('loginDB');
+        $login = $this->getParameter('loginDB');
         $pw = $this->getParameter('PasswordDB');
     
         $entreprise = $this->getUser();
