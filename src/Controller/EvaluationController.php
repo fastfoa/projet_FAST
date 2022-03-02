@@ -98,6 +98,7 @@ class EvaluationController extends AbstractController
                 'nameCompet' => $nameCompet,
                 'message' => $message,
                 'app'=>$app,
+                'note'=>$note
                 
             ]);
     }
