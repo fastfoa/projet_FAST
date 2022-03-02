@@ -84,6 +84,7 @@ class ProfilController extends AbstractController
             'user' => $user,
             'document' => $listDoc,
             'docSend' => $docSend,
+            'menu' => getMenuFromRole( $this->getUser()->getRoleString() ),            
             'fonction' => "Apprenti"        
         ]);
     }    
@@ -99,6 +100,7 @@ class ProfilController extends AbstractController
             'user' => $user,
             'document' => $listDoc,
             'docSend' => $docSend,
+            'menu' => getMenuFromRole( $this->getUser()->getRoleString() ),            
             'fonction' => "Formateur"        
         ]);
     }       
@@ -114,7 +116,8 @@ class ProfilController extends AbstractController
             'user' => $user,
             'document' => $listDoc,
             'docSend' => $docSend,
-            'fonction' => "Maître d'Apprentissage"        
+            'fonction' => "Maître d'Apprentissage",        
+            'menu' => getMenuFromRole( $this->getUser()->getRoleString() ),            
         ]);
     }    
     // l'entreprise
@@ -129,7 +132,8 @@ class ProfilController extends AbstractController
             'user' => $user,
             'document' => $listDoc,
             'docSend' => $docSend,
-            'fonction' => "Entreprise"        
+            'fonction' => "Entreprise",        
+            'menu' => getMenuFromRole( $this->getUser()->getRoleString() ),            
         ]);
     }
     
@@ -146,7 +150,8 @@ class ProfilController extends AbstractController
             'user' => $user,
             'document' => $listDoc,
             'docSend' => $docSend,
-            'fonction' => "Organisme de Formation"        
+            'fonction' => "Organisme de Formation",        
+            'menu' => getMenuFromRole( $this->getUser()->getRoleString() ),            
         ]);
     }
     // formateur
@@ -161,7 +166,8 @@ class ProfilController extends AbstractController
             'user' => $user,
             'document' => $listDoc,
             'docSend' => $docSend,
-            'fonction' => "Formateur"        
+            'fonction' => "Formateur",        
+            'menu' => getMenuFromRole( $this->getUser()->getRoleString() ),            
         ]);
     }
     // maître d'apprentissage 
@@ -176,7 +182,8 @@ class ProfilController extends AbstractController
             'user' => $user,
             'document' => $listDoc,
             'docSend' => $docSend,
-            'fonction' => "Maître d'apprentissage"        
+            'fonction' => "Maître d'apprentissage",        
+            'menu' => getMenuFromRole( $this->getUser()->getRoleString() ),            
         ]);
     }
     // l'entreprise
@@ -191,7 +198,8 @@ class ProfilController extends AbstractController
             'user' => $user,
             'document' => $listDoc,
             'docSend' => $docSend,
-            'fonction' => "Entreprise"        
+            'fonction' => "Entreprise",        
+            'menu' => getMenuFromRole( $this->getUser()->getRoleString() ),            
         ]);
     }
 
@@ -208,7 +216,8 @@ class ProfilController extends AbstractController
             'user' => $user,
             'document' => $listDoc,
             'docSend' => $docSend,
-            'fonction' => "Organisme de formation"        
+            'fonction' => "Organisme de formation" ,       
+            'menu' => getMenuFromRole( $this->getUser()->getRoleString() ),            
         ]);
     }        
     // l'apprenti
@@ -223,7 +232,8 @@ class ProfilController extends AbstractController
             'user' => $user,
             'document' => $listDoc,
             'docSend' => $docSend,
-            'fonction' => "Apprenti"        
+            'fonction' => "Apprenti",        
+            'menu' => getMenuFromRole( $this->getUser()->getRoleString() ),            
         ]);
     }
     // maître d'apprentissage
@@ -238,8 +248,9 @@ class ProfilController extends AbstractController
              'user' => $user,
              'document' => $listDoc,
              'docSend' => $docSend,
-             'fonction' => "Maître d'apprentissage"
-         ]);
+             'fonction' => "Maître d'apprentissage",
+             'menu' => getMenuFromRole( $this->getUser()->getRoleString() ),            
+        ]);
     }
     // l'entreprise
     public function profilFOR_Entreprise(User $user, $listDoc, $docSend): Response
@@ -253,8 +264,9 @@ class ProfilController extends AbstractController
              'user' => $user,
              'document' => $listDoc,
              'docSend' => $docSend,
-             'fonction' => "Entreprise"
-         ]);
+             'fonction' => "Entreprise",
+             'menu' => getMenuFromRole( $this->getUser()->getRoleString() ),            
+            ]);
     }
 
     // maître d'apprentissage regarde les infos de :
@@ -270,7 +282,8 @@ class ProfilController extends AbstractController
             'user' => $user,
             'document' => $listDoc,
             'docSend' => $docSend,
-            'fonction' => "Organisme de formation"        
+            'fonction' => "Organisme de formation",        
+            'menu' => getMenuFromRole( $this->getUser()->getRoleString() ),            
         ]);
     }         
     // l'apprenti
@@ -285,7 +298,8 @@ class ProfilController extends AbstractController
             'user' => $user,
             'document' => $listDoc,
             'docSend' => $docSend,
-            'fonction' => "Apprenti"        
+            'fonction' => "Apprenti",        
+            'menu' => getMenuFromRole( $this->getUser()->getRoleString() ),            
         ]);
     } 
     // Formateur
@@ -300,8 +314,9 @@ class ProfilController extends AbstractController
              'user' => $user,
              'document' => $listDoc,
              'docSend' => $docSend,
-             'fonction' => "Formateur"
-         ]);
+             'fonction' => "Formateur",
+             'menu' => getMenuFromRole( $this->getUser()->getRoleString() ),            
+            ]);
     } 
 
         // L'entreprise regarde les infos de :
@@ -317,7 +332,8 @@ class ProfilController extends AbstractController
             'user' => $user,
             'document' => $listDoc,
             'docSend' => $docSend,
-            'fonction' => "Organisme de formation"        
+            'fonction' => "Organisme de formation",        
+            'menu' => getMenuFromRole( $this->getUser()->getRoleString() ),            
         ]);
     }         
     // l'apprenti
@@ -332,7 +348,8 @@ class ProfilController extends AbstractController
             'user' => $user,
             'document' => $listDoc,
             'docSend' => $docSend,
-            'fonction' => "Apprenti"        
+            'fonction' => "Apprenti",        
+            'menu' => getMenuFromRole( $this->getUser()->getRoleString() ),            
         ]);
     } 
     // Formateur
@@ -347,9 +364,8 @@ class ProfilController extends AbstractController
              'user' => $user,
              'document' => $listDoc,
              'docSend' => $docSend,
-             'fonction' => "Formateur"
-         ]);
+             'fonction' => "Formateur",
+             'menu' => getMenuFromRole( $this->getUser()->getRoleString() ),            
+            ]);
     } 
-  
-     
 }

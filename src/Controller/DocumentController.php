@@ -141,6 +141,7 @@ class DocumentController extends AbstractController
             'nameFormateur' => $nameFormateur,
             'nameApprenti' => $nameApprenti,
             'nameEntreprise' => $nameEntreprise,
+            'menu' => getMenuFromRole( $this->getUser()->getRoleString() ),            
             ]);
     }
    
@@ -154,15 +155,13 @@ class DocumentController extends AbstractController
         //$patro = $doctrine->getRepository(Patronyme::class)->find($id);
 
         $uploads = $doctrine->getRepository(Document::class)->findAll();
-        $menu = [
-            "Documents"=>"downloadlist",
-            ];
 
         return $this->render(
         'document/downloadlist.html.twig', 
         [
             'listUp' => $uploads,
-            'menu' => $menu
+            'menu' => getMenuFromRole( $this->getUser()->getRoleString() ),            
+
         ]);    
 
     }
