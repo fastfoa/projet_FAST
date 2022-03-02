@@ -39,7 +39,12 @@
 				</li>
 
 		</ul>
-
+		<script>
+				function rtn() 
+				{
+					window.history.back();
+				}
+		</script>
 
 		{% if is_granted('IS_AUTHENTICATED_FULLY') %}
 			<a class="boutonForm my-2 my-sm-0 m-3" aria-current="page" href="{{ path('app_logout')}}">Déconnexion</a>

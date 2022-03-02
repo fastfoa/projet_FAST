@@ -19,8 +19,6 @@ use App\Form\EvaluationOFType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Security;
 
-
-
 class EvaluationController extends AbstractController
 {
     
@@ -98,11 +96,15 @@ class EvaluationController extends AbstractController
 
     public function choiceCompetence(User $app, Session $session, Request $request): Response
     {
+
+        $login = $this->getParameter('loginDB');
+        $pw = $this->getParameter('PasswordDB');
+
         $formationID = $session->getIdFormation();
         $doctrine = $this->getDoctrine();
         $formation = $doctrine->getRepository(Formation::class)->find( $formationID );
         $nomFormation = $formation->getNom();
-        $list = getSQLArrayAssoc( 
+        $list = getSQLArrayAssoc( $login, $pw,
             "SELECT *  
              FROM  competence as c 
              WHERE c.id_formation=$formationID");
