@@ -100,6 +100,7 @@ class EvaluationController extends AbstractController
         $evaluation->setIdMA($MA['id']);
         $evaluation->setIdFormateur($Formateur['id']);
         $evaluation->setIdSession($idSession);
+        //$evaluation->setDateApp();
         //$evaluation->setNote(1);
       
         $form = $this->createForm( $type, $evaluation);
@@ -112,7 +113,7 @@ class EvaluationController extends AbstractController
 
             if ( $role == "ROLE_APP" )
             {
-                $evaluation->setDateApp(  );
+                $evaluation->setDateApp();
             }   
             else if ( $role == "ROLE_MA" )
             {
