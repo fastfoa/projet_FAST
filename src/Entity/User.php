@@ -59,15 +59,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $adresse;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $session;
-
-    /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Session", inversedBy="users")
-     */
-    private $sessions;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -278,7 +269,27 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
     * @ORM\Column(type="string", length=255, nullable=true)
     */
-    private $RaisonSocial; // pour une rôle unique de maitre d'apprentissage et entreprise, ex :indépendant
+    private $RaisonSocial; // Raison sociale pour une rôle unique de maitre d'apprentissage et entreprise, ex :indépendant
+
+    /**
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private $dateDossierComplet; // date de réception du dossier complet (CERFA)
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $numeroDepot; // par l'organisme en charge du depot
+
+    /**
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private $dateDecision; //  par l'organisme en charge du depot
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $numeroAvenant;
 
     public function __construct()
     {
@@ -383,6 +394,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setNom(?string $nom): self
     {
         $this->nom = $nom;
+        $this->RaisonSocial = $nom;
 
         return $this;
     }
@@ -886,6 +898,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setRaisonSocial(?string $RaisonSocial): self
     {
         $this->RaisonSocial = $RaisonSocial;
+        $this->nom = $RaisonSocial;
 
         return $this;
     }
@@ -976,6 +989,54 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setTelUrgence2(?string $telUrgence2): self
     {
         $this->telUrgence2 = $telUrgence2;
+        return $this;
+    }
+
+    public function getDateDossierComplet(): ?string
+    {
+        return $this->dateDossierComplet;
+    }
+
+    public function setDateDossierComplet(string $dateDossierComplet): self
+    {
+        $this->dateDossierComplet = $dateDossierComplet;
+
+        return $this;
+    }
+
+    public function getNumeroDepot(): ?string
+    {
+        return $this->numeroDepot;
+    }
+
+    public function setNumeroDepot(string $numeroDepot): self
+    {
+        $this->numeroDepot = $numeroDepot;
+
+        return $this;
+    }
+
+    public function getDateDecision(): ?string
+    {
+        return $this->dateDecision;
+    }
+
+    public function setDateDecision(string $dateDecision): self
+    {
+        $this->dateDecision = $dateDecision;
+
+        return $this;
+    }
+
+    public function getNumeroAvenant(): ?string
+    {
+        return $this->numeroAvenant;
+    }
+
+    public function setNumeroAvenant(string $numeroAvenant): self
+    {
+        $this->numeroAvenant = $numeroAvenant;
+
         return $this;
     }
 }

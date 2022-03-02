@@ -29,18 +29,18 @@ class DashController extends AbstractController
     function checkRGPD()
     {
         $user = $this->getUser();
-        if ( $user == null )
-           return $this->redirectToRoute( "login" );
-         if ( !$user->getRGPDOK())
-            return $this->redirectToRoute( "rgpdForm" );
+        if ($user == null)
+            return $this->redirectToRoute("login");
+        if (!$user->getRGPDOK())
+            return $this->redirectToRoute("rgpdForm");
         return null;
     }
 
     public function dashOFPrincipal(): Response
     {
-        
+
         $ret = $this->checkRGPD();
-        if ( $ret )
+        if ($ret)
             return $ret;
 
         $doctrine = $this->getDoctrine();
@@ -50,65 +50,57 @@ class DashController extends AbstractController
 
         $listSession = getSQLArrayAssoc($login, $pw, 'SELECT session.id, formation.nom as f, session.debut, session.fin, session.nom 
         FROM session, formation 
-        WHERE formation.id=session.id_formation' );
-        
+        WHERE formation.id=session.id_formation');
 
 
-        //return new JsonResponse( $listSession );
-        $menu = 
-        [
-            'Sessions' => 'dashOFPrincipal', 
-            'Apprentis' => 'listAllAprentis', 
-            'Formateurs' => 'listAllFormateurs', 
-            'Maitres' => 'listAllMA', 
-            'Entreprises' => 'listAllEntreprises' 
-        ];
         return $this->render(
-        'dash/dashOFPrincipal.html.twig', 
-        [
-            'listSession' => $listSession,
-            'menu' => $menu,
-        ]);    
+            'dash/dashOFPrincipal.html.twig',
+            [
+                'listSession' => $listSession,
+                'menu' => getMenuFromRole($this->getUser()->getRoleString()),
+            ]
+        );
     }
     public function addSession(Request $request): Response
     {
-        
+
         $ret = $this->checkRGPD();
-        if ( $ret )
+        if ($ret)
             return $ret;
 
-        $session =new Session();
+        $session = new Session();
 
-        $form = $this->createForm(SessionType::class,$session);
-         $form->handleRequest($request);
-         if($form->isSubmitted()&& $form->isValid())
-         {
-            $doctrine =$this->getDoctrine();
-            $em =$doctrine->getManager();
-            $em ->persist($session);
+        $form = $this->createForm(SessionType::class, $session);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $doctrine = $this->getDoctrine();
+            $em = $doctrine->getManager();
+            $em->persist($session);
             $em->flush();
-            return $this->redirectToRoute("dashOFPrincipal");         }
+            return $this->redirectToRoute("dashOFPrincipal");
+        }
 
-            $menu = 
+        $menu =
             [
-                'Sessions' => 'dashOFPrincipal', 
-                'Apprentis' => 'listAllAprentis', 
-                'Formateurs' => 'listAllFormateurs', 
-                'Maitres' => 'listAllMA', 
-                'Entreprises' => 'listAllEntreprises' 
+                'Sessions' => 'dashOFPrincipal',
+                'Apprentis' => 'listAllAprentis',
+                'Formateurs' => 'listAllFormateurs',
+                'Maitres' => 'listAllMA',
+                'Entreprises' => 'listAllEntreprises'
             ];
-            return $this->render('dash/addSession.html.twig', [
+        return $this->render('dash/addSession.html.twig', [
             'form' => $form->createView(),
-            'menu' => $menu
+            'menu' => getMenuFromRole($this->getUser()->getRoleString()),
+
 
         ]);
     }
 
-    
-   public function deleteSession(Session $session )
+
+    public function deleteSession(Session $session)
     {
         $ret = $this->checkRGPD();
-        if ( $ret )
+        if ($ret)
             return $ret;
 
         $doctrine = $this->getDoctrine();
@@ -117,102 +109,92 @@ class DashController extends AbstractController
         $om->flush();
         return $this->redirectToRoute("dashOFPrincipal");
     }
-                            
-    
 
     public function dashEntreprise(): Response
     {
+        $infoOF = getInfoOF();
+
         $ret = $this->checkRGPD();
-        if ( $ret )
+        if ($ret)
             return $ret;
 
         $login = $this->getParameter('loginDB');
         $pw = $this->getParameter('PasswordDB');
-    
-        $entreprise = $this->getUser();
-        //dd( $entreprise );
-    
-        $resMA = getMAFromEnt($login, $pw, $entreprise->getId() );
-        //dd( $resMA );
-        $resApp = getAppFromMA($login, $pw, $resMA['id'] );
-        //dd( $resApp );
-        $of = [ 'nom' => 'Vidal', 'prenom' => 'Jean-Philippe'];
 
-        $menu = 
-        [
-            'Sessions' => 'dashOFPrincipal', 
-            'Apprentis' => 'listAllAprentis', 
-            'Formateurs' => 'listAllFormateurs', 
-            'Maitres' => 'listAllMA', 
-            'Entreprises' => 'listAllEntreprises' 
-        ];
+        $user       = $this->getUser();
+        $role       = $user->getRoleString();
+        $user       = convertUserEntity2SQL($login, $pw, $user->getId());
+        $entreprise = $user;
+
+        $MA         = convertUserEntity2SQL($login, $pw, getMAFromEnt($login, $pw, $entreprise['id'])['id']);
+        $app        = convertUserEntity2SQL($login, $pw, getAppFromMA($login, $pw, $MA['id'])['id']);
+        $formateur  = convertUserEntity2SQL($login, $pw, getFormateursFromApprenti($login, $pw, $app['id'])[0]['id']);
+        $OF         = getInfoOF();
+
+
+
         return $this->render(
-        'dash/dashEntreprise.html.twig', 
-        [
-            'entreprise' => $entreprise,
-            'app' => $resApp,
-            'ma' => $resMA,
-            'OF' => $of,
-                        
-        ]);    
+            'dash/dashEntreprise.html.twig',
+            [
+                'entreprise' => $entreprise,
+                'app' => $app,
+                'ma' => $MA,
+                'OF' => $infoOF,
+                'menu' => getMenuFromRole('ROLE_ENT')
+
+            ]
+        );
     }
-    
-   
-    
-    public function dashOFSession(Session $session ): Response
+
+
+
+    public function dashOFSession(Session $session): Response
     {
         $ret = $this->checkRGPD();
-        if ( $ret )
+        if ($ret)
             return $ret;
 
-        $menu = 
-        [
-            'Sessions' => 'dashOFPrincipal', 
-            'Apprentis' => 'listAllAprentis', 
-            'Formateurs' => 'listAllFormateurs', 
-            'Maitres' => 'listAllMA', 
-            'Entreprises' => 'listAllEntreprises' 
-        ];
+        $menu =
+            [
+                'Sessions' => 'dashOFPrincipal',
+                'Apprentis' => 'listAllAprentis',
+                'Formateurs' => 'listAllFormateurs',
+                'Maitres' => 'listAllMA',
+                'Entreprises' => 'listAllEntreprises'
+            ];
         return $this->render(
-        'dash/dashOFSession.html.twig', 
-        [
-            'session' => $session,
-            'menu' => $menu
-        ]);    
+            'dash/dashOFSession.html.twig',
+            [
+                'session' => $session,
+                'menu' => getMenuFromRole($this->getUser()->getRoleString())
+            ]
+        );
     }
 
 
     public function listUsersEntreprise(User $entreprise, $role, $roleName): Response
     {
         $ret = $this->checkRGPD();
-        if ( $ret )
+        if ($ret)
             return $ret;
 
         $doctrine = $this->getDoctrine();
         $list = $doctrine->getRepository(User::class)->findAll();
-    
-        $menu = 
-        [
-            'Sessions' => 'dashOFPrincipal', 
-            'Apprentis' => 'listAllAprentis', 
-            'Maitres' => 'listAllMA', 
-            'Entreprises' => 'listAllEntreprises' 
-        ];
 
         return $this->render(
-        'dash/listUsersEntreprise.html.twig', 
-        [
-            'list' => $list,
-            'entreprise' => $entreprise,
-            'menu' => $menu,
-            'roleName' => $roleName,
-            'role' => $role
-        ]);    
+            'dash/listUsersEntreprise.html.twig',
+            [
+                'list' => $list,
+                'entreprise' => $entreprise,
+                'menu' => getMenuFromRole($this->getUser()->getRoleString()),            'roleName' => $roleName,
+                'role' => $role
+            ]
+        );
     }
     public function listUsersSession(Session $session, $role, $roleName): Response
     {
         $ret = $this->checkRGPD();
-        if ( $ret )
+        if ($ret)
             return $ret;
 
         $doctrine = $this->getDoctrine();
@@ -220,36 +202,31 @@ class DashController extends AbstractController
         $login = $this->getParameter('loginDB');
         $pw = $this->getParameter('PasswordDB');
 
-        $list = getSQLArrayAssoc( $login, $pw, 
+        $list = getSQLArrayAssoc(
+            $login,
+            $pw,
             "SELECT user.nom, user.prenom, user.telephone, user.email, user.id 
              FROM  user_in_session as s 
              LEFT JOIN user ON s.id_user=user.id 
-             WHERE s.id_session=$sessionID and user.role_string='$role'");
-    
-        $menu = 
-        [
-            'Sessions' => 'dashOFPrincipal', 
-            'Apprentis' => 'listAllAprentis', 
-            'Formateurs' => 'listAllFormateurs', 
-            'Maitres' => 'listAllMA', 
-            'Entreprises' => 'listAllEntreprises' 
-        ];
+             WHERE s.id_session=$sessionID and user.role_string='$role'"
+        );
 
         return $this->render(
-        'dash/listUsersSession.html.twig', 
-        [
-            'list' => $list,
-            'session' => $session,
-            'menu' => $menu,
-            'roleName' => $roleName,
-            'role' => $role
-        ]);    
+            'dash/listUsersSession.html.twig',
+            [
+                'list' => $list,
+                'session' => $session,
+                'menu' => getMenuFromRole($this->getUser()->getRoleString()),
+                'roleName' => $roleName,
+                'role' => $role
+            ]
+        );
     }
 
     public function listApprentis(Session $session): Response
     {
         $ret = $this->checkRGPD();
-        if ( $ret )
+        if ($ret)
             return $ret;
 
         return $this->listUsersSession($session, 'ROLE_APP', 'Apprenti');
@@ -258,7 +235,7 @@ class DashController extends AbstractController
     public function listFormateurs(Session $session): Response
     {
         $ret = $this->checkRGPD();
-        if ( $ret )
+        if ($ret)
             return $ret;
 
         return $this->listUsersSession($session, 'ROLE_FORMATEUR', 'Formateur');
@@ -267,17 +244,17 @@ class DashController extends AbstractController
     public function listMA(Session $session): Response
     {
         $ret = $this->checkRGPD();
-        if ( $ret )
+        if ($ret)
             return $ret;
 
         return $this->listUsersSession($session, 'ROLE_MA', "Maitre d'apprentissage");
     }
 
-  
-    public function listAll( $role,  $roleName ): Response
+
+    public function listAll($role,  $roleName): Response
     {
         $ret = $this->checkRGPD();
-        if ( $ret )
+        if ($ret)
             return $ret;
 
         $doctrine = $this->getDoctrine();
@@ -285,98 +262,109 @@ class DashController extends AbstractController
         $login = $this->getParameter('loginDB');
         $pw = $this->getParameter('PasswordDB');
 
-        $list = getSQLArrayAssoc( $login, $pw,
+        $list = getSQLArrayAssoc(
+            $login,
+            $pw,
             "SELECT user.nom, user.prenom, user.telephone, user.email, user.id, s.nom as ns
              FROM  user
              LEFT JOIN user_in_session as us ON us.id_user=user.id 
              LEFT JOIN session as s ON us.id_session=s.id 
-             WHERE user.role_string='$role'");
-    
+             WHERE user.role_string='$role'"
+        );
 
-        //return new Response( "toto");
-        $menu = 
-        [
-            'Sessions' => 'dashOFPrincipal', 
-            'Apprentis' => 'listAllAprentis', 
-            'Formateurs' => 'listAllFormateurs', 
-            'Maitres' => 'listAllMA', 
-            'Entreprises' => 'listAllEntreprises' 
-        ];
 
         return $this->render(
-        'dash/listUser.html.twig', 
-        [
-            'list' => $list,
-            'menu' => $menu,
-            'role' => $role,
-            'roleName' => $roleName
-        ]);    
+            'dash/listUser.html.twig',
+            [
+                'list' => $list,
+                'menu' => getMenuFromRole($this->getUser()->getRoleString()),        'role' => $role,
+                'roleName' => $roleName
+            ]
+        );
     }
-    
+
     public function listAllAprentis(): Response
     {
         $ret = $this->checkRGPD();
-        if ( $ret )
+        if ($ret)
             return $ret;
 
-        return $this->listAll( 'ROLE_APP', 'Apprenti' );
+        return $this->listAll('ROLE_APP', 'Apprenti');
     }
-    
+
     public function listAllFormateurs(): Response
     {
         $ret = $this->checkRGPD();
-        if ( $ret )
+        if ($ret)
             return $ret;
 
-        return $this->listAll( 'ROLE_FORMATEUR','Formateur' );
+        return $this->listAll('ROLE_FORMATEUR', 'Formateur');
     }
-    
+
     public function listAllEntreprises(): Response
     {
         $ret = $this->checkRGPD();
-        if ( $ret )
+        if ($ret)
             return $ret;
 
-        return $this->listAll( 'ROLE_ENT','Entreprise' );
+        return $this->listAll('ROLE_ENT', 'Entreprise');
     }
 
     public function listAllMA(): Response
     {
         $ret = $this->checkRGPD();
-        if ( $ret )
+        if ($ret)
             return $ret;
-            
-        return $this->listAll( 'ROLE_MA', "Maitre d'apprentissage" );
-    }
 
+        return $this->listAll('ROLE_MA', "Maitre d'apprentissage");
+    }
 
 
 
     // public function dashENTprincipalx(): Response
 
-    public function dashApp(User $apprenti ): Response
-
-
-    // public function dashApp( ): Response
-
+    public function dashApp(): Response
     {
-        $apprenti = $this->getUser();
+        $infoOF = getInfoOF();
 
-        $menuA = 
-        [
-            'Sessions' => 'dashOFPrincipal', 
-            'Apprentis' => 'listAllAprentis', 
-            'Formateurs' => 'listAllFormateurs', 
-            'Maitres' => 'listAllMA', 
-            'Entreprises' => 'listAllEntreprises' 
-        ];
+        $ret = $this->checkRGPD();
+        if ($ret)
+            return $ret;
+
+        $login = $this->getParameter('loginDB');
+        $pw = $this->getParameter('PasswordDB');
+
+        $user       = $this->getUser();
+        $role       = $user->getRoleString();
+        $user       = convertUserEntity2SQL($login, $pw, $user->getId());
+        $app = $user;
+
         
+        $MA         = convertUserEntity2SQL($login, $pw, getMAFromApprenti($login, $pw, $app['id'])['id']);
+        $entreprise = convertUserEntity2SQL($login, $pw, getENTFromMA($login, $pw, $MA['id'])['id']);
+        $formateur  = convertUserEntity2SQL($login, $pw, getFormateursFromApprenti($login, $pw, $app['id'])[0]['id']);
+        $OF         = getInfoOF();
+
+        $uid = $app['id'];
+        $listDoc = getSQLArrayAssoc($this->getParameter('loginDB'), $this->getParameter('PasswordDB'),
+        "SELECT document.id AS d_id, document.titre AS d_titre, document.file_name AS d_fileName
+        FROM document, user
+        WHERE user.id=document.id_owner AND user.id=".$uid);
+
+
+
         return $this->render(
-        'dash/dashApp.html.twig', 
-        [
-            'apprenti' => $apprenti,
-            'menu' => $menuA
-        ]);    
+            'dash/dashApp.html.twig',
+            [
+                'document' => $listDoc,
+                'id' => $uid,
+                'entreprise' => $entreprise,
+                'app' => $app,
+                'ma' => $MA,
+                'OF' => $infoOF,
+                'menu' => getMenuFromRole('ROLE_APP')
+
+            ]
+        );
     }
-  
 }
