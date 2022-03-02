@@ -174,13 +174,16 @@ class LanController extends AbstractController
         return $this->render('lan/annuaireTest.html.twig');
     }
 
-    public function annuairePopup(): Response
+    public function annuairePopup($listApp): Response
     {
         $ret = $this->checkRGPD();
         if ( $ret )
             return $ret;
 
-        return $this->render('lan/annuairePopup.html.twig');
+        return $this->render('lan/annuairePopup.html.twig', 
+        [
+            'app' => $listApp,       
+        ]);
     }
 
     public function annuaire(): Response
@@ -189,6 +192,11 @@ class LanController extends AbstractController
         if ( $ret )
             return $ret;
             
+
+        $listApp = getSQLArrayAssoc($this->getParameter('loginDB'), $this->getParameter('PasswordDB'),
+        'SELECT prenom, role_string from user'                                            );
+        // return  new JsonResponse(   $users    );
+    
         $login = $this->getParameter('loginDB');
         $pw = $this->getParameter('PasswordDB');
     
