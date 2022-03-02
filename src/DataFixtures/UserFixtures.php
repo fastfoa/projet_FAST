@@ -106,7 +106,7 @@ class UserFixtures extends Fixture
             $user->setProfilEnabled(true);
             $manager->persist($user);
         }
-
+        //200
         // Fixture Formateur
         for ($i = 0; $i < 50; $i++) 
         {
@@ -129,6 +129,7 @@ class UserFixtures extends Fixture
             $manager->persist($user);
         }
 
+        //250
         // Fixture Entreprise
         for ($j = 0; $j <= 20; $j++) {
             $user = new User();
@@ -152,6 +153,7 @@ class UserFixtures extends Fixture
             $manager->persist($user);
         }
 
+        //270
         // Fixture Admin
         for ($i = 0; $i < 5; $i++) {
             $user = new User();

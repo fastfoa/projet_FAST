@@ -19,11 +19,8 @@ use App\Form\EvaluationOFType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Security;
 
-
-
 class EvaluationController extends AbstractController
 {
-    
     /**
      * @Route("/evaluation", name="evaluation")
      */
@@ -44,50 +41,95 @@ class EvaluationController extends AbstractController
         return null;
     }
 
-    public function saisiEvaluation(Competence $competence, User $app, Session $session, Request $request): Response
+    public function saisiEvaluation(Competence $competence, User $app, Request $request): Response
     {
 
+        $login = $this->getParameter('loginDB');
+        $pw = $this->getParameter('PasswordDB');
+
         $user = $this->getUser();
-       // dd($user);
+        //dd($user);
         $role='';
         if(!empty($user))
         {
-        //$role = $user->getRoles()[0];
-        $role= $user->getRoleString();
-
-          //dd($role);
+            //$role = $user->getRoles()[0];
+            $role= $user->getRoleString();
         }
     
         $message = false;
         $evaluation = new Evaluation();
-       
+
+        $type = EvaluationAppType::class;
+        $App = $app;
+        $MA = "";
+        $Formateur = "";
+
+        if ( $role == "ROLE_APP" )
+        {
+            $App = $user;
+            $MA = getMAFromApprenti($login, $pw, $App->getId() );
+            $Formateur = getFormateursFromApprenti($login, $pw, $App->getId() )[0];
+            $type = EvaluationAppType::class;
+        }   
+        else if ( $role == "ROLE_MA" )
+        {
+            $MA = $user;
+            $App = getAppFromMA($login, $pw, $MA->getId() );
+            $Formateur = getFormateursFromApprenti($login, $pw, $App->getId() )[0];
+            $type = EvaluationMAType::class;
+        }
+        else if ( $role == "ROLE_FORMATEUR" )
+        {
+            $Formateur = $user;
+            $App = $app;
+            $MA = getMAFromApprenti( $login, $pw, $App->getId() );
+            $type = EvaluationFormateurType::class;
+        }
+        else
+        {
+           $type = EvaluationOFType::class;
+           $MA = getMAFromApprenti( $login, $pw, $App->getId() );
+           $Formateur = getFormateursFromApprenti($login, $pw, $App->getId() )[0];
+        }
+
+        $idSession = getIdSessionFromApprenti( $login, $pw, $App->getId() );
+        //dd( $session );
         $nameCompet = $competence->getName();
         $evaluation->setIdCompetence($competence->getId());
-        $evaluation->setIdApp($app->getId());
-        $evaluation->setIdMA(1);
-        $evaluation->setNote(1);
-        $evaluation->setIdFormateur(1);
-        $evaluation->setIdSession($session->getId(1));
+        $evaluation->setIdApp($App->getId());
+        $evaluation->setIdMA($MA['id']);
+        $evaluation->setIdFormateur($Formateur['id']);
+        $evaluation->setIdSession($idSession);
+        //$evaluation->setNote(1);
       
-        //dd( $evaluation );
-        $type = EvaluationAppType::class;
-
-        if ( $role == "ROLE_APP")
-            $type = EvaluationAppType::class;
-        else if ( $role == "ROLE_OF")
-            $type = EvaluationOFType::class;
-        else if ( $role == "ROLE_FORMATEUR")
-            $type = EvaluationFormateurType::class;
-        else if ( $role == "ROLE_MA")
-            $type = EvaluationMAType::class;
-
         $form = $this->createForm( $type, $evaluation);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            
+        if ($form->isSubmitted() && $form->isValid()) 
+        {
             $doctrine = $this->getDoctrine();
             $entityManager = $doctrine->getManager();
+
+            if ( $role == "ROLE_APP" )
+            {
+                $evaluation->setDateApp(  );
+            }   
+            else if ( $role == "ROLE_MA" )
+            {
+                $evaluation->setDateMA();
+            }
+            else if ( $role == "ROLE_FORMATEUR" )
+            {
+                $evaluation->setDateFormateur();
+            }
+            else
+            {
+                $evaluation->setDateOF();
+            }
+    
+    
+
+
             $entityManager->persist($evaluation);
             $entityManager->flush();
             $message = "le formulaire a bien était pris en compte ";
@@ -97,7 +139,7 @@ class EvaluationController extends AbstractController
                 'form' => $form->createView(),
                 'nameCompet' => $nameCompet,
                 'message' => $message,
-                'app'=>$app,
+                'app'=>$App,
                 
                 
             ]);
@@ -105,28 +147,75 @@ class EvaluationController extends AbstractController
 
     public function choiceCompetence(User $app, Session $session, Request $request): Response
     {
+        $login = $this->getParameter('loginDB');
+        $pw = $this->getParameter('PasswordDB');
+
         $formationID = $session->getIdFormation();
         $doctrine = $this->getDoctrine();
         $login = $this->getParameter('loginDB');
         $pw = $this->getParameter('PasswordDB');
         $formation = $doctrine->getRepository(Formation::class)->find( $formationID );
         $nomFormation = $formation->getNom();
-        $list = getSQLArrayAssoc( $login, $pw,
+        $listCompetence = getSQLArrayAssoc( $login, $pw,
             "SELECT *  
              FROM  competence as c 
              WHERE c.id_formation=$formationID");
         
-        $nomAPP= $app->getPrenom()." ".$app->getNom();
-
         return $this->render('evaluation/choiceCompetence.html.twig', [
             'user' => $app,    
             'session' => $session,    
             'nomFormation' => $nomFormation,    
-            'list'=>$list
-                
+            'listCompetence'=>$listCompetence
             ]);
     }
 
+    public function dashEval( User $app, Session $session ): Response
+    {
+        $ret = $this->checkRGPD();
+        if ( $ret )
+            return $ret;
 
+        $login = $this->getParameter('loginDB');
+        $pw = $this->getParameter('PasswordDB');
+    
+        $user = $this->getUser();
+        $role = $user->getRoleString();
+        $formationID = $session->getIdFormation();
+        $doctrine = $this->getDoctrine();
+        $login = $this->getParameter('loginDB');
+        $pw = $this->getParameter('PasswordDB');
+        $formation = $doctrine->getRepository(Formation::class)->find( $formationID );
+        $nomFormation = $formation->getNom();
+        $listCompetence = getSQLArrayAssoc( $login, $pw,
+            "SELECT *  
+             FROM  competence as c 
+             WHERE c.id_formation=$formationID");
+        //dd( $entreprise );
+    
+        //$resMA = getMAFromEnt($login, $pw, $entreprise->getId() );
+        //dd( $resMA );
+        //$resApp = getAppFromMA($login, $pw, $resMA['id'] );
+        //dd( $resApp );
+        //$of = [ 'nom' => 'Vidal', 'prenom' => 'Jean-Philippe'];
+
+        $menuOF = 
+        [
+            'Sessions' => 'dashOFPrincipal', 
+            'Apprentis' => 'listAllAprentis', 
+            'Formateurs' => 'listAllFormateurs', 
+            'Maitres' => 'listAllMA', 
+            'Entreprises' => 'listAllEntreprises' 
+        ];
+        return $this->render(
+        'evaluation/dashEval.html.twig', 
+        [
+            'app' => $app,
+            'menu' => $menuOF,
+            'session' => $session,    
+            'nomFormation' => $nomFormation,    
+            'listCompetence'=>$listCompetence         
+        ]);    
+    }
+    
 
 }

@@ -34,6 +34,12 @@ test:
     path: /test
     controller: App\Controller\LanController::test
 
+## ****************************  Document 
+
+getInfoDoc: 
+    path: /getInfoDoc/{iddr}
+    controller: App\Controller\DocumentController::getInfoDoc
+
 upload: 
     path: /upload
     controller: App\Controller\DocumentController::upload
@@ -232,6 +238,7 @@ annuaire:
 
 # ********************** les Profils **************************
 
+
 profilOF_APP: 
     path: /profilOF_APP/{user}
     controller: App\Controller\ProfilController::profilOF_APP
@@ -303,6 +310,7 @@ profilENT_APP:
 profilENT_FOR: 
     path: /profilENT_FOR/{user}
     controller: App\Controller\ProfilController::profilENT_FOR
+
      
 # ********************** RGPD **************************
 
@@ -313,10 +321,13 @@ rgpdForm:
 # ********************** EVALUATION **************************
 
 saisiEvaluation: 
-    path: /saisiEvaluation/{competence}/{app}/{session}
+    path: /saisiEvaluation/{competence}/{app}
     controller: App\Controller\EvaluationController::saisiEvaluation
 
 choiceCompetence: 
     path: /choiceCompetence/{app}/{session}
     controller: App\Controller\EvaluationController::choiceCompetence
 
+dashEval: 
+    path: /dashEval/{app}/{session}
+    controller: App\Controller\EvaluationController::dashEval
