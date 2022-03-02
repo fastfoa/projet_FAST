@@ -17,7 +17,7 @@ class CompteController extends AbstractController
         return $this->redirectToRoute( "rgpdForm" );
     return null;
     }
-
+    
     /**
      * @Route("/compte", name="compte")
      */

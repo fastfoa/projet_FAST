@@ -37,8 +37,9 @@ class InscriptionController extends AbstractController
 
     function checkRGPD()
     {
-    //dd( $t );
-    $rgpd = $this->getUser()->getRGPDOK();
+        $user = $this->getUser();
+        if ( $user != null )
+            $rgpd = $user->getRGPDOK();
 
     if (!$rgpd)
         return $this->redirectToRoute( "rgpdForm" );

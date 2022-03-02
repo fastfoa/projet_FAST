@@ -113,7 +113,6 @@ addUserSession:
 userGeneralForm:
     path: /userGeneralForm/{user}
     controller: App\Controller\InscriptionController::userGeneralForm
-
     
 ## App\Controller\DashController
 
