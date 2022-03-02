@@ -246,3 +246,14 @@ function getUsersFromRole($login, $pw, $role)
              WHERE user.role_string='$role'"
     );
 }
+
+function getENTFromMA($login, $pw, $idMA) 
+{
+    return getSQLSingleAssoc($login, $pw,
+    "SELECT u.nom, u.id, u.role_string , u.raison_social
+        FROM mahas_ent as me
+        RIGHT JOIN user as u ON u.id=me.id_ent 
+        WHERE me.id_ma=$idMA"
+    );
+}
+
