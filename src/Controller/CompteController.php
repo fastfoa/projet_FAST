@@ -105,7 +105,9 @@ class CompteController extends AbstractController
         
         return $this->render($twig, [
             'form' => $form->createView(),
-            'notification' => $notification
+            'notification' => $notification,
+            'menu' => getMenuFromRole( $this->getUser()->getRoleString() ),            
+
         ]);
     }
 }

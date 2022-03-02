@@ -140,7 +140,7 @@ class EvaluationController extends AbstractController
                 'nameCompet' => $nameCompet,
                 'message' => $message,
                 'app'=>$App,
-                
+                'menu' => getMenuFromRole( $this->getUser()->getRoleString() ),            
             ]);
     }
 
@@ -164,7 +164,8 @@ class EvaluationController extends AbstractController
             'user' => $app,    
             'session' => $session,    
             'nomFormation' => $nomFormation,    
-            'listCompetence'=>$listCompetence
+            'listCompetence'=>$listCompetence,
+            'menu' => getMenuFromRole( $this->getUser()->getRoleString() ),
             ]);
     }
 
@@ -197,24 +198,14 @@ class EvaluationController extends AbstractController
         //dd( $resApp );
         //$of = [ 'nom' => 'Vidal', 'prenom' => 'Jean-Philippe'];
 
-        $menuOF = 
-        [
-            'Sessions' => 'dashOFPrincipal', 
-            'Apprentis' => 'listAllAprentis', 
-            'Formateurs' => 'listAllFormateurs', 
-            'Maitres' => 'listAllMA', 
-            'Entreprises' => 'listAllEntreprises' 
-        ];
         return $this->render(
         'evaluation/dashEval.html.twig', 
         [
             'app' => $app,
-            'menu' => $menuOF,
+            'menu' => getMenuFromRole( $this->getUser()->getRoleString() ),            
             'session' => $session,    
             'nomFormation' => $nomFormation,    
             'listCompetence'=>$listCompetence         
         ]);    
     }
-    
-
 }
