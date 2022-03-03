@@ -77,11 +77,11 @@ aide:
     controller: App\Controller\LanController::aide
 
 # compte
-compte:
+comptexxxx:
     path: /compte
     controller: App\Controller\CompteController::monCompte
 
-modifInfoMonCompte:
+compte:
     path: /modifInfoMonCompte
     controller: App\Controller\CompteController::modifInfoMonCompte
 
