@@ -264,6 +264,11 @@ input[type=text], input[type=password], input[type=date], input[type=number], se
     font-size: 25px;
 }
 
+.txt-dark	  		/* couleur fond des bar ( menu, titre, ... ) */
+{
+    color: #11284B;
+}
+
 
 .txt-bar		/* text en barre */
 {

@@ -2,15 +2,19 @@
 
 {% block myStylesheets %}
 <style>
-.avatar
-{
-    width: 100px;
-    height: 100px;
-}
+    .avatar
+    {
+        width: 100px;
+        height: 100px;
+    }
 </style>
 {% endblock myStylesheets %}
 
-{% block myJavascripts %}{% endblock %}
+{% block myJavascripts %}
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+{% endblock %}
 
 {% block body %}
     <div class="container-fluid">
@@ -27,5 +31,29 @@
 
         {% block ENT %}
         {% endblock ENT %}
+
+        <div class="row">
+            <div class="col-6">    
+                <h3>Mes documents :</h3>
+                <label for="listDoc">Chercher un document :</label>
+                <input list="documents" type="text" id="listDoc">
+                <datalist id="documents">
+                    {% for doc in document %}
+                        <option id="{{doc.d_id}}" value="{{doc.d_titre}}">{{doc.d_fileName}}</option>
+                    {% endfor %}
+                </datalist>
+            </div>
+            <div class="col-4 mt-5">
+                <button onclick='seeDoc2({{id}})' class="mt-4">
+                     <i class="fas fa-solid fa-info" style="font-size:20px;color:blue;padding:3px 6px 3px 6px;"></i>
+                </button>
+                <button onclick='downloadDoc("{{ path('download1') }}");'>
+                    <i class="fas fa-solid fa-download" style="font-size:20px;color:green;padding:3px;"></i>
+                </button>
+            </div>
+        </div>
     </div>
+        <div  id='infosDoc' class="invisible col-6" style="color:black;background-color:white;height:50pt;overflow:auto;">
+        </div>
+
 {% endblock body %}

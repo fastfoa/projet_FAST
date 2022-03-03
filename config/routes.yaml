@@ -38,9 +38,17 @@ upload:
     path: /upload
     controller: App\Controller\DocumentController::upload
 
+getInfoDoc: 
+    path: /getInfoDoc/{id}
+    controller: App\Controller\DocumentController::getInfoDoc
+
 downloadlist:
     path: /downloadlist
     controller: App\Controller\DocumentController::downloadlist
+
+download1:
+    path: /download
+    controller: App\Controller\DocumentController::download
 
 download:
     path: /download/{id}
@@ -119,7 +127,9 @@ addUserSession:
     path: /addUserSession/{session}/{role}/{roleName}
     controller: App\Controller\InscriptionController::addUserSession
 
-
+userGeneralForm:
+    path: /userGeneralForm/{user}
+    controller: App\Controller\InscriptionController::userGeneralForm
     
 ## App\Controller\DashController
 
@@ -160,8 +170,6 @@ deleteSession:
 dashOFSession:
     path: /dashOFSession/{session}
     controller: App\Controller\DashController::dashOFSession
-
-
 
 editApprenti:
     path: /feditApprenti/{userID}
@@ -231,6 +239,7 @@ annuaire:
     controller: App\Controller\LanController::annuaire
 
 # ********************** les Profils **************************
+
 
 profilOF_APP: 
     path: /profilOF_APP/{user}
@@ -303,6 +312,7 @@ profilENT_APP:
 profilENT_FOR: 
     path: /profilENT_FOR/{user}
     controller: App\Controller\ProfilController::profilENT_FOR
+
      
 # ********************** RGPD **************************
 
@@ -312,11 +322,30 @@ rgpdForm:
 
 # ********************** EVALUATION **************************
 
-saisiEvaluation: 
-    path: /saisiEvaluation/{competence}/{app}/{session}
-    controller: App\Controller\EvaluationController::saisiEvaluation
+newEvaluation: 
+    path: /newEvaluation/{competence}/{app}
+    controller: App\Controller\EvaluationController::newEvaluation
+
+editEvaluation: 
+    path: /editEvaluation/{eval}
+    controller: App\Controller\EvaluationController::editEvaluation
+
+showEvaluation: 
+    path: /showEvaluation/{eval}
+    controller: App\Controller\EvaluationController::showEvaluation
 
 choiceCompetence: 
     path: /choiceCompetence/{app}/{session}
     controller: App\Controller\EvaluationController::choiceCompetence
+# ************************Test*************************
+testannuaire:
+    path: /testAnnuaire
+    controller: App\Controller\TestannuaireController::app_testannuaire
 
+liste_session_role:
+    path: /testAnnuaire/{session}/{role}/
+    controller: App\Controller\TestannuaireController::liste_session_role
+
+dashEval: 
+    path: /dashEval/{app}/{session}
+    controller: App\Controller\EvaluationController::dashEval

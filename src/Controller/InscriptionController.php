@@ -19,6 +19,8 @@ use App\Form\InscriptionApp2Type;
 use App\Form\InscriptionMAType;
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use Doctrine\Persistence\ManagerRegistry;
+use App\Form\UserGeneralType;
+
 
 
 class InscriptionController extends AbstractController
@@ -42,7 +44,6 @@ class InscriptionController extends AbstractController
             return $this->redirectToRoute( "rgpdForm" );
         return null;
     }
-
 
     public function inscriptionEntreprise(Request $request): Response
     {
@@ -114,6 +115,30 @@ class InscriptionController extends AbstractController
         ]);
     }
     
+
+    public function userGeneralForm(Request $request, User $user): Response
+    {
+        $ret = $this->checkRGPD();
+        if ( $ret )
+            return $ret;
+
+
+        $form = $this->createForm(UserGeneralType::class, $user);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) 
+        {
+            $doctrine = $this->getDoctrine();
+            $entityManager = $doctrine->getManager();
+
+            $entityManager->persist($user);
+            $entityManager->flush();
+            // return $this->redirect($this->generateUrl('login'));
+        }
+        return $this->render('inscription/userGeneralForm.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
 
 
     public function inscriptionMA(Request $request, ManagerRegistry $doctrine): Response
@@ -564,6 +589,8 @@ class InscriptionController extends AbstractController
         $form = $this->createForm(AddUserType::class, $user);
         $form->handleRequest($request);
         $erreur = false;
+        $listApp = getSQLArrayAssoc($this->getParameter('loginDB'), $this->getParameter('PasswordDB'),
+        "SELECT prenom, role_string, nom, email  from user WHERE role_string = '$role' ");
 
         if ($form->isSubmitted() && $form->isValid()) 
         {
@@ -588,7 +615,8 @@ class InscriptionController extends AbstractController
             [
                 'form' => $form->createView(),
                 'roleName' => $roleName,
-                'erreur' => $erreur
+                'erreur' => $erreur,
+                'app' => $listApp
             ]
         );
     }

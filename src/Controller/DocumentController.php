@@ -3,9 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\Document;
+use App\Entity\RecipientDocument;
 use App\Form\DocumentType;
 use App\Form\DocumentExtType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,8 +21,6 @@ use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\User;
 use PDO;
 use App\Entity\Session;
-
-
 
 class DocumentController extends AbstractController
 {
@@ -212,6 +212,7 @@ class DocumentController extends AbstractController
             'nameFormateur' => $nameFormateur,
             'nameApprenti' => $nameApprenti,
             'nameEntreprise' => $nameEntreprise,
+            'menu' => getMenuFromRole( $this->getUser()->getRoleString() ),            
             ]);
     }
    
@@ -225,15 +226,13 @@ class DocumentController extends AbstractController
         //$patro = $doctrine->getRepository(Patronyme::class)->find($id);
 
         $uploads = $doctrine->getRepository(Document::class)->findAll();
-        $menu = [
-            "Documents"=>"downloadlist",
-            ];
 
         return $this->render(
         'document/downloadlist.html.twig', 
         [
             'listUp' => $uploads,
-            'menu' => $menu
+            'menu' => getMenuFromRole( $this->getUser()->getRoleString() ),            
+
         ]);    
 
     }
@@ -272,5 +271,17 @@ class DocumentController extends AbstractController
         $this->addFlash('message', "Document supprimé");
         return $this->redirectToRoute("downloadlist");
     }
-  
+
+    public function getInfoDoc(User $user )
+    {
+        $ret = $this->checkRGPD();
+        if ( $ret )
+            return $ret;
+
+        $a = getSQLArrayAssoc($this->getParameter('loginDB'), $this->getParameter('PasswordDB'),
+        "SELECT u.nom, u.prenom, u.raison_social, u.role_string, d.titre, r.id_document, r.date_read FROM document AS d, recipient_document AS r, user AS u
+        WHERE r.id_document=d.id AND u.id=r.id_recipient AND d.id_owner=".$user->getId());
+
+        return new JsonResponse([ "a" => $a]);
+    }
 }

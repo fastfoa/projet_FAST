@@ -1,0 +1,115 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<div class="container-fluid bg-workSpace">
+		<div
+			class="row bg-bar">
+			<h4>Apprenti :  {{app.prenom}} {{app.nom}}</h4>
+		</div>
+		<div class="row">
+			<div class="col-12">
+				<div class="accordion" id="accordionPanelsStayOpenExample">
+					<div class="accordion-item">
+						<h2 class="accordion-header" id="panelsStayOpen-headingOne">
+							<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+								<h2 class="txt-dark">Nouvelle évaluation</h2
+							</button>
+						</h2>
+						<div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+							<div class="accordion-body">
+                            		<div class="row">
+									<div class="col-12">
+										<table class="table-normal">
+											<thead>
+												<tr>
+													<th class="txt-bar bg-bar">Compétence</th>
+												</tr>
+											</thead>
+											<tbody>
+												{% for item in listCompetence %}
+													<tr>
+														<td>
+															<a href="{{ path( 'newEvaluation',{'competence':item.id, 'app':app.id } ) }}">
+																{{item.name}}
+															</a>
+														</td>
+													</tr>
+												{% endfor %}
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="accordion-item">
+						<h2 class="accordion-header" id="panelsStayOpen-headingTwo">
+							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+								<h2 class="txt-dark">Evaluation en cours</h2>
+							</button>
+						</h2>
+						<div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
+							<div class="accordion-body">
+                            	<div class="row">
+									<div class="col-12">
+										<table class="table-normal">
+											<thead>
+												<tr>
+													<th class="txt-bar bg-bar">Compétence</th>
+												</tr>
+											</thead>
+											<tbody>
+												{% for item in listEvalEnCours %}
+													<tr>
+														<td>
+															<a href="{{ path( 'editEvaluation',{'eval':item.id } ) }}">
+																{{item.name}}
+															</a>
+														</td>
+													</tr>
+												{% endfor %}
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="accordion-item">
+						<h2 class="accordion-header" id="panelsStayOpen-headingThree">
+							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
+								<h2 class="txt-dark">Evaluations terminées</h2>
+							</button>
+						</h2>
+						<div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingThree">
+							<div class="accordion-body">
+                            	<div class="row">
+									<div class="col-12">
+										<table class="table-normal">
+											<thead>
+												<tr>
+													<th class="txt-bar bg-bar">Compétence</th>
+												</tr>
+											</thead>
+											<tbody>
+												{% for item in listEvalFinies %}
+													<tr>
+														<td>
+															<a href="{{ path( 'showEvaluation',{'eval':item.id } ) }}">
+																{{item.name}}
+															</a>
+														</td>
+													</tr>
+												{% endfor %}
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock body %}

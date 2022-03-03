@@ -1,67 +1,85 @@
 {% extends 'base.html.twig' %}
-{% block myStylesheets %}
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-{% endblock %}
-{% block body %}
 
+
+{% block body %}
 	<div class="container-fluid bg-workSpace">
 		<div
 			class="row bg-bar">
 			{# <h3>Entreprise {{entreprise.nom}}</h3> #}
-			<h3>Entreprise</h3>
+			<h3>Interface Entrepise
+			</h3>
 		</div>
+		<div class="row">
+			<div class="col-12">
 
-		<div class="row my-3">
-
-			<div class="col-4 txt-normal">
-
-				<p>
-					<a class="boutonForm btn-primary" data-toggle="collapse" href="#collapseExample1" role="button" aria-expanded="false" aria-controls="collapseExample">
-						Stagaire
-					</a>
-				</p>
-				<div class="collapse" id="collapseExample1">
-					<div class="bg-bar card-body">
-							 <h3> Dina Adam</h3>
-								06-98-76-54
-								Dina@hotmail.com
+				<div class="accordion" id="accordionPanelsStayOpenExample">
+					<div class="accordion-item">
+						<h2 class="accordion-header" id="panelsStayOpen-headingOne">
+							<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+								<h2 class="txt-dark">Apprenti</h2
+							</button>
+						</h2>
+						<div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+							<div class="accordion-body">
+								<div class="row">
+									{% if app %}
+										<div class="col-6">
+											{{ app.prenom }} {{ app.nom }}
+											<br>
+											{{ app.email }}
+											<br>
+											{{ app.telephone }}
+											<br>
+											{{ app.adresse|default('adresse') }}
+										</div>	
+										<div class="col-6">
+											{{ app.tel_urgence1|default('telephone urgence 1') }}
+											<br>
+											{{ app.tel_urgence2|default('telephone urgence 1') }}
+										</div>	
+									{% else %}
+										<div class="col-6">
+											<h2 class="txt-dark">PAS D'APPRENTI</h2>
+										</div>	
+									{% endif %}
+								</div>	
+							</div>
+						</div>
+					</div>
+					<div class="accordion-item">
+						<h2 class="accordion-header" id="panelsStayOpen-headingTwo">
+							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+								<h2 class="txt-dark">Maitre d'Apprentissage</h2>
+							</button>
+						</h2>
+						<div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
+							<div class="accordion-body">
+								<div class="row">
+									{% if ma %}
+										<div class="col-6">
+											{{ ma.prenom }} {{ ma.nom }}
+											<br>
+											{{ ma.email }}
+											<br>
+											{{ ma.telephone }}
+											<br>
+											{{ ma.adresse|default('adresse') }}
+										</div>	
+										<div class="col-6">
+										</div>	
+									{% else %}
+										<div class="col-6">
+											<h2 class="txt-dark">PAS DE MAITRE D'APPRENTISSAGE</h2>
+										</div>	
+									{% endif %}
+								</div>	
+							</div>
+						</div>
+					</div>
+					{% include 'dash/dashOFInclude.html.twig' %}
 					</div>
 				</div>
-
 			</div>
-
-			<div class="col-4 txt-normal">
-				<p>
-					<a class="boutonForm btn-primary" data-toggle="collapse" href="#collapseExample2" role="button" aria-expanded="false" aria-controls="collapseExample">
-						Responsable de OF
-					</a>
-				</p>
-				<div class="collapse" id="collapseExample2">
-					<div class="bg-bar card-body">
-					          <h3> Dina Adam</h3>
-								06-98-76-54
-								Dina@hotmail.com
-					</div>
-				</div>
-			</div>
-
-			<div class="col-4 txt-normal">
-				<p>
-					<a class="boutonForm btn-primary" data-toggle="collapse" href="#collapseExample3" role="button" aria-expanded="false" aria-controls="collapseExample">
-						Formateur
-					</a>
-				</p>
-				<div class="collapse" id="collapseExample3">
-					<div class="bg-bar card-body">
-						       <h3> Dina Adam</h3>
-								06-98-76-54
-								Dina@hotmail.com
-					</div>
-				</div>
-			</div>
-			
-
 		</div>
-		<div class="row my-3"></div>
 	</div>
-{% endblock %}
+{% endblock body %}

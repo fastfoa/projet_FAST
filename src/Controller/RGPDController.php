@@ -54,7 +54,7 @@ class RGPDController extends AbstractController
             } elseif ($role == 'ROLE_MA') {
                 $redirect = 'dashMA';
             }
-            return $this->redirectToRoute( $redirect);
+            return $this->redirectToRoute( $redirect );
         } 
         elseif (!$rgpd)
         {

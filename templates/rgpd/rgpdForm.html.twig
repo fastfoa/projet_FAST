@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
-{% block body %}
 
+{% block myStylesheets %}
 	<style>
 		.jumbo {
 			background-color: C6C5B9;
@@ -39,15 +39,14 @@
 			}
 		}
 	</style>
+{% endblock myStylesheets %}
 
-</head>
-{% block RGPD %}
-	<div class="jumbotron jumbo mx-auto">
+{% block body %}
+	<div class="jumbotron jumbo mx-auto txt-normal">
 		<h1 class="display-4">Bienvenue sur le Livret d'apprentissage Numérique</h1>
 		<p class="lead">Règlement général sur la protection des données (RGPD)</p>
 		<hr class="my-4">
 
-		<p>En vertu du RPGD,
 			<strong>il incombe aux propriétaires et aux opérateurs de sites web</strong>
 			de s'assurer que les données personnelles sont collectées et traitées légalement.</p>
 		<p>Le RGPD définit des règles spécifiques pour l'utilisation des cookies.</p>
@@ -65,5 +64,4 @@
 		</p>
         {{ form_end(myForm) }}
 	</div>  
-{% endblock RGPD %}
 {% endblock body %}

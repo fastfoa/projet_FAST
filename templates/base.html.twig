@@ -8,15 +8,16 @@
 		</title>
 		<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
 		{# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
-		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
 		<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 
-		<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+
 		<link rel="stylesheet" href="{{asset("css/lan.css")}}">
 		<link rel="stylesheet" href="{{asset("css/annuaire.css")}}">
 		<script src="{{asset("/JS/annuaire.js")}}"></script>
 
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 
 		{% block myStylesheets %}
 		{% endblock myStylesheets %}
@@ -36,7 +37,6 @@
 	<body class="body-fe">
 
 		{% include 'menu.html.twig' %}
-		{% include 'annuaire.html.twig' %}
 		
 		<div class="work-content"> 
 			{% block body %}
@@ -48,5 +48,50 @@
 			Lorem ipsum dolor sit amet consectetur adipisicing elit.
 		</div>
 		#}
+	        <script>
+            function seeDoc2(id)
+            {
+                var valueI = $('#listDoc').val();
+                var idD = $('#documents option[value="' + valueI +'"]').attr('id');
+
+                if (!idD)
+                    return alert("Document introuvable !");
+
+                $.get( "/getInfoDoc/"+id,
+                    function( data )
+                    {
+                        $("#infosDoc").text("");
+                        for(let d in data.a)
+                        {
+                            if (idD == data.a[d].id_document)
+                            {
+                                if (data.a[d].role_string == "ROLE_ENT")
+                                    $("#infosDoc").removeClass('invisible').append(data.a[d].titre+" envoyé à "+data.a[d].raison_social);
+                                else
+                                    $("#infosDoc").removeClass('invisible').append(data.a[d].titre+" envoyé à "+data.a[d].nom+" "+data.a[d].prenom);
+                                
+                                if (data.a[d].date_read == null)
+                                    $('#infosDoc').append(' : non lu ❌<br>');
+                                else
+                                    $('#infosDoc').append(' : lu le '+data.a[d].date_read+" ✅<br>");
+                            }
+                        }
+                    }
+                );
+            }
+
+            function downloadDoc(url)
+            {
+                var valueI = $('#listDoc').val();
+                var idD = $('#documents option[value="' + valueI +'"]').attr('id');
+
+                if (!idD)
+                    return alert("Fichier introuvable !");
+
+                var link = url+"/"+idD;
+                window.location = link;
+            }
+        </script>
+	
 	</body>
 </html>

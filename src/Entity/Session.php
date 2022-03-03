@@ -38,6 +38,11 @@ class Session
      */
     private $idFormation;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $nombreHeure; //durée de la formation
+
     public function getId(): ?int
     {
         return $this->id;
@@ -87,6 +92,18 @@ class Session
     public function setIdFormation(int $idFormation): self
     {
         $this->idFormation = $idFormation;
+
+        return $this;
+    }
+
+    public function getNombreHeure(): ?string
+    {
+        return $this->nombreHeure;
+    }
+
+    public function setNombreHeure(?string $nombreHeure): self
+    {
+        $this->nombreHeure = $nombreHeure;
 
         return $this;
     }
