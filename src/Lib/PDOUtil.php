@@ -299,4 +299,12 @@ function getMAFromSession($login, $pw, $idSession )
         WHERE s.id_session=$idSession and user.role_string='ROLE_MA'");
 }
 
+function getDocsFromUser($login, $pw, $id ) 
+{
+    return getSQLArrayAssoc( $login, $pw,
+        "SELECT document.id AS d_id, document.titre AS d_titre, document.file_name AS d_fileName
+        FROM document, user
+        WHERE user.id=document.id_owner AND user.id=".$id);
+}
+
 

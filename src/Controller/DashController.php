@@ -148,9 +148,15 @@ class DashController extends AbstractController
             }
         }
 
+        $uid = $user['id'];
+        $listDoc = getDocsFromUser( $login, $pw, $uid );
+
+
         return $this->render(
             'dash/dashEntreprise.html.twig',
             [
+                'document'      => $listDoc,
+                'id'            => $uid,
                 'entreprise'    => $entreprise,
                 'app'           => $app,
                 'ma'            => $MA,
@@ -363,31 +369,31 @@ class DashController extends AbstractController
         if ( $MA )
         {
             $MA = convertUserEntity2SQL($login, $pw, $MA['id'] );
-            $entreprise = convertUserEntity2SQL($login, $pw, getENTFromMA($login, $pw, $MA['id'])['id']);
+            $entreprise = getENTFromMA($login, $pw, $MA['id']);
+            if ( $entreprise )
+                $entreprise = convertUserEntity2SQL($login, $pw, $entreprise['id'] );
         }
-        $formateur  = getFormateursFromApprenti($login, $pw, $app['id']);
+        $formateur  = getFormateursFromApprenti($login, $pw, 
+        $app['id']);
         if  ( $formateur )
         {
              $formateur  = convertUserEntity2SQL($login, $pw, $formateur[0]['id']);
         }
 
         $uid = $app['id'];
-        $listDoc = getSQLArrayAssoc( $login, $pw,
-        "SELECT document.id AS d_id, document.titre AS d_titre, document.file_name AS d_fileName
-        FROM document, user
-        WHERE user.id=document.id_owner AND user.id=".$uid);
+        $listDoc = getDocsFromUser( $login, $pw, $uid );
 
 
         return $this->render(
             'dash/dashApp.html.twig',
             [
-                'document' => $listDoc,
-                'id' => $uid,
-                'entreprise' => $entreprise,
-                'app' => $app,
-                'ma' => $MA,
-                'OF' => $infoOF,
-                'menu' => getMenuFromRole('ROLE_APP')
+                'document'      => $listDoc,
+                'id'            => $uid,
+                'entreprise'    => $entreprise,
+                'app'           => $app,
+                'ma'            => $MA,
+                'OF'            => $infoOF,
+                'menu'          => getMenuFromRole('ROLE_APP')
 
             ]
         );
