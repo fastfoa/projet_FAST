@@ -99,7 +99,6 @@ use PDO;
          );
     }
 
-
     function getAppFromMA($login, $pw, $idMA )
     {
          return getSQLSingleAssoc($login, $pw, 
