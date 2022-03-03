@@ -1,6 +1,5 @@
 {% extends 'base.html.twig' %}
 
-
 {% block body %}
 	<div class="container-fluid bg-workSpace">
 		<div
@@ -9,7 +8,6 @@
 		</div>
 		<div class="row">
 			<div class="col-12">
-
 				<div class="accordion" id="accordionPanelsStayOpenExample">
 					<div class="accordion-item">
 						<h2 class="accordion-header" id="panelsStayOpen-headingOne">
@@ -20,28 +18,27 @@
 						<div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
 							<div class="accordion-body">
                             		<div class="row">
-			<div class="col-12">
-				<table class="table-normal">
-					<thead>
-						<tr>
-							<th class="txt-bar bg-bar">Compétence</th>
-						</tr>
-					</thead>
-					<tbody>
-						{% for item in listCompetence %}
-							<tr>
-								<td>
-									<a href="{{ path( 'saisiEvaluation',{'competence':item.id, 'app':app.id } ) }}">
-										{{item.name}}
-									</a>
-								</td>
-							</tr>
-						{% endfor %}
-					</tbody>
-				</table>
-			</div>
-
-		</div>
+									<div class="col-12">
+										<table class="table-normal">
+											<thead>
+												<tr>
+													<th class="txt-bar bg-bar">Compétence</th>
+												</tr>
+											</thead>
+											<tbody>
+												{% for item in listCompetence %}
+													<tr>
+														<td>
+															<a href="{{ path( 'newEvaluation',{'competence':item.id, 'app':app.id } ) }}">
+																{{item.name}}
+															</a>
+														</td>
+													</tr>
+												{% endfor %}
+											</tbody>
+										</table>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -53,12 +50,28 @@
 						</h2>
 						<div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
 							<div class="accordion-body">
-							<div class="row">
-							<div class="col-6">
-							</div>	
-							<div class="col-6">
-							</div>	
-							</div>	
+                            	<div class="row">
+									<div class="col-12">
+										<table class="table-normal">
+											<thead>
+												<tr>
+													<th class="txt-bar bg-bar">Compétence</th>
+												</tr>
+											</thead>
+											<tbody>
+												{% for item in listEvalEnCours %}
+													<tr>
+														<td>
+															<a href="{{ path( 'editEvaluation',{'eval':item.id } ) }}">
+																{{item.name}}
+															</a>
+														</td>
+													</tr>
+												{% endfor %}
+											</tbody>
+										</table>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -70,9 +83,28 @@
 						</h2>
 						<div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingThree">
 							<div class="accordion-body">
-								<strong>This is the third item's accordion body.</strong>
-								It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the
-								<code>.accordion-body</code>, though the transition does limit overflow.
+                            	<div class="row">
+									<div class="col-12">
+										<table class="table-normal">
+											<thead>
+												<tr>
+													<th class="txt-bar bg-bar">Compétence</th>
+												</tr>
+											</thead>
+											<tbody>
+												{% for item in listEvalFinies %}
+													<tr>
+														<td>
+															<a href="{{ path( 'showEvaluation',{'eval':item.id } ) }}">
+																{{item.name}}
+															</a>
+														</td>
+													</tr>
+												{% endfor %}
+											</tbody>
+										</table>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
