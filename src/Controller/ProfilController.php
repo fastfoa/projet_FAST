@@ -98,9 +98,7 @@ class ProfilController extends AbstractController
     {
         $ret = $this->checkRGPD();
         if ( $ret )
-            return $ret;
-            
-            
+            return $ret;            
         //dd( $user );
         return $this->render('profil/profilOF_APP.html.twig', 
         [
@@ -145,7 +143,6 @@ class ProfilController extends AbstractController
             'fonction' => "Maître d'Apprentissage",        
             'menu' => getMenuFromRole( $this->getUser()->getRoleString() ),            
             'id' => $id,
-            
             'fonction' => "Maître d'Apprentissage"        
         ]);
     }    

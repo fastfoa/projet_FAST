@@ -32,16 +32,9 @@ function getMenuFromRole($role)
         
         'ROLE_APP'=> 
         [
-            'Apprentis' => 'listAllAprentis', 
-            'Formateurs' => 'listAllFormateurs', 
-            'Maitres' => 'listAllMA', 
-            'Entreprises' => 'listAllEntreprises' 
         ],
         'ROLE_ENT'=> 
         [
-            'Apprentis' => 'listAllAprentis', 
-            'Formateurs' => 'listAllFormateurs', 
-            'Maitres' => 'listAllMA', 
             'Entreprises' => 'listAllEntreprises' 
         ],
         'ROLE_MA'=> 
@@ -224,6 +217,28 @@ function convertUserEntity2SQL($login, $pw, $id)
     );
 }
 
+function convertSessionEntity2SQL($login, $pw, $id)
+{
+    return getSQLSingleAssoc(
+        $login,
+        $pw,
+        "SELECT *                   
+          FROM session          
+          WHERE id='$id'"
+    );
+}
+
+function getCompetenceFromEval( $login, $pw, $idEval)
+{
+    return getSQLSingleAssoc(
+        $login,
+        $pw,
+        "SELECT *                   
+        FROM competence          
+        WHERE id='$idEval'"
+    );
+}
+
 function getUsersFromRoleSession($login, $pw, $role, $idSession)
 {
     return getSQLArrayAssoc(
@@ -256,4 +271,40 @@ function getENTFromMA($login, $pw, $idMA)
         WHERE me.id_ma=$idMA"
     );
 }
+
+function getAppsFromSession($login, $pw, $idSession ) 
+{
+    return getSQLArrayAssoc( $login, $pw, 
+    "SELECT user.nom, user.prenom, user.telephone, user.email, user.id 
+        FROM  user_in_session as s 
+        LEFT JOIN user ON s.id_user=user.id 
+        WHERE s.id_session=$idSession and user.role_string='ROLE_APP'");
+}
+
+function getFormateurFromSession($login, $pw, $idSession ) 
+{
+    return getSQLArrayAssoc( $login, $pw, 
+    "SELECT user.nom, user.prenom, user.telephone, user.email, user.id 
+        FROM  user_in_session as s 
+        LEFT JOIN user ON s.id_user=user.id 
+        WHERE s.id_session=$idSession and user.role_string='ROLE_FORMATEUR'");
+}
+
+function getMAFromSession($login, $pw, $idSession ) 
+{
+    return getSQLArrayAssoc( $login, $pw, 
+    "SELECT user.nom, user.prenom, user.telephone, user.email, user.id 
+        FROM  user_in_session as s 
+        LEFT JOIN user ON s.id_user=user.id 
+        WHERE s.id_session=$idSession and user.role_string='ROLE_MA'");
+}
+
+function getDocsFromUser($login, $pw, $id ) 
+{
+    return getSQLArrayAssoc( $login, $pw,
+        "SELECT document.id AS d_id, document.titre AS d_titre, document.file_name AS d_fileName
+        FROM document, user
+        WHERE user.id=document.id_owner AND user.id=".$id);
+}
+
 

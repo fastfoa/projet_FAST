@@ -351,5 +351,5 @@ liste_session_role:
     controller: App\Controller\TestannuaireController::liste_session_role
 
 dashEval: 
-    path: /dashEval/{app}/{session}
+    path: /dashEval/{app}
     controller: App\Controller\EvaluationController::dashEval
