@@ -3,8 +3,15 @@
 {% block body %}
 	<div class="container-fluid bg-workSpace">
 		<div class="row bg-bar">
-			<h3>Session
-				{{session.nom}}</h3>
+			<div class="col-6 txt-normal">
+				<h3>Session	{{session.nom}}</h3>
+			</div>
+			<div class="col-3 txt-normal">
+				<a class= "boutonForm" href="{{ path( 'deleteSession',{'session':session.id} ) }}">Supprimer la session</a>		
+			</div>
+			<div class="col-3 txt-normal">
+				<a class= "boutonForm" href="{{ path( 'deleteSession',{'session':session.id} ) }}">Archiver la session</a>		
+			</div>
 		</div>
 		<div class="row ">
 			<div class="col-1 txt-normal">
@@ -26,11 +33,11 @@
 			<div class="col-12 txt-normal">
 				<div class="accordion" id="accordionPanelsStayOpenExample">
 					<div class="accordion-item">
-						<h2 class="accordion-header" id="panelsStayOpen-headingOne">
+						<h4 class="accordion-header" id="panelsStayOpen-headingOne">
 							<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
-								<h2 class="txt-dark">Apprenti</h2>
+								<h4 class="txt-dark">Apprenti</h4>
 							</button>
-						</h2>
+						</h4>
 						<div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
 							<div class="accordion-body">
 								<div class="row">
@@ -38,7 +45,7 @@
 										<div class="row"></div>
 										<div class="row bg-bar">
 											<div class="col-12">
-												<h2>liste de tous les Apprenti</h2>
+												<h4>liste de tous les Apprenti</h4>
 											</div>
 										</div>
 										<div class="row bg">
@@ -98,11 +105,11 @@
 		<div class="row my-3">
 			<div class="col-12 txt-normal">
 				<div class="accordion-item">
-					<h2 class="accordion-header" id="panelsStayOpen-headingTwo">
+					<h4 class="accordion-header" id="panelsStayOpen-headingTwo">
 						<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="true" aria-controls="panelsStayOpen-collapseTwo">
-							<h2 class="txt-dark">Formateur</h2>
+							<h4 class="txt-dark">Formateur</h4>
 						</button>
-					</h2>
+					</h4>
 					<div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingTwo">
 						<div class="accordion-body">
 							<div class="row">
@@ -110,7 +117,7 @@
 									<div class="row"></div>
 									<div class="row bg-bar">
 										<div class="col-12">
-											<h2>liste de tous les Formateur</h2>
+											<h4>liste de tous les Formateur</h4>
 										</div>
 									</div>
 									<div class="row bg">
@@ -166,11 +173,11 @@
 		<div class="row my-3">
 			<div class="col-12 txt-normal">
 				<div class="accordion-item">
-					<h2 class="accordion-header" id="panelsStayOpen-headingThree">
+					<h4 class="accordion-header" id="panelsStayOpen-headingThree">
 						<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="true" aria-controls="panelsStayOpen-collapseThree">
-							<h2 class="txt-dark">Maitre Apprentissage</h2>
+							<h4 class="txt-dark">Maitre Apprentissage</h4>
 						</button>
-					</h2>
+					</h4>
 					<div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingThree">
 						<div class="accordion-body">
 							<div class="row">
@@ -178,7 +185,7 @@
 									<div class="row"></div>
 									<div class="row bg-bar">
 										<div class="col-12">
-											<h2>liste de tous les Maitre Apprentissage</h2>
+											<h4>liste de tous les Maitre Apprentissage</h4>
 										</div>
 									</div>
 									<div class="row bg">
