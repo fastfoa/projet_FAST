@@ -322,7 +322,7 @@ rgpdForm:
 
 # ********************** EVALUATION **************************
 
-newlleEvaluation: 
+newEvaluation: 
     path: /newEvaluation/{competence}/{app}
     controller: App\Controller\EvaluationController::newEvaluation
 
