@@ -61,6 +61,7 @@ class DashController extends AbstractController
             ]
         );
     }
+
     public function addSession(Request $request): Response
     {
 
@@ -126,27 +127,38 @@ class DashController extends AbstractController
         $user       = convertUserEntity2SQL($login, $pw, $user->getId());
         $entreprise = $user;
 
-        $MA         = convertUserEntity2SQL($login, $pw, getMAFromEnt($login, $pw, $entreprise['id'])['id']);
-        $app        = convertUserEntity2SQL($login, $pw, getAppFromMA($login, $pw, $MA['id'])['id']);
-        $formateur  = convertUserEntity2SQL($login, $pw, getFormateursFromApprenti($login, $pw, $app['id'])[0]['id']);
         $OF         = getInfoOF();
+        $MA         = null;
+        $app        = null;
+        $formateur  = null;
 
-
+        $MA = getMAFromEnt($login, $pw, $entreprise['id']);
+        if ( $MA != false )
+        {
+            $MA = convertUserEntity2SQL($login, $pw, $MA['id']);
+            $app = getAppFromMA($login, $pw, $MA['id']);
+            if ( $app != false )
+            {
+                $app = convertUserEntity2SQL($login, $pw, $app['id']);
+                $formateur  = getFormateursFromApprenti($login, $pw, $app['id']);
+                if ( $formateur != false )
+                {
+                    $formateur  = convertUserEntity2SQL($login, $pw, $formateur[0]['id']);
+                }
+            }
+        }
 
         return $this->render(
             'dash/dashEntreprise.html.twig',
             [
-                'entreprise' => $entreprise,
-                'app' => $app,
-                'ma' => $MA,
-                'OF' => $infoOF,
-                'menu' => getMenuFromRole('ROLE_ENT')
-
+                'entreprise'    => $entreprise,
+                'app'           => $app,
+                'ma'            => $MA,
+                'OF'            => $infoOF,
+                'menu'          => getMenuFromRole('ROLE_ENT')
             ]
         );
     }
-
-
 
     public function dashOFSession(Session $session): Response
     {
@@ -157,40 +169,19 @@ class DashController extends AbstractController
         $sessionID = $session->getId();
         $login = $this->getParameter('loginDB');
         $pw = $this->getParameter('PasswordDB');
-        $listAPP = getSQLArrayAssoc( $login, $pw, 
-        "SELECT user.nom, user.prenom, user.telephone, user.email, user.id 
-            FROM  user_in_session as s 
-            LEFT JOIN user ON s.id_user=user.id 
-            WHERE s.id_session=$sessionID and user.role_string='ROLE_APP'");
 
-        $listFORMATEUR = getSQLArrayAssoc( $login, $pw, 
-         "SELECT user.nom, user.prenom, user.telephone, user.email, user.id 
-             FROM  user_in_session as s 
-             LEFT JOIN user ON s.id_user=user.id 
-             WHERE s.id_session=$sessionID and user.role_string='ROLE_FORMATEUR'");
+        $listAPP        =  getAppsFromSession($login, $pw, $sessionID ); 
+        $listFORMATEUR  =  getFormateurFromSession($login, $pw, $sessionID ); 
+        $listMA         =  getMAFromSession($login, $pw, $sessionID );
 
-        $listMA = getSQLArrayAssoc( $login, $pw, 
-        "SELECT user.nom, user.prenom, user.telephone, user.email, user.id 
-            FROM  user_in_session as s 
-            LEFT JOIN user ON s.id_user=user.id 
-            WHERE s.id_session=$sessionID and user.role_string='ROLE_MA'");
-
-        $menu = 
-        [
-            'Sessions' => 'dashOFPrincipal', 
-            'Apprentis' => 'listAllAprentis', 
-            'Formateurs' => 'listAllFormateurs', 
-            'Maitres' => 'listAllMA', 
-            'Entreprises' => 'listAllEntreprises' 
-        ];
         return $this->render(
         'dash/dashOFSession.html.twig', 
-        [
-            'listMA' => $listMA,
-            'listFORMATEUR' => $listFORMATEUR,
-            'listAPP' => $listAPP,
-            'session' => $session,
-            'menu' => getMenuFromRole($this->getUser()->getRoleString())
+            [
+                'listMA'        => $listMA,
+                'listFORMATEUR' => $listFORMATEUR,
+                'listAPP'       => $listAPP,
+                'session'       => $session,
+                'menu'          => getMenuFromRole($this->getUser()->getRoleString())
             ]
         );
     }
@@ -355,26 +346,36 @@ class DashController extends AbstractController
         if ($ret)
             return $ret;
 
-        $login = $this->getParameter('loginDB');
-        $pw = $this->getParameter('PasswordDB');
-
+        $login  = $this->getParameter('loginDB');
+        $pw     = $this->getParameter('PasswordDB');
+        
         $user       = $this->getUser();
         $role       = $user->getRoleString();
         $user       = convertUserEntity2SQL($login, $pw, $user->getId());
-        $app = $user;
-
-        
-        $MA         = convertUserEntity2SQL($login, $pw, getMAFromApprenti($login, $pw, $app['id'])['id']);
-        $entreprise = convertUserEntity2SQL($login, $pw, getENTFromMA($login, $pw, $MA['id'])['id']);
-        $formateur  = convertUserEntity2SQL($login, $pw, getFormateursFromApprenti($login, $pw, $app['id'])[0]['id']);
+        $app        = $user;
         $OF         = getInfoOF();
+        $MA         = false;
+        $formateur  = false;
+        $entreprise = false;
+
+
+        $MA = getMAFromApprenti($login, $pw, $app['id']);
+        if ( $MA )
+        {
+            $MA = convertUserEntity2SQL($login, $pw, $MA['id'] );
+            $entreprise = convertUserEntity2SQL($login, $pw, getENTFromMA($login, $pw, $MA['id'])['id']);
+        }
+        $formateur  = getFormateursFromApprenti($login, $pw, $app['id']);
+        if  ( $formateur )
+        {
+             $formateur  = convertUserEntity2SQL($login, $pw, $formateur[0]['id']);
+        }
 
         $uid = $app['id'];
-        $listDoc = getSQLArrayAssoc($this->getParameter('loginDB'), $this->getParameter('PasswordDB'),
+        $listDoc = getSQLArrayAssoc( $login, $pw,
         "SELECT document.id AS d_id, document.titre AS d_titre, document.file_name AS d_fileName
         FROM document, user
         WHERE user.id=document.id_owner AND user.id=".$uid);
-
 
 
         return $this->render(

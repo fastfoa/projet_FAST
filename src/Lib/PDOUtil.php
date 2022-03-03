@@ -32,16 +32,9 @@ function getMenuFromRole($role)
         
         'ROLE_APP'=> 
         [
-            'Apprentis' => 'listAllAprentis', 
-            'Formateurs' => 'listAllFormateurs', 
-            'Maitres' => 'listAllMA', 
-            'Entreprises' => 'listAllEntreprises' 
         ],
         'ROLE_ENT'=> 
         [
-            'Apprentis' => 'listAllAprentis', 
-            'Formateurs' => 'listAllFormateurs', 
-            'Maitres' => 'listAllMA', 
             'Entreprises' => 'listAllEntreprises' 
         ],
         'ROLE_MA'=> 
@@ -256,4 +249,32 @@ function getENTFromMA($login, $pw, $idMA)
         WHERE me.id_ma=$idMA"
     );
 }
+
+function getAppsFromSession($login, $pw, $idSession ) 
+{
+    return getSQLArrayAssoc( $login, $pw, 
+    "SELECT user.nom, user.prenom, user.telephone, user.email, user.id 
+        FROM  user_in_session as s 
+        LEFT JOIN user ON s.id_user=user.id 
+        WHERE s.id_session=$idSession and user.role_string='ROLE_APP'");
+}
+
+function getFormateurFromSession($login, $pw, $idSession ) 
+{
+    return getSQLArrayAssoc( $login, $pw, 
+    "SELECT user.nom, user.prenom, user.telephone, user.email, user.id 
+        FROM  user_in_session as s 
+        LEFT JOIN user ON s.id_user=user.id 
+        WHERE s.id_session=$idSession and user.role_string='ROLE_FORMATEUR'");
+}
+
+function getMAFromSession($login, $pw, $idSession ) 
+{
+    return getSQLArrayAssoc( $login, $pw, 
+    "SELECT user.nom, user.prenom, user.telephone, user.email, user.id 
+        FROM  user_in_session as s 
+        LEFT JOIN user ON s.id_user=user.id 
+        WHERE s.id_session=$idSession and user.role_string='ROLE_MA'");
+}
+
 
