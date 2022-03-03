@@ -59,7 +59,7 @@ a{
 												class="col-12">
 												{# XXXXXXXXXXXXXXXXXX  attention all role 
 																																																																		<a href="{{ path( 'addUser', {'role':1}) }}"> #}
-												<a href="">
+												<a href="{{ path( 'addUser',{'role': 'ROLE_APP','roleName': 'ROLE_APP'} ) }}">
 													<div class="boutonForm">+ Ajouter un Apprenti</div>
 												</a>
 											</div>
@@ -117,7 +117,7 @@ a{
 											class="col-12">
 											{# XXXXXXXXXXXXXXXXXX  attention all role 
 																																																																<a href="{{ path( 'addUser', {'role':1}) }}"> #}
-											<a href="">
+											<a href="{{ path( 'addUser',{'role': 'ROLE_FORMATEUR','roleName': 'ROLE_FORMATEUR'} ) }}">
 												<div class="boutonForm">+ Ajouter un Formateur</div>
 											</a>
 										</div>
@@ -173,7 +173,7 @@ a{
 											class="col-12">
 											{# XXXXXXXXXXXXXXXXXX  attention all role 
 																																																																<a href="{{ path( 'addUser', {'role':1}) }}"> #}
-											<a href="">
+											<a href="{{ path( 'addUser',{'role': 'ROLE_MA','roleName': 'ROLE_MA'} ) }}">
 												<div class="boutonForm">+ Ajouter un Maitre Apprentissage</div>
 											</a>
 										</div>
