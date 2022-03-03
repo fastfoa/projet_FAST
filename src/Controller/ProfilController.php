@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\AppHasMA;
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -55,11 +57,14 @@ class ProfilController extends AbstractController
          RIGHT JOIN user as u ON u.id=a.id_ma 
          WHERE a.id_apprenti=".$user->getId());
 
+        $listMa = getSQLArrayAssoc($this->getParameter('loginDB'), $this->getParameter('PasswordDB'),
+        "SELECT id, nom, prenom, email FROM user WHERE role_string='ROLE_MA'");
+
         $id = $user->getId();
         if ( $roleViewer ==  'ROLE_OF' )
         {
                  if ($roleTarget == 'ROLE_APP')
-                        return $this->profilOF_APP($user, $ma, $id, $listDoc);
+                        return $this->profilOF_APP($user, $listMa, $ma, $id, $listDoc);
             else if ($roleTarget == 'ROLE_FORMATEUR')
                         return $this->profilOF_Formateur($user, $id, $listDoc);
             else if ($roleTarget == 'ROLE_MA')
@@ -69,9 +74,27 @@ class ProfilController extends AbstractController
         }
     }
 
+    public function insertMA($idMa, User $idApp): Response
+    {
+        $ret = $this->checkRGPD();
+        if ( $ret )
+            return $ret;
+
+        $doctrine = $this->getDoctrine();
+        $entityManager = $doctrine->getManager();
+        $id = $idApp->getId();
+        $r = new AppHasMA();
+        $r->setIdApprenti( $id );
+        $r->setIdMA( $idMa );
+        $entityManager->persist($r);
+        $entityManager->flush();
+
+        return new JsonResponse("Maitre d'apprentissage enregistré");
+    }
+
     // Organisme de Formation regarde les infos de :    
     // l'apprenti 
-    public function profilOF_APP(User $user, $ma, $id, $listDoc): Response
+    public function profilOF_APP(User $user, $listMa, $ma, $id, $listDoc): Response
     {
         $ret = $this->checkRGPD();
         if ( $ret )
@@ -82,6 +105,7 @@ class ProfilController extends AbstractController
         return $this->render('profil/profilOF_APP.html.twig', 
         [
             'user' => $user,
+            'listMa' => $listMa,
             'ma' => $ma,
             'id' => $id,
             'document' => $listDoc,
