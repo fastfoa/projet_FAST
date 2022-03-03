@@ -116,10 +116,22 @@ use PDO;
         {
             return getSQLSingleAssoc( $login, $pw, 
             "SELECT id_session 
-             FROM user_in_session 
-             WHERE id_user='$idApp'"
+             FROM user_in_session as us
+             RIGHT JOIN user as u on u.id=us.id_user
+             WHERE us.id_user='$idApp'"
             
         );
+        }
+
+        function getSessionFromEnt($login, $pw, $idEnt)
+        {
+            return getSQLSingleAssoc( $login, $pw, 
+            "SELECT id_session 
+             FROM user_in_session 
+             WHERE id_user='$idEnt'"
+            
+        );
+        
         }
 
         function getUsersFromRoleSession($login, $pw, $role, $idSession )
@@ -131,4 +143,13 @@ use PDO;
              WHERE s.id_session=$idSession and user.role_string='$role'");
         }
       
+        function getMAFromEnt($login, $pw, $idEnt )
+        {
+            return getSQLSingleAssoc($login, $pw,
+            "SELECT u.nom, u.prenom, u.id, u.role_string , u.raison_social, me.id_ma                 
+            FROM mahas_ent as me          
+            RIGHT JOIN user as u ON u.id=me.id_ma 
+            WHERE me.id_ent=$idEnt"
+           );
  
+        }

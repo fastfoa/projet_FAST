@@ -121,23 +121,17 @@ class DocumentController extends AbstractController
             $nameApprenti = ""; 
             $nameEntreprise ="";
 
-            if ( $roleString == 'ROLE_APP')   //App / MA / ENT / FOR / OF / IND
+            if ( $roleString == 'ROLE_APP')   //App / MA / ENT / FOR / OF 
             {
                 $idApp = $user->getId(); 
                
                 $resMA =  getMAFromApprenti($login, $pw, $idApp );
                 $nameMA = $resMA['prenom']." ".$resMA['nom'] ." (MA)"; 
               
-                if ( $resMA['role_string'] == 'ROLE_IND' )
-                {
-                    $resENT = $nameMA;
-                }    
-                else 
-                {
-
-                    $resENT =  getENTFromMA($login, $pw, $resMA['id'] );
-                    $nameEntreprise = $resENT['nom'] ." (ENT)"; 
-                }
+               
+                $resENT =  getENTFromMA($login, $pw, $resMA['id'] );
+                $nameEntreprise = $resENT['nom'] ." (ENT)"; 
+                
                 $role= "ROLE_FORMATEUR";
                 
                 $resIdSession = getSessionFromApp($login, $pw, $idApp); 
@@ -152,31 +146,18 @@ class DocumentController extends AbstractController
                 
             }
 
-            else if ($roleString == 'ROLE_MA') // MA / ENT* / FOR* / OF* / IND*/App*
+            else if ($roleString == 'ROLE_MA') // MA / ENT / FOR / OF /App 
             {
                 $idMA = $user->getId(); 
                 $roleMA = $user->getRoles();
-                $nomMA = $user->getNom(); 
-                $prenomMA = $user->getPrenom(); 
-               
-                dump($nomMA);
-                dump($prenomMA);
-              
-                
-                if ( $roleMA[0] == 'ROLE_IND' ) 
-                {
-                    $resENT = $nameMA;
-                }    
-                else 
+                 
+            
                 $resApp =  getAppFromMA($login, $pw, $idMA );
                 $nameApprenti= $resApp['prenom']." ".$resApp['nom'] ." (App)"; 
               
-               
-                {
-
-                    $resENT =  getENTFromMA($login, $pw, $idMA );
-                    $nameEntreprise = $resENT['nom'] ." (ENT)"; 
-                }
+                $resENT =  getENTFromMA($login, $pw, $idMA );
+                $nameEntreprise = $resENT['nom'] ." (ENT)"; 
+                
                 $role= "ROLE_FORMATEUR";
                 
                 $resIdSession = getSessionFromApp($login, $pw, $resApp['id']); 
@@ -188,14 +169,37 @@ class DocumentController extends AbstractController
 
                 $nameOF = 'FOREACH';
             }
+            else if ($roleString == 'ROLE_ENT')//  ENT / FOR / OF /App/ MA
+            {
+                $idEnt = $user->getId(); 
+                $roleEnt = $user->getRoles();
+               
+                $resMA =  getMAFromEnt($login, $pw, $idEnt );
+                $nameMA = $resMA['prenom'] ." ".$resMA['nom']." (MA)";
+                dd($resMA); 
+
+                $resApp =  getAppFromMA($login, $pw, $resMA['id'] );
+                $nameApprenti= $resApp['prenom']." ".$resApp['nom'] ." (App)"; 
+                
+                $role= "ROLE_FORMATEUR";
+                
+                $resIdSession = getSessionFromApp($login, $pw, $resApp['id']);  
+                
+                $idSession = $resIdSession['id_session'];
+               
+                $resFormateur =getUsersFromRoleSession($login, $pw, $role, $idSession);
+                $nameFormateur = $resFormateur[0]['prenom']." ".$resFormateur[0]['nom'] ." (FOR)";
+
+                $nameEntreprise = ''; 
+
+                $nameOF = 'FOREACH';
+            }
+
             else if ($roleString == 'ROLE_OF')
             {
 
             }
-            else if ($roleString == 'ROLE_ENT' || $roleString == 'ROLE_IND')
-            {
-               
-            }
+           
             else if ($roleString == 'ROLE_FORMATEUR')
             {
 
