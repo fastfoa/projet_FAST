@@ -303,4 +303,13 @@ function getMAFromSession($login, $pw, $idSession )
 }
 
 
+function getUserFromMail($login, $pw, $mail ) 
+{
+    return getSQLArrayAssoc( $login, $pw, 
+    "SELECT * 
+        FROM  user 
+        WHERE email='$mail'");
+}
+
+
 
