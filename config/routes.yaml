@@ -322,9 +322,17 @@ rgpdForm:
 
 # ********************** EVALUATION **************************
 
-saisiEvaluation: 
-    path: /saisiEvaluation/{competence}/{app}
-    controller: App\Controller\EvaluationController::saisiEvaluation
+newlleEvaluation: 
+    path: /newEvaluation/{competence}/{app}
+    controller: App\Controller\EvaluationController::newEvaluation
+
+editEvaluation: 
+    path: /editEvaluation/{eval}
+    controller: App\Controller\EvaluationController::editEvaluation
+
+showEvaluation: 
+    path: /showEvaluation/{eval}
+    controller: App\Controller\EvaluationController::showEvaluation
 
 choiceCompetence: 
     path: /choiceCompetence/{app}/{session}
