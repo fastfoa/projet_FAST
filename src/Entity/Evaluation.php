@@ -41,7 +41,7 @@ class Evaluation
     /**
      * @ORM\Column(type="integer", nullable=true)
      */
-    private $idApp;
+    private $idApp; 
 
     /**
      * @ORM\Column(type="integer", nullable=true)

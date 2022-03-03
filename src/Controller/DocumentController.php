@@ -20,8 +20,6 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\User;
 
-
-
 class DocumentController extends AbstractController
 {
     /**
@@ -141,6 +139,7 @@ class DocumentController extends AbstractController
             'nameFormateur' => $nameFormateur,
             'nameApprenti' => $nameApprenti,
             'nameEntreprise' => $nameEntreprise,
+            'menu' => getMenuFromRole( $this->getUser()->getRoleString() ),            
             ]);
     }
    
@@ -154,15 +153,13 @@ class DocumentController extends AbstractController
         //$patro = $doctrine->getRepository(Patronyme::class)->find($id);
 
         $uploads = $doctrine->getRepository(Document::class)->findAll();
-        $menu = [
-            "Documents"=>"downloadlist",
-            ];
 
         return $this->render(
         'document/downloadlist.html.twig', 
         [
             'listUp' => $uploads,
-            'menu' => $menu
+            'menu' => getMenuFromRole( $this->getUser()->getRoleString() ),            
+
         ]);    
 
     }
@@ -201,15 +198,17 @@ class DocumentController extends AbstractController
         $this->addFlash('message', "Document supprimé");
         return $this->redirectToRoute("downloadlist");
     }
- 
-    public function getInfoDoc( RecipientDocument $iddr ): Response
+
+    public function getInfoDoc(User $user )
     {
         $ret = $this->checkRGPD();
         if ( $ret )
             return $ret;
 
-        return new JsonResponse( [ 'id_document'=> $iddr->getIdDocument(), 
-                    'id_recipient'=> $iddr->getIdRecipient() ] );
+        $a = getSQLArrayAssoc($this->getParameter('loginDB'), $this->getParameter('PasswordDB'),
+        "SELECT u.nom, u.prenom, u.raison_social, u.role_string, d.titre, r.id_document, r.date_read FROM document AS d, recipient_document AS r, user AS u
+        WHERE r.id_document=d.id AND u.id=r.id_recipient AND d.id_owner=".$user->getId());
+
+        return new JsonResponse([ "a" => $a]);
     }
-   
 }

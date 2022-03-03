@@ -34,15 +34,13 @@ test:
     path: /test
     controller: App\Controller\LanController::test
 
-## ****************************  Document 
-
-getInfoDoc: 
-    path: /getInfoDoc/{iddr}
-    controller: App\Controller\DocumentController::getInfoDoc
-
 upload: 
     path: /upload
     controller: App\Controller\DocumentController::upload
+
+getInfoDoc: 
+    path: /getInfoDoc/{id}
+    controller: App\Controller\DocumentController::getInfoDoc
 
 downloadlist:
     path: /downloadlist
@@ -324,9 +322,17 @@ rgpdForm:
 
 # ********************** EVALUATION **************************
 
-saisiEvaluation: 
-    path: /saisiEvaluation/{competence}/{app}
-    controller: App\Controller\EvaluationController::saisiEvaluation
+newlleEvaluation: 
+    path: /newEvaluation/{competence}/{app}
+    controller: App\Controller\EvaluationController::newEvaluation
+
+editEvaluation: 
+    path: /editEvaluation/{eval}
+    controller: App\Controller\EvaluationController::editEvaluation
+
+showEvaluation: 
+    path: /showEvaluation/{eval}
+    controller: App\Controller\EvaluationController::showEvaluation
 
 choiceCompetence: 
     path: /choiceCompetence/{app}/{session}
