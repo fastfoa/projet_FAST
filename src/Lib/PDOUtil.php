@@ -217,6 +217,28 @@ function convertUserEntity2SQL($login, $pw, $id)
     );
 }
 
+function convertSessionEntity2SQL($login, $pw, $id)
+{
+    return getSQLSingleAssoc(
+        $login,
+        $pw,
+        "SELECT *                   
+          FROM session          
+          WHERE id='$id'"
+    );
+}
+
+function getCompetenceFromEval( $login, $pw, $idEval)
+{
+    return getSQLSingleAssoc(
+        $login,
+        $pw,
+        "SELECT *                   
+        FROM competence          
+        WHERE id='$idEval'"
+    );
+}
+
 function getUsersFromRoleSession($login, $pw, $role, $idSession)
 {
     return getSQLArrayAssoc(
