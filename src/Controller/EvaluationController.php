@@ -165,6 +165,9 @@ class EvaluationController extends AbstractController
         $MA         = convertUserEntity2SQL( $login, $pw, $eval->getIdMA() );
         $OF         = getInfoOF();
 
+        $note = $eval->getNote();
+        if ( $note == null )
+            $note = 0;
 
         if ( $role == "ROLE_APP" )
         {
@@ -228,12 +231,10 @@ class EvaluationController extends AbstractController
                 'form'      => $form->createView(),
                 'nameCompet'=> $nameCompet,
                 'message'   => $message,
+                'note'      => $note,
                 'menu'      => getMenuFromRole( $this->getUser()->getRoleString() ),            
             ]);
     }
-
-
-
 
 
     public function choiceCompetence(User $app, Session $session, Request $request): Response
