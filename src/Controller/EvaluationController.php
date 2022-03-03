@@ -53,6 +53,7 @@ class EvaluationController extends AbstractController
         $message = false;
         $type = EvaluationAppType::class;
         $evaluation = new Evaluation();
+        
 
 
         $user       = $this->getUser();
@@ -63,6 +64,7 @@ class EvaluationController extends AbstractController
         $formateur  = convertUserEntity2SQL( $login, $pw, getFormateursFromApprenti($login, $pw, $app['id'] )[0]['id']);
         $MA         = convertUserEntity2SQL( $login, $pw, getMAFromApprenti($login, $pw, $app['id'] )['id']);
         $OF         = getInfoOF();
+        //$note       =0;
 
         if ( $role == "ROLE_APP" )
         {
@@ -93,6 +95,7 @@ class EvaluationController extends AbstractController
         $evaluation->setIdMA($MA['id']);
         $evaluation->setIdFormateur($formateur['id']);
         $evaluation->setIdSession($idSession);
+        //$note->$evaluation->getNote();
         
         //$evaluation->setNote(1);
       
@@ -135,7 +138,9 @@ class EvaluationController extends AbstractController
                 'form' => $form->createView(),
                 'nameCompet' => $nameCompet,
                 'message' => $message,
-                'menu' => getMenuFromRole( $this->getUser()->getRoleString() ),            
+                //'note'=>$note, 
+                'menu' => getMenuFromRole( $this->getUser()->getRoleString() ),
+                           
             ]);
     }
 
