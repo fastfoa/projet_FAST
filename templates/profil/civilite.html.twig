@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col-8">    
+    <div class="col-7">    
 
         <h2>{{ user.prenom}} {{user.nom}} ({{fonction}})</h2>
         <h5> {{user.email}} </h5>
@@ -8,6 +8,11 @@
     </div>
     <div class="col-2">    
         <img class="avatar" src="https://www.transdev-grandest.fr/media/cache/thumbnail/7a7ff92c95467d5b50ab64fe5dbae47b.png" />
+    </div>
+    <div class="col-2">    
+        <a href="{{ path( 'dashEval',{'app':user.id } ) }}">
+                <button class="boutonForm">EVAL</button>
+        </a>
     </div>
 </div>
 <hr>

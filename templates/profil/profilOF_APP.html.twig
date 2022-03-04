@@ -6,5 +6,56 @@
 {% block myJavascripts %}{% endblock myJavascripts%}
 
 {% block OF %}
-{{ include('profil/profilApp.html.twig') }} 
+{{ include('profil/profilApp.html.twig') }}
+<div class="row">
+	<div id="ma" class="col-5">
+        <h3>Maitre D'apprentissage :</h3>
+        {% if ma == false %}
+            <h5>Vous n'avez pas de maitre d'apprentissage</h5>
+        {% else %}
+            {% for d in ma %}
+                <h5>Nom : {{d.nom}}</h5>
+                <h5>Prénom : {{d.prenom}}</h5>
+                <h5>Téléphone : {{d.telephone}}</h5>
+                <br>
+            {% endfor %}
+        {% endif %}
+    </div>
+    <div class="col-2"></div>
+    <div class="col-5">
+        <button class="boutonForm" onclick="showList()" style="font-size:large; padding:5px 9px 5px 9px;">+</button>
+
+        <input class="invisible" list="maitre" type="text" id="listMa">
+        <datalist  class="invisible" id="maitre">
+            {% for ma in listMa %}
+                <option id="{{ma.id}}" value="{{ma.nom}}  {{ma.prenom}}">{{ma.email}}</option>
+            {% endfor %}
+        </datalist>
+        <button id="validation" class="invisible boutonForm" onclick='addMa({{id}})'>
+            Ok
+        </button>
+        <h5 id="result"><h5>
+    </div>
+
+</div>
+<hr class="text-light">
+<script>
+    function showList()
+    {
+        $("#listMa, #maitre, #validation").removeClass("invisible");
+    }
+
+    function addMa(idApp)
+    {
+        var valueI = $('#listMa').val();
+        var idMa = $('#maitre option[value="' + valueI +'"]').attr('id');
+
+        $.get( "/insertMa/" + idMa + "/" + idApp,
+                function(result)
+                {
+                    $('#result').html(result);
+                }
+            );
+    }
+</script>
 {% endblock OF %}

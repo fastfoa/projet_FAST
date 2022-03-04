@@ -191,7 +191,7 @@ class EvaluationController extends AbstractController
         }
 
         $idSession  = getIdSessionFromApprenti( $login, $pw, $app['id'] );
-        $nameCompet = $competence->getName();
+        $nameCompet = getCompetenceFromEval( $login, $pw, $eval->getId())['name'];
       
         $form = $this->createForm( $type, $eval);
         $form->handleRequest($request);
@@ -266,7 +266,7 @@ class EvaluationController extends AbstractController
             ]);
     }
 
-    public function dashEval( User $app, Session $session ): Response
+    public function dashEval( User $app): Response
     {
         $ret = $this->checkRGPD();
         if ( $ret )
@@ -276,6 +276,12 @@ class EvaluationController extends AbstractController
         $uid    = $user->getId();
         $role   = $user->getRoleString();
 
+        $login = $this->getParameter('loginDB');
+        $pw = $this->getParameter('PasswordDB');
+
+        $idSession = getIdSessionFromApprenti($login, $pw, $app->getId());
+        $session = convertSessionEntity2SQL( $login, $pw, $idSession );
+        //dd( $session );
         $where="";
         if ( $role == "ROLE_APP" )
         {
@@ -295,15 +301,13 @@ class EvaluationController extends AbstractController
             $where = " AND id_of = '$uid' ";
         }
         $where="";
-    
-        $login = $this->getParameter('loginDB');
-        $pw = $this->getParameter('PasswordDB');
-    
-        $formationID = $session->getIdFormation();
+        
+        $formationID = $session[ 'id_formation'];
 
         $doctrine = $this->getDoctrine();
         $formation = $doctrine->getRepository(Formation::class)->find( $formationID );
         $nomFormation = $formation->getNom();
+
 
         $listCompetence = getSQLArrayAssoc( $login, $pw,
             "SELECT *  
@@ -313,7 +317,7 @@ class EvaluationController extends AbstractController
 
 
         $listEvalEnCours = getSQLArrayAssoc( $login, $pw,  
-            "SELECT DISTINCT e.id_competence AS id, c.name 
+            "SELECT DISTINCT e.id AS id, c.name as name 
             FROM evaluation AS e, competence AS c 
             WHERE e.id_competence=c.id 
             AND  e.id IN (SELECT DISTINCT id FROM evaluation 
