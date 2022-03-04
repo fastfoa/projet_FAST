@@ -237,7 +237,7 @@ class EvaluationController extends AbstractController
     }
 
 
-    public function choiceCompetence(User $app, Session $session, Request $request): Response
+        public function choiceCompetence(User $app, Session $session, Request $request): Response
     {
         $ret = $this->checkRGPD();
         if ( $ret )
