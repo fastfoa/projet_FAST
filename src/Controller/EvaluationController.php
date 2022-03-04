@@ -190,8 +190,9 @@ class EvaluationController extends AbstractController
             $type = EvaluationOFType::class;
         }
 
+
         $idSession  = getIdSessionFromApprenti( $login, $pw, $app['id'] );
-        $nameCompet = getCompetenceFromEval( $login, $pw, $eval->getId())['name'];
+        $nameCompet = getCompetenceFromEval( $login, $pw, $eval->getIdCompetence(   ))['name'];
       
         $form = $this->createForm( $type, $eval);
         $form->handleRequest($request);
