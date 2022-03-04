@@ -20,7 +20,8 @@
            <div class="col-11 txt-normal"> 
                 {{session.fin|date("d/m/y")}}
            </div>
-        </div>        
+        </div>    
+            
 		<div class="row my-3">
             <div class="col-4 txt-normal"> 
             <a href="{{ path( 'listUsersSession',{'session':session.id, 'role':'ROLE_APP', 'roleName':'Apprenti' }) }}">

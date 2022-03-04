@@ -73,7 +73,7 @@ documents:
     controller: App\Controller\LanController::documentOff
 
 aide:
-    path: /aide
+    path: /aidedashEval
     controller: App\Controller\LanController::aide
 
 # compte
