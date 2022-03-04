@@ -5,13 +5,7 @@
 		</div>
 	
 		{% if is_granted('IS_AUTHENTICATED_FULLY') %}
-
-		<button  class="boutonForm my-2 my-sm-0 m-3" onclick="rtn()"><i class="fa fa-undo"></i></button>
-		<script>
-			function rtn() {
-				window.history.back();
-				}
-		</script>
+			<button  class="boutonForm my-2 my-sm-0 m-3" onclick="rtn()"><i class="fa fa-arrow-left"></i></button>
 		{% endif %}
 		<ul class="navbar-nav me-auto fith100">
 			<li class="nav-item ">

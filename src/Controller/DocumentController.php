@@ -44,10 +44,8 @@ class DocumentController extends AbstractController
         return null;
     }
 
-    public function upload(Request $request, SluggerInterface $slugger): Response
+    public function upload($retour,     Request $request, SluggerInterface $slugger): Response
     {
-
-
         $ret = $this->checkRGPD();
         if ($ret)
             return $ret;
@@ -55,9 +53,6 @@ class DocumentController extends AbstractController
         $up = new Document();
         $user = $this->getUser();
         $roleString = $user->getRoleString();
-
-
-
 
         $login = $this->getParameter('loginDB');
         $pw = $this->getParameter('PasswordDB');
@@ -178,6 +173,7 @@ class DocumentController extends AbstractController
                     // ... handle exception if something happens during file upload
                 }
                 $up->setFileName($newFilename);
+                $up->setIdOwner( $user->getId());
                 $up->setFileNameOriginal($fullOrigineFileName);
                 $up->setDateCreate(new \DateTime());
 
@@ -230,7 +226,7 @@ class DocumentController extends AbstractController
                 $entityManager->flush();
 
                 $this->addFlash('message', "Document ajouté");
-                return $this->redirect('downloadlist');
+                return $this->redirect( $retour );
             }
         }
 

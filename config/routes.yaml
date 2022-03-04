@@ -35,7 +35,7 @@ test:
     controller: App\Controller\LanController::test
 
 upload: 
-    path: /upload
+    path: /upload/{retour}
     controller: App\Controller\DocumentController::upload
 
 getInfoDoc: 
@@ -76,12 +76,7 @@ aide:
     path: /aide
     controller: App\Controller\LanController::aide
 
-# qvallee@free.frd
 compte:
-    path: /compte
-    controller: App\Controller\CompteController::monCompte
-
-modifInfoMonCompte:
     path: /modifInfoMonCompte
     controller: App\Controller\CompteController::modifInfoMonCompte
 
@@ -131,6 +126,10 @@ userGeneralForm:
     path: /userGeneralForm/{user}
     controller: App\Controller\InscriptionController::userGeneralForm
     
+insertMa:
+    path: /insertMa/{idMa}/{idApp}
+    controller: App\Controller\ProfilController::insertMa
+
 ## App\Controller\DashController
 
 dashOFPrincipal:
@@ -347,5 +346,5 @@ liste_session_role:
     controller: App\Controller\TestannuaireController::liste_session_role
 
 dashEval: 
-    path: /dashEval/{app}/{session}
+    path: /dashEval/{app}
     controller: App\Controller\EvaluationController::dashEval

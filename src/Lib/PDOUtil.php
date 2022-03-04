@@ -238,14 +238,6 @@ function getAppFromMA($login, $pw, $idMA)
         
         }
 
-        function getUsersFromRoleSession($login, $pw, $role, $idSession )
-        {
-             return getSQLArrayAssoc( $login, $pw, 
-            "SELECT user.nom, user.prenom, user.id, user.email
-             FROM  user_in_session as s 
-             LEFT JOIN user ON s.id_user=user.id 
-             WHERE s.id_session=$idSession and user.role_string='$role'");
-        }
      
     
 
@@ -261,6 +253,40 @@ function convertUserEntity2SQL($login, $pw, $id)
     );
 }
 
+
+function convertSessionEntity2SQL($login, $pw, $id)
+{
+    return getSQLSingleAssoc(
+        $login,
+        $pw,
+        "SELECT *                   
+          FROM session          
+          WHERE id='$id'"
+    );
+}
+
+function getCompetenceFromEval( $login, $pw, $idEval)
+{
+    return getSQLSingleAssoc(
+        $login,
+        $pw,
+        "SELECT *                   
+        FROM competence          
+        WHERE id='$idEval'"
+    );
+}
+
+function getUsersFromRoleSession($login, $pw, $role, $idSession)
+{
+    return getSQLArrayAssoc(
+        $login,
+        $pw,
+        "SELECT user.nom, user.prenom, user.id, user.email
+             FROM  user_in_session as s 
+             LEFT JOIN user ON s.id_user=user.id 
+             WHERE s.id_session=$idSession and user.role_string='$role'"
+    );
+}
 
 function getUsersFromRole($login, $pw, $role)
 {
@@ -300,6 +326,14 @@ function getMAFromSession($login, $pw, $idSession )
         FROM  user_in_session as s 
         LEFT JOIN user ON s.id_user=user.id 
         WHERE s.id_session=$idSession and user.role_string='ROLE_MA'");
+}
+
+function getDocsFromUser($login, $pw, $id ) 
+{
+    return getSQLArrayAssoc( $login, $pw,
+        "SELECT document.id AS d_id, document.titre AS d_titre, document.file_name AS d_fileName
+        FROM document, user
+        WHERE user.id=document.id_owner AND user.id=".$id);
 }
 
 
