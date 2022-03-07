@@ -5,7 +5,7 @@
 		</div>
 	
 		{% if is_granted('IS_AUTHENTICATED_FULLY') %}
-
+{# bouton de retour #}
 		<button  class="boutonForm my-2 my-sm-0 m-3" onclick="rtn()"><i class="fa fa-undo"></i></button>
 		<script>
 			function rtn() {
@@ -46,7 +46,7 @@
 					window.history.back();
 				}
 		</script>
-
+{# le bouton de retour s'affiche seulement si l'user est connecté #}
 		{% if is_granted('IS_AUTHENTICATED_FULLY') %}
 			<a class="boutonForm my-2 my-sm-0 m-3" aria-current="page" href="{{ path('app_logout')}}">Déconnexion</a>
 		{% else %}

@@ -74,8 +74,7 @@ class FormateurType extends AbstractType
                     'class' => 'dat'
                 ]
             ])
-           
-            ->add('diplome',TextType::class,[
+              ->add('diplome',TextType::class,[
                 'label'=> false,
                 'attr' => [
                     'placeholder' => 'diplome',

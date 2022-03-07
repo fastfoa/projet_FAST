@@ -44,7 +44,6 @@ class EvaluationOFType extends AbstractType
                     'placeholder' => 'remarque OF'
                 ]
             ])
-
             ->add('note', RangeType::class, [
                 'label' => false,
                 'attr' => [
@@ -53,9 +52,6 @@ class EvaluationOFType extends AbstractType
                     'onchange' => "$('#resultRange').text(this.value)"
                 ],
             ])
-
-
-
             ->add('Enregistrer', SubmitType::class, [
                 'attr' => [
                     'class' => 'boutonForm'

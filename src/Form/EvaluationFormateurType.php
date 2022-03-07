@@ -42,12 +42,9 @@ class EvaluationFormateurType extends AbstractType
                 'label' => false,
                 'attr' => [
                     'placeholder' => 'remarque OF'
-                    
+
                 ]
             ])
-           
-
-
             ->add('Enregistrer', SubmitType::class, [
                 'attr' => [
                     'class' => 'boutonForm'
