@@ -3,7 +3,8 @@
  controlleur pour modifier c'est information personelle selon la personne qui est connecter
 
  le 7/03/2022 
- Alexis Santrain alexi
+ Alexis Santrain 
+ alexis.santrain@orange.fr
 
 */
 
