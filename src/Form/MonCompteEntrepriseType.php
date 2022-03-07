@@ -20,25 +20,29 @@ class MonCompteEntrepriseType extends AbstractType
         ->add('nom', TextType::class,[
             'label'=> false,
             'attr' => [
-                'placeholder' => 'nom'
+                'placeholder' => 'nom',
+                'style'=> 'color: black !important'
             ]
         ])
         ->add('adresse', TextType::class,[
             'label'=> false,
             'attr' => [
-                'placeholder' => 'adresse'
+                'placeholder' => 'adresse',
+                'style'=> 'color: black !important'
             ]
         ])
         ->add('telephone', TextType::class,[
             'label'=> false,
             'attr' => [
-                'placeholder' => 'telephone'
+                'placeholder' => 'telephone',
+                'style'=> 'color: black !important'
             ]
         ])
         ->add('Effectif', NumberType::class,[
             'label'=> false,
             'attr' => [
-                'placeholder' => 'Effectif'
+                'placeholder' => 'Effectif',
+                'style'=> 'color: black !important'
             ]
         ])
         
