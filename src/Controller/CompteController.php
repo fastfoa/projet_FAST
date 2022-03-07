@@ -1,6 +1,6 @@
 <?php
 /*
-    controlleur pour modifier c'est information personel 
+    controlleur pour modifier ses informations personelles 
     7/03/2022
 
 */
@@ -68,7 +68,8 @@ class CompteController extends AbstractController
         $type =  null;
         $twig = '';
 
-        // remplir le type et le twig en rapport au compte a la qu'elle on et connecter
+        // définir le type de formaulaire et le twig en rapport 
+        // au type du compte user
         if ($role == 'ROLE_APP') {
             $type =  MonCompteAppType::class;
             $twig = 'compte/mon_compte/monCompteApp.html.twig';
