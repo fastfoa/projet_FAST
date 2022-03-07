@@ -21,28 +21,34 @@ class MonCompteMAType extends AbstractType
                 'disabled' => true,
                 'attr' => [ 
                 'placeholder' => 'Entrez votre adresse email',
-                'style'=> 'color: white'
+                'style'=> 'color: grey !important'
                 ] 
             ])
             ->add('nom', TextType::class,[
                 'disabled' => true,
                 'attr' => [ 
                 'placeholder' => 'Entrez votre nom',
-                'style'=> 'color: white'
+                'style'=> 'color: grey !important'
                 ]  
             ])
             ->add('prenom', TextType::class,[
                 'disabled' => true,
                 'attr' => [ 
                 'placeholder' => 'Entrez votre prénom',
-                'style'=> 'color: white'
+                'style'=> 'color: grey !important'
                 ]  
             ])
             ->add('adresse', TextType::class,
-                [ 'attr' => [ 'placeholder' => 'Entrez votre adresse' ] ]
+                [ 'attr' => [ 
+                    'placeholder' => 'Entrez votre adresse',
+                    'style'=> 'color: black !important'
+                     ] ]
             )
             ->add('telephone', TextType::class,
-                [ 'attr' => [ 'placeholder' => 'Entrez votre numéro de téléphone' ] ]
+                [ 'attr' => [ 
+                    'placeholder' => 'Entrez votre numéro de téléphone',
+                    'style'=> 'color: black !important'
+                     ] ]
             )
             
             ->add('save', SubmitType::class,[ 

@@ -23,7 +23,7 @@ class MonCompteADMINType extends AbstractType
             'disabled' => true,
             'attr' => [
                 'placeholder' => 'nom',
-                'style'=> 'color: white'
+                'style'=> 'color: grey !important'
             ]
         ])
         ->add('prenom', TextType::class,[
@@ -31,27 +31,29 @@ class MonCompteADMINType extends AbstractType
             'disabled' => true,
             'attr' => [
                 'placeholder' => 'prenom',
-                'style'=> 'color: white'
+                'style'=> 'color: grey !important'
             ]
         ])
         ->add('email', TextType::class,[
             'disabled' => true,
             'attr' => [ 
                 'placeholder' => 'Entrez votre adresse email',
-                'style'=> 'color: white'
+                'style'=> 'color: grey !important'
                 ] 
         ])
 
         ->add('adresse', TextType::class,[
             'label'=> false,
             'attr' => [
-                'placeholder' => 'adresse'
+                'placeholder' => 'adresse',
+                'style'=> 'color: black !important'
             ]
         ])
         ->add('telephone', TextType::class,[
             'label'=> false,
             'attr' => [
-                'placeholder' => 'telephone'
+                'placeholder' => 'telephone',
+                'style'=> 'color: black !important'
             ]
         ])
 
