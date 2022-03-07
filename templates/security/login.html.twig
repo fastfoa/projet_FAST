@@ -40,29 +40,11 @@
         <input type="password" placeholder='Entrez votre mot de passe' name="password" id="inputPassword" class="form-control mt-2" autocomplete="current-password" required>
 
         <input type="hidden" name="_csrf_token"
-            value="{{ csrf_token('authenticate') }}"
-        >
-        <input class="form-check-input mycheck mt-3" type="checkbox" value="" id="flexCheckDefault">
-        <label class="form-check-label my-2" for="flexCheckDefault">
-            Se souvenir de moi
-        </label>
-
-    {#
-        Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
-        See https://symfony.com/doc/current/security/remember_me.html
-
-        <div class="checkbox mb-3">
-            <label>
-                <input type="checkbox" name="_remember_me"> Remember me
-            </label>
-        </div>
-    #}
+            value="{{ csrf_token('authenticate') }}">
         <br>
         <button class="boutonForm mb-2" type="submit">
             Se connecter
         </button>
-        <br>
-        <a href="#">Mot de passe oublié ?</a>
     </form>
 </div>
 {% endblock %}

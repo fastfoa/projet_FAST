@@ -156,6 +156,7 @@ class InscriptionController extends AbstractController
             $entityManager = $doctrine->getManager();
 
             $user->setRoles(['ROLE_MA']);
+            $user->setRoleString('ROLE_MA');
 
             $email = $user->getEmail();
             $user->setEmail($email);
@@ -665,6 +666,4 @@ class InscriptionController extends AbstractController
         }
         return $userID;
     }
-
-
 }

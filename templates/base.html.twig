@@ -10,8 +10,6 @@
 		{# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
 		<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-
-
 		<link rel="stylesheet" href="{{asset("css/lan.css")}}">
 		<link rel="stylesheet" href="{{asset("css/annuaire.css")}}">
 		<script src="{{asset("/JS/annuaire.js")}}"></script>
@@ -35,7 +33,6 @@
 
 	</head>
 	<body class="body-fe">
-
 		{% include 'menu.html.twig' %}
 		
 		<div class="work-content"> 
@@ -48,11 +45,13 @@
 			Lorem ipsum dolor sit amet consectetur adipisicing elit.
 		</div>
 		#}
-	        <script>
+	    <script>
+			// récupère les infos du document sélectionné et
+			// affiche si le document à été envoyé, a qui, si il à été lu
             function seeDoc2(id)
             {
-                var valueI = $('#listDoc').val();
-                var idD = $('#documents option[value="' + valueI +'"]').attr('id');
+                let valueI = $('#listDoc').val();
+                let idD = $('#documents option[value="' + valueI +'"]').attr('id');
 
                 if (!idD)
                     return alert("Document introuvable !");
@@ -82,16 +81,15 @@
 
             function downloadDoc(url)
             {
-                var valueI = $('#listDoc').val();
-                var idD = $('#documents option[value="' + valueI +'"]').attr('id');
+                let valueI = $('#listDoc').val();
+                let idD = $('#documents option[value="' + valueI +'"]').attr('id');
 
                 if (!idD)
                     return alert("Fichier introuvable !");
 
-                var link = url+"/"+idD;
+                let link = url+"/"+idD;
                 window.location = link;
             }
         </script>
-	
 	</body>
 </html>

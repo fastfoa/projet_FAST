@@ -16,24 +16,11 @@ class SecurityController extends AbstractController
      */
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
-        $u = $this->getUser();
+        $user = $this->getUser();
 
-        //$t = $this->getDoctrine()->getManager()->getRepository(User::class)->find($u);
-        if ($u) {
-            //dd( $u );
-            //$enabled = $u->getProfilEnabled();
-            //if ( $enabled == 0 )
-            //    return $this->redirectToRoute('logout');;
-            //return $this->redirectToRoute('dashOFPrincipal');
+        if ($user)
             return $this->redirectToRoute('profilEnabled');
-            }
         
-        // $profil = getSQLSingle( 
-        //     "SELECT profil_enabled as p
-        //      FROM  user
-        //      WHERE email='$t'");
-        //      return new JsonResponse($profil);
-
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
         // last username entered by the user
@@ -42,7 +29,6 @@ class SecurityController extends AbstractController
         $erreur = "Email ou mot de passe incorrect";
        
         return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error, 'erreur' => $erreur]);
-        // return $this->redirectToRoute('rgpdForm', ['last_username' => $lastUsername,  'error' => $error]);
     }
 
     /**
@@ -52,17 +38,4 @@ class SecurityController extends AbstractController
     {
         throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
     }
-
-    function checkRGPD()
-    {
-        $user = $this->getUser();
-        if ( $user == null )
-           return $this->redirectToRoute( "login" );
-         if ( !$user->getRGPDOK())
-            return $this->redirectToRoute( "rgpdForm" );
-        return null;
-    }
-
-
-
 }

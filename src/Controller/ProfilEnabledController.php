@@ -18,21 +18,10 @@ class ProfilEnabledController extends AbstractController
         $user = $this->getUser();
         $enabled = $user->getProfilEnabled();
         
+        // verifier si le profil est activé
         if ($enabled)
             return $this->redirectToRoute('rgpdForm');
 
         return $this->redirectToRoute( 'app_logout' );
     }
-
-    function checkRGPD()
-    {
-        $user = $this->getUser();
-        if ( $user == null )
-           return $this->redirectToRoute( "login" );
-         if ( !$user->getRGPDOK())
-            return $this->redirectToRoute( "rgpdForm" );
-        return null;
-   }
-
-
 }

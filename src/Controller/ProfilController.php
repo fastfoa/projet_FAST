@@ -33,28 +33,26 @@ class ProfilController extends AbstractController
         return null;
     }
 
-
+    // envoi des données necessaires pour afficher la liste des docs, le maitre d'apprentissage
+    // et la liste des maitres d'apprentissage sur la fiche user
     public function editUser( User $user): Response
     {
         $ret = $this->checkRGPD();
         if ( $ret )
             return $ret;
-            
-        //$aut = $this->getUser();
-        //$roleViewer = $aut->getRoles()[0];
+
         $roleViewer = 'ROLE_OF';
         $roleTarget = $user->getRoleString();
 
-        
         $listDoc = getSQLArrayAssoc($this->getParameter('loginDB'), $this->getParameter('PasswordDB'),
         "SELECT document.id AS d_id, document.titre AS d_titre, document.file_name AS d_fileName
         FROM document, user
         WHERE user.id=document.id_owner AND user.id=".$user->getId());
 
         $ma = getSQLArrayAssoc($this->getParameter('loginDB'), $this->getParameter('PasswordDB'),
-        "SELECT u.nom, u.prenom, u.telephone, u.id, u.role_string                   
+        "SELECT u.nom, u.prenom, u.telephone, u.id, u.role_string
          FROM app_has_ma as a
-         RIGHT JOIN user as u ON u.id=a.id_ma 
+         RIGHT JOIN user as u ON u.id=a.id_ma
          WHERE a.id_apprenti=".$user->getId());
 
         $listMa = getSQLArrayAssoc($this->getParameter('loginDB'), $this->getParameter('PasswordDB'),
@@ -63,18 +61,19 @@ class ProfilController extends AbstractController
         $id = $user->getId();
         if ( $roleViewer ==  'ROLE_OF' )
         {
-                 if ($roleTarget == 'ROLE_APP')
-                        return $this->profilOF_APP($user, $listMa, $ma, $id, $listDoc);
-            else if ($roleTarget == 'ROLE_FORMATEUR')
-                        return $this->profilOF_Formateur($user, $id, $listDoc);
-            else if ($roleTarget == 'ROLE_MA')
-                        return  $this->profilOF_MA($user, $id, $listDoc);
-            else if ($roleTarget == 'ROLE_ENT')
-                       return $this->profilOF_Entreprise($user, $id, $listDoc);
+            if ($roleTarget == 'ROLE_APP')
+                return $this->profilOF_APP($user, $listMa, $ma, $id, $listDoc);
+            elseif ($roleTarget == 'ROLE_FORMATEUR')
+                return $this->profilOF_Formateur($user, $id, $listDoc);
+            elseif ($roleTarget == 'ROLE_MA')
+                return  $this->profilOF_MA($user, $id, $listDoc);
+            elseif ($roleTarget == 'ROLE_ENT')
+                return $this->profilOF_Entreprise($user, $id, $listDoc);
         }
     }
 
-    public function insertMA($idMa, User $idApp): Response
+    // ajouté un maitre d'apprentissage a un user
+    public function insertMA($idMa, User $user): Response
     {
         $ret = $this->checkRGPD();
         if ( $ret )
@@ -82,7 +81,7 @@ class ProfilController extends AbstractController
 
         $doctrine = $this->getDoctrine();
         $entityManager = $doctrine->getManager();
-        $id = $idApp->getId();
+        $id = $user->getId();
         $r = new AppHasMA();
         $r->setIdApprenti( $id );
         $r->setIdMA( $idMa );

@@ -132,7 +132,7 @@ userGeneralForm:
     controller: App\Controller\InscriptionController::userGeneralForm
     
 insertMa:
-    path: /insertMa/{idMa}/{idApp}
+    path: /insertMa/{idMa}/{user}
     controller: App\Controller\ProfilController::insertMa
 
 ## App\Controller\DashController
@@ -141,16 +141,13 @@ dashOFPrincipal:
     path: /dashOFPrincipal
     controller: App\Controller\DashController::dashOFPrincipal
 
-    
 dashApp:
     path: /dashApp
     controller: App\Controller\DashController::dashApp
 
-    
 dashEntreprise:
     path: /dashEntreprise
     controller: App\Controller\DashController::dashEntreprise
-
 
 dashFormateur:
     path: /dashFormateur
@@ -159,7 +156,6 @@ dashFormateur:
 dashMA:
     path: /dashMA
     controller: App\Controller\DashController::dashMA
-
 
 ## **************** SESSION
 
@@ -202,7 +198,7 @@ listFormateurs:
 listMA:
     path: /listMA/{session}
     controller: App\Controller\DashController::listMA
-   
+
 listAllAprentis: 
     path: /listAllAprentis
     controller: App\Controller\DashController::listAllAprentis
@@ -215,10 +211,9 @@ listAllEntreprises:
     path: /listAllEntreprises
     controller: App\Controller\DashController::listAllEntreprises
 
-listAllMA: 
+listAllMA:
     path: /listAllMA
     controller: App\Controller\DashController::listAllMA
-
 
 # ********************** Annuaire **************************
 
@@ -244,80 +239,78 @@ annuaire:
 
 # ********************** les Profils **************************
 
-
 profilOF_APP: 
     path: /profilOF_APP/{user}
     controller: App\Controller\ProfilController::profilOF_APP
 
-profilOF_Formateur: 
+profilOF_Formateur:
     path: /profilOF_Formateur/{user}
     controller: App\Controller\ProfilController::profilOF_Formateur
 
-profilOF_MA: 
+profilOF_MA:
     path: /profilOF_MA/{user}
     controller: App\Controller\ProfilController::profilOF_MA
 
-profilOF_Entreprise: 
+profilOF_Entreprise:
     path: /profilOF_Entreprise/{user}
     controller: App\Controller\ProfilController::profilOF_Entreprise
 
-profilAPP_OF: 
+profilAPP_OF:
     path: /profilAPP_OF/{user}
     controller: App\Controller\ProfilController::profilAPP_OF
 
-profilAPP_Formateur: 
+profilAPP_Formateur:
     path: /profilAPP_Formateur/{user}
     controller: App\Controller\ProfilController::profilAPP_Formateur
 
-profilAPP_MA: 
+profilAPP_MA:
     path: /profilAPP_MA/{user}
     controller: App\Controller\ProfilController::profilAPP_MA
-    
-profilAPP_Entreprise: 
+
+profilAPP_Entreprise:
     path: /profilAPP_Entreprise/{user}
     controller: App\Controller\ProfilController::profilAPP_Entreprise
 
-profilFOR_OF: 
+profilFOR_OF:
     path: /profilFOR_OF/{user}
     controller: App\Controller\ProfilController::profilFOR_OF
- 
-profilFOR_APP: 
+
+profilFOR_APP:
     path: /profilFOR_APP/{user}
     controller: App\Controller\ProfilController::profilFOR_APP
-          
-profilFOR_MA: 
+
+profilFOR_MA:
     path: /profilFOR_MA/{user}
     controller: App\Controller\ProfilController::profilFOR_MA
-     
-profilFOR_Entreprise: 
+
+profilFOR_Entreprise:
     path: /profilFOR_Entreprise/{user}
     controller: App\Controller\ProfilController::profilFOR_Entreprise
 
-profilMA_OF: 
+profilMA_OF:
     path: /profilMA_OF/{user}
     controller: App\Controller\ProfilController::profilMA_OF
- 
-profilMA_APP: 
+
+profilMA_APP:
     path: /profilMA_APP/{user}
     controller: App\Controller\ProfilController::profilMA_APP
-          
-profilMA_FOR: 
+
+profilMA_FOR:
     path: /profilMA_FOR/{user}
     controller: App\Controller\ProfilController::profilMA_FOR
-     
-profilENT_OF: 
+
+profilENT_OF:
     path: /profilENT_OF/{user}
     controller: App\Controller\ProfilController::profilENT_OF
- 
-profilENT_APP: 
+
+profilENT_APP:
     path: /profilENT_APP/{user}
     controller: App\Controller\ProfilController::profilENT_APP
-          
-profilENT_FOR: 
+
+profilENT_FOR:
     path: /profilENT_FOR/{user}
     controller: App\Controller\ProfilController::profilENT_FOR
 
-     
 # ********************** RGPD **************************
 
 rgpdForm:
@@ -326,22 +319,24 @@ rgpdForm:
 
 # ********************** EVALUATION **************************
 
-newEvaluation: 
+newEvaluation:
     path: /newEvaluation/{competence}/{app}
     controller: App\Controller\EvaluationController::newEvaluation
 
-editEvaluation: 
+editEvaluation:
     path: /editEvaluation/{eval}
     controller: App\Controller\EvaluationController::editEvaluation
 
-showEvaluation: 
+showEvaluation:
     path: /showEvaluation/{eval}
     controller: App\Controller\EvaluationController::showEvaluation
 
-choiceCompetence: 
+choiceCompetence:
     path: /choiceCompetence/{app}/{session}
     controller: App\Controller\EvaluationController::choiceCompetence
+
 # ************************Test*************************
+
 testannuaire:
     path: /testAnnuaire
     controller: App\Controller\TestannuaireController::app_testannuaire
@@ -350,6 +345,6 @@ liste_session_role:
     path: /testAnnuaire/{session}/{role}/
     controller: App\Controller\TestannuaireController::liste_session_role
 
-dashEval: 
+dashEval:
     path: /dashEval/{app}
     controller: App\Controller\EvaluationController::dashEval

@@ -47,15 +47,15 @@
 
     function addMa(idApp)
     {
-        var valueI = $('#listMa').val();
-        var idMa = $('#maitre option[value="' + valueI +'"]').attr('id');
+        let valueI = $('#listMa').val();
+        let idMa = $('#maitre option[value="' + valueI +'"]').attr('id');
 
         $.get( "/insertMa/" + idMa + "/" + idApp,
-                function(result)
-                {
-                    $('#result').html(result);
-                }
-            );
+            function(result)
+            {
+                $('#result').html(result);
+            }
+        );
     }
 </script>
 {% endblock OF %}

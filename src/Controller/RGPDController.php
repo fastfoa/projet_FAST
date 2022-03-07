@@ -21,16 +21,6 @@ class RGPDController extends AbstractController
         ]);
     }
 
-    function checkRGPD()
-    {
-        $user = $this->getUser();
-        if ( $user == null )
-           return $this->redirectToRoute( "login" );
-         if ( !$user->getRGPDOK())
-            return $this->redirectToRoute( "rgpdForm" );
-        return null;
-    }
-
     public function rgpdForm(Request $request): Response
     {
         $user = $this->getUser();
@@ -61,8 +51,6 @@ class RGPDController extends AbstractController
             $formulaire = $this->createForm(RGPDType::class, $user);
             $formulaire->handleRequest($request);
 
-            //dd( $role );
-
             if ( $formulaire->isSubmitted() ) 
             {
                     $user->setRGPDOK(true);
@@ -85,6 +73,4 @@ class RGPDController extends AbstractController
             return $this->redirectToRoute( 'app_logout' );
         }
     }
-
-
 }

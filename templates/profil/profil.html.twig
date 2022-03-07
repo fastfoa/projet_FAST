@@ -1,19 +1,17 @@
 {% extends 'base.html.twig' %}
 
 {% block myStylesheets %}
-<style>
-    .avatar
-    {
-        width: 100px;
-        height: 100px;
-    }
-</style>
+    <style>
+        .avatar
+        {
+            width: 100px;
+            height: 100px;
+        }
+    </style>
 {% endblock myStylesheets %}
 
 {% block myJavascripts %}
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
 {% endblock %}
 
 {% block body %}
@@ -53,7 +51,5 @@
             </div>
         </div>
     </div>
-        <div  id='infosDoc' class="invisible col-6" style="color:black;background-color:white;height:50pt;overflow:auto;">
-        </div>
-
+        <div  id='infosDoc' class="invisible col-6" style="color:black;background-color:white;height:50pt;overflow:auto;"></div>
 {% endblock body %}
