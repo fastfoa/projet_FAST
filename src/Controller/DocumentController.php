@@ -122,8 +122,8 @@ class DocumentController extends AbstractController
                 $resMA =  getMAFromApprenti($login, $pw, $user->getId() );
                 $nameMA = $resMA['prenom']." ".$resMA['nom'] ." (MA)"; 
 
-                if ( $nameMA['role_string'] == 'ROLE_IND' )
-                $resENT = $nameMA;    
+                if ( $resMA['role_string'] == 'ROLE_IND' )
+                    $resENT = $nameMA;    
                 else
                     $resENT =  getENTFromMA($login, $pw, $resMA['id'] );
 
