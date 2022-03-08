@@ -1,5 +1,12 @@
 <?php
+/*
+/controller pour les inscription Formateur USER;
+18/02/2022 olive59200@live.fr
 
+
+
+
+*/
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -10,16 +17,17 @@ use App\Form\InscriptionEntrepriseType;
 use App\Form\InscriptioFormateurType;
 use App\Entity\User;
 use App\Entity\Session;
-use Doctrine\ORM\EntityManagerInterface;
+
 use App\Form\AddUserType;
-use App\Form\InscriptionAppType;
+
 use App\Form\InscriptionApprentiType;
 use App\Form\InscriptionIndType;
-use App\Form\InscriptionApp2Type;
+
 use App\Form\InscriptionMAType;
-use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
+
 use Doctrine\Persistence\ManagerRegistry;
 use App\Form\UserGeneralType;
+
 
 
 
@@ -115,7 +123,6 @@ class InscriptionController extends AbstractController
         ]);
     }
     
-
     public function userGeneralForm(Request $request, User $user): Response
     {
         $ret = $this->checkRGPD();
@@ -139,7 +146,6 @@ class InscriptionController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
-
 
     public function inscriptionMA(Request $request, ManagerRegistry $doctrine): Response
     {
@@ -186,66 +192,71 @@ class InscriptionController extends AbstractController
         ]);
     }
 
-    public function inscriptionFormateur(Request $request, EntityManagerInterface $manager)
-    {
+    //fonction qui enregistre un formateur dans la table user
+    public function inscriptionFormateur( Request $request, ManagerRegistry $doctrine): Response
+    {   //validation rgpd
         $ret = $this->checkRGPD();
         if ( $ret )
             return $ret;
-
-        $contact = new User();
-        $form = $this->createForm(InscriptioFormateurType::class, $contact);
-        $form->handleRequest($request);
+    
+        $user = new User();
+        $form = $this->createForm(InscriptioFormateurType::class, $user);
+        $form->handleRequest($request);  
+    
         if ($form->isSubmitted() && $form->isValid()) {
-            //enregistrer le mail 
-            $mail = $contact->getEmail();
+
+            // la valeur et forcer parceque non nullable
+            $user->setRoleString('ROLE_FORMATEUR');
+            $user->setRoles(['ROLE_FORMATEUR']);
+    
+            //enregistrer le email 
+            $mail = $user->getEmail();
             $mail = strip_tags($mail);
-            $contact->setEmail($mail);
+            $user->setEmail($mail);
 
             //enregistrer le genre 
-            $genre = $contact->getGenre();
+            $genre = $user->getGenre();
             $genre = strip_tags($genre);
-            $contact->setGenre($genre);
+            $user->setGenre($genre);
 
-            //enregistrer le adress 
-            $adress = $contact->getAdresse();
+            //enregistrer l'adresse
+            $adress = $user->getAdresse();
             $adress = strip_tags($adress);
-            $contact->setAdresse($adress);
+            $user->setAdresse($adress);
 
-            //enregistrer le adress 
-            $tel = $contact->getTelephone();
+            //enregistrer le Telephone 
+            $tel = $user->getTelephone();
             $tel = strip_tags($tel);
-            $contact->setTelephone($tel);
+            $user->setTelephone($tel);
 
-            //enregistrer le adress 
-            $siret = $contact->getSiret();
+            //enregistrer le siret 
+            $siret = $user->getSiret();
             $siret = strip_tags($siret);
-            $contact->setSiret($siret);
+            $user->setSiret($siret);
 
-            //enregistrer contact
-            $nom = $contact->getNom();
+            //enregistrer nom
+            $nom = $user->getNom();
             $nom = strip_tags($nom);
-            $contact->setNom($nom);
+            $user->setNom($nom);
 
             //enregistrer prenom
-            $prenom = $contact->getPrenom();
+            $prenom = $user->getPrenom();
             $prenom = strip_tags($prenom);
-            $contact->setPrenom($prenom);
-
-
+            $user->setPrenom($prenom);
 
             //enregistrer diplome
-            $diplome = $contact->getDiplome();
+            $diplome = $user->getDiplome();
             $diplome = strip_tags($diplome);
-            $contact->setDiplome($diplome);
+            $user->setDiplome($diplome);
 
             //enregistrer le date naissance 
-            $date_naissance = $contact->getDateNaissance();
-            $contact->setDateNaissance($date_naissance);
+            $date_naissance = $user->getDateNaissance();
+            $user->setDateNaissance($date_naissance);
 
             $doctrine = $this->getDoctrine();
             $entityManager = $doctrine->getManager();
 
-            $entityManager->persist($contact);
+            $entityManager->persist($user);
             $entityManager->flush();
             return $this->redirect($this->generateUrl('login'));
         }
@@ -315,7 +326,6 @@ class InscriptionController extends AbstractController
             ]
         );
     }
-
 
     public function inscriptionEleveAS(Request $request): Response
     {
