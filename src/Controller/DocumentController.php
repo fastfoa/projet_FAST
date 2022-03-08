@@ -44,7 +44,7 @@ class DocumentController extends AbstractController
         return null;
     }
 
-    public function upload($retour,     Request $request, SluggerInterface $slugger): Response
+    public function upload($retour, Request $request, SluggerInterface $slugger): Response
     {
         $ret = $this->checkRGPD();
         if ($ret)
@@ -183,7 +183,6 @@ class DocumentController extends AbstractController
                 $entityManager->persist($up); // On confie notre entit&#xE9; &#xE0; l'entity manager (on persist l'entit&#xE9;)
                 $entityManager->flush();
 
-
                 if( $up->getOFormation() )
                 {
                     $recipient = new RecipientDocument();
@@ -207,15 +206,21 @@ class DocumentController extends AbstractController
                     $recipient->setIdRecipient( $resApp['id'] );
                     $entityManager->persist($recipient); // On confie notre entit&#xE9; &#xE0; l'entity manager (on persist l'entit&#xE9;)    
                 }
+                if ( $resMA['role_string'] == 'ROLE_IND' )
+                    $resENT = $nameMA;    
+                else
+                    $resENT =  getENTFromMA($login, $pw, $resMA['id'] );
 
+                //dd( )
                 if( $resFormateur && $up->getFormateur() )
                 {
-                    $recipient = new RecipientDocument();
-                    $recipient->setIdDocument( $up->getId());
-                    $recipient->setIdRecipient( $resFormateur['id'] );
-                    $entityManager->persist($recipient); // On confie notre entit&#xE9; &#xE0; l'entity manager (on persist l'entit&#xE9;)    
+                    foreach ( $resFormateur as $key =>  $for) {
+                        $recipient = new RecipientDocument();
+                        $recipient->setIdDocument( $up->getId());
+                        $recipient->setIdRecipient( $for['id'] );
+                        $entityManager->persist($recipient); // On confie notre entit&#xE9; &#xE0; l'entity manager (on persist l'entit&#xE9;)                    }
+                    }
                 }
-
                 if( $resENT && $up->getEntreprise() )
                 {
                     $recipient = new RecipientDocument();
@@ -226,7 +231,8 @@ class DocumentController extends AbstractController
                 $entityManager->flush();
 
                 $this->addFlash('message', "Document ajouté");
-                return $this->redirect( $retour );
+                //dd( $retour );
+                return $this->redirectToRoute( $retour );
             }
         }
 

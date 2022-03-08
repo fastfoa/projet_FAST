@@ -1,7 +1,5 @@
 <?php
 
-
-
 use PDO;
 
 
@@ -13,6 +11,7 @@ function getInfoOF()
         'prenom' => 'Jean-Philippe',
         'email' => 'jean-philippe.vidal@foreach-academy.fr',
         'telephone' => 'XXXXXXXXXX',
+        'id' => 1,
     ];
 
     return $infoOF;
@@ -150,7 +149,7 @@ function getNameSessionFromApprenti($login, $pw, $idApprenti)
     return getSQLSingleAssoc(
         $login,
         $pw,
-        "SELECT s.nom                   
+        "SELECT s.nom                  
          FROM user_in_session as u, session as s          
          WHERE s.id = u.id_session and u.id_user='$idApprenti'"
     )['nom'];
@@ -346,6 +345,3 @@ function getUserFromMail($login, $pw, $mail )
         FROM  user 
         WHERE email='$mail'");
 }
-
-
-

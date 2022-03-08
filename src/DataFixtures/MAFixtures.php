@@ -11,8 +11,6 @@ use Faker;
 
 class MAFixtures extends Fixture
 {
-
-
     public function load(ObjectManager $manager): void
     {
         // composer require fzaninotto/faker
