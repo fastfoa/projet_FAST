@@ -30,7 +30,7 @@ class EvaluationController extends AbstractController
             'controller_name' => 'EvaluationController',
         ]);
     }
-
+// fonction qui permet de vérifier l'acceptation du RGPD
     function checkRGPD()
     {
         $user = $this->getUser();
@@ -46,7 +46,7 @@ class EvaluationController extends AbstractController
         $ret = $this->checkRGPD();
         if ( $ret )
             return $ret;
-
+//connexion à la base de donnée 
         $login = $this->getParameter('loginDB');
         $pw = $this->getParameter('PasswordDB');
     
@@ -57,13 +57,13 @@ class EvaluationController extends AbstractController
 
         $user       = $this->getUser();
         $role       = $user->getRoleString();
-        
+// Conversion de l'entité user en sql
         $user       = convertUserEntity2SQL( $login, $pw, $user->getId() );
         $app        = convertUserEntity2SQL( $login, $pw, $app->getId() );
         $formateur  = convertUserEntity2SQL( $login, $pw, getFormateursFromApprenti($login, $pw, $app['id'] )[0]['id']);
         $MA         = convertUserEntity2SQL( $login, $pw, getMAFromApprenti($login, $pw, $app['id'] )['id']);
         $OF         = getInfoOF();
-
+//test pour diriger vers le formulaire en fonction du rôle de l'utilisateur.
         if ( $role == "ROLE_APP" )
         {
             $app = $user;
@@ -97,12 +97,12 @@ class EvaluationController extends AbstractController
       
         $form = $this->createForm( $type, $evaluation);
         $form->handleRequest($request);
-
+// vérification du formulaire si soumis et valide 
         if ($form->isSubmitted() && $form->isValid()) 
         {
             $doctrine = $this->getDoctrine();
             $entityManager = $doctrine->getManager();
-
+// si l'utilisateur qui soumets est l'apprenti alors on enregistre la date dans le champs DateApp
             if ( $role == "ROLE_APP" )
             {
                 $evaluation->setDateApp( new \DateTime('now') );
@@ -119,18 +119,17 @@ class EvaluationController extends AbstractController
             {
                 $evaluation->setDateOF( new \DateTime('now') );
             }
-    
+ // on garde en mémoire avec persist et on flush on inscrit dans la base de donnée.   
             $entityManager->persist($evaluation);
             $entityManager->flush();
             $message = "le formulaire a bien était pris en compte ";
         }
-
+//retourne toutes les variables, les variables, on crée le formulaire, menu fonction de l'utilisateur.
         return $this->render('evaluation/saisiEvaluation.html.twig', [
                 'MA' => $MA,
                 'OF' => $OF,
                 'formateur' => $formateur,
-                'app'=>$app,
-                
+                'app'=>$app,  
                 'form' => $form->createView(),
                 'nameCompet' => $nameCompet,
                 'message' => $message,
@@ -152,7 +151,7 @@ class EvaluationController extends AbstractController
  
         $user       = $this->getUser();
         $role       = $user->getRoleString();
-        
+  //conversion en sql pour avoir accès aux données en version dictionnaire.      
         $user       = convertUserEntity2SQL( $login, $pw, $user->getId() );
         $app        = convertUserEntity2SQL( $login, $pw, $eval->getIdApp() );
         $formateur  = convertUserEntity2SQL( $login, $pw, $eval->getIdFormateur() );

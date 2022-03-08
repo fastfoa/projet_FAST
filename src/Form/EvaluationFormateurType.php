@@ -45,9 +45,6 @@ class EvaluationFormateurType extends AbstractType
                     
                 ]
             ])
-           
-
-
             ->add('Enregistrer', SubmitType::class, [
                 'attr' => [
                     'class' => 'boutonForm'

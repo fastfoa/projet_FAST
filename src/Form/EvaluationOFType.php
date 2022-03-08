@@ -53,9 +53,6 @@ class EvaluationOFType extends AbstractType
                     'onchange' => "$('#resultRange').text(this.value)"
                 ],
             ])
-
-
-
             ->add('Enregistrer', SubmitType::class, [
                 'attr' => [
                     'class' => 'boutonForm'
