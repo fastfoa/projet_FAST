@@ -146,7 +146,7 @@ function getNameSessionFromApprenti($login, $pw, $idApprenti)
     return getSQLSingleAssoc(
         $login,
         $pw,
-        "SELECT s.nom                   
+        "SELECT s.nom                  
          FROM user_in_session as u, session as s          
          WHERE s.id = u.id_session and u.id_user='$idApprenti'"
     )['nom'];
@@ -304,5 +304,3 @@ function getDocsFromUser($login, $pw, $id )
         FROM document, user
         WHERE user.id=document.id_owner AND user.id=".$id);
 }
-
-

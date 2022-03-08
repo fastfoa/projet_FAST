@@ -1,4 +1,10 @@
 <?php
+/*
+    controller pour les inscription USER
+    12/2/2022 
+
+
+*/
 
 namespace App\Controller;
 
@@ -61,6 +67,7 @@ class InscriptionController extends AbstractController
         {
             //enregistrer le Nom 
         
+            // la valeur est forcée parce que non nullable
             $user->setRoles(['ROLE_ENT']);
             $user->setRoleString('ROLE_ENT');
             
