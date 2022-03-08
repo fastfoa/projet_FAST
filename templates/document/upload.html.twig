@@ -1,82 +1,106 @@
 {% extends 'base.html.twig' %}
 {% block myStylesheets %}
-        <link rel="stylesheet" href='{{ asset("css/follow.css")}}'>
-        <link rel="stylesheet" href='{{ asset("css/login.css")}}'> 
-        <link rel="stylesheet" href='{{ asset("css/lan.css")}}'> 
+        <style>
+        .myHidden 
+        {
+                height :1px;
+        }
+        </style>
 {% endblock %}
 
 
-    {% block title %}UPLOAD FICHIER{% endblock %}
+{% block title %}UPLOAD FICHIER
+{% endblock %}
 
 
 {% block body %}
-<div class="container bg-workSpace fit50 pb-2">
-    <div class="row bg-bar">
-        <h2 class="col-12 ">Upload Document</h2>
-    </div>
-            {{ form_start(myForm) }}
-    <div class="row align-middle">           
-                <div class="input-field col-6 my-auto">
-                     {{ form_widget(myForm.titre, {'attr': {'placeholder': 'Titre'}}) }}
-                </div>
-                <div class="input-field col-6 my-auto">
-                     {{ form_widget(myForm.fileName, {'attr': {'placeholder': 'message'}}) }}
-                </div>
-    </div>
-    <div class="row mx-auto"> 
-        <div class="col-12 text-justify">
-                <div class="row"> 
-                    <div class="form-check col-8">
-                            OF
-                    </div>
-                    <div class="form-check col-2">
-                            {{ form_widget(myForm.OFormation) }}
-                    </div>
-                </div>
-                <div class="row"> 
-                    <div class="form-check col-8">
-                            {{ nameMA|default('pas de MA') }}
-                    </div>
-                    <div class="form-check col-2">
-                            {{ form_widget(myForm.MA) }}
-                    </div>
-                </div>
-                <div class="row"> 
-                    <div class="form-check col-8">
-                            Formateur
-                    </div>
-                    <div class="form-check col-2">
-                            {{ form_widget(myForm.formateur) }}
-                    </div>
-                </div>
-                <div class="row"> 
-                    <div class="form-check col-8">
-                            Entreprise
-                    </div>
-                    <div class="form-check col-2">
-                            {{ form_widget(myForm.entreprise) }}
-                    </div>
-                </div>
-                <div class="row"> 
-                    <div class="form-check col-8">
-                            Apprenti
-                    </div>
-                    <div class="form-check col-2">
-                            {{ form_widget(myForm.apprenti) }}
-                    </div>
-                </div>
-        </div>       
-    </div>  
-    <div class="row mb-2">
-                <div class="mx-auto col-6">
-                    <a href="{{ path( 'downloadlist') }}"><div class="btn btn-danger"  alt="Retour"  >Retour</div></a>
-                 </div>
-                <div class="mx-auto col-6">
-                    <button class="btn btn-success" type="submit" >Uploader</button>
-                </div>
-        </div>
-    </div> 
-        {{ form_end(myForm) }}
-</div>
-   
-{% endblock %}
+	<div class="container bg-workSpace fit50 pb-2">
+		<div class="row bg-bar">
+			<h2 class="col-12 ">Upload Document</h2>
+		</div>
+		{{ form_start(myForm) }}
+		<div class="row align-middle">
+			<div class="input-field col-6 my-auto">
+				{{ form_widget(myForm.titre, {'attr': {'placeholder': 'Titre'}}) }}
+			</div>
+			<div class="input-field col-6 my-auto">
+				{{ form_widget(myForm.fileName, {'attr': {'placeholder': 'message'}}) }}
+			</div>
+		</div>
+		<div class="row mx-auto">
+			<div class="col-12 text-justify">
+				{% if role != 'ROLE_OF' %}
+                                        <div class="row">
+                                                <div class="form-check col-8">
+                                                        {{ nameOF|default('pas de OF') }}
+                                                </div>
+                                                <div class="form-check col-2">
+                                                        {{ form_widget(myForm.OFormation) }}
+
+                                                </div>
+                                        </div>
+                                {% endif %}
+				{% if role != 'ROLE_MA' and  nameMA != '' %}
+                                        <div class="row">
+				{% else %}
+                                        <div class="row invisible myHidden">
+                                {% endif %}
+                                                <div class="form-check col-8">
+                                                        {{ nameMA|default('pas de MA') }}
+                                                </div>
+                                                <div class="form-check col-2">
+                                                        {{ form_widget(myForm.MA) }}
+                                                </div>
+                                        </div>
+				{% if role != 'ROLE_FORMATEUR' and nameFormateur != '' %}
+                                        <div class="row">
+				{% else %}
+                                        <div class="row invisible myHidden">
+                                {% endif %}
+                                                <div class="form-check col-8">
+                                                        {{ nameFormateur|default('pas de Formateur') }}
+                                                </div>
+                                                <div class="form-check col-2">
+                                                        {{ form_widget(myForm.formateur) }}
+                                                </div>
+                                        </div>
+				{% if role != 'ROLE_ENT' and nameEntreprise != '' %}
+                                        <div class="row">
+				{% else %}
+                                        <div class="row invisible myHidden">
+                                {% endif %}
+
+                                                <div class="form-check col-8">
+                                                        {{ nameEntreprise|default('pas d Entreprise') }}
+                                                </div>
+                                                <div class="form-check col-2">
+                                                        {{ form_widget(myForm.entreprise) }}
+                                                </div>
+                                        </div>
+				{% if role != 'ROLE_APP' and nameApprenti != '' %}
+                                        <div class="row">
+				{% else %}
+                                        <div class="row invisible myHidden">
+                                {% endif %}
+                                                        <div class="form-check col-8">
+                                                        {{ nameApprenti|default('pas de APP') }}
+                                                </div>
+                                                <div class="form-check col-2">
+                                                        {{ form_widget(myForm.apprenti) }}
+                                                </div>
+                                        </div>
+			</div>
+		</div>
+		<div class="row mb-2">
+			<div class="mx-auto col-6">
+				<a href="{{ path( 'downloadlist') }}">
+				        <div class="btn btn-danger" onclick="rtn()" alt="Retour">Retour</div>
+				</a>
+			</div>
+			<div class="mx-auto col-6">
+				<button class="btn btn-success" type="submit">Uploader</button>
+			</div>
+		</div>
+	</div>
+	{{ form_end(myForm) }}
+</div>{% endblock %}

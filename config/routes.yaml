@@ -35,7 +35,7 @@ test:
     controller: App\Controller\LanController::test
 
 upload: 
-    path: /upload
+    path: /upload/{retour}
     controller: App\Controller\DocumentController::upload
 
 getInfoDoc: 
@@ -75,11 +75,6 @@ documents:
 aide:
     path: /aide
     controller: App\Controller\LanController::aide
-
-# compte
-comptexxxx:
-    path: /compte
-    controller: App\Controller\CompteController::monCompte
 
 compte:
     path: /modifInfoMonCompte

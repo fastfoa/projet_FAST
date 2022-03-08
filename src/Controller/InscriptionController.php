@@ -1,4 +1,10 @@
 <?php
+/*
+    controller pour les inscription USER
+    12/2/2022 
+
+
+*/
 
 namespace App\Controller;
 
@@ -60,49 +66,11 @@ class InscriptionController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) 
         {
             //enregistrer le Nom 
-            $raisonSocial = $user->getRaisonSocial();
-            $user->setRaisonSocial($raisonSocial);
-
-            //enregistrer l'Adresse 
-            $Adresse = $user->getAdresse();
-            $Adresse = strip_tags( $Adresse );
-            $user->setAdresse( $Adresse );
-
-            //enregistrer le Telephone 
-            $Telephone = $user->getTelephone();
-            $Telephone = strip_tags( $Telephone );
-            $user->setTelephone( $Telephone );
-
-            //enregistrer le Siret 
-            $Siret = $user->getSiret();
-            $Siret = strip_tags( $Siret );
-            $user->setSiret( $Siret );
-
-            //enregistrer le NAF 
-            $NAF = $user->getNAF();
-            $NAF = strip_tags( $NAF );
-            $user->setNAF( $NAF );
-
-            //enregistrer le Effectif 
-            $Effectif = $user->getEffectif();
-            $Effectif = strip_tags( $Effectif );
-            $user->setEffectif( $Effectif );
-
-            //enregistrer la ConventionCollective 
-            $ConventionCollective = $user->getConventionCollective();
-            $ConventionCollective = strip_tags( $ConventionCollective );
-            $user->setEffectif( $ConventionCollective );
-
-            //enregistrer Employeur Public|| Public 
-            $EmployeurPublic = $user->getEmployeurPublic();
-            $EmployeurPublic = strip_tags( $EmployeurPublic );
-            $user->setEmployeurPublic( $EmployeurPublic );
-             
-            //enregistrer Employeur Public|| Public 
-            $CodeIDCCConvention = $user->getCodeIDCCConvention();
-            $CodeIDCCConvention = strip_tags( $CodeIDCCConvention );
-            $user->setCodeIDCCConvention( $CodeIDCCConvention );
-
+        
+            // la valeur est forcée parce que non nullable
+            $user->setRoles(['ROLE_ENT']);
+            $user->setRoleString('ROLE_ENT');
+            
             $doctrine = $this->getDoctrine();
             $entityManager = $doctrine->getManager();
 

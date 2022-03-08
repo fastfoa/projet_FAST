@@ -1,4 +1,10 @@
 <?php
+/*
+    controlleur pour modifier ses informations personelles 
+    7/03/2022
+
+*/
+
 
 namespace App\Controller;
 
@@ -17,13 +23,15 @@ use App\Form\MonCompteOFType;
 
 class CompteController extends AbstractController
 {
-    function checkRGPD()
+    public function checkRGPD()
     {
         $user = $this->getUser();
-        if ( $user == null )
-           return $this->redirectToRoute( "login" );
-         if ( !$user->getRGPDOK())
-            return $this->redirectToRoute( "rgpdForm" );
+        if ($user == null) {
+            return $this->redirectToRoute("login");
+        }
+        if (!$user->getRGPDOK()) {
+            return $this->redirectToRoute("rgpdForm");
+        }
         return null;
     }
     
@@ -33,34 +41,35 @@ class CompteController extends AbstractController
     public function index(): Response
     {
         $ret = $this->checkRGPD();
-        if ( $ret )
+        if ($ret) {
             return $ret;
+        }
         
         $user = $this->getUser();
        
-        return $this->render('compte/compte.html.twig',
-    [
+        return $this->render(
+            'compte/compte.html.twig',
+            [
         'user' => $user
-    ]);
+    ]
+        );
     }
 
-    public function modifInfoMonCompte(Request $request ): Response
+    public function modifInfoMonCompte(Request $request): Response
     {
         $ret = $this->checkRGPD();
         if ($ret) {
             return $ret;
         }
 
-        $notification = null;
         $contact = $this->getUser();
-
         $role = $contact->getRoleString();
 
-        //dd( $role );
         $type =  null;
         $twig = '';
 
-
+        // définir le type de formaulaire et le twig en rapport 
+        // au type du compte user
         if ($role == 'ROLE_APP') {
             $type =  MonCompteAppType::class;
             $twig = 'compte/mon_compte/monCompteApp.html.twig';
@@ -94,19 +103,17 @@ class CompteController extends AbstractController
         $form = $this->createForm($type, $contact);
         $form->handleRequest($request);
 
-        if($form->isSubmitted())
-        {
+        if ($form->isSubmitted() && $form->isValid()) {
             $doctrine = $this->getDoctrine();
             $entityManager = $doctrine->getManager();
-            $entityManager->persist($contact); // On confie notre entit&#xE9; &#xE0; l'entity manager (on persist l'entit&#xE9;)
+            $entityManager->persist($contact);
             $entityManager->flush();
             return $this->redirectToRoute('compte');
         }
         
         return $this->render($twig, [
             'form' => $form->createView(),
-            'notification' => $notification,
-            'menu' => getMenuFromRole( $this->getUser()->getRoleString() ),            
+            'menu' => getMenuFromRole($this->getUser()->getRoleString()), //envoye le menu part a port a son role
 
         ]);
     }
