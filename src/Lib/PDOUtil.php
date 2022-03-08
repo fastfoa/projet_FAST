@@ -32,6 +32,8 @@ function getMenuFromRole($role)
         
         'ROLE_APP'=> 
         [
+            'Apprentis' => 'listAllAprentis', 
+            'Formateurs' => 'listAllFormateurs', 
         ],
         'ROLE_ENT'=> 
         [
