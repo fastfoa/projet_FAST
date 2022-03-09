@@ -135,24 +135,33 @@ function getSQLSingleAssoc($login, $pw, $query)
 
 function getIdSessionFromApprenti($login, $pw, $idApprenti)
 {
-    return getSQLSingleAssoc(
+    $res =  getSQLSingleAssoc(
         $login,
         $pw,
         "SELECT id_session                   
          FROM user_in_session          
          WHERE id_user='$idApprenti'"
-    )['id_session'];
+    );
+    if ( $res ) 
+        return $res['id_session'];
+    return $res;
+    
 }
 
 function getNameSessionFromApprenti($login, $pw, $idApprenti)
 {
-    return getSQLSingleAssoc(
+
+    $ret = getSQLSingleAssoc(
         $login,
         $pw,
         "SELECT s.nom                  
          FROM user_in_session as u, session as s          
          WHERE s.id = u.id_session and u.id_user='$idApprenti'"
-    )['nom'];
+    );
+    if ( $ret )
+        return $ret['nom'];
+    return false;
+    
 }
 // ********************************* requetes 
 

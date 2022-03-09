@@ -206,11 +206,6 @@ class DocumentController extends AbstractController
                     $recipient->setIdRecipient( $resApp['id'] );
                     $entityManager->persist($recipient); // On confie notre entit&#xE9; &#xE0; l'entity manager (on persist l'entit&#xE9;)    
                 }
-                if ( $resMA['role_string'] == 'ROLE_IND' )
-                    $resENT = $nameMA;    
-                else
-                    $resENT =  getENTFromMA($login, $pw, $resMA['id'] );
-
                 //dd( )
                 if( $resFormateur && $up->getFormateur() )
                 {
