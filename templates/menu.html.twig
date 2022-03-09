@@ -4,13 +4,14 @@
 			<img src="{{ asset('images/logo-foreach-blanc.png') }}">
 		</div>
 		{# le bouton de retour s'affiche seulement si l'user est coonecté #}	
-		{% if is_granted('IS_AUTHENTICATED_FULLY') %}
-			<button  class="boutonForm my-2 my-sm-0 m-3" onclick="rtn()"><i class="fa fa-undo"></i></button>
+		{% if is_granted('IS_AUTHENTICATED_FULLY') %}	
+			<button  class="boutonForm my-2 my-sm-0 m-3" onclick="rtn()"><i class="fa fa-arrow-left"></i></button>
 			<script>
 				function rtn() {
 					window.history.back();
 					}
 			</script>
+
 		{% endif %}
 		<ul class="navbar-nav me-auto fith100">
 			<li class="nav-item ">

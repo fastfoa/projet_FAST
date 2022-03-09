@@ -156,7 +156,7 @@ class DashController extends AbstractController
             'dash/dashEntreprise.html.twig',
             [
                 'document'      => $listDoc,
-                'id'            => $uid,
+                'user'           => $user,
                 'entreprise'    => $entreprise,
                 'app'           => $app,
                 'ma'            => $MA,
@@ -388,7 +388,7 @@ class DashController extends AbstractController
             'dash/dashApp.html.twig',
             [
                 'document'      => $listDoc,
-                'id'            => $uid,
+                'user'          => $user,
                 'entreprise'    => $entreprise,
                 'app'           => $app,
                 'ma'            => $MA,

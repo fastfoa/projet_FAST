@@ -24,7 +24,7 @@ class MonCompteAppType extends AbstractType
             'disabled' => true,
             'attr' => [
                 'placeholder' => 'nom',
-                'style'=> 'color: white'
+                'style'=> 'color: grey !important'
             ]
         ])
         ->add('prenom', TextType::class,[
@@ -32,27 +32,29 @@ class MonCompteAppType extends AbstractType
             'disabled' => true,
             'attr' => [
                 'placeholder' => 'prenom',
-                'style'=> 'color: white'
+                'style'=> 'color: grey !important'
             ]
         ])
         ->add('email', TextType::class,[
             'disabled' => true,
             'attr' => [ 
                 'placeholder' => 'Entrez votre adresse email',
-                'style'=> 'color: white'
+                'style'=> 'color: grey !important'
                 ] 
         ])
 
         ->add('adresse', TextType::class,[
             'label'=> false,
             'attr' => [
-                'placeholder' => 'adresse'
+                'placeholder' => 'adresse',
+                'style'=> 'color: black !important'
             ]
         ])
         ->add('telephone', TextType::class,[
             'label'=> false,
             'attr' => [
-                'placeholder' => 'telephone'
+                'placeholder' => 'telephone',
+                'style'=> 'color: black !important'
             ]
         ])
 
@@ -60,13 +62,15 @@ class MonCompteAppType extends AbstractType
         ->add('RepresentantLegal1', TextType::class,[
             'label'=> false,
             'attr' => [
-                'placeholder' => 'Representant Legal 1'
+                'placeholder' => 'Representant Legal 1',
+                'style'=> 'color: black !important'
             ]
         ])
         ->add('RepresentantLegal2', TextType::class,[
             'label'=> false,
             'attr' => [
-                'placeholder' => 'Representant Legal 2'
+                'placeholder' => 'Representant Legal 2',
+                'style'=> 'color: black !important'
             ]
         ])
         ->add('TravailleurHandicape', ChoiceType::class,[

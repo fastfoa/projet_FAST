@@ -25,34 +25,36 @@ class MonCompteFormateurType extends AbstractType
            'disabled' => true,
            'attr' => [
                'placeholder' => 'email',
-               'style'=> 'color: white'
+               'style'=> 'color: grey !important'
            ]
        ])
 
        ->add('nom', TextType::class,[
+           'disabled' => true,
            'attr' => [
                'placeholder' => 'nom',
-              
+               'style'=> 'color: grey !important'
            ]
        ])
        ->add('prenom',TextType::class,[
            'disabled' => true,
            'attr' => [
                'placeholder' => 'Prenom',
-               'style'=> 'color: white'
+               'style'=> 'color: grey !important'
            ]
        ])
     
        ->add('adresse',TextType::class,[
            'attr' => [
                'placeholder' => 'adresse',
-             
+               'style'=> 'color: black !important'
            ]
        ])
        ->add('telephone', TextType::class,[
         'label'=> false,
         'attr' => [
-            'placeholder' => 'telephone'
+            'placeholder' => 'telephone',
+            'style'=> 'color: black !important'
         ]
     ])
 

@@ -11,6 +11,7 @@ function getInfoOF()
         'prenom' => 'Jean-Philippe',
         'email' => 'jean-philippe.vidal@foreach-academy.fr',
         'telephone' => 'XXXXXXXXXX',
+        'id' => 1,
     ];
 
     return $infoOF;
@@ -30,6 +31,8 @@ function getMenuFromRole($role)
         
         'ROLE_APP'=> 
         [
+            'Apprentis' => 'listAllAprentis', 
+            'Formateurs' => 'listAllFormateurs', 
         ],
         'ROLE_ENT'=> 
         [
@@ -146,7 +149,7 @@ function getNameSessionFromApprenti($login, $pw, $idApprenti)
     return getSQLSingleAssoc(
         $login,
         $pw,
-        "SELECT s.nom                   
+        "SELECT s.nom                  
          FROM user_in_session as u, session as s          
          WHERE s.id = u.id_session and u.id_user='$idApprenti'"
     )['nom'];
@@ -201,8 +204,44 @@ function getAppFromMA($login, $pw, $idMA)
           FROM app_has_ma as a          
           RIGHT JOIN user as u ON u.id=a.id_apprenti 
           WHERE a.id_ma='$idMA'"
-    );
-}
+      );
+     }
+      function getENTFromMA($login, $pw, $idMA) 
+      {
+        return getSQLSingleAssoc($login, $pw,
+        "SELECT u.nom, u.id, u.role_string , u.raison_social                 
+         FROM mahas_ent as me          
+         RIGHT JOIN user as u ON u.id=me.id_ent 
+         WHERE me.id_ma=$idMA"
+        );
+      }
+
+      
+        function getSessionFromApp($login, $pw, $idApp)
+        {
+            return getSQLSingleAssoc( $login, $pw, 
+            "SELECT id_session 
+             FROM user_in_session as us
+             RIGHT JOIN user as u on u.id=us.id_user
+             WHERE us.id_user='$idApp'"
+            
+        );
+        }
+
+        function getSessionFromEnt($login, $pw, $idEnt)
+        {
+            return getSQLSingleAssoc( $login, $pw, 
+            "SELECT id_session 
+             FROM user_in_session 
+             WHERE id_user='$idEnt'"
+            
+        );
+        
+        }
+
+     
+    
+
 
 function convertUserEntity2SQL($login, $pw, $id)
 {
@@ -214,6 +253,7 @@ function convertUserEntity2SQL($login, $pw, $id)
           WHERE id='$id'"
     );
 }
+
 
 function convertSessionEntity2SQL($login, $pw, $id)
 {
@@ -260,15 +300,7 @@ function getUsersFromRole($login, $pw, $role)
     );
 }
 
-function getENTFromMA($login, $pw, $idMA) 
-{
-    return getSQLSingleAssoc($login, $pw,
-    "SELECT u.nom, u.id, u.role_string , u.raison_social
-        FROM mahas_ent as me
-        RIGHT JOIN user as u ON u.id=me.id_ent 
-        WHERE me.id_ma=$idMA"
-    );
-}
+
 
 function getAppsFromSession($login, $pw, $idSession ) 
 {
@@ -306,3 +338,10 @@ function getDocsFromUser($login, $pw, $id )
 }
 
 
+function getUserFromMail($login, $pw, $mail ) 
+{
+    return getSQLArrayAssoc( $login, $pw, 
+    "SELECT * 
+        FROM  user 
+        WHERE email='$mail'");
+}
