@@ -51,15 +51,14 @@ class InscriptionController extends AbstractController
         return null;
     }
 
-    public function inscriptionEntreprise(Request $request): Response
+    public function inscriptionEntreprise(User $user, Request $request): Response
     {
         $ret = $this->checkRGPD();
         if ( $ret )
             return $ret;
 
-        $user = new User();
+        $user = $this->getUser();
 
-        //$user->setNom( 'toto');
         $form = $this->createForm(InscriptionEntrepriseType::class, $user);
 
         $form->handleRequest($request);
@@ -76,14 +75,13 @@ class InscriptionController extends AbstractController
 
             $entityManager->persist($user);
             $entityManager->flush();
-            return $this->redirect($this->generateUrl('login'));
+            return $this->redirectToRoute('dashEntreprise');
         }
         return $this->render('inscription/inscriptionEntreprise.html.twig', [
             'form' => $form->createView(),
         ]);
     }
     
-
     public function userGeneralForm(Request $request, User $user): Response
     {
         $ret = $this->checkRGPD();
@@ -198,8 +196,6 @@ class InscriptionController extends AbstractController
             $prenom = $contact->getPrenom();
             $prenom = strip_tags($prenom);
             $contact->setPrenom($prenom);
-
-
 
             //enregistrer diplome
             $diplome = $contact->getDiplome();
