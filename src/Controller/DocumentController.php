@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Entity\Document;
 use App\Entity\RecipientDocument;
-use App\Form\DocumentType;
 use App\Form\DocumentExtType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -15,12 +14,8 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\HeaderUtils;
-use Symfony\Component\Validator\Constraints\DateTime;
-use Symfony\Component\HttpFoundation\RedirectResponse;
-use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\User;
-use PDO;
-use App\Entity\Session;
+
 
 class DocumentController extends AbstractController
 {
@@ -33,6 +28,7 @@ class DocumentController extends AbstractController
             'controller_name' => 'DocumentController',
         ]);
     }
+
 
     function checkRGPD()
     {
@@ -54,9 +50,11 @@ class DocumentController extends AbstractController
         $user = $this->getUser();
         $roleString = $user->getRoleString();
 
+        // parametre pour accès à PDO
         $login = $this->getParameter('loginDB');
         $pw = $this->getParameter('PasswordDB');
 
+        // mise à zéro
         $nameMA = "";
         $nameOF = "";
         $nameFormateur = "";
@@ -67,6 +65,7 @@ class DocumentController extends AbstractController
         $resFormateur   = false;
         $resENT         = false;
 
+        //1 seul responsable OF 
         $nameOF = 'FOREACH';
 
 
@@ -109,9 +108,6 @@ class DocumentController extends AbstractController
             $resFormateur = getUsersFromRoleSession($login, $pw, "ROLE_FORMATEUR", $idSession);
             $nameFormateur = $resFormateur[0]['prenom'] . " " . $resFormateur[0]['nom'] . " (FOR)";
 
-            $nameMA = '';
-
-            $nameOF = 'FOREACH';
         } 
         else if ($roleString == 'ROLE_ENT') //  ENT / FOR / OF /App/ MA
         {
@@ -138,11 +134,6 @@ class DocumentController extends AbstractController
                 }
             }
         } 
-
-        $nameOF = 'FOREACH';
-
-
-
 
         $formulaire = $this->createForm(DocumentExtType::class, $up);
         $formulaire->handleRequest($request);
@@ -180,15 +171,16 @@ class DocumentController extends AbstractController
                 $doctrine = $this->getDoctrine();
                 $entityManager = $doctrine->getManager();
 
-                $entityManager->persist($up); // On confie notre entit&#xE9; &#xE0; l'entity manager (on persist l'entit&#xE9;)
+                $entityManager->persist($up); 
                 $entityManager->flush();
 
+                // envoye des document avec les CheckboxType
                 if( $up->getOFormation() )
                 {
                     $recipient = new RecipientDocument();
                     $recipient->setIdDocument( $up->getId());
                     $recipient->setIdRecipient( getUserFromMail($login, $pw, 'foreach@academy.fr' )['id'] );
-                    $entityManager->persist($recipient); // On confie notre entit&#xE9; &#xE0; l'entity manager (on persist l'entit&#xE9;)    
+                    $entityManager->persist($recipient);     
                 }
 
                 if( $resMA && $up->getMA() )
@@ -196,7 +188,7 @@ class DocumentController extends AbstractController
                     $recipient = new RecipientDocument();
                     $recipient->setIdDocument( $up->getId());
                     $recipient->setIdRecipient( $resMA['id'] );
-                    $entityManager->persist($recipient); // On confie notre entit&#xE9; &#xE0; l'entity manager (on persist l'entit&#xE9;)    
+                    $entityManager->persist($recipient);     
                 }
 
                 if( $resApp && $up->getApprenti() )
@@ -204,7 +196,7 @@ class DocumentController extends AbstractController
                     $recipient = new RecipientDocument();
                     $recipient->setIdDocument( $up->getId());
                     $recipient->setIdRecipient( $resApp['id'] );
-                    $entityManager->persist($recipient); // On confie notre entit&#xE9; &#xE0; l'entity manager (on persist l'entit&#xE9;)    
+                    $entityManager->persist($recipient);     
                 }
                 //dd( )
                 if( $resFormateur && $up->getFormateur() )
@@ -213,7 +205,7 @@ class DocumentController extends AbstractController
                         $recipient = new RecipientDocument();
                         $recipient->setIdDocument( $up->getId());
                         $recipient->setIdRecipient( $for['id'] );
-                        $entityManager->persist($recipient); // On confie notre entit&#xE9; &#xE0; l'entity manager (on persist l'entit&#xE9;)                    }
+                        $entityManager->persist($recipient); 
                     }
                 }
                 if( $resENT && $up->getEntreprise() )
@@ -221,7 +213,7 @@ class DocumentController extends AbstractController
                     $recipient = new RecipientDocument();
                     $recipient->setIdDocument( $up->getId());
                     $recipient->setIdRecipient( $resENT['id'] );
-                    $entityManager->persist($recipient); // On confie notre entit&#xE9; &#xE0; l'entity manager (on persist l'entit&#xE9;)    
+                    $entityManager->persist($recipient);     
                 }
                 $entityManager->flush();
 
