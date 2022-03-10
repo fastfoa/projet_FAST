@@ -111,6 +111,8 @@ class DashController extends AbstractController
         return $this->redirectToRoute("dashOFPrincipal");
     }
 
+    
+
     public function dashEntreprise(): Response
     {
         $infoOF = getInfoOF();
@@ -165,6 +167,58 @@ class DashController extends AbstractController
             ]
         );
     }
+
+    
+    public function dashFormateur(): Response
+    {
+        $ret = $this->checkRGPD();
+        if ($ret)
+            return $ret;
+
+        $infoOF = getInfoOF();
+
+        $login = $this->getParameter('loginDB');
+        $pw = $this->getParameter('PasswordDB');
+
+        $user       = $this->getUser();
+        $role       = $user->getRoleString();
+        $user       = convertUserEntity2SQL($login, $pw, $user->getId());
+        $formateur = $user;
+        $session = false;
+        $listAPP = false;
+        $listFORMATEUR = false;
+        $listMA = false;
+
+        //dd( $user );
+        
+
+        $sessionID = getIdSessionFromApprenti($login, $pw, $user['id']);
+        //dd( $sessionID );
+        if ( $sessionID != null )
+        {
+            $session =  convertSessionEntity2SQL($login, $pw, $sessionID);
+            $listAPP        =  getAppsFromSession($login, $pw, $sessionID ); 
+            $listFORMATEUR  =  getFormateurFromSession($login, $pw, $sessionID ); 
+            $listMA         =  getMAFromSession($login, $pw, $sessionID );
+        }
+        $listDoc = getDocsFromUser( $login, $pw, $user['id'] );
+
+        //dd( $user );
+        return $this->render(
+        'dash/dashFormateur.html.twig', 
+            [
+                'user'          => $user,
+                'document'      => $listDoc,
+                'OF'            => $infoOF,
+                'listMA'        => $listMA,
+                'listFORMATEUR' => $listFORMATEUR,
+                'listAPP'       => $listAPP,
+                'session'       => $session,
+                'menu'          => getMenuFromRole($this->getUser()->getRoleString())
+            ]
+        );
+    }
+
 
     public function dashOFSession(Session $session): Response
     {

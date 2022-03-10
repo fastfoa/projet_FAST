@@ -35,6 +35,7 @@ class RGPDController extends AbstractController
     {
         $user = $this->getUser();
         $id = $user->getId();
+        $name = $user->getNom();
         $rgpd = $user->getRGPDOK();
         $role = $user->getRoles()[0];
 
@@ -46,9 +47,15 @@ class RGPDController extends AbstractController
             } elseif ($role == 'ROLE_APP') {
                 $redirect = 'dashApp';
             } elseif ($role == 'ROLE_ENT') {
-                $redirect = 'dashEntreprise';
+                if( $name =='' )
+                    $redirect = 'inscriptionEntreprise';
+                else
+                    $redirect = 'dashEntreprise';
             } elseif ($role == 'ROLE_FORMATEUR') {
-                $redirect = 'dashFormateur';
+                if( $name =='' )
+                    $redirect = 'inscriptionFormateur';
+                else
+                    $redirect = 'dashFormateur';
             } elseif ($role == 'ROLE_OF') {
                 $redirect = 'dashOFPrincipal';
             } elseif ($role == 'ROLE_MA') {
