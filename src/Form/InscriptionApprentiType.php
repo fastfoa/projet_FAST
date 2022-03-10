@@ -17,13 +17,13 @@ class InscriptionApprentiType extends AbstractType
     {
         $builder
             ->add('nom', TextType::class,[
-                'label'=> false,
+                 'label'=> false, 'required' => false,
                 'attr' => [
                     'placeholder' => 'nom'
                 ]
             ])
             ->add('prenom', TextType::class,[
-                'label'=> false,
+                 'label'=> false, 'required' => false,
                 'attr' => [
                     'placeholder' => 'prenom'
                 ]
@@ -33,19 +33,19 @@ class InscriptionApprentiType extends AbstractType
         )
 
             ->add('adresse', TextType::class,[
-                'label'=> false,
+                 'label'=> false, 'required' => false,
                 'attr' => [
                     'placeholder' => 'adresse'
                 ]
             ])
             ->add('telephone', TextType::class,[
-                'label'=> false,
+                 'label'=> false, 'required' => false,
                 'attr' => [
                     'placeholder' => 'telephone'
                 ]
             ])
             ->add('diplome', TextType::class,[
-                'label'=> false,
+                 'label'=> false, 'required' => false,
                 'attr' => [
                     'placeholder' => 'diplome'
                 ]
@@ -54,6 +54,7 @@ class InscriptionApprentiType extends AbstractType
 
             ->add('dateNaissance', DateType::class, [
                 'widget' => 'single_text',
+                'required' => false,
                 'attr' => [
                     'placeholder' => 'date',
                     'type' => 'text',
@@ -65,7 +66,7 @@ class InscriptionApprentiType extends AbstractType
                 'format' => 'yyyy-MM-dd'
             ])
             ->add('Genre', ChoiceType::class,[
-                'label'=> false,
+                 'label'=> false, 'required' => false,
                 'attr' => [
                     'placeholder' => 'Genre'
                 ],
@@ -75,49 +76,49 @@ class InscriptionApprentiType extends AbstractType
                 ],
             ])
             ->add('RepresentantLegal1', TextType::class,[
-                'label'=> false,
+                 'label'=> false, 'required' => false,
                 'attr' => [
                     'placeholder' => 'Representant Legal 1'
                 ]
             ])
             ->add('RepresentantLegal2', TextType::class,[
-                'label'=> false,
+                 'label'=> false, 'required' => false,
                 'attr' => [
                     'placeholder' => 'Representant Legal 2'
                 ]
             ])
             ->add('NIR', TextType::class,[
-                'label'=> false,
+                 'label'=> false, 'required' => false,
                 'attr' => [
                     'placeholder' => 'NIR'
                 ]
             ])
             ->add('DepNaissance', TextType::class,[
-                'label'=> false,
+                 'label'=> false, 'required' => false,
                 'attr' => [
                     'placeholder' => 'Departement de Naissance'
                 ]
             ])
             ->add('CommuneNaissance', TextType::class,[
-                'label'=> false,
+                 'label'=> false, 'required' => false,
                 'attr' => [
                     'placeholder' => 'Commune de Naissance'
                 ]
             ])
             ->add('Nationalite', TextType::class,[
-                'label'=> false,
+                 'label'=> false, 'required' => false,
                 'attr' => [
                     'placeholder' => 'Nationalite'
                 ]
             ])
             ->add('RegimeSocial', TextType::class,[
-                'label'=> false,
+                 'label'=> false, 'required' => false,
                 'attr' => [
                     'placeholder' => 'Regime Social'
                 ]
             ])
             ->add('TravailleurHandicape', ChoiceType::class,[
-                'label'=> false,
+                 'label'=> false, 'required' => false,
                 'attr' => [
                     'placeholder' => 'Travailleur Handicape'
                 ],
@@ -135,25 +136,26 @@ class InscriptionApprentiType extends AbstractType
                 
             ])
             ->add('SituationAvantContrat', TextType::class,[
-                'label'=> false,
+                'label'=> false, 
+                'required' => false,
                 'attr' => [
                     'placeholder' => 'Situation Avant Contrat'
                 ]
             ])
             ->add('DernierDiplome', TextType::class,[
-                'label'=> false,
+                 'label'=> false, 'required' => false,
                 'attr' => [
                     'placeholder' => 'Dernier Diplome'
                 ]
             ])
             ->add('ConventionCollective', TextType::class,[
-                'label'=> false,
+                 'label'=> false, 'required' => false,
                 'attr' => [
                     'placeholder' => 'Convention Collective'
                 ]
             ])
             ->add('DiplomePlusHaut', TextType::class,[
-                'label'=> false,
+                 'label'=> false, 'required' => false,
                 'attr' => [
                     'placeholder' => 'Diplome Plus Haut'
                 ]
