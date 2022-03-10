@@ -62,6 +62,7 @@ class UserFixtures extends Fixture
             $user->setRoleString("ROLE_APP");
             $user->setEmail($faker->email);
             $user->setPassword($hashPW); // 0000
+            $user->setDateNaissance($faker->dateTimeBetween($startDate = '-25 years', $endDate = '-20 years', $timezone = null));
             $manager->persist($user);
         }
 
@@ -94,6 +95,7 @@ class UserFixtures extends Fixture
             $user->setRoleString("ROLE_MA");
             $user->setEmail($faker->email);
             $user->setPassword($hashPW); // 0000
+            $user->setDateNaissance($faker->dateTimeBetween($startDate = '-25 years', $endDate = '-20 years', $timezone = null));
             $manager->persist($user);
         }
         // id 200
@@ -126,6 +128,7 @@ class UserFixtures extends Fixture
             $user->setRoleString("ROLE_FORMATEUR");
             $user->setEmail($faker->email);
             $user->setPassword($hashPW); // 0000
+            $user->setDateNaissance($faker->dateTimeBetween($startDate = '-25 years', $endDate = '-20 years', $timezone = null));
             $manager->persist($user);
         }
 
@@ -158,6 +161,7 @@ class UserFixtures extends Fixture
             $user->setRoleString("ROLE_ENT");
             $user->setEmail($faker->companyEmail);
             $user->setPassword($hashPW); // 0000
+            $user->setDateNaissance($faker->dateTimeBetween($startDate = '-25 years', $endDate = '-20 years', $timezone = null));
             $manager->persist($user);
         }
 

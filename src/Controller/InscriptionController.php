@@ -64,7 +64,7 @@ class InscriptionController extends AbstractController
 
             $entityManager->persist($user);
             $entityManager->flush();
-            return $this->redirectToRoute('login');
+            return $this->redirectToRoute('app_logout');
         }
         return $this->render('inscription/inscriptionEntreprise.html.twig', [
             'form' => $form->createView(),
@@ -112,7 +112,7 @@ class InscriptionController extends AbstractController
 
             $entityManager->persist($user); 
             $entityManager->flush();
-            return $this->redirectToRoute('login');
+            return $this->redirectToRoute('app_logout');
         }
         return $this->render( 'inscription/inscriptionMA.html.twig', [
             'form' => $form->createView(),
@@ -137,7 +137,7 @@ class InscriptionController extends AbstractController
 
             $entityManager->persist($user);
             $entityManager->flush();
-            return $this->redirectToRoute('login');
+            return $this->redirectToRoute('app_logout');
         }
         return $this->render(
             'inscription/inscriptionFormateurs.html.twig',
@@ -163,7 +163,7 @@ class InscriptionController extends AbstractController
 
             $entityManager->persist($user);
             $entityManager->flush();
-            return $this->redirectToRoute('login');
+            return $this->redirectToRoute('app_logout');
         }
         return $this->render(
             'inscription/inscriptionApprenti.html.twig',
