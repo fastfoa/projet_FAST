@@ -19,7 +19,7 @@ class DocumentFixtures extends Fixture
         $hashPW = '$2y$13$kvy/WURxT98Px/cM60DXZuIwGCH0gxDoD1OPA2xDSgPaowxzbnq96';
 
         // Fixture Apprenant
-        for ($i = 1; $i <= 50; $i++) {
+        for ($i = 1; $i < 50; $i++) {
             $d = new Document();
             $d->setIdOwner( $i );
             $d->setTitre( $faker->sentence(3,true) );
