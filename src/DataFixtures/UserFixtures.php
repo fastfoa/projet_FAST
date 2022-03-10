@@ -57,6 +57,7 @@ class UserFixtures extends Fixture
             $manager->persist($user);
         }
 
+        // id 100
         // Fixture Maître d'apprentissage
         for ($i = 0; $i < 100; $i++) 
         {
@@ -78,36 +79,7 @@ class UserFixtures extends Fixture
             $user->setProfilEnabled(true);
             $manager->persist($user);
         }
-        // Fixture Indépendant
-        /*
-        for ($i = 0; $i < 40; $i++) {
-            $user = new User();
-            $user->setRoles(["ROLE_IND"]);
-            $user->setRoleString("ROLE_IND");
-            $user->setFonctionMA("PDG");
-            $user->setEmail($faker->email);
-            $user->setPassword($hashPW); // 0000
-            $user->setNom($faker->lastName);
-            $user->setPrenom($faker->firstName);
-            $user->setAdresse($faker->address);
-            $user->setTelephone($faker->phoneNumber);
-            $user->setDateNaissance($faker->dateTimeBetween('-60 years', '-20 years'));
-            $user->setGenre($faker->title('M'|'F') );
-
-            $user->setSiret($faker->siret);
-            $user->setNAF("dj580");
-            $user->setEffectif(500);
-            $user->setConventionCollective("Convention collective");
-            $user->setEmployeurPublic(false);
-            $user->setCodeIDCCConvention("8905");
-            $user->setLinkedin("http://www.linkedin.com");
-            $user->setGithub("http://www.github.com");
-            $user->setSiteWebPro("http://www.mywebsite.com");
-            $user->setRGPDOK(true);
-            $user->setProfilEnabled(true);
-            $manager->persist($user);
-        }*/
-        //200
+        // id 200
         // Fixture Formateur
         for ($i = 0; $i < 50; $i++) 
         {
@@ -130,9 +102,9 @@ class UserFixtures extends Fixture
             $manager->persist($user);
         }
 
-        //250
+        // id 250
         // Fixture Entreprise
-        for ($j = 0; $j <= 20; $j++) {
+        for ($j = 0; $j <= 50; $j++) {
             $user = new User();
             $user->setRoles(["ROLE_ENT"]);
             $user->setRoleString("ROLE_ENT");
@@ -154,7 +126,7 @@ class UserFixtures extends Fixture
             $manager->persist($user);
         }
 
-        //270
+        // 300
         // Fixture Admin
         for ($i = 0; $i < 5; $i++) {
             $user = new User();
@@ -171,7 +143,7 @@ class UserFixtures extends Fixture
             $manager->persist($user);
         }
 
-
+        // or ID
         // Fixture Apprenant
         $user = new User();
         $user->setEmail("toto@titi.fr");

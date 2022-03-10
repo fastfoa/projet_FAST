@@ -46,7 +46,7 @@ class InscriptioFormateurType extends AbstractType
              
                ]
            ])
-           ->add('telephone', NumberType::class,[
+           ->add('telephone', TextType::class,[
                'attr' => [
                    'placeholder' => 'telephone',
                
@@ -80,14 +80,7 @@ class InscriptioFormateurType extends AbstractType
                 'label' => false,
                 'format' => 'yyyy-MM-dd'
             ])
-        /*
-           ->add('dateNaissance', DateType::class, [
-            'widget' => 'single_text',
-            'required' => true,
-            'label' => false,
-            'format' => 'yyyy-MM-dd'
-        ])
-        */
+ 
         ->add('save', SubmitType::class,
             [ 'label' => "Enregistrer", 'attr' => [ 'class' => "boutonForm" ] ]
             );
