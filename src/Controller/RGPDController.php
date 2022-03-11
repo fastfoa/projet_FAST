@@ -41,11 +41,15 @@ class RGPDController extends AbstractController
 
         $redirect = "login";
 
-        if ($rgpd) {
+        if ($rgpd) 
+        {
             if ($role == 'ROLE_ADMIN') {
                 $redirect = 'dashOFPrincipal';
             } elseif ($role == 'ROLE_APP') {
-                $redirect = 'dashApp';
+                if( $name =='' )
+                    $redirect = 'inscriptionApprenti';
+                else
+                    $redirect = 'dashApp';
             } elseif ($role == 'ROLE_ENT') {
                 if( $name =='' )
                     $redirect = 'inscriptionEntreprise';
@@ -59,7 +63,10 @@ class RGPDController extends AbstractController
             } elseif ($role == 'ROLE_OF') {
                 $redirect = 'dashOFPrincipal';
             } elseif ($role == 'ROLE_MA') {
-                $redirect = 'dashMA';
+                if( $name =='' )
+                    $redirect = 'inscriptionMA';
+                else
+                    $redirect = 'dashMA';
             }
             return $this->redirectToRoute( $redirect );
         } 

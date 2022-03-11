@@ -12,14 +12,10 @@ use Faker;
 
 class SessionFixtures extends Fixture
 {
-
-
     public function load(ObjectManager $manager): void
     {
         // composer require fzaninotto/faker
         $faker = Faker\Factory::create('fr_FR');
-        $hashPW = '$2y$13$kvy/WURxT98Px/cM60DXZuIwGCH0gxDoD1OPA2xDSgPaowxzbnq96';
-
 
         $r = new Session();
         $r->setNom( 'salad and code');
