@@ -29,7 +29,7 @@
 
 		<div class="row myarea">
 			<div class=" col-6 mt-3">
-				<div class='txt-normal'>{{MA.prenom}} {{MA.nom}}</div>
+				<div class='txt-normal'>{{MA.prenom|default("nc")}} {{MA.nom}}</div>
 				{{ form_widget(form.remarqueMA) }}
 			</div>
 			<div class="col-6  mt-3">
