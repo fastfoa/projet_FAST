@@ -60,7 +60,7 @@ function getMenuFromRole($role)
 
 function getPDO($login, $pw)
 {
-    $dsn = "mysql:host=127.0.0.1;dbname=projet_FAST";
+    $dsn = "mysql:host=127.0.0.1;dbname=projet_FAST; charset=utf8mb4";
     try {
         $pdo = new PDO($dsn, $login, $pw);
     } catch (\PDOException $e) {

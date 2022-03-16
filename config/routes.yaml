@@ -54,6 +54,10 @@ download:
     path: /download/{id}
     controller: App\Controller\DocumentController::download
 
+deletedocument1:
+    path: /deletedocument
+    controller: App\Controller\DocumentController::deletedocument
+
 deletedocument:
     path: /deletedocument/{id}
     controller: App\Controller\DocumentController::deletedocument

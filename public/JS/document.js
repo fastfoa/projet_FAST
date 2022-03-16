@@ -36,6 +36,18 @@ function downloadDoc(url) {
     window.location = link;
 }
 
+function deleteDoc(url) {
+    var valueI = $('#listDoc').val();
+    var idD = $('#documents option[value="' + valueI + '"]').attr('id');
+
+    if (!idD)
+        return alert("Fichier introuvable !");
+
+    var link = url + "/" + idD;
+    window.location = link;
+    
+}
+
 
 function upLoadDoc(url) {
     window.location = url;

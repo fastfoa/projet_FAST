@@ -281,7 +281,7 @@ class DocumentController extends AbstractController
         return $r;
     }
 
-    public function deletedocument(Document $document)
+    public function deletedocument(User $user, Document $document)
     {
         $ret = $this->checkRGPD();
         if ($ret)
@@ -290,10 +290,19 @@ class DocumentController extends AbstractController
         $doctrine = $this->getDoctrine();
         $om = $doctrine->getManager();
         $om->remove($document);
-        $om->flush();
-        $this->addFlash('message', "Document supprimé");
-        return $this->redirectToRoute("downloadlist");
+        $om->flush(); 
+        
+        $roleString = $user->getRoleString();
+        dd($roleString);
+        if ( $roleString == jjde) {
+            return $this->redirectToRoute();
+        }
+        
+
+    
     }
+
+    
 
     public function getInfoDoc(User $user)
     {
@@ -308,6 +317,7 @@ class DocumentController extends AbstractController
         WHERE r.id_document=d.id AND u.id=r.id_recipient AND d.id_owner=" . $user->getId()
         );
 
+       
         return new JsonResponse(["a" => $a]);
     }
 }
