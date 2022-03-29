@@ -1,29 +1,29 @@
 {% extends 'base.html.twig' %}
 {% block myStylesheets %}
-<style>
-.colorTextNoir{
- color: black !important;
-}
-.clickable-row:hover{
- background-color: #f37262;
-}
-a{
-	text-decoration:none ;
-}
-</style>
+	<style>
+		.colorTextNoir {
+			color: black !important;
+		}
+		.clickable-row:hover {
+			background-color: #f37262;
+		}
+		a {
+			text-decoration: none;
+		}
+	</style>
 
 {% endblock myStylesheets %}
 {% block myJavascripts %}
-<script src="https://code.jquery.com/jquery-3.6.0.slim.js" integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY=" crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.slim.js" integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY=" crossorigin="anonymous"></script>
 
-<script>
+	<script>
 
-	jQuery(document).ready(function($) {
-    $(".clickable-row").click(function() {
-        window.location = $(this).data("href");
-    });
+		jQuery(document).ready(function ($) {
+$(".clickable-row").click(function () {
+window.location = $(this).data("href");
 });
-</script>
+});
+	</script>
 {% endblock myJavascripts %}
 
 {% block body %}
@@ -32,15 +32,18 @@ a{
 		{% if session %}
 			<div class="row bg-bar">
 				<div class="col-6 txt-normal">
-					<h3>Session	{{session.nom}}</h3>
+					<h3>Session
+						{{session.nom}}</h3>
 				</div>
 			</div>
 			<div class="row text-center">
 				<div class="col-6 txt-normal">
-					Debut : {{session.debut|date("d/m/y")}}
+					Debut :
+					{{session.debut|date("d/m/y")}}
 				</div>
 				<div class="col-6 txt-normal">
-					Fin : {{session.fin|date("d/m/y")}}
+					Fin :
+					{{session.fin|date("d/m/y")}}
 				</div>
 			</div>
 		{% else %}
@@ -50,7 +53,7 @@ a{
 				</div>
 			</div>
 		{% endif %}
-		<div class="row my-3" >
+		<div class="row my-3">
 			<div class="col-12 txt-normal">
 				<div class="accordion" id="accordionPanelsStayOpenExample">
 					<div class="accordion-item">
@@ -78,7 +81,7 @@ a{
 									{% else %}
 										<div class="col-6">
 											<h2 class="txt-dark">PAS DE MAITRE D'APPRENTISSAGE</h2>
-										</div>	
+										</div>
 									{% endif %}
 								</div>
 
@@ -89,11 +92,18 @@ a{
 			</div>
 		</div>
 
-        {% include 'listSession.html.twig' %}
-        {% include 'dash/dashOFInclude.html.twig' %}
-        {% set retour = 'dashFormateur' %}
-        {% include 'dash/dashDocumentInclude.html.twig' %}
+		{% include 'listSession.html.twig' %}
+
+
+		
+		{% include 'dash/dashOFInclude.html.twig' %}
+	
+
+
+
+		
+		{% set retour = 'dashFormateur' %}
+
 	</div>
 
-</div>
-{% endblock %}
+</div>{% endblock %}
