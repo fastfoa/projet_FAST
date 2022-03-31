@@ -19,14 +19,13 @@
 					<span class="sr-only">(current)</span>
 				</a>
 			</li>
-
-			{% if menu is defined %}
+		 {% if menu is defined %}
 				{% for item, route in menu %}
 					<li class="nav-item">
 						<a class="nav-link  " href="{{ path(route) }}">{{item}}</a>
 					</li>
 				{% endfor %}
-			{% endif %}
+			{% endif %} 
 			<li class="nav-item">
 				<a class="nav-link  " href="{{ path('documents') }}">documenthèque</a>
 			</li>
