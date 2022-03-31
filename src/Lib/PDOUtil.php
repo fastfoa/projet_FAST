@@ -32,12 +32,12 @@ function getMenuFromRole($role)
         
         'ROLE_APP'=> 
         [
-            'Apprentis' => 'listAllAprentis', 
-            'Formateurs' => 'listAllFormateurs', 
+           /* 'Apprentis' => 'listAllAprentis', 
+            'Formateurs' => 'listAllFormateurs', */
         ],
         'ROLE_ENT'=> 
         [
-            'Entreprises' => 'listAllEntreprises' 
+           /* 'Entreprises' => 'listAllEntreprises' */
         ],
         'ROLE_MA'=> 
         [
@@ -48,10 +48,10 @@ function getMenuFromRole($role)
         ],
         'ROLE_FORMATEUR'=> 
         [
-            'Apprentis' => 'listAllAprentis', 
+            /*'Apprentis' => 'listAllAprentis', 
             'Formateurs' => 'listAllFormateurs', 
             'Maitres' => 'listAllMA', 
-            'Entreprises' => 'listAllEntreprises' 
+            'Entreprises' => 'listAllEntreprises' */
         ]
         
     ];
