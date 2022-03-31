@@ -40,10 +40,10 @@ function getMenuFromRole($role)
         ],
         'ROLE_MA'=> 
         [
-            'Apprentis' => 'listAllAprentis', 
+           /* 'Apprentis' => 'listAllAprentis', 
             'Formateurs' => 'listAllFormateurs', 
             'Maitres' => 'listAllMA', 
-            'Entreprises' => 'listAllEntreprises' 
+            'Entreprises' => 'listAllEntreprises' */
         ],
         'ROLE_FORMATEUR'=> 
         [
