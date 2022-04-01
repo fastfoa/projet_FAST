@@ -37,7 +37,7 @@ function getMenuFromRole($role)
         ],
         'ROLE_ENT'=> 
         [
-            'Entreprises' => 'listAllEntreprises' 
+            // 'Entreprises' => 'listAllEntreprises' 
         ],
         'ROLE_MA'=> 
         [
