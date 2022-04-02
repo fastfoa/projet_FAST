@@ -1,9 +1,24 @@
 {% extends 'base.html.twig' %}
 
 {% block myStylesheets %}
+<style>
+.clickable-row:hover{
+ background-color: #f37262;}
+</style>
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 {% endblock %}
 
+{% block myJavascripts %}
+<script src="https://code.jquery.com/jquery-3.6.0.slim.js" integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY=" crossorigin="anonymous"></script>
+<script>
+	jQuery(document).ready(function($) {
+    $(".clickable-row").click(function() {
+        window.location = $(this).data("href");
+    });
+});
+</script>
+
+{% endblock myJavascripts %}
 {% block title %}liste
 	{{ roleName }}s
 {% endblock %}
@@ -11,86 +26,107 @@
 {% block body %}
 <div class="container-fluid bg-workSpace">
 	<div class="row"></div>
-	<div class="row bg-bar">
-		<div class="col-12">
-			<h2>liste de tous les
-				{{ roleName }}s</h2>
-		</div>
-	</div>
-	<div class="row bg">
-		<div
-			class="col-3">
-			{# XXXXXXXXXXXXXXXXXX  attention all role 
-													<a href="{{ path( 'addUser', {'role':1}) }}"> #}
-			<a href="">
+		<div class="row bg-bar">
+			<div class="col-12">
+				<h2>liste de tous les {{ roleName }}s</h2>
+		    </div>
+	    </div>
+		<div class="row bg">
+			<div class="col-3">
+			</a>	<a href="">
 				<div class="boutonForm">+ Ajouter un
 					{{ roleName }}</div>
 			</a>
+			</div>
 		</div>
-	</div>
 	<div class="row">
-		<div class="col-12">
+		<div>
 			<table class="table-normal">
 				<thead>
-
 					<tr>
 						{% if roleName == 'Entreprise' %}
 							{# <th class="txt-bar bg-bar">Prenom</th> #}
-							<th class="txt-bar bg-bar">nom</th>
+							<th class="txt-bar bg-bar col-4">nom</th>
 							{# <th class="txt-bar bg-bar">session</th> #}
-							<th class="txt-bar bg-bar">Tél</th>
-							<th class="txt-bar bg-bar">Mail</th>
-							<th class="txt-bar bg-bar">Action</th>
-						</tr>
+							<th class="txt-bar bg-bar col-4">Tél</th>
+							<th class="txt-bar bg-bar col-4">Mail</th>
+							{# <th class="txt-bar bg-bar">Action</th> #}
 					</tr>
 				</thead>
 				<tbody>
 					{% for item in list %}
-						<tr>
+					<tr>
 							{# <td>{{item.prenom}}</td> #}
-							<td>{{item.nom}}</td>
+							<td class="col-4">{{item.nom}}</td>
 							{# <td>{{item.ns}}</td> #}
-							<td>{{item.telephone}}</td>
-							<td>{{item.email}}</td>
+							<td class="col-4">{{item.telephone}}</td>
+							<td class="col-4">{{item.email}}</td>
 							{#<td>{{session.formation}}</td>#}
 
-							<td>
-								<a href="{{ path( 'editUser',{'user':item.id} ) }}">
-									<i class="fas fa-solid fa-download" style="font-size:20px;color:green;"></i>
-								</a>
-							</td>
-						</tr>
+							{# <td>
+															<a href="{{ path( 'editUser',{'user':item.id} ) }}">
+																<i class="fas fa-solid fa-download" style="font-size:20px;color:green;"></i>
+															</a>
+														</td> #}
+					</tr>
 					{% endfor %}
 				</tbody>
 			</table>
 
 
-		{% else %}
-			<th class="txt-bar bg-bar">Prenom</th>
-			<th class="txt-bar bg-bar">nom</th>
-			<th class="txt-bar bg-bar">session</th> 
-			<th class="txt-bar bg-bar">Tél</th>
-			<th class="txt-bar bg-bar">Mail</th>
-			<th class="txt-bar bg-bar">Action</th>
-
-		</tr>
-	</thead>
-	<tbody>
-		{% for item in list %}
-			<tr>
-				<td>{{item.prenom}}</td>
-				<td>{{item.nom}}</td>
-				<td>{{item.ns}}</td>
-				<td>{{item.telephone}}</td>
-				<td>{{item.email}}</td>
+						{% elseif roleName == 'Apprenti' %}
+							<th class="txt-bar bg-bar col-2">Prenom</th>
+							<th class="txt-bar bg-bar col-2">nom</th>
+							<th class="txt-bar bg-bar col-2">session</th>
+							<th class="txt-bar bg-bar col-3">Tél</th>
+							<th class="txt-bar bg-bar col-3">Mail</th>
+					    	{# <th class="txt-bar bg-bar">Action</th> #}		
+						</tr>
+					</thead>
+				<tbody>
+					{% for item in list %}
+						<tr  class='clickable-row' data-href='{{ path( 'editUser',{'user':item.id} ) }}'>
+							<td class="col-2">{{item.prenom}}</td>
+							<td class="col-2">{{item.nom}}</td>
+							<td class="col-2">{{item.ns}}</td>
+				 			<td class="col-3">{{item.telephone}}</td>
+							<td class="col-3">{{item.email}}</td>
+												
 				{#<td>{{session.formation}}</td>#}
-
-				<td>
-					<a href="{{ path( 'editUser',{'user':item.id} ) }}">
-						<i class="fas fa-solid fa-download" style="font-size:20px;color:green;"></i>
-					</a>
-				</td>
-			</tr>
-		{% endfor %}
+				{# 	<td><a href="{{ path( 'editUser',{'user':item.id} ) }}">
+					<i class="fas fa-solid fa-download" style="font-size:20px;color:green;"></i></a>
+					</td> #}
+						</tr>
+							{% endfor %}
+				</tbody>
+			</table>
+			
+		{% else %}
+			<th class="txt-bar bg-bar col-2">Prenom</th>
+			<th class="txt-bar bg-bar col-2">nom</th>
+			<th class="txt-bar bg-bar col-2">session</th>
+			<th class="txt-bar bg-bar col-3">Tél</th>
+			<th class="txt-bar bg-bar col-3">Mail</th>
+			{# <th class="txt-bar bg-bar">Action</th> #}
+		</tr>
 	</tbody>
-</table>{% endif %}</div></div></div></div></div>{% endblock %}
+</thead>
+<tbody>
+	{% for item in list %}
+		<tr>
+			<td class="col-2">{{item.prenom}}</td>
+			<td class="col-2">{{item.nom}}</td>
+			<td class="col-2">{{item.ns}}</td>
+			<td class="col-3">{{item.telephone}}</td>
+			<td class="col-3">{{item.email}}</td>
+			{#<td>{{session.formation}}</td>#}
+
+			{# <td>
+				<a href="{{ path( 'editUser',{'user':item.id} ) }}">
+					<i class="fas fa-solid fa-download" style="font-size:20px;color:green;"></i>
+				</a>
+			</td> #}
+		</tr>
+
+	{% endfor %}
+</tbody></table>{% endif %}</div></div></div></div></div>{% endblock %}

@@ -250,7 +250,7 @@ class InscriptionController extends AbstractController
             return $ret;
 
         $userID = $this->addUserRaw($request, $role, $roleName );
-        dd( $userID );
+        // dd( $userID );
         if ( is_int($userID) )
         {
             return $this->redirect($this->generateUrl('login'));
