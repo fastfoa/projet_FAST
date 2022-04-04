@@ -25,7 +25,7 @@ function getMenuFromRole($role)
             'Sessions' => 'dashOFPrincipal', 
             'Apprentis' => 'listAllAprentis', 
             'Formateurs' => 'listAllFormateurs', 
-            'Maitres' => 'listAllMA', 
+            "Maitre d'apprentissage" => 'listAllMA', 
             'Entreprises' => 'listAllEntreprises' 
         ],
         
@@ -42,7 +42,7 @@ function getMenuFromRole($role)
         [
             'Apprentis' => 'listAllAprentis', 
             'Formateurs' => 'listAllFormateurs', 
-            'Maitres' => 'listAllMA', 
+            "Maitre d'apprentissage" => 'listAllMA', 
             'Entreprises' => 'listAllEntreprises' 
         ],
         'ROLE_FORMATEUR'=> 
