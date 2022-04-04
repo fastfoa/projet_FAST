@@ -4,7 +4,16 @@
 	<div class="container-fluid">
 		<div class="row bg-bar">
 			<h3>Inscription
-				{{roleName}}</h3>
+			{% if roleName == 'ROLE_APP' %} 
+			Apprenti
+			{% elseif roleName == 'ROLE_FORMATEUR' %}
+            Formateur 
+			{% elseif roleName == 'ROLE_MA' %}
+				
+				Maitre d'apprentissage
+
+			{% endif %}
+				{# {{roleName}}  #}</h3>
 		</div>
 		{{form_start(form)}}
 		<div class="row">
@@ -18,7 +27,7 @@
 
 		<div class="row">
 			<div class="col-3">
-				<p class="text-light">recheche:</p>
+				<p class="text-light">Recherche:</p>
 				<input list="app" type="text" id="listAPP">
 				<form action="" method="GET">
 					<datalist id="app">
@@ -28,7 +37,7 @@
 
 						{% endfor %}
 					</datalist>
-					<button type="submit" class = "boutonForm  my-2">Ajouter a la liste</button>
+					<button type="submit" class = "boutonForm  my-2">Créer à une session</button>
 				</form>
 			</div>
 		</div>
