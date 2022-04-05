@@ -5,7 +5,7 @@
 		</div>
 		{# le bouton de retour s'affiche seulement si l'user est coonecté #}	
 		{% if is_granted('IS_AUTHENTICATED_FULLY') %}	
-			<button  class="boutonForm my-2 my-sm-0 m-3" onclick="rtn()"><i class="fa fa-arrow-left"></i></button>
+			{# <button  class="boutonForm my-2 my-sm-0 m-3" onclick="rtn()"><i class="fa fa-arrow-left"></i></button> #}
 			<script>
 				function rtn() {
 					window.history.back();
