@@ -91,7 +91,7 @@
                                             </thead>
                                             <tbody>
                                                 {% for item in listFORMATEUR %}
-                                                    <tr class='clickable-row' data-href='{{ path( 'editUser',{'user':item.id} ) }}'>
+                                                  <tr>  {# <tr class='clickable-row' data-href='{{ path( 'editUser',{'user':item.id} ) }}'> #}
                                                         <td class = " colorTextNoir" >{{item.prenom}}</td>
                                                         <td class = " colorTextNoir" >{{item.nom}}</td>
                                                         {# <td class = " colorTextNoir" >{{item.nom}}</td> #}
@@ -146,7 +146,7 @@
                                             </thead>
                                             <tbody>
                                                 {% for item in listMA %}
-                                                    <tr class='clickable-row' data-href='{{ path( 'editUser',{'user':item.id} ) }}'>
+                                                   <tr> {# <tr class='clickable-row' data-href='{{ path( 'editUser',{'user':item.id} ) }}'> #}
                                                         <td class = " colorTextNoir" >{{item.prenom}}</td>
                                                         <td class = " colorTextNoir" >{{item.nom}}</td>
                                                        {# <td class = " colorTextNoir" >{{item.nom}}</td> #}
