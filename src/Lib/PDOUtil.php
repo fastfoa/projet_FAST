@@ -183,7 +183,7 @@ function getFormateursFromApprenti($login, $pw, $idApprenti)
     return getSQLArrayAssoc(
         $login,
         $pw,
-        "SELECT u.nom, u.prenom, u.id 
+        "SELECT u.nom, u.prenom, u.email, u.id 
                 FROM user_in_session as us0, 
                     user_in_session as us1, 
                     user as u 
