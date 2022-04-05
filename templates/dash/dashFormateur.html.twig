@@ -1,29 +1,29 @@
 {% extends 'base.html.twig' %}
 {% block myStylesheets %}
-<style>
-.colorTextNoir{
- color: black !important;
-}
-.clickable-row:hover{
- background-color: #f37262;
-}
-a{
-	text-decoration:none ;
-}
-</style>
+	<style>
+		.colorTextNoir {
+			color: black !important;
+		}
+		.clickable-row:hover {
+			background-color: #f37262;
+		}
+		a {
+			text-decoration: none;
+		}
+	</style>
 
 {% endblock myStylesheets %}
 {% block myJavascripts %}
-<script src="https://code.jquery.com/jquery-3.6.0.slim.js" integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY=" crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.slim.js" integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY=" crossorigin="anonymous"></script>
 
-<script>
+	<script>
 
-	jQuery(document).ready(function($) {
-    $(".clickable-row").click(function() {
-        window.location = $(this).data("href");
-    });
+		jQuery(document).ready(function ($) {
+$(".clickable-row").click(function () {
+window.location = $(this).data("href");
 });
-</script>
+});
+	</script>
 {% endblock myJavascripts %}
 
 {% block body %}
@@ -32,15 +32,18 @@ a{
 		{% if session %}
 			<div class="row bg-bar">
 				<div class="col-6 txt-normal">
-					<h3>Session	{{session.nom}}</h3>
+					<h3>Session
+						{{session.nom}}</h3>
 				</div>
 			</div>
 			<div class="row text-center">
 				<div class="col-6 txt-normal">
-					Debut : {{session.debut|date("d/m/y")}}
+					Debut :
+					{{session.debut|date("d/m/y")}}
 				</div>
 				<div class="col-6 txt-normal">
-					Fin : {{session.fin|date("d/m/y")}}
+					Fin :
+					{{session.fin|date("d/m/y")}}
 				</div>
 			</div>
 		{% else %}
@@ -50,21 +53,21 @@ a{
 				</div>
 			</div>
 		{% endif %}
-		<div class="row my-3" >
+		<div class="row my-3">
 			<div class="col-12 txt-normal">
 				<div class="accordion" id="accordionPanelsStayOpenExample">
-					<div class="accordion-item">
-						<div class="accordion-header" id="panelsStayOpen-headingOne">
+					{# <div class="accordion-item">
+						 <div class="accordion-header" id="panelsStayOpen-headingOne">
 							<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
 								<h4 class="txt-dark">Formateur</h4>
-							</button>
-						</div>
+							</button> 
+						</div> #}
 						<div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
 							<div class="accordion-body">
 
 								<div class="row txt-dark">
 									{% if user %}
-										<div class="col-8">
+										{# <div class="col-8">
 											{{ user.prenom }}
 											{{ user.nom }}
 											<br>
@@ -73,12 +76,12 @@ a{
 											{{ user.telephone }}
 											<br>
 											{{ user.adresse|default('adresse') }}
-										</div>
+										</div> #}
 										<div class="col-6"></div>
 									{% else %}
 										<div class="col-6">
 											<h2 class="txt-dark">PAS DE MAITRE D'APPRENTISSAGE</h2>
-										</div>	
+										</div>
 									{% endif %}
 								</div>
 
@@ -89,11 +92,18 @@ a{
 			</div>
 		</div>
 
-        {% include 'listSession.html.twig' %}
-        {% include 'dash/dashOFInclude.html.twig' %}
-        {% set retour = 'dashFormateur' %}
-        {% include 'dash/dashDocumentInclude.html.twig' %}
+		{% include 'listSession.html.twig' %}
+
+
+		
+		{% include 'dash/dashOFInclude.html.twig' %}
+	
+
+
+
+		
+		{% set retour = 'dashFormateur' %}
+
 	</div>
 
-</div>
-{% endblock %}
+</div>{% endblock %}

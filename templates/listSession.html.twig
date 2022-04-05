@@ -26,24 +26,21 @@
                                         <div class="col-12">
                                             <table class="table-normal" class = " colorTextNoir">
                                                     <tr >
-                                                        <th>Prenom</th>
-                                                        <th>nom</th>
-                                                        <th>session</th>
-                                                        <th>Tél</th>
-                                                        <th>Mail</th>
+                                                        <th class = " colorTextNoir">Prenom</th>
+                                                        <th class = " colorTextNoir">nom</th>
+                                                       {# <th class = " colorTextNoir">session</th> #}
+                                                        <th class = " colorTextNoir">Tél</th>
+                                                        <th class = " colorTextNoir">Mail</th>
                                                     </tr>
                                                 <tbody>
-                                                    {% for item in listAPP %}
-                                                    
+                                                    {% for item in listAPP %}                               
                                                         <tr class='clickable-row' data-href='{{ path( 'editUser',{'user':item.id} ) }}' >
                                                             {# <a href="{{ path( 'editUser',{'user':item.id} ) }}"> #}
                                                                 <td class = " colorTextNoir">{{item.prenom}}</td>
                                                                 <td class = " colorTextNoir">{{item.nom}}</td>
-                                                                <td class = " colorTextNoir">{{item.nom}}</td>
                                                                 <td class = " colorTextNoir">{{item.telephone}}</td>
                                                                 <td class = " colorTextNoir">{{item.email}}</td>
-                                                        </tr>
-                                                    
+                                                        </tr>        
                                                     {% endfor %}
                                                 </tbody>
                                             </table>
@@ -87,8 +84,8 @@
                                                 <tr >
                                                     <th  class = " colorTextNoir">Prenom</th>
                                                     <th  class = " colorTextNoir">nom</th>
-                                                    <th  class = " colorTextNoir">session</th>
-                                                    <th  class = " colorTextNoir">Tél</th>
+                                                    {# <th  class = " colorTextNoir">session</th> #}
+                                                     {# <th  class = " colorTextNoir">Tél</th> #}
                                                     <th  class = " colorTextNoir">Mail</th>
                                                 </tr>
                                             </thead>
@@ -97,8 +94,8 @@
                                                     <tr class='clickable-row' data-href='{{ path( 'editUser',{'user':item.id} ) }}'>
                                                         <td class = " colorTextNoir" >{{item.prenom}}</td>
                                                         <td class = " colorTextNoir" >{{item.nom}}</td>
-                                                        <td class = " colorTextNoir" >{{item.nom}}</td>
-                                                        <td class = " colorTextNoir" >{{item.telephone}}</td>
+                                                        {# <td class = " colorTextNoir" >{{item.nom}}</td> #}
+                                                        {# <td class = " colorTextNoir" >{{item.telephone}}</td> #}
                                                         <td class = " colorTextNoir" >{{item.email}}</td>
                                                     </tr>
                                                 {% endfor %}
@@ -113,7 +110,7 @@
             </div>
         </div>
     </div>
-    <div class="row my-3 pb-3">
+    <div class="row  my-3">
         <div class="col-12 txt-normal">
             <div class="accordion-item">
                 <h4 class="accordion-header" id="panelsStayOpen-headingThree">
@@ -124,8 +121,7 @@
                 <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingThree">
                     <div class="accordion-body">
                         <div class="row">
-                            <div class="container-fluid">
-                                
+                            <div class="container-fluid">     
                                 <div class="row bg">
                                     <div
                                         class="col-12">
@@ -143,8 +139,8 @@
                                                 <tr>
                                                     <th  class = " colorTextNoir">Prenom</th>
                                                     <th  class = " colorTextNoir">nom</th>
-                                                    <th  class = " colorTextNoir">session</th>
-                                                    <th  class = " colorTextNoir">Tél</th>
+                                                   {# <th  class = " colorTextNoir">session</th> #}
+                                                    {# <th  class = " colorTextNoir">Tél</th> #}
                                                     <th  class = " colorTextNoir">Mail</th>
                                                 </tr>
                                             </thead>
@@ -153,8 +149,8 @@
                                                     <tr class='clickable-row' data-href='{{ path( 'editUser',{'user':item.id} ) }}'>
                                                         <td class = " colorTextNoir" >{{item.prenom}}</td>
                                                         <td class = " colorTextNoir" >{{item.nom}}</td>
-                                                        <td class = " colorTextNoir" >{{item.nom}}</td>
-                                                        <td class = " colorTextNoir" >{{item.telephone}}</td>
+                                                       {# <td class = " colorTextNoir" >{{item.nom}}</td> #}
+                                                       {# <td class = " colorTextNoir" >{{item.telephone}}</td> #}
                                                         <td class = " colorTextNoir" >{{item.email}}</td>
                                                     </tr>
                                                 {% endfor %}

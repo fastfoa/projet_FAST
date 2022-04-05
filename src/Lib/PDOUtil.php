@@ -7,10 +7,11 @@ use PDO;
 function getInfoOF()
 {
     $infoOF = [
-        'nom' => 'Vidal',
-        'prenom' => 'Jean-Philippe',
-        'email' => 'jean-philippe.vidal@foreach-academy.fr',
-        'telephone' => 'XXXXXXXXXX',
+        'nom' => 'Saidani',
+        'prenom' => 'Yanis',
+        'adresse' => '393 Rue du Général de Gaulle, 59700 Marcq-en-Barœul',
+        'email' => 'yanis.saidani@foreach-academy.fr',
+        'telephone' => '03 20 74 87 30',
         'id' => 1,
     ];
 
@@ -31,12 +32,12 @@ function getMenuFromRole($role)
         
         'ROLE_APP'=> 
         [
-            'Apprentis' => 'listAllAprentis', 
-            'Formateurs' => 'listAllFormateurs', 
+           /* 'Apprentis' => 'listAllAprentis', 
+            'Formateurs' => 'listAllFormateurs', */
         ],
         'ROLE_ENT'=> 
         [
-            'Entreprises' => 'listAllEntreprises' 
+           /* 'Entreprises' => 'listAllEntreprises' */
         ],
         'ROLE_MA'=> 
         [
@@ -47,10 +48,10 @@ function getMenuFromRole($role)
         ],
         'ROLE_FORMATEUR'=> 
         [
-            'Apprentis' => 'listAllAprentis', 
+            /*'Apprentis' => 'listAllAprentis', 
             'Formateurs' => 'listAllFormateurs', 
             'Maitres' => 'listAllMA', 
-            'Entreprises' => 'listAllEntreprises' 
+            'Entreprises' => 'listAllEntreprises' */
         ]
         
     ];
