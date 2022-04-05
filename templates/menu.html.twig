@@ -14,11 +14,11 @@
 
 		{% endif %}
 		<ul class="navbar-nav me-auto fith100">
-			<li class="nav-item ">
+			{# <li class="nav-item ">
 				<a class="nav-link  " href="{{ path('test')}}">Accueil
 					<span class="sr-only">(current)</span>
 				</a>
-			</li>
+			</li> #}
 		 {% if menu is defined %}
 				{% for item, route in menu %}
 					<li class="nav-item">
@@ -26,12 +26,12 @@
 					</li>
 				{% endfor %}
 			{% endif %} 
-			<li class="nav-item">
+			{# <li class="nav-item">
 				<a class="nav-link  " href="{{ path('documents') }}">documenthèque</a>
 			</li>
 			<li class="nav-item">
 				<a class="nav-link  " href="{{ path('aide') }}">aide</a>
-			</li>
+			</li> #}
 
 
 			{% if is_granted('IS_AUTHENTICATED_FULLY') %}
@@ -52,8 +52,8 @@
 		{% if is_granted('IS_AUTHENTICATED_FULLY') %}
 			<a class="boutonForm my-2 my-sm-0 m-3" aria-current="page" href="{{ path('app_logout')}}">Déconnexion</a>
 		{# sinon authentifié affiche le boutton de connexion #}
-		{% else %}
-			<a class="boutonForm my-2 my-sm-0 m-3" aria-current="page" href="{{ path('login')}}">Connexion</a>
+		{# {% else %}
+			<a class="boutonForm my-2 my-sm-0 m-3" aria-current="page" href="{{ path('login')}}">Connexion</a> #}
 		{% endif %}
 	</div>
 </nav>
