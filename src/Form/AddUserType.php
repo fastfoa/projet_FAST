@@ -26,7 +26,7 @@ class AddUserType extends AbstractType
                ]
            ])
         ->add('save', SubmitType::class,
-            [ 'label' => "Enregistrer", 
+            [ 'label' => "Envoyer", 
                'attr' => [ 'class' => "boutonForm col-3 my-2" ] 
                ]
                 );
