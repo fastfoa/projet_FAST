@@ -167,6 +167,61 @@ class DashController extends AbstractController
             ]
         );
     }
+    public function dashMA(): Response
+    {
+        $infoOF = getInfoOF();
+
+        $ret = $this->checkRGPD();
+        if ($ret)
+            return $ret;
+
+        $login = $this->getParameter('loginDB');
+        $pw = $this->getParameter('PasswordDB');
+
+        $user       = $this->getUser();
+        $role       = $user->getRoleString();
+        $user       = convertUserEntity2SQL($login, $pw, $user->getId());
+        $MA = $user;
+
+        $OF         = getInfoOF();
+        $entreprise = null;
+        $app        = null;
+        $formateur  = null;
+
+        // $MA = getMAFromEnt($login, $pw, $entreprise['id']);
+        if ( $MA != false )
+        {
+            $MA = convertUserEntity2SQL($login, $pw, $MA['id']);
+            $app = getAppFromMA($login, $pw, $MA['id']);
+            if ( $app != false )
+            {
+                $app = convertUserEntity2SQL($login, $pw, $app['id']);
+                $formateur  = getFormateursFromApprenti($login, $pw, $app['id']);
+                if ( $formateur != false )
+                {
+                    $formateur  = convertUserEntity2SQL($login, $pw, $formateur[0]['id']);
+                }
+            }
+        }
+
+        $uid = $user['id'];
+        $listDoc = getDocsFromUser( $login, $pw, $uid );
+
+
+        return $this->render(
+            'dash/dashMA.html.twig',
+            [
+                'document'      => $listDoc,
+                'user'           => $user,
+                'entreprise'    => $entreprise,
+                'app'           => $app,
+                'ma'            => $MA,
+                'OF'            => $infoOF,
+                'menu'          => getMenuFromRole('ROLE_ENT')
+            ]
+        );
+    }
+
 
     
     public function dashFormateur(): Response
