@@ -417,6 +417,7 @@ class DashController extends AbstractController
         $MA         = false;
         $formateur  = false;
         $entreprise = false;
+        $sessionID = getIdSessionFromApprenti($login, $pw, $user['id']);
 
 
         $MA = getMAFromApprenti($login, $pw, $app['id']);
@@ -427,12 +428,24 @@ class DashController extends AbstractController
             if ( $entreprise )
                 $entreprise = convertUserEntity2SQL($login, $pw, $entreprise['id'] );
         }
-        $formateur  = getFormateursFromApprenti($login, $pw, 
-        $app['id']);
-        if  ( $formateur )
-        {
-             $formateur  = convertUserEntity2SQL($login, $pw, $formateur[0]['id']);
-        }
+        
+   
+        //    $formateur  = getFormateursFromApprenti($login, $pw, 
+        // $app['id']);
+        
+        $listFormateur = getSQLArrayAssoc(
+            $login,
+            $pw,
+ 
+        "SELECT u.nom, u.prenom, u.email, u.id 
+        FROM user_in_session as us0, 
+            user_in_session as us1, 
+            user as u 
+        WHERE 
+        us0.id_session=us1.id_session and u.id=us1.id_user and u.role_string='ROLE_FORMATEUR' 
+        and us0.id_user='$sessionID'"
+);
+    //    dd($listFormateur);
 
         $uid = $app['id'];
         $listDoc = getDocsFromUser( $login, $pw, $uid );
@@ -447,6 +460,7 @@ class DashController extends AbstractController
                 'app'           => $app,
                 'ma'            => $MA,
                 'OF'            => $infoOF,
+                'formateurs'    => $listFormateur,
                 'menu'          => getMenuFromRole('ROLE_APP')
 
             ]
