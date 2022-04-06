@@ -10,23 +10,33 @@
 
 			<script>
 				function rtn() {
-                           window.history.back();
-                            }
+window.history.back();
+}
 			</script>
 
 		{% endif %}
 		<ul class="navbar-nav me-auto fith100">
-              
-			{% if is_granted('IS_AUTHENTICATED_FULLY') %}
-				<li class="nav-item ">
-                 
-					<a class="nav-link  " href="{{ path('login')}}">Accueil
-						<span class="sr-only">(current)</span>
+
+
+			<li class="nav-item ">
+				{% if is_granted('ROLE_OF') %}
+					<a class="nav-link  " href="{{ path('dashOFPrincipal')}}">Accueil<span class="sr-only">(current)</span>
 					</a>
+				{% elseif is_granted('ROLE_APP') %}
+					<a class="nav-link  " href="{{ path('dashApp')}}">Accueil<span class="sr-only">(current)</span>
+					</a>
+				{% elseif is_granted('ROLE_FORMATEUR') %}
+					<a class="nav-link  " href="{{ path('dashFormateur')}}">Accueil<span class="sr-only">(current)</span>
+					</a>
+				{% elseif is_granted('ROLE_MA') %}
+					<a class="nav-link  " href="{{ path('dashMA')}}">Accueil<span class="sr-only">(current)</span>
+					</a>
+				{% elseif is_granted('ROLE_ENT') %}
+					<a class="nav-link  " href="{{ path('dashEntreprise')}}">Accueil<span class="sr-only">(current)</span>
+					</a>
+				{% endif %}
+			</li>
 
-				</li>
-
-			{% endif %}
 
 			{% if menu is defined %}
 				{% for item, route in menu %}
@@ -37,32 +47,25 @@
 				{% endfor %}
 			{% endif %}
 			{# <li class="nav-item">
-										<a class="nav-link  " href="{{ path('documents') }}">documenthèque</a>
-									</li>
-									<li class="nav-item">
-										<a class="nav-link  " href="{{ path('aide') }}">aide</a>
-									</li> #}
+													
+																	{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+																		{# <li class="nav-item">
+																																																							<a class="nav-link " href="{{ path('compte') }}">mon Compte</a>
+																																																						</li> #}
+		{# {% endif %} #}
 
-
-			{% if is_granted('IS_AUTHENTICATED_FULLY') %}
-				{# <li class="nav-item">
-													<a class="nav-link " href="{{ path('compte') }}">mon Compte</a>
-												</li> #}
-			{% endif %}
-
-		</ul>
-		<script>
-			function rtn() {
+	</ul>
+	<script>
+		function rtn() {
 window.history.back();
 }
-		</script>
+	</script>
 
-		{# si authentifié affiche le boutton de deconnexion #}
-		{% if is_granted('IS_AUTHENTICATED_FULLY') %}
-			<a class="boutonForm my-2 my-sm-0 m-3" aria-current="page" href="{{ path('app_logout')}}">Déconnexion</a>
-			{# sinon authentifié affiche le boutton de connexion #}
-			{# {% else %}
-									<a class="boutonForm my-2 my-sm-0 m-3" aria-current="page" href="{{ path('login')}}">Connexion</a> #}
-		{% endif %}
-	</div>
-</nav>
+	{# si authentifié affiche le boutton de deconnexion #}
+	{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+		<a class="boutonForm my-2 my-sm-0 m-3" aria-current="page" href="{{ path('app_logout')}}">Déconnexion</a>
+		{# sinon authentifié affiche le boutton de connexion #}
+		{# {% else %}
+																																													<a class="boutonForm my-2 my-sm-0 m-3" aria-current="page" href="{{ path('login')}}">Connexion</a> #}
+	{% endif %}
+</div></li></nav></li>
