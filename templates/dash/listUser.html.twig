@@ -64,10 +64,11 @@
 							{#<td>{{session.formation}}</td>#}
 
 							{# <td>
-															<a href="{{ path( 'editUser',{'user':item.id} ) }}">
-																<i class="fas fa-solid fa-download" style="font-size:20px;color:green;"></i>
-															</a>
-														</td> #}
+	<a href="{{ path( 'editUser',{'user':item.id} ) }}">
+	<i class="fas fa-solid fa-download" style="font-size:20px;color:green;">
+	</i>
+	</a>
+	</td> #}
 					</tr>
 					{% endfor %}
 				</tbody>
@@ -101,7 +102,7 @@
 				</tbody>
 			</table>
 			
-		{% else %}
+		{% elseif roleName == "Maitre d'apprentissage" %}
 			<th class="txt-bar bg-bar col-2">Prenom</th>
 			<th class="txt-bar bg-bar col-2">nom</th>
 			<th class="txt-bar bg-bar col-2">session</th>
@@ -128,6 +129,37 @@
 				</a>
 			</td> #}
 		</tr>
+			{% endfor %}
+				</tbody>
+			</table>
+
+			{% else %}
+			<th class="txt-bar bg-bar col-2">Prenom</th>
+			<th class="txt-bar bg-bar col-2">nom</th>
+			<th class="txt-bar bg-bar col-2">session</th>
+			<th class="txt-bar bg-bar col-2">Tél</th>
+			<th class="txt-bar bg-bar col-2">Mail</th>
+			{# <th class="txt-bar bg-bar">Action</th> #}
+		</tr>
+	</tbody>
+</thead>
+<tbody>
+	{% for item in list %}
+		<tr>
+			<td class="col-2">{{item.prenom}}</td>
+			<td class="col-2">{{item.nom}}</td>
+			<td class="col-2">{{item.ns}}</td>
+			<td class="col-3">{{item.telephone}}</td>
+			<td class="col-3">{{item.email}}</td>
+			{#<td>{{session.formation}}</td>#}
+
+			{# <td>
+				<a href="{{ path( 'editUser',{'user':item.id} ) }}">
+					<i class="fas fa-solid fa-download" style="font-size:20px;color:green;"></i>
+				</a>
+			</td> #}
+		</tr>
+
 
 	{% endfor %}
 </tbody></table>{% endif %}</div></div></div></div></div>{% endblock %}
