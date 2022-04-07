@@ -7,8 +7,21 @@
 		</div>
 		<div class="row">
 			<div class="col-6">
-				{{form(form)}}
+			{{ form(form) }}
+				{# {{form_start(form)}}
+				{{ form_widget(form.email) }}
+				{{ form_widget(form.adresse) }}
+				{{ form_widget(form.telephone) }}
+				{{ form_widget(form.siret) }}
+				{{ form_widget(form.NAF) }}
+				{{ form_widget(form.Effectif) }}
+				{{ form_widget(form.ConventionCollective) }}
+				{{ form_widget(form.CodeIDCCConvention) }}
+				{{ form_widget(form.password) }}
+				{{ form_widget(form.new_password) }}
+				{{form_end(form)}} #}
 			</div>
 		</div>
+		
 	</div>
 {% endblock %}
