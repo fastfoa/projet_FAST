@@ -22,9 +22,17 @@ use App\Form\InscriptionIndType;
 use App\Form\InscriptionMAType;
 use Doctrine\Persistence\ManagerRegistry;
 use App\Form\UserGeneralType;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Doctrine\ORM\EntityManagerInterface;
 
 class InscriptionController extends AbstractController
 {
+    // private $entitymanager;
+
+    // public function __construct(EntityManagerInterface $entitymanager)
+    // {
+    //     $this->entitymanager = $entitymanager;
+    // }
     /**
      * @Route("/inscription", name="inscription")
      */
@@ -45,7 +53,7 @@ class InscriptionController extends AbstractController
         return null;
     }
 
-    public function inscriptionEntreprise(Request $request): Response
+    public function inscriptionEntreprise(EntityManagerInterface $entityManager, UserPasswordEncoderInterface $encoder, Request $request): Response
     {
         $ret = $this->checkRGPD();
         if ( $ret )
@@ -57,13 +65,26 @@ class InscriptionController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) 
         {
+            $old_pwd= $form->get('old_password')->getData();
+        //   dd($old_pwd); 
+            if ($encoder->isPasswordValid($user, $old_pwd)) 
+            {
+                $new_pwd= $form->get('new_password')->getData();
+                // dd($new_pwd);
+                $password = $encoder->encodePassword($user, $new_pwd);
+        //    dd($password);
+               $user->setPassword($password);
+         $entityManager->persist($user);
+           $entityManager->flush();
+            }
+
+                     
             //enregistrer le Nom 
                     
-            $doctrine = $this->getDoctrine();
-            $entityManager = $doctrine->getManager();
+            // $doctrine = $this->getDoctrine();
+            // $entityManager = $doctrine->getManager();
 
-            $entityManager->persist($user);
-            $entityManager->flush();
+          
             return $this->redirectToRoute('app_logout');
         }
         return $this->render('inscription/inscriptionEntreprise.html.twig', [
@@ -250,7 +271,7 @@ class InscriptionController extends AbstractController
             return $ret;
 
         $userID = $this->addUserRaw($request, $role, $roleName );
-        // dd( $userID );
+        dd( $userID );
         if ( is_int($userID) )
         {
             return $this->redirect($this->generateUrl('login'));
