@@ -1,7 +1,18 @@
 <nav class="bar-top navbar navbar-expand-lg   ">
 	<div class="collapse navbar-collapse" id="navbarSupportedContent ">
 		<div class="logo-top">
-			<img src="{{ asset('images/logo-foreach-blanc.png') }}">
+		{% if is_granted('ROLE_OF') %}
+					<img src="{{ asset('images/logo-foreach-blanc.png') }}">
+					{% elseif is_granted('ROLE_APP') %}
+						<img src="{{ asset('images/logo-foreach-blanc.png') }}">
+						{% elseif is_granted('ROLE_FORMATEUR') %}
+							<img src="{{ asset('images/logo-foreach-blanc.png') }}">
+							{% elseif is_granted('ROLE_MA') %}
+								<img src="{{ asset('images/logo-foreach-blanc.png') }}">
+								{% elseif is_granted('ROLE_ENT') %}
+								<img src="{{ asset('images/logo-foreach-blanc.png') }}">
+								{% endif %}
+			
 		</div>
 		{# le bouton de retour s'affiche seulement si l'user est coonecté #}	
 		{% if is_granted('IS_AUTHENTICATED_FULLY') %}	
