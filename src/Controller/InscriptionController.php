@@ -27,12 +27,7 @@ use Doctrine\ORM\EntityManagerInterface;
 
 class InscriptionController extends AbstractController
 {
-    // private $entitymanager;
-
-    // public function __construct(EntityManagerInterface $entitymanager)
-    // {
-    //     $this->entitymanager = $entitymanager;
-    // }
+    
     /**
      * @Route("/inscription", name="inscription")
      */
@@ -73,16 +68,11 @@ class InscriptionController extends AbstractController
                 // dd($new_pwd);
                 $password = $encoder->encodePassword($user, $new_pwd);
         //    dd($password);
-               $user->setPassword($password);
-         $entityManager->persist($user);
-           $entityManager->flush();
+                $user->setPassword($password);
+                $entityManager->persist($user);
+                $entityManager->flush();
             }
 
-                     
-            //enregistrer le Nom 
-                    
-            // $doctrine = $this->getDoctrine();
-            // $entityManager = $doctrine->getManager();
 
           
             return $this->redirectToRoute('app_logout');
@@ -116,7 +106,7 @@ class InscriptionController extends AbstractController
         ]);
     }
 
-    public function inscriptionMA(Request $request ): Response
+    public function inscriptionMA(EntityManagerInterface $entityManager, UserPasswordEncoderInterface $encoder, Request $request ): Response
     {
         $ret = $this->checkRGPD();
         if ( $ret )
@@ -128,11 +118,20 @@ class InscriptionController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $doctrine = $this->getDoctrine();
-            $entityManager = $doctrine->getManager();
+            $old_pwd= $form->get('old_password')->getData();
+        //   dd($old_pwd); 
+            if ($encoder->isPasswordValid($user, $old_pwd)) 
+            {
+                $new_pwd= $form->get('new_password')->getData();
+                // dd($new_pwd);
+                $password = $encoder->encodePassword($user, $new_pwd);
+        //    dd($password);
+                $user->setPassword($password);
+                
 
             $entityManager->persist($user); 
             $entityManager->flush();
+            }
             return $this->redirectToRoute('app_logout');
         }
         return $this->render( 'inscription/inscriptionMA.html.twig', [
@@ -141,7 +140,7 @@ class InscriptionController extends AbstractController
     }
 
     //fonction qui enregistre un formateur dans la table user
-    public function inscriptionFormateur( Request $request): Response
+    public function inscriptionFormateur(EntityManagerInterface $entityManager, UserPasswordEncoderInterface $encoder, Request $request): Response
     {   //validation rgpd
         $ret = $this->checkRGPD();
         if ( $ret )
@@ -153,11 +152,22 @@ class InscriptionController extends AbstractController
     
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $doctrine = $this->getDoctrine();
-            $entityManager = $doctrine->getManager();
+            $old_pwd= $form->get('old_password')->getData();
+        //   dd($old_pwd); 
+            if ($encoder->isPasswordValid($user, $old_pwd)) 
+            {
+                $new_pwd= $form->get('new_password')->getData();
+                // dd($new_pwd);
+                $password = $encoder->encodePassword($user, $new_pwd);
+        //    dd($password);
+                $user->setPassword($password);
+                $entityManager->persist($user);
+                $entityManager->flush();
 
             $entityManager->persist($user);
             $entityManager->flush();
+
+            }
             return $this->redirectToRoute('app_logout');
         }
         return $this->render(
@@ -168,7 +178,7 @@ class InscriptionController extends AbstractController
         );
     }
 
-    public function inscriptionApprenti(Request $request): Response
+    public function inscriptionApprenti(EntityManagerInterface $entityManager, UserPasswordEncoderInterface $encoder, Request $request): Response
     {
         $ret = $this->checkRGPD();
         if ( $ret )
@@ -179,11 +189,19 @@ class InscriptionController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() ) {
 
-            $doctrine = $this->getDoctrine();
-            $entityManager = $doctrine->getManager();
+            $old_pwd= $form->get('old_password')->getData();
+            //   dd($old_pwd); 
+                if ($encoder->isPasswordValid($user, $old_pwd)) 
+                {
+                    $new_pwd= $form->get('new_password')->getData();
+                    // dd($new_pwd);
+                    $password = $encoder->encodePassword($user, $new_pwd);
+            //    dd($password);
+                    $user->setPassword($password);
+                    $entityManager->persist($user);
+                    $entityManager->flush();
 
-            $entityManager->persist($user);
-            $entityManager->flush();
+                }
             return $this->redirectToRoute('app_logout');
         }
         return $this->render(
