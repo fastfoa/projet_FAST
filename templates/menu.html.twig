@@ -22,73 +22,51 @@ window.history.back();
 				{% if is_granted('ROLE_OF') %}
 					<a class="nav-link  " href="{{ path('dashOFPrincipal')}}">Accueil<span class="sr-only">(current)</span>
 					</a>
-					{% elseif is_granted('ROLE_APP') %}
+				{% elseif is_granted('ROLE_APP') %}
 						<a class="nav-link  " href="{{ path('dashApp')}}">Accueil<span class="sr-only">(current)</span>
 						</a>
-						{% elseif is_granted('ROLE_FORMATEUR') %}
+				{% elseif is_granted('ROLE_FORMATEUR') %}
 							<a class="nav-link  " href="{{ path('dashFormateur')}}">Accueil<span class="sr-only">(current)</span>
 							</a>
-							{% elseif is_granted('ROLE_MA') %}
+				{% elseif is_granted('ROLE_MA') %}
 								<a class="nav-link  " href="{{ path('dashMA')}}">Accueil<span class="sr-only">(current)</span>
 								</a>
-								{% elseif is_granted('ROLE_ENT') %}
+				{% elseif is_granted('ROLE_ENT') %}
 									<a class="nav-link  " href="{{ path('dashEntreprise')}}">Accueil<span class="sr-only">(current)</span>
 									</a>
-								{% endif %}
-							</li>
+				{% endif %}
+			</li>
 
 
-							{% if menu is defined %}
-								{% for item, route in menu %}
-									<li class="nav-item">
-										<a class="nav-link  " href="{{ path(route) }}">{{item}}</a>
-									</li>
+	{% if menu is defined %}
+		{% for item, route in menu %}
+			<li class="nav-item">
+				<a class="nav-link  " href="{{ path(route) }}">{{item}}</a>
+			</li>
 
-								{% endfor %}
-							{% endif %}
-							{# <li class="nav-item">
-																															<a class="nav-link  " href="{{ path('documents') }}">documenthèque</a>
-																														</li>
-																														<li class="nav-item">
-																															<a class="nav-link  " href="{{ path('aide') }}">aide</a>
-																														</li> #}
+		{% endfor %}
+	{% endif %}
+	{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+     		<li class="nav-item">
+				<a class="nav-link " href="{{ path('compte') }}">mon Compte</a>
+			</li> 
+	{% endif %}
+		</ul>
 
-
-							{% if is_granted('IS_AUTHENTICATED_FULLY') %}
-								{# <li class="nav-item">
-																																					<a class="nav-link " href="{{ path('compte') }}">mon Compte</a>
-																																				</li> #}
-							{% endif %}
-
-						</ul>
-						<script>
-							function rtn() {
-window.history.back();
-}
-						</script>
-
+	<script>
+		function rtn() {window.history.back();}
+	</script>
+<ul>
 						{# si authentifié affiche le boutton de deconnexion #}
 						{% if is_granted('IS_AUTHENTICATED_FULLY') %}
 							<a class="boutonForm my-2 my-sm-0 m-3" aria-current="page" href="{{ path('app_logout')}}">Déconnexion</a>
 							{# sinon authentifié affiche le boutton de connexion #}
 							{# {% else %}
-																														<a class="boutonForm my-2 my-sm-0 m-3" aria-current="page" href="{{ path('login')}}">Connexion</a> #}
+									<a class="boutonForm my-2 my-sm-0 m-3" aria-current="page" href="{{ path('login')}}">Connexion</a> #}
 						{% endif %}
 					</div>
 				</nav>
 			</li>
-
-			<li class="nav-item">
-				<a class="nav-link  " href="{{ path('aide') }}">aide</a>
-			</li> #}
-
-
-			{% if is_granted('IS_AUTHENTICATED_FULLY') %}
-				 <li class="nav-item">
-					<a class="nav-link " href="{{ path('compte') }}">mon Compte</a>
-				</li> 
-			{% endif %}
-
 		</ul>
 		<script>
 				function rtn() 
@@ -98,12 +76,12 @@ window.history.back();
 		</script>
 
 		{# si authentifié affiche le boutton de deconnexion #}
-		{% if is_granted('IS_AUTHENTICATED_FULLY') %}
-			<a class="boutonForm my-2 my-sm-0 m-3" aria-current="page" href="{{ path('app_logout')}}">Déconnexion</a>
+		{# {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+			<a class="boutonForm my-2 my-sm-0 m-3" aria-current="page" href="{{ path('app_logout')}}">Déconnexion</a> #}
 		{# sinon authentifié affiche le boutton de connexion #}
 		{# {% else %}
 			<a class="boutonForm my-2 my-sm-0 m-3" aria-current="page" href="{{ path('login')}}">Connexion</a> #}
-		{% endif %}
+		{# {% endif %} #}
 	</div>
 </nav>
 
