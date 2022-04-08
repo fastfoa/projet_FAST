@@ -1,11 +1,23 @@
 <nav class="bar-top navbar navbar-expand-lg   ">
 	<div class="collapse navbar-collapse" id="navbarSupportedContent ">
 		<div class="logo-top">
-			 <img src="{{ asset('images/logo-foreach-blanc.png') }}"> 
+
+		{% if is_granted('ROLE_OF') %}
+				<img src="{{ asset('https://webgenius.foreach-academy.fr/wp-content/uploads/2022/01/Logo-Web-Genius-300x294.png') }}">
+			{% elseif is_granted('ROLE_APP') %}
+				<img src="{{ asset('https://webgenius.foreach-academy.fr/wp-content/uploads/2022/01/Logo-Web-Genius-300x294.png') }}">
+			{% elseif is_granted('ROLE_FORMATEUR') %}
+				<img src="{{ asset('https://webgenius.foreach-academy.fr/wp-content/uploads/2022/01/Logo-Web-Genius-300x294.png') }}">
+			{% elseif is_granted('ROLE_MA') %}
+				<img src="{{ asset('https://webgenius.foreach-academy.fr/wp-content/uploads/2022/01/Logo-Web-Genius-300x294.png') }}">
+			{% elseif is_granted('ROLE_ENT') %}
+				<img src="{{ asset('https://webgenius.foreach-academy.fr/wp-content/uploads/2022/01/Logo-Web-Genius-300x294.png') }}">
+			{% endif %}
+			 {# <img src="{{ asset('images/logo-foreach-blanc.png') }}">  #}
 		</div>
 		{# le bouton de retour s'affiche seulement si l'user est coonecté #}	
 		{% if is_granted('IS_AUTHENTICATED_FULLY') %}	
-			<button  class="boutonForm my-2 my-sm-0 m-3" onclick="rtn()"><i class="fa fa-arrow-left"></i></button>
+			{# <button  class="boutonForm my-2 my-sm-0 m-3" onclick="rtn()"><i class="fa fa-arrow-left"></i></button> #}
 			<script>
 				function rtn() {
 					window.history.back();
