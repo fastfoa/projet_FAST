@@ -1,52 +1,38 @@
 <nav class="bar-top navbar navbar-expand-lg   ">
 	<div class="collapse navbar-collapse" id="navbarSupportedContent ">
 		<div class="logo-top">
-			{% if is_granted('ROLE_OF') %}
-				<img src="{{ asset('https://webgenius.foreach-academy.fr/wp-content/uploads/2022/01/Logo-Web-Genius-300x294.png') }}">
-			{% elseif is_granted('ROLE_APP') %}
-				<img src="{{ asset('https://webgenius.foreach-academy.fr/wp-content/uploads/2022/01/Logo-Web-Genius-300x294.png') }}">
-			{% elseif is_granted('ROLE_FORMATEUR') %}
-				<img src="{{ asset('https://webgenius.foreach-academy.fr/wp-content/uploads/2022/01/Logo-Web-Genius-300x294.png') }}">
-			{% elseif is_granted('ROLE_MA') %}
-				<img src="{{ asset('https://webgenius.foreach-academy.fr/wp-content/uploads/2022/01/Logo-Web-Genius-300x294.png') }}">
-			{% elseif is_granted('ROLE_ENT') %}
-				<img src="{{ asset('https://webgenius.foreach-academy.fr/wp-content/uploads/2022/01/Logo-Web-Genius-300x294.png') }}">
-			{% endif %}
-
+			 <img src="{{ asset('images/logo-foreach-blanc.png') }}"> 
 		</div>
-		{# le bouton de retour s'affiche seulement si l'user est coonecté #}
-		{% if is_granted('IS_AUTHENTICATED_FULLY') %}
-			{# <button  class="boutonForm my-2 my-sm-0 m-3" onclick="rtn()"><i class="fa fa-arrow-left"></i></button> #}
+		{# le bouton de retour s'affiche seulement si l'user est coonecté #}	
+		{% if is_granted('IS_AUTHENTICATED_FULLY') %}	
+			<button  class="boutonForm my-2 my-sm-0 m-3" onclick="rtn()"><i class="fa fa-arrow-left"></i></button>
 			<script>
 				function rtn() {
-window.history.back();
-}
+					window.history.back();
+					}
 			</script>
 
 		{% endif %}
-		<ul
-			class="navbar-nav me-auto fith100">
+		<ul class="navbar-nav me-auto fith100">
 			{# <li class="nav-item ">
-							<a class="nav-link  " href="{{ path('test')}}">Accueil
-								<span class="sr-only">(current)</span>
-							</a>
-						</li> #}
-
+				<a class="nav-link  " href="{{ path('test')}}">Accueil
+					<span class="sr-only">(current)</span>
+				</a>
+			</li> #}
 
 			{% if menu is defined %}
 				{% for item, route in menu %}
 					<li class="nav-item">
 						<a class="nav-link  " href="{{ path(route) }}">{{item}}</a>
-
 					</li>
 				{% endfor %}
 			{% endif %}
 			{# <li class="nav-item">
-							<a class="nav-link  " href="{{ path('documents') }}">documenthèque</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link  " href="{{ path('aide') }}">aide</a>
-						</li> #}
+				<a class="nav-link  " href="{{ path('documents') }}">documenthèque</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link  " href="{{ path('aide') }}">aide</a>
+			</li> #}
 
 
 			{% if is_granted('IS_AUTHENTICATED_FULLY') %}
@@ -55,20 +41,20 @@ window.history.back();
 				</li>
 			{% endif %}
 
-
 		</ul>
 		<script>
-			function rtn() {
-window.history.back();
-}
+				function rtn() 
+				{
+					window.history.back();
+				}
 		</script>
 
 		{# si authentifié affiche le boutton de deconnexion #}
 		{% if is_granted('IS_AUTHENTICATED_FULLY') %}
 			<a class="boutonForm my-2 my-sm-0 m-3" aria-current="page" href="{{ path('app_logout')}}">Déconnexion</a>
-			{# sinon authentifié affiche le boutton de connexion #}
-			{# {% else %}
-						<a class="boutonForm my-2 my-sm-0 m-3" aria-current="page" href="{{ path('login')}}">Connexion</a> #}
+		{# sinon authentifié affiche le boutton de connexion #}
+		{% else %}
+			{# <a class="boutonForm my-2 my-sm-0 m-3" aria-current="page" href="{{ path('login')}}">Connexion</a> #}
 		{% endif %}
 	</div>
 </nav>
