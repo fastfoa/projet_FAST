@@ -27,7 +27,9 @@ window.location = $(this).data("href");
 {% endblock myJavascripts %}
 
 {% block body %}
-
+	 <li class="nav-item bar-top navbar my-2 m-3 ">
+								<a class="nav-link " href="{{ path('compte') }}">mon Compte</a>
+							</li>
 	<div class="container-fluid bg-workSpace">
 		{% if session %}
 			<div class="row bg-bar">
