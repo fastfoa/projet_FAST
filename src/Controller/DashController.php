@@ -217,7 +217,7 @@ class DashController extends AbstractController
                 'app'           => $app,
                 'ma'            => $MA,
                 'OF'            => $infoOF,
-                'menu'          => getMenuFromRole('ROLE_ENT')
+                'menu'          => getMenuFromRole('ROLE_MA')
             ]
         );
     }
