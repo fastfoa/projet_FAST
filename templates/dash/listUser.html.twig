@@ -46,7 +46,7 @@
 					<tr>
 						{% if roleName == 'Entreprise' %}
 							{# <th class="txt-bar bg-bar">Prenom</th> #}
-							<th class="txt-bar bg-bar col-4">nom3</th>
+							<th class="txt-bar bg-bar col-4">nom</th>
 							{# <th class="txt-bar bg-bar">session</th> #}
 							<th class="txt-bar bg-bar col-4">Tél</th>
 							<th class="txt-bar bg-bar col-4">Mail</th>
@@ -57,7 +57,7 @@
 					{% for item in list %}
 					<tr>
 							{# <td>{{item.prenom}}</td> #}
-							<td class="col-4">{{item.nom}}</td>
+							<td class="col-4">{{item.nom_ent}}</td>
 							{# <td>{{item.ns}}</td> #}
 							<td class="col-4">{{item.telephone}}</td>
 							<td class="col-4">{{item.email}}</td>
