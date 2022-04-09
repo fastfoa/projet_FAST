@@ -86,7 +86,7 @@ class DashController extends AbstractController
                 'Sessions' => 'dashOFPrincipal',
                 'Apprentis' => 'listAllAprentis',
                 'Formateurs' => 'listAllFormateurs',
-                'Maitres' => 'listAllMA',
+                'Maitres d\'apprentissage' => 'listAllMA',
                 'Entreprises' => 'listAllEntreprises'
             ];
         return $this->render('dash/addSession.html.twig', [
@@ -395,13 +395,28 @@ class DashController extends AbstractController
         $list = getSQLArrayAssoc(
             $login,
             $pw,
-            "SELECT user.nom, user.prenom, user.telephone, user.email, user.id, s.nom as ns
+         /*  "SELECT user.nom, user.prenom, user.telephone, user.email, user.id, s.nom as ns
              FROM  user
              LEFT JOIN user_in_session as us ON us.id_user=user.id 
              LEFT JOIN session as s ON us.id_session=s.id 
-             WHERE user.role_string='$role'"
-        );
+             WHERE user.role_string='$role'"              
+        );                                                      
+                                    */
 
+
+      /*  "SELECT u.nom, u.prenom, u.id, u.email, u.telephone, u.session, m.id_ent, 
+        (select nom from projet_fast.user as user2 where m.id_ent=user2.id) as nom_ent, u.roles                 
+         FROM  projet_fast.mahas_ent as m          
+         RIGHT JOIN  projet_fast.user as u ON u.id=m.id_ma 
+         WHERE u.roles like '%ROLE_MA%'");                */
+         
+        "SELECT u.nom, u.prenom, u.id, u.email, u.telephone, u.id, m.id_ent, (select nom from projet_fast.user as user2 where m.id_ent=user2.id) as nom_ent, u.roles, s.nom as ns
+         FROM mahas_ent as m 
+         RIGHT JOIN  user as u ON u.id=m.id_ma 
+         LEFT JOIN user_in_session as us ON us.id_user=u.id 
+         LEFT JOIN session as s ON us.id_session=s.id 
+         WHERE u.roles like '%ROLE_MA%';");
+                                                                        
 
         return $this->render(
             'dash/listUser.html.twig',
