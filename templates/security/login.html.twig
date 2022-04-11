@@ -20,9 +20,13 @@
 
 {% block body %}
 <div class='form'>
-    <div class="logoWG">
-        <img width="100" height="100" src="https://webgenius.foreach-academy.fr/wp-content/uploads/2022/01/Logo-Web-Genius-300x294.png" 
-        class="attachment-medium size-medium" alt="" loading="lazy">
+    <div class="logoWG margin my-3 mt-3">
+         <img width="100" height="80" src="https://webgenius.foreach-academy.fr/wp-content/uploads/2022/01/Logo-Web-Genius-300x294.png" 
+        class="attachment-medium size-medium" alt="" loading="lazy"> 
+   <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+    
+         <img width="100" height="80" src="images/logo-foreach-blanc.png" 
+        class="attachment-medium size-medium" alt="" loading="lazy"> 
     </div>
     <form method="post">
         {% if error %}
@@ -34,7 +38,7 @@
                 Vous êtes connecté en tant que {{ app.user.username }}, <a href="{{ path('app_logout') }}">Déconnexion</a>
             </div>
         {% endif %}
-
+          <br>
         <h1 class="h3 mb-3 font-weight-normal">Connectez-vous</h1>
         <input type="email" placeholder='Entrez votre adresse mail' value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
         <input type="password" placeholder='Entrez votre mot de passe' name="password" id="inputPassword" class="form-control mt-2" autocomplete="current-password" required>

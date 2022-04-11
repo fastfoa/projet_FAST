@@ -41,9 +41,10 @@
 
 	</head>
 	<body class="body-fe">
+	{% if is_granted('IS_AUTHENTICATED_FULLY') %}	
 
 		{% include 'menu.html.twig' %}
-		
+		{% endif %}
 		<div class="work-content"> 
 			{% block body %}
 			
