@@ -15,11 +15,11 @@ window.history.back();
 		{% endif %}
 		<ul
 			class="navbar-nav me-auto fith100">
-			 {# <li class="nav-item ">
-							<a class="nav-link  " href="{{ path('test')}}">Accueil
-								<span class="sr-only">(current)</span>
-							</a>
-						</li>  #}
+			{# <li class="nav-item ">
+																<a class="nav-link  " href="{{ path('test')}}">Accueil
+																	<span class="sr-only">(current)</span>
+																</a>
+															</li>  #}
 			{% if menu is defined %}
 				{% for item, route in menu %}
 					<li class="nav-item">
@@ -27,29 +27,23 @@ window.history.back();
 					</li>
 				{% endfor %}
 			{% endif %}
-			 {# <li class="nav-item">
-							<a class="nav-link  " href="{{ path('documents') }}">documenthèque</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link  " href="{{ path('aide') }}">aide</a>
-						</li>  #}
-			{# <li class="nav-item">
+
+
+			<li class="nav-item">
+
 				{% if is_granted('ROLE_OF') %}
 					<a class="nav-link " href="{{ path('compte') }}">mon Compte</a>
-
+				{% elseif is_granted('ROLE_FORMATEUR') %}
+					<a class="nav-link " href="{{ path('compte') }}">mon Compte</a>
+				{% elseif is_granted('ROLE_APP') %}
+					<a class="nav-link " href="{{ path('compte') }}">mon Compte</a>
 				{% elseif is_granted('ROLE_ENT') %}
 					<a class="nav-link " href="{{ path('compte') }}">mon Compte</a>
-				</li>
-			{% endif %} #}
-			
-					
+				{% elseif is_granted('ROLE_MA') %}
+					<a class="nav-link " href="{{ path('compte') }}">mon Compte</a>
 
-			 {% if is_granted('ROLE_OF') %}
-							 <li class="nav-item">
-								<a class="nav-link " href="{{ path('compte') }}">mon Compte</a>
-							</li> 
-						{% endif %} 
-						
+				{% endif %}
+			</li>
 
 		</ul>
 		<script>
@@ -63,7 +57,7 @@ window.history.back();
 			<a class="boutonForm my-2 my-sm-0 m-3" aria-current="page" href="{{ path('app_logout')}}">Déconnexion</a>
 			{# sinon authentifié affiche le boutton de connexion #}
 			{# {% else %}
-						<a class="boutonForm my-2 my-sm-0 m-3" aria-current="page" href="{{ path('login')}}">Connexion</a> #}
+															<a class="boutonForm my-2 my-sm-0 m-3" aria-current="page" href="{{ path('login')}}">Connexion</a> #}
 		{% endif %}
 	</div>
 </nav>
