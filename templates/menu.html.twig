@@ -34,18 +34,7 @@ window.history.back();
 					<span class="sr-only">(current)</span>
 				</a>
 			</li> #}
-
-			{% if menu is defined %}
-				{% for item, route in menu %}
-					<li class="nav-item">
-						<a class="nav-link  " href="{{ path(route) }}">{{item}}</a>
-					</li>
-				{% endfor %}
-			{% endif %}
-
-
-
-			<li class="nav-item ">
+		<li class="nav-item ">
 				{% if is_granted('ROLE_OF') %}
 					<a class="nav-link  " href="{{ path('dashOFPrincipal')}}">Accueil<span class="sr-only">(current)</span>
 					</a>
@@ -62,6 +51,18 @@ window.history.back();
 									<a class="nav-link  " href="{{ path('dashEntreprise')}}">Accueil<span class="sr-only">(current)</span>
 									</a>
 				{% endif %}
+
+			</li>
+
+			{% if menu is defined %}
+				{% for item, route in menu %}
+					<li class="nav-item">
+						<a class="nav-link  " href="{{ path(route) }}">{{item}}</a>
+					</li>
+				{% endfor %}
+			{% endif %}
+
+
 
 			</li>
 
