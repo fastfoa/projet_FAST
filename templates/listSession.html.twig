@@ -1,168 +1,194 @@
 {% if session %}
-    <div class="row my-3" >
-        <div class="col-12 txt-normal">
-            <div class="accordion" id="accordionPanelsStayOpenExample">
-                <div class="accordion-item">
-                    <div class="accordion-header" id="panelsStayOpen-headingOne">
-                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
-                            <h4 class="txt-dark">Apprenti</h4>
-                        </button>
-                    </div>
-                    <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
-                        <div class="accordion-body">
-                            <div class="row">
-                                <div class="container-fluid">
-                                    <div class="row bg">
-                                        <div
-                                            class="col-12">
-                                            {# XXXXXXXXXXXXXXXXXX  attention all role 
-                                                                                                                                                                                                                                                                    <a href="{{ path( 'addUser', {'role':1}) }}"> #}
-                                            <a href="{{ path( 'addUser',{'role': 'ROLE_APP','roleName': 'ROLE_APP'} ) }}">
-                                                <div class="boutonForm">+ Créer un Apprenti</div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-12">
-                                            <table class="table-normal" class = " colorTextNoir">
-                                                    <tr >
-                                                        <th class = " colorTextNoir">Prenom</th>
-                                                        <th class = " colorTextNoir">nom</th>
-                                                       {# <th class = " colorTextNoir">session</th> #}
-                                                        <th class = " colorTextNoir">Tél</th>
-                                                        <th class = " colorTextNoir">Mail</th>
-                                                    </tr>
-                                                <tbody>
-                                                    {% for item in listAPP %}                               
-                                                        <tr class='clickable-row' data-href='{{ path( 'editUser',{'user':item.id} ) }}' >
-                                                            {# <a href="{{ path( 'editUser',{'user':item.id} ) }}"> #}
-                                                                <td class = " colorTextNoir">{{item.prenom}}</td>
-                                                                <td class = " colorTextNoir">{{item.nom}}</td>
-                                                                <td class = " colorTextNoir">{{item.telephone}}</td>
-                                                                <td class = " colorTextNoir">{{item.email}}</td>
-                                                        </tr>        
-                                                    {% endfor %}
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row my-3">
-        <div class="col-12 txt-normal">
-            <div class="accordion-item">
-                <h4 class="accordion-header" id="panelsStayOpen-headingTwo">
-                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="true" aria-controls="panelsStayOpen-collapseTwo">
-                        <h4 class="txt-dark">Formateur</h4>
-                    </button>
-                </h4>
-                <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingTwo">
-                    <div class="accordion-body">
-                        <div class="row">
-                            <div class="container-fluid">
-                                
-                                <div class="row bg">
-                                    <div
-                                        class="col-12">
-                                        {# XXXXXXXXXXXXXXXXXX  attention all role 
-                                                                                                                                                                                                                                                            <a href="{{ path( 'addUser', {'role':1}) }}"> #}
-                                        <a href="{{ path( 'addUser',{'role': 'ROLE_FORMATEUR','roleName': 'ROLE_FORMATEUR'} ) }}">
-                                            <div class="boutonForm">+ Créer un Formateur</div>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-12">
-                                        <table class="table-normal">
-                                            <thead>
-                                                <tr >
-                                                    <th  class = " colorTextNoir">Prenom</th>
-                                                    <th  class = " colorTextNoir">nom</th>
-                                                    {# <th  class = " colorTextNoir">session</th> #}
-                                                     {# <th  class = " colorTextNoir">Tél</th> #}
-                                                    <th  class = " colorTextNoir">Mail</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                {% for item in listFORMATEUR %}
-                                                  <tr>  {# <tr class='clickable-row' data-href='{{ path( 'editUser',{'user':item.id} ) }}'> #}
-                                                        <td class = " colorTextNoir" >{{item.prenom}}</td>
-                                                        <td class = " colorTextNoir" >{{item.nom}}</td>
-                                                        {# <td class = " colorTextNoir" >{{item.nom}}</td> #}
-                                                        {# <td class = " colorTextNoir" >{{item.telephone}}</td> #}
-                                                        <td class = " colorTextNoir" >{{item.email}}</td>
-                                                    </tr>
-                                                {% endfor %}
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row  my-3">
-        <div class="col-12 txt-normal">
-            <div class="accordion-item">
-                <h4 class="accordion-header" id="panelsStayOpen-headingThree">
-                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="true" aria-controls="panelsStayOpen-collapseThree">
-                        <h4 class="txt-dark">Maitre Apprentissage</h4>
-                    </button>
-                </h4>
-                <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingThree">
-                    <div class="accordion-body">
-                        <div class="row">
-                            <div class="container-fluid">     
-                                <div class="row bg">
-                                    <div
-                                        class="col-12">
-                                        {# XXXXXXXXXXXXXXXXXX  attention all role 
-                                                                                                                                                                                                                                                            <a href="{{ path( 'addUser', {'role':1}) }}"> #}
-                                        <a href="{{ path( 'addUser',{'role': 'ROLE_MA','roleName': 'ROLE_MA'} ) }}">
-                                            <div class="boutonForm">+ Créer un Maitre Apprentissage</div>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-12">
-                                        <table class="table-normal">
-                                            <thead>
-                                                <tr>
-                                                    <th  class = " colorTextNoir">Prenom</th>
-                                                    <th  class = " colorTextNoir">nom</th>
-                                                   {# <th  class = " colorTextNoir">session</th> #}
-                                                    {# <th  class = " colorTextNoir">Tél</th> #}
-                                                    <th  class = " colorTextNoir">Mail</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                {% for item in listMA %}
-                                                   <tr> {# <tr class='clickable-row' data-href='{{ path( 'editUser',{'user':item.id} ) }}'> #}
-                                                        <td class = " colorTextNoir" >{{item.prenom}}</td>
-                                                        <td class = " colorTextNoir" >{{item.nom}}</td>
-                                                       {# <td class = " colorTextNoir" >{{item.nom}}</td> #}
-                                                       {# <td class = " colorTextNoir" >{{item.telephone}}</td> #}
-                                                        <td class = " colorTextNoir" >{{item.email}}</td>
-                                                    </tr>
-                                                {% endfor %}
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+	<div class="row my-3">
+		<div class="col-12 txt-normal">
+			<div class="accordion" id="accordionPanelsStayOpenExample">
+				<div class="accordion-item">
+					<div class="accordion-header" id="panelsStayOpen-headingOne">
+						<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+							<h4 class="txt-dark">Apprenti</h4>
+						</button>
+					</div>
+					<div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+						<div class="accordion-body">
+							<div class="row">
+								<div class="container-fluid">
+									<div class="row bg">
+										<div
+											class="col-12">
+											{# XXXXXXXXXXXXXXXXXX  attention all role <a href="{{ path( 'addUser', {'role':1}) }}"> #}
+
+											{% if is_granted('ROLE_OF') %}
+												<a href="{{ path( 'addUser',{'role': 'ROLE_APP','roleName': 'ROLE_APP'} ) }}">
+													<div class="boutonForm">+ Créer un Apprenti</div>
+												</a>
+
+												{% else %}
+												{# <a href="{{ path( 'addUser',{'role': 'ROLE_APP','roleName': 'ROLE_APP'} ) }}">
+																									<div class="boutonForm">+ Créer un Apprenti</div>
+																								</a> #}
+											{% endif %}
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-12">
+											<table class="table-normal" class=" colorTextNoir">
+												<tr>
+													<th class=" colorTextNoir">Prenom</th>
+													<th class=" colorTextNoir">nom</th>
+													{# <th class = " colorTextNoir">session</th> #}
+													<th class=" colorTextNoir">Tél</th>
+													<th class=" colorTextNoir">Mail</th>
+												</tr>
+												<tbody>
+													{% for item in listAPP %}
+														<tr
+															class='clickable-row' data-href='{{ path( 'editUser',{'user':item.id} ) }}'>
+															{# <a href="{{ path( 'editUser',{'user':item.id} ) }}"> #}
+															<td class=" colorTextNoir">{{item.prenom}}</td>
+															<td class=" colorTextNoir">{{item.nom}}</td>
+															<td class=" colorTextNoir">{{item.telephone}}</td>
+															<td class=" colorTextNoir">{{item.email}}</td>
+														</tr>
+													{% endfor %}
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row my-3">
+		<div class="col-12 txt-normal">
+			<div class="accordion-item">
+				<h4 class="accordion-header" id="panelsStayOpen-headingTwo">
+					<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="true" aria-controls="panelsStayOpen-collapseTwo">
+						<h4 class="txt-dark">Formateur</h4>
+					</button>
+				</h4>
+				<div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingTwo">
+					<div class="accordion-body">
+						<div class="row">
+							<div class="container-fluid">
+
+								<div class="row bg">
+									<div
+										class="col-12">
+										{# XXXXXXXXXXXXXXXXXX  attention all role 
+																					                                                                                                                                                                                                                                                            <a href="{{ path( 'addUser', {'role':1}) }}"> #}
+										
+											{% if is_granted('ROLE_OF') %}
+												<a href="{{ path( 'addUser',{'role': 'ROLE_APP','roleName': 'ROLE_APP'} ) }}">
+													<div class="boutonForm">+ Créer un Apprenti</div>
+												</a>
+
+												{% else %}
+												{# <a href="{{ path( 'addUser',{'role': 'ROLE_APP','roleName': 'ROLE_APP'} ) }}">
+																									<div class="boutonForm">+ Créer un Apprenti</div>
+																								</a> #}
+											{% endif %}
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-12">
+										<table class="table-normal">
+											<thead>
+												<tr>
+													<th class=" colorTextNoir">Prenom</th>
+													<th class=" colorTextNoir">nom</th>
+													{# <th  class = " colorTextNoir">session</th> #}
+													{# <th  class = " colorTextNoir">Tél</th> #}
+													<th class=" colorTextNoir">Mail</th>
+												</tr>
+											</thead>
+											<tbody>
+												{% for item in listFORMATEUR %}
+													<tr>
+														{# <tr class='clickable-row' data-href='{{ path( 'editUser',{'user':item.id} ) }}'> #}
+														<td class=" colorTextNoir">{{item.prenom}}</td>
+														<td class=" colorTextNoir">{{item.nom}}</td>
+														{# <td class = " colorTextNoir" >{{item.nom}}</td> #}
+														{# <td class = " colorTextNoir" >{{item.telephone}}</td> #}
+														<td class=" colorTextNoir">{{item.email}}</td>
+													</tr>
+												{% endfor %}
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row  my-3">
+		<div class="col-12 txt-normal">
+			<div class="accordion-item">
+				<h4 class="accordion-header" id="panelsStayOpen-headingThree">
+					<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="true" aria-controls="panelsStayOpen-collapseThree">
+						<h4 class="txt-dark">Maitre Apprentissage</h4>
+					</button>
+				</h4>
+				<div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingThree">
+					<div class="accordion-body">
+						<div class="row">
+							<div class="container-fluid">
+								<div class="row bg">
+									<div
+										class="col-12">
+										{# XXXXXXXXXXXXXXXXXX  attention all role 
+																					                                                                                                                                                                                                                                                            <a href="{{ path( 'addUser', {'role':1}) }}"> #}
+									
+											{% if is_granted('ROLE_OF') %}
+												<a href="{{ path( 'addUser',{'role': 'ROLE_APP','roleName': 'ROLE_APP'} ) }}">
+													<div class="boutonForm">+ Créer un Apprenti</div>
+												</a>
+
+												{% else %}
+												{# <a href="{{ path( 'addUser',{'role': 'ROLE_APP','roleName': 'ROLE_APP'} ) }}">
+																									<div class="boutonForm">+ Créer un Apprenti</div>
+																								</a> #}
+											{% endif %}
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-12">
+										<table class="table-normal">
+											<thead>
+												<tr>
+													<th class=" colorTextNoir">Prenom</th>
+													<th class=" colorTextNoir">nom</th>
+													{# <th  class = " colorTextNoir">session</th> #}
+													{# <th  class = " colorTextNoir">Tél</th> #}
+													<th class=" colorTextNoir">Mail</th>
+												</tr>
+											</thead>
+											<tbody>
+												{% for item in listMA %}
+													<tr>
+														{# <tr class='clickable-row' data-href='{{ path( 'editUser',{'user':item.id} ) }}'> #}
+														<td class=" colorTextNoir">{{item.prenom}}</td>
+														<td class=" colorTextNoir">{{item.nom}}</td>
+														{# <td class = " colorTextNoir" >{{item.nom}}</td> #}
+														{# <td class = " colorTextNoir" >{{item.telephone}}</td> #}
+														<td class=" colorTextNoir">{{item.email}}</td>
+													</tr>
+												{% endfor %}
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 {% endif %}
