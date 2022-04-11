@@ -3,15 +3,15 @@
 		<div class="logo-top">
 
 		{% if is_granted('ROLE_OF') %}
-				<img src="{{ asset('https://webgenius.foreach-academy.fr/wp-content/uploads/2022/01/Logo-Web-Genius-300x294.png') }}">
+				<img src="{{ asset('images/logo-foreach-blanc.png') }}">
 			{% elseif is_granted('ROLE_APP') %}
-				<img src="{{ asset('https://webgenius.foreach-academy.fr/wp-content/uploads/2022/01/Logo-Web-Genius-300x294.png') }}">
+				<img src="{{ asset('images/logo-foreach-blanc.png') }}">
 			{% elseif is_granted('ROLE_FORMATEUR') %}
-				<img src="{{ asset('https://webgenius.foreach-academy.fr/wp-content/uploads/2022/01/Logo-Web-Genius-300x294.png') }}">
+				<img src="{{ asset('images/logo-foreach-blanc.png') }}">
 			{% elseif is_granted('ROLE_MA') %}
-				<img src="{{ asset('https://webgenius.foreach-academy.fr/wp-content/uploads/2022/01/Logo-Web-Genius-300x294.png') }}">
+				<img src="{{ asset('images/logo-foreach-blanc.png') }}">
 			{% elseif is_granted('ROLE_ENT') %}
-				<img src="{{ asset('https://webgenius.foreach-academy.fr/wp-content/uploads/2022/01/Logo-Web-Genius-300x294.png') }}">
+				<img src="{{ asset('images/logo-foreach-blanc.png') }}">
 			{% endif %}
 			 {# <img src="{{ asset('images/logo-foreach-blanc.png') }}">  #}
 		</div>
