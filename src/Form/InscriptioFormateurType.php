@@ -12,6 +12,9 @@ use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
+
 
 class InscriptioFormateurType extends AbstractType
 {
@@ -79,6 +82,32 @@ class InscriptioFormateurType extends AbstractType
                 ],
                 'label' => false,
                 'format' => 'yyyy-MM-dd'
+            ])
+            ->add('old_password', PasswordType::class,[
+                'mapped'=>false,
+                'label'=> false,
+                'attr' => [
+                    'placeholder' => 'Mot de passe actuel'
+                    
+                ] 
+            ])
+            ->add('new_password', RepeatedType::class, [
+                'type' => PasswordType::class,
+                'mapped' => false,
+                'invalid_message' => 'Le mot de passe et la confirmation doivent être identique.',
+                'required' => true,
+                'first_options' => [
+                    'label' => false,
+                    'attr' => [
+                        'placeholder' => 'Merci de saisir votre nouveau mot de passe.'
+                    ]
+                ],
+                'second_options' => [
+                    'label' => false, 
+                    'attr' => [
+                        'placeholder' => 'Merci de confirmer votre nouveau mot de passe.'
+                    ]
+                ]
             ])
  
         ->add('save', SubmitType::class,
