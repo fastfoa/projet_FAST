@@ -392,17 +392,17 @@ class DashController extends AbstractController
         $login = $this->getParameter('loginDB');
         $pw = $this->getParameter('PasswordDB');
 
+        if ( $role == 'ROLE_MA'){
         $list = getSQLArrayAssoc(
             $login,
             $pw,
-         /*  "SELECT user.nom, user.prenom, user.telephone, user.email, user.id, s.nom as ns
+           /*"SELECT user.nom, user.prenom, user.telephone, user.email, user.id, s.nom as ns
              FROM  user
              LEFT JOIN user_in_session as us ON us.id_user=user.id 
              LEFT JOIN session as s ON us.id_session=s.id 
              WHERE user.role_string='$role'"              
-        );                                                      
-                                    */
-
+        );         */                                            
+                                    
 
       /*  "SELECT u.nom, u.prenom, u.id, u.email, u.telephone, u.session, m.id_ent, 
         (select nom from projet_fast.user as user2 where m.id_ent=user2.id) as nom_ent, u.roles                 
@@ -415,14 +415,24 @@ class DashController extends AbstractController
          RIGHT JOIN  user as u ON u.id=m.id_ma 
          LEFT JOIN user_in_session as us ON us.id_user=u.id 
          LEFT JOIN session as s ON us.id_session=s.id 
-         WHERE u.roles like '%ROLE_MA%';");
+         WHERE u.roles like '%ROLE_MA%';");} 
+         
+         else { $list =  getSQLArrayAssoc(
+            $login,
+            $pw,
+            "SELECT user.nom, user.prenom, user.telephone, user.email, user.id, s.nom as ns
+            FROM  user
+            LEFT JOIN user_in_session as us ON us.id_user=user.id 
+            LEFT JOIN session as s ON us.id_session=s.id 
+            WHERE user.role_string='$role'"   ); }
                                                                         
 
         return $this->render(
             'dash/listUser.html.twig',
             [
                 'list' => $list,
-                'menu' => getMenuFromRole($this->getUser()->getRoleString()),        'role' => $role,
+                'menu' => getMenuFromRole($this->getUser()->getRoleString()), 
+                'role' => $role,
                 'roleName' => $roleName
             ]
         );

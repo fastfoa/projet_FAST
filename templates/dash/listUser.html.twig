@@ -34,7 +34,7 @@
 		<div class="row bg">
 			<div class="col-3">
 			</a>	<a href="">
-				<div class="boutonForm">+ Ajouter un
+				<div class="boutonForm m-3 p-2">+ Ajouter un
 					{{ roleName }}</div>
 			</a>
 			</div>
@@ -57,7 +57,7 @@
 					{% for item in list %}
 					<tr>
 							{# <td>{{item.prenom}}</td> #}
-							<td class="col-4">{{item.nom_ent}}</td>
+							<td class="col-4">{{item.nom}}</td> 
 							{# <td>{{item.ns}}</td> #}
 							<td class="col-4">{{item.telephone}}</td>
 							<td class="col-4">{{item.email}}</td>
@@ -73,7 +73,7 @@
 				</tbody>
 			</table>
 						{% elseif roleName == 'Apprenti' %}
-							<th class="txt-bar bg-bar col-2">Prenom1</th>
+							<th class="txt-bar bg-bar col-2">Prenom</th>
 							<th class="txt-bar bg-bar col-2">nom</th>
 							<th class="txt-bar bg-bar col-2">session</th>
 							<th class="txt-bar bg-bar col-3">Tél</th>
@@ -117,7 +117,7 @@
 							<td class="col-2">{{item.ns}}</td>
 				 			{#<td class="col-3">{{item.telephone}}</td> #}
 							<td class="col-3">{{item.email}}</td>
-							<td class="col-3">{{item.nom_ent}}</td>
+							<td class="col-3">{{item.nom_ent}}</td> 
 												
 				{#<td>{{session.formation}}</td>#}
 				{# 	<td><a href="{{ path( 'editUser',{'user':item.id} ) }}">
