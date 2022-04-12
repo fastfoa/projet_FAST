@@ -266,25 +266,45 @@ class DashController extends AbstractController
         $user       = convertUserEntity2SQL($login, $pw, $user->getId());
         $formateur = $user;
         $session = false;
-        $listAPP = false;
-        $listFORMATEUR = false;
-        $listMA = false;
-
-        //dd( $user );
+        $listAPP = [];
+        $listFORMATEUR = [];
+        $listMA = [];
+    
         
-
-        $sessionID = getIdSessionFromApprenti($login, $pw, $user['id']);
-        //dd( $sessionID );
-        if ( $sessionID != null )
-        {
-            $session =  convertSessionEntity2SQL($login, $pw, $sessionID);
-            $listAPP        =  getAppsFromSession($login, $pw, $sessionID ); 
-            $listFORMATEUR  =  getFormateurFromSession($login, $pw, $sessionID ); 
-            $listMA         =  getMAFromSession($login, $pw, $sessionID );
-        }
+            $sessionID = getSessionFromFormateur($login, $pw, $formateur['id']);
+                $SESSIONBIS = [];
+            //   dd( $sessionID);     
+    //     for ($i=0; $i < sizeof($sessionID) ; $i++) { 
+    //         array_push($SESSIONBIS, convertUserEntity2SQL($login, $pw, $sessionID[$i]['id']) );           
+    //    }
+    //  dd($SESSIONBIS);  
+      
+        if ( $sessionID != null ) { 
+    {for ($i=0; $i < sizeof($sessionID) ; $i++) { 
+           
+        array_push($SESSIONBIS, convertUserEntity2SQL($login, $pw, $sessionID[$i]['id']) );
+   }
+    //    dd($listAPP);
+       $Sessionlistapp= [];
+       $Sessionlistma= [];
+       $Sessionlistform= [];
+        
+         for ($j=0; $j < sizeof($SESSIONBIS); $j++) { 
+            array_push($Sessionlistapp, getAppsFromSession($login, $pw, $sessionID[$i]['id']));
+            array_push($Sessionlistform, getFormateurFromSession($login, $pw, $sessionID[$i]['id']));
+            array_push($Sessionlistma, getMAFromSession($login, $pw, $sessionID[$i]['id']));
+         }   
+       dd($Sessionlistapp);
+    //    if ( $appbis != false )
+    //    {$appter= [];
+    //        for ($k=0; $k < sizeof($appbis) ; $k++) { 
+    //    array_push($appter,convertUserEntity2SQL($login, $pw, $appbis[$k]['id']) );
+    //    }}
+   //  dd($appter);
+        }}
         $listDoc = getDocsFromUser( $login, $pw, $user['id'] );
 
-        //dd( $user );
+        // dd( $sessionID );
         return $this->render(
         'dash/dashFormateur.html.twig', 
             [
@@ -422,19 +442,7 @@ class DashController extends AbstractController
         $list = getSQLArrayAssoc(
             $login,
             $pw,
-           /*"SELECT user.nom, user.prenom, user.telephone, user.email, user.id, s.nom as ns
-             FROM  user
-             LEFT JOIN user_in_session as us ON us.id_user=user.id 
-             LEFT JOIN session as s ON us.id_session=s.id 
-             WHERE user.role_string='$role'"              
-        );         */                                            
-                                    
-
-      /*  "SELECT u.nom, u.prenom, u.id, u.email, u.telephone, u.session, m.id_ent, 
-        (select nom from projet_fast.user as user2 where m.id_ent=user2.id) as nom_ent, u.roles                 
-         FROM  projet_fast.mahas_ent as m          
-         RIGHT JOIN  projet_fast.user as u ON u.id=m.id_ma 
-         WHERE u.roles like '%ROLE_MA%'");                */
+                 
          
         "SELECT u.nom, u.prenom, u.id, u.email, u.telephone, u.id, m.id_ent, (select nom from projet_fast.user as user2 where m.id_ent=user2.id) as nom_ent, u.roles, s.nom as ns
          FROM mahas_ent as m 
