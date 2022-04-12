@@ -199,7 +199,7 @@ class DashController extends AbstractController
 
         $ret = $this->checkRGPD();
         if ($ret)
-            return $ret;
+                     return $ret;
 
         $login = $this->getParameter('loginDB');
         $pw = $this->getParameter('PasswordDB');
