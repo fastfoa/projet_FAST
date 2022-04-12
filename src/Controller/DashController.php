@@ -11,8 +11,7 @@ use App\Controller\ProfilController;
 use App\Entity\Session;
 use App\Entity\User;
 use App\Form\SessionType;
-
-
+use Symfony\Component\Validator\Constraints\Length;
 
 class DashController extends AbstractController
 {
@@ -131,24 +130,50 @@ class DashController extends AbstractController
 
         $OF         = getInfoOF();
         $MA         = null;
-        $app        = null;
-        $formateur  = null;
+        $app        = [];
+        $formateur  = [];
 
         $MA = getMAFromEnt($login, $pw, $entreprise['id']);
+        $MABIS = [];
+
+        // dd($MA);
         if ( $MA != false )
-        {
-            $MA = convertUserEntity2SQL($login, $pw, $MA['id']);
-            $app = getAppFromMA($login, $pw, $MA['id']);
-            if ( $app != false )
-            {
-                $app = convertUserEntity2SQL($login, $pw, $app['id']);
-                $formateur  = getFormateursFromApprenti($login, $pw, $app['id']);
-                if ( $formateur != false )
-                {
-                    $formateur  = convertUserEntity2SQL($login, $pw, $formateur[0]['id']);
-                }
-            }
+        {for ($i=0; $i < sizeof($MA) ; $i++) { 
+           
+             array_push($MABIS, convertUserEntity2SQL($login, $pw, $MA[$i]['id']) );
+             array_push($app, getAppFromMA($login, $pw, $MA[$i]['id']));
         }
+        //  dd($app);
+        $appbis= [];
+        
+         for ($j=0; $j < sizeof($app); $j++) { 
+         $appbis = array_merge($appbis,$app[$j]);
+         }   
+        //   dd($appbis);
+         if ( $appbis != false )
+            {$appter= [];
+                for ($k=0; $k < sizeof($appbis) ; $k++) { 
+            array_push($appter,convertUserEntity2SQL($login, $pw, $appbis[$k]['id']) );
+            }
+        //  dd($appter);
+
+            for ($r=0; $r < sizeof($appter); $r++) { 
+             array_push($formateur, getFormateursFromApprenti($login, $pw, $appter[$r]['id']));
+                } 
+        // dd($formateur);
+        $formateurbis = [];
+        for ($m=0; $m < sizeof($formateur); $m++) { 
+                $formateurbis = array_merge($formateurbis,$formateur[$m]);
+              }   
+         // $formateurbis = array_unique($formateurbis);
+        // dd($formateurbis);
+        $formateurter = [];
+        for ($n=0; $n < sizeof($formateurbis) ; $n++) { 
+        array_push($formateurter,convertUserEntity2SQL($login, $pw, $formateurbis[$n]['id']) );}
+            //   dd($formateurter);
+                
+            }
+ }
 
         $uid = $user['id'];
         $listDoc = getDocsFromUser( $login, $pw, $uid );
@@ -160,9 +185,10 @@ class DashController extends AbstractController
                 'document'      => $listDoc,
                 'user'           => $user,
                 'entreprise'    => $entreprise,
-                'app'           => $app,
-                'ma'            => $MA,
+                'apps'           => $appter,
+                'mas'            => $MABIS,
                 'OF'            => $infoOF,
+                'formateurs' => $formateurter,
                 'menu'          => getMenuFromRole('ROLE_ENT')
             ]
         );
