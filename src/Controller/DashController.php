@@ -217,7 +217,7 @@ class DashController extends AbstractController
         // $MA = getMAFromEnt($login, $pw, $entreprise['id']);
         if ( $MA != false )
         {
-            $MA = convertUserEntity2SQL($login, $pw, $MA['id']);
+            $MA = convertUserEntity2SQL($login, $pw, $MA['id'])    ;
             $app = getAppFromMA($login, $pw, $MA['id']);
             if ( $app != false )
             {
