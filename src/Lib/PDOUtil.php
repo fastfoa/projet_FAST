@@ -183,7 +183,7 @@ function getFormateursFromApprenti($login, $pw, $idApprenti)
     return getSQLArrayAssoc(
         $login,
         $pw,
-        "SELECT u.nom, u.prenom, u.email, u.id 
+        "SELECT u.nom, u.prenom, u.id 
                 FROM user_in_session as us0, 
                     user_in_session as us1, 
                     user as u 
@@ -195,7 +195,7 @@ function getFormateursFromApprenti($login, $pw, $idApprenti)
 
 function getMAFromEnt($login, $pw, $idEntreprise)
 {
-    return getSQLSingleAssoc(
+    return getSQLArrayAssoc(
         $login,
         $pw,
         "SELECT u.nom, u.prenom, u.id, u.email, u.telephone                  
@@ -207,7 +207,7 @@ function getMAFromEnt($login, $pw, $idEntreprise)
 
 function getAppFromMA($login, $pw, $idMA)
 {
-    return getSQLSingleAssoc(
+    return getSQLArrayAssoc(
         $login,
         $pw,
         "SELECT u.nom, u.prenom, u.id, u.email, u.telephone, u.tel_urgence1, u.tel_urgence2, u.adresse                   
