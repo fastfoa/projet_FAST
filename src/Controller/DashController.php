@@ -286,7 +286,7 @@ class DashController extends AbstractController
                     array_push($Sessionlistma, getMAFromSession($login, $pw, $sessionID[$i]['id']));
                 }
                 // dd($SESSIONBIS);
-                //   dd($Sessionlistapp);
+            //    dd($Sessionlistapp);
                 // $appbis = [];
 
                 // for ($j = 0; $j < sizeof($Sessionlistapp); $j++) {

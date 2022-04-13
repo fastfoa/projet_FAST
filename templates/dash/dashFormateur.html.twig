@@ -28,28 +28,43 @@ window.location = $(this).data("href");
 
 {% block body %}
 
-	<div class="container-fluid bg-workSpace">
 		{% if sessions %}
-		{% for session in sessions %}
-			
-	
-			<div class="row bg-bar">
-				<div class="col-6 txt-normal">
-					<h3>Session
-						{{session.nom}}</h3>
+		{% for i in 0.. sessions|length -1  %}
+		
+	<div class="container-fluid bg-workSpace">
+	<div class="row my-3">
+		<div class="col-12 ">
+			<div class="accordion" id="accordionPanelsStayOpenExample">
+				<div class="accordion-item">
+					<div class="accordion-header" id="panelsStayOpen-headingOne">
+						<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+							<h4 class="txt-dark">Session{{sessions[i].nom}}</h4>
+						</button>
+					</div>
+					<div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+						<div class="accordion-body">
+							<div class="row">
+								<div class="container-fluid">
+									<div class="row bg-bar">
+										<div class="col-6 txt-normal">
+											Debut :	{{sessions[i].debut|date("d/m/y")}}
+										</div>
+										<div class="col-6 txt-normal">
+											Fin : {{sessions[i].fin|date("d/m/y")}}
+										</div>
+									</div>
+									<div>
+										{% include 'listSession1.html.twig' %}
+									</div>			
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
-			<div class="row text-center">
-				<div class="col-6 txt-normal">
-					Debut :
-					{{session.debut|date("d/m/y")}}
-				</div>
-				<div class="col-6 txt-normal">
-					Fin :
-					{{session.fin|date("d/m/y")}}
-				</div>
-			</div>
-			{% include 'listSession1.html.twig' %}
+		</div>
+	</div></div>
+		
 				{% endfor %}
 		{% else %}
 			<div class="row bg-bar">
@@ -57,21 +72,9 @@ window.location = $(this).data("href");
 					<h3>Aucune session en cours</h3>
 				</div>
 			</div>
-		{% endif %}
-
-
-		
-
-
-		
+		{% endif %}		
 		{% include 'dash/dashOFInclude.html.twig' %}
-	
-
-
-
-		
 		{% set retour = 'dashFormateur' %}
-
 	</div>
 
 </div>{% endblock %}
