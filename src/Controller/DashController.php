@@ -148,10 +148,11 @@ class DashController extends AbstractController
         
          for ($j=0; $j < sizeof($app); $j++) { 
          $appbis = array_merge($appbis,$app[$j]);
-         }   
+         } 
+          
         //   dd($appbis);
          if ( $appbis != false )
-            {$appter= [];
+        {$appter= [];
                 for ($k=0; $k < sizeof($appbis) ; $k++) { 
             array_push($appter,convertUserEntity2SQL($login, $pw, $appbis[$k]['id']) );
             }
@@ -172,7 +173,7 @@ class DashController extends AbstractController
         array_push($formateurter,convertUserEntity2SQL($login, $pw, $formateurbis[$n]['id']) );}
             //   dd($formateurter);
                 
-            }
+         }
  }
 
         $uid = $user['id'];
