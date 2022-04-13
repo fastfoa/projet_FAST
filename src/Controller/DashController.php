@@ -268,7 +268,7 @@ class DashController extends AbstractController
         $listFORMATEUR = [];
         $listMA = [];
 
-
+// dd($formateur);
         $sessionID = getSessionFromFormateur($login, $pw, $formateur['id']);
         $SESSIONBIS = [];
         //   dd( $sessionID);     
@@ -286,7 +286,7 @@ class DashController extends AbstractController
                     array_push($Sessionlistma, getMAFromSession($login, $pw, $sessionID[$i]['id']));
                 }
                 // dd($SESSIONBIS);
-                //    dd($Sessionlistapp);
+                //   dd($Sessionlistapp);
                 // $appbis = [];
 
                 // for ($j = 0; $j < sizeof($Sessionlistapp); $j++) {
@@ -305,8 +305,8 @@ class DashController extends AbstractController
                 'user'          => $user,
                 'document'      => $listDoc,
                 'OF'            => $infoOF,
-                'listMAS'        => $listMA,
-                'listFORMATEURS' => $listFORMATEUR,
+                'listMAS'        => $Sessionlistma,
+                'listFORMATEURS' => $Sessionlistform,
                 'listAPPS'       => $Sessionlistapp,
                 'sessions'       => $SESSIONBIS,
                 'menu'          => getMenuFromRole($this->getUser()->getRoleString())
