@@ -117,13 +117,7 @@ window.history.back();
 		</script>
 
 
-		{# si authentifié affiche le boutton de deconnexion #}
-		{% if is_granted('IS_AUTHENTICATED_FULLY') %}
-			<a class="boutonForm my-2 my-sm-0 m-3" aria-current="page" href="{{ path('app_logout')}}">Déconnexion</a>
-			{# sinon authentifié affiche le boutton de connexion #}
-			{# {% else %}
-															<a class="boutonForm my-2 my-sm-0 m-3" aria-current="page" href="{{ path('login')}}">Connexion</a> #}
-		{% endif %}
+	
 	</div>
 </nav>
 
