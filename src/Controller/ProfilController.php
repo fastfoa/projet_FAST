@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+
 class ProfilController extends AbstractController
 {
     /**
@@ -39,13 +40,22 @@ class ProfilController extends AbstractController
         $ret = $this->checkRGPD();
         if ( $ret )
             return $ret;
-            
+           
+            $login  = $this->getParameter('loginDB');
+            $pw     = $this->getParameter('PasswordDB');
+
         //$aut = $this->getUser();
         //$roleViewer = $aut->getRoles()[0];
         $roleViewer = 'ROLE_OF';
         $roleTarget = $user->getRoleString();
-
+        $listFormateur=[];
         
+        $id = $user->getId();
+    
+        $sessionID = getIdSessionFromApprenti($login, $pw,  $id );
+        
+        //$listFormateur= getSQLArrayAssoc($this->getParameter('loginDB'), $this->getParameter('PasswordDB'),
+        // requete liste formateur d'un app.
         $listDoc = getSQLArrayAssoc($this->getParameter('loginDB'), $this->getParameter('PasswordDB'),
         "SELECT document.id AS d_id, document.titre AS d_titre, document.file_name AS d_fileName
         FROM document, user
@@ -60,11 +70,19 @@ class ProfilController extends AbstractController
         $listMa = getSQLArrayAssoc($this->getParameter('loginDB'), $this->getParameter('PasswordDB'),
         "SELECT id, nom, prenom, email FROM user WHERE role_string='ROLE_MA'");
 
+        $listFormateur = getSQLArrayAssoc($this->getParameter('loginDB'), $this->getParameter('PasswordDB'),
+          "SELECT u.nom, u.prenom, u.email, u.id 
+          FROM user_in_session as us0, user_in_session as us1, user as u  
+          WHERE us0.id_session=us1.id_session and u.id=us1.id_user 
+          and u.role_string='ROLE_FORMATEUR' 
+          and us0.id_user='$sessionID'");
+
         $id = $user->getId();
         if ( $roleViewer ==  'ROLE_OF' )
+        // ajout listFormateur dans if role_app
         {
                  if ($roleTarget == 'ROLE_APP')
-                        return $this->profilOF_APP($user, $listMa, $ma, $id, $listDoc);
+                        return $this->profilOF_APP($user, $listMa, $ma, $id, $listDoc, $listFormateur);
             else if ($roleTarget == 'ROLE_FORMATEUR')
                         return $this->profilOF_Formateur($user, $id, $listDoc);
             else if ($roleTarget == 'ROLE_MA')
@@ -94,7 +112,8 @@ class ProfilController extends AbstractController
 
     // Organisme de Formation regarde les infos de :    
     // l'apprenti 
-    public function profilOF_APP(User $user, $listMa, $ma, $id, $listDoc): Response
+    // listFormateur dans la parenthèse
+    public function profilOF_APP(User $user, $listMa, $ma, $id, $listDoc, $listFormateur): Response
     {
         $ret = $this->checkRGPD();
         if ( $ret )
@@ -109,7 +128,8 @@ class ProfilController extends AbstractController
             'document' => $listDoc,
             'menu' => getMenuFromRole( $this->getUser()->getRoleString() ),            
             
-            'fonction' => "Apprenti"        
+            'fonction' => "Apprenti", 
+            'listFormateur'=> $listFormateur
         ]);
     }    
     // formateur
