@@ -11,8 +11,7 @@ use App\Controller\ProfilController;
 use App\Entity\Session;
 use App\Entity\User;
 use App\Form\SessionType;
-
-
+use Symfony\Component\Validator\Constraints\Length;
 
 class DashController extends AbstractController
 {
@@ -86,7 +85,7 @@ class DashController extends AbstractController
                 'Sessions' => 'dashOFPrincipal',
                 'Apprentis' => 'listAllAprentis',
                 'Formateurs' => 'listAllFormateurs',
-                'Maitres' => 'listAllMA',
+                'Maitres d\'apprentissage' => 'listAllMA',
                 'Entreprises' => 'listAllEntreprises'
             ];
         return $this->render('dash/addSession.html.twig', [
@@ -131,13 +130,94 @@ class DashController extends AbstractController
 
         $OF         = getInfoOF();
         $MA         = null;
+        $app        = [];
+        $formateur  = [];
+
+        $MA = getMAFromEnt($login, $pw, $entreprise['id']);
+        $MABIS = [];
+
+        // dd($MA);
+        if ( $MA != false )
+        {for ($i=0; $i < sizeof($MA) ; $i++) { 
+           
+             array_push($MABIS, convertUserEntity2SQL($login, $pw, $MA[$i]['id']) );
+             array_push($app, getAppFromMA($login, $pw, $MA[$i]['id']));
+        }
+        //  dd($app);
+        $appbis= [];
+        
+         for ($j=0; $j < sizeof($app); $j++) { 
+         $appbis = array_merge($appbis,$app[$j]);
+         }   
+        //   dd($appbis);
+         if ( $appbis != false )
+            {$appter= [];
+                for ($k=0; $k < sizeof($appbis) ; $k++) { 
+            array_push($appter,convertUserEntity2SQL($login, $pw, $appbis[$k]['id']) );
+            }
+        //  dd($appter);
+
+            for ($r=0; $r < sizeof($appter); $r++) { 
+             array_push($formateur, getFormateursFromApprenti($login, $pw, $appter[$r]['id']));
+                } 
+        // dd($formateur);
+        $formateurbis = [];
+        for ($m=0; $m < sizeof($formateur); $m++) { 
+                $formateurbis = array_merge($formateurbis,$formateur[$m]);
+              }   
+         // $formateurbis = array_unique($formateurbis);
+        // dd($formateurbis);
+        $formateurter = [];
+        for ($n=0; $n < sizeof($formateurbis) ; $n++) { 
+        array_push($formateurter,convertUserEntity2SQL($login, $pw, $formateurbis[$n]['id']) );}
+            //   dd($formateurter);
+                
+            }
+ }
+
+        $uid = $user['id'];
+        $listDoc = getDocsFromUser( $login, $pw, $uid );
+
+
+        return $this->render(
+            'dash/dashEntreprise.html.twig',
+            [
+                'document'      => $listDoc,
+                'user'           => $user,
+                'entreprise'    => $entreprise,
+                'apps'           => $appter,
+                'mas'            => $MABIS,
+                'OF'            => $infoOF,
+                'formateurs' => $formateurter,
+                'menu'          => getMenuFromRole('ROLE_ENT')
+            ]
+        );
+    }
+    public function dashMA(): Response
+    {
+        $infoOF = getInfoOF();
+
+        $ret = $this->checkRGPD();
+        if ($ret)
+                     return $ret;
+
+        $login = $this->getParameter('loginDB');
+        $pw = $this->getParameter('PasswordDB');
+
+        $user       = $this->getUser();
+        $role       = $user->getRoleString();
+        $user       = convertUserEntity2SQL($login, $pw, $user->getId());
+        $MA = $user;
+
+        $OF         = getInfoOF();
+        $entreprise = null;
         $app        = null;
         $formateur  = null;
 
-        $MA = getMAFromEnt($login, $pw, $entreprise['id']);
+        // $MA = getMAFromEnt($login, $pw, $entreprise['id']);
         if ( $MA != false )
         {
-            $MA = convertUserEntity2SQL($login, $pw, $MA['id']);
+            $MA = convertUserEntity2SQL($login, $pw, $MA['id'])    ;
             $app = getAppFromMA($login, $pw, $MA['id']);
             if ( $app != false )
             {
@@ -155,7 +235,7 @@ class DashController extends AbstractController
 
 
         return $this->render(
-            'dash/dashEntreprise.html.twig',
+            'dash/dashMA.html.twig',
             [
                 'document'      => $listDoc,
                 'user'           => $user,
@@ -167,6 +247,7 @@ class DashController extends AbstractController
             ]
         );
     }
+
 
     
     public function dashFormateur(): Response
@@ -337,22 +418,47 @@ class DashController extends AbstractController
         $login = $this->getParameter('loginDB');
         $pw = $this->getParameter('PasswordDB');
 
+        if ( $role == 'ROLE_MA'){
         $list = getSQLArrayAssoc(
             $login,
             $pw,
-            "SELECT user.nom, user.prenom, user.telephone, user.email, user.id, s.nom as ns
+           /*"SELECT user.nom, user.prenom, user.telephone, user.email, user.id, s.nom as ns
              FROM  user
              LEFT JOIN user_in_session as us ON us.id_user=user.id 
              LEFT JOIN session as s ON us.id_session=s.id 
-             WHERE user.role_string='$role'"
-        );
+             WHERE user.role_string='$role'"              
+        );         */                                            
+                                    
 
+      /*  "SELECT u.nom, u.prenom, u.id, u.email, u.telephone, u.session, m.id_ent, 
+        (select nom from projet_fast.user as user2 where m.id_ent=user2.id) as nom_ent, u.roles                 
+         FROM  projet_fast.mahas_ent as m          
+         RIGHT JOIN  projet_fast.user as u ON u.id=m.id_ma 
+         WHERE u.roles like '%ROLE_MA%'");                */
+         
+        "SELECT u.nom, u.prenom, u.id, u.email, u.telephone, u.id, m.id_ent, (select nom from projet_fast.user as user2 where m.id_ent=user2.id) as nom_ent, u.roles, s.nom as ns
+         FROM mahas_ent as m 
+         RIGHT JOIN  user as u ON u.id=m.id_ma 
+         LEFT JOIN user_in_session as us ON us.id_user=u.id 
+         LEFT JOIN session as s ON us.id_session=s.id 
+         WHERE u.roles like '%ROLE_MA%';");} 
+         
+         else { $list =  getSQLArrayAssoc(
+            $login,
+            $pw,
+            "SELECT user.nom, user.prenom, user.telephone, user.email, user.id, s.nom as ns
+            FROM  user
+            LEFT JOIN user_in_session as us ON us.id_user=user.id 
+            LEFT JOIN session as s ON us.id_session=s.id 
+            WHERE user.role_string='$role'"   ); }
+                                                                        
 
         return $this->render(
             'dash/listUser.html.twig',
             [
                 'list' => $list,
-                'menu' => getMenuFromRole($this->getUser()->getRoleString()),        'role' => $role,
+                'menu' => getMenuFromRole($this->getUser()->getRoleString()), 
+                'role' => $role,
                 'roleName' => $roleName
             ]
         );

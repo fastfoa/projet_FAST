@@ -27,7 +27,7 @@ class UserFixtures extends Fixture
             $user->setRoleString("ROLE_APP");
             $user->setEmail($faker->email);
             $user->setPassword($hashPW); // 0000
-            $user->setNom('éric');
+            $user->setNom($faker->lastname);
             $user->setPrenom($faker->firstName);
             $user->setAdresse($faker->address);
             $user->setTelephone($faker->phoneNumber);
