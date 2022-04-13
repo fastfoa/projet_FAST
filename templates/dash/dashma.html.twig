@@ -22,10 +22,9 @@
 						<div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
 							<div class="accordion-body">
 								<div class="row">
-									{% if app %}
-									{% for app in apps %}
-										
-									
+								
+								{% if apps %}
+									{% for app in apps %}							
 										<div class="col-5">
 											{{ app.prenom }} {{ app.nom }}
 											<br>
@@ -45,14 +44,14 @@
                 								<button class="boutonForm">EVAL</button>
         									</a>
 										</div>	
-										<hr>										        
-										
+										<hr>										        										
 									{% endfor %}
-									{% else %}
+								 {% else %}
+									 
 										<div class="col-6">
 											<h2 class="txt-dark">PAS D'APPRENTI</h2>
 										</div>	
-									{% endif %}
+								{% endif %}
 								</div>	
 							</div>
 						</div>
