@@ -86,19 +86,19 @@
 								<div class="row bg">
 									<div
 										class="col-12">
-										XXXXXXXXXXXXXXXXXX  attention all role 
-
+										{# XXXXXXXXXXXXXXXXXX  attention all role 
+																																									                                                                                                                                                                                                                                                            <a href="{{ path( 'addUser', {'role':1}) }}"> #}
 
 										{% if is_granted('ROLE_OF') %}
 											<a href="{{ path( 'addUser',{'role': 'ROLE_APP','roleName': 'ROLE_APP'} ) }}">
-												<div class="boutonForm">+ Créer un Apprenti</div>
+												<div class="boutonForm">+ Créer un Formateur</div>
 											</a>
 
 											{% else %}
 											{# <a href="{{ path( 'addUser',{'role': 'ROLE_APP','roleName': 'ROLE_APP'} ) }}">
-														<div class="boutonForm">+ Créer un Apprenti</div>
-															</a>#}
-										 {% endif %} 
+																																															<div class="boutonForm">+ Créer un Apprenti</div>
+																																														</a> #}
+										{% endif %}
 									</div>
 								</div>
 								<div class="row">
@@ -150,18 +150,18 @@
 								<div class="row bg">
 									<div
 										class="col-12">
-								
-
+										{# XXXXXXXXXXXXXXXXXX  attention all role 
+																																									                                                                                                                                                                                                                                                            <a href="{{ path( 'addUser', {'role':1}) }}"> #}
 
 										{% if is_granted('ROLE_OF') %}
 											<a href="{{ path( 'addUser',{'role': 'ROLE_APP','roleName': 'ROLE_APP'} ) }}">
-												<div class="boutonForm">+ Créer un Apprenti</div>
+												<div class="boutonForm">+ Créer un Maitre Apprentissage</div>
 											</a>
 
 											{% else %}
 											{# <a href="{{ path( 'addUser',{'role': 'ROLE_APP','roleName': 'ROLE_APP'} ) }}">
-																							<div class="boutonForm">+ Créer un Apprenti</div>
-																		</a> #}
+																																															<div class="boutonForm">+ Créer un Apprenti</div>
+																																														</a> #}
 										{% endif %}
 									</div>
 								</div>
