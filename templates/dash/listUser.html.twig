@@ -111,7 +111,8 @@
 					</thead>
 				<tbody>
 					{% for item in list %}
-						<tr  class='clickable-row' data-href='{{ path( 'editUser',{'user':item.id} ) }}'>
+						{# <tr  class='clickable-row' data-href='{{ path( 'editUser',{'user':item.id} ) }}'>#}
+							<tr>
 							<td class="col-2">{{item.prenom}}</td>
 							<td class="col-2">{{item.nom}}</td>
 							<td class="col-2">{{item.ns}}</td>
@@ -123,7 +124,7 @@
 				{# 	<td><a href="{{ path( 'editUser',{'user':item.id} ) }}">
 					<i class="fas fa-solid fa-download" style="font-size:20px;color:green;"></i></a>
 					</td> #}
-						</tr>
+							</tr>
 							{% endfor %}
 				</tbody>
 			</table>

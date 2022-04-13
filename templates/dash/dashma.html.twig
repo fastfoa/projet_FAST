@@ -2,12 +2,13 @@
 
 
 {% block body %}
-
 	<div class="container-fluid bg-workSpace">
 		<div
 			class="row bg-bar">
 			{# <h3>Entreprise {{entreprise.nom}}</h3> #}
-			<h3>Interface Entreprise
+
+			<h3>Interface Maitre d'Apprentissage
+
 			</h3>
 		</div>
 		<div class="row">
@@ -19,14 +20,15 @@
 							<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
 								<h2 class="txt-dark">Apprenti</h2
 							</button>
+
 						</h2>
 						<div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
 							<div class="accordion-body">
 								<div class="row">
-									{% if apps %}
-									{% for app in apps %}
-										
-									
+								
+								{% if apps %}
+									{% for app in apps %}							
+
 										<div class="col-5">
 											{{ app.prenom }} {{ app.nom }}
 											<br>
@@ -45,54 +47,23 @@
 											<a href="{{ path( 'dashEval',{'app':app.id } ) }}">
                 								<button class="boutonForm">EVAL</button>
         									</a>
+
 										</div>	
-										<hr>										        
-										
+										<hr>										        										
 									{% endfor %}
-									{% else %}
+								 {% else %}
+									 
 										<div class="col-6">
 											<h2 class="txt-dark">PAS D'APPRENTI</h2>
 										</div>	
-									{% endif %}
+								{% endif %}
+
 								</div>	
 							</div>
 						</div>
 					</div>
-					<div class="accordion-item">
-						<h2 class="accordion-header" id="panelsStayOpen-headingTwo">
-							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
-								<h2 class="txt-dark">Maitre d'Apprentissage</h2>
-							</button>
-						</h2>
-						<div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
-							<div class="accordion-body">
-								<div class="row">
-									{% if mas %}
-									{% for ma in mas %}
-										
-									
-										<div class="col-6">
-											{{ ma.prenom }} {{ ma.nom }}
-											<br>
-											{{ ma.email }}
-											<br>
-											{{ ma.telephone }}
-											<br>
-											{{ ma.adresse|default('adresse') }}
-											<hr>
-										</div>	
-										<div class="col-6">
-										</div>	
-										{% endfor %}
-									{% else %}
-										<div class="col-6">
-											<h2 class="txt-dark">PAS DE MAITRE D'APPRENTISSAGE</h2>
-										</div>	
-									{% endif %}
-								</div>	
-							</div>
-						</div>
-					</div>
+
+				
 						<div class="accordion-item">
 						<h2 class="accordion-header" id="panelsStayOpen-headingTwo">
 							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
@@ -119,15 +90,18 @@
 										<div class="col-6">
 											<h2 class="txt-dark">PAS DE MAITRE D'APPRENTISSAGE</h2>
 										</div>	
+
 									{% endif %}
 								</div>	
 							</div>
 						</div>
 					</div>
 					{% include 'dash/dashOFInclude.html.twig' %}
+
 					{% set retour = 'dashEntreprise' %}
 
 				
+
 
 
 					</div>
