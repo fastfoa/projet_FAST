@@ -127,15 +127,16 @@ class DashController extends AbstractController
         $role       = $user->getRoleString();
         $user       = convertUserEntity2SQL($login, $pw, $user->getId());
         $entreprise = $user;
-
         $OF         = getInfoOF();
         $MA         = null;
         $app        = [];
         $formateur  = [];
-
-        $MA = getMAFromEnt($login, $pw, $entreprise['id']);
+        $appter= [];
         $MABIS = [];
-
+        $formateurter = [];
+       
+        $MA = getMAFromEnt($login, $pw, $entreprise['id']);
+        
         // dd($MA);
         if ( $MA != false )
         {for ($i=0; $i < sizeof($MA) ; $i++) { 
@@ -151,7 +152,7 @@ class DashController extends AbstractController
          }   
         //   dd($appbis);
          if ( $appbis != false )
-            {$appter= [];
+            {
                 for ($k=0; $k < sizeof($appbis) ; $k++) { 
             array_push($appter,convertUserEntity2SQL($login, $pw, $appbis[$k]['id']) );
             }
@@ -167,7 +168,7 @@ class DashController extends AbstractController
               }   
          // $formateurbis = array_unique($formateurbis);
         // dd($formateurbis);
-        $formateurter = [];
+       
         for ($n=0; $n < sizeof($formateurbis) ; $n++) { 
         array_push($formateurter,convertUserEntity2SQL($login, $pw, $formateurbis[$n]['id']) );}
             //   dd($formateurter);
@@ -177,8 +178,7 @@ class DashController extends AbstractController
 
         $uid = $user['id'];
         $listDoc = getDocsFromUser( $login, $pw, $uid );
-
-
+        
         return $this->render(
             'dash/dashEntreprise.html.twig',
             [
