@@ -110,7 +110,7 @@ class DashController extends AbstractController
         return $this->redirectToRoute("dashOFPrincipal");
     }
 
-    
+
 
     public function dashEntreprise(): Response
     {
@@ -137,46 +137,47 @@ class DashController extends AbstractController
         $MABIS = [];
 
         // dd($MA);
-        if ( $MA != false )
-        {for ($i=0; $i < sizeof($MA) ; $i++) { 
-           
-             array_push($MABIS, convertUserEntity2SQL($login, $pw, $MA[$i]['id']) );
-             array_push($app, getAppFromMA($login, $pw, $MA[$i]['id']));
-        }
-        //  dd($app);
-        $appbis= [];
-        
-         for ($j=0; $j < sizeof($app); $j++) { 
-         $appbis = array_merge($appbis,$app[$j]);
-         }   
-        //   dd($appbis);
-         if ( $appbis != false )
-            {$appter= [];
-                for ($k=0; $k < sizeof($appbis) ; $k++) { 
-            array_push($appter,convertUserEntity2SQL($login, $pw, $appbis[$k]['id']) );
-            }
-        //  dd($appter);
+        if ($MA != false) {
+            for ($i = 0; $i < sizeof($MA); $i++) {
 
-            for ($r=0; $r < sizeof($appter); $r++) { 
-             array_push($formateur, getFormateursFromApprenti($login, $pw, $appter[$r]['id']));
-                } 
-        // dd($formateur);
-        $formateurbis = [];
-        for ($m=0; $m < sizeof($formateur); $m++) { 
-                $formateurbis = array_merge($formateurbis,$formateur[$m]);
-              }   
-         // $formateurbis = array_unique($formateurbis);
-        // dd($formateurbis);
-        $formateurter = [];
-        for ($n=0; $n < sizeof($formateurbis) ; $n++) { 
-        array_push($formateurter,convertUserEntity2SQL($login, $pw, $formateurbis[$n]['id']) );}
-            //   dd($formateurter);
-                
+                array_push($MABIS, convertUserEntity2SQL($login, $pw, $MA[$i]['id']));
+                array_push($app, getAppFromMA($login, $pw, $MA[$i]['id']));
             }
- }
+            //  dd($app);
+            $appbis = [];
+
+            for ($j = 0; $j < sizeof($app); $j++) {
+                $appbis = array_merge($appbis, $app[$j]);
+            }
+            //   dd($appbis);
+            if ($appbis != false) {
+                $appter = [];
+                for ($k = 0; $k < sizeof($appbis); $k++) {
+                    array_push($appter, convertUserEntity2SQL($login, $pw, $appbis[$k]['id']));
+                }
+                //  dd($appter);
+
+                for ($r = 0; $r < sizeof($appter); $r++) {
+                    array_push($formateur, getFormateursFromApprenti($login, $pw, $appter[$r]['id']));
+                }
+                // dd($formateur);
+                $formateurbis = [];
+                for ($m = 0; $m < sizeof($formateur); $m++) {
+                    $formateurbis = array_merge($formateurbis, $formateur[$m]);
+                }
+                // $formateurbis = array_unique($formateurbis);
+                // dd($formateurbis);
+                $formateurter = [];
+                for ($n = 0; $n < sizeof($formateurbis); $n++) {
+                    array_push($formateurter, convertUserEntity2SQL($login, $pw, $formateurbis[$n]['id']));
+                }
+                //   dd($formateurter);
+
+            }
+        }
 
         $uid = $user['id'];
-        $listDoc = getDocsFromUser( $login, $pw, $uid );
+        $listDoc = getDocsFromUser($login, $pw, $uid);
 
 
         return $this->render(
@@ -199,7 +200,7 @@ class DashController extends AbstractController
 
         $ret = $this->checkRGPD();
         if ($ret)
-                     return $ret;
+            return $ret;
 
         $login = $this->getParameter('loginDB');
         $pw = $this->getParameter('PasswordDB');
@@ -215,23 +216,20 @@ class DashController extends AbstractController
         $formateur  = null;
 
         // $MA = getMAFromEnt($login, $pw, $entreprise['id']);
-        if ( $MA != false )
-        {
-            $MA = convertUserEntity2SQL($login, $pw, $MA['id'])    ;
+        if ($MA != false) {
+            $MA = convertUserEntity2SQL($login, $pw, $MA['id']);
             $app = getAppFromMA($login, $pw, $MA['id']);
-            if ( $app != false )
-            {
+            if ($app != false) {
                 $app = convertUserEntity2SQL($login, $pw, $app['id']);
                 $formateur  = getFormateursFromApprenti($login, $pw, $app['id']);
-                if ( $formateur != false )
-                {
+                if ($formateur != false) {
                     $formateur  = convertUserEntity2SQL($login, $pw, $formateur[0]['id']);
                 }
             }
         }
 
         $uid = $user['id'];
-        $listDoc = getDocsFromUser( $login, $pw, $uid );
+        $listDoc = getDocsFromUser($login, $pw, $uid);
 
 
         return $this->render(
@@ -249,7 +247,7 @@ class DashController extends AbstractController
     }
 
 
-    
+
     public function dashFormateur(): Response
     {
         $ret = $this->checkRGPD();
@@ -269,52 +267,48 @@ class DashController extends AbstractController
         $listAPP = [];
         $listFORMATEUR = [];
         $listMA = [];
+
+
+        $sessionID = getSessionFromFormateur($login, $pw, $formateur['id']);
+        $SESSIONBIS = [];
+        //   dd( $sessionID);     
     
-        
-            $sessionID = getSessionFromFormateur($login, $pw, $formateur['id']);
-                $SESSIONBIS = [];
-            //   dd( $sessionID);     
-    //     for ($i=0; $i < sizeof($sessionID) ; $i++) { 
-    //         array_push($SESSIONBIS, convertUserEntity2SQL($login, $pw, $sessionID[$i]['id']) );           
-    //    }
-    //  dd($SESSIONBIS);  
-      
-        if ( $sessionID != null ) { 
-    {for ($i=0; $i < sizeof($sessionID) ; $i++) { 
-           
-        array_push($SESSIONBIS, convertUserEntity2SQL($login, $pw, $sessionID[$i]['id']) );
-   }
-    //    dd($listAPP);
-       $Sessionlistapp= [];
-       $Sessionlistma= [];
-       $Sessionlistform= [];
-        
-         for ($j=0; $j < sizeof($SESSIONBIS); $j++) { 
-            array_push($Sessionlistapp, getAppsFromSession($login, $pw, $sessionID[$i]['id']));
-            array_push($Sessionlistform, getFormateurFromSession($login, $pw, $sessionID[$i]['id']));
-            array_push($Sessionlistma, getMAFromSession($login, $pw, $sessionID[$i]['id']));
-         }   
-       dd($Sessionlistapp);
-    //    if ( $appbis != false )
-    //    {$appter= [];
-    //        for ($k=0; $k < sizeof($appbis) ; $k++) { 
-    //    array_push($appter,convertUserEntity2SQL($login, $pw, $appbis[$k]['id']) );
-    //    }}
-   //  dd($appter);
-        }}
-        $listDoc = getDocsFromUser( $login, $pw, $user['id'] );
+        //   dd($sessionID[0])['id'];  
+        $Sessionlistapp = [];
+        $Sessionlistma = [];
+        $Sessionlistform = [];
+        if ($sessionID != null) { {
+                for ($i = 0; $i < sizeof($sessionID); $i++) {
+
+                    array_push($SESSIONBIS, convertSessionEntity2SQL($login, $pw, $sessionID[$i]['id']));
+                    array_push($Sessionlistapp, getAppsFromSession($login, $pw, $sessionID[$i]['id']));
+                    array_push($Sessionlistform, getFormateurFromSession($login, $pw, $sessionID[$i]['id']));
+                    array_push($Sessionlistma, getMAFromSession($login, $pw, $sessionID[$i]['id']));
+                }
+                // dd($SESSIONBIS);
+                //    dd($Sessionlistapp);
+                // $appbis = [];
+
+                // for ($j = 0; $j < sizeof($Sessionlistapp); $j++) {
+                //     $appbis = array_merge($appbis, $Sessionlistapp[$j]);
+                // }
+
+                //   dd($appbis);
+            }
+        }
+        $listDoc = getDocsFromUser($login, $pw, $user['id']);
 
         // dd( $sessionID );
         return $this->render(
-        'dash/dashFormateur.html.twig', 
+            'dash/dashFormateur.html.twig',
             [
                 'user'          => $user,
                 'document'      => $listDoc,
                 'OF'            => $infoOF,
-                'listMA'        => $listMA,
-                'listFORMATEUR' => $listFORMATEUR,
-                'listAPP'       => $listAPP,
-                'session'       => $session,
+                'listMAS'        => $listMA,
+                'listFORMATEURS' => $listFORMATEUR,
+                'listAPPS'       => $Sessionlistapp,
+                'sessions'       => $SESSIONBIS,
                 'menu'          => getMenuFromRole($this->getUser()->getRoleString())
             ]
         );
@@ -331,12 +325,12 @@ class DashController extends AbstractController
         $login = $this->getParameter('loginDB');
         $pw = $this->getParameter('PasswordDB');
 
-        $listAPP        =  getAppsFromSession($login, $pw, $sessionID ); 
-        $listFORMATEUR  =  getFormateurFromSession($login, $pw, $sessionID ); 
-        $listMA         =  getMAFromSession($login, $pw, $sessionID );
+        $listAPP        =  getAppsFromSession($login, $pw, $sessionID);
+        $listFORMATEUR  =  getFormateurFromSession($login, $pw, $sessionID);
+        $listMA         =  getMAFromSession($login, $pw, $sessionID);
 
         return $this->render(
-        'dash/dashOFSession.html.twig', 
+            'dash/dashOFSession.html.twig',
             [
                 'listMA'        => $listMA,
                 'listFORMATEUR' => $listFORMATEUR,
@@ -438,34 +432,37 @@ class DashController extends AbstractController
         $login = $this->getParameter('loginDB');
         $pw = $this->getParameter('PasswordDB');
 
-        if ( $role == 'ROLE_MA'){
-        $list = getSQLArrayAssoc(
-            $login,
-            $pw,
-                 
-         
-        "SELECT u.nom, u.prenom, u.id, u.email, u.telephone, u.id, m.id_ent, (select nom from projet_fast.user as user2 where m.id_ent=user2.id) as nom_ent, u.roles, s.nom as ns
+        if ($role == 'ROLE_MA') {
+            $list = getSQLArrayAssoc(
+                $login,
+                $pw,
+
+
+                "SELECT u.nom, u.prenom, u.id, u.email, u.telephone, u.id, m.id_ent, (select nom from projet_fast.user as user2 where m.id_ent=user2.id) as nom_ent, u.roles, s.nom as ns
          FROM mahas_ent as m 
          RIGHT JOIN  user as u ON u.id=m.id_ma 
          LEFT JOIN user_in_session as us ON us.id_user=u.id 
          LEFT JOIN session as s ON us.id_session=s.id 
-         WHERE u.roles like '%ROLE_MA%';");} 
-         
-         else { $list =  getSQLArrayAssoc(
-            $login,
-            $pw,
-            "SELECT user.nom, user.prenom, user.telephone, user.email, user.id, s.nom as ns
+         WHERE u.roles like '%ROLE_MA%';"
+            );
+        } else {
+            $list =  getSQLArrayAssoc(
+                $login,
+                $pw,
+                "SELECT user.nom, user.prenom, user.telephone, user.email, user.id, s.nom as ns
             FROM  user
             LEFT JOIN user_in_session as us ON us.id_user=user.id 
             LEFT JOIN session as s ON us.id_session=s.id 
-            WHERE user.role_string='$role'"   ); }
-                                                                        
+            WHERE user.role_string='$role'"
+            );
+        }
+
 
         return $this->render(
             'dash/listUser.html.twig',
             [
                 'list' => $list,
-                'menu' => getMenuFromRole($this->getUser()->getRoleString()), 
+                'menu' => getMenuFromRole($this->getUser()->getRoleString()),
                 'role' => $role,
                 'roleName' => $roleName
             ]
@@ -522,7 +519,7 @@ class DashController extends AbstractController
 
         $login  = $this->getParameter('loginDB');
         $pw     = $this->getParameter('PasswordDB');
-        
+
         $user       = $this->getUser();
         $role       = $user->getRoleString();
         $user       = convertUserEntity2SQL($login, $pw, $user->getId());
@@ -535,34 +532,33 @@ class DashController extends AbstractController
 
 
         $MA = getMAFromApprenti($login, $pw, $app['id']);
-        if ( $MA )
-        {
-            $MA = convertUserEntity2SQL($login, $pw, $MA['id'] );
+        if ($MA) {
+            $MA = convertUserEntity2SQL($login, $pw, $MA['id']);
             $entreprise = getENTFromMA($login, $pw, $MA['id']);
-            if ( $entreprise )
-                $entreprise = convertUserEntity2SQL($login, $pw, $entreprise['id'] );
+            if ($entreprise)
+                $entreprise = convertUserEntity2SQL($login, $pw, $entreprise['id']);
         }
-        
-   
+
+
         //    $formateur  = getFormateursFromApprenti($login, $pw, 
         // $app['id']);
-        
+
         $listFormateur = getSQLArrayAssoc(
             $login,
             $pw,
- 
-        "SELECT u.nom, u.prenom, u.email, u.id 
+
+            "SELECT u.nom, u.prenom, u.email, u.id 
         FROM user_in_session as us0, 
             user_in_session as us1, 
             user as u 
         WHERE 
         us0.id_session=us1.id_session and u.id=us1.id_user and u.role_string='ROLE_FORMATEUR' 
         and us0.id_user='$sessionID'"
-);
-    //    dd($listFormateur);
+        );
+        //    dd($listFormateur);
 
         $uid = $app['id'];
-        $listDoc = getDocsFromUser( $login, $pw, $uid );
+        $listDoc = getDocsFromUser($login, $pw, $uid);
 
 
         return $this->render(

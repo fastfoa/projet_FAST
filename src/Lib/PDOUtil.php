@@ -267,6 +267,8 @@ function convertUserEntity2SQL($login, $pw, $id)
 }
 
 
+
+
 function convertSessionEntity2SQL($login, $pw, $id)
 {
     return getSQLSingleAssoc(

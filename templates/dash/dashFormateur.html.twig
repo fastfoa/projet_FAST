@@ -29,7 +29,10 @@ window.location = $(this).data("href");
 {% block body %}
 
 	<div class="container-fluid bg-workSpace">
-		{% if session %}
+		{% if sessions %}
+		{% for session in sessions %}
+			
+	
 			<div class="row bg-bar">
 				<div class="col-6 txt-normal">
 					<h3>Session
@@ -46,6 +49,8 @@ window.location = $(this).data("href");
 					{{session.fin|date("d/m/y")}}
 				</div>
 			</div>
+			{% include 'listSession1.html.twig' %}
+				{% endfor %}
 		{% else %}
 			<div class="row bg-bar">
 				<div class="col-6 txt-normal">
@@ -92,7 +97,7 @@ window.location = $(this).data("href");
 			</div>
 		</div>
 
-		{% include 'listSession.html.twig' %}
+		
 
 
 		
