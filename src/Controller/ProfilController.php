@@ -49,8 +49,10 @@ class ProfilController extends AbstractController
         $roleViewer = 'ROLE_OF';
         $roleTarget = $user->getRoleString();
         $listFormateur=[];
+        $ent=[];
         
         $id = $user->getId();
+        $infoOF = getInfoOF();
     
         $sessionID = getIdSessionFromApprenti($login, $pw,  $id );
         
@@ -66,7 +68,19 @@ class ProfilController extends AbstractController
          FROM app_has_ma as a
          RIGHT JOIN user as u ON u.id=a.id_ma 
          WHERE a.id_apprenti=".$user->getId());
+   $MA = getMAFromApprenti($login, $pw, $id);
+   if ( $MA )
+   {
+       $MA = convertUserEntity2SQL($login, $pw, $MA['id'] );
+       $entreprise = getENTFromMA($login, $pw, $MA['id']);
+       if ( $entreprise )
+           $entreprise = convertUserEntity2SQL($login, $pw, $entreprise['id'] );
+   }
 
+        //  for ($i=0; $i <sizeof($ma) ; $i++) { 
+        //     array_push($ent, getENTFromMA($login, $pw, $ma[1]['id']));
+        //  }
+    //dd($entreprise);
         $listMa = getSQLArrayAssoc($this->getParameter('loginDB'), $this->getParameter('PasswordDB'),
         "SELECT id, nom, prenom, email FROM user WHERE role_string='ROLE_MA'");
 
@@ -82,7 +96,7 @@ class ProfilController extends AbstractController
         // ajout listFormateur dans if role_app
         {
                  if ($roleTarget == 'ROLE_APP')
-                        return $this->profilOF_APP($user, $listMa, $ma, $id, $listDoc, $listFormateur);
+                        return $this->profilOF_APP($user, $listMa, $ma, $id, $listDoc, $listFormateur, $infoOF, $entreprise);
             else if ($roleTarget == 'ROLE_FORMATEUR')
                         return $this->profilOF_Formateur($user, $id, $listDoc);
             else if ($roleTarget == 'ROLE_MA')
@@ -113,12 +127,13 @@ class ProfilController extends AbstractController
     // Organisme de Formation regarde les infos de :    
     // l'apprenti 
     // listFormateur dans la parenthèse
-    public function profilOF_APP(User $user, $listMa, $ma, $id, $listDoc, $listFormateur): Response
-    {
+    public function profilOF_APP(User $user, $listMa, $ma, $id, $listDoc, $listFormateur, $infoOF,$entreprise): Response
+    { 
         $ret = $this->checkRGPD();
         if ( $ret )
-            return $ret;            
-        //dd( $user );
+            return $ret;   
+            //dd($infoOF);          
+        //dd( $entreprise );
         return $this->render('profil/profilOF_APP.html.twig', 
         [
             'user' => $user,
@@ -126,10 +141,11 @@ class ProfilController extends AbstractController
             'ma' => $ma,
             'id' => $id,
             'document' => $listDoc,
-            'menu' => getMenuFromRole( $this->getUser()->getRoleString() ),            
-            
+            'menu' => getMenuFromRole( $this->getUser()->getRoleString() ),
+            'OF'   => $infoOF,         
             'fonction' => "Apprenti", 
-            'listFormateur'=> $listFormateur
+            'listFormateur'=> $listFormateur,
+            'entreprise'=>$entreprise
         ]);
     }    
     // formateur
