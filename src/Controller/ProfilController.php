@@ -77,7 +77,7 @@ class ProfilController extends AbstractController
           and u.role_string='ROLE_FORMATEUR' 
           and us0.id_user='$sessionID'");
 
-        $id = $user->getId();
+      
         if ( $roleViewer ==  'ROLE_OF' )
         // ajout listFormateur dans if role_app
         {
