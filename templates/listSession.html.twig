@@ -91,7 +91,7 @@
 
 										{% if is_granted('ROLE_OF') %}
 											<a href="{{ path( 'addUser',{'role': 'ROLE_APP','roleName': 'ROLE_APP'} ) }}">
-												<div class="boutonForm">+ Créer un Apprenti</div>
+												<div class="boutonForm">+ Créer un formateur</div>
 											</a>
 
 											{% else %}
@@ -155,7 +155,7 @@
 
 										{% if is_granted('ROLE_OF') %}
 											<a href="{{ path( 'addUser',{'role': 'ROLE_APP','roleName': 'ROLE_APP'} ) }}">
-												<div class="boutonForm">+ Créer un Apprenti</div>
+												<div class="boutonForm">+ Créer un maitre d'apprentissage</div>
 											</a>
 
 											{% else %}
