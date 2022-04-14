@@ -267,7 +267,6 @@ class DashController extends AbstractController
         $listAPP = [];
         $listFORMATEUR = [];
         $listMA = [];
-
 // dd($formateur);
         $sessionID = getSessionFromFormateur($login, $pw, $formateur['id']);
         $SESSIONBIS = [];
