@@ -556,8 +556,8 @@ class DashController extends AbstractController
         $MA         = false;
         $formateur  = false;
         $entreprise = false;
-        $sessionID = getIdSessionFromApprenti($login, $pw, $user['id']);
-
+        $sessionID = getIdSessionFromApprentiBis($login, $pw, $user['id']);
+        
 
         $MA = getMAFromApprenti($login, $pw, $app['id']);
         if ($MA) {
