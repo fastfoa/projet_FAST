@@ -485,6 +485,124 @@ class DashController extends AbstractController
             ]
         );
     }
+    public function triListeGlobaleApprenti($param) : Response 
+    //   dd( $param );
+    {
+        $listAux = [];
+     // NOM_ASC
+     if ($param == "NOM_ASC") {
+        $listAux = getSQLArrayAssoc(
+            $login,
+            $pw,
+            "SELECT *
+            FROM  user
+            ORDER BY nom ASC"   );
+     }
+        // NOM_DESC
+        else if ($param == "NOM_DESC")
+        {
+            $listAux = getSQLArrayAssoc(
+                $login,
+                $pw,
+                "SELECT *
+                FROM  user
+                ORDER BY nom DESC"   );
+         }
+        // PRENOM_ASC
+        else if ($param == "PRENOM_ASC")
+        {
+            $listAux = getSQLArrayAssoc(
+                $login,
+                $pw,
+                "SELECT *
+                FROM  user
+                ORDER BY prenom ASC"   );
+         }
+        // PRENOM_DESC
+        else if ($param == "PRENOM_DESC")
+        {
+            $listAux = getSQLArrayAssoc(
+                $login,
+                $pw,
+                "SELECT *
+                FROM  user
+                ORDER BY prenom DESC"   );
+         }
+        // SESSION_ASC
+        else if ($param == "SESSION_ASC")
+        {
+            $listAux = getSQLArrayAssoc(
+                $login,
+                $pw,
+                "SELECT *
+                FROM  user
+                ORDER BY S ASC"   );
+         }
+        // SESSION_DESC
+        else if ($param == "SESSION_DESC")
+        {
+            $listAux = getSQLArrayAssoc(
+                $login,
+                $pw,
+                "SELECT *
+                FROM  user
+                ORDER BY S DESC"   );
+         }
+        // TELEPHONE_ASC
+        else if ($param == "TELEPHONE_ASC")
+        {
+            $listAux = getSQLArrayAssoc(
+                $login,
+                $pw,
+                "SELECT *
+                FROM  user
+                ORDER BY telephone ASC"   );
+         }
+        // TELEPHONE_DESC
+        else if ($param == "TELEPHONE_DESC")
+        {
+            $listAux = getSQLArrayAssoc(
+                $login,
+                $pw,
+                "SELECT *
+                FROM  user
+                ORDER BY telephone DESC"   );
+         }
+        // EMAIL_ASC
+        else if ($param == "EMAIL_ASC")
+        {
+            $listAux = getSQLArrayAssoc(
+                $login,
+                $pw,
+                "SELECT *
+                FROM  user
+                ORDER BY email ASC"   );
+         }
+        // EMAIL_DESC
+        else if ($param == "EMAIL_DESC")
+        {
+            $listAux = getSQLArrayAssoc(
+                $login,
+                $pw,
+                "SELECT *
+                FROM  user
+                ORDER BY email DESC"   );
+         }
+        else {
+            $listAux = listAll('ROLE_APP', 'Apprenti');
+    }
+    return $this->render(
+        'dash/listUser.html.twig',
+        [
+            'list' => $listAux,
+            'menu' => getMenuFromRole($this->getUser()->getRoleString()), 
+            'role' => 'ROLE_APP',
+            'roleName' => 'Apprenti'
+        ]
+    );
+    
+
+    }
 
     public function listAllAprentis(): Response
     {
@@ -494,7 +612,125 @@ class DashController extends AbstractController
 
         return $this->listAll('ROLE_APP', 'Apprenti');
     }
+    public function triListeGlobaleFormateur($param) : Response 
+    //   dd( $param );
+    {
+        $listAux = [];
+     // NOM_ASC
+     if ($param == "NOM_ASC") {
+        $listAux = getSQLArrayAssoc(
+            $login,
+            $pw,
+            "SELECT *
+            FROM  user
+            ORDER BY nom ASC"   );
+     }
+        // NOM_DESC
+        else if ($param == "NOM_DESC") {
+            $listAux = getSQLArrayAssoc(
+                $login,
+                $pw,
+                "SELECT *
+                FROM  user
+                ORDER BY nom DESC"   );
 
+        }
+        // PRENOM_ASC
+        else if ($param == "PRENOM_ASC")
+        {
+            $listAux = getSQLArrayAssoc(
+                $login,
+                $pw,
+                "SELECT *
+                FROM  user
+                ORDER BY prenom ASC"   );
+         }
+        // PRENOM_DESC
+        else if ($param == "PRENOM_DESC")
+        {
+            $listAux = getSQLArrayAssoc(
+                $login,
+                $pw,
+                "SELECT *
+                FROM  user
+                ORDER BY prenom DESC"   );
+         }
+        // SESSION_ASC
+        else if ($param == "SESSION_ASC")
+        {
+            $listAux = getSQLArrayAssoc(
+                $login,
+                $pw,
+                "SELECT *
+                FROM  user
+                ORDER BY s ASC"   );
+         }
+
+        // SESSION_DESC
+        else if ($param == "SESSION_DESC")
+        {
+            $listAux = getSQLArrayAssoc(
+                $login,
+                $pw,
+                "SELECT *
+                FROM  user
+                ORDER BY s DESC"   );
+         }
+        // TELEPHONE_ASC
+        else if ($param == "TELEPHONE_ASC")
+        {
+            $listAux = getSQLArrayAssoc(
+                $login,
+                $pw,
+                "SELECT *
+                FROM  user
+                ORDER BY TELEPHONE ASC"   );
+         }
+        // TELEPHONE_DESC
+        else if ($param == "TELEPHONE_DESC")
+        {
+            $listAux = getSQLArrayAssoc(
+                $login,
+                $pw,
+                "SELECT *
+                FROM  user
+                ORDER BY TELEPHONE DESC"   );
+         }
+        // EMAIL_ASC
+        else if ($param == "EMAIL_ASC")
+        {
+            $listAux = getSQLArrayAssoc(
+                $login,
+                $pw,
+                "SELECT *
+                FROM  user
+                ORDER BY EMAIL ASC"   );
+         }
+        // EMAIL_DESC
+        else if ($param == "EMAIL_DESC")
+        {
+            $listAux = getSQLArrayAssoc(
+                $login,
+                $pw,
+                "SELECT *
+                FROM  user
+                ORDER BY EMAIL DESC"   );
+         }
+        else {
+            $listAux = listAll('ROLE_FORMATEUR', 'Formateur');
+    }
+    return $this->render(
+        'dash/listUser.html.twig',
+        [
+            'list' => $listAux,
+            'menu' => getMenuFromRole($this->getUser()->getRoleString()), 
+            'role' => 'ROLE_FORMATEUR',
+            'roleName' => 'Formateur'
+        ]
+    );
+    
+
+    }
     public function listAllFormateurs(): Response
     {
         $ret = $this->checkRGPD();
@@ -503,7 +739,85 @@ class DashController extends AbstractController
 
         return $this->listAll('ROLE_FORMATEUR', 'Formateur');
     }
+    public function triListeGlobaleEntreprises($param) : Response 
+    //   dd( $param );
+    {
+        $listAux = [];
+     // NOM_ASC
+     if ($param == "NOM_ASC") {
+        $listAux = getSQLArrayAssoc(
+            $login,
+            $pw,
+            "SELECT *
+            FROM  user
+            ORDER BY nom ASC"   );
+     }
+        // NOM_DESC
+        else if ($param == "NOM_DESC") {
+            $listAux = getSQLArrayAssoc(
+                $login,
+                $pw,
+                "SELECT *
+                FROM  user
+                ORDER BY nom DESC"   );
 
+        }
+   
+        // TELEPHONE_ASC
+        else if ($param == "TELEPHONE_ASC")
+        {
+            $listAux = getSQLArrayAssoc(
+                $login,
+                $pw,
+                "SELECT *
+                FROM  user
+                ORDER BY TELEPHONE ASC"   );
+         }
+        // TELEPHONE_DESC
+        else if ($param == "TELEPHONE_DESC")
+        {
+            $listAux = getSQLArrayAssoc(
+                $login,
+                $pw,
+                "SELECT *
+                FROM  user
+                ORDER BY TELEPHONE DESC"   );
+         }
+        // EMAIL_ASC
+        else if ($param == "EMAIL_ASC")
+        {
+            $listAux = getSQLArrayAssoc(
+                $login,
+                $pw,
+                "SELECT *
+                FROM  user
+                ORDER BY EMAIL ASC"   );
+         }
+        // EMAIL_DESC
+        else if ($param == "EMAIL_DESC")
+        {
+            $listAux = getSQLArrayAssoc(
+                $login,
+                $pw,
+                "SELECT *
+                FROM  user
+                ORDER BY EMAIL DESC"   );
+         }
+        else {
+            $listAux = listAll('ROLE_ENT', 'Entreprise');
+    }
+    return $this->render(
+        'dash/listUser.html.twig',
+        [
+            'list' => $listAux,
+            'menu' => getMenuFromRole($this->getUser()->getRoleString()), 
+            'role' => 'ROLE_ENT',
+            'roleName' => 'entreprise'
+        ]
+    );
+    
+
+    }
     public function listAllEntreprises(): Response
     {
         $ret = $this->checkRGPD();
@@ -512,7 +826,89 @@ class DashController extends AbstractController
 
         return $this->listAll('ROLE_ENT', 'Entreprise');
     }
-
+    public function triListeGlobaleMA($param) : Response 
+    //   dd( $param );
+    {
+        $listAux = [];
+     // NOM_ASC
+     if ($param == "NOM_ASC") {
+        $listAux = getSQLArrayAssoc(
+            $login,
+            $pw,
+            "SELECT *
+            FROM  user
+            ORDER BY nom ASC"   );
+     }
+        // NOM_DESC
+        else if ($param == "NOM_DESC")
+        {
+            $listAux = getSQLArrayAssoc(
+                $login,
+                $pw,
+                "SELECT *
+                FROM  user
+                ORDER BY nom DESC"   );
+         }
+        // PRENOM_ASC
+        else if ($param == "PRENOM_ASC")
+        {
+            $listAux = getSQLArrayAssoc(
+                $login,
+                $pw,
+                "SELECT *
+                FROM  user
+                ORDER BY prenom ASC"   );
+         }
+        // PRENOM_DESC
+        else if ($param == "PRENOM_DESC")
+        {
+            $listAux = getSQLArrayAssoc(
+                $login,
+                $pw,
+                "SELECT *
+                FROM  user
+                ORDER BY prenom DESC"   );
+         }
+        // SESSION_ASC
+        // SESSION_DESC
+        
+        // EMAIL_ASC
+        else if ($param == "EMAIL_ASC")
+        {
+            $listAux = getSQLArrayAssoc(
+                $login,
+                $pw,
+                "SELECT *
+                FROM  user
+                ORDER BY email ASC"   );
+         }
+        // EMAIL_DESC
+        else if ($param == "EMAIL_DESC")
+        {
+            $listAux = getSQLArrayAssoc(
+                $login,
+                $pw,
+                "SELECT *
+                FROM  user
+                ORDER BY email DESC"   );
+         }
+        // ENT_ASC
+        // ENT_DESC
+        else {
+            $listAux = listAll('ROLE_MA',  "Maitre d'apprentissage");
+    }
+   
+    return $this->render(
+        'dash/listUser.html.twig',
+        [
+            'list' => $listAux,
+            'menu' => getMenuFromRole($this->getUser()->getRoleString()), 
+            'role' => 'ROLE_MA',
+            'roleName' => "Maitre d'apprentissage"
+        ]
+    );
+    
+    }
     public function listAllMA(): Response
     {
         $ret = $this->checkRGPD();
@@ -521,9 +917,8 @@ class DashController extends AbstractController
 
         return $this->listAll('ROLE_MA', "Maitre d'apprentissage");
     }
-
-
-
+  
+    
     // public function dashENTprincipalx(): Response
 
     public function dashApp(): Response
