@@ -136,7 +136,7 @@ function getSQLSingleAssoc($login, $pw, $query)
 
 function getIdSessionFromApprenti($login, $pw, $idApprenti)
 {
-    $res =  getSQLSingleAssoc(
+    $res =  getSQLArrayAssoc(
         $login,
         $pw,
         "SELECT id_session                   
@@ -144,7 +144,24 @@ function getIdSessionFromApprenti($login, $pw, $idApprenti)
          WHERE id_user='$idApprenti'"
     );
     if ( $res ) 
+    // dd($res);
         return $res['id_session'];
+    return $res;
+    
+}
+
+function getIdSessionFromApprentiBis($login, $pw, $idApprenti)
+{
+    $res =  getSQLArrayAssoc(
+        $login,
+        $pw,
+        "SELECT id_session                   
+         FROM user_in_session          
+         WHERE id_user='$idApprenti'"
+    );
+    if ( $res ) 
+    // dd($res);
+        return $res[0]['id_session'];
     return $res;
     
 }
@@ -192,6 +209,8 @@ function getFormateursFromApprenti($login, $pw, $idApprenti)
                 and us0.id_user='$idApprenti'"
     );
 }
+
+
 
 function getMAFromEnt($login, $pw, $idEntreprise)
 {
@@ -265,6 +284,8 @@ function convertUserEntity2SQL($login, $pw, $id)
 }
 
 
+
+
 function convertSessionEntity2SQL($login, $pw, $id)
 {
     return getSQLSingleAssoc(
@@ -320,6 +341,23 @@ function getAppsFromSession($login, $pw, $idSession )
         LEFT JOIN user ON s.id_user=user.id 
         WHERE s.id_session=$idSession and user.role_string='ROLE_APP'");
 }
+
+
+function getSessionFromFormateur($login, $pw, $IDformateur){
+    return getSQLArrayAssoc( 
+        $login, 
+        $pw, 
+        "SELECT e.* FROM projet_FAST.user_in_session as s,
+        projet_FAST.user as u,
+        projet_FAST.`session` as e
+         WHERE u.id=s.id_user 
+         AND u.role_string='ROLE_FORMATEUR' 
+         AND s.id_user = $IDformateur
+         AND s.id_session = e.id ;");
+ 
+}
+
+
 
 function getFormateurFromSession($login, $pw, $idSession ) 
 {
