@@ -253,17 +253,7 @@ class DashController extends AbstractController
                    
            
 
-        // $MA = getMAFromEnt($login, $pw, $entreprise['id']);
-        if ($MA != false) {
-            $MA = convertUserEntity2SQL($login, $pw, $MA['id']);
-            $app = getAppFromMA($login, $pw, $MA['id']);
-            if ($app != false) {
-                $app = convertUserEntity2SQL($login, $pw, $app['id']);
-                $formateur  = getFormateursFromApprenti($login, $pw, $app['id']);
-                if ($formateur != false) {
-                    $formateur  = convertUserEntity2SQL($login, $pw, $formateur[0]['id']);
 
-            }
         }
 
         $uid = $user['id'];
@@ -285,7 +275,7 @@ class DashController extends AbstractController
         );
     }
 
-               }}}
+               }
 
     public function dashFormateur(): Response
     {
