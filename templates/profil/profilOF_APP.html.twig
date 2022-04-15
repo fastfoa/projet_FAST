@@ -103,10 +103,10 @@
 
 </div>
 
-<hr class="text-light mt-2">
+<hr class="text-light mt-3">
  
 <div class="row">
-	<div id="ma" class="col-3">
+	<div id="ma" class="col-5">
         <h3>Maitre D'apprentissage :</h3>
         {% if ma == false %}
         <h5>Vous n'avez pas de maitre d'apprentissage</h5>
@@ -130,8 +130,13 @@
         </button>
         <h5 id="result"><h5>
 
+      <div>  <h3>Entreprise :</h3><h5>{{ entreprise.nom }}</h5>
+            <h5>{{ entreprise.adresse }}</h5>
+            <h5><a href="mailto:{{ entreprise.email }}">{{ entreprise.email }}</a></h5>
+            <h5><a href="tel:{{ entreprise.telephone }}">{{ entreprise.telephone }}</a></h5></div>
+
         </div> <div class="col-2"></div> 
-        <div id="formateur" class="col-3">
+        <div id="formateur" class="col-5">
             <h3>Formateurs :</h3>
                  {% if listFormateur == false %}
                     <h5>Vous n'avez pas de maitre de formateur</h5>
@@ -143,19 +148,14 @@
                 <br>
                  {% endfor %}
               {% endif %}
+
+              
          </div>
 
-<div class="col-3 my-auto ms-5">
-       
-            <h3>Entreprise :</h3><h5>{{ entreprise.nom }}</h5>
-            <h5>{{ entreprise.adresse }}</h5>
-            <h5><a href="mailto:{{ entreprise.email }}">{{ entreprise.email }}</a></h5>
-            <h5><a href="tel:{{ entreprise.telephone }}">{{ entreprise.telephone }}</a></h5>
-       
-        </div>
+
 
      </div>
-<hr class="text-light">
+<hr class="text-light mt-3">
                 <h3>Organisme de formation :</h3>
 					<h5> Responsable pédagogique : {{ OF.prenom }} {{ OF.nom }}</h5>
 					<h5></h5>		
