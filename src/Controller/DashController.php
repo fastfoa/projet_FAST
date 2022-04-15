@@ -127,16 +127,18 @@ class DashController extends AbstractController
         $role       = $user->getRoleString();
         $user       = convertUserEntity2SQL($login, $pw, $user->getId());
         $entreprise = $user;
-
         $OF         = getInfoOF();
         $MA         = null;
         $app        = [];
         $formateur  = [];
-
-        $MA = getMAFromEnt($login, $pw, $entreprise['id']);
+        $appter= [];
         $MABIS = [];
-
+        $formateurter = [];
+       
+        $MA = getMAFromEnt($login, $pw, $entreprise['id']);
+        
         // dd($MA);
+
         if ($MA != false) {
             for ($i = 0; $i < sizeof($MA); $i++) {
 
@@ -173,10 +175,12 @@ class DashController extends AbstractController
                 }
                 //   dd($formateurter);
 
+
             }
         }
 
         $uid = $user['id'];
+
         $listDoc = getDocsFromUser($login, $pw, $uid);
 
 
@@ -209,11 +213,45 @@ class DashController extends AbstractController
         $role       = $user->getRoleString();
         $user       = convertUserEntity2SQL($login, $pw, $user->getId());
         $MA = $user;
-
+        $formateurter = [];
+        $appter= [];
         $OF         = getInfoOF();
         $entreprise = null;
-        $app        = null;
-        $formateur  = null;
+        $app        = [];
+        $formateur  = [];
+    //  dd($MA);
+        $app = getAppFromMA($login, $pw, $MA['id']);
+     
+            $appbis= [];
+        if ( $app != false ){
+        for ($j=0; $j < sizeof($app); $j++) { 
+             array_push($appbis,$app[$j]);
+            }   
+            //   dd($appbis);
+            if ( $appbis != false )
+               {
+                   for ($k=0; $k < sizeof($appbis) ; $k++) { 
+   
+               array_push($appter,convertUserEntity2SQL($login, $pw, $appbis[$k]['id']) );
+              
+            }
+                // dd($appter);
+            for ($r=0; $r < sizeof($appter); $r++) { 
+                array_push($formateur, getFormateursFromApprenti($login, $pw, $appter[$r]['id']));
+                   } 
+            // dd($formateur);
+           $formateurbis = [];
+           for ($m=0; $m < sizeof($formateur); $m++) { 
+                   $formateurbis = array_merge($formateurbis,$formateur[$m]);
+                 }   
+            // $formateurbis = array_unique($formateurbis);
+        //  dd($formateurbis);
+          
+           for ($n=0; $n < sizeof($formateurbis) ; $n++) { 
+           array_push($formateurter,convertUserEntity2SQL($login, $pw, $formateurbis[$n]['id']) );}
+                //   dd($formateurter);
+                   
+           
 
         // $MA = getMAFromEnt($login, $pw, $entreprise['id']);
         if ($MA != false) {
@@ -224,7 +262,7 @@ class DashController extends AbstractController
                 $formateur  = getFormateursFromApprenti($login, $pw, $app['id']);
                 if ($formateur != false) {
                     $formateur  = convertUserEntity2SQL($login, $pw, $formateur[0]['id']);
-                }
+
             }
         }
 
@@ -238,9 +276,10 @@ class DashController extends AbstractController
                 'document'      => $listDoc,
                 'user'           => $user,
                 'entreprise'    => $entreprise,
-                'app'           => $app,
+                'apps'           => $appter,
                 'ma'            => $MA,
                 'OF'            => $infoOF,
+                'formateurs' => $formateurter,
                 'menu'          => getMenuFromRole('ROLE_ENT')
             ]
         );
