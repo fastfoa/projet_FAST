@@ -285,7 +285,7 @@ class DashController extends AbstractController
         );
     }
 
-
+               }}}
 
     public function dashFormateur(): Response
     {
