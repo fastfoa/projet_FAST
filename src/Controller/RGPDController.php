@@ -33,14 +33,18 @@ class RGPDController extends AbstractController
 
     public function rgpdForm(Request $request): Response
     {
+        $login = $this->getParameter('loginDB');
+        $pw = $this->getParameter('PasswordDB');
+
         $user = $this->getUser();
         $id = $user->getId();
         $name = $user->getNom();
         $rgpd = $user->getRGPDOK();
         $role = $user->getRoles()[0];
-
+        $idd = convertUserEntity2SQL($login, $pw, $user->getId());
+        $idd = $idd['id'];
         $redirect = "login";
-
+// dd($idd);
         if ($rgpd) 
         {
             if ($role == 'ROLE_ADMIN') {
@@ -49,7 +53,8 @@ class RGPDController extends AbstractController
                 if( $name =='' )
                     $redirect = 'inscriptionApprenti';
                 else
-                    $redirect = '/editUser/{user}';
+                    $redirect = 'dashApp'
+                        ;
             } elseif ($role == 'ROLE_ENT') {
                 if( $name =='' )
                     $redirect = 'inscriptionEntreprise';
