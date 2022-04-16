@@ -49,7 +49,7 @@ class RGPDController extends AbstractController
                 if( $name =='' )
                     $redirect = 'inscriptionApprenti';
                 else
-                    $redirect = 'dashApp';
+                    $redirect = '/editUser/{user}';
             } elseif ($role == 'ROLE_ENT') {
                 if( $name =='' )
                     $redirect = 'inscriptionEntreprise';
