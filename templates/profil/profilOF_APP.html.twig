@@ -78,10 +78,15 @@
          <a href="{{ path( 'dashEval',{'app':user.id } ) }}">
         <button class="boutonForm mx-5">EVAL</button>
         </a>
+          	{% if fonction == 'Apprenti' %}
+                {% set retour = 'dashApp' %}
+            {# {% else %}
+                {% set retour  = 'profilOF_APP',{'user':user.id}  %} #}
+            {% endif %}
 <div class="row">
     <div class="col- mt-3">    
-                 <h3>Mes documents :</h3>
-                        <label for="listDoc">Chercher un document :</label>
+        <h3>Mes documents :</h3>
+                        <label for="listDoc">Chercher un document :</label> 
                         <input list="documents" type="text" id="listDoc">
                         <datalist id="documents">
                             {% for doc in document %}
@@ -89,25 +94,30 @@
                             {% endfor %}
                         </datalist>
             </div>
-            <div class="col-4 ">
-               <button onclick='seeDoc2({{user.id}})'>
+                    <div class="col-4 ">
+                        <button onclick='seeDoc2({{user.id}})'>
                             <i class="fas fa-solid fa-info" style="font-size:20px;color:blue;padding:3px 6px 3px 6px;"></i>
                         </button>
                         <button onclick='downloadDoc("{{ path('download1') }}");'>
                             <i class="fas fa-solid fa-download" style="font-size:20px;color:green;padding:3px;"></i>
                         </button>
                         <button>
-                            <a href="{{ path('upload', {'retour': retour}) }}">
+                        	{% if fonction == 'Apprenti' %}
+                                <a href="{{ path('upload', {'retour': retour}) }}">
+                            {% else %}
+                                 <a href="{{ path('upload', {'retour': retour }) }}">
+                            {% endif %}
                                 <i class="fas fa-solid fa-upload" style="font-size:20px;color:green;padding:3px;"></i>
                             </a>
                         </button>
-                        <button onclick='deleteDoc("{{ path('deletedocument1')}}")'> 
+                        <button onclick='deleteDoc("#")'> 
                             ❌
                         </button>
             </div>
                   <div  id='infosDoc' class="invisible col-6" style="color:black;background-color:white;height:50pt;overflow:auto;"></div>
-
         </div>
+
+
 
 </div>
 

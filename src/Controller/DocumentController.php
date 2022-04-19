@@ -226,7 +226,10 @@ class DocumentController extends AbstractController
                 $entityManager->flush();
                 $this->addFlash('message', "Document ajouté");
                 //dd( $retour );
-                return $this->redirectToRoute( $retour );
+      
+                    return $this->redirectToRoute( $retour );
+  
+                
               
             }
         }
@@ -289,18 +292,18 @@ class DocumentController extends AbstractController
         return $r;
     }
 
-    public function deletedocument(Document $document)
+    public function deletedocument( Document $document)
     {
         $ret = $this->checkRGPD();
         if ($ret)
             return $ret;
-
+dd($document);
         $doctrine = $this->getDoctrine();
         $om = $doctrine->getManager();
         $om->remove($document);
         $om->flush();
         $this->addFlash('message', "Document supprimé");
-        return $this->redirectToRoute("downloadlist");
+        return $this->redirectToRoute("downloadlist") ;
     }
 
     public function getInfoDoc(User $user)
