@@ -130,6 +130,7 @@ class InscriptionApprentiType extends AbstractType
                 ],
             ])
             ->add('SportifHautNiveau', ChoiceType::class,[
+                
                 'label'=> 'Sportif de Haut Niveau',
                 'choices'  => [
                     'OUI' => true,
