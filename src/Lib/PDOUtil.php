@@ -144,8 +144,24 @@ function getIdSessionFromApprenti($login, $pw, $idApprenti)
          WHERE id_user='$idApprenti'"
     );
     if ( $res ) 
-    // dd($res);
+    //  dd($res);
         return $res['id_session'];
+    return $res;
+    
+}
+
+function getIdSessionFromApprenti1($login, $pw, $idApprenti)
+{
+    $res =  getSQLArrayAssoc(
+        $login,
+        $pw,
+        "SELECT id_session                   
+         FROM user_in_session          
+         WHERE id_user='$idApprenti'"
+    );
+    if ( $res ) 
+    //  dd($res);
+        return $res[0]['id_session'];
     return $res;
     
 }

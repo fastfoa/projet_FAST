@@ -55,19 +55,14 @@ class ProfilController extends AbstractController
         $role       = $userInterface->getRoles();
     
 
-        if ( $role == "ROLE_APP" )
-        {
-         $id = $this->getId();
-        //  dd($id);
-        }
-        else {
+        
         $id = $user->getId();
-        //  dd($id);
-        }
+        //   dd($id);
+     
        
         $infoOF = getInfoOF();
     
-        $sessionID = getIdSessionFromApprenti($login, $pw,  $id );
+        $sessionID = getIdSessionFromApprenti1($login, $pw,  $id );
         
 
         $listDoc = getSQLArrayAssoc($this->getParameter('loginDB'), $this->getParameter('PasswordDB'),

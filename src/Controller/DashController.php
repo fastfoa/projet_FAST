@@ -561,7 +561,7 @@ class DashController extends AbstractController
        
         $infoOF = getInfoOF();
     
-        $sessionID = getIdSessionFromApprenti($login, $pw,  $id );
+        $sessionID = getIdSessionFromApprenti1($login, $pw,  $id );
         
 
         $listDoc = getSQLArrayAssoc($this->getParameter('loginDB'), $this->getParameter('PasswordDB'),
