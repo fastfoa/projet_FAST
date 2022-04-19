@@ -224,10 +224,10 @@ class DocumentController extends AbstractController
                     $entityManager->persist($recipient); // On confie notre entit&#xE9; &#xE0; l'entity manager (on persist l'entit&#xE9;)    
                 }
                 $entityManager->flush();
-
                 $this->addFlash('message', "Document ajouté");
                 //dd( $retour );
                 return $this->redirectToRoute( $retour );
+              
             }
         }
 
