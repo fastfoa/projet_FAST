@@ -185,7 +185,6 @@ input[type=text], input[type=password], input[type=date], input[type=number], se
 }
 
 
-
 .boutonForm
 {
     background-color: #79a342;
@@ -246,6 +245,7 @@ input[type=text], input[type=password], input[type=date], input[type=number], se
 .bg-workSpace  	/* couleur fond de la box de travail */
 {
     background-color:#018FA5;
+    
 }
 
 .bg-input	  	/* couleur fond des champs de saisie */
@@ -260,13 +260,14 @@ input[type=text], input[type=password], input[type=date], input[type=number], se
 
 .txt-normal 		/* text ordinaire */
 {
-    color:white;
+    color: white !important;
     font-size: 25px;
 }
 
 .txt-dark	  		/* couleur fond des bar ( menu, titre, ... ) */
 {
     color: #11284B;
+ 
 }
 
 
