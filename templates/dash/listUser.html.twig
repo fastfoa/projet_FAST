@@ -83,7 +83,7 @@
 					</thead>
 				<tbody>
 					{% for item in list %}
-						<tr  class='clickable-row' data-href='{{ path( 'editUser',{'user':item.id} ) }}'>
+						<tr  class='clickable-row' data-href='{{ path( 'profilOF_APP',{'user':item.id} ) }}'>
 							<td class="col-2">{{item.prenom}}</td>
 							<td class="col-2">{{item.nom}}</td>
 							<td class="col-2">{{item.ns}}</td>

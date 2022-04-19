@@ -384,7 +384,8 @@ class DashController extends AbstractController
             [
                 'list' => $list,
                 'entreprise' => $entreprise,
-                'menu' => getMenuFromRole($this->getUser()->getRoleString()),            'roleName' => $roleName,
+                'menu' => getMenuFromRole($this->getUser()->getRoleString()),          
+                  'roleName' => $roleName,
                 'role' => $role
             ]
         );
@@ -538,70 +539,76 @@ class DashController extends AbstractController
     // public function dashENTprincipalx(): Response
 
     public function dashApp(): Response
-    {
-        $infoOF = getInfoOF();
-
+    { 
         $ret = $this->checkRGPD();
-        if ($ret)
+        if ( $ret )
             return $ret;
 
-        $login  = $this->getParameter('loginDB');
-        $pw     = $this->getParameter('PasswordDB');
+           
+            $login  = $this->getParameter('loginDB');
+            $pw     = $this->getParameter('PasswordDB');
 
-        $user       = $this->getUser();
-        $role       = $user->getRoleString();
-        $user       = convertUserEntity2SQL($login, $pw, $user->getId());
-        $app        = $user;
-        $OF         = getInfoOF();
-        $MA         = false;
-        $formateur  = false;
-        $entreprise = false;
-        $sessionID = getIdSessionFromApprentiBis($login, $pw, $user['id']);
+        //$aut = $this->getUser();
+        //$roleViewer = $aut->getRoles()[0];
+      
+        $listFormateur=[];
+      
+    $user  = $this->getUser();
+
+         $id = $user->getId();
+        //  dd($id);
+      
+       
+        $infoOF = getInfoOF();
+    
+        $sessionID = getIdSessionFromApprenti($login, $pw,  $id );
         
 
-        $MA = getMAFromApprenti($login, $pw, $app['id']);
-        if ($MA) {
-            $MA = convertUserEntity2SQL($login, $pw, $MA['id']);
+        $listDoc = getSQLArrayAssoc($this->getParameter('loginDB'), $this->getParameter('PasswordDB'),
+        "SELECT document.id AS d_id, document.titre AS d_titre, document.file_name AS d_fileName
+        FROM document, user
+        WHERE user.id=document.id_owner AND user.id=".$user->getId());
+
+        $ma = getSQLArrayAssoc($this->getParameter('loginDB'), $this->getParameter('PasswordDB'),
+        "SELECT u.nom, u.prenom, u.telephone, u.id, u.role_string                   
+         FROM app_has_ma as a
+         RIGHT JOIN user as u ON u.id=a.id_ma 
+         WHERE a.id_apprenti=".$user->getId());
+
+        $MA = getMAFromApprenti($login, $pw, $id);
+        if ( $MA ){
+            $MA = convertUserEntity2SQL($login, $pw, $MA['id'] );
             $entreprise = getENTFromMA($login, $pw, $MA['id']);
-            if ($entreprise)
-                $entreprise = convertUserEntity2SQL($login, $pw, $entreprise['id']);
-        }
+       if ( $entreprise )
+           $entreprise = convertUserEntity2SQL($login, $pw, $entreprise['id'] );
+   }
+
+    //dd($entreprise);
+        $listMa = getSQLArrayAssoc($this->getParameter('loginDB'), $this->getParameter('PasswordDB'),
+        "SELECT id, nom, prenom, email FROM user WHERE role_string='ROLE_MA'");
+
+        $listFormateur = getSQLArrayAssoc($this->getParameter('loginDB'), $this->getParameter('PasswordDB'),
+          "SELECT u.nom, u.prenom, u.email, u.id 
+          FROM user_in_session as us0, user_in_session as us1, user as u  
+          WHERE us0.id_session=us1.id_session and u.id=us1.id_user 
+          and u.role_string='ROLE_FORMATEUR' 
+          and us0.id_user='$sessionID'");
+
+        return $this->render('profil/profilOF_APP.html.twig', 
+        [
+            'user' => $user,
+            'listMa' => $listMa,
+            'ma' => $ma,
+            'id' => $id,
+            'document' => $listDoc,
+            'OF'   => $infoOF,         
+            'menu' => getMenuFromRole( $this->getUser()->getRoleString() ),
+            'fonction' => "Apprenti", 
+            'listFormateur'=> $listFormateur,
+            'entreprise'=>$entreprise
+        ]);
+    }    
 
 
-        //    $formateur  = getFormateursFromApprenti($login, $pw, 
-        // $app['id']);
-
-        $listFormateur = getSQLArrayAssoc(
-            $login,
-            $pw,
-
-            "SELECT u.nom, u.prenom, u.email, u.id 
-        FROM user_in_session as us0, 
-            user_in_session as us1, 
-            user as u 
-        WHERE 
-        us0.id_session=us1.id_session and u.id=us1.id_user and u.role_string='ROLE_FORMATEUR' 
-        and us0.id_user='$sessionID'"
-        );
-        //    dd($listFormateur);
-
-        $uid = $app['id'];
-        $listDoc = getDocsFromUser($login, $pw, $uid);
-
-
-        return $this->render(
-            'dash/dashApp.html.twig',
-            [
-                'document'      => $listDoc,
-                'user'          => $user,
-                'entreprise'    => $entreprise,
-                'app'           => $app,
-                'ma'            => $MA,
-                'OF'            => $infoOF,
-                'formateurs'    => $listFormateur,
-                'menu'          => getMenuFromRole('ROLE_APP')
-
-            ]
-        );
-    }
+       
 }
