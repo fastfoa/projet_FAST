@@ -870,7 +870,26 @@ class DashController extends AbstractController
                 ORDER BY prenom DESC"   );
          }
         // SESSION_ASC
+        else if ($param == "SESSION_ASC")
+        {
+            $listAux = getSQLArrayAssoc(
+                $login,
+                $pw,
+                "SELECT *
+                FROM  user
+                ORDER BY s ASC"   );
+         }
+
         // SESSION_DESC
+        else if ($param == "SESSION_DESC")
+        {
+            $listAux = getSQLArrayAssoc(
+                $login,
+                $pw,
+                "SELECT *
+                FROM  user
+                ORDER BY s DESC"   );
+         }
         
         // EMAIL_ASC
         else if ($param == "EMAIL_ASC")
@@ -893,7 +912,25 @@ class DashController extends AbstractController
                 ORDER BY email DESC"   );
          }
         // ENT_ASC
+        else if ($param == "ENT_ASC")
+        {
+            $listAux = getSQLArrayAssoc(
+                $login,
+                $pw,
+                "SELECT *
+                FROM  user
+                ORDER BY entreprise ASC"   );
+         }
         // ENT_DESC
+        else if ($param == "ENT_DESC")
+        {
+            $listAux = getSQLArrayAssoc(
+                $login,
+                $pw,
+                "SELECT *
+                FROM  user
+                ORDER BY entreprise DESC"   );
+         }
         else {
             $listAux = listAll('ROLE_MA',  "Maitre d'apprentissage");
     }

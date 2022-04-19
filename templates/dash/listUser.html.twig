@@ -36,75 +36,248 @@ window.location = $(this).data("href");
 		<br>
 		<div class="row bg">
 			<div class="col-3"></a>
-			{# <a href="">
-													<div class="boutonForm m-3 p-2">+ Ajouter un
-														{{ roleName }}</div>
-												</a> #}
-		</div>
+		</a>
+		
 	</div>
-	<div class="row">
-		<div>
-			<table class="table-normal">
-				<thead>
+</div>
+<div class="row">
+	<div>
+		<table class="table-normal">
+			<thead>
 
-					<tr>
-						{% if roleName == 'Entreprise' %}
-							{# <th class="txt-bar bg-bar">Prenom</th> #}
-
-							<th class="txt-bar bg-bar col-4">nom</th>
-							{# <th class="txt-bar bg-bar">session</th> #}
-							<th class="txt-bar bg-bar col-4">Tél</th>
-							<th class="txt-bar bg-bar col-4">Mail</th>
-							{# <th class="txt-bar bg-bar">Action</th> #}
-						</tr>
-					</tr>
-				</thead>
-			</tr>
-		</thead>
-		<tbody>
-			{% for item in list %}
 				<tr>
-					{# <td>{{item.prenom}}</td> #}
-					<td class="col-4">{{item.nom}}</td>
-					{# <td>{{item.ns}}</td> #}
-					<td class="col-4">{{item.telephone}}</td>
-					<td class="col-4">{{item.email}}</td>
-					{#<td>{{session.formation}}</td>#}
+					{% if roleName == 'Entreprise' %}
+						{# <th class="txt-bar bg-bar">Prenom</th> #}
 
-					{# <td>
-																																									<a href="{{ path( 'editUser',{'user':item.id} ) }}">
-																																										<i class="fas fa-solid fa-download" style="font-size:20px;color:green;"></i>
-																																									</a>
-																																								</td> #}
+						<th class="txt-bar bg-bar col-4">nom</th>
+
+						<?php 
+							if(isset($_POST['NOM_ASC'])) { 
+								$list = getSQLArrayAssoc(
+								$login,
+								$pw,
+								"SELECT *
+								FROM  user
+								ORDER BY nom ASC"   );
+							} 
+							?>
+						<form method="post">
+							<input type="submit" name="NOM_ASC" value="NOM_ASC">
+						</form>
+						{# <th class="txt-bar bg-bar">session</th> #}
+						<th class="txt-bar bg-bar col-4">Tél</th>
+
+						<?php 
+							if(isset($_POST['TELEPHONE_ASC'])) { 
+								$list = getSQLArrayAssoc(
+								$login,
+								$pw,
+								"SELECT *
+								FROM  user
+								ORDER BY nom ASC"   );
+							} 
+							?>
+						<form method="post">
+							<input type="submit" name="TELEPHONE_ASC" value="TELEPHONE_ASC">
+						</form>
+						<th class="txt-bar bg-bar col-4">Email</th>
+
+						<?php 
+						if(isset($_POST['EMAIL_ASC'])) { 
+								$list = getSQLArrayAssoc(
+								$login,
+								$pw,
+								"SELECT *
+								FROM  user
+								ORDER BY nom ASC"   );
+							} 
+							?>
+						<form method="post">
+							<input type="submit" name="EMAIL_ASC" value="EMAIL_ASC">
+						</form>
+
+						{# <th class="txt-bar bg-bar">Action</th> #}
+					</tr>
 				</tr>
-			{% endfor %}
-		</tbody>
-	</table>
-{% elseif roleName == 'Apprenti' %}
-	<th class="txt-bar bg-bar col-2">Prenom</th>
-	<th class="txt-bar bg-bar col-2">nom</th>
-	<th class="txt-bar bg-bar col-2">session</th>
-	<th class="txt-bar bg-bar col-3">Tél</th>
-	<th class="txt-bar bg-bar col-3">Mail</th>
-	{# <th class="txt-bar bg-bar">Action</th> #}
-</tr></thead><tbody>
-{% for item in list %}
-	<tr class='clickable-row' data-href='{{ path( 'editUser',{'user':item.id} ) }}'>
-		<td class="col-2">{{item.prenom}}</td>
-		<td class="col-2">{{item.nom}}</td>
-		<td class="col-2">{{item.ns}}</td>
-		<td class="col-3">{{item.telephone}}</td>
-		<td class="col-3">{{item.email}}</td>
+			</thead>
+		</tr>
+	</thead>
+	<tbody>
+		{% for item in list %}
+			<tr>
+				{# <td>{{item.prenom}}</td> #}
+				<td class="col-4">{{item.nom}}</td>
+				{# <td>{{item.ns}}</td> #}
+				<td class="col-4">{{item.telephone}}</td>
+				<td class="col-4">{{item.email}}</td>
 
-		{#<td>{{session.formation}}</td>#}
-		{# 	<td><a href="{{ path( 'editUser',{'user':item.id} ) }}">
-																			<i class="fas fa-solid fa-download" style="font-size:20px;color:green;"></i></a>
-																			</td> #}
-	</tr>
-{% endfor %}</tbody></table></table>{% elseif roleName ==  "Maitre d'apprentissage" %}<th class="txt-bar bg-bar col-2">Prenom</th><th class="txt-bar bg-bar col-2">nom</th><th class="txt-bar bg-bar col-2">session</th>{#<th class="txt-bar bg-bar col-3">Tél</th> #}<th class="txt-bar bg-bar col-3">Mail</th><th class="txt-bar bg-bar col-3">entreprise</th>{# <th class="txt-bar bg-bar">Action</th> #}</tr></thead><tbody>{% for item in list %}{# <tr  class='clickable-row' data-href='{{ path( 'editUser',{'user':item.id} ) }}'>#}<tr><td class="col-2">{{item.prenom}}</td><td class="col-2">{{item.nom}}</td><td class="col-2">{{item.ns}}</td>{#<td class="col-3">{{item.telephone}}</td> #}<td class="col-3">{{item.email}}</td><td class="col-3">{{item.nom_ent}}</td>{#<td>{{session.formation}}</td>#}{# 	<td><a href="{{ path( 'editUser',{'user':item.id} ) }}">
-									<i class="fas fa-solid fa-download" style="font-size:20px;color:green;"></i></a>
-									</td> #}</tr>{% endfor %}</tbody></table>{% else %}<th class="txt-bar bg-bar col-2">Prenom</th><th class="txt-bar bg-bar col-2">nom</th><th class="txt-bar bg-bar col-2">session</th><th class="txt-bar bg-bar col-3">Tél</th><th class="txt-bar bg-bar col-3">Mail</th>{# <th class="txt-bar bg-bar">Action</th> #}</tr></tbody></thead><tbody>{% for item in list %}<tr><td class="col-2">{{item.prenom}}</td><td class="col-2">{{item.nom}}</td><td class="col-2">{{item.ns}}</td><td class="col-3">{{item.telephone}}</td><td class="col-3">{{item.email}}</td>{#<td>{{session.formation}}</td>#}{# <td>
-								<a href="{{ path( 'editUser',{'user':item.id} ) }}">
-									<i class="fas fa-solid fa-download" style="font-size:20px;color:green;"></i>
-								</a>
-							</td> #}</tr>{% endfor %}</tbody> </table>{% endif %}</div></div></div></div></div>{% endblock %}
+			</tr>
+		{% endfor %}
+	</tbody>
+</table>{% elseif roleName == 'Apprenti' %}
+<th class="txt-bar bg-bar col-2">Prenom</th>
+
+<?php 
+								if(isset($_POST['PRENOM_ASC'])) { 
+								$list = getSQLArrayAssoc(
+								$login,
+								$pw,
+								"SELECT *
+								FROM  user
+								ORDER BY nom ASC"   );
+							} 
+							?>
+<form method="post">
+	<input type="submit" name="PRENOM_ASC" value="PRENOM_ASC">
+</form>
+<th class="txt-bar bg-bar col-2">nom</th>
+<?php
+	if(isset($_POST['NOM_ASC'])) { 
+										$list = getSQLArrayAssoc(
+										$login,
+										$pw,
+										"SELECT *
+										FROM  user
+										ORDER BY nom ASC"   );
+									} 
+									?>
+<form method="post">
+	<input type="submit" name="NOM_ASC" value="NOM_ASC">
+</form>
+<th class="txt-bar bg-bar col-2">session</th>
+<?php 
+		if(isset($_POST['SESSION_ASC'])) { 
+								$list = getSQLArrayAssoc(
+								$login,
+								$pw,
+								"SELECT *
+								FROM  user
+								ORDER BY nom ASC"   );
+							}
+								?>
+<form method="post">
+	<input type="submit" name="SESSION_ASC" value="SESSION_ASC">
+</form>
+<th class="txt-bar bg-bar col-3">Tél</th>
+<?php 
+		if(isset($_POST['TELEPHONE_ASC'])) { 
+								$list = getSQLArrayAssoc(
+								$login,
+								$pw,
+								"SELECT *
+								FROM  user
+								ORDER BY nom ASC"   );
+							}
+		 					?>
+<form method="post">
+	<input type="submit" name="TELEPHONE_ASC" value="TELEPHONE_ASC">
+</form>
+
+<th class="txt-bar bg-bar col-3">Email</th>
+<?php 
+	if(isset($_POST['EMAIL_ASC'])) { 
+								$list = getSQLArrayAssoc(
+								$login,
+								$pw,
+								"SELECT *
+								FROM  user
+								ORDER BY nom ASC"   );
+							}
+							?>
+<form method="post">
+	<input type="submit" name="EMAIL_ASC" value="EMAIL_ASC">
+</form>
+{# <th class="txt-bar bg-bar">Action</th> #}</tr></thead><tbody>{% for item in list %}
+<tr class='clickable-row' data-href='{{ path( 'editUser',{'user':item.id} ) }}'>
+	<td class="col-2">{{item.prenom}}</td>
+	<td class="col-2">{{item.nom}}</td>
+	<td class="col-2">{{item.ns}}</td>
+	<td class="col-3">{{item.telephone}}</td>
+	<td class="col-3">{{item.email}}</td>
+
+	{#<td>{{session.formation}}</td>#}
+	{# 	<td><a href="{{ path( 'editUser',{'user':item.id} ) }}">
+																																																				<i class="fas fa-solid fa-download" style="font-size:20px;color:green;"></i></a>
+																																																				</td> #}
+</tr>{% endfor %}</tbody></table></table>{% elseif roleName ==  "Maitre d'apprentissage" %}<th class="txt-bar bg-bar col-2">Prenom</th><?php 
+	if(isset($_POST['PRENOM_ASC'])) { 
+								$list = getSQLArrayAssoc(
+								$login,
+								$pw,
+								"SELECT *
+								FROM  user
+								ORDER BY nom ASC"   );
+							}
+							?><form method="post"><input type="submit" name="PRENOM_ASC" value="PRENOM_ASC"></form><th class="txt-bar bg-bar col-2">nom</th><?php
+	                           if(isset($_POST['NOM_ASC'])) { 
+										$list = getSQLArrayAssoc(
+										$login,
+										$pw,
+										"SELECT *
+										FROM  user
+										ORDER BY nom ASC"   );
+									} 
+									?><form method="post"><input type="submit" name="NOM_ASC" value="NOM_ASC"></form><th class="txt-bar bg-bar col-2">session</th><?php 
+		if(isset($_POST['SESSION_ASC'])) { 
+								$list = getSQLArrayAssoc(
+								$login,
+								$pw,
+								"SELECT *
+								FROM  user
+								ORDER BY nom ASC"   );
+							}
+								?><form method="post"><input type="submit" name="SESSION_ASC" value="SESSION_ASC"></form>{#<th class="txt-bar bg-bar col-3">Tél</th> #}<th class="txt-bar bg-bar col-3">Email</th><?php 
+	if(isset($_POST['EMAIL_ASC'])) { 
+								$list = getSQLArrayAssoc(
+								$login,
+								$pw,
+								"SELECT *
+								FROM  user
+								ORDER BY nom ASC"   );
+							}
+							?><form method="post"><input type="submit" name="EMAIL_ASC" value="EMAIL_ASC"></form><th class="txt-bar bg-bar col-3">entreprise</th>{# <th class="txt-bar bg-bar">Action</th> #}</tr></thead><tbody>{% for item in list %}{# <tr  class='clickable-row' data-href='{{ path( 'editUser',{'user':item.id} ) }}'>#}<tr><td class="col-2">{{item.prenom}}</td><td class="col-2">{{item.nom}}</td><td class="col-2">{{item.ns}}</td>{#<td class="col-3">{{item.telephone}}</td> #}<td class="col-3">{{item.email}}</td><td class="col-3">{{item.nom_ent}}</td></tr>{% endfor %}</tbody></table>{% else %}<th class="txt-bar bg-bar col-2">Prenom</th><?php 
+	if(isset($_POST['PRENOM_ASC'])) { 
+								$list = getSQLArrayAssoc(
+								$login,
+								$pw,
+								"SELECT *
+								FROM  user
+								ORDER BY nom ASC"   );
+							}
+							?><form method="post"><input type="submit" name="PRENOM_ASC" value="PRENOM_ASC"></form><th class="txt-bar bg-bar col-2">nom</th><?php
+	                           if(isset($_POST['NOM_ASC'])) { 
+										$list = getSQLArrayAssoc(
+										$login,
+										$pw,
+										"SELECT *
+										FROM  user
+										ORDER BY nom ASC"   );
+									} 
+									?><form method="post"><input type="submit" name="NOM_ASC" value="NOM_ASC"></form><th class="txt-bar bg-bar col-2">session</th><?php 
+		if(isset($_POST['SESSION_ASC'])) { 
+								$list = getSQLArrayAssoc(
+								$login,
+								$pw,
+								"SELECT *
+								FROM  user
+								ORDER BY nom ASC"   );
+							}
+								?><form method="post"><input type="submit" name="SESSION_ASC" value="SESSION_ASC"></form><th class="txt-bar bg-bar col-3">Tél</th><?php 
+		if(isset($_POST['TELEPHONE_ASC'])) { 
+								$list = getSQLArrayAssoc(
+								$login,
+								$pw,
+								"SELECT *
+								FROM  user
+								ORDER BY nom ASC"   );
+							}
+		 					?><form method="post"><input type="submit" name="TELEPHONE_ASC" value="TELEPHONE_ASC"></form><th class="txt-bar bg-bar col-3">Email</th><?php 
+	if(isset($_POST['EMAIL_ASC'])) { 
+								$list = getSQLArrayAssoc(
+								$login,
+								$pw,
+								"SELECT *
+								FROM  user
+								ORDER BY nom ASC"   );
+							}
+							?><form method="post"><input type="submit" name="EMAIL_ASC" value="EMAIL_ASC"></form>{# <th class="txt-bar bg-bar">Action</th> #}</tr></tbody> </thead> <tbody>{% for item in list %}<tr><td class="col-2">{{item.prenom}}</td><td class="col-2">{{item.nom}}</td><td class="col-2">{{item.ns}}</td><td class="col-3">{{item.telephone}}</td><td class="col-3">{{item.email}}</td></tr>{% endfor %} </tbody></table>{% endif %}</div></div></div></div></div>{% endblock %}
