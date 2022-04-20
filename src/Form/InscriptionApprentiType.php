@@ -135,6 +135,7 @@ class InscriptionApprentiType extends AbstractType
                 'choices'  => [
                     'OUI' => true,
                     'NON' => false,
+                    
                 ],
                 
             ])

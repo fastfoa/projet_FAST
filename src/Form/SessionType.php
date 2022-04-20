@@ -9,7 +9,6 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\ChoiceList\Factory\Cache\ChoiceLabel;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -51,19 +50,13 @@ class SessionType extends AbstractType
                 'format' => 'yyyy-MM-dd'
             ])
 
-            ->add('idFormation', choiceType::class,[
+            ->add('idFormation', ChoiceType::class,[
                 'label'=> 'Formation',
                 'choices'  => [
                     'DWWM' => 1,
                     'CDA' => 2,
                     'Bachelor' => 3,
                 ],
-                // 'choice_attr' => [
-                //     'DWWM' => ['value' => '1'],
-                //     'CDA' => ['value' => '2'],
-                //     'Bachelor' => ['value' => '3'],
-                // ],
-                
                 
             ])
             
