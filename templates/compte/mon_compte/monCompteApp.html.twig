@@ -12,17 +12,30 @@
 			<div class="col-6">
 				{{form_widget(form.prenom)}}
 				{{form_widget(form.nom)}}
+				{{form_widget(form.dateNaissance)}}
+				{{form_widget(form.DepNaissance)}}
+				{{form_widget(form.CommuneNaissance)}}
+				{{form_widget(form.Nationalite)}}
 				{{form_widget(form.email)}}
 				{{form_widget(form.adresse)}}
 				{{form_widget(form.telephone)}}
 				<p style="color: #fff">Sportif De Haut Niveau :</p>
 				{{form_widget(form.SportifHautNiveau)}}
+				{{form_widget(form.ConventionCollective)}}
 			</div>
 			<div class="col-6">
 				{{form_widget(form.RepresentantLegal1)}}
 				{{form_widget(form.RepresentantLegal2)}}
 				<p style="color: #fff">Travailleur Handicape :</p>
 				{{form_widget(form.TravailleurHandicape)}}
+				{{form_widget(form.NIR)}}
+				{{form_widget(form.RegimeSocial)}}
+				{{form_widget(form.SituationAvantContrat)}}
+				{{form_widget(form.diplome)}}
+				{{form_widget(form.DernierDiplome)}}
+				{{form_widget(form.DiplomePlusHaut)}}
+				{{form_widget(form.old_password)}}
+				{{form_widget(form.new_password)}}
 			</div>
 		</div>
 		{% include 'buttonOK.html.twig' %}

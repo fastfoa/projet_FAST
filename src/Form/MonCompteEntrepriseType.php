@@ -45,7 +45,54 @@ class MonCompteEntrepriseType extends AbstractType
                 'style'=> 'color: black !important'
             ]
         ])
-        
+        ->add('siret', TextType::class,[
+            'label'=> false,
+            'attr' => [
+                'placeholder' => 'siret'
+            ]
+        ])
+        ->add('NAF', TextType::class,[
+            'label'=> false,
+            'attr' => [
+                'placeholder' => 'NAF'
+            ]
+        ])
+        ->add('raisonSocial', TextType::class,[
+            'label'=> false,
+            'attr' => [
+                'placeholder' => 'Raison Social'
+            ]
+        ])
+
+
+
+        ->add('old_password', PasswordType::class,[
+            'mapped'=>false,
+            'label'=> false,
+            'attr' => [
+                'placeholder' => 'Mot de passe actuel'
+                
+            ] 
+            ])
+            ->add('new_password', RepeatedType::class, [
+                'type' => PasswordType::class,
+                'mapped' => false,
+                'invalid_message' => 'Le mot de passe et la confirmation doivent être identique.',
+                'required' => true,
+                'first_options' => [
+                    'label' => false,
+                    'attr' => [
+                        'placeholder' => 'Merci de saisir votre nouveau mot de passe.'
+                    ]
+                ],
+                'second_options' => [
+                    'label' => false, 
+                    'attr' => [
+                        'placeholder' => 'Merci de confirmer votre nouveau mot de passe.'
+                    ]
+                ]
+            ])
+
         
         ->add('save', SubmitType::class,[
             'label'=> "Enregistrer",
@@ -53,6 +100,7 @@ class MonCompteEntrepriseType extends AbstractType
                 'class' => 'boutonForm'
             ]
             ]);
+           
     }
 
     public function configureOptions(OptionsResolver $resolver): void
