@@ -5,6 +5,7 @@
 		.clickable-row:hover {
 			background-color: #f37262;
 		}
+	
 	</style>
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 {% endblock %}
@@ -33,15 +34,28 @@ window.location = $(this).data("href");
 					{{ roleName }}s</h2>
 			</div>
 		</div>
-		<br>
+	
 		<div class="row bg">
 			<div class="col-3"></a>
 		</a>
-		
+
 	</div>
 </div>
 <div class="row">
-	<div>
+	<div class="container-fluid">
+
+
+		<div>
+			<div class="row">
+				<div class="col-12 col-md-4">
+					<div id="resultat"></div>
+				</div>
+				<div class="col-12 col-md-8"></div>
+			</div>
+		</div>
+	</div> 
+
+	 <div>
 		<table class="table-normal">
 			<thead>
 
@@ -50,59 +64,23 @@ window.location = $(this).data("href");
 						{# <th class="txt-bar bg-bar">Prenom</th> #}
 
 						<th class="txt-bar bg-bar col-4">nom</th>
-
-						<?php 
-							if(isset($_POST['NOM_ASC'])) { 
-								$list = getSQLArrayAssoc(
-								$login,
-								$pw,
-								"SELECT *
-								FROM  user
-								ORDER BY nom ASC"   );
-							} 
-							?>
-						<form method="post">
-							<input type="submit" name="NOM_ASC" value="NOM_ASC">
-						</form>
+				
+						<button class="btn btn-info m-3" onclick="location.href ='{{ path( 'triListeGlobale',{'param':"NOM_ASC", role,'role_name': roleName } ) }}'">NOM_ASC</button>
+						<button class="btn btn-info m-3"onclick="location.href ='{{ path( 'triListeGlobale',{'param':"NOM_DESC", role,'role_name': roleName } ) }}'">NOM_DESC</button>
 						{# <th class="txt-bar bg-bar">session</th> #}
+						
 						<th class="txt-bar bg-bar col-4">Tél</th>
 
-						<?php 
-							if(isset($_POST['TELEPHONE_ASC'])) { 
-								$list = getSQLArrayAssoc(
-								$login,
-								$pw,
-								"SELECT *
-								FROM  user
-								ORDER BY nom ASC"   );
-							} 
-							?>
-						<form method="post">
-							<input type="submit" name="TELEPHONE_ASC" value="TELEPHONE_ASC">
-						</form>
 						<th class="txt-bar bg-bar col-4">Email</th>
-
-						<?php 
-						if(isset($_POST['EMAIL_ASC'])) { 
-								$list = getSQLArrayAssoc(
-								$login,
-								$pw,
-								"SELECT *
-								FROM  user
-								ORDER BY nom ASC"   );
-							} 
-							?>
-						<form method="post">
-							<input type="submit" name="EMAIL_ASC" value="EMAIL_ASC">
-						</form>
-
+						<button class="btn btn-info m-3" onclick="location.href ='{{ path( 'triListeGlobale',{'param':"EMAIL_ASC", role,'role_name': roleName } ) }}'">EMAIL_ASC</button>
+						<button class="btn btn-info m-3" onclick="location.href ='{{ path( 'triListeGlobale',{'param':"EMAIL_DESC", role,'role_name': roleName } ) }}'">EMAIL_DESC</button>
 						{# <th class="txt-bar bg-bar">Action</th> #}
-					</tr>
+					
 				</tr>
 			</thead>
-		</tr>
-	</thead>
-	<tbody>
+		
+	
+	    <tbody>
 		{% for item in list %}
 			<tr>
 				{# <td>{{item.prenom}}</td> #}
@@ -114,170 +92,111 @@ window.location = $(this).data("href");
 			</tr>
 		{% endfor %}
 	</tbody>
-</table>{% elseif roleName == 'Apprenti' %}
+	
+</table>
+{% elseif roleName == 'Apprenti' %}
 <th class="txt-bar bg-bar col-2">Prenom</th>
+	<button class="btn btn-info m-2" onclick="location.href ='{{ path( 'triListeGlobale',{'param':"PRENOM_ASC", role,'role_name': roleName } ) }}'">PRENOM_ASC</button>
+	<button class="btn btn-info m-2" onclick="location.href ='{{ path( 'triListeGlobale',{'param':"PRENOM_DESC", role,'role_name': roleName } ) }}'">PRENOM_DESC</button>
 
-<?php 
-								if(isset($_POST['PRENOM_ASC'])) { 
-								$list = getSQLArrayAssoc(
-								$login,
-								$pw,
-								"SELECT *
-								FROM  user
-								ORDER BY nom ASC"   );
-							} 
-							?>
-<form method="post">
-	<input type="submit" name="PRENOM_ASC" value="PRENOM_ASC">
-</form>
-<th class="txt-bar bg-bar col-2">nom</th>
-<?php
-	if(isset($_POST['NOM_ASC'])) { 
-										$list = getSQLArrayAssoc(
-										$login,
-										$pw,
-										"SELECT *
-										FROM  user
-										ORDER BY nom ASC"   );
-									} 
-									?>
-<form method="post">
-	<input type="submit" name="NOM_ASC" value="NOM_ASC">
-</form>
-<th class="txt-bar bg-bar col-2">session</th>
-<?php 
-		if(isset($_POST['SESSION_ASC'])) { 
-								$list = getSQLArrayAssoc(
-								$login,
-								$pw,
-								"SELECT *
-								FROM  user
-								ORDER BY nom ASC"   );
-							}
-								?>
-<form method="post">
-	<input type="submit" name="SESSION_ASC" value="SESSION_ASC">
-</form>
+
+<th class="txt-bar bg-bar col-3">nom</th>
+
+<button class="btn btn-info m-2" onclick="location.href ='{{ path( 'triListeGlobale',{'param':"NOM_ASC", role,'role_name': roleName } ) }}'">NOM_ASC</button>
+<button class="btn btn-info m-2" onclick="location.href ='{{ path( 'triListeGlobale',{'param':"NOM_DESC", role, 'role_name': roleName } ) }}'">NOM_DESC</button>
+
+<th class="txt-bar bg-bar col-3 ">session</th>
 <th class="txt-bar bg-bar col-3">Tél</th>
-<?php 
-		if(isset($_POST['TELEPHONE_ASC'])) { 
-								$list = getSQLArrayAssoc(
-								$login,
-								$pw,
-								"SELECT *
-								FROM  user
-								ORDER BY nom ASC"   );
-							}
-		 					?>
-<form method="post">
-	<input type="submit" name="TELEPHONE_ASC" value="TELEPHONE_ASC">
-</form>
 
 <th class="txt-bar bg-bar col-3">Email</th>
-<?php 
-	if(isset($_POST['EMAIL_ASC'])) { 
-								$list = getSQLArrayAssoc(
-								$login,
-								$pw,
-								"SELECT *
-								FROM  user
-								ORDER BY nom ASC"   );
-							}
-							?>
-<form method="post">
-	<input type="submit" name="EMAIL_ASC" value="EMAIL_ASC">
-</form>
-{# <th class="txt-bar bg-bar">Action</th> #}</tr></thead><tbody>{% for item in list %}
+<button class="btn btn-info m-2" onclick="location.href ='{{ path( 'triListeGlobale',{'param':"EMAIL_ASC", role,'role_name': roleName } ) }}'">EMAIL_ASC</button>
+<button class="btn btn-info m-2" onclick="location.href ='{{ path( 'triListeGlobale',{'param':"EMAIL_DESC",role,'role_name': roleName } ) }}'">EMAIL_DESC</button>
+
+{# <th class="txt-bar bg-bar">Action</th> #}</tr></thead><tbody>
+{% for item in list %}
 <tr class='clickable-row' data-href='{{ path( 'editUser',{'user':item.id} ) }}'>
 	<td class="col-2">{{item.prenom}}</td>
 	<td class="col-2">{{item.nom}}</td>
 	<td class="col-2">{{item.ns}}</td>
 	<td class="col-3">{{item.telephone}}</td>
 	<td class="col-3">{{item.email}}</td>
+																																																			
+</tr>
+{% endfor %}
+</tbody>
+</table>
+</table>
 
-	{#<td>{{session.formation}}</td>#}
-	{# 	<td><a href="{{ path( 'editUser',{'user':item.id} ) }}">
-																																																				<i class="fas fa-solid fa-download" style="font-size:20px;color:green;"></i></a>
-																																																				</td> #}
-</tr>{% endfor %}</tbody></table></table>{% elseif roleName ==  "Maitre d'apprentissage" %}<th class="txt-bar bg-bar col-2">Prenom</th><?php 
-	if(isset($_POST['PRENOM_ASC'])) { 
-								$list = getSQLArrayAssoc(
-								$login,
-								$pw,
-								"SELECT *
-								FROM  user
-								ORDER BY nom ASC"   );
-							}
-							?><form method="post"><input type="submit" name="PRENOM_ASC" value="PRENOM_ASC"></form><th class="txt-bar bg-bar col-2">nom</th><?php
-	                           if(isset($_POST['NOM_ASC'])) { 
-										$list = getSQLArrayAssoc(
-										$login,
-										$pw,
-										"SELECT *
-										FROM  user
-										ORDER BY nom ASC"   );
-									} 
-									?><form method="post"><input type="submit" name="NOM_ASC" value="NOM_ASC"></form><th class="txt-bar bg-bar col-2">session</th><?php 
-		if(isset($_POST['SESSION_ASC'])) { 
-								$list = getSQLArrayAssoc(
-								$login,
-								$pw,
-								"SELECT *
-								FROM  user
-								ORDER BY nom ASC"   );
-							}
-								?><form method="post"><input type="submit" name="SESSION_ASC" value="SESSION_ASC"></form>{#<th class="txt-bar bg-bar col-3">Tél</th> #}<th class="txt-bar bg-bar col-3">Email</th><?php 
-	if(isset($_POST['EMAIL_ASC'])) { 
-								$list = getSQLArrayAssoc(
-								$login,
-								$pw,
-								"SELECT *
-								FROM  user
-								ORDER BY nom ASC"   );
-							}
-							?><form method="post"><input type="submit" name="EMAIL_ASC" value="EMAIL_ASC"></form><th class="txt-bar bg-bar col-3">entreprise</th>{# <th class="txt-bar bg-bar">Action</th> #}</tr></thead><tbody>{% for item in list %}{# <tr  class='clickable-row' data-href='{{ path( 'editUser',{'user':item.id} ) }}'>#}<tr><td class="col-2">{{item.prenom}}</td><td class="col-2">{{item.nom}}</td><td class="col-2">{{item.ns}}</td>{#<td class="col-3">{{item.telephone}}</td> #}<td class="col-3">{{item.email}}</td><td class="col-3">{{item.nom_ent}}</td></tr>{% endfor %}</tbody></table>{% else %}<th class="txt-bar bg-bar col-2">Prenom</th><?php 
-	if(isset($_POST['PRENOM_ASC'])) { 
-								$list = getSQLArrayAssoc(
-								$login,
-								$pw,
-								"SELECT *
-								FROM  user
-								ORDER BY nom ASC"   );
-							}
-							?><form method="post"><input type="submit" name="PRENOM_ASC" value="PRENOM_ASC"></form><th class="txt-bar bg-bar col-2">nom</th><?php
-	                           if(isset($_POST['NOM_ASC'])) { 
-										$list = getSQLArrayAssoc(
-										$login,
-										$pw,
-										"SELECT *
-										FROM  user
-										ORDER BY nom ASC"   );
-									} 
-									?><form method="post"><input type="submit" name="NOM_ASC" value="NOM_ASC"></form><th class="txt-bar bg-bar col-2">session</th><?php 
-		if(isset($_POST['SESSION_ASC'])) { 
-								$list = getSQLArrayAssoc(
-								$login,
-								$pw,
-								"SELECT *
-								FROM  user
-								ORDER BY nom ASC"   );
-							}
-								?><form method="post"><input type="submit" name="SESSION_ASC" value="SESSION_ASC"></form><th class="txt-bar bg-bar col-3">Tél</th><?php 
-		if(isset($_POST['TELEPHONE_ASC'])) { 
-								$list = getSQLArrayAssoc(
-								$login,
-								$pw,
-								"SELECT *
-								FROM  user
-								ORDER BY nom ASC"   );
-							}
-		 					?><form method="post"><input type="submit" name="TELEPHONE_ASC" value="TELEPHONE_ASC"></form><th class="txt-bar bg-bar col-3">Email</th><?php 
-	if(isset($_POST['EMAIL_ASC'])) { 
-								$list = getSQLArrayAssoc(
-								$login,
-								$pw,
-								"SELECT *
-								FROM  user
-								ORDER BY nom ASC"   );
-							}
-							?><form method="post"><input type="submit" name="EMAIL_ASC" value="EMAIL_ASC"></form>{# <th class="txt-bar bg-bar">Action</th> #}</tr></tbody> </thead> <tbody>{% for item in list %}<tr><td class="col-2">{{item.prenom}}</td><td class="col-2">{{item.nom}}</td><td class="col-2">{{item.ns}}</td><td class="col-3">{{item.telephone}}</td><td class="col-3">{{item.email}}</td></tr>{% endfor %} </tbody></table>{% endif %}</div></div></div></div></div>{% endblock %}
+{% elseif roleName ==  "Maitre d'apprentissage" %}
+
+	<th class="txt-bar bg-bar col-2">Prenom</th>
+	<button class="btn btn-info m-2" onclick="location.href ='{{ path( 'triListeGlobale',{'param':"PRENOM_ASC", role,'role_name': roleName } ) }}'">PRENOM_ASC</button>
+	<button class="btn btn-info m-2" onclick="location.href ='{{ path( 'triListeGlobale',{'param':"PRENOM_DESC", role,'role_name': roleName } ) }}'">PRENOM_DESC</button>
+
+
+    <th class="txt-bar bg-bar col-2">nom</th>
+	<button class="btn btn-info m-2" onclick="location.href ='{{ path( 'triListeGlobale',{'param':"NOM_ASC", role,'role_name': roleName } ) }}'">NOM_ASC</button>
+	<button class="btn btn-info m-2" onclick="location.href ='{{ path( 'triListeGlobale',{'param':"NOM_DESC", role,'role_name': roleName } ) }}'">NOM_DESC</button>
+
+
+	<th class="txt-bar bg-bar col-2">session</th>
+    {# <th class="txt-bar bg-bar col-3">Tél</th>  #}
+
+	<th class="txt-bar bg-bar col-3">Email</th>
+	<button class="btn btn-info m-2" onclick="location.href ='{{ path( 'triListeGlobale',{'param':"EMAIL_ASC", role,'role_name': roleName } ) }}'">EMAIL_ASC</button>
+	<button class="btn btn-info m-2" onclick="location.href ='{{ path( 'triListeGlobale',{'param':"EMAIL_DESC", role,'role_name': roleName } ) }}'">EMAIL_DESC</button>
+							
+	<th class="txt-bar bg-bar col-3">entreprise</th>
+	
+	{# <th class="txt-bar bg-bar">Action</th> #}
+	</tr>
+	</thead>
+	<tbody>
+	{% for item in list %}
+	{# <tr  class='clickable-row' data-href='{{ path( 'editUser',{'user':item.id} ) }}'>#}
+	<tr>
+	<td class="col-2">{{item.prenom}}</td>
+	<td class="col-2">{{item.nom}}</td>
+	<td class="col-2">{{item.ns}}</td>
+	{# <td class="col-3">{{item.telephone}}</td> #}
+	<td class="col-3">{{item.email}}</td>
+    <td class="col-3">{{item.nom_ent}}</td>
+	</tr>
+	{% endfor %}
+	</tbody>
+	</table>
+	{% else %}
+
+	<th class="txt-bar bg-bar col-2">Prenom</th>
+	<button class="btn btn-info m-2" onclick="location.href ='{{ path( 'triListeGlobale',{'param':"PRENOM_ASC", role,'role_name': roleName } ) }}'">PRENOM_ASC</button>
+	<button class="btn btn-info m-2" onclick="location.href ='{{ path( 'triListeGlobale',{'param':"PRENOM_DESC", role,'role_name': roleName } ) }}'">PRENOM_DESC</button>
+
+	<th class="txt-bar bg-bar col-2">nom</th>
+	<button class="btn btn-info m-2" onclick="location.href ='{{ path( 'triListeGlobale',{'param':"NOM_ASC", role,'role_name': roleName } ) }}'">NOM_ASC</button>
+	<button class="btn btn-info m-2" onclick="location.href ='{{ path( 'triListeGlobale',{'param':"NOM_DESC", role,'role_name': roleName } ) }}'">NOM_DESC</button>
+
+	<th class="txt-bar bg-bar col-2">session</th>	
+	<th class="txt-bar bg-bar col-3">Tél</th>
+
+	<th class="txt-bar bg-bar col-3">Email</th>
+	<button class="btn btn-info m-2" onclick="location.href ='{{ path( 'triListeGlobale',{'param':"EMAIL_ASC", role,'role_name': roleName } ) }}'">EMAIL_ASC</button>
+	<button class="btn btn-info m-2" onclick="location.href ='{{ path( 'triListeGlobale',{'param':"EMAIL_DESC", role,'role_name': roleName } ) }}'">EMAIL_DESC</button>
+	
+	{# <th class="txt-bar bg-bar">Action</th> #}
+	</tr></tbody> </thead> 
+	<tbody>
+
+	{% for item in list %}
+	<tr>
+	<td class="col-2">{{item.prenom}}</td>
+	<td class="col-2">{{item.nom}}</td>
+	<td class="col-2">{{item.ns}}</td>
+	 <td class="col-3">{{item.telephone}}</td>
+	<td class="col-3">{{item.email}}</td>
+	</tr>
+	{% endfor %} 
+	</tbody>
+	</table>
+	{% endif %}
+	</div></div></div></div></div>
+	{% endblock %}

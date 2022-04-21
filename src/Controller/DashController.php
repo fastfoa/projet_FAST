@@ -485,18 +485,24 @@ class DashController extends AbstractController
             ]
         );
     }
-    public function triListeGlobaleApprenti($param) : Response 
-    //   dd( $param );
+    public function triListeGlobale($param,$role,$role_name) : Response 
+    //    dd( $param );
     {
+        // dd( $param );
+        $login = $this->getParameter('loginDB');
+        $pw = $this->getParameter('PasswordDB');
         $listAux = [];
      // NOM_ASC
      if ($param == "NOM_ASC") {
         $listAux = getSQLArrayAssoc(
             $login,
             $pw,
-            "SELECT *
+            "SELECT user.nom, user.prenom, user.telephone, user.email, user.id, s.nom as ns
             FROM  user
-            ORDER BY nom ASC"   );
+            LEFT JOIN user_in_session as us ON us.id_user=user.id 
+            LEFT JOIN session as s ON us.id_session=s.id 
+            WHERE user.role_string='$role' ORDER BY user.nom  ASC"
+           );
      }
         // NOM_DESC
         else if ($param == "NOM_DESC")
@@ -504,9 +510,12 @@ class DashController extends AbstractController
             $listAux = getSQLArrayAssoc(
                 $login,
                 $pw,
-                "SELECT *
+                "SELECT user.nom, user.prenom, user.telephone, user.email, user.id, s.nom as ns
                 FROM  user
-                ORDER BY nom DESC"   );
+                LEFT JOIN user_in_session as us ON us.id_user=user.id 
+                LEFT JOIN session as s ON us.id_session=s.id 
+                WHERE user.role_string='$role' ORDER BY user.nom DESC"
+            );
          }
         // PRENOM_ASC
         else if ($param == "PRENOM_ASC")
@@ -514,9 +523,12 @@ class DashController extends AbstractController
             $listAux = getSQLArrayAssoc(
                 $login,
                 $pw,
-                "SELECT *
+                "SELECT user.nom, user.prenom, user.telephone, user.email, user.id, s.nom as ns
                 FROM  user
-                ORDER BY prenom ASC"   );
+                LEFT JOIN user_in_session as us ON us.id_user=user.id 
+                LEFT JOIN session as s ON us.id_session=s.id 
+                WHERE user.role_string='$role' ORDER BY user.prenom  ASC" 
+                );
          }
         // PRENOM_DESC
         else if ($param == "PRENOM_DESC")
@@ -524,59 +536,26 @@ class DashController extends AbstractController
             $listAux = getSQLArrayAssoc(
                 $login,
                 $pw,
-                "SELECT *
+                "SELECT user.nom, user.prenom, user.telephone, user.email, user.id, s.nom as ns
                 FROM  user
-                ORDER BY prenom DESC"   );
+                LEFT JOIN user_in_session as us ON us.id_user=user.id 
+                LEFT JOIN session as s ON us.id_session=s.id 
+                WHERE user.role_string='$role' ORDER BY user.prenom  DESC"
+                );
          }
-        // SESSION_ASC
-        else if ($param == "SESSION_ASC")
-        {
-            $listAux = getSQLArrayAssoc(
-                $login,
-                $pw,
-                "SELECT *
-                FROM  user
-                ORDER BY S ASC"   );
-         }
-        // SESSION_DESC
-        else if ($param == "SESSION_DESC")
-        {
-            $listAux = getSQLArrayAssoc(
-                $login,
-                $pw,
-                "SELECT *
-                FROM  user
-                ORDER BY S DESC"   );
-         }
-        // TELEPHONE_ASC
-        else if ($param == "TELEPHONE_ASC")
-        {
-            $listAux = getSQLArrayAssoc(
-                $login,
-                $pw,
-                "SELECT *
-                FROM  user
-                ORDER BY telephone ASC"   );
-         }
-        // TELEPHONE_DESC
-        else if ($param == "TELEPHONE_DESC")
-        {
-            $listAux = getSQLArrayAssoc(
-                $login,
-                $pw,
-                "SELECT *
-                FROM  user
-                ORDER BY telephone DESC"   );
-         }
-        // EMAIL_ASC
+        
+               // EMAIL_ASC
         else if ($param == "EMAIL_ASC")
         {
             $listAux = getSQLArrayAssoc(
                 $login,
                 $pw,
-                "SELECT *
+                "SELECT user.nom, user.prenom, user.telephone, user.email, user.id, s.nom as ns
                 FROM  user
-                ORDER BY email ASC"   );
+                LEFT JOIN user_in_session as us ON us.id_user=user.id 
+                LEFT JOIN session as s ON us.id_session=s.id 
+                WHERE user.role_string='$role' ORDER BY user.email  ASC"
+               );
          }
         // EMAIL_DESC
         else if ($param == "EMAIL_DESC")
@@ -584,20 +563,26 @@ class DashController extends AbstractController
             $listAux = getSQLArrayAssoc(
                 $login,
                 $pw,
-                "SELECT *
+                "SELECT user.nom, user.prenom, user.telephone, user.email, user.id, s.nom as ns
                 FROM  user
-                ORDER BY email DESC"   );
+                LEFT JOIN user_in_session as us ON us.id_user=user.id 
+                LEFT JOIN session as s ON us.id_session=s.id 
+                WHERE user.role_string='$role' ORDER BY user.email DESC"
+            );
          }
         else {
-            $listAux = listAll('ROLE_APP', 'Apprenti');
+            $listAux = listAll( $role, $role_name);
     }
+    // dd($listAux);
     return $this->render(
+
         'dash/listUser.html.twig',
+        
         [
             'list' => $listAux,
             'menu' => getMenuFromRole($this->getUser()->getRoleString()), 
-            'role' => 'ROLE_APP',
-            'roleName' => 'Apprenti'
+            'role' => $role,
+            'roleName' => $role_name
         ]
     );
     
@@ -621,18 +606,23 @@ class DashController extends AbstractController
         $listAux = getSQLArrayAssoc(
             $login,
             $pw,
-            "SELECT *
+            "SELECT user.nom, user.prenom, user.telephone, user.email, user.id, s.nom as ns
             FROM  user
-            ORDER BY nom ASC"   );
+            LEFT JOIN user_in_session as us ON us.id_user=user.id 
+            LEFT JOIN session as s ON us.id_session=s.id 
+            WHERE user.role_string='$role' ORDER BY user.nom ASC"
+            );
      }
         // NOM_DESC
         else if ($param == "NOM_DESC") {
             $listAux = getSQLArrayAssoc(
                 $login,
                 $pw,
-                "SELECT *
+                "SELECT user.nom, user.prenom, user.telephone, user.email, user.id, s.nom as ns
                 FROM  user
-                ORDER BY nom DESC"   );
+                LEFT JOIN user_in_session as us ON us.id_user=user.id 
+                LEFT JOIN session as s ON us.id_session=s.id 
+                WHERE user.role_string='$role' ORDER BY user.nom DESC"   );
 
         }
         // PRENOM_ASC
@@ -641,9 +631,11 @@ class DashController extends AbstractController
             $listAux = getSQLArrayAssoc(
                 $login,
                 $pw,
-                "SELECT *
-                FROM  user
-                ORDER BY prenom ASC"   );
+                "SELECT user.nom, user.prenom, user.telephone, user.email, user.id, s.nom as ns
+            FROM  user
+            LEFT JOIN user_in_session as us ON us.id_user=user.id 
+            LEFT JOIN session as s ON us.id_session=s.id 
+            WHERE user.role_string='$role' ORDER BY user.prenom ASC"   );
          }
         // PRENOM_DESC
         else if ($param == "PRENOM_DESC")
@@ -651,60 +643,64 @@ class DashController extends AbstractController
             $listAux = getSQLArrayAssoc(
                 $login,
                 $pw,
-                "SELECT *
+                "SELECT user.nom, user.prenom, user.telephone, user.email, user.id, s.nom as ns
                 FROM  user
-                ORDER BY prenom DESC"   );
+                LEFT JOIN user_in_session as us ON us.id_user=user.id 
+                LEFT JOIN session as s ON us.id_session=s.id 
+                WHERE user.role_string='$role' ORDER BY user.prenom DESC"   );
          }
         // SESSION_ASC
-        else if ($param == "SESSION_ASC")
-        {
-            $listAux = getSQLArrayAssoc(
-                $login,
-                $pw,
-                "SELECT *
-                FROM  user
-                ORDER BY s ASC"   );
-         }
+        // else if ($param == "SESSION_ASC")
+        // {
+        //     $listAux = getSQLArrayAssoc(
+        //         $login,
+        //         $pw,
+        //         "SELECT *
+        //         FROM  user
+        //         ORDER BY s ASC"   );
+        //  }
 
         // SESSION_DESC
-        else if ($param == "SESSION_DESC")
-        {
-            $listAux = getSQLArrayAssoc(
-                $login,
-                $pw,
-                "SELECT *
-                FROM  user
-                ORDER BY s DESC"   );
-         }
+        // else if ($param == "SESSION_DESC")
+        // {
+        //     $listAux = getSQLArrayAssoc(
+        //         $login,
+        //         $pw,
+        //         "SELECT *
+        //         FROM  user
+        //         ORDER BY s DESC"   );
+        //  }
         // TELEPHONE_ASC
-        else if ($param == "TELEPHONE_ASC")
-        {
-            $listAux = getSQLArrayAssoc(
-                $login,
-                $pw,
-                "SELECT *
-                FROM  user
-                ORDER BY TELEPHONE ASC"   );
-         }
+        // else if ($param == "TELEPHONE_ASC")
+        // {
+        //     $listAux = getSQLArrayAssoc(
+        //         $login,
+        //         $pw,
+        //         "SELECT *
+        //         FROM  user
+        //         ORDER BY TELEPHONE ASC"   );
+        //  }
         // TELEPHONE_DESC
-        else if ($param == "TELEPHONE_DESC")
-        {
-            $listAux = getSQLArrayAssoc(
-                $login,
-                $pw,
-                "SELECT *
-                FROM  user
-                ORDER BY TELEPHONE DESC"   );
-         }
+        // else if ($param == "TELEPHONE_DESC")
+        // {
+        //     $listAux = getSQLArrayAssoc(
+        //         $login,
+        //         $pw,
+        //         "SELECT *
+        //         FROM  user
+        //         ORDER BY TELEPHONE DESC"   );
+        //  }
         // EMAIL_ASC
         else if ($param == "EMAIL_ASC")
         {
             $listAux = getSQLArrayAssoc(
                 $login,
                 $pw,
-                "SELECT *
+                "SELECT user.nom, user.prenom, user.telephone, user.email, user.id, s.nom as ns
                 FROM  user
-                ORDER BY EMAIL ASC"   );
+                LEFT JOIN user_in_session as us ON us.id_user=user.id 
+                LEFT JOIN session as s ON us.id_session=s.id 
+                WHERE user.role_string='$role' ORDER BY user.EMAIL ASC"   );
          }
         // EMAIL_DESC
         else if ($param == "EMAIL_DESC")
@@ -712,9 +708,11 @@ class DashController extends AbstractController
             $listAux = getSQLArrayAssoc(
                 $login,
                 $pw,
-                "SELECT *
-                FROM  user
-                ORDER BY EMAIL DESC"   );
+                "SELECT user.nom, user.prenom, user.telephone, user.email, user.id, s.nom as ns
+            FROM  user
+            LEFT JOIN user_in_session as us ON us.id_user=user.id 
+            LEFT JOIN session as s ON us.id_session=s.id 
+            WHERE user.role_string='$role' ORDER BY user.EMAIL DESC"   );
          }
         else {
             $listAux = listAll('ROLE_FORMATEUR', 'Formateur');
@@ -748,50 +746,56 @@ class DashController extends AbstractController
         $listAux = getSQLArrayAssoc(
             $login,
             $pw,
-            "SELECT *
+            "SELECT user.nom, user.prenom, user.telephone, user.email, user.id, s.nom as ns
             FROM  user
-            ORDER BY nom ASC"   );
+            LEFT JOIN user_in_session as us ON us.id_user=user.id 
+            LEFT JOIN session as s ON us.id_session=s.id 
+            WHERE user.role_string='$role' ORDER BY user.nom ASC"   );
      }
         // NOM_DESC
         else if ($param == "NOM_DESC") {
             $listAux = getSQLArrayAssoc(
                 $login,
                 $pw,
-                "SELECT *
-                FROM  user
-                ORDER BY nom DESC"   );
+                "SELECT user.nom, user.prenom, user.telephone, user.email, user.id, s.nom as ns
+            FROM  user
+            LEFT JOIN user_in_session as us ON us.id_user=user.id 
+            LEFT JOIN session as s ON us.id_session=s.id 
+            WHERE user.role_string='$role' ORDER BY user.nom DESC"   );
 
         }
    
         // TELEPHONE_ASC
-        else if ($param == "TELEPHONE_ASC")
-        {
-            $listAux = getSQLArrayAssoc(
-                $login,
-                $pw,
-                "SELECT *
-                FROM  user
-                ORDER BY TELEPHONE ASC"   );
-         }
+        // else if ($param == "TELEPHONE_ASC")
+        // {
+        //     $listAux = getSQLArrayAssoc(
+        //         $login,
+        //         $pw,
+        //         "SELECT *
+        //         FROM  user
+        //         ORDER BY TELEPHONE ASC"   );
+        //  }
         // TELEPHONE_DESC
-        else if ($param == "TELEPHONE_DESC")
-        {
-            $listAux = getSQLArrayAssoc(
-                $login,
-                $pw,
-                "SELECT *
-                FROM  user
-                ORDER BY TELEPHONE DESC"   );
-         }
+        // else if ($param == "TELEPHONE_DESC")
+        // {
+        //     $listAux = getSQLArrayAssoc(
+        //         $login,
+        //         $pw,
+        //         "SELECT *
+        //         FROM  user
+        //         ORDER BY TELEPHONE DESC"   );
+        //  }
         // EMAIL_ASC
         else if ($param == "EMAIL_ASC")
         {
             $listAux = getSQLArrayAssoc(
                 $login,
                 $pw,
-                "SELECT *
+                "SELECT user.nom, user.prenom, user.telephone, user.email, user.id, s.nom as ns
                 FROM  user
-                ORDER BY EMAIL ASC"   );
+                LEFT JOIN user_in_session as us ON us.id_user=user.id 
+                LEFT JOIN session as s ON us.id_session=s.id 
+                WHERE user.role_string='$role' ORDER BY user.EMAIL ASC"   );
          }
         // EMAIL_DESC
         else if ($param == "EMAIL_DESC")
@@ -799,9 +803,11 @@ class DashController extends AbstractController
             $listAux = getSQLArrayAssoc(
                 $login,
                 $pw,
-                "SELECT *
+                "SELECT user.nom, user.prenom, user.telephone, user.email, user.id, s.nom as ns
                 FROM  user
-                ORDER BY EMAIL DESC"   );
+                LEFT JOIN user_in_session as us ON us.id_user=user.id 
+                LEFT JOIN session as s ON us.id_session=s.id 
+                WHERE user.role_string='$role' ORDER BY user.EMAIL DESC"   );
          }
         else {
             $listAux = listAll('ROLE_ENT', 'Entreprise');
@@ -835,9 +841,11 @@ class DashController extends AbstractController
         $listAux = getSQLArrayAssoc(
             $login,
             $pw,
-            "SELECT *
+            "SELECT user.nom, user.prenom, user.telephone, user.email, user.id, s.nom as ns
             FROM  user
-            ORDER BY nom ASC"   );
+            LEFT JOIN user_in_session as us ON us.id_user=user.id 
+            LEFT JOIN session as s ON us.id_session=s.id 
+            WHERE user.role_string='$role' ORDER BY user.nom ASC"   );
      }
         // NOM_DESC
         else if ($param == "NOM_DESC")
@@ -845,9 +853,11 @@ class DashController extends AbstractController
             $listAux = getSQLArrayAssoc(
                 $login,
                 $pw,
-                "SELECT *
-                FROM  user
-                ORDER BY nom DESC"   );
+                "SELECT user.nom, user.prenom, user.telephone, user.email, user.id, s.nom as ns
+            FROM  user
+            LEFT JOIN user_in_session as us ON us.id_user=user.id 
+            LEFT JOIN session as s ON us.id_session=s.id 
+            WHERE user.role_string='$role' ORDER BY user.nom DESC"   );
          }
         // PRENOM_ASC
         else if ($param == "PRENOM_ASC")
@@ -855,9 +865,11 @@ class DashController extends AbstractController
             $listAux = getSQLArrayAssoc(
                 $login,
                 $pw,
-                "SELECT *
+                "SELECT user.nom, user.prenom, user.telephone, user.email, user.id, s.nom as ns
                 FROM  user
-                ORDER BY prenom ASC"   );
+                LEFT JOIN user_in_session as us ON us.id_user=user.id 
+                LEFT JOIN session as s ON us.id_session=s.id 
+                WHERE user.role_string='$role' ORDER BY user.prenom ASC"   );
          }
         // PRENOM_DESC
         else if ($param == "PRENOM_DESC")
@@ -865,31 +877,33 @@ class DashController extends AbstractController
             $listAux = getSQLArrayAssoc(
                 $login,
                 $pw,
-                "SELECT *
-                FROM  user
-                ORDER BY prenom DESC"   );
+                "SELECT user.nom, user.prenom, user.telephone, user.email, user.id, s.nom as ns
+            FROM  user
+            LEFT JOIN user_in_session as us ON us.id_user=user.id 
+            LEFT JOIN session as s ON us.id_session=s.id 
+            WHERE user.role_string='$role' ORDER BY user.prenom DESC"   );
          }
         // SESSION_ASC
-        else if ($param == "SESSION_ASC")
-        {
-            $listAux = getSQLArrayAssoc(
-                $login,
-                $pw,
-                "SELECT *
-                FROM  user
-                ORDER BY s ASC"   );
-         }
+        // else if ($param == "SESSION_ASC")
+        // {
+        //     $listAux = getSQLArrayAssoc(
+        //         $login,
+        //         $pw,
+        //         "SELECT *
+        //         FROM  user
+        //         ORDER BY s ASC"   );
+        //  }
 
         // SESSION_DESC
-        else if ($param == "SESSION_DESC")
-        {
-            $listAux = getSQLArrayAssoc(
-                $login,
-                $pw,
-                "SELECT *
-                FROM  user
-                ORDER BY s DESC"   );
-         }
+        // else if ($param == "SESSION_DESC")
+        // {
+        //     $listAux = getSQLArrayAssoc(
+        //         $login,
+        //         $pw,
+        //         "SELECT *
+        //         FROM  user
+        //         ORDER BY s DESC"   );
+        //  }
         
         // EMAIL_ASC
         else if ($param == "EMAIL_ASC")
@@ -897,9 +911,11 @@ class DashController extends AbstractController
             $listAux = getSQLArrayAssoc(
                 $login,
                 $pw,
-                "SELECT *
+                "SELECT user.nom, user.prenom, user.telephone, user.email, user.id, s.nom as ns
                 FROM  user
-                ORDER BY email ASC"   );
+                LEFT JOIN user_in_session as us ON us.id_user=user.id 
+                LEFT JOIN session as s ON us.id_session=s.id 
+                WHERE user.role_string='$role' ORDER BY user.email ASC"   );
          }
         // EMAIL_DESC
         else if ($param == "EMAIL_DESC")
@@ -907,9 +923,11 @@ class DashController extends AbstractController
             $listAux = getSQLArrayAssoc(
                 $login,
                 $pw,
-                "SELECT *
+                "SELECT user.nom, user.prenom, user.telephone, user.email, user.id, s.nom as ns
                 FROM  user
-                ORDER BY email DESC"   );
+                LEFT JOIN user_in_session as us ON us.id_user=user.id 
+                LEFT JOIN session as s ON us.id_session=s.id 
+                WHERE user.role_string='$role' ORDER BY user.email DESC"   );
          }
         // ENT_ASC
         else if ($param == "ENT_ASC")
@@ -917,9 +935,11 @@ class DashController extends AbstractController
             $listAux = getSQLArrayAssoc(
                 $login,
                 $pw,
-                "SELECT *
+                "SELECT user.nom, user.prenom, user.telephone, user.email, user.id, s.nom as ns
                 FROM  user
-                ORDER BY entreprise ASC"   );
+                LEFT JOIN user_in_session as us ON us.id_user=user.id 
+                LEFT JOIN session as s ON us.id_session=s.id 
+                WHERE user.role_string='$role' ORDER BY user.ent ASC"   );
          }
         // ENT_DESC
         else if ($param == "ENT_DESC")
@@ -927,9 +947,11 @@ class DashController extends AbstractController
             $listAux = getSQLArrayAssoc(
                 $login,
                 $pw,
-                "SELECT *
+                "SELECT user.nom, user.prenom, user.telephone, user.email, user.id, s.nom as ns
                 FROM  user
-                ORDER BY entreprise DESC"   );
+                LEFT JOIN user_in_session as us ON us.id_user=user.id 
+                LEFT JOIN session as s ON us.id_session=s.id 
+                WHERE user.role_string='$role' ORDER BY user.ent DESC"   );
          }
         else {
             $listAux = listAll('ROLE_MA',  "Maitre d'apprentissage");
