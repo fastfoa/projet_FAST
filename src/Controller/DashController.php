@@ -564,10 +564,10 @@ class DashController extends AbstractController
         $sessionID = getIdSessionFromApprenti1($login, $pw,  $id );
         
 
-        $listDoc = getSQLArrayAssoc($this->getParameter('loginDB'), $this->getParameter('PasswordDB'),
+       $listDoc = getSQLArrayAssoc($this->getParameter('loginDB'), $this->getParameter('PasswordDB'),
         "SELECT document.id AS d_id, document.titre AS d_titre, document.file_name AS d_fileName
         FROM document, user
-        WHERE user.id=document.id_owner AND user.id=".$user->getId());
+        WHERE user.id=document.id_owner AND user.id=".$user->getId()); 
 
         $ma = getSQLArrayAssoc($this->getParameter('loginDB'), $this->getParameter('PasswordDB'),
         "SELECT u.nom, u.prenom, u.telephone, u.id, u.role_string                   

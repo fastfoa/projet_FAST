@@ -44,7 +44,7 @@ class DocumentController extends AbstractController
         return null;
     }
 
-    public function upload($retour, Request $request, SluggerInterface $slugger): Response
+    public function upload( Request $request, SluggerInterface $slugger): Response
     {
         $ret = $this->checkRGPD();
         if ($ret)
@@ -227,7 +227,7 @@ class DocumentController extends AbstractController
                 $this->addFlash('message', "Document ajouté");
                 //dd( $retour );
       
-                    return $this->redirectToRoute( $retour );
+                    // return $this->redirectToRoute( $retour );
   
                 
               
@@ -235,10 +235,10 @@ class DocumentController extends AbstractController
         }
 
         return $this->render(
-            'document/upload.html.twig',
+            'profil/profilOF_APP.html.twig', 
             [
 
-                'myForm'            => $formulaire->createView(),
+                'myform'            => $formulaire->createView(),
                 'role'              => $roleString,
                 'nameOF'            => $nameOF,
                 'nameMA'            => $nameMA,
@@ -278,26 +278,26 @@ class DocumentController extends AbstractController
             return $ret;
 
         $file = $this->getParameter('path_upload') . "/" . $id->getFileName();
-
+// dd($file);
         $r = new BinaryFileResponse($file);
 
         $str =  $id->getFileNameOriginal();
 
         $d = HeaderUtils::makeDisposition(
-            HeaderUtils::DISPOSITION_ATTACHMENT,
-            $str
+            HeaderUtils::DISPOSITION_ATTACHMENT,$str
         );
-
+// dd($d);
         $r->headers->set('Content-Disposition', $d);
         return $r;
     }
 
-    public function deletedocument( Document $document)
+    public function deletedocument( Document $document )
     {
         $ret = $this->checkRGPD();
         if ($ret)
             return $ret;
-dd($document);
+
+          
         $doctrine = $this->getDoctrine();
         $om = $doctrine->getManager();
         $om->remove($document);
