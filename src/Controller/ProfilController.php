@@ -310,7 +310,7 @@ class ProfilController extends AbstractController
             'listMa' => $listMa,
             'ma' => $ma,
             'id' => $id,
-            'document' => $listDoc,
+            'documents' => $listDoc,
             // 'docs' => $listDocbis,
             'menu' => getMenuFromRole( $this->getUser()->getRoleString() ),
             'OF'   => $infoOF,         

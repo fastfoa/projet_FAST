@@ -89,21 +89,58 @@
 					<div class="row">
 						<div class="col- mt-3">
 							<h3>Mes documents :</h3>
-							<label for="listDoc">Chercher un document :</label>
-							<input list="documents" type="text" id="listDoc">
-							<datalist id="documents">
-								{% for doc in document %}
-									<option id="{{doc.d_id}}" value="{{doc.d_id}}">{{doc.d_fileName}}</option>
-								{% endfor %}
-							</datalist>
+					
+						<style>
+	.demo {
+		border:1px solide #C0C0C0;
+		border-collapse:effondrer;
+		padding:5px;
+	}
+	.demo th {
+		border:1px solide #C0C0C0;
+		padding:5px;
+		background:#F0F0F0;
+	}
+	.demo td {
+		border:1px solide #C0C0C0;
+		padding:5px;
+		background:#FFFFFF;
+	}
+</style>
+<table class="demo">
+
+	<thead>
+	<tr>
+		<th>Titre</th>
+		<th>Nom du fichier</th>
+		<th>Date d'envoi</th>
+		<th>Suprimer</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	<tr>	{% for document in documents %}
+		<td>{{document.d_titre}}</td>
+		<td>{{document.d_fileName}}</td>
+		<td>{{document.d_dateCreate}}</td>
+		<td><button onclick="{{ path( 'deletedocument', {'id':document.d_id}) }}">
+								❌
+							</button></td>
+							
+	</tr>{% endfor %}
+
+	<tbody>
+</table>
+							
+						
 						</div>
 						<div class="col-4 ">
-							<button onclick='seeDoc2({{user.id}})'>
+							{# <button onclick='seeDoc2({{user.id}})'>
 								<i class="fas fa-solid fa-info" style="font-size:20px;color:blue;padding:3px 6px 3px 6px;"></i>
-							</button>
-							{# <button onclick='downloadDoc("{{ path(' download1') }}");'>
-																																											<i class="fas fa-solid fa-download" style="font-size:20px;color:green;padding:3px;"></i>
-																																										</button> #}
+							</button> #}
+							 <button onclick='downloadDoc("{{ path(' download1') }}");'>
+												upload																															<i class="fas fa-solid fa-download" style="font-size:20px;color:green;padding:3px;"></i>
+									</button>																																	</button> #}
 							<!-- Button trigger modal -->
 							<button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
 								<i class="fas fa-solid fa-upload" style="font-size:20px;color:green;padding:3px;"></i>
@@ -138,10 +175,8 @@
 									</div>
 								</div>
 							</div>
-                            <p>{{ path( 'deletedocument', {'id': "+deletedocumentjs()+"}) }}"</p>
-							<button onclick="{{ path( 'deletedocument', {'id': "+deletedocumentjs()+"}) }}">
-								❌
-							</button>
+                        
+							
 						</div>
 						<div id='infosDoc' class="invisible col-6" style="color:black;background-color:white;height:50pt;overflow:auto;"></div>
 					</div>
