@@ -75,6 +75,9 @@ class ProfilController extends AbstractController
          FROM app_has_ma as a
          RIGHT JOIN user as u ON u.id=a.id_ma 
          WHERE a.id_apprenti=".$user->getId());
+        //dd($ma);
+        // $rolema=$ma[0]['role_string'];
+        //dd($rolema);
 
         $MA = getMAFromApprenti($login, $pw, $id);
         if ( $MA ){
@@ -82,11 +85,13 @@ class ProfilController extends AbstractController
             $entreprise = getENTFromMA($login, $pw, $MA['id']);
        if ( $entreprise )
            $entreprise = convertUserEntity2SQL($login, $pw, $entreprise['id'] );
+           //dd($MA);
    }
 
     //dd($entreprise);
         $listMa = getSQLArrayAssoc($this->getParameter('loginDB'), $this->getParameter('PasswordDB'),
         "SELECT id, nom, prenom, email FROM user WHERE role_string='ROLE_MA'");
+       // dd($listMa);
 
         $listFormateur = getSQLArrayAssoc($this->getParameter('loginDB'), $this->getParameter('PasswordDB'),
           "SELECT u.nom, u.prenom, u.email, u.id 
@@ -106,7 +111,8 @@ class ProfilController extends AbstractController
             'OF'   => $infoOF,         
             'fonction' => "Apprenti", 
             'listFormateur'=> $listFormateur,
-            'entreprise'=>$entreprise
+            'entreprise'=>$entreprise,
+            /*'rolema'=>$rolema,*/
         ]);
     }    
 
@@ -127,4 +133,25 @@ class ProfilController extends AbstractController
 
         return new JsonResponse("Maitre d'apprentissage enregistré");
     }
+
+    public function deleteMA( AppHasMA $id) : Response
+
+    {
+        $ret = $this->checkRGPD();
+        if ( $ret )
+            return $ret;
+
+        $id = $id->getId();
+        dd($id);
+        $doctrine = $this->getDoctrine();
+        $entityManager = $doctrine->getManager();
+        $entityManager->remove($id);
+        $entityManager->flush();
+
+        return new JsonResponse("Maitre d'apprentissage supprimé");
+
+        
+    }
+    
+    
 }
