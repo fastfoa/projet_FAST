@@ -65,15 +65,15 @@ window.location = $(this).data("href");
 
 						<th class="txt-bar bg-bar col-4">nom</th>
 				
-						<button class="btn btn-info m-1" onclick="location.href ='{{ path( 'triListeGlobale',{'param':"NOM_ASC", role,'role_name': roleName } ) }}'">NOM_ASC</button>
-						<button class="btn btn-info m-1"onclick="location.href ='{{ path( 'triListeGlobale',{'param':"NOM_DESC", role,'role_name': roleName } ) }}'">NOM_DESC</button>
+						<button class='fas fa-arrow-circle-down btn btn-light m-1' style='font-size:20px'  onclick="location.href ='{{ path( 'triListeGlobale',{'param':"NOM_ASC", role,'role_name': roleName } ) }}'">NOM</button>
+						<button class='fas fa-arrow-alt-circle-up btn btn-light m-1' style='font-size:20px'onclick="location.href ='{{ path( 'triListeGlobale',{'param':"NOM_DESC", role,'role_name': roleName } ) }}'">NOM</button>
 						{# <th class="txt-bar bg-bar">session</th> #}
 						
 						<th class="txt-bar bg-bar col-4">Tél</th>
 
 						<th class="txt-bar bg-bar col-4">Email</th>
-						<button class="btn btn-info m-1" onclick="location.href ='{{ path( 'triListeGlobale',{'param':"EMAIL_ASC", role,'role_name': roleName } ) }}'">EMAIL_ASC</button>
-						<button class="btn btn-info m-1" onclick="location.href ='{{ path( 'triListeGlobale',{'param':"EMAIL_DESC", role,'role_name': roleName } ) }}'">EMAIL_DESC</button>
+						<button class='fas fa-arrow-circle-down btn btn-light m-1' style='font-size:20px'  onclick="location.href ='{{ path( 'triListeGlobale',{'param':"EMAIL_ASC", role,'role_name': roleName } ) }}'">EMAIL</button>
+						<button class='fas fa-arrow-alt-circle-up btn btn-light m-1' style='font-size:20px' onclick="location.href ='{{ path( 'triListeGlobale',{'param':"EMAIL_DESC", role,'role_name': roleName } ) }}'">EMAIL</button>
 						{# <th class="txt-bar bg-bar">Action</th> #}
 					
 				</tr>
