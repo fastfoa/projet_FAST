@@ -474,7 +474,7 @@ class DashController extends AbstractController
             LEFT JOIN session as s ON us.id_session=s.id 
             WHERE user.role_string='$role'"   ); }
                                                                         
-
+// dd($list);
         return $this->render(
             'dash/listUser.html.twig',
             [
