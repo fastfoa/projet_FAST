@@ -291,19 +291,18 @@ class DocumentController extends AbstractController
         return $r;
     }
 
-    public function deletedocument( Document $document )
+    public function deletedocument( Document $id, User $user)
     {
         $ret = $this->checkRGPD();
         if ($ret)
             return $ret;
-
-          
+            $idd = $user->getId();
         $doctrine = $this->getDoctrine();
         $om = $doctrine->getManager();
-        $om->remove($document);
+        $om->remove($id);
         $om->flush();
-        $this->addFlash('message', "Document supprimé");
-        return $this->redirectToRoute("downloadlist") ;
+        // // $this->addFlash('message', "Document supprimé");
+        return $this->redirectToRoute('profilOF_APP', array('user'=> $idd)) ;
     }
 
     public function getInfoDoc(User $user)

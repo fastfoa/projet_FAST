@@ -69,7 +69,7 @@ class ProfilController extends AbstractController
         $infoOF = getInfoOF();
     
         $sessionID = getIdSessionFromApprenti1($login, $pw,  $id );
-        
+        // dd($id);
 
         $listDoc = getSQLArrayAssoc($this->getParameter('loginDB'), $this->getParameter('PasswordDB'),
         "SELECT document.id AS d_id, document.titre AS d_titre, document.file_name AS d_fileName, document.date_create AS d_dateCreate

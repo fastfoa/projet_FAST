@@ -6,6 +6,24 @@
 			width: 100px;
 			height: 100px;
 		}
+			.demo {
+		border:1px solide #C0C0C0;
+		border-collapse:effondrer;
+		padding:5px;
+	}
+	.demo th {
+		border:1px solide #C0C0C0;
+		padding:5px;
+		background:#F0F0F0;
+	}
+	.demo td {
+		border:1px solide #C0C0C0;
+		padding:5px;
+		background:#FFFFFF;
+	}
+	.flexxx {
+  justify-content: flex-end!important; 
+}
 	</style>
 {% endblock myStylesheets %}
 
@@ -87,64 +105,43 @@
 
 
 					<div class="row">
-						<div class="col- mt-3">
+						<div class="mt-3">
 							<h3>Mes documents :</h3>
-					
-						<style>
-	.demo {
-		border:1px solide #C0C0C0;
-		border-collapse:effondrer;
-		padding:5px;
-	}
-	.demo th {
-		border:1px solide #C0C0C0;
-		padding:5px;
-		background:#F0F0F0;
-	}
-	.demo td {
-		border:1px solide #C0C0C0;
-		padding:5px;
-		background:#FFFFFF;
-	}
-</style>
-<table class="demo">
-
-	<thead>
-	<tr>
-		<th>Titre</th>
-		<th>Nom du fichier</th>
-		<th>Date d'envoi</th>
-		<th>Suprimer</th>
-	</tr>
-	</thead>
-	
-	<tbody>
-	<tr>	{% for document in documents %}
-		<td>{{document.d_titre}}</td>
-		<td>{{document.d_fileName}}</td>
-		<td>{{document.d_dateCreate}}</td>
-		<td><button onclick="{{ path( 'deletedocument', {'id':document.d_id}) }}">
-								❌
-							</button></td>
+							<button type="button" class="btn btn-success flexx"data-bs-toggle="modal" data-bs-target="#exampleModal">
+								Upload
+							</button>
+							</div>
+							<table class="demo">
+								<thead>
+									<tr>
+										<th>Titre</th>
+										<th>Nom du fichier</th>
+										<th>Date d'envoi</th>
+										<th>Suprimer</th>
+									</tr>
+								</thead>
+								<tbody>
+								
+								{% for document in documents %}<tr>
+									<td>{{document.d_titre}}</td>
+									<td>{{document.d_fileName}}</td>
+									<td>{{document.d_dateCreate}}</td>
+									<td>
+										<a href="{{ path( 'deletedocument',{'id':document.d_id}) }}">
+										❌
+										</a>
+							   					<a href="{{ path( 'download',{'id':document.d_id} ) }}">
+													<i class="fas fa-solid fa-download" style="font-size:20px;color:green;"></i>
+											</a>
+									</td>
 							
-	</tr>{% endfor %}
-
-	<tbody>
-</table>
-							
-						
+								</tr>	{% endfor %}
+								<tbody>
+							</table>
 						</div>
 						<div class="col-4 ">
-							{# <button onclick='seeDoc2({{user.id}})'>
-								<i class="fas fa-solid fa-info" style="font-size:20px;color:blue;padding:3px 6px 3px 6px;"></i>
-							</button> #}
-							 <button onclick='downloadDoc("{{ path(' download1') }}");'>
-												upload																															<i class="fas fa-solid fa-download" style="font-size:20px;color:green;padding:3px;"></i>
-									</button>																																	</button> #}
-							<!-- Button trigger modal -->
-							<button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
-								<i class="fas fa-solid fa-upload" style="font-size:20px;color:green;padding:3px;"></i>
-							</button>
+				
+							
 
 							<!-- Modal -->
 							<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -179,8 +176,8 @@
 							
 						</div>
 						<div id='infosDoc' class="invisible col-6" style="color:black;background-color:white;height:50pt;overflow:auto;"></div>
+						</div>
 					</div>
-				</div>
 
 				<hr class="text-light mt-3">
 
