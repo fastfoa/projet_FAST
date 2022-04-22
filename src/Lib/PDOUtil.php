@@ -250,6 +250,8 @@ function getAppFromMA($login, $pw, $idMA)
           RIGHT JOIN user as u ON u.id=a.id_apprenti 
           WHERE a.id_ma='$idMA'"
       );
+      
+
      }
       function getENTFromMA($login, $pw, $idMA) 
       {

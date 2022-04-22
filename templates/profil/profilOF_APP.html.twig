@@ -102,9 +102,15 @@
 
 </div>
 
+{% for message in app.flashes('notice') %}
+    <div class="flash-notice">
+        {{ message }}
+    </div>
+{% endfor %}
+
 <hr class="text-light mt-3">
  
-<div class="row bg-success">
+<div class="row 1bg-success">
 	<div id="ma" class="col-5">
         <h3>Maitre D'apprentissage :</h3>
         {% if ma == false %}
@@ -114,29 +120,34 @@
                 <div id="supMA"><h5>nom : {{ d.nom }}</h5> 
                 <h5>Prénom : {{d.prenom}}</h5>
                 <h5>Téléphone : {{d.telephone}}</h5>
-               {# <a href=""><img style="height:30px;" src={{asset("images/icons8-remove-48.png")}} alt=""></a> #} 
+      <a href="{{path('deleteMA',{'idMa':user.id,'idApp':d.id} )}}"><img style="height:30px;" src={{asset("images/icons8-remove-48.png")}} alt=""></a> #} 
                </div>
+               {{dump(d.id)}} {{dump(user.id)}}#}
                 <br>
                 {% endfor %}    
         {% endif %}
-       <button id="btn" type="button" onclick='{{path('deleteMA',{'id':id} )}}' class="btn btn-warning  text-white mb-2" style="font-size:large; padding:5px 9px 5px 9px;">Supprimer maitre d'apprentissage</button>
+       {#<button id="btn" type="button" onclick='{{path('deleteMA',{'id':ma.id} )}}' class="btn btn-warning  text-white mb-2" style="font-size:large; padding:5px 9px 5px 9px;">Supprimer maitre d'apprentissage</button> #}
         <button class="boutonForm " onclick="showList()" style="font-size:large; padding:5px 9px 5px 9px;">Ajouter  maitre d'apprentissage</button>
         <input class="invisible" list="maitre" type="text" id="listMa">
         <datalist  class="invisible" id="maitre"> 
             {% for ma in listMa %}
-                <option id="{{ma.id}}" value="{{ma.nom}}  {{ma.prenom}}">{{ma.email}}</option>
+                <option id="{{ma.id}}" value="{{ma.nom}}  {{ma.prenom}}">{{ma.email}}</option> 
+               {# {{dump(ma.id)}} {{dump(user.id)}} #}
             {% endfor %}
+            
+            
         </datalist>
         <button id="validation" class="invisible boutonForm" onclick='addMa({{id}})'>
             Ok
         </button>
         <h5 id="result"><h5>
-
+        
+      {#  {% if ma is defined %} #}
       <div>  <h3>Entreprise :</h3><h5>{{ entreprise.nom }}</h5>
             <h5>{{ entreprise.adresse }}</h5>
             <h5><a href="mailto:{{ entreprise.email }}">{{ entreprise.email }}</a></h5>
             <h5><a href="tel:{{ entreprise.telephone }}">{{ entreprise.telephone }}</a></h5></div>
-
+      {#  {% endif %}  #}
         </div> <div class="col-2"></div> 
         <div id="formateur" class="col-5">
             <h3>Formateurs :</h3>
@@ -178,8 +189,8 @@ $(document).ready(function(){
        
         }
     });
-});             */
-
+});             
+                    */
 
 
 

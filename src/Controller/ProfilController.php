@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\User\UserInterface;
 
+
 class ProfilController extends AbstractController
 {
     /**
@@ -85,8 +86,10 @@ class ProfilController extends AbstractController
             $entreprise = getENTFromMA($login, $pw, $MA['id']);
        if ( $entreprise )
            $entreprise = convertUserEntity2SQL($login, $pw, $entreprise['id'] );
-           //dd($MA);
+          // dd($MA);
    }
+
+    
 
     //dd($entreprise);
         $listMa = getSQLArrayAssoc($this->getParameter('loginDB'), $this->getParameter('PasswordDB'),
@@ -112,6 +115,7 @@ class ProfilController extends AbstractController
             'fonction' => "Apprenti", 
             'listFormateur'=> $listFormateur,
             'entreprise'=>$entreprise,
+            
             /*'rolema'=>$rolema,*/
         ]);
     }    
@@ -134,21 +138,38 @@ class ProfilController extends AbstractController
         return new JsonResponse("Maitre d'apprentissage enregistré");
     }
 
-    public function deleteMA( AppHasMA $id) : Response
+    public function deleteMA( AppHasMA $idMa, $idApp) : Response
 
     {
         $ret = $this->checkRGPD();
         if ( $ret )
             return $ret;
 
-        $id = $id->getId();
-        dd($id);
+            $login  = $this->getParameter('loginDB');
+            $pw     = $this->getParameter('PasswordDB');
+
+        //$idMa= $idMa->getId();
+        
+
+        //$deleteMA = "delete from app_has_ma where id_apprenti=$idApp and id_ma=$idMa";
+
+        //dd($deleteMA);
+
         $doctrine = $this->getDoctrine();
         $entityManager = $doctrine->getManager();
-        $entityManager->remove($id);
+       // $object=$entityManager->find($idMa, $idApp);
+        $entityManager->remove($idMa);
         $entityManager->flush();
 
-        return new JsonResponse("Maitre d'apprentissage supprimé");
+        $this->addFlash(
+            'notice',
+            'Your changes were saved!'
+        );
+
+        // return new JsonResponse("Maitre d'apprentissage supprimé");
+
+        return $this->redirectToRoute('profilOf_APP');
+        
 
         
     }
