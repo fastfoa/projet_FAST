@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller; 
 
 use App\Controller\InscriptionController;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
