@@ -58,59 +58,13 @@ class MonCompteFormateurType extends AbstractType
         ]
     ])
 
-       ->add('diplome',TextType::class,[
-        'attr' => [
-            'placeholder' => 'diplome',
-            
-         
-        ]
-    ])
-    ->add('dateNaissance', DateType::class, [
-        'widget' => 'single_text', 'required' => False,
-        'attr' => [
-            'placeholder' => 'date naissance',
-            'type' => 'text',
-            'onfocusout' => "(this.type='text')",
-            'onfocus' => "(this.type='date')"
-           
-        ],
-        'label' => false,
-        'format' => 'yyyy-MM-dd'
-    ])
-    ->add('old_password', PasswordType::class,[
-        'mapped'=>false,
-        'label'=> false,
-        'attr' => [
-            'placeholder' => 'Mot de passe actuel'
-            
-        ] 
-    ])
-    ->add('new_password', RepeatedType::class, [
-        'type' => PasswordType::class,
-        'mapped' => false,
-        'invalid_message' => 'Le mot de passe et la confirmation doivent être identique.',
-        'required' => true,
-        'first_options' => [
-            'label' => false,
-            'attr' => [
-                'placeholder' => 'Merci de saisir votre nouveau mot de passe.'
-            ]
-        ],
-        'second_options' => [
-            'label' => false, 
-            'attr' => [
-                'placeholder' => 'Merci de confirmer votre nouveau mot de passe.'
-            ]
-        ]
-    ])
-
         ->add('save', SubmitType::class,[
             'label'=> "Enregistrer",
             'attr' => [
                 'class' => 'boutonForm'
             ]
             ]);
-        
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
