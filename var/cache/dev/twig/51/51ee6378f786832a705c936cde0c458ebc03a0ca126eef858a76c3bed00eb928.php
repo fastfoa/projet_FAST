@@ -272,7 +272,7 @@ class __TwigTemplate_a991c0bd564f394ea80c06a0703b171137658050c68de9446a394c1b734
         } else {
             // line 119
             echo "\t\t\t\t\t\t\t\t\t\t<div class=\"col-6\">
-\t\t\t\t\t\t\t\t\t\t\t<h2 class=\"txt-dark\">PAS DE MAITRE D'APPRENTISSAGE</h2>
+\t\t\t\t\t\t\t\t\t\t\t<h2 class=\"txt-dark\">PAS DE Formateur  </h2>
 \t\t\t\t\t\t\t\t\t\t</div>\t
 \t\t\t\t\t\t\t\t\t";
         }
@@ -442,7 +442,7 @@ class __TwigTemplate_a991c0bd564f394ea80c06a0703b171137658050c68de9446a394c1b734
 \t\t\t\t\t\t\t\t\t\t{% endfor %}
 \t\t\t\t\t\t\t\t\t{% else %}
 \t\t\t\t\t\t\t\t\t\t<div class=\"col-6\">
-\t\t\t\t\t\t\t\t\t\t\t<h2 class=\"txt-dark\">PAS DE MAITRE D'APPRENTISSAGE</h2>
+\t\t\t\t\t\t\t\t\t\t\t<h2 class=\"txt-dark\">PAS DE Formateur  </h2>
 \t\t\t\t\t\t\t\t\t\t</div>\t
 \t\t\t\t\t\t\t\t\t{% endif %}
 \t\t\t\t\t\t\t\t</div>\t

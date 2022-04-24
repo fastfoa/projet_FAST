@@ -56,7 +56,6 @@ return [
     'addUserSession' => [['session', 'role', 'roleName'], ['_controller' => 'App\\Controller\\InscriptionController::addUserSession'], [], [['variable', '/', '[^/]++', 'roleName', true], ['variable', '/', '[^/]++', 'role', true], ['variable', '/', '[^/]++', 'session', true], ['text', '/addUserSession']], [], [], []],
     'userGeneralForm' => [['user'], ['_controller' => 'App\\Controller\\InscriptionController::userGeneralForm'], [], [['variable', '/', '[^/]++', 'user', true], ['text', '/userGeneralForm']], [], [], []],
     'insertMa' => [['idMa', 'idApp'], ['_controller' => 'App\\Controller\\ProfilController::insertMa'], [], [['variable', '/', '[^/]++', 'idApp', true], ['variable', '/', '[^/]++', 'idMa', true], ['text', '/insertMa']], [], [], []],
-    'deleteMA' => [['idApp', 'idMa'], ['_controller' => 'App\\Controller\\ProfilController::deleteMA'], [], [['variable', '/', '[^/]++', 'idMa', true], ['variable', '/', '[^/]++', 'idApp', true], ['text', '/deleteMA']], [], [], []],
     'dashOFPrincipal' => [[], ['_controller' => 'App\\Controller\\DashController::dashOFPrincipal'], [], [['text', '/dashOFPrincipal']], [], [], []],
     'dashApp' => [[], ['_controller' => 'App\\Controller\\DashController::dashApp'], [], [['text', '/dashApp']], [], [], []],
     'dashEntreprise' => [[], ['_controller' => 'App\\Controller\\DashController::dashEntreprise'], [], [['text', '/dashEntreprise']], [], [], []],

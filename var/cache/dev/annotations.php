@@ -210,8 +210,6 @@ return [[
 '[C]App%5CController%5CProfilController%23profilOF_APP' => 1,
 'App%5CController%5CProfilController%23insertMA' => 0,
 '[C]App%5CController%5CProfilController%23insertMA' => 1,
-'App%5CController%5CProfilController%23deleteMA' => 0,
-'[C]App%5CController%5CProfilController%23deleteMA' => 1,
 'App%5CController%5CProfilEnabledController' => 0,
 '[C]App%5CController%5CProfilEnabledController' => 1,
 'App%5CController%5CProfilEnabledController%23profilEnabled' => 9,
@@ -1466,7 +1464,7 @@ return [[
 ], [
 
 0 => [],
-1 => 1650542744,
+1 => 1650835507,
 2 => static function () {
     return \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
         $o = [

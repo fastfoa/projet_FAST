@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => 'da4c6085d152f10b35a13660f1d4dbff70367b3e',
+        'reference' => '3a47ddd23fe08c6c526faa4a1c0a51afd42f9eec',
         'name' => '__root__',
         'dev' => true,
     ),
@@ -16,7 +16,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => 'da4c6085d152f10b35a13660f1d4dbff70367b3e',
+            'reference' => '3a47ddd23fe08c6c526faa4a1c0a51afd42f9eec',
             'dev_requirement' => false,
         ),
         'doctrine/annotations' => array(
@@ -83,12 +83,12 @@
             'dev_requirement' => false,
         ),
         'doctrine/doctrine-bundle' => array(
-            'pretty_version' => '2.6.2',
-            'version' => '2.6.2.0',
+            'pretty_version' => '2.6.3',
+            'version' => '2.6.3.0',
             'type' => 'symfony-bundle',
             'install_path' => __DIR__ . '/../doctrine/doctrine-bundle',
             'aliases' => array(),
-            'reference' => '53cf797feda995299629bed081ffb51776f36e9f',
+            'reference' => '527970d22b8ca6472ebd88d7c42e512550bd874e',
             'dev_requirement' => false,
         ),
         'doctrine/doctrine-fixtures-bundle' => array(
@@ -155,12 +155,12 @@
             'dev_requirement' => false,
         ),
         'doctrine/orm' => array(
-            'pretty_version' => '2.12.0',
-            'version' => '2.12.0.0',
+            'pretty_version' => '2.12.1',
+            'version' => '2.12.1.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../doctrine/orm',
             'aliases' => array(),
-            'reference' => 'd5503644314ed825fe4b276a588458a033fa3e7c',
+            'reference' => '2e4a8722721b934149ff53b191522a6829b6d73b',
             'dev_requirement' => false,
         ),
         'doctrine/persistence' => array(
@@ -326,12 +326,12 @@
             'dev_requirement' => true,
         ),
         'phpstan/phpdoc-parser' => array(
-            'pretty_version' => '1.4.4',
-            'version' => '1.4.4.0',
+            'pretty_version' => '1.4.5',
+            'version' => '1.4.5.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../phpstan/phpdoc-parser',
             'aliases' => array(),
-            'reference' => 'd8e9fd97ca11f2f24fc1aafbcfb1f78bce762267',
+            'reference' => '129a63b3bc7caeb593c224c41f420675e63cfefc',
             'dev_requirement' => false,
         ),
         'phpunit/php-code-coverage' => array(
@@ -466,8 +466,8 @@
         'psr/log-implementation' => array(
             'dev_requirement' => false,
             'provided' => array(
-                0 => '1.0|2.0',
-                1 => '1.0.0 || 2.0.0 || 3.0.0',
+                0 => '1.0.0 || 2.0.0 || 3.0.0',
+                1 => '1.0|2.0',
             ),
         ),
         'psr/simple-cache-implementation' => array(
@@ -900,12 +900,12 @@
             'dev_requirement' => false,
         ),
         'symfony/maker-bundle' => array(
-            'pretty_version' => 'v1.38.0',
-            'version' => '1.38.0.0',
+            'pretty_version' => 'v1.40.1',
+            'version' => '1.40.1.0',
             'type' => 'symfony-bundle',
             'install_path' => __DIR__ . '/../symfony/maker-bundle',
             'aliases' => array(),
-            'reference' => '143024ab0e426285d3d9b7f6a3ce51e12a9d8ec5',
+            'reference' => 'adc846e4f852e3aa2cd84a433cd05ba23dd19c3f',
             'dev_requirement' => true,
         ),
         'symfony/mime' => array(

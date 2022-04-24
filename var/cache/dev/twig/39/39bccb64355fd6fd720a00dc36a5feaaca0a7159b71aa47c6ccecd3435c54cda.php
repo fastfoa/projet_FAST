@@ -93,14 +93,35 @@ class __TwigTemplate_040aa4d80175c7ea6d1343ee3b7aea04ec2e438f58493e35fdfaf3c96d0
         // line 17
         echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 17, $this->source); })()), "Effectif", [], "any", false, false, false, 17), 'widget');
         echo "
+\t\t\t\t";
+        // line 18
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 18, $this->source); })()), "siret", [], "any", false, false, false, 18), 'widget');
+        echo "
+\t\t\t\t";
+        // line 19
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 19, $this->source); })()), "NAF", [], "any", false, false, false, 19), 'widget');
+        echo "
+\t\t\t\t";
+        // line 20
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 20, $this->source); })()), "raisonSocial", [], "any", false, false, false, 20), 'widget');
+        echo "
+\t\t\t\t";
+        // line 21
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 21, $this->source); })()), "old_password", [], "any", false, false, false, 21), 'widget');
+        echo "
+\t\t\t\t";
+        // line 22
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 22, $this->source); })()), "new_password", [], "any", false, false, false, 22), 'widget');
+        echo "
+
 \t\t\t</div>
 \t\t</div>
 \t\t";
-        // line 20
-        $this->loadTemplate("buttonOK.html.twig", "compte/mon_compte/monCompteEntreprise.html.twig", 20)->display($context);
-        // line 21
+        // line 26
+        $this->loadTemplate("buttonOK.html.twig", "compte/mon_compte/monCompteEntreprise.html.twig", 26)->display($context);
+        // line 27
         echo "\t\t";
-        echo         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 21, $this->source); })()), 'form_end');
+        echo         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 27, $this->source); })()), 'form_end');
         echo "
 \t</div>
 ";
@@ -124,7 +145,7 @@ class __TwigTemplate_040aa4d80175c7ea6d1343ee3b7aea04ec2e438f58493e35fdfaf3c96d0
 
     public function getDebugInfo()
     {
-        return array (  102 => 21,  100 => 20,  94 => 17,  90 => 16,  86 => 15,  82 => 14,  71 => 6,  68 => 5,  58 => 4,  35 => 1,);
+        return array (  123 => 27,  121 => 26,  114 => 22,  110 => 21,  106 => 20,  102 => 19,  98 => 18,  94 => 17,  90 => 16,  86 => 15,  82 => 14,  71 => 6,  68 => 5,  58 => 4,  35 => 1,);
     }
 
     public function getSourceContext()
@@ -146,6 +167,12 @@ class __TwigTemplate_040aa4d80175c7ea6d1343ee3b7aea04ec2e438f58493e35fdfaf3c96d0
 \t\t\t\t{{ form_widget(form.adresse) }}
 \t\t\t\t{{ form_widget(form.telephone) }}
 \t\t\t\t{{ form_widget(form.Effectif)}}
+\t\t\t\t{{ form_widget(form.siret)}}
+\t\t\t\t{{ form_widget(form.NAF)}}
+\t\t\t\t{{ form_widget(form.raisonSocial)}}
+\t\t\t\t{{ form_widget(form.old_password)}}
+\t\t\t\t{{ form_widget(form.new_password)}}
+
 \t\t\t</div>
 \t\t</div>
 \t\t{% include 'buttonOK.html.twig' %}

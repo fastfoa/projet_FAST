@@ -90,41 +90,40 @@ return [
                     .'|ownload/([^/]++)(*:277)'
                     .'|elete(?'
                         .'|document/([^/]++)(*:310)'
-                        .'|MA/([^/]++)/([^/]++)(*:338)'
-                        .'|Session/([^/]++)(*:362)'
+                        .'|Session/([^/]++)(*:334)'
                     .')'
                     .'|ash(?'
-                        .'|OFSession/([^/]++)(*:395)'
-                        .'|Eval/([^/]++)(*:416)'
+                        .'|OFSession/([^/]++)(*:367)'
+                        .'|Eval/([^/]++)(*:388)'
                     .')'
                 .')'
                 .'|/a(?'
                     .'|ddUser(?'
-                        .'|/([^/]++)/([^/]++)(*:458)'
-                        .'|Session/([^/]++)/([^/]++)/([^/]++)(*:500)'
+                        .'|/([^/]++)/([^/]++)(*:430)'
+                        .'|Session/([^/]++)/([^/]++)/([^/]++)(*:472)'
                     .')'
                     .'|nnuaireR(?'
-                        .'|/([^/]++)(*:529)'
-                        .'|S/([^/]++)/([^/]++)(*:556)'
+                        .'|/([^/]++)(*:501)'
+                        .'|S/([^/]++)/([^/]++)(*:528)'
                     .')'
                 .')'
-                .'|/insertMa/([^/]++)/([^/]++)(*:593)'
-                .'|/feditApprenti/([^/]++)(*:624)'
+                .'|/insertMa/([^/]++)/([^/]++)(*:565)'
+                .'|/feditApprenti/([^/]++)(*:596)'
                 .'|/list(?'
-                    .'|Apprentis/([^/]++)(*:658)'
+                    .'|Apprentis/([^/]++)(*:630)'
                     .'|Users(?'
-                        .'|Session/([^/]++)/([^/]++)/([^/]++)(*:708)'
-                        .'|Entreprise/([^/]++)/([^/]++)/([^/]++)(*:753)'
+                        .'|Session/([^/]++)/([^/]++)/([^/]++)(*:680)'
+                        .'|Entreprise/([^/]++)/([^/]++)/([^/]++)(*:725)'
                     .')'
-                    .'|Formateurs/([^/]++)(*:781)'
-                    .'|MA/([^/]++)(*:800)'
+                    .'|Formateurs/([^/]++)(*:753)'
+                    .'|MA/([^/]++)(*:772)'
                 .')'
-                .'|/profilOF_APP/([^/]++)(*:831)'
-                .'|/newEvaluation/([^/]++)/([^/]++)(*:871)'
-                .'|/editEvaluation/([^/]++)(*:903)'
-                .'|/showEvaluation/([^/]++)(*:935)'
-                .'|/choiceCompetence/([^/]++)/([^/]++)(*:978)'
-                .'|/testAnnuaire/([^/]++)/([^/]++)(*:1017)'
+                .'|/profilOF_APP/([^/]++)(*:803)'
+                .'|/newEvaluation/([^/]++)/([^/]++)(*:843)'
+                .'|/editEvaluation/([^/]++)(*:875)'
+                .'|/showEvaluation/([^/]++)(*:907)'
+                .'|/choiceCompetence/([^/]++)/([^/]++)(*:950)'
+                .'|/testAnnuaire/([^/]++)/([^/]++)(*:989)'
             .')/?$}sDu',
     ],
     [ // $dynamicRoutes
@@ -140,27 +139,26 @@ return [
         248 => [[['_route' => 'getInfoDoc', '_controller' => 'App\\Controller\\DocumentController::getInfoDoc'], ['id'], null, null, false, true, null]],
         277 => [[['_route' => 'download', '_controller' => 'App\\Controller\\DocumentController::download'], ['id'], null, null, false, true, null]],
         310 => [[['_route' => 'deletedocument', '_controller' => 'App\\Controller\\DocumentController::deletedocument'], ['id'], null, null, false, true, null]],
-        338 => [[['_route' => 'deleteMA', '_controller' => 'App\\Controller\\ProfilController::deleteMA'], ['idApp', 'idMa'], null, null, false, true, null]],
-        362 => [[['_route' => 'deleteSession', '_controller' => 'App\\Controller\\DashController::deleteSession'], ['session'], null, null, false, true, null]],
-        395 => [[['_route' => 'dashOFSession', '_controller' => 'App\\Controller\\DashController::dashOFSession'], ['session'], null, null, false, true, null]],
-        416 => [[['_route' => 'dashEval', '_controller' => 'App\\Controller\\EvaluationController::dashEval'], ['app'], null, null, false, true, null]],
-        458 => [[['_route' => 'addUser', '_controller' => 'App\\Controller\\InscriptionController::addUser'], ['role', 'roleName'], null, null, false, true, null]],
-        500 => [[['_route' => 'addUserSession', '_controller' => 'App\\Controller\\InscriptionController::addUserSession'], ['session', 'role', 'roleName'], null, null, false, true, null]],
-        529 => [[['_route' => 'annuaireR', '_controller' => 'App\\Controller\\LanController::annuaireR'], ['role'], null, null, false, true, null]],
-        556 => [[['_route' => 'annuaireRS', '_controller' => 'App\\Controller\\LanController::annuaireRS'], ['role', 'session'], null, null, false, true, null]],
-        593 => [[['_route' => 'insertMa', '_controller' => 'App\\Controller\\ProfilController::insertMa'], ['idMa', 'idApp'], null, null, false, true, null]],
-        624 => [[['_route' => 'editApprenti', '_controller' => 'App\\Controller\\DashController::editApprenti'], ['userID'], null, null, false, true, null]],
-        658 => [[['_route' => 'listApprentis', '_controller' => 'App\\Controller\\DashController::listApprentis'], ['session'], null, null, false, true, null]],
-        708 => [[['_route' => 'listUsersSession', '_controller' => 'App\\Controller\\DashController::listUsersSession'], ['session', 'role', 'roleName'], null, null, false, true, null]],
-        753 => [[['_route' => 'listUsersEntreprise', '_controller' => 'App\\Controller\\DashController::listUsersEntreprise'], ['entreprise', 'role', 'roleName'], null, null, false, true, null]],
-        781 => [[['_route' => 'listFormateurs', '_controller' => 'App\\Controller\\DashController::listFormateurs'], ['session'], null, null, false, true, null]],
-        800 => [[['_route' => 'listMA', '_controller' => 'App\\Controller\\DashController::listMA'], ['session'], null, null, false, true, null]],
-        831 => [[['_route' => 'profilOF_APP', '_controller' => 'App\\Controller\\ProfilController::profilOF_APP'], ['user'], null, null, false, true, null]],
-        871 => [[['_route' => 'newEvaluation', '_controller' => 'App\\Controller\\EvaluationController::newEvaluation'], ['competence', 'app'], null, null, false, true, null]],
-        903 => [[['_route' => 'editEvaluation', '_controller' => 'App\\Controller\\EvaluationController::editEvaluation'], ['eval'], null, null, false, true, null]],
-        935 => [[['_route' => 'showEvaluation', '_controller' => 'App\\Controller\\EvaluationController::showEvaluation'], ['eval'], null, null, false, true, null]],
-        978 => [[['_route' => 'choiceCompetence', '_controller' => 'App\\Controller\\EvaluationController::choiceCompetence'], ['app', 'session'], null, null, false, true, null]],
-        1017 => [
+        334 => [[['_route' => 'deleteSession', '_controller' => 'App\\Controller\\DashController::deleteSession'], ['session'], null, null, false, true, null]],
+        367 => [[['_route' => 'dashOFSession', '_controller' => 'App\\Controller\\DashController::dashOFSession'], ['session'], null, null, false, true, null]],
+        388 => [[['_route' => 'dashEval', '_controller' => 'App\\Controller\\EvaluationController::dashEval'], ['app'], null, null, false, true, null]],
+        430 => [[['_route' => 'addUser', '_controller' => 'App\\Controller\\InscriptionController::addUser'], ['role', 'roleName'], null, null, false, true, null]],
+        472 => [[['_route' => 'addUserSession', '_controller' => 'App\\Controller\\InscriptionController::addUserSession'], ['session', 'role', 'roleName'], null, null, false, true, null]],
+        501 => [[['_route' => 'annuaireR', '_controller' => 'App\\Controller\\LanController::annuaireR'], ['role'], null, null, false, true, null]],
+        528 => [[['_route' => 'annuaireRS', '_controller' => 'App\\Controller\\LanController::annuaireRS'], ['role', 'session'], null, null, false, true, null]],
+        565 => [[['_route' => 'insertMa', '_controller' => 'App\\Controller\\ProfilController::insertMa'], ['idMa', 'idApp'], null, null, false, true, null]],
+        596 => [[['_route' => 'editApprenti', '_controller' => 'App\\Controller\\DashController::editApprenti'], ['userID'], null, null, false, true, null]],
+        630 => [[['_route' => 'listApprentis', '_controller' => 'App\\Controller\\DashController::listApprentis'], ['session'], null, null, false, true, null]],
+        680 => [[['_route' => 'listUsersSession', '_controller' => 'App\\Controller\\DashController::listUsersSession'], ['session', 'role', 'roleName'], null, null, false, true, null]],
+        725 => [[['_route' => 'listUsersEntreprise', '_controller' => 'App\\Controller\\DashController::listUsersEntreprise'], ['entreprise', 'role', 'roleName'], null, null, false, true, null]],
+        753 => [[['_route' => 'listFormateurs', '_controller' => 'App\\Controller\\DashController::listFormateurs'], ['session'], null, null, false, true, null]],
+        772 => [[['_route' => 'listMA', '_controller' => 'App\\Controller\\DashController::listMA'], ['session'], null, null, false, true, null]],
+        803 => [[['_route' => 'profilOF_APP', '_controller' => 'App\\Controller\\ProfilController::profilOF_APP'], ['user'], null, null, false, true, null]],
+        843 => [[['_route' => 'newEvaluation', '_controller' => 'App\\Controller\\EvaluationController::newEvaluation'], ['competence', 'app'], null, null, false, true, null]],
+        875 => [[['_route' => 'editEvaluation', '_controller' => 'App\\Controller\\EvaluationController::editEvaluation'], ['eval'], null, null, false, true, null]],
+        907 => [[['_route' => 'showEvaluation', '_controller' => 'App\\Controller\\EvaluationController::showEvaluation'], ['eval'], null, null, false, true, null]],
+        950 => [[['_route' => 'choiceCompetence', '_controller' => 'App\\Controller\\EvaluationController::choiceCompetence'], ['app', 'session'], null, null, false, true, null]],
+        989 => [
             [['_route' => 'liste_session_role', '_controller' => 'App\\Controller\\TestannuaireController::liste_session_role'], ['session', 'role'], null, null, true, true, null],
             [null, null, null, null, false, false, 0],
         ],

@@ -915,6 +915,7 @@ return array(
     'Doctrine\\ORM\\Mapping\\Driver\\AnnotationDriver' => $vendorDir . '/doctrine/orm/lib/Doctrine/ORM/Mapping/Driver/AnnotationDriver.php',
     'Doctrine\\ORM\\Mapping\\Driver\\AttributeDriver' => $vendorDir . '/doctrine/orm/lib/Doctrine/ORM/Mapping/Driver/AttributeDriver.php',
     'Doctrine\\ORM\\Mapping\\Driver\\AttributeReader' => $vendorDir . '/doctrine/orm/lib/Doctrine/ORM/Mapping/Driver/AttributeReader.php',
+    'Doctrine\\ORM\\Mapping\\Driver\\CompatibilityAnnotationDriver' => $vendorDir . '/doctrine/orm/lib/Doctrine/ORM/Mapping/Driver/CompatibilityAnnotationDriver.php',
     'Doctrine\\ORM\\Mapping\\Driver\\DatabaseDriver' => $vendorDir . '/doctrine/orm/lib/Doctrine/ORM/Mapping/Driver/DatabaseDriver.php',
     'Doctrine\\ORM\\Mapping\\Driver\\DriverChain' => $vendorDir . '/doctrine/orm/lib/Doctrine/ORM/Mapping/Driver/DriverChain.php',
     'Doctrine\\ORM\\Mapping\\Driver\\PHPDriver' => $vendorDir . '/doctrine/orm/lib/Doctrine/ORM/Mapping/Driver/PHPDriver.php',
