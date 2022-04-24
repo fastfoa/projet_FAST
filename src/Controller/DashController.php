@@ -444,21 +444,9 @@ class DashController extends AbstractController
         $list = getSQLArrayAssoc(
             $login,
             $pw,
-           /*"SELECT user.nom, user.prenom, user.telephone, user.email, user.id, s.nom as ns
-             FROM  user
-             LEFT JOIN user_in_session as us ON us.id_user=user.id 
-             LEFT JOIN session as s ON us.id_session=s.id 
-             WHERE user.role_string='$role'"              
-        );         */                                            
-                                    
-
-      /*  "SELECT u.nom, u.prenom, u.id, u.email, u.telephone, u.session, m.id_ent, 
-        (select nom from projet_fast.user as user2 where m.id_ent=user2.id) as nom_ent, u.roles                 
-         FROM  projet_fast.mahas_ent as m          
-         RIGHT JOIN  projet_fast.user as u ON u.id=m.id_ma 
-         WHERE u.roles like '%ROLE_MA%'");                */
+    
          
-        "SELECT u.nom, u.prenom, u.id, u.email, u.telephone, u.id, m.id_ent, (select nom from projet_fast.user as user2 where m.id_ent=user2.id) as nom_ent, u.roles, s.nom as ns
+        "SELECT u.nom, u.prenom, u.id, u.email, u.telephone, u.id, m.id_ent, (select user2.nom from projet_fast.user as user2 where m.id_ent=user2.id) as nom_ent, u.roles, s.nom as ns
          FROM mahas_ent as m 
          RIGHT JOIN  user as u ON u.id=m.id_ma 
          LEFT JOIN user_in_session as us ON us.id_user=u.id 
@@ -601,6 +589,8 @@ class DashController extends AbstractController
     //   dd( $param );
     {
         $listAux = [];
+        $login = $this->getParameter('loginDB');
+        $pw = $this->getParameter('PasswordDB');
      // NOM_ASC
      if ($param == "NOM_ASC") {
         $listAux = getSQLArrayAssoc(
@@ -610,7 +600,7 @@ class DashController extends AbstractController
             FROM  user
             LEFT JOIN user_in_session as us ON us.id_user=user.id 
             LEFT JOIN session as s ON us.id_session=s.id 
-            WHERE user.role_string='$role' ORDER BY user.nom ASC"
+            WHERE user.role_string='ROLE_APP' ORDER BY user.nom ASC"
             );
      }
         // NOM_DESC
@@ -622,7 +612,7 @@ class DashController extends AbstractController
                 FROM  user
                 LEFT JOIN user_in_session as us ON us.id_user=user.id 
                 LEFT JOIN session as s ON us.id_session=s.id 
-                WHERE user.role_string='$role' ORDER BY user.nom DESC"   );
+                WHERE user.role_string='ROLE_APP' ORDER BY user.nom DESC"   );
 
         }
         // PRENOM_ASC
@@ -635,7 +625,7 @@ class DashController extends AbstractController
             FROM  user
             LEFT JOIN user_in_session as us ON us.id_user=user.id 
             LEFT JOIN session as s ON us.id_session=s.id 
-            WHERE user.role_string='$role' ORDER BY user.prenom ASC"   );
+            WHERE user.role_string='ROLE_APP' ORDER BY user.prenom ASC"   );
          }
         // PRENOM_DESC
         else if ($param == "PRENOM_DESC")
@@ -647,50 +637,9 @@ class DashController extends AbstractController
                 FROM  user
                 LEFT JOIN user_in_session as us ON us.id_user=user.id 
                 LEFT JOIN session as s ON us.id_session=s.id 
-                WHERE user.role_string='$role' ORDER BY user.prenom DESC"   );
+                WHERE user.role_string='ROLE_APP' ORDER BY user.prenom DESC"   );
          }
-        // SESSION_ASC
-        // else if ($param == "SESSION_ASC")
-        // {
-        //     $listAux = getSQLArrayAssoc(
-        //         $login,
-        //         $pw,
-        //         "SELECT *
-        //         FROM  user
-        //         ORDER BY s ASC"   );
-        //  }
-
-        // SESSION_DESC
-        // else if ($param == "SESSION_DESC")
-        // {
-        //     $listAux = getSQLArrayAssoc(
-        //         $login,
-        //         $pw,
-        //         "SELECT *
-        //         FROM  user
-        //         ORDER BY s DESC"   );
-        //  }
-        // TELEPHONE_ASC
-        // else if ($param == "TELEPHONE_ASC")
-        // {
-        //     $listAux = getSQLArrayAssoc(
-        //         $login,
-        //         $pw,
-        //         "SELECT *
-        //         FROM  user
-        //         ORDER BY TELEPHONE ASC"   );
-        //  }
-        // TELEPHONE_DESC
-        // else if ($param == "TELEPHONE_DESC")
-        // {
-        //     $listAux = getSQLArrayAssoc(
-        //         $login,
-        //         $pw,
-        //         "SELECT *
-        //         FROM  user
-        //         ORDER BY TELEPHONE DESC"   );
-        //  }
-        // EMAIL_ASC
+   
         else if ($param == "EMAIL_ASC")
         {
             $listAux = getSQLArrayAssoc(
@@ -700,7 +649,7 @@ class DashController extends AbstractController
                 FROM  user
                 LEFT JOIN user_in_session as us ON us.id_user=user.id 
                 LEFT JOIN session as s ON us.id_session=s.id 
-                WHERE user.role_string='$role' ORDER BY user.EMAIL ASC"   );
+                WHERE user.role_string='ROLE_APP' ORDER BY user.EMAIL ASC"   );
          }
         // EMAIL_DESC
         else if ($param == "EMAIL_DESC")
@@ -712,7 +661,7 @@ class DashController extends AbstractController
             FROM  user
             LEFT JOIN user_in_session as us ON us.id_user=user.id 
             LEFT JOIN session as s ON us.id_session=s.id 
-            WHERE user.role_string='$role' ORDER BY user.EMAIL DESC"   );
+            WHERE user.role_string='ROLE_APP' ORDER BY user.EMAIL DESC"   );
          }
         else {
             $listAux = listAll('ROLE_FORMATEUR', 'Formateur');
@@ -741,6 +690,9 @@ class DashController extends AbstractController
     //   dd( $param );
     {
         $listAux = [];
+        $login = $this->getParameter('loginDB');
+        $pw = $this->getParameter('PasswordDB');
+        
      // NOM_ASC
      if ($param == "NOM_ASC") {
         $listAux = getSQLArrayAssoc(
@@ -765,27 +717,6 @@ class DashController extends AbstractController
 
         }
    
-        // TELEPHONE_ASC
-        // else if ($param == "TELEPHONE_ASC")
-        // {
-        //     $listAux = getSQLArrayAssoc(
-        //         $login,
-        //         $pw,
-        //         "SELECT *
-        //         FROM  user
-        //         ORDER BY TELEPHONE ASC"   );
-        //  }
-        // TELEPHONE_DESC
-        // else if ($param == "TELEPHONE_DESC")
-        // {
-        //     $listAux = getSQLArrayAssoc(
-        //         $login,
-        //         $pw,
-        //         "SELECT *
-        //         FROM  user
-        //         ORDER BY TELEPHONE DESC"   );
-        //  }
-        // EMAIL_ASC
         else if ($param == "EMAIL_ASC")
         {
             $listAux = getSQLArrayAssoc(
@@ -836,16 +767,22 @@ class DashController extends AbstractController
     //   dd( $param );
     {
         $listAux = [];
+        $login = $this->getParameter('loginDB');
+        $pw = $this->getParameter('PasswordDB');
      // NOM_ASC
      if ($param == "NOM_ASC") {
         $listAux = getSQLArrayAssoc(
             $login,
             $pw,
-            "SELECT user.nom, user.prenom, user.telephone, user.email, user.id, s.nom as ns
-            FROM  user
-            LEFT JOIN user_in_session as us ON us.id_user=user.id 
+       
+            
+            "SELECT u.nom, u.prenom, u.id, u.email, u.telephone, u.id, m.id_ent, (select user2.nom from projet_fast.user as user2 where m.id_ent=user2.id) as nom_ent, u.roles, s.nom as ns
+            FROM mahas_ent as m 
+            RIGHT JOIN  user as u ON u.id=m.id_ma 
+            LEFT JOIN user_in_session as us ON us.id_user=u.id 
             LEFT JOIN session as s ON us.id_session=s.id 
-            WHERE user.role_string='$role' ORDER BY user.nom ASC"   );
+            WHERE u.roles like '%ROLE_MA%' ORDER BY u.nom ASC"  
+        );
      }
         // NOM_DESC
         else if ($param == "NOM_DESC")
@@ -853,11 +790,12 @@ class DashController extends AbstractController
             $listAux = getSQLArrayAssoc(
                 $login,
                 $pw,
-                "SELECT user.nom, user.prenom, user.telephone, user.email, user.id, s.nom as ns
-            FROM  user
-            LEFT JOIN user_in_session as us ON us.id_user=user.id 
-            LEFT JOIN session as s ON us.id_session=s.id 
-            WHERE user.role_string='$role' ORDER BY user.nom DESC"   );
+                "SELECT u.nom, u.prenom, u.id, u.email, u.telephone, u.id, m.id_ent, (select user2.nom from projet_fast.user as user2 where m.id_ent=user2.id) as nom_ent, u.roles, s.nom as ns
+                FROM mahas_ent as m 
+                RIGHT JOIN  user as u ON u.id=m.id_ma 
+                LEFT JOIN user_in_session as us ON us.id_user=u.id 
+                LEFT JOIN session as s ON us.id_session=s.id 
+                WHERE u.roles like '%ROLE_MA%' ORDER BY u.nom DESC;"   );
          }
         // PRENOM_ASC
         else if ($param == "PRENOM_ASC")
@@ -883,28 +821,7 @@ class DashController extends AbstractController
             LEFT JOIN session as s ON us.id_session=s.id 
             WHERE user.role_string='$role' ORDER BY user.prenom DESC"   );
          }
-        // SESSION_ASC
-        // else if ($param == "SESSION_ASC")
-        // {
-        //     $listAux = getSQLArrayAssoc(
-        //         $login,
-        //         $pw,
-        //         "SELECT *
-        //         FROM  user
-        //         ORDER BY s ASC"   );
-        //  }
 
-        // SESSION_DESC
-        // else if ($param == "SESSION_DESC")
-        // {
-        //     $listAux = getSQLArrayAssoc(
-        //         $login,
-        //         $pw,
-        //         "SELECT *
-        //         FROM  user
-        //         ORDER BY s DESC"   );
-        //  }
-        
         // EMAIL_ASC
         else if ($param == "EMAIL_ASC")
         {
