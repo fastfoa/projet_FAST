@@ -102,11 +102,7 @@
 
 </div>
 
-{% for message in app.flashes('notice') %}
-    <div class="flash-notice">
-        {{ message }}
-    </div>
-{% endfor %}
+
 
 <hr class="text-light mt-3">
  
@@ -120,7 +116,7 @@
                 <div id="supMA"><h5>nom : {{ d.nom }}</h5> 
                 <h5>Prénom : {{d.prenom}}</h5>
                 <h5>Téléphone : {{d.telephone}}</h5>
-      <a href="{{path('deleteMA',{'idMa':user.id,'idApp':d.id} )}}"><img style="height:30px;" src={{asset("images/icons8-remove-48.png")}} alt=""></a> #} 
+      <a href="{{path('deleteMA',{'idMa':d.id,'idApp':user.id} )}}"><img style="height:30px;" src={{asset("images/icons8-remove-48.png")}} alt="">supprimer</a> #} 
                </div>
                {{dump(d.id)}} {{dump(user.id)}}#}
                 <br>
