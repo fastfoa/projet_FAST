@@ -127,9 +127,11 @@
 									<td>{{document.d_fileName}}</td>
 									<td>{{document.d_dateCreate}}</td>
 									<td>
+										{% if is_granted('ROLE_OF') %}
 										<a href="{{ path( 'deletedocument',{'id':document.d_id}) }}">
 										❌
 										</a>
+									{% endif %}	
 							   					<a href="{{ path( 'download',{'id':document.d_id} ) }}">
 													<i class="fas fa-solid fa-download" style="font-size:20px;color:green;"></i>
 											</a>

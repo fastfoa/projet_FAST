@@ -245,6 +245,7 @@ class DocumentController extends AbstractController
                 'nameFormateur'     => $nameFormateur,
                 'nameApprenti'      => $nameApprenti,
                 'nameEntreprise'    => $nameEntreprise,
+                'idapp' => $idApp,
                 'menu'              => getMenuFromRole($this->getUser()->getRoleString()),
             ]
         );
@@ -296,13 +297,22 @@ class DocumentController extends AbstractController
         $ret = $this->checkRGPD();
         if ($ret)
             return $ret;
-            $idd = $user->getId();
+
+            $login = $this->getParameter('loginDB');
+            $pw = $this->getParameter('PasswordDB');
+      $idd = $user->getid();
+        //   dd($id);
+       $idapp = getSQLArrayAssoc($login , $pw,
+        "SELECT id_owner FROM document where id = $idd "); 
+        $idapp = $idapp[0]['id_owner'];
+// dd($idapp);
         $doctrine = $this->getDoctrine();
         $om = $doctrine->getManager();
         $om->remove($id);
         $om->flush();
+
         // // $this->addFlash('message', "Document supprimé");
-        return $this->redirectToRoute('profilOF_APP', array('user'=> $idd)) ;
+        return $this->redirectToRoute('profilOF_APP',  ['user' => $idapp]) ;
     }
 
     public function getInfoDoc(User $user)
