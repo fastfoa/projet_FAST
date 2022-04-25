@@ -19,9 +19,16 @@ use App\Form\MonCompteFormateurType;
 use App\Form\MonCompteINDType;
 use App\Form\MonCompteMAType;
 use App\Form\MonCompteOFType;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class CompteController extends AbstractController
-{
+{   
+    private $entityManager;
+    public function __construct(EntityManagerInterface $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
     public function checkRGPD()
     {
         $user = $this->getUser();
@@ -54,7 +61,7 @@ class CompteController extends AbstractController
         );
     }
 
-    public function modifInfoMonCompte(Request $request): Response
+    public function modifInfoMonCompte(Request $request,  UserPasswordEncoderInterface $encoder): Response
     {
         $ret = $this->checkRGPD();
         if ($ret) {
@@ -66,6 +73,7 @@ class CompteController extends AbstractController
 
         $type =  null;
         $twig = '';
+        $notification= '';
 
         // définir le type de formaulaire et le twig en rapport 
         // au type du compte user
@@ -103,17 +111,34 @@ class CompteController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $doctrine = $this->getDoctrine();
-            $entityManager = $doctrine->getManager();
-            $entityManager->persist($contact);
-            $entityManager->flush();
-            return $this->redirectToRoute('compte');
+
+            $old_pwd= $form->get('old_password')->getData();
+
+            if ($encoder->isPasswordValid($contact, $old_pwd)) {
+                $new_pwd= $form->get('new_password')->getData();
+                $password = $encoder->encodePassword($contact, $new_pwd);
+
+                $contact->setPassword($password);
+                $this->entityManager->flush();
+               
+                $notification="vos informations ont bien été modifiées"; 
+               /* return $this->redirectToRoute('compte');*/
+            }
+            else{
+                $notification= "vos informations sont erronées";
+            }
+                    
+            // $doctrine = $this->getDoctrine();
+            // $entityManager = $doctrine->getManager();
+            // $entityManager->persist($contact);
+            // $entityManager->flush();
+            // return $this->redirectToRoute('compte');
         }
         
         return $this->render($twig, [
             'form' => $form->createView(),
             'menu' => getMenuFromRole($this->getUser()->getRoleString()), //envoye le menu part a port a son role
-
+            'notification'=>$notification,
         ]);
     }
 }
