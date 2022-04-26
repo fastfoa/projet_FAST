@@ -18,11 +18,12 @@ class FiltreType extends AbstractType
         $builder
             ->add('filtretext', TextType::class, [
                 'mapped'=> false,
+           'required' => false,
                 'attr' => [
                     'placeholder' => 'Recherche ...',
                     'class' => 'form-control',
                     'type' => 'search',
-                    'id' => 'form1'
+                    'id' => 'form1',
 
                 ]
                 ]);

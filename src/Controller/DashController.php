@@ -451,7 +451,7 @@ class DashController extends AbstractController
     }
 
 
-    public function listAll($role,  $roleName , $myForm, $filtre): Response
+    public function listAll($role,  $roleName , Request $request): Response
     {
         $ret = $this->checkRGPD();
         if ($ret)
@@ -462,12 +462,53 @@ class DashController extends AbstractController
         $login = $this->getParameter('loginDB');
         $pw = $this->getParameter('PasswordDB');
 
+        
+        $form = $this->createForm(FiltreType::class);
+        $form->handleRequest($request);
+        $data = $form->get('filtretext')->getData();
+    if($data != ''){ 
+        if ($form->isSubmitted() && $form->isValid()) {  
+            if ($role == 'ROLE_MA') {
+                $list = getSQLArrayAssoc(
+                    $login,
+                    $pw,
+                    "SELECT u.nom, u.prenom, u.id, u.email, u.telephone, u.id, m.id_ent, (select nom from projet_fast.user as user2 where m.id_ent=user2.id) as nom_ent, u.roles, s.nom as ns
+                    FROM mahas_ent as m 
+                    RIGHT JOIN  user as u ON u.id=m.id_ma 
+                    LEFT JOIN user_in_session as us ON us.id_user=u.id 
+                    LEFT JOIN session as s ON us.id_session=s.id 
+                    WHERE ( u.nom LIKE '%$data%'
+                       OR u.prenom LIKE '%$data%'
+                       OR u.email LIKE '%$data%' )
+                       AND u.role_string= 'ROLE_MA';'"
+                );
+            } else {
+                $list =  getSQLArrayAssoc(
+                    $login,
+                    $pw,
+                    "SELECT user.nom, user.prenom, user.telephone, user.email, user.id, s.nom as ns
+                    FROM  user
+                    LEFT JOIN user_in_session as us ON us.id_user=user.id 
+                    LEFT JOIN session as s ON us.id_session=s.id 
+                    WHERE ( user.nom LIKE '%$data%'
+                    OR user.prenom LIKE '%$data%'
+                    OR user.email LIKE '%$data%' )
+                    AND user.role_string= '$role';"
+                );
+            }
+           
+            $doctrine = $this->getDoctrine();
+            $entityManager = $doctrine->getManager();
+            // $entityManager->persist($user); 
+            $entityManager->flush();
+            }
+        }
+
+    else{
         if ($role == 'ROLE_MA') {
             $list = getSQLArrayAssoc(
                 $login,
                 $pw,
-
-
                 "SELECT u.nom, u.prenom, u.id, u.email, u.telephone, u.id, m.id_ent, (select nom from projet_fast.user as user2 where m.id_ent=user2.id) as nom_ent, u.roles, s.nom as ns
          FROM mahas_ent as m 
          RIGHT JOIN  user as u ON u.id=m.id_ma 
@@ -486,9 +527,7 @@ class DashController extends AbstractController
             WHERE user.role_string='$role'"
             );
         }
-
-        
-
+        }
         return $this->render(
             'dash/listUser.html.twig',
             [
@@ -496,8 +535,8 @@ class DashController extends AbstractController
                 'menu' => getMenuFromRole($this->getUser()->getRoleString()),
                 'role' => $role,
                 'roleName' => $roleName,
-                'myForm' => $myForm,
-                'filtre' => $filtre,
+                'myForm' => $form->createView(),
+             
             ]
         );
     }
@@ -508,36 +547,13 @@ class DashController extends AbstractController
         if ($ret)
             return $ret;
 
-            $login  = $this->getParameter('loginDB');
-            $pw     = $this->getParameter('PasswordDB');
+
             $role = "ROLE_APP";
             $roleName = 'Apprenti';
                    
-            $form = $this->createForm(FiltreType::class);
-            $form->handleRequest($request);
-    
-            if ($form->isSubmitted() && $form->isValid()) {
-
-                $data = $form->get('filtretext')->getData();
-               
-                $filtre = getSQLArrayAssoc(
-                    $login,
-                    $pw,
-                    "SELECT * from projet_fast.user as u 
-                    WHERE ( u.nom LIKE '%$data%'
-                    OR u.prenom LIKE '%$data%'
-                    OR u.email LIKE '%$data%' )
-                    AND u.role_string= '$role' ;"  );
-
-                $doctrine = $this->getDoctrine();
-                $entityManager = $doctrine->getManager();
-                // $entityManager->persist($user); 
-                $entityManager->flush();
-            }
-            // dd($filtre);
-            $myForm = $form->createView();
             
-        return $this->listAll($role, $roleName, $myForm, $filtre );
+            
+        return $this->listAll($role, $roleName, $request );
     }
 
     public function listAllFormateurs(Request $request): Response
@@ -545,35 +561,9 @@ class DashController extends AbstractController
         $ret = $this->checkRGPD();
         if ($ret)
             return $ret;
-            $login  = $this->getParameter('loginDB');
-            $pw     = $this->getParameter('PasswordDB');
-            $listAux = [];
-    
-        
-                $filtre = getSQLArrayAssoc(
-                    $login,
-                    $pw,
-                    "
-                    "  );
-                    
-            // $user = $user;
-            $form = $this->createForm(FiltreType::class);
-            $form->handleRequest($request);
-    
-            if ($form->isSubmitted() && $form->isValid()) {
-    
+      
 
-                
-                $doctrine = $this->getDoctrine();
-                $entityManager = $doctrine->getManager();
-                // $entityManager->persist($user); 
-                $entityManager->flush();
-    
-  
-            }
-            $myForm = $form->createView();
-
-        return $this->listAll('ROLE_FORMATEUR', 'Formateur',$myForm);
+        return $this->listAll('ROLE_FORMATEUR', 'Formateur' , $request);
     }
 
     public function listAllEntreprises(Request $request): Response
@@ -581,35 +571,9 @@ class DashController extends AbstractController
         $ret = $this->checkRGPD();
         if ($ret)
             return $ret;
-            $login  = $this->getParameter('loginDB');
-            $pw     = $this->getParameter('PasswordDB');
-            $listAux = [];
-    
-        
-                $filtre = getSQLArrayAssoc(
-                    $login,
-                    $pw,
-                    "
-                    "  );
-                    
-            // $user = $user;
-            $form = $this->createForm(FiltreType::class);
-            $form->handleRequest($request);
-    
-            if ($form->isSubmitted() && $form->isValid()) {
-    
+           
 
-                
-                $doctrine = $this->getDoctrine();
-                $entityManager = $doctrine->getManager();
-                // $entityManager->persist($user); 
-                $entityManager->flush();
-    
-  
-            }
-            $myForm = $form->createView();
-
-        return $this->listAll('ROLE_ENT', 'Entreprise',$myForm);
+        return $this->listAll('ROLE_ENT', 'Entreprise',$request);
     }
 
     public function listAllMA(Request $request): Response
@@ -617,35 +581,9 @@ class DashController extends AbstractController
         $ret = $this->checkRGPD();
         if ($ret)
             return $ret;
-            $login  = $this->getParameter('loginDB');
-            $pw     = $this->getParameter('PasswordDB');
-            $listAux = [];
-    
-        
-                $filtre = getSQLArrayAssoc(
-                    $login,
-                    $pw,
-                    "
-                    "  );
-                    
-            // $user = $user;
-            $form = $this->createForm(FiltreType::class);
-            $form->handleRequest($request);
-    
-            if ($form->isSubmitted() && $form->isValid()) {
-    
+           
 
-                
-                $doctrine = $this->getDoctrine();
-                $entityManager = $doctrine->getManager();
-                // $entityManager->persist($user); 
-                $entityManager->flush();
-    
-  
-            }
-            $myForm = $form->createView();
-
-        return $this->listAll('ROLE_MA', "Maitre d'apprentissage",$myForm);
+        return $this->listAll('ROLE_MA', "Maitre d'apprentissage",$request);
     }
 
 
