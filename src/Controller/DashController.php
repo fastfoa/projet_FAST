@@ -136,12 +136,12 @@ class DashController extends AbstractController
         $MA         = null;
         $app        = [];
         $formateur  = [];
-        $appter= [];
+        $appter = [];
         $MABIS = [];
         $formateurter = [];
-       
+
         $MA = getMAFromEnt($login, $pw, $entreprise['id']);
-        
+
         // dd($MA);
 
         if ($MA != false) {
@@ -158,7 +158,9 @@ class DashController extends AbstractController
             }
             //   dd($appbis);
             if ($appbis != false) {
+
                 $appter = [];
+
                 for ($k = 0; $k < sizeof($appbis); $k++) {
                     array_push($appter, convertUserEntity2SQL($login, $pw, $appbis[$k]['id']));
                 }
@@ -174,7 +176,9 @@ class DashController extends AbstractController
                 }
                 // $formateurbis = array_unique($formateurbis);
                 // dd($formateurbis);
+
                 $formateurter = [];
+
                 for ($n = 0; $n < sizeof($formateurbis); $n++) {
                     array_push($formateurter, convertUserEntity2SQL($login, $pw, $formateurbis[$n]['id']));
                 }
@@ -186,7 +190,11 @@ class DashController extends AbstractController
 
         $uid = $user['id'];
 
+
+
+
         $listDoc = getDocsFromUser($login, $pw, $uid);
+
 
 
         return $this->render(
@@ -219,44 +227,43 @@ class DashController extends AbstractController
         $user       = convertUserEntity2SQL($login, $pw, $user->getId());
         $MA = $user;
         $formateurter = [];
-        $appter= [];
+        $appter = [];
         $OF         = getInfoOF();
         $entreprise = null;
         $app        = [];
         $formateur  = [];
-    //  dd($MA);
+        //  dd($MA);
         $app = getAppFromMA($login, $pw, $MA['id']);
-     
-            $appbis= [];
-        if ( $app != false ){
-        for ($j=0; $j < sizeof($app); $j++) { 
-             array_push($appbis,$app[$j]);
-            }   
-            //   dd($appbis);
-            if ( $appbis != false )
-               {
-                   for ($k=0; $k < sizeof($appbis) ; $k++) { 
-   
-               array_push($appter,convertUserEntity2SQL($login, $pw, $appbis[$k]['id']) );
-              
+
+        $appbis = [];
+        if ($app != false) {
+            for ($j = 0; $j < sizeof($app); $j++) {
+                array_push($appbis, $app[$j]);
             }
+            //   dd($appbis);
+            if ($appbis != false) {
+                for ($k = 0; $k < sizeof($appbis); $k++) {
+
+                    array_push($appter, convertUserEntity2SQL($login, $pw, $appbis[$k]['id']));
+                }
                 // dd($appter);
-            for ($r=0; $r < sizeof($appter); $r++) { 
-                array_push($formateur, getFormateursFromApprenti($login, $pw, $appter[$r]['id']));
-                   } 
-            // dd($formateur);
-           $formateurbis = [];
-           for ($m=0; $m < sizeof($formateur); $m++) { 
-                   $formateurbis = array_merge($formateurbis,$formateur[$m]);
-                 }   
-            // $formateurbis = array_unique($formateurbis);
-        //  dd($formateurbis);
-          
-           for ($n=0; $n < sizeof($formateurbis) ; $n++) { 
-           array_push($formateurter,convertUserEntity2SQL($login, $pw, $formateurbis[$n]['id']) );}
+                for ($r = 0; $r < sizeof($appter); $r++) {
+                    array_push($formateur, getFormateursFromApprenti($login, $pw, $appter[$r]['id']));
+                }
+                // dd($formateur);
+                $formateurbis = [];
+                for ($m = 0; $m < sizeof($formateur); $m++) {
+                    $formateurbis = array_merge($formateurbis, $formateur[$m]);
+                }
+                // $formateurbis = array_unique($formateurbis);
+                //  dd($formateurbis);
+
+                for ($n = 0; $n < sizeof($formateurbis); $n++) {
+                    array_push($formateurter, convertUserEntity2SQL($login, $pw, $formateurbis[$n]['id']));
+                }
                 //   dd($formateurter);
-                   
-           
+
+
 
 
         }
@@ -282,6 +289,7 @@ class DashController extends AbstractController
 
                }
 
+
     public function dashFormateur(): Response
     {
         $ret = $this->checkRGPD();
@@ -298,6 +306,7 @@ class DashController extends AbstractController
         $user       = convertUserEntity2SQL($login, $pw, $user->getId());
         $formateur = $user;
         $session = false;
+
         $listAPP = [];
         $listFORMATEUR = [];
         $listMA = [];
@@ -328,6 +337,7 @@ class DashController extends AbstractController
 
                 //   dd($appbis);
             }
+
         }
         $listDoc = getDocsFromUser($login, $pw, $user['id']);
 
@@ -466,6 +476,7 @@ class DashController extends AbstractController
         $login = $this->getParameter('loginDB');
         $pw = $this->getParameter('PasswordDB');
 
+
         
         $form = $this->createForm(FiltreType::class);
         $form->handleRequest($request);
@@ -509,10 +520,13 @@ class DashController extends AbstractController
         }
 
     else{
+      
         if ($role == 'ROLE_MA') {
             $list = getSQLArrayAssoc(
                 $login,
                 $pw,
+
+
                 "SELECT u.nom, u.prenom, u.id, u.email, u.telephone, u.id, m.id_ent, (select nom from projet_fast.user as user2 where m.id_ent=user2.id) as nom_ent, u.roles, s.nom as ns
          FROM mahas_ent as m 
          RIGHT JOIN  user as u ON u.id=m.id_ma 
@@ -531,7 +545,9 @@ class DashController extends AbstractController
             WHERE user.role_string='$role'"
             );
         }
+
         }
+
         return $this->render(
             'dash/listUser.html.twig',
             [
@@ -543,6 +559,105 @@ class DashController extends AbstractController
              
             ]
         );
+    }
+    public function triListeGlobale($param, $role, $role_name): Response
+    //    dd( $param );
+    {
+        // dd( $param );
+        $login = $this->getParameter('loginDB');
+        $pw = $this->getParameter('PasswordDB');
+        $listAux = [];
+        // NOM_ASC
+        if ($role == 'ROLE_MA') {
+            return $this->triListeGlobaleMA($param);
+        } else {
+            if ($param == "NOM_ASC") {
+                $listAux = getSQLArrayAssoc(
+                    $login,
+                    $pw,
+                    "SELECT user.nom, user.prenom, user.telephone, user.email, user.id, s.nom as ns
+            FROM  user
+            LEFT JOIN user_in_session as us ON us.id_user=user.id 
+            LEFT JOIN session as s ON us.id_session=s.id 
+            WHERE user.role_string='$role' ORDER BY user.nom  ASC"
+                );
+            }
+            // NOM_DESC
+            else if ($param == "NOM_DESC") {
+                $listAux = getSQLArrayAssoc(
+                    $login,
+                    $pw,
+                    "SELECT user.nom, user.prenom, user.telephone, user.email, user.id, s.nom as ns
+                FROM  user
+                LEFT JOIN user_in_session as us ON us.id_user=user.id 
+                LEFT JOIN session as s ON us.id_session=s.id 
+                WHERE user.role_string='$role' ORDER BY user.nom DESC"
+                );
+            }
+            // PRENOM_ASC
+            else if ($param == "PRENOM_ASC") {
+                $listAux = getSQLArrayAssoc(
+                    $login,
+                    $pw,
+                    "SELECT user.nom, user.prenom, user.telephone, user.email, user.id, s.nom as ns
+                FROM  user
+                LEFT JOIN user_in_session as us ON us.id_user=user.id 
+                LEFT JOIN session as s ON us.id_session=s.id 
+                WHERE user.role_string='$role' ORDER BY user.prenom  ASC"
+                );
+            }
+            // PRENOM_DESC
+            else if ($param == "PRENOM_DESC") {
+                $listAux = getSQLArrayAssoc(
+                    $login,
+                    $pw,
+                    "SELECT user.nom, user.prenom, user.telephone, user.email, user.id, s.nom as ns
+                FROM  user
+                LEFT JOIN user_in_session as us ON us.id_user=user.id 
+                LEFT JOIN session as s ON us.id_session=s.id 
+                WHERE user.role_string='$role' ORDER BY user.prenom  DESC"
+                );
+            }
+
+            // EMAIL_ASC
+            else if ($param == "EMAIL_ASC") {
+                $listAux = getSQLArrayAssoc(
+                    $login,
+                    $pw,
+                    "SELECT user.nom, user.prenom, user.telephone, user.email, user.id, s.nom as ns
+                FROM  user
+                LEFT JOIN user_in_session as us ON us.id_user=user.id 
+                LEFT JOIN session as s ON us.id_session=s.id 
+                WHERE user.role_string='$role' ORDER BY user.email  ASC"
+                );
+            }
+            // EMAIL_DESC
+            else if ($param == "EMAIL_DESC") {
+                $listAux = getSQLArrayAssoc(
+                    $login,
+                    $pw,
+                    "SELECT user.nom, user.prenom, user.telephone, user.email, user.id, s.nom as ns
+                FROM  user
+                LEFT JOIN user_in_session as us ON us.id_user=user.id 
+                LEFT JOIN session as s ON us.id_session=s.id 
+                WHERE user.role_string='$role' ORDER BY user.email DESC"
+                );
+            } else {
+                $listAux = $this->listAll($role, $role_name);
+            }
+            // dd($listAux);
+            return $this->render(
+
+                'dash/listUser.html.twig',
+
+                [
+                    'list' => $listAux,
+                    'menu' => getMenuFromRole($this->getUser()->getRoleString()),
+                    'role' => $role,
+                    'roleName' => $role_name
+                ]
+            );
+        }
     }
 
     public function listAllAprentis( Request $request): Response
@@ -560,7 +675,9 @@ class DashController extends AbstractController
         return $this->listAll($role, $roleName, $request );
     }
 
+
     public function listAllFormateurs(Request $request): Response
+
     {
         $ret = $this->checkRGPD();
         if ($ret)
@@ -570,7 +687,9 @@ class DashController extends AbstractController
         return $this->listAll('ROLE_FORMATEUR', 'Formateur' , $request);
     }
 
+
     public function listAllEntreprises(Request $request): Response
+
     {
         $ret = $this->checkRGPD();
         if ($ret)
@@ -578,6 +697,131 @@ class DashController extends AbstractController
            
 
         return $this->listAll('ROLE_ENT', 'Entreprise',$request);
+    }
+    public function triListeGlobaleMA($param): Response
+    //   dd( $param );
+    {
+        $listAux = [];
+        $login = $this->getParameter('loginDB');
+        $pw = $this->getParameter('PasswordDB');
+        // NOM_ASC
+        if ($param == "NOM_ASC") {
+            $listAux = getSQLArrayAssoc(
+                $login,
+                $pw,
+
+
+                "SELECT u.nom, u.prenom, u.id, u.email, u.telephone, u.id, m.id_ent, (select user2.nom from user as user2 where m.id_ent=user2.id) as nom_ent, u.roles, s.nom as ns
+            FROM mahas_ent as m 
+            RIGHT JOIN  user as u ON u.id=m.id_ma 
+            LEFT JOIN user_in_session as us ON us.id_user=u.id 
+            LEFT JOIN session as s ON us.id_session=s.id 
+            WHERE u.role_string = 'ROLE_MA' ORDER BY u.nom ASC"
+            );
+        }
+        // NOM_DESC
+        else if ($param == "NOM_DESC") {
+            $listAux = getSQLArrayAssoc(
+                $login,
+                $pw,
+                "SELECT u.nom, u.prenom, u.id, u.email, u.telephone, u.id, m.id_ent, (select user2.nom from projet_fast.user as user2 where m.id_ent=user2.id) as nom_ent, u.roles, s.nom as ns
+                FROM mahas_ent as m 
+                RIGHT JOIN  user as u ON u.id=m.id_ma 
+                LEFT JOIN user_in_session as us ON us.id_user=u.id 
+                LEFT JOIN session as s ON us.id_session=s.id 
+                WHERE u.roles like '%ROLE_MA%' ORDER BY u.nom DESC;"
+            );
+        }
+        // PRENOM_ASC
+        else if ($param == "PRENOM_ASC") {
+            $listAux = getSQLArrayAssoc(
+                $login,
+                $pw,
+                "SELECT u.nom, u.prenom, u.id, u.email, u.telephone, u.id, m.id_ent, (select user2.nom from projet_fast.user as user2 where m.id_ent=user2.id) as nom_ent, u.roles, s.nom as ns
+            FROM mahas_ent as m 
+            RIGHT JOIN  user as u ON u.id=m.id_ma 
+            LEFT JOIN user_in_session as us ON us.id_user=u.id 
+            LEFT JOIN session as s ON us.id_session=s.id 
+            WHERE u.roles like '%ROLE_MA%' ORDER BY u.prenom ASC"
+            );
+        }
+        // PRENOM_DESC
+        else if ($param == "PRENOM_DESC") {
+            $listAux = getSQLArrayAssoc(
+                $login,
+                $pw,
+                "SELECT u.nom, u.prenom, u.id, u.email, u.telephone, u.id, m.id_ent, (select user2.nom from projet_fast.user as user2 where m.id_ent=user2.id) as nom_ent, u.roles, s.nom as ns
+                FROM mahas_ent as m 
+                RIGHT JOIN  user as u ON u.id=m.id_ma 
+                LEFT JOIN user_in_session as us ON us.id_user=u.id 
+                LEFT JOIN session as s ON us.id_session=s.id 
+                WHERE u.roles like '%ROLE_MA%' ORDER BY u.prenom DESC;"
+            );
+        }
+
+
+        // EMAIL_ASC
+        else if ($param == "EMAIL_ASC") {
+            $listAux = getSQLArrayAssoc(
+                $login,
+                $pw,
+                "SELECT u.nom, u.prenom, u.id, u.email, u.telephone, u.id, m.id_ent, (select user2.nom from projet_fast.user as user2 where m.id_ent=user2.id) as nom_ent, u.roles, s.nom as ns
+            FROM mahas_ent as m 
+            RIGHT JOIN  user as u ON u.id=m.id_ma 
+            LEFT JOIN user_in_session as us ON us.id_user=u.id 
+            LEFT JOIN session as s ON us.id_session=s.id 
+            WHERE u.roles like '%ROLE_MA%' ORDER BY u.email ASC"
+            );
+        }
+        // EMAIL_DESC
+        else if ($param == "EMAIL_DESC") {
+            $listAux = getSQLArrayAssoc(
+                $login,
+                $pw,
+                "SELECT u.nom, u.prenom, u.id, u.email, u.telephone, u.id, m.id_ent, (select user2.nom from projet_fast.user as user2 where m.id_ent=user2.id) as nom_ent, u.roles, s.nom as ns
+                FROM mahas_ent as m 
+                RIGHT JOIN  user as u ON u.id=m.id_ma 
+                LEFT JOIN user_in_session as us ON us.id_user=u.id 
+                LEFT JOIN session as s ON us.id_session=s.id 
+                WHERE u.roles like '%ROLE_MA%' ORDER BY u.email DESC;"
+            );
+        }
+        // ENT_ASC
+        else if ($param == "ENT_ASC") {
+            $listAux = getSQLArrayAssoc(
+                $login,
+                $pw,
+                "SELECT user.nom, user.prenom, user.telephone, user.email, user.id, s.nom as ns
+                FROM  user
+                LEFT JOIN user_in_session as us ON us.id_user=user.id 
+                LEFT JOIN session as s ON us.id_session=s.id 
+                WHERE user.role_string='$role' ORDER BY user.ent ASC"
+            );
+        }
+        // ENT_DESC
+        else if ($param == "ENT_DESC") {
+            $listAux = getSQLArrayAssoc(
+                $login,
+                $pw,
+                "SELECT user.nom, user.prenom, user.telephone, user.email, user.id, s.nom as ns
+                FROM  user
+                LEFT JOIN user_in_session as us ON us.id_user=user.id 
+                LEFT JOIN session as s ON us.id_session=s.id 
+                WHERE user.role_string='$role' ORDER BY user.ent DESC"
+            );
+        } else {
+            $listAux = $this->listAll('ROLE_MA',  "Maitre d'apprentissage");
+        }
+
+        return $this->render(
+            'dash/listUser.html.twig',
+            [
+                'list' => $listAux,
+                'menu' => getMenuFromRole($this->getUser()->getRoleString()),
+                'role' => 'ROLE_MA',
+                'roleName' => "Maitre d'apprentissage"
+            ]
+        );
     }
 
     public function listAllMA(Request $request): Response
@@ -589,7 +833,6 @@ class DashController extends AbstractController
 
         return $this->listAll('ROLE_MA', "Maitre d'apprentissage",$request);
     }
-
 
 
     // public function dashENTprincipalx(): Response
@@ -780,26 +1023,50 @@ class DashController extends AbstractController
 
         $login  = $this->getParameter('loginDB');
         $pw     = $this->getParameter('PasswordDB');
-        $listAux = [];
 
-        if ($param == "FILTRE"){
-            $filtre = getSQLArrayAssoc(
-                $login,
-                $pw,
-                "
-                "  );
-                
-        $user = $user;
-        $form = $this->createForm(FiltreType::class, $user);
-        $form->handleRequest($request);
+
+        $user       = $this->getUser();
+        $role       = $user->getRoleString();
+        $user       = convertUserEntity2SQL($login, $pw, $user->getId());
+        $app        = $user;
+        $OF         = getInfoOF();
+        $MA         = false;
+        $formateur  = false;
+        $entreprise = false;
+        $sessionID = getIdSessionFromApprenti($login, $pw, $user['id']);
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $doctrine = $this->getDoctrine();
-            $entityManager = $doctrine->getManager();
 
-            $entityManager->persist($user); 
-            $entityManager->flush();
+        $MA = getMAFromApprenti($login, $pw, $app['id']);
+        if ($MA) {
+            $MA = convertUserEntity2SQL($login, $pw, $MA['id']);
+            $entreprise = getENTFromMA($login, $pw, $MA['id']);
+            if ($entreprise)
+                $entreprise = convertUserEntity2SQL($login, $pw, $entreprise['id']);
+        }
+
+
+        //    $formateur  = getFormateursFromApprenti($login, $pw, 
+        // $app['id']);
+
+        $listFormateur = getSQLArrayAssoc(
+            $login,
+            $pw,
+
+            "SELECT u.nom, u.prenom, u.email, u.id 
+        FROM user_in_session as us0, 
+            user_in_session as us1, 
+            user as u 
+        WHERE 
+        us0.id_session=us1.id_session and u.id=us1.id_user and u.role_string='ROLE_FORMATEUR' 
+        and us0.id_user='$sessionID'"
+        );
+        //    dd($listFormateur);
+
+        $uid = $app['id'];
+        $listDoc = getDocsFromUser($login, $pw, $uid);
+
 
 
         }

@@ -1,33 +1,29 @@
 {% extends 'base.html.twig' %}
 
 {% block myStylesheets %}
-<style>
-.clickable-row:hover{
- background-color: #f37262;}
-</style>
+	<style>
+		.clickable-row:hover {
+			background-color: #f37262;
+		}
+	</style>
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 {% endblock %}
 
 {% block myJavascripts %}
-<script src="https://code.jquery.com/jquery-3.6.0.slim.js" integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY=" crossorigin="anonymous"></script>
-<script>
-	jQuery(document).ready(function($) {
-    $(".clickable-row").click(function() {
-        window.location = $(this).data("href");
-    });
-});
-</script>
-
+	<script src="https://code.jquery.com/jquery-3.6.0.slim.js" integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY=" crossorigin="anonymous"></script>
+	<script>
+		jQuery(document).ready(function ($) {
+		$(".clickable-row").click(function () {
+		window.location = $(this).data("href");});});
+	</script>
 {% endblock myJavascripts %}
-{% block title %}liste
-	{{ roleName }}s
-{% endblock %}
+{% block title %}liste{{ roleName }}s{% endblock %}
 
 {% block body %}
-<div class="container-fluid bg-workSpace">
-	<div class="row"></div>
+	<div class="container-fluid bg-workSpace">
 		<div class="row bg-bar">
 			<div class="col-12">
+
 				<h2>liste de tous les {{ roleName }}s</h2>
 		    </div>
 	    </div>
@@ -46,121 +42,148 @@
 		
 	<div class="row">
 		<div>
+
 			<table class="table-normal">
 			
 				<thead>
 					<tr>
-						{% if roleName == 'Entreprise' %}
-							{# <th class="txt-bar bg-bar">Prenom</th> #}
-							<th class="txt-bar bg-bar col-4">nom</th>
-							{# <th class="txt-bar bg-bar">session</th> #}
-							<th class="txt-bar bg-bar col-4">Tél</th>
-							<th class="txt-bar bg-bar col-4">Mail</th>
-							{# <th class="txt-bar bg-bar">Action</th> #}
+					{% if roleName == 'Entreprise' %}
+						<th class="txt-bar bg-bar col-4">nom 
+							<button class='fas fa-arrow-circle-down btn btn-light m-1' style='font-size:15px'  onclick="location.href ='{{ path( 'triListeGlobale',{'param':"NOM_ASC", role,'role_name': roleName } ) }}'">
+							</button>
+							<button class='fas fa-arrow-alt-circle-up btn btn-light m-1' style='font-size:15px'onclick="location.href ='{{ path( 'triListeGlobale',{'param':"NOM_DESC", role,'role_name': roleName } ) }}'">
+							</button>
+						</th>
+						<th class="txt-bar bg-bar col-4">Tél</th>
+						<th class="txt-bar bg-bar col-4">Email
+							<button class='fas fa-arrow-circle-down btn btn-light m-1' style='font-size:15px'  onclick="location.href ='{{ path( 'triListeGlobale',{'param':"EMAIL_ASC", role,'role_name': roleName } ) }}'">
+							</button>
+							
+							 <button class='fas fa-arrow-alt-circle-up btn btn-light m-1' style='font-size:15px' onclick="location.href ='{{ path( 'triListeGlobale',{'param':"EMAIL_DESC", role,'role_name': roleName } ) }}'">
+							</button>
+						</th>	
+					</tr>
+				</thead>
+	    		<tbody>
+				{% for item in list %}
+					<tr>
+						<td class="col-4">{{item.nom}}</td>
+						<td class="col-4">{{item.telephone}}</td>
+						<td class="col-4">{{item.email}}</td>
+					</tr>
+				{% endfor %}
+				</tbody>		
+			</table>
+
+					{% elseif roleName == 'Apprenti' %}
+						<th class="txt-bar bg-bar col-3">Prenom 
+							<button class='fas fa-arrow-circle-down btn btn-light m-1' style='font-size:15px' onclick="location.href ='{{ path( 'triListeGlobale',{'param':"PRENOM_ASC", role,'role_name': roleName } ) }}'">
+							</button>
+							<button class='fas fa-arrow-alt-circle-up btn btn-light m-1' style='font-size:15px' onclick="location.href ='{{ path( 'triListeGlobale',{'param':"PRENOM_DESC", role,'role_name': roleName } ) }}'">
+							</button>
+						</th>
+						<th class="txt-bar bg-bar col-3">nom 
+							<button class='fas fa-arrow-circle-down btn btn-light m-1' style='font-size:15px' onclick="location.href ='{{ path( 'triListeGlobale',{'param':"NOM_ASC", role,'role_name': roleName } ) }}'">
+							</button>
+							<button class='fas fa-arrow-alt-circle-up btn btn-light m-1' style='font-size:15px' onclick="location.href ='{{ path( 'triListeGlobale',{'param':"NOM_DESC", role, 'role_name': roleName } ) }}'">
+							</button>
+						</th>		
+						<th class="txt-bar bg-bar col-3 ">session</th>
+						<th class="txt-bar bg-bar col-3">Tél</th>
+						<th class="txt-bar bg-bar col-3">Email 
+							<button class='fas fa-arrow-circle-down btn btn-light m-1' style='font-size:15px' onclick="location.href ='{{ path( 'triListeGlobale',{'param':"EMAIL_ASC", role,'role_name': roleName } ) }}'">
+							</button>
+							<button class='fas fa-arrow-alt-circle-up btn btn-light m-1' style='font-size:15px' onclick="location.href ='{{ path( 'triListeGlobale',{'param':"EMAIL_DESC",role,'role_name': roleName } ) }}'">
+							</button>
+						</th>
 					</tr>
 				</thead>
 				<tbody>
-					{% for item in list %}
-					<tr>
-							{# <td>{{item.prenom}}</td> #}
-							<td class="col-4">{{item.nom}}</td> 
-							{# <td>{{item.ns}}</td> #}
-							<td class="col-4">{{item.telephone}}</td>
-							<td class="col-4">{{item.email}}</td>
-							{#<td>{{session.formation}}</td>#}
-
-							{# <td>
-															<a href="{{ path( 'editUser',{'user':item.id} ) }}">
-																<i class="fas fa-solid fa-download" style="font-size:20px;color:green;"></i>
-															</a>
-														</td> #}
+				{% for item in list %}
+					<tr class='clickable-row' data-href='{{ path( 'editUser',{'user':item.id} ) }}'>
+						<td class="col-2">{{item.prenom}}</td>
+						<td class="col-2">{{item.nom}}</td>
+						<td class="col-2">{{item.ns}}</td>
+						<td class="col-3">{{item.telephone}}</td>
+						<td class="col-3">{{item.email}}</td>																																																		
 					</tr>
-					{% endfor %}
+				{% endfor %}
 				</tbody>
 			</table>
-						{% elseif roleName == 'Apprenti' %}
-							<th class="txt-bar bg-bar col-2">Prenom</th>
-							<th class="txt-bar bg-bar col-2">nom</th>
-							<th class="txt-bar bg-bar col-2">session</th>
-							<th class="txt-bar bg-bar col-3">Tél</th>
-							<th class="txt-bar bg-bar col-3">Mail</th>
-					    	{# <th class="txt-bar bg-bar">Action</th> #}		
-						</tr>
-					</thead>
-				<tbody>
-					{% for item in list %}
-						<tr  class='clickable-row' data-href='{{ path( 'profilOF_APP',{'user':item.id} ) }}'>
-							<td class="col-2">{{item.prenom}}</td>
-							<td class="col-2">{{item.nom}}</td>
-							<td class="col-2">{{item.ns}}</td>
-				 			<td class="col-3">{{item.telephone}}</td>
-							<td class="col-3">{{item.email}}</td>
-												
-				{#<td>{{session.formation}}</td>#}
-				{# 	<td><a href="{{ path( 'editUser',{'user':item.id} ) }}">
-					<i class="fas fa-solid fa-download" style="font-size:20px;color:green;"></i></a>
-					</td> #}
-						</tr>
-							{% endfor %}
-				</tbody>
-			</table>
-			</table>
-						{% elseif roleName ==  "Maitre d'apprentissage" %}
-							<th class="txt-bar bg-bar col-2">Prenom</th>
-							<th class="txt-bar bg-bar col-2">nom</th>
-							<th class="txt-bar bg-bar col-2">session</th>
-							{#<th class="txt-bar bg-bar col-3">Tél</th> #}
-							<th class="txt-bar bg-bar col-3">Mail</th>
-							<th class="txt-bar bg-bar col-3">entreprise</th>
-					    	{# <th class="txt-bar bg-bar">Action</th> #}		
-						</tr>
-					</thead>
-				<tbody>
-					{% for item in list %}
-						{# <tr  class='clickable-row' data-href='{{ path( 'editUser',{'user':item.id} ) }}'>#}
-							<tr>
-							<td class="col-2">{{item.prenom}}</td>
-							<td class="col-2">{{item.nom}}</td>
-							<td class="col-2">{{item.ns}}</td>
-				 			{#<td class="col-3">{{item.telephone}}</td> #}
-							<td class="col-3">{{item.email}}</td>
-							<td class="col-3">{{item.nom_ent}}</td> 
-												
-				{#<td>{{session.formation}}</td>#}
-				{# 	<td><a href="{{ path( 'editUser',{'user':item.id} ) }}">
-					<i class="fas fa-solid fa-download" style="font-size:20px;color:green;"></i></a>
-					</td> #}
-							</tr>
-							{% endfor %}
-				</tbody>
-			</table>
-			
-		{% else %}
-			<th class="txt-bar bg-bar col-2">Prenom</th>
-			<th class="txt-bar bg-bar col-2">nom</th>
-			<th class="txt-bar bg-bar col-2">session</th>
-			 <th class="txt-bar bg-bar col-3">Tél</th>
-			<th class="txt-bar bg-bar col-3">Mail</th>
-			{# <th class="txt-bar bg-bar">Action</th> #}
-		</tr>
-	</tbody>
-</thead>
-<tbody>
-	{% for item in list %}
-		<tr>
-			<td class="col-2">{{item.prenom}}</td>
-			<td class="col-2">{{item.nom}}</td>
-			<td class="col-2">{{item.ns}}</td>
-			<td class="col-3">{{item.telephone}}</td>
-			<td class="col-3">{{item.email}}</td>
-			{#<td>{{session.formation}}</td>#}
 
-			{# <td>
-				<a href="{{ path( 'editUser',{'user':item.id} ) }}">
-					<i class="fas fa-solid fa-download" style="font-size:20px;color:green;"></i>
-				</a>
-			</td> #}
-		</tr>
+					{% elseif roleName ==  "Maitre d'apprentissage" %}
+						<th class="txt-bar bg-bar col-2">Prenom 
+							<button class='fas fa-arrow-circle-down btn btn-light m-1' style='font-size:15px' onclick="location.href ='{{ path( 'triListeGlobale',{'param':"PRENOM_ASC", role,'role_name': roleName } ) }}'">
+							</button>
+							<button class='fas fa-arrow-alt-circle-up btn btn-light m-1' style='font-size:15px' onclick="location.href ='{{ path( 'triListeGlobale',{'param':"PRENOM_DESC", role,'role_name': roleName } ) }}'">
+							</button>
+						</th>
+    					<th class="txt-bar bg-bar col-2">nom 
+							<button class='fas fa-arrow-circle-down btn btn-light m-1' style='font-size:15px' onclick="location.href ='{{ path( 'triListeGlobale',{'param':"NOM_ASC", role,'role_name': roleName } ) }}'">
+							</button>
+							<button class='fas fa-arrow-alt-circle-up btn btn-light m-1' style='font-size:15px' onclick="location.href ='{{ path( 'triListeGlobale',{'param':"NOM_DESC", role,'role_name': roleName } ) }}'">
+							</button>
+						</th>
+						<th class="txt-bar bg-bar col-2">session</th>
+						<th class="txt-bar bg-bar col-3">Email 
+							<button class='fas fa-arrow-circle-down btn btn-light m-1' style='font-size:15px' onclick="location.href ='{{ path( 'triListeGlobale',{'param':"EMAIL_ASC", role,'role_name': roleName } ) }}'">
+							</button>
+							<button class='fas fa-arrow-alt-circle-up btn btn-light m-1' style='font-size:15px' onclick="location.href ='{{ path( 'triListeGlobale',{'param':"EMAIL_DESC", role,'role_name': roleName } ) }}'">
+							</button>
+						</th>
+						<th class="txt-bar bg-bar col-3">entreprise</th>
+					</tr>
+				</thead>
+				<tbody>
 
-	{% endfor %}
-</tbody></table>{% endif %}</div></div></div></div></div>{% endblock %}
+				{% for item in list %}
+					<tr>
+						<td class="col-2">{{item.prenom}}</td>
+						<td class="col-2">{{item.nom}}</td>
+						<td class="col-2">{{item.ns}}</td>
+						<td class="col-3">{{item.email}}</td>
+    					<td class="col-3">{{item.nom_ent}}</td>
+					</tr>
+				{% endfor %}
+
+				</tbody>
+			</table>
+					{% else %}
+						<th class="txt-bar bg-bar col-2">Prenom 
+							<button class='fas fa-arrow-circle-down btn btn-light m-1' style='font-size:15px' onclick="location.href ='{{ path( 'triListeGlobale',{'param':"PRENOM_ASC", role,'role_name': roleName } ) }}'">	
+							</button>
+							<button class='fas fa-arrow-alt-circle-up btn btn-light m-1' style='font-size:15px' onclick="location.href ='{{ path( 'triListeGlobale',{'param':"PRENOM_DESC", role,'role_name': roleName } ) }}'">
+							</button>
+						</th>
+						<th class="txt-bar bg-bar col-2">nom
+							<button class='fas fa-arrow-circle-down btn btn-light m-1' style='font-size:15px' onclick="location.href ='{{ path( 'triListeGlobale',{'param':"NOM_ASC", role,'role_name': roleName } ) }}'">	
+							</button>
+							<button class='fas fa-arrow-alt-circle-up btn btn-light m-1' style='font-size:15px' onclick="location.href ='{{ path( 'triListeGlobale',{'param':"NOM_DESC", role,'role_name': roleName } ) }}'">
+							</button>
+						</th>
+						<th class="txt-bar bg-bar col-2">session</th>	
+						<th class="txt-bar bg-bar col-3">Tél</th>
+						<th class="txt-bar bg-bar col-3">Email 
+							<button class='fas fa-arrow-circle-down btn btn-light m-1' style='font-size:15px' onclick="location.href ='{{ path( 'triListeGlobale',{'param':"EMAIL_ASC", role,'role_name': roleName } ) }}'">
+							</button>
+							<button class='fas fa-arrow-alt-circle-up btn btn-light m-1' style='font-size:15px' onclick="location.href ='{{ path( 'triListeGlobale',{'param':"EMAIL_DESC", role,'role_name': roleName } ) }}'">
+							</button>
+						</th>
+					</tr>		
+				</thead> 
+				<tbody>
+				{% for item in list %}
+					<tr>
+						<td class="col-2">{{item.prenom}}</td>
+						<td class="col-2">{{item.nom}}</td>
+						<td class="col-2">{{item.ns}}</td>
+	 					<td class="col-3">{{item.telephone}}</td>
+						<td class="col-3">{{item.email}}</td>
+					</tr>
+				{% endfor %} 
+				</tbody>
+			</table>
+					{% endif %}
+		</div>
+	</div>
+{% endblock %}

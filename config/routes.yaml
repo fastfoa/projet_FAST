@@ -154,6 +154,11 @@ dashMA:
   path: /dashMA
   controller: App\Controller\DashController::dashMA
 
+triListeGlobale:
+    path: /triListeGlobale/{param}/{role}/{role_name}
+    controller: App\Controller\DashController::triListeGlobale
+    
+
 ## **************** SESSION
 
 addSession:
