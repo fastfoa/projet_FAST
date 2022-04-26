@@ -44,7 +44,7 @@ class DocumentController extends AbstractController
         return null;
     }
 
-    public function upload($retour, Request $request, SluggerInterface $slugger): Response
+    public function upload( Request $request, SluggerInterface $slugger): Response
     {
         $ret = $this->checkRGPD();
         if ($ret)
@@ -224,24 +224,28 @@ class DocumentController extends AbstractController
                     $entityManager->persist($recipient); // On confie notre entit&#xE9; &#xE0; l'entity manager (on persist l'entit&#xE9;)    
                 }
                 $entityManager->flush();
-
                 $this->addFlash('message', "Document ajouté");
                 //dd( $retour );
-                return $this->redirectToRoute( $retour );
+      
+                    // return $this->redirectToRoute( $retour );
+  
+                
+              
             }
         }
 
         return $this->render(
-            'document/upload.html.twig',
+            'profil/profilOF_APP.html.twig', 
             [
 
-                'myForm'            => $formulaire->createView(),
+                'myform'            => $formulaire->createView(),
                 'role'              => $roleString,
                 'nameOF'            => $nameOF,
                 'nameMA'            => $nameMA,
                 'nameFormateur'     => $nameFormateur,
                 'nameApprenti'      => $nameApprenti,
                 'nameEntreprise'    => $nameEntreprise,
+                'idapp' => $idApp,
                 'menu'              => getMenuFromRole($this->getUser()->getRoleString()),
             ]
         );
@@ -275,32 +279,40 @@ class DocumentController extends AbstractController
             return $ret;
 
         $file = $this->getParameter('path_upload') . "/" . $id->getFileName();
-
+// dd($file);
         $r = new BinaryFileResponse($file);
 
         $str =  $id->getFileNameOriginal();
 
         $d = HeaderUtils::makeDisposition(
-            HeaderUtils::DISPOSITION_ATTACHMENT,
-            $str
+            HeaderUtils::DISPOSITION_ATTACHMENT,$str
         );
-
+// dd($d);
         $r->headers->set('Content-Disposition', $d);
         return $r;
     }
 
-    public function deletedocument(Document $document)
+    public function deletedocument( Document $id, User $user)
     {
         $ret = $this->checkRGPD();
         if ($ret)
             return $ret;
 
+            $login = $this->getParameter('loginDB');
+            $pw = $this->getParameter('PasswordDB');
+      $idd = $user->getid();
+        //   dd($id);
+       $idapp = getSQLArrayAssoc($login , $pw,
+        "SELECT id_owner FROM document where id = $idd "); 
+        $idapp = $idapp[0]['id_owner'];
+// dd($idapp);
         $doctrine = $this->getDoctrine();
         $om = $doctrine->getManager();
-        $om->remove($document);
+        $om->remove($id);
         $om->flush();
-        $this->addFlash('message', "Document supprimé");
-        return $this->redirectToRoute("downloadlist");
+
+        // // $this->addFlash('message', "Document supprimé");
+        return $this->redirectToRoute('profilOF_APP',  ['user' => $idapp]) ;
     }
 
     public function getInfoDoc(User $user)

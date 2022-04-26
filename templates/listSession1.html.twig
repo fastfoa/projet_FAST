@@ -34,7 +34,7 @@
 									</tr>
 								<tbody>
 									{% for elme in listAPPS[i] %}
-                                    <tr	class='clickable-row' data-href='{{ path( 'editUser',{'user':elme.id} ) }}'>
+                                    <tr	class='clickable-row' data-href='{{ path( 'profilOF_APP',{'user':elme.id} ) }}'>
 									 {# <a href="{{ path( 'editUser',{'user':item.id} ) }}"> #}
 										<td class=" colorTextNoir">{{elme.prenom}}</td>
 										<td class=" colorTextNoir">{{elme.nom}}</td>
