@@ -779,7 +779,7 @@ class DashController extends AbstractController
             $pw,
        
             
-            "SELECT u.nom, u.prenom, u.id, u.email, u.telephone, u.id, m.id_ent, (select user2.nom from projet_fast.user as user2 where m.id_ent=user2.id) as nom_ent, u.roles, s.nom as ns
+            "SELECT u.nom, u.prenom, u.id, u.email, u.telephone, u.id, m.id_ent, (select user2.nom from user as user2 where m.id_ent=user2.id) as nom_ent, u.roles, s.nom as ns
             FROM mahas_ent as m 
             RIGHT JOIN  user as u ON u.id=m.id_ma 
             LEFT JOIN user_in_session as us ON us.id_user=u.id 
