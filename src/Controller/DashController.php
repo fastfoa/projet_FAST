@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use App\Controller\ProfilController;
 use App\Entity\Session;
 use App\Entity\User;
+use App\Form\FiltreType;
 use App\Form\SessionType;
 use Symfony\Component\Validator\Constraints\Length;
 
@@ -450,7 +451,7 @@ class DashController extends AbstractController
     }
 
 
-    public function listAll($role,  $roleName): Response
+    public function listAll($role,  $roleName , $myForm, $filtre): Response
     {
         $ret = $this->checkRGPD();
         if ($ret)
@@ -486,6 +487,7 @@ class DashController extends AbstractController
             );
         }
 
+        
 
         return $this->render(
             'dash/listUser.html.twig',
@@ -493,45 +495,157 @@ class DashController extends AbstractController
                 'list' => $list,
                 'menu' => getMenuFromRole($this->getUser()->getRoleString()),
                 'role' => $role,
-                'roleName' => $roleName
+                'roleName' => $roleName,
+                'myForm' => $myForm,
+                'filtre' => $filtre,
             ]
         );
     }
 
-    public function listAllAprentis(): Response
+    public function listAllAprentis( Request $request): Response
     {
         $ret = $this->checkRGPD();
         if ($ret)
             return $ret;
 
-        return $this->listAll('ROLE_APP', 'Apprenti');
+            $login  = $this->getParameter('loginDB');
+            $pw     = $this->getParameter('PasswordDB');
+            $role = "ROLE_APP";
+            $roleName = 'Apprenti';
+                   
+            $form = $this->createForm(FiltreType::class);
+            $form->handleRequest($request);
+    
+            if ($form->isSubmitted() && $form->isValid()) {
+
+                $data = $form->get('filtretext')->getData();
+               
+                $filtre = getSQLArrayAssoc(
+                    $login,
+                    $pw,
+                    "SELECT * from projet_fast.user as u 
+                    WHERE ( u.nom LIKE '%$data%'
+                    OR u.prenom LIKE '%$data%'
+                    OR u.email LIKE '%$data%' )
+                    AND u.role_string= '$role' ;"  );
+
+                $doctrine = $this->getDoctrine();
+                $entityManager = $doctrine->getManager();
+                // $entityManager->persist($user); 
+                $entityManager->flush();
+            }
+            // dd($filtre);
+            $myForm = $form->createView();
+            
+        return $this->listAll($role, $roleName, $myForm, $filtre );
     }
 
-    public function listAllFormateurs(): Response
+    public function listAllFormateurs(Request $request): Response
     {
         $ret = $this->checkRGPD();
         if ($ret)
             return $ret;
+            $login  = $this->getParameter('loginDB');
+            $pw     = $this->getParameter('PasswordDB');
+            $listAux = [];
+    
+        
+                $filtre = getSQLArrayAssoc(
+                    $login,
+                    $pw,
+                    "
+                    "  );
+                    
+            // $user = $user;
+            $form = $this->createForm(FiltreType::class);
+            $form->handleRequest($request);
+    
+            if ($form->isSubmitted() && $form->isValid()) {
+    
 
-        return $this->listAll('ROLE_FORMATEUR', 'Formateur');
+                
+                $doctrine = $this->getDoctrine();
+                $entityManager = $doctrine->getManager();
+                // $entityManager->persist($user); 
+                $entityManager->flush();
+    
+  
+            }
+            $myForm = $form->createView();
+
+        return $this->listAll('ROLE_FORMATEUR', 'Formateur',$myForm);
     }
 
-    public function listAllEntreprises(): Response
+    public function listAllEntreprises(Request $request): Response
     {
         $ret = $this->checkRGPD();
         if ($ret)
             return $ret;
+            $login  = $this->getParameter('loginDB');
+            $pw     = $this->getParameter('PasswordDB');
+            $listAux = [];
+    
+        
+                $filtre = getSQLArrayAssoc(
+                    $login,
+                    $pw,
+                    "
+                    "  );
+                    
+            // $user = $user;
+            $form = $this->createForm(FiltreType::class);
+            $form->handleRequest($request);
+    
+            if ($form->isSubmitted() && $form->isValid()) {
+    
 
-        return $this->listAll('ROLE_ENT', 'Entreprise');
+                
+                $doctrine = $this->getDoctrine();
+                $entityManager = $doctrine->getManager();
+                // $entityManager->persist($user); 
+                $entityManager->flush();
+    
+  
+            }
+            $myForm = $form->createView();
+
+        return $this->listAll('ROLE_ENT', 'Entreprise',$myForm);
     }
 
-    public function listAllMA(): Response
+    public function listAllMA(Request $request): Response
     {
         $ret = $this->checkRGPD();
         if ($ret)
             return $ret;
+            $login  = $this->getParameter('loginDB');
+            $pw     = $this->getParameter('PasswordDB');
+            $listAux = [];
+    
+        
+                $filtre = getSQLArrayAssoc(
+                    $login,
+                    $pw,
+                    "
+                    "  );
+                    
+            // $user = $user;
+            $form = $this->createForm(FiltreType::class);
+            $form->handleRequest($request);
+    
+            if ($form->isSubmitted() && $form->isValid()) {
+    
 
-        return $this->listAll('ROLE_MA', "Maitre d'apprentissage");
+                
+                $doctrine = $this->getDoctrine();
+                $entityManager = $doctrine->getManager();
+                // $entityManager->persist($user); 
+                $entityManager->flush();
+    
+  
+            }
+            $myForm = $form->createView();
+
+        return $this->listAll('ROLE_MA', "Maitre d'apprentissage",$myForm);
     }
 
 
@@ -553,7 +667,7 @@ class DashController extends AbstractController
       
         $listFormateur=[];
       
-    $user  = $this->getUser();
+         $user  = $this->getUser();
 
          $id = $user->getId();
         //  dd($id);
@@ -608,6 +722,40 @@ class DashController extends AbstractController
             'entreprise'=>$entreprise
         ]);
     }    
+
+    public function filtrelistglobal($param, Request $request, User $user){
+
+        $login  = $this->getParameter('loginDB');
+        $pw     = $this->getParameter('PasswordDB');
+        $listAux = [];
+
+        if ($param == "FILTRE"){
+            $filtre = getSQLArrayAssoc(
+                $login,
+                $pw,
+                "
+                "  );
+                
+        $user = $user;
+        $form = $this->createForm(FiltreType::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $doctrine = $this->getDoctrine();
+            $entityManager = $doctrine->getManager();
+
+            $entityManager->persist($user); 
+            $entityManager->flush();
+
+
+        }
+        return $this->render( 'dash/listUser.html.twig', [
+            'myForm' => $form->createView(),
+        ]);
+        }
+
+    }
 
 
        
