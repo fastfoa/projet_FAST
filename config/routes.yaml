@@ -122,9 +122,14 @@ userGeneralForm:
   path: /userGeneralForm/{user}
   controller: App\Controller\InscriptionController::userGeneralForm
 
-insertMa:
-  path: /insertMa/{idMa}/{idApp}
-  controller: App\Controller\ProfilController::insertMa
+
+    path: /insertMa/{idMa}/{idApp}
+    controller: App\Controller\ProfilController::insertMa
+    
+deleteMA:
+    path: /deleteMA/{id}
+    controller: App\Controller\ProfilController::deleteMA
+
 
 ## App\Controller\DashController
 
