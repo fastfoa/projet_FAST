@@ -32,16 +32,22 @@
 		    </div>
 	    </div>
 		<div class="row bg">
-			<div class="col-3">
-			</a>	<a href="">
-				<div class="boutonForm m-3 p-2">+ Ajouter un
-					{{ roleName }}</div>
-			</a>
+		
+			<div class="input-group">
+  			{{ form_start(myForm) }}
+			  {{ form_widget(myForm.filtretext) }}
+  				<button  type="submit" class="btn btn-primary float-right">
+    				<i class="fas fa-search"></i>
+  				</button>
+				  {{ form_end(myForm) }}
 			</div>
 		</div>
+
+		
 	<div class="row">
 		<div>
 			<table class="table-normal">
+			
 				<thead>
 					<tr>
 						{% if roleName == 'Entreprise' %}

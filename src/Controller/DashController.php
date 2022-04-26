@@ -12,6 +12,7 @@ use App\Entity\Document;
 use App\Entity\RecipientDocument;
 use App\Entity\Session;
 use App\Entity\User;
+use App\Form\FiltreType;
 use App\Form\SessionType;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\String\Slugger\SluggerInterface;
@@ -454,7 +455,7 @@ class DashController extends AbstractController
     }
 
 
-    public function listAll($role,  $roleName): Response
+    public function listAll($role,  $roleName , Request $request): Response
     {
         $ret = $this->checkRGPD();
         if ($ret)
@@ -465,12 +466,53 @@ class DashController extends AbstractController
         $login = $this->getParameter('loginDB');
         $pw = $this->getParameter('PasswordDB');
 
+        
+        $form = $this->createForm(FiltreType::class);
+        $form->handleRequest($request);
+        $data = $form->get('filtretext')->getData();
+    if($data != ''){ 
+        if ($form->isSubmitted() && $form->isValid()) {  
+            if ($role == 'ROLE_MA') {
+                $list = getSQLArrayAssoc(
+                    $login,
+                    $pw,
+                    "SELECT u.nom, u.prenom, u.id, u.email, u.telephone, u.id, m.id_ent, (select nom from projet_fast.user as user2 where m.id_ent=user2.id) as nom_ent, u.roles, s.nom as ns
+                    FROM mahas_ent as m 
+                    RIGHT JOIN  user as u ON u.id=m.id_ma 
+                    LEFT JOIN user_in_session as us ON us.id_user=u.id 
+                    LEFT JOIN session as s ON us.id_session=s.id 
+                    WHERE ( u.nom LIKE '%$data%'
+                       OR u.prenom LIKE '%$data%'
+                       OR u.email LIKE '%$data%' )
+                       AND u.role_string= 'ROLE_MA';'"
+                );
+            } else {
+                $list =  getSQLArrayAssoc(
+                    $login,
+                    $pw,
+                    "SELECT user.nom, user.prenom, user.telephone, user.email, user.id, s.nom as ns
+                    FROM  user
+                    LEFT JOIN user_in_session as us ON us.id_user=user.id 
+                    LEFT JOIN session as s ON us.id_session=s.id 
+                    WHERE ( user.nom LIKE '%$data%'
+                    OR user.prenom LIKE '%$data%'
+                    OR user.email LIKE '%$data%' )
+                    AND user.role_string= '$role';"
+                );
+            }
+           
+            $doctrine = $this->getDoctrine();
+            $entityManager = $doctrine->getManager();
+            // $entityManager->persist($user); 
+            $entityManager->flush();
+            }
+        }
+
+    else{
         if ($role == 'ROLE_MA') {
             $list = getSQLArrayAssoc(
                 $login,
                 $pw,
-
-
                 "SELECT u.nom, u.prenom, u.id, u.email, u.telephone, u.id, m.id_ent, (select nom from projet_fast.user as user2 where m.id_ent=user2.id) as nom_ent, u.roles, s.nom as ns
          FROM mahas_ent as m 
          RIGHT JOIN  user as u ON u.id=m.id_ma 
@@ -489,53 +531,63 @@ class DashController extends AbstractController
             WHERE user.role_string='$role'"
             );
         }
-
-
+        }
         return $this->render(
             'dash/listUser.html.twig',
             [
                 'list' => $list,
                 'menu' => getMenuFromRole($this->getUser()->getRoleString()),
                 'role' => $role,
-                'roleName' => $roleName
+                'roleName' => $roleName,
+                'myForm' => $form->createView(),
+             
             ]
         );
     }
 
-    public function listAllAprentis(): Response
+    public function listAllAprentis( Request $request): Response
     {
         $ret = $this->checkRGPD();
         if ($ret)
             return $ret;
 
-        return $this->listAll('ROLE_APP', 'Apprenti');
+
+            $role = "ROLE_APP";
+            $roleName = 'Apprenti';
+                   
+            
+            
+        return $this->listAll($role, $roleName, $request );
     }
 
-    public function listAllFormateurs(): Response
+    public function listAllFormateurs(Request $request): Response
     {
         $ret = $this->checkRGPD();
         if ($ret)
             return $ret;
+      
 
-        return $this->listAll('ROLE_FORMATEUR', 'Formateur');
+        return $this->listAll('ROLE_FORMATEUR', 'Formateur' , $request);
     }
 
-    public function listAllEntreprises(): Response
+    public function listAllEntreprises(Request $request): Response
     {
         $ret = $this->checkRGPD();
         if ($ret)
             return $ret;
+           
 
-        return $this->listAll('ROLE_ENT', 'Entreprise');
+        return $this->listAll('ROLE_ENT', 'Entreprise',$request);
     }
 
-    public function listAllMA(): Response
+    public function listAllMA(Request $request): Response
     {
         $ret = $this->checkRGPD();
         if ($ret)
             return $ret;
+           
 
-        return $this->listAll('ROLE_MA', "Maitre d'apprentissage");
+        return $this->listAll('ROLE_MA', "Maitre d'apprentissage",$request);
     }
 
 
@@ -557,7 +609,7 @@ class DashController extends AbstractController
       
         $listFormateur=[];
       
-    $user  = $this->getUser();
+         $user  = $this->getUser();
 
          $id = $user->getId();
         //  dd($id);
@@ -723,6 +775,40 @@ class DashController extends AbstractController
 
      
     }    
+
+    public function filtrelistglobal($param, Request $request, User $user){
+
+        $login  = $this->getParameter('loginDB');
+        $pw     = $this->getParameter('PasswordDB');
+        $listAux = [];
+
+        if ($param == "FILTRE"){
+            $filtre = getSQLArrayAssoc(
+                $login,
+                $pw,
+                "
+                "  );
+                
+        $user = $user;
+        $form = $this->createForm(FiltreType::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $doctrine = $this->getDoctrine();
+            $entityManager = $doctrine->getManager();
+
+            $entityManager->persist($user); 
+            $entityManager->flush();
+
+
+        }
+        return $this->render( 'dash/listUser.html.twig', [
+            'myForm' => $form->createView(),
+        ]);
+        }
+
+    }
 
 
        
