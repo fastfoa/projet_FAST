@@ -38,7 +38,7 @@
 											<br>
 											{{ app.adresse|default('adresse') }}
 										</div>	
-										<div class="col-5">
+									{#	<div class="col-5">
 											{{ app.tel_urgence1|default('telephone urgence 1') }}
 											<br>
 											{{ app.tel_urgence2|default('telephone urgence 1') }}
@@ -48,7 +48,7 @@
                 								<button class="boutonForm">EVAL</button>
         									</a>
 
-										</div>	
+										</div>	#}
 										<hr>										        										
 									{% endfor %}
 								 {% else %}
@@ -77,7 +77,7 @@
 									{% for formateur in formateurs %}
 										
 									
-										<div class="col-6">
+										<div class="col-12">
 											{{ formateur.prenom }} {{ formateur.nom }}
 											<br>
 											{{ formateur.email }}<hr>
@@ -87,8 +87,10 @@
 										</div>	
 										{% endfor %}
 									{% else %}
-										<div class="col-6">
-											<h2 class="txt-dark">PAS DE Formateur</h2>
+
+										<div class="col-12">
+											<h2 class="txt-dark">PAS DE MAITRE D'APPRENTISSAGE</h2>
+
 										</div>	
 
 									{% endif %}

@@ -36,7 +36,7 @@
 											<br>
 											{{ app.adresse|default('adresse') }}
 										</div>	
-										<div class="col-5">
+									{#	<div class="col-5">
 											{{ app.tel_urgence1|default('telephone urgence 1') }}
 											<br>
 											{{ app.tel_urgence2|default('telephone urgence 1') }}
@@ -45,7 +45,7 @@
 											<a href="{{ path( 'dashEval',{'app':app.id } ) }}">
                 								<button class="boutonForm">EVAL</button>
         									</a>
-										</div>	
+										</div>	#}
 										<hr>										        
 										
 									{% endfor %}
@@ -71,7 +71,7 @@
 									{% for ma in mas %}
 										
 									
-										<div class="col-6">
+										<div class="col-12">
 											{{ ma.prenom }} {{ ma.nom }}
 											<br>
 											{{ ma.email }}
@@ -106,18 +106,21 @@
 									{% for formateur in formateurs %}
 										
 									
-										<div class="col-6">
+										<div class="col-12">
 											{{ formateur.prenom }} {{ formateur.nom }}
 											<br>
-											{{ formateur.email }}<hr>
-										</div>	
+											{{ formateur.email }}
+											<hr>
+										</div>
 										
 										<div class="col-6">
 										</div>	
 										{% endfor %}
 									{% else %}
 										<div class="col-6">
-											<h2 class="txt-dark">PAS DE Formateur  </h2>
+
+											<h2 class="txt-dark">PAS DE FORMATEUR</h2>
+
 										</div>	
 									{% endif %}
 								</div>	
