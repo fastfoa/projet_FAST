@@ -8,10 +8,14 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use App\Controller\ProfilController;
+use App\Entity\Document;
+use App\Entity\RecipientDocument;
 use App\Entity\Session;
 use App\Entity\User;
 use App\Form\FiltreType;
 use App\Form\SessionType;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Component\Validator\Constraints\Length;
 
 class DashController extends AbstractController
@@ -590,7 +594,7 @@ class DashController extends AbstractController
 
     // public function dashENTprincipalx(): Response
 
-    public function dashApp(): Response
+    public function dashApp(Request $request, SluggerInterface $slugger): Response
     { 
         $ret = $this->checkRGPD();
         if ( $ret )
@@ -614,10 +618,10 @@ class DashController extends AbstractController
         $infoOF = getInfoOF();
     
         $sessionID = getIdSessionFromApprenti1($login, $pw,  $id );
-        
+        // dd($id);
 
         $listDoc = getSQLArrayAssoc($this->getParameter('loginDB'), $this->getParameter('PasswordDB'),
-        "SELECT document.id AS d_id, document.titre AS d_titre, document.file_name AS d_fileName
+        "SELECT document.id AS d_id, document.titre AS d_titre, document.file_name AS d_fileName, document.date_create AS d_dateCreate
         FROM document, user
         WHERE user.id=document.id_owner AND user.id=".$user->getId());
 
@@ -646,19 +650,130 @@ class DashController extends AbstractController
           and u.role_string='ROLE_FORMATEUR' 
           and us0.id_user='$sessionID'");
 
+
+
+
+        $up = new Document();
+        $user = $user;
+        $roleString = $user->getRoleString();
+
+        $login = $this->getParameter('loginDB');
+        $pw = $this->getParameter('PasswordDB');
+
+        $nameMA = "";
+        $nameOF = "";
+        $nameFormateur = "";
+        $nameApprenti = "";
+        $nameEntreprise = "";
+        $resMA          = false;
+        $resApp         = false;
+        $resFormateur   = false;
+        $resENT         = false;
+
+        $nameOF = 'FOREACH';
+
+
+      
+
+            $resMA =  getMAFromApprenti($login, $pw, $id);
+            if( $resMA )
+            {
+                $nameMA = $resMA['prenom'] . " " . $resMA['nom'] . " (MA)";
+                $resENT =  getENTFromMA($login, $pw, $resMA['id']);
+                if ( $resENT )
+                {
+                    $resIdSession = getSessionFromApp($login, $pw, $id);
+                    if( $resIdSession )
+                    {
+                        $idSession = $resIdSession['id_session'];
+                        $resFormateur = getUsersFromRoleSession($login, $pw, "ROLE_FORMATEUR", $idSession);
+                        if ( $resFormateur )
+                            $nameFormateur = $resFormateur[0]['prenom'] . " " . $resFormateur[0]['nom'] . " (FOR)";
+                    }
+                }
+            }
+       
+
+        $nameOF = 'FOREACH';
+
+
+
+
+        $formulaire = $this->createForm(DocumentExtType::class, $up);
+        $formulaire->handleRequest($request);
+
+        if ($formulaire->isSubmitted() && $formulaire->isValid()) {
+            $file = $formulaire->get('fileName')->getData();
+            if ($file) {
+                //return new Response( " fichier : $file ");
+                $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+                $originalExt = pathinfo($file->getClientOriginalName(), PATHINFO_EXTENSION);
+                //return new Response( " fichier : $originalFilename . $originalExt uploadé ");
+                $fullOrigineFileName = $originalFilename . "." . $originalExt;
+
+                // this is needed to safely include the file name as part of the URL
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename . '-' . uniqid() . '.' . $originalExt;
+
+
+                // Move the file to the directory where brochures are stored
+
+
+                try {
+                    $file->move(
+                        $this->getParameter('path_upload'),
+                        $newFilename
+                    );
+                } catch (FileException $e) {
+                    // ... handle exception if something happens during file upload
+                }
+                $up->setFileName($newFilename);
+                $up->setIdOwner( $user->getId());
+                $up->setFileNameOriginal($fullOrigineFileName);
+                $up->setDateCreate(new \DateTime());
+
+                $doctrine = $this->getDoctrine();
+                $entityManager = $doctrine->getManager();
+
+                $entityManager->persist($up); // On confie notre entit&#xE9; &#xE0; l'entity manager (on persist l'entit&#xE9;)
+                $entityManager->flush();
+
+          
+                    $recipient = new RecipientDocument();
+                    $recipient->setIdDocument( $up->getId());
+                    $recipient->setIdRecipient( $id );
+                    $entityManager->persist($recipient); // On confie notre entit&#xE9; &#xE0; l'entity manager (on persist l'entit&#xE9;)    
+          
+           
+                $entityManager->flush();
+                $this->addFlash('message', "Document ajouté");
+                //dd( $retour );
+            }
+        }
+
+
         return $this->render('profil/profilOF_APP.html.twig', 
         [
             'user' => $user,
             'listMa' => $listMa,
             'ma' => $ma,
             'id' => $id,
-            'document' => $listDoc,
-            'OF'   => $infoOF,         
+            'documents' => $listDoc,
             'menu' => getMenuFromRole( $this->getUser()->getRoleString() ),
+            'OF'   => $infoOF,         
             'fonction' => "Apprenti", 
             'listFormateur'=> $listFormateur,
-            'entreprise'=>$entreprise
+            'entreprise'=>$entreprise,
+            'myform'            => $formulaire->createView(),
+            'role'              => $roleString,
+            'nameOF'            => $nameOF,
+            'nameMA'            => $nameMA,
+            'nameFormateur'     => $nameFormateur,
+            'nameApprenti'      => $nameApprenti,
+            'nameEntreprise'    => $nameEntreprise,
         ]);
+
+     
     }    
 
     public function filtrelistglobal($param, Request $request, User $user){

@@ -26,14 +26,15 @@ function seeDoc2(id) {
 }
 
 function downloadDoc(url) {
-    var valueI = $('#listDoc').val();
-    var idD = $('#documents option[value="' + valueI + '"]').attr('id');
+//     var valueI = $('#listDoc').val();
+//     var idD = $('#documents option[value="' + valueI + '"]').attr('id');
+// return alert(valueI);
+// console.log(idD);
+//     if (!idD)
+//         return alert("Fichier introuvable !");
 
-    if (!idD)
-        return alert("Fichier introuvable !");
-
-    var link = url + "/" + idD;
-    window.location = link;
+    // var link = url + "/" + idD;
+    window.location = url;
 }
 
 
