@@ -43,10 +43,8 @@ window.history.back();
 				</a>
 			</li> #}
 		<li class="nav-item ">
-				{% if is_granted('ROLE_OF') %}
-					<a class="nav-link  " href="{{ path('dashOFPrincipal')}}">Accueil<span class="sr-only">(current)</span>
-					</a>
-				{% elseif is_granted('ROLE_APP') %}
+				
+				{% if is_granted('ROLE_APP') %}
 						<a class="nav-link  " href="{{ path('dashApp')}}">Accueil<span class="sr-only">(current)</span>
 						</a>
 				{% elseif is_granted('ROLE_FORMATEUR') %}

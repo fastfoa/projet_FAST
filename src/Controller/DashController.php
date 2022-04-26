@@ -8,9 +8,13 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use App\Controller\ProfilController;
+use App\Entity\Document;
+use App\Entity\RecipientDocument;
 use App\Entity\Session;
 use App\Entity\User;
 use App\Form\SessionType;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Component\Validator\Constraints\Length;
 
 class DashController extends AbstractController
@@ -110,7 +114,7 @@ class DashController extends AbstractController
         return $this->redirectToRoute("dashOFPrincipal");
     }
 
-    
+
 
     public function dashEntreprise(): Response
     {
@@ -138,47 +142,52 @@ class DashController extends AbstractController
         $MA = getMAFromEnt($login, $pw, $entreprise['id']);
         
         // dd($MA);
-        if ( $MA != false )
-        {for ($i=0; $i < sizeof($MA) ; $i++) { 
-           
-             array_push($MABIS, convertUserEntity2SQL($login, $pw, $MA[$i]['id']) );
-             array_push($app, getAppFromMA($login, $pw, $MA[$i]['id']));
-        }
-        //  dd($app);
-        $appbis= [];
-        
-         for ($j=0; $j < sizeof($app); $j++) { 
-         $appbis = array_merge($appbis,$app[$j]);
-         }   
-        //   dd($appbis);
-         if ( $appbis != false )
-            {
-                for ($k=0; $k < sizeof($appbis) ; $k++) { 
-            array_push($appter,convertUserEntity2SQL($login, $pw, $appbis[$k]['id']) );
-            }
-        //  dd($appter);
 
-            for ($r=0; $r < sizeof($appter); $r++) { 
-             array_push($formateur, getFormateursFromApprenti($login, $pw, $appter[$r]['id']));
-                } 
-        // dd($formateur);
-        $formateurbis = [];
-        for ($m=0; $m < sizeof($formateur); $m++) { 
-                $formateurbis = array_merge($formateurbis,$formateur[$m]);
-              }   
-         // $formateurbis = array_unique($formateurbis);
-        // dd($formateurbis);
-       
-        for ($n=0; $n < sizeof($formateurbis) ; $n++) { 
-        array_push($formateurter,convertUserEntity2SQL($login, $pw, $formateurbis[$n]['id']) );}
-            //   dd($formateurter);
-                
+        if ($MA != false) {
+            for ($i = 0; $i < sizeof($MA); $i++) {
+
+                array_push($MABIS, convertUserEntity2SQL($login, $pw, $MA[$i]['id']));
+                array_push($app, getAppFromMA($login, $pw, $MA[$i]['id']));
             }
- }
+            //  dd($app);
+            $appbis = [];
+
+            for ($j = 0; $j < sizeof($app); $j++) {
+                $appbis = array_merge($appbis, $app[$j]);
+            }
+            //   dd($appbis);
+            if ($appbis != false) {
+                $appter = [];
+                for ($k = 0; $k < sizeof($appbis); $k++) {
+                    array_push($appter, convertUserEntity2SQL($login, $pw, $appbis[$k]['id']));
+                }
+                //  dd($appter);
+
+                for ($r = 0; $r < sizeof($appter); $r++) {
+                    array_push($formateur, getFormateursFromApprenti($login, $pw, $appter[$r]['id']));
+                }
+                // dd($formateur);
+                $formateurbis = [];
+                for ($m = 0; $m < sizeof($formateur); $m++) {
+                    $formateurbis = array_merge($formateurbis, $formateur[$m]);
+                }
+                // $formateurbis = array_unique($formateurbis);
+                // dd($formateurbis);
+                $formateurter = [];
+                for ($n = 0; $n < sizeof($formateurbis); $n++) {
+                    array_push($formateurter, convertUserEntity2SQL($login, $pw, $formateurbis[$n]['id']));
+                }
+                //   dd($formateurter);
+
+
+            }
+        }
 
         $uid = $user['id'];
-        $listDoc = getDocsFromUser( $login, $pw, $uid );
-        
+
+        $listDoc = getDocsFromUser($login, $pw, $uid);
+
+
         return $this->render(
             'dash/dashEntreprise.html.twig',
             [
@@ -199,7 +208,7 @@ class DashController extends AbstractController
 
         $ret = $this->checkRGPD();
         if ($ret)
-                     return $ret;
+            return $ret;
 
         $login = $this->getParameter('loginDB');
         $pw = $this->getParameter('PasswordDB');
@@ -248,11 +257,11 @@ class DashController extends AbstractController
                    
            
 
-            }
+
         }
 
         $uid = $user['id'];
-        $listDoc = getDocsFromUser( $login, $pw, $uid );
+        $listDoc = getDocsFromUser($login, $pw, $uid);
 
 
         return $this->render(
@@ -270,8 +279,8 @@ class DashController extends AbstractController
         );
     }
 
+               }
 
-    
     public function dashFormateur(): Response
     {
         $ret = $this->checkRGPD();
@@ -288,35 +297,50 @@ class DashController extends AbstractController
         $user       = convertUserEntity2SQL($login, $pw, $user->getId());
         $formateur = $user;
         $session = false;
-        $listAPP = false;
-        $listFORMATEUR = false;
-        $listMA = false;
+        $listAPP = [];
+        $listFORMATEUR = [];
+        $listMA = [];
+// dd($formateur);
+        $sessionID = getSessionFromFormateur($login, $pw, $formateur['id']);
+        $SESSIONBIS = [];
+        //   dd( $sessionID);     
+    
+        //   dd($sessionID[0])['id'];  
+        $Sessionlistapp = [];
+        $Sessionlistma = [];
+        $Sessionlistform = [];
+        if ($sessionID != null) { {
+                for ($i = 0; $i < sizeof($sessionID); $i++) {
 
-        //dd( $user );
-        
+                    array_push($SESSIONBIS, convertSessionEntity2SQL($login, $pw, $sessionID[$i]['id']));
+                    array_push($Sessionlistapp, getAppsFromSession($login, $pw, $sessionID[$i]['id']));
+                    array_push($Sessionlistform, getFormateurFromSession($login, $pw, $sessionID[$i]['id']));
+                    array_push($Sessionlistma, getMAFromSession($login, $pw, $sessionID[$i]['id']));
+                }
+                // dd($SESSIONBIS);
+            //    dd($Sessionlistapp);
+                // $appbis = [];
 
-        $sessionID = getIdSessionFromApprenti($login, $pw, $user['id']);
-        //dd( $sessionID );
-        if ( $sessionID != null )
-        {
-            $session =  convertSessionEntity2SQL($login, $pw, $sessionID);
-            $listAPP        =  getAppsFromSession($login, $pw, $sessionID ); 
-            $listFORMATEUR  =  getFormateurFromSession($login, $pw, $sessionID ); 
-            $listMA         =  getMAFromSession($login, $pw, $sessionID );
+                // for ($j = 0; $j < sizeof($Sessionlistapp); $j++) {
+                //     $appbis = array_merge($appbis, $Sessionlistapp[$j]);
+                // }
+
+                //   dd($appbis);
+            }
         }
-        $listDoc = getDocsFromUser( $login, $pw, $user['id'] );
+        $listDoc = getDocsFromUser($login, $pw, $user['id']);
 
-        //dd( $user );
+        // dd( $sessionID );
         return $this->render(
-        'dash/dashFormateur.html.twig', 
+            'dash/dashFormateur.html.twig',
             [
                 'user'          => $user,
                 'document'      => $listDoc,
                 'OF'            => $infoOF,
-                'listMA'        => $listMA,
-                'listFORMATEUR' => $listFORMATEUR,
-                'listAPP'       => $listAPP,
-                'session'       => $session,
+                'listMAS'        => $Sessionlistma,
+                'listFORMATEURS' => $Sessionlistform,
+                'listAPPS'       => $Sessionlistapp,
+                'sessions'       => $SESSIONBIS,
                 'menu'          => getMenuFromRole($this->getUser()->getRoleString())
             ]
         );
@@ -333,12 +357,12 @@ class DashController extends AbstractController
         $login = $this->getParameter('loginDB');
         $pw = $this->getParameter('PasswordDB');
 
-        $listAPP        =  getAppsFromSession($login, $pw, $sessionID ); 
-        $listFORMATEUR  =  getFormateurFromSession($login, $pw, $sessionID ); 
-        $listMA         =  getMAFromSession($login, $pw, $sessionID );
+        $listAPP        =  getAppsFromSession($login, $pw, $sessionID);
+        $listFORMATEUR  =  getFormateurFromSession($login, $pw, $sessionID);
+        $listMA         =  getMAFromSession($login, $pw, $sessionID);
 
         return $this->render(
-        'dash/dashOFSession.html.twig', 
+            'dash/dashOFSession.html.twig',
             [
                 'listMA'        => $listMA,
                 'listFORMATEUR' => $listFORMATEUR,
@@ -441,46 +465,37 @@ class DashController extends AbstractController
         $login = $this->getParameter('loginDB');
         $pw = $this->getParameter('PasswordDB');
 
-        if ( $role == 'ROLE_MA'){
-        $list = getSQLArrayAssoc(
-            $login,
-            $pw,
-           /*"SELECT user.nom, user.prenom, user.telephone, user.email, user.id, s.nom as ns
-             FROM  user
-             LEFT JOIN user_in_session as us ON us.id_user=user.id 
-             LEFT JOIN session as s ON us.id_session=s.id 
-             WHERE user.role_string='$role'"              
-        );         */                                            
-                                    
+        if ($role == 'ROLE_MA') {
+            $list = getSQLArrayAssoc(
+                $login,
+                $pw,
 
-      /*  "SELECT u.nom, u.prenom, u.id, u.email, u.telephone, u.session, m.id_ent, 
-        (select nom from projet_fast.user as user2 where m.id_ent=user2.id) as nom_ent, u.roles                 
-         FROM  projet_fast.mahas_ent as m          
-         RIGHT JOIN  projet_fast.user as u ON u.id=m.id_ma 
-         WHERE u.roles like '%ROLE_MA%'");                */
-         
-        "SELECT u.nom, u.prenom, u.id, u.email, u.telephone, u.id, m.id_ent, (select nom from projet_fast.user as user2 where m.id_ent=user2.id) as nom_ent, u.roles, s.nom as ns
+
+                "SELECT u.nom, u.prenom, u.id, u.email, u.telephone, u.id, m.id_ent, (select nom from projet_fast.user as user2 where m.id_ent=user2.id) as nom_ent, u.roles, s.nom as ns
          FROM mahas_ent as m 
          RIGHT JOIN  user as u ON u.id=m.id_ma 
          LEFT JOIN user_in_session as us ON us.id_user=u.id 
          LEFT JOIN session as s ON us.id_session=s.id 
-         WHERE u.roles like '%ROLE_MA%';");} 
-         
-         else { $list =  getSQLArrayAssoc(
-            $login,
-            $pw,
-            "SELECT user.nom, user.prenom, user.telephone, user.email, user.id, s.nom as ns
+         WHERE u.roles like '%ROLE_MA%';"
+            );
+        } else {
+            $list =  getSQLArrayAssoc(
+                $login,
+                $pw,
+                "SELECT user.nom, user.prenom, user.telephone, user.email, user.id, s.nom as ns
             FROM  user
             LEFT JOIN user_in_session as us ON us.id_user=user.id 
             LEFT JOIN session as s ON us.id_session=s.id 
-            WHERE user.role_string='$role'"   ); }
-                                                                        
+            WHERE user.role_string='$role'"
+            );
+        }
+
 
         return $this->render(
             'dash/listUser.html.twig',
             [
                 'list' => $list,
-                'menu' => getMenuFromRole($this->getUser()->getRoleString()), 
+                'menu' => getMenuFromRole($this->getUser()->getRoleString()),
                 'role' => $role,
                 'roleName' => $roleName
             ]
@@ -527,11 +542,12 @@ class DashController extends AbstractController
 
     // public function dashENTprincipalx(): Response
 
-    public function dashApp(): Response
+    public function dashApp(Request $request, SluggerInterface $slugger): Response
     { 
         $ret = $this->checkRGPD();
         if ( $ret )
             return $ret;
+
            
             $login  = $this->getParameter('loginDB');
             $pw     = $this->getParameter('PasswordDB');
@@ -549,11 +565,11 @@ class DashController extends AbstractController
        
         $infoOF = getInfoOF();
     
-        $sessionID = getIdSessionFromApprenti($login, $pw,  $id );
-        
+        $sessionID = getIdSessionFromApprenti1($login, $pw,  $id );
+        // dd($id);
 
         $listDoc = getSQLArrayAssoc($this->getParameter('loginDB'), $this->getParameter('PasswordDB'),
-        "SELECT document.id AS d_id, document.titre AS d_titre, document.file_name AS d_fileName
+        "SELECT document.id AS d_id, document.titre AS d_titre, document.file_name AS d_fileName, document.date_create AS d_dateCreate
         FROM document, user
         WHERE user.id=document.id_owner AND user.id=".$user->getId());
 
@@ -582,18 +598,132 @@ class DashController extends AbstractController
           and u.role_string='ROLE_FORMATEUR' 
           and us0.id_user='$sessionID'");
 
+
+
+
+        $up = new Document();
+        $user = $user;
+        $roleString = $user->getRoleString();
+
+        $login = $this->getParameter('loginDB');
+        $pw = $this->getParameter('PasswordDB');
+
+        $nameMA = "";
+        $nameOF = "";
+        $nameFormateur = "";
+        $nameApprenti = "";
+        $nameEntreprise = "";
+        $resMA          = false;
+        $resApp         = false;
+        $resFormateur   = false;
+        $resENT         = false;
+
+        $nameOF = 'FOREACH';
+
+
+      
+
+            $resMA =  getMAFromApprenti($login, $pw, $id);
+            if( $resMA )
+            {
+                $nameMA = $resMA['prenom'] . " " . $resMA['nom'] . " (MA)";
+                $resENT =  getENTFromMA($login, $pw, $resMA['id']);
+                if ( $resENT )
+                {
+                    $resIdSession = getSessionFromApp($login, $pw, $id);
+                    if( $resIdSession )
+                    {
+                        $idSession = $resIdSession['id_session'];
+                        $resFormateur = getUsersFromRoleSession($login, $pw, "ROLE_FORMATEUR", $idSession);
+                        if ( $resFormateur )
+                            $nameFormateur = $resFormateur[0]['prenom'] . " " . $resFormateur[0]['nom'] . " (FOR)";
+                    }
+                }
+            }
+       
+
+        $nameOF = 'FOREACH';
+
+
+
+
+        $formulaire = $this->createForm(DocumentExtType::class, $up);
+        $formulaire->handleRequest($request);
+
+        if ($formulaire->isSubmitted() && $formulaire->isValid()) {
+            $file = $formulaire->get('fileName')->getData();
+            if ($file) {
+                //return new Response( " fichier : $file ");
+                $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+                $originalExt = pathinfo($file->getClientOriginalName(), PATHINFO_EXTENSION);
+                //return new Response( " fichier : $originalFilename . $originalExt uploadé ");
+                $fullOrigineFileName = $originalFilename . "." . $originalExt;
+
+                // this is needed to safely include the file name as part of the URL
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename . '-' . uniqid() . '.' . $originalExt;
+
+
+                // Move the file to the directory where brochures are stored
+
+
+                try {
+                    $file->move(
+                        $this->getParameter('path_upload'),
+                        $newFilename
+                    );
+                } catch (FileException $e) {
+                    // ... handle exception if something happens during file upload
+                }
+                $up->setFileName($newFilename);
+                $up->setIdOwner( $user->getId());
+                $up->setFileNameOriginal($fullOrigineFileName);
+                $up->setDateCreate(new \DateTime());
+
+                $doctrine = $this->getDoctrine();
+                $entityManager = $doctrine->getManager();
+
+                $entityManager->persist($up); // On confie notre entit&#xE9; &#xE0; l'entity manager (on persist l'entit&#xE9;)
+                $entityManager->flush();
+
+          
+                    $recipient = new RecipientDocument();
+                    $recipient->setIdDocument( $up->getId());
+                    $recipient->setIdRecipient( $id );
+                    $entityManager->persist($recipient); // On confie notre entit&#xE9; &#xE0; l'entity manager (on persist l'entit&#xE9;)    
+          
+           
+                $entityManager->flush();
+                $this->addFlash('message', "Document ajouté");
+                //dd( $retour );
+            }
+        }
+
+
         return $this->render('profil/profilOF_APP.html.twig', 
         [
             'user' => $user,
             'listMa' => $listMa,
             'ma' => $ma,
             'id' => $id,
-            'document' => $listDoc,
-            'OF'   => $infoOF,         
+            'documents' => $listDoc,
             'menu' => getMenuFromRole( $this->getUser()->getRoleString() ),
+            'OF'   => $infoOF,         
             'fonction' => "Apprenti", 
             'listFormateur'=> $listFormateur,
-            'entreprise'=>$entreprise
+            'entreprise'=>$entreprise,
+            'myform'            => $formulaire->createView(),
+            'role'              => $roleString,
+            'nameOF'            => $nameOF,
+            'nameMA'            => $nameMA,
+            'nameFormateur'     => $nameFormateur,
+            'nameApprenti'      => $nameApprenti,
+            'nameEntreprise'    => $nameEntreprise,
         ]);
+
+     
     }    
+
+
+       
 }
