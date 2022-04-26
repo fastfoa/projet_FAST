@@ -34,25 +34,7 @@ class DocumentExtType extends AbstractType
                         */
                         ])
                 ],
-            ])->add('OFormation', CheckboxType::class, [
-                'required' => false,
-                'label' => false
-            ])->add('MA', CheckboxType::class, [
-                'required' => false,
-                'label' => false
-            ])->add('formateur', CheckboxType::class, [
-                'required' => false,
-                'label' => false
-            ])->add('apprenti', CheckboxType::class, [
-                'required' => false,
-                'label' => false
-            ])->add('entreprise', CheckboxType::class, [
-                'required' => false,
-                'label' => false
-            ])
-            
-            
-            ;
+            ]);
           
           
     }

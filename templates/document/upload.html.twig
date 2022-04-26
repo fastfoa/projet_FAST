@@ -27,70 +27,7 @@
 				{{ form_widget(myForm.fileName, {'attr': {'placeholder': 'message'}}) }}
 			</div>
 		</div>
-		<div class="row mx-auto">
-			<div class="col-12 text-justify">
-				{% if role != 'ROLE_OF' %}
-                                        <div class="row">
-                                                <div class="form-check col-8">
-                                                        {{ nameOF|default('pas de OF') }}
-                                                </div>
-                                                <div class="form-check col-2">
-                                                        {{ form_widget(myForm.OFormation) }}
-
-                                                </div>
-                                        </div>
-                                {% endif %}
-				{% if role != 'ROLE_MA' and  nameMA != '' %}
-                                        <div class="row">
-				{% else %}
-                                        <div class="row invisible myHidden">
-                                {% endif %}
-                                                <div class="form-check col-8">
-                                                        {{ nameMA|default('pas de MA') }}
-                                                </div>
-                                                <div class="form-check col-2">
-                                                        {{ form_widget(myForm.MA) }}
-                                                </div>
-                                        </div>
-				{% if role != 'ROLE_FORMATEUR' and nameFormateur != '' %}
-                                        <div class="row">
-				{% else %}
-                                        <div class="row invisible myHidden">
-                                {% endif %}
-                                                <div class="form-check col-8">
-                                                        {{ nameFormateur|default('pas de Formateur') }}
-                                                </div>
-                                                <div class="form-check col-2">
-                                                        {{ form_widget(myForm.formateur) }}
-                                                </div>
-                                        </div>
-				{% if role != 'ROLE_ENT' and nameEntreprise != '' %}
-                                        <div class="row">
-				{% else %}
-                                        <div class="row invisible myHidden">
-                                {% endif %}
-
-                                                <div class="form-check col-8">
-                                                        {{ nameEntreprise|default('pas d Entreprise') }}
-                                                </div>
-                                                <div class="form-check col-2">
-                                                        {{ form_widget(myForm.entreprise) }}
-                                                </div>
-                                        </div>
-				{% if role != 'ROLE_APP' and nameApprenti != '' %}
-                                        <div class="row">
-				{% else %}
-                                        <div class="row invisible myHidden">
-                                {% endif %}
-                                                        <div class="form-check col-8">
-                                                        {{ nameApprenti|default('pas de APP') }}
-                                                </div>
-                                                <div class="form-check col-2">
-                                                        {{ form_widget(myForm.apprenti) }}
-                                                </div>
-                                        </div>
-			</div>
-		</div>
+	
 		<div class="row mb-2">
 			<div class="mx-auto col-6">
 				<a href="{{ path( 'downloadlist') }}">

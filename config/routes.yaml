@@ -3,154 +3,156 @@
 #    controller: App\Controller\DefaultController::index
 
 login:
-    path: /login
-    controller: App\Controller\SecurityController::login
-    
+  path: /login
+  controller: App\Controller\SecurityController::login
+
 profilEnabled:
-    path: /profilEnabled
-    controller: App\Controller\ProfilEnabledController::profilEnabled
-                               
+  path: /profilEnabled
+  controller: App\Controller\ProfilEnabledController::profilEnabled
+
 files:
-    path: /files
-    controller: App\Controller\LanController::files
-        
+  path: /files
+  controller: App\Controller\LanController::files
+
 formulaireEleve:
-    path: /formulaireEleve
-    controller: App\Controller\LanController::formulaireEleve
+  path: /formulaireEleve
+  controller: App\Controller\LanController::formulaireEleve
 
 formulaireG:
-    path: /formulaireG
-    controller: App\Controller\LanController::formulaireG
+  path: /formulaireG
+  controller: App\Controller\LanController::formulaireG
 
 followCompany:
-    path: /followCompany
-    controller: App\Controller\LanController::followCompany
+  path: /followCompany
+  controller: App\Controller\LanController::followCompany
 
 followTraining:
-    path: /followTraining
-    controller: App\Controller\LanController::followTraining
+  path: /followTraining
+  controller: App\Controller\LanController::followTraining
 
 test:
-    path: /test
-    controller: App\Controller\LanController::test
+  path: /test
+  controller: App\Controller\LanController::test
 
-upload: 
-    path: /upload/{retour}
-    controller: App\Controller\DocumentController::upload
+upload:
+  path: /upload/{retour}/{iddd}
+  controller: App\Controller\DocumentController::upload
 
-getInfoDoc: 
-    path: /getInfoDoc/{id}
-    controller: App\Controller\DocumentController::getInfoDoc
+getInfoDoc:
+  path: /getInfoDoc/{id}
+  controller: App\Controller\DocumentController::getInfoDoc
 
 downloadlist:
-    path: /downloadlist
-    controller: App\Controller\DocumentController::downloadlist
+  path: /downloadlist
+  controller: App\Controller\DocumentController::downloadlist
 
 download1:
-    path: /download
-    controller: App\Controller\DocumentController::download
+  path: /download
+  controller: App\Controller\DocumentController::download
 
 download:
-    path: /download/{id}
-    controller: App\Controller\DocumentController::download
+  path: /download/{id}
+  controller: App\Controller\DocumentController::download
 
 deletedocument:
-    path: /deletedocument/{id}
-    controller: App\Controller\DocumentController::deletedocument
+  path: /deletedocument/{id}
+  controller: App\Controller\DocumentController::deletedocument
 
 stageForm:
-    path: /stageForm
-    controller: App\Controller\StageFormController::stageForm
+  path: /stageForm
+  controller: App\Controller\StageFormController::stageForm
 
 ## App\Controller\LanController
 
 formations:
-    path: /formations
-    controller: App\Controller\LanController::formations
+  path: /formations
+  controller: App\Controller\LanController::formations
 
 documents:
-    path: /documents
-    controller: App\Controller\LanController::documentOff
+  path: /documents
+  controller: App\Controller\LanController::documentOff
 
 aide:
-    path: /aide
-    controller: App\Controller\LanController::aide
+  path: /aide
+  controller: App\Controller\LanController::aide
 
 compte:
-    path: /modifInfoMonCompte
-    controller: App\Controller\CompteController::modifInfoMonCompte
+  path: /modifInfoMonCompte
+  controller: App\Controller\CompteController::modifInfoMonCompte
 
 compte_modif_password:
-    path: /modifier_mon_password
-    controller: App\Controller\CompteModifPasswordController::compte_modif_password
+  path: /modifier_mon_password
+  controller: App\Controller\CompteModifPasswordController::compte_modif_password
 
 ## App\Controller\InscriptionController
 
 inscriptionEntreprise:
-    path: /inscriptionEntreprise
-    controller: App\Controller\InscriptionController::inscriptionEntreprise
+  path: /inscriptionEntreprise
+  controller: App\Controller\InscriptionController::inscriptionEntreprise
 
 inscriptionApprenti:
-    path: /inscriptionApprenti
-    controller: App\Controller\InscriptionController::inscriptionApprenti
+  path: /inscriptionApprenti
+  controller: App\Controller\InscriptionController::inscriptionApprenti
 
 inscriptionMA:
-    path: /inscriptionMA
-    controller: App\Controller\InscriptionController::inscriptionMA
-    
+  path: /inscriptionMA
+  controller: App\Controller\InscriptionController::inscriptionMA
+
 inscriptionInd:
-    path: /inscriptionInd
-    controller: App\Controller\InscriptionController::inscriptionInd
+  path: /inscriptionInd
+  controller: App\Controller\InscriptionController::inscriptionInd
 
 inscriptionFormateur:
-    path: /inscriptionFormateur
-    controller: App\Controller\InscriptionController::inscriptionFormateur
+  path: /inscriptionFormateur
+  controller: App\Controller\InscriptionController::inscriptionFormateur
 
 barSession:
-    path: /barSession
-    controller: App\Controller\BarController::barSession
-    
+  path: /barSession
+  controller: App\Controller\BarController::barSession
+
 addUser:
-    path: /addUser/{role}/{roleName}
-    controller: App\Controller\InscriptionController::addUser
+  path: /addUser/{role}/{roleName}
+  controller: App\Controller\InscriptionController::addUser
 
 addUserSession:
-    path: /addUserSession/{session}/{role}/{roleName}
-    controller: App\Controller\InscriptionController::addUserSession
+  path: /addUserSession/{session}/{role}/{roleName}
+  controller: App\Controller\InscriptionController::addUserSession
 
 userGeneralForm:
     path: /userGeneralForm/{user}
     controller: App\Controller\InscriptionController::userGeneralForm
     
+    
 insertMa:
     path: /insertMa/{idMa}/{idApp}
     controller: App\Controller\ProfilController::insertMa
+    
+deleteMA:
+    path: /deleteMA/{id}
+    controller: App\Controller\ProfilController::deleteMA
+
 
 ## App\Controller\DashController
 
 dashOFPrincipal:
-    path: /dashOFPrincipal
-    controller: App\Controller\DashController::dashOFPrincipal
+  path: /dashOFPrincipal
+  controller: App\Controller\DashController::dashOFPrincipal
 
-    
 dashApp:
-    path: /dashApp
-    controller: App\Controller\DashController::dashApp
+  path: /dashApp
+  controller: App\Controller\DashController::dashApp
 
-    
 dashEntreprise:
-    path: /dashEntreprise
-    controller: App\Controller\DashController::dashEntreprise
-
+  path: /dashEntreprise
+  controller: App\Controller\DashController::dashEntreprise
 
 dashFormateur:
-    path: /dashFormateur
-    controller: App\Controller\DashController::dashFormateur
+  path: /dashFormateur
+  controller: App\Controller\DashController::dashFormateur
 
 dashMA:
-    path: /dashMA
-    controller: App\Controller\DashController::dashMA
-
+  path: /dashMA
+  controller: App\Controller\DashController::dashMA
 
 triListeGlobale:
     path: /triListeGlobale/{param}/{role}/{role_name}
@@ -160,192 +162,121 @@ triListeGlobale:
 ## **************** SESSION
 
 addSession:
-    path: /addSession
-    controller: App\Controller\DashController::addSession
+  path: /addSession
+  controller: App\Controller\DashController::addSession
 
 deleteSession:
-    path: /deleteSession/{session}
-    controller: App\Controller\DashController::deleteSession
+  path: /deleteSession/{session}
+  controller: App\Controller\DashController::deleteSession
 
 dashOFSession:
-    path: /dashOFSession/{session}
-    controller: App\Controller\DashController::dashOFSession
+  path: /dashOFSession/{session}
+  controller: App\Controller\DashController::dashOFSession
 
 editApprenti:
-    path: /feditApprenti/{userID}
-    controller: App\Controller\DashController::editApprenti
+  path: /feditApprenti/{userID}
+  controller: App\Controller\DashController::editApprenti
 
-editUser:
-    path: /editUser/{user}
-    controller: App\Controller\ProfilController::editUser
+# editUser:
+#     path: /editUser/{user}
+#     controller: App\Controller\ProfilController::editUser
 
 listApprentis:
-    path: /listApprentis/{session}
-    controller: App\Controller\DashController::listApprentis
+  path: /listApprentis/{session}
+  controller: App\Controller\DashController::listApprentis
 
 listUsersSession:
-    path: /listUsersSession/{session}/{role}/{roleName}
-    controller: App\Controller\DashController::listUsersSession
+  path: /listUsersSession/{session}/{role}/{roleName}
+  controller: App\Controller\DashController::listUsersSession
 
 listUsersEntreprise:
-    path: /listUsersEntreprise/{entreprise}/{role}/{roleName}
-    controller: App\Controller\DashController::listUsersEntreprise
+  path: /listUsersEntreprise/{entreprise}/{role}/{roleName}
+  controller: App\Controller\DashController::listUsersEntreprise
 
 listFormateurs:
-    path: /listFormateurs/{session}
-    controller: App\Controller\DashController::listFormateurs
+  path: /listFormateurs/{session}
+  controller: App\Controller\DashController::listFormateurs
 
 listMA:
-    path: /listMA/{session}
-    controller: App\Controller\DashController::listMA
-   
-listAllAprentis: 
-    path: /listAllAprentis
-    controller: App\Controller\DashController::listAllAprentis
+  path: /listMA/{session}
+  controller: App\Controller\DashController::listMA
 
-listAllFormateurs: 
-    path: /listAllFormateurs
-    controller: App\Controller\DashController::listAllFormateurs
+listAllAprentis:
+  path: /listAllAprentis
+  controller: App\Controller\DashController::listAllAprentis
 
-listAllEntreprises: 
-    path: /listAllEntreprises
-    controller: App\Controller\DashController::listAllEntreprises
+listAllFormateurs:
+  path: /listAllFormateurs
+  controller: App\Controller\DashController::listAllFormateurs
 
-listAllMA: 
-    path: /listAllMA
-    controller: App\Controller\DashController::listAllMA
+listAllEntreprises:
+  path: /listAllEntreprises
+  controller: App\Controller\DashController::listAllEntreprises
 
+listAllMA:
+  path: /listAllMA
+  controller: App\Controller\DashController::listAllMA
 
 # ********************** Annuaire **************************
 
 annuairePopup:
-    path: /annuairePopup
-    controller: App\Controller\LanController::annuairePopup
+  path: /annuairePopup
+  controller: App\Controller\LanController::annuairePopup
 
 annuaireTest:
-    path: /annuaireTest
-    controller: App\Controller\LanController::annuaireTest
+  path: /annuaireTest
+  controller: App\Controller\LanController::annuaireTest
 
 annuaireR:
-    path: /annuaireR/{role}
-    controller: App\Controller\LanController::annuaireR
+  path: /annuaireR/{role}
+  controller: App\Controller\LanController::annuaireR
 
 annuaireRS:
-    path: /annuaireRS/{role}/{session}
-    controller: App\Controller\LanController::annuaireRS
+  path: /annuaireRS/{role}/{session}
+  controller: App\Controller\LanController::annuaireRS
 
 annuaire:
-    path: /annuaire
-    controller: App\Controller\LanController::annuaire
+  path: /annuaire
+  controller: App\Controller\LanController::annuaire
 
 # ********************** les Profils **************************
 
+profilOF_APP:
+  path: /profilOF_APP/{user}
+  controller: App\Controller\ProfilController::profilOF_APP
 
-profilOF_APP: 
-    path: /profilOF_APP/{user}
-    controller: App\Controller\ProfilController::profilOF_APP
-
-profilOF_Formateur: 
-    path: /profilOF_Formateur/{user}
-    controller: App\Controller\ProfilController::profilOF_Formateur
-
-profilOF_MA: 
-    path: /profilOF_MA/{user}
-    controller: App\Controller\ProfilController::profilOF_MA
-
-profilOF_Entreprise: 
-    path: /profilOF_Entreprise/{user}
-    controller: App\Controller\ProfilController::profilOF_Entreprise
-
-profilAPP_OF: 
-    path: /profilAPP_OF/{user}
-    controller: App\Controller\ProfilController::profilAPP_OF
-
-profilAPP_Formateur: 
-    path: /profilAPP_Formateur/{user}
-    controller: App\Controller\ProfilController::profilAPP_Formateur
-
-profilAPP_MA: 
-    path: /profilAPP_MA/{user}
-    controller: App\Controller\ProfilController::profilAPP_MA
-    
-profilAPP_Entreprise: 
-    path: /profilAPP_Entreprise/{user}
-    controller: App\Controller\ProfilController::profilAPP_Entreprise
-
-profilFOR_OF: 
-    path: /profilFOR_OF/{user}
-    controller: App\Controller\ProfilController::profilFOR_OF
- 
-profilFOR_APP: 
-    path: /profilFOR_APP/{user}
-    controller: App\Controller\ProfilController::profilFOR_APP
-          
-profilFOR_MA: 
-    path: /profilFOR_MA/{user}
-    controller: App\Controller\ProfilController::profilFOR_MA
-     
-profilFOR_Entreprise: 
-    path: /profilFOR_Entreprise/{user}
-    controller: App\Controller\ProfilController::profilFOR_Entreprise
-
-profilMA_OF: 
-    path: /profilMA_OF/{user}
-    controller: App\Controller\ProfilController::profilMA_OF
- 
-profilMA_APP: 
-    path: /profilMA_APP/{user}
-    controller: App\Controller\ProfilController::profilMA_APP
-          
-profilMA_FOR: 
-    path: /profilMA_FOR/{user}
-    controller: App\Controller\ProfilController::profilMA_FOR
-     
-profilENT_OF: 
-    path: /profilENT_OF/{user}
-    controller: App\Controller\ProfilController::profilENT_OF
- 
-profilENT_APP: 
-    path: /profilENT_APP/{user}
-    controller: App\Controller\ProfilController::profilENT_APP
-          
-profilENT_FOR: 
-    path: /profilENT_FOR/{user}
-    controller: App\Controller\ProfilController::profilENT_FOR
-
-     
 # ********************** RGPD **************************
 
 rgpdForm:
-    path: /rgpdForm
-    controller: App\Controller\RGPDController::rgpdForm
+  path: /rgpdForm
+  controller: App\Controller\RGPDController::rgpdForm
 
 # ********************** EVALUATION **************************
 
-newEvaluation: 
-    path: /newEvaluation/{competence}/{app}
-    controller: App\Controller\EvaluationController::newEvaluation
+newEvaluation:
+  path: /newEvaluation/{competence}/{app}
+  controller: App\Controller\EvaluationController::newEvaluation
 
-editEvaluation: 
-    path: /editEvaluation/{eval}
-    controller: App\Controller\EvaluationController::editEvaluation
+editEvaluation:
+  path: /editEvaluation/{eval}
+  controller: App\Controller\EvaluationController::editEvaluation
 
-showEvaluation: 
-    path: /showEvaluation/{eval}
-    controller: App\Controller\EvaluationController::showEvaluation
+showEvaluation:
+  path: /showEvaluation/{eval}
+  controller: App\Controller\EvaluationController::showEvaluation
 
-choiceCompetence: 
-    path: /choiceCompetence/{app}/{session}
-    controller: App\Controller\EvaluationController::choiceCompetence
+choiceCompetence:
+  path: /choiceCompetence/{app}/{session}
+  controller: App\Controller\EvaluationController::choiceCompetence
 # ************************Test*************************
 testannuaire:
-    path: /testAnnuaire
-    controller: App\Controller\TestannuaireController::app_testannuaire
+  path: /testAnnuaire
+  controller: App\Controller\TestannuaireController::app_testannuaire
 
 liste_session_role:
-    path: /testAnnuaire/{session}/{role}/
-    controller: App\Controller\TestannuaireController::liste_session_role
+  path: /testAnnuaire/{session}/{role}/
+  controller: App\Controller\TestannuaireController::liste_session_role
 
-dashEval: 
-    path: /dashEval/{app}
-    controller: App\Controller\EvaluationController::dashEval
+dashEval:
+  path: /dashEval/{app}
+  controller: App\Controller\EvaluationController::dashEval

@@ -23,21 +23,28 @@
 	<div class="container-fluid bg-workSpace">
 		<div class="row bg-bar">
 			<div class="col-12">
-				<h2>liste de tous les
-					{{ roleName }}s</h2>
-				</div>
-			</div>		
-			{# <div class="row">
-				<div class="container-fluid">
-						<div class="row">
-							<div class="col-12 col-md-4">
-								<div id="resultat"></div>
-							</div>
-							<div class="col-12 col-md-8"></div>
-						</div>
-				</div> 
-			<div> #}
+
+				<h2>liste de tous les {{ roleName }}s</h2>
+		    </div>
+	    </div>
+		<div class="row bg">
+		
+			<div class="input-group">
+  			{{ form_start(myForm) }}
+			  {{ form_widget(myForm.filtretext) }}
+  				<button  type="submit" class="btn btn-primary float-right">
+    				<i class="fas fa-search"></i>
+  				</button>
+				  {{ form_end(myForm) }}
+			</div>
+		</div>
+
+		
+	<div class="row">
+		<div>
+
 			<table class="table-normal">
+			
 				<thead>
 					<tr>
 					{% if roleName == 'Entreprise' %}
@@ -128,6 +135,7 @@
 					</tr>
 				</thead>
 				<tbody>
+
 				{% for item in list %}
 					<tr>
 						<td class="col-2">{{item.prenom}}</td>
@@ -137,6 +145,7 @@
     					<td class="col-3">{{item.nom_ent}}</td>
 					</tr>
 				{% endfor %}
+
 				</tbody>
 			</table>
 					{% else %}
