@@ -9,6 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use App\Controller\ProfilController;
 use App\Entity\Document;
+use App\Form\DocumentExtType;
 use App\Entity\RecipientDocument;
 use App\Entity\Session;
 use App\Entity\User;
