@@ -751,7 +751,7 @@ class DashController extends AbstractController
                     WHERE ( user.nom LIKE '%$data%'
                     OR user.prenom LIKE '%$data%'
                     OR user.email LIKE '%$data%' )
-                    AND user.role_string='$role' 
+                    AND user.role_string='ROLE_MA' 
                     ORDER BY user.nom  ASC" );} 
                      $doctrine = $this->getDoctrine();
                      $entityManager = $doctrine->getManager(); 
@@ -765,7 +765,7 @@ class DashController extends AbstractController
                     FROM  user
                     LEFT JOIN user_in_session as us ON us.id_user=user.id 
                     LEFT JOIN session as s ON us.id_session=s.id 
-                    WHERE user.role_string='$role' ORDER BY user.nom  ASC");  
+                    WHERE user.role_string='ROLE_MA' ORDER BY user.nom  ASC");  
                         }
                     }
         // NOM_ASC
