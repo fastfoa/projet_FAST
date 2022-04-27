@@ -50,6 +50,7 @@ class MonCompteOFType extends AbstractType
                     ] ]
             )
             ->add('old_password', PasswordType::class,[
+                'required'   => false,
                 'mapped'=>false,
                 'label'=> false,
                 'attr' => [
@@ -59,6 +60,7 @@ class MonCompteOFType extends AbstractType
             ])
             ->add('new_password', RepeatedType::class, [
                 'type' => PasswordType::class,
+                'required'   => false,
                 'mapped' => false,
                 'invalid_message' => 'Le mot de passe et la confirmation doivent être identique.',
                 'required' => true,
@@ -69,6 +71,7 @@ class MonCompteOFType extends AbstractType
                     ]
                 ],
                 'second_options' => [
+                    'required'   => false,
                     'label' => false, 
                     'attr' => [
                         'placeholder' => 'Merci de confirmer votre nouveau mot de passe.'
