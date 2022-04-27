@@ -58,7 +58,6 @@ class MonCompteFormateurType extends AbstractType
         ]
     ])
     ->add('old_password', PasswordType::class,[
-        'required'   => true,
         'mapped'=>false,
         'label'=> false,
         'attr' => [
@@ -68,13 +67,12 @@ class MonCompteFormateurType extends AbstractType
     ])
     ->add('new_password', RepeatedType::class, [
         'type' => PasswordType::class,
-        'required'   => true,
         'mapped' => false,
+        'required'   => false,
         'invalid_message' => 'Le mot de passe et la confirmation doivent être identique.',
-        'required' => false,
         'first_options' => [
-            'label' => false,
-            'attr' => [
+        'label' => false,
+        'attr' => [
                 'placeholder' => 'Merci de saisir votre nouveau mot de passe.'
             ]
         ],

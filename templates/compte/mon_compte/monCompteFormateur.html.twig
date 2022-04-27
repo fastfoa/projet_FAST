@@ -16,9 +16,11 @@
 				{{form_widget(form.adresse)}}
 				{{form_widget(form.prenom)}}
 				{{ form_widget(form.telephone) }}
+				{{form_widget(form.old_password)}}
+				{{form_widget(form.new_password)}}
 			</div>
 		</div>
 		{% include 'buttonOK.html.twig' %}
 		{{form_end(form)}}
-	</div> <div class="text-white">{{ notification }}</div>
+	</div> <div class="text-white"><h3>{{ notification }}</h3></div>
 {% endblock %}
