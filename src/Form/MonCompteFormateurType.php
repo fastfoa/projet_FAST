@@ -57,34 +57,7 @@ class MonCompteFormateurType extends AbstractType
             'style'=> 'color: black !important'
         ]
     ])
-    ->add('old_password', PasswordType::class,[
-        'mapped'=>false,
-        'label'=> false,
-        'attr' => [
-            'placeholder' => 'Mot de passe actuel'
-            
-        ] 
-    ])
-    ->add('new_password', RepeatedType::class, [
-        'type' => PasswordType::class,
-        'mapped' => false,
-        'required'   => false,
-        'invalid_message' => 'Le mot de passe et la confirmation doivent être identique.',
-        'first_options' => [
-        'label' => false,
-        'attr' => [
-                'placeholder' => 'Merci de saisir votre nouveau mot de passe.'
-            ]
-        ],
-        'second_options' => [
-            'required'   => false,
-            'label' => false, 
-            'attr' => [
-                'placeholder' => 'Merci de confirmer votre nouveau mot de passe.'
-            ]
-        ]
-    ])
-
+    
         ->add('save', SubmitType::class,[
             'label'=> "Enregistrer",
             'attr' => [

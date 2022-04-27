@@ -2,13 +2,13 @@
 
 {% block body %}
 	<div class="container-fluid">
-	{{form_start(form)}}
+		{{form_start(form)}}
 		<div class="row bg-bar">
 			<div class="col-6">
 				<h3>Modification Information Maitre Apprentissage</h3>
 			</div>
 		</div>
-		<div class="row">
+		<div class="row mt-4">
 			<div class="col-6">
 				{{ form_widget(form.email) }}
 				{{ form_widget(form.nom) }}
@@ -17,33 +17,34 @@
 				{{ form_widget(form.telephone) }}
 				{{ form_widget(form.dateNaissance) }}
 				{% include 'buttonOK.html.twig' %}
-				
-		</div>
-		</div>
-		
-		{{form_end(form)}}
-</div> <div class="text-white"><h3>{{ notification }}</h3></div>
-<hr class="text-white">
 
-{{form_start(formMDP)}}
-<div class="row bg-bar">
-			<div class="col-6">
-				<h3>Modification du Mot de passe</h3>
 			</div>
 		</div>
-		<div class="row">
-			<div class="col-6">
-				
-				
-				{{ form_widget(formMDP.old_password) }}
-				{{ form_widget(formMDP.new_password) }}
-				<div class="mt-3">{{ form_widget(formMDP.save2) }}</div>
-				
-			</div>
+
+		{{form_end(form)}}
+	</div>
+	<div class="text-white">
+		<h3>{{ notification }}</h3>
+	</div>
+	<hr class="text-white">
+
+	{{form_start(formMDP)}}
+	<div class="row bg-bar mt-4">
+		<div class="col-6">
+			<h3>Modification du Mot de passe</h3>
 		</div>
-		</div> <div class="text-white"><h3>{{ notificationMDP }}</h3></div>
-{{form_end(formMDP)}}
-		
-	
-	
-{% endblock %}
+	</div>
+
+	<div class="row mt-4">
+		<div class="col-6">
+			{{ form_widget(formMDP.old_password) }}
+			{{ form_widget(formMDP.new_password) }}
+			<div class="mt-3">{{ form_widget(formMDP.save2) }}</div>
+
+		</div>
+	</div>
+</div>
+<div class="text-white">
+	<h3>{{ notificationMDP }}</h3>
+</div>
+{{form_end(formMDP)}}{% endblock %}

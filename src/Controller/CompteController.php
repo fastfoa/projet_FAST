@@ -81,6 +81,7 @@ class CompteController extends AbstractController
         // au type du compte user
         if ($role == 'ROLE_APP') {
             $type =  MonCompteAppType::class;
+            $MDP=ResetMDPType::class;
             $twig = 'compte/mon_compte/monCompteApp.html.twig';
             $titre = "Apprenti";
         } elseif ($role == 'ROLE_MA') {
@@ -90,22 +91,27 @@ class CompteController extends AbstractController
             $titre = "Maitre d'Apprentissage";
         } elseif ($role == 'ROLE_ENT') {
             $type =  MonCompteEntrepriseType::class;
+            $MDP=ResetMDPType::class;
             $twig = 'compte/mon_compte/monCompteEntreprise.html.twig';
             $titre = "Entreprise";
         } elseif ($role == 'ROLE_FORMATEUR') {
             $type =  MonCompteFormateurType::class;
+            $MDP=ResetMDPType::class;
             $twig = 'compte/mon_compte/monCompteFormateur.html.twig';
             $titre = "Formateur";
         } elseif ($role == 'ROLE_OF') {
             $type =  MonCompteOFType::class;
+            $MDP=ResetMDPType::class;
             $twig = 'compte/mon_compte/monCompteOF.html.twig';
             $titre = "Organisme de Formation";
         } elseif ($role == 'ROLE_IND') {
             $type =  MonCompteINDType::class;
+            $MDP=ResetMDPType::class;
             $twig = 'compte/mon_compte/monCompteIND.html.twig';
             $titre = "Formateur";
         } elseif ($role == 'ROLE_ADMIN') {
             $type =  MonCompteADMINType::class;
+            $MDP=ResetMDPType::class;
             $twig = 'compte/mon_compte/monCompteADMIN.html.twig';
             $titre = "Formateur";
         }
@@ -123,7 +129,7 @@ class CompteController extends AbstractController
             $notification= "vos informations sont mises à jour";
             }
             else{
-                $notification= "vos informations sont erronées";
+                $notification="";
             }
 
         $formMDP = $this->createForm($MDP, $contact);
@@ -141,7 +147,7 @@ class CompteController extends AbstractController
                 $contact->setPassword($password);
                 $this->entityManager->flush();
                
-                $notificationMDP="vos informations ont bien été modifiées"; 
+                $notificationMDP="votre mot de passe a été modifié"; 
                /* return $this->redirectToRoute('compte');*/
             }
             else{
