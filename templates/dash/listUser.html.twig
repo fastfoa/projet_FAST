@@ -49,17 +49,17 @@
 					<tr>
 					{% if roleName == 'Entreprise' %}
 						<th class="txt-bar bg-bar col-4">nom 
-							<button class='fas fa-arrow-circle-down btn btn-light m-1' style='font-size:15px'  onclick="location.href ='{{ path( 'triListeGlobale',{'param':"NOM_ASC", role,'role_name': roleName } ) }}'">
+							<button  class='far fa-caret-square-up' style='font-size:24px'  onclick="location.href ='{{ path( 'triListeGlobale',{'param':"NOM_ASC", role,'role_name': roleName } ) }}'">
 							</button>
-							<button class='fas fa-arrow-alt-circle-up btn btn-light m-1' style='font-size:15px'onclick="location.href ='{{ path( 'triListeGlobale',{'param':"NOM_DESC", role,'role_name': roleName } ) }}'">
+							<button class='far fa-caret-square-down' style='font-size:24px'onclick="location.href ='{{ path( 'triListeGlobale',{'param':"NOM_DESC", role,'role_name': roleName } ) }}'">
 							</button>
 						</th>
 						<th class="txt-bar bg-bar col-4">Tél</th>
 						<th class="txt-bar bg-bar col-4">Email
-							<button class='fas fa-arrow-circle-down btn btn-light m-1' style='font-size:15px'  onclick="location.href ='{{ path( 'triListeGlobale',{'param':"EMAIL_ASC", role,'role_name': roleName } ) }}'">
+							<button  class='far fa-caret-square-up' style='font-size:24px'  onclick="location.href ='{{ path( 'triListeGlobale',{'param':"EMAIL_ASC", role,'role_name': roleName } ) }}'">
 							</button>
 							
-							 <button class='fas fa-arrow-alt-circle-up btn btn-light m-1' style='font-size:15px' onclick="location.href ='{{ path( 'triListeGlobale',{'param':"EMAIL_DESC", role,'role_name': roleName } ) }}'">
+							 <button class='far fa-caret-square-down' style='font-size:24px' onclick="location.href ='{{ path( 'triListeGlobale',{'param':"EMAIL_DESC", role,'role_name': roleName } ) }}'">
 							</button>
 						</th>	
 					</tr>
@@ -77,23 +77,23 @@
 
 					{% elseif roleName == 'Apprenti' %}
 						<th class="txt-bar bg-bar col-3">Prenom 
-							<button class='fas fa-arrow-circle-down btn btn-light m-1' style='font-size:15px' onclick="location.href ='{{ path( 'triListeGlobale',{'param':"PRENOM_ASC", role,'role_name': roleName } ) }}'">
+							<button  class='far fa-caret-square-up' style='font-size:24px' onclick="location.href ='{{ path( 'triListeGlobale',{'param':"PRENOM_ASC", role,'role_name': roleName } ) }}'">
 							</button>
-							<button class='fas fa-arrow-alt-circle-up btn btn-light m-1' style='font-size:15px' onclick="location.href ='{{ path( 'triListeGlobale',{'param':"PRENOM_DESC", role,'role_name': roleName } ) }}'">
+							<button class='far fa-caret-square-down' style='font-size:24px' onclick="location.href ='{{ path( 'triListeGlobale',{'param':"PRENOM_DESC", role,'role_name': roleName } ) }}'">
 							</button>
 						</th>
 						<th class="txt-bar bg-bar col-3">nom 
-							<button class='fas fa-arrow-circle-down btn btn-light m-1' style='font-size:15px' onclick="location.href ='{{ path( 'triListeGlobale',{'param':"NOM_ASC", role,'role_name': roleName } ) }}'">
+							<button  class='far fa-caret-square-up' style='font-size:24px' onclick="location.href ='{{ path( 'triListeGlobale',{'param':"NOM_ASC", role,'role_name': roleName } ) }}'">
 							</button>
-							<button class='fas fa-arrow-alt-circle-up btn btn-light m-1' style='font-size:15px' onclick="location.href ='{{ path( 'triListeGlobale',{'param':"NOM_DESC", role, 'role_name': roleName } ) }}'">
+							<button class='far fa-caret-square-down' style='font-size:24px' onclick="location.href ='{{ path( 'triListeGlobale',{'param':"NOM_DESC", role, 'role_name': roleName } ) }}'">
 							</button>
 						</th>		
 						<th class="txt-bar bg-bar col-3 ">session</th>
 						<th class="txt-bar bg-bar col-3">Tél</th>
 						<th class="txt-bar bg-bar col-3">Email 
-							<button class='fas fa-arrow-circle-down btn btn-light m-1' style='font-size:15px' onclick="location.href ='{{ path( 'triListeGlobale',{'param':"EMAIL_ASC", role,'role_name': roleName } ) }}'">
+							<button  class='far fa-caret-square-up' style='font-size:24px' onclick="location.href ='{{ path( 'triListeGlobale',{'param':"EMAIL_ASC", role,'role_name': roleName } ) }}'">
 							</button>
-							<button class='fas fa-arrow-alt-circle-up btn btn-light m-1' style='font-size:15px' onclick="location.href ='{{ path( 'triListeGlobale',{'param':"EMAIL_DESC",role,'role_name': roleName } ) }}'">
+							<button class='far fa-caret-square-down' style='font-size:24px' onclick="location.href ='{{ path( 'triListeGlobale',{'param':"EMAIL_DESC",role,'role_name': roleName } ) }}'">
 							</button>
 						</th>
 					</tr>
@@ -113,22 +113,22 @@
 
 					{% elseif roleName ==  "Maitre d'apprentissage" %}
 						<th class="txt-bar bg-bar col-2">Prenom 
-							<button class='fas fa-arrow-circle-down btn btn-light m-1' style='font-size:15px' onclick="location.href ='{{ path( 'triListeGlobale',{'param':"PRENOM_ASC", role,'role_name': roleName } ) }}'">
+							<button  class='far fa-caret-square-up' style='font-size:24px' onclick="location.href ='{{ path( 'triListeGlobale',{'param':"PRENOM_ASC", role,'role_name': roleName } ) }}'">
 							</button>
-							<button class='fas fa-arrow-alt-circle-up btn btn-light m-1' style='font-size:15px' onclick="location.href ='{{ path( 'triListeGlobale',{'param':"PRENOM_DESC", role,'role_name': roleName } ) }}'">
+							<button class='far fa-caret-square-down' style='font-size:24px' onclick="location.href ='{{ path( 'triListeGlobale',{'param':"PRENOM_DESC", role,'role_name': roleName } ) }}'">
 							</button>
 						</th>
     					<th class="txt-bar bg-bar col-2">nom 
-							<button class='fas fa-arrow-circle-down btn btn-light m-1' style='font-size:15px' onclick="location.href ='{{ path( 'triListeGlobale',{'param':"NOM_ASC", role,'role_name': roleName } ) }}'">
+							<button  class='far fa-caret-square-up' style='font-size:24px' onclick="location.href ='{{ path( 'triListeGlobale',{'param':"NOM_ASC", role,'role_name': roleName } ) }}'">
 							</button>
-							<button class='fas fa-arrow-alt-circle-up btn btn-light m-1' style='font-size:15px' onclick="location.href ='{{ path( 'triListeGlobale',{'param':"NOM_DESC", role,'role_name': roleName } ) }}'">
+							<button class='far fa-caret-square-down' style='font-size:24px' onclick="location.href ='{{ path( 'triListeGlobale',{'param':"NOM_DESC", role,'role_name': roleName } ) }}'">
 							</button>
 						</th>
 						<th class="txt-bar bg-bar col-2">session</th>
 						<th class="txt-bar bg-bar col-3">Email 
-							<button class='fas fa-arrow-circle-down btn btn-light m-1' style='font-size:15px' onclick="location.href ='{{ path( 'triListeGlobale',{'param':"EMAIL_ASC", role,'role_name': roleName } ) }}'">
+							<button  class='far fa-caret-square-up' style='font-size:24px' onclick="location.href ='{{ path( 'triListeGlobale',{'param':"EMAIL_ASC", role,'role_name': roleName } ) }}'">
 							</button>
-							<button class='fas fa-arrow-alt-circle-up btn btn-light m-1' style='font-size:15px' onclick="location.href ='{{ path( 'triListeGlobale',{'param':"EMAIL_DESC", role,'role_name': roleName } ) }}'">
+							<button class='far fa-caret-square-down' style='font-size:24px' onclick="location.href ='{{ path( 'triListeGlobale',{'param':"EMAIL_DESC", role,'role_name': roleName } ) }}'">
 							</button>
 						</th>
 						<th class="txt-bar bg-bar col-3">entreprise</th>
@@ -150,23 +150,23 @@
 			</table>
 					{% else %}
 						<th class="txt-bar bg-bar col-2">Prenom 
-							<button class='fas fa-arrow-circle-down btn btn-light m-1' style='font-size:15px' onclick="location.href ='{{ path( 'triListeGlobale',{'param':"PRENOM_ASC", role,'role_name': roleName } ) }}'">	
+							<button  class='far fa-caret-square-up' style='font-size:24px' onclick="location.href ='{{ path( 'triListeGlobale',{'param':"PRENOM_ASC", role,'role_name': roleName } ) }}'">	
 							</button>
-							<button class='fas fa-arrow-alt-circle-up btn btn-light m-1' style='font-size:15px' onclick="location.href ='{{ path( 'triListeGlobale',{'param':"PRENOM_DESC", role,'role_name': roleName } ) }}'">
+							<button class='far fa-caret-square-down' style='font-size:24px' onclick="location.href ='{{ path( 'triListeGlobale',{'param':"PRENOM_DESC", role,'role_name': roleName } ) }}'">
 							</button>
 						</th>
 						<th class="txt-bar bg-bar col-2">nom
-							<button class='fas fa-arrow-circle-down btn btn-light m-1' style='font-size:15px' onclick="location.href ='{{ path( 'triListeGlobale',{'param':"NOM_ASC", role,'role_name': roleName } ) }}'">	
+							<button  class='far fa-caret-square-up' style='font-size:24px' onclick="location.href ='{{ path( 'triListeGlobale',{'param':"NOM_ASC", role,'role_name': roleName } ) }}'">	
 							</button>
-							<button class='fas fa-arrow-alt-circle-up btn btn-light m-1' style='font-size:15px' onclick="location.href ='{{ path( 'triListeGlobale',{'param':"NOM_DESC", role,'role_name': roleName } ) }}'">
+							<button class='far fa-caret-square-down' style='font-size:24px' onclick="location.href ='{{ path( 'triListeGlobale',{'param':"NOM_DESC", role,'role_name': roleName } ) }}'">
 							</button>
 						</th>
 						<th class="txt-bar bg-bar col-2">session</th>	
 						<th class="txt-bar bg-bar col-3">Tél</th>
 						<th class="txt-bar bg-bar col-3">Email 
-							<button class='fas fa-arrow-circle-down btn btn-light m-1' style='font-size:15px' onclick="location.href ='{{ path( 'triListeGlobale',{'param':"EMAIL_ASC", role,'role_name': roleName } ) }}'">
+							<button  class='far fa-caret-square-up' style='font-size:24px' onclick="location.href ='{{ path( 'triListeGlobale',{'param':"EMAIL_ASC", role,'role_name': roleName } ) }}'">
 							</button>
-							<button class='fas fa-arrow-alt-circle-up btn btn-light m-1' style='font-size:15px' onclick="location.href ='{{ path( 'triListeGlobale',{'param':"EMAIL_DESC", role,'role_name': roleName } ) }}'">
+							<button class='far fa-caret-square-down' style='font-size:24px' onclick="location.href ='{{ path( 'triListeGlobale',{'param':"EMAIL_DESC", role,'role_name': roleName } ) }}'">
 							</button>
 						</th>
 					</tr>		
