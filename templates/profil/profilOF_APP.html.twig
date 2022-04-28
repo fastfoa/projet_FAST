@@ -116,7 +116,8 @@
                 <div id="supMA"><h5>nom : {{ d.nom }}</h5> 
                 <h5>Prénom : {{d.prenom}}</h5>
                 <h5>Téléphone : {{d.telephone}}</h5>
-      <a href="{{path('deleteMA',{'idMa':d.id,'idApp':user.id} )}}"><img style="height:30px;" src={{asset("images/icons8-remove-48.png")}} alt="">supprimer</a> #} 
+      {# <a href="{{path('deleteMA',{'idMa':d.id,'idApp':user.id} )}}"><img style="height:30px;" src={{asset("images/icons8-remove-48.png")}} alt="">supprimer</a> #}  #}
+      <a href="{{path('deleteMA',{'id':d.idd} )}}"><img style="height:30px;" src={{asset("images/icons8-remove-48.png")}} alt="">supprimer</a> #} 
                </div>
                {{dump(d.id)}} {{dump(user.id)}}#}
                 <br>

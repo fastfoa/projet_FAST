@@ -127,7 +127,7 @@ insertMa:
     controller: App\Controller\ProfilController::insertMa
     
 deleteMA:
-    path: /deleteMA/{idApp}/{idMa}
+    path: /deleteMA/{id}
     controller: App\Controller\ProfilController::deleteMA
 
 ## App\Controller\DashController

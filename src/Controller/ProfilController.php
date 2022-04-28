@@ -79,11 +79,11 @@ class ProfilController extends AbstractController
         WHERE user.id=document.id_owner AND user.id=".$user->getId());
 
         $ma = getSQLArrayAssoc($this->getParameter('loginDB'), $this->getParameter('PasswordDB'),
-        "SELECT u.nom, u.prenom, u.telephone, u.id, u.role_string                   
+        "SELECT u.nom, u.prenom, u.telephone, u.id, u.role_string, a.id as idd                   
          FROM app_has_ma as a
          RIGHT JOIN user as u ON u.id=a.id_ma 
          WHERE a.id_apprenti=".$user->getId());
-        //dd($ma);
+        // dd($ma);
         // $rolema=$ma[0]['role_string'];
         //dd($rolema);
 
@@ -147,35 +147,40 @@ class ProfilController extends AbstractController
 
 
 
-    public function deleteMA(  AppHasMA $idMa, $idApp) : Response
+    public function deleteMA( AppHasMA $id) : Response
 
     {      
         $ret = $this->checkRGPD();
         if ( $ret )
             return $ret;
 
+        
+        //   dd($id) ;
             $login  = $this->getParameter('loginDB');
             $pw     = $this->getParameter('PasswordDB');
 
-           
-
-        //$idMa= $idMa->getId();
+         
+     //  dd($idMa);
+       $idl=$id->getId();
+       //      dd($idd);
         
+        $idApp = getSQLSingleAssoc(
+            $login,
+            $pw,
+        "SELECT a.id_apprenti FROM app_has_ma AS a WHERE a.id_ma = $idMa AND a.id = $idl ;");
+        // $idApp=$idApp[0]['id_apprenti'];
+        //  dd($idApp);
+         //$deleteMA = "delete from app_has_ma where id_apprenti=$idApp and id_ma=$idMa";
 
-        //$deleteMA = "delete from app_has_ma where id_apprenti=$idApp and id_ma=$idMa";
-
-        dd($deleteMA);
         
         $doctrine = $this->getDoctrine();
         $entityManager = $doctrine->getManager();
-        $object=$entityManager->find($idMa, $idApp);
-        $entityManager->remove($idMa, $idApp);
+        $entityManager->remove($id);
         $entityManager->flush();
 
-         
-      
+           return new JsonResponse("Maitre d'apprentissage supprimé");
 
-         return new JsonResponse("Maitre d'apprentissage supprimé");
+      //  return $this->redirectToRoute('profilOF_APP',  ['user' => $idApp]) ;
 
         //return $this->redirectToRoute('/profilOF_APP/{$idApp}');
         
