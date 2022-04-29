@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 
+
 use App\Entity\AppHasMA;
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
@@ -65,7 +66,7 @@ class ProfilController extends AbstractController
 
         
         $id = $user->getId();
-        //   dd($id);
+        //    dd($id);
      
        
         $infoOF = getInfoOF();
@@ -79,7 +80,7 @@ class ProfilController extends AbstractController
         WHERE user.id=document.id_owner AND user.id=".$user->getId());
 
         $ma = getSQLArrayAssoc($this->getParameter('loginDB'), $this->getParameter('PasswordDB'),
-        "SELECT u.nom, u.prenom, u.telephone, u.id, u.role_string, a.id as idd                   
+        "SELECT u.nom, u.prenom, u.telephone, u.id, u.role_string, a.id as idl                  
          FROM app_has_ma as a
          RIGHT JOIN user as u ON u.id=a.id_ma 
          WHERE a.id_apprenti=".$user->getId());
@@ -95,6 +96,8 @@ class ProfilController extends AbstractController
            $entreprise = convertUserEntity2SQL($login, $pw, $entreprise['id'] );
           // dd($MA);
    }
+
+    
 
    $entreprise = $user;
 
@@ -133,42 +136,55 @@ class ProfilController extends AbstractController
         if ( $ret )
             return $ret;
 
+        
+
         $doctrine = $this->getDoctrine();
         $entityManager = $doctrine->getManager();
         $id = $idApp->getId();
         $r = new AppHasMA();
         $r->setIdApprenti( $id );
         $r->setIdMA( $idMa );
-        $entityManager->persist($r);
-        $entityManager->flush();
+        $entity =  getSQLArrayAssoc($this->getParameter('loginDB'), $this->getParameter('PasswordDB'),
+        "SELECT *  FROM app_has_ma WHERE id_apprenti=$id and id_ma=$idMa");
+         
+         if ($entity == null || sizeof($entity)==0){
+            $entityManager->persist($r);
+            $entityManager->flush();
+        }
+        
 
         return new JsonResponse("Maitre d'apprentissage enregistré");
     }
 
 
 
-    public function deleteMA( AppHasMA $id) : Response
+    public function deleteMA( AppHasMA $id, User $idMa): Response
 
-    {      
+    {     
+      
         $ret = $this->checkRGPD();
         if ( $ret )
             return $ret;
 
-        
+        // dd($idMa);
         //   dd($id) ;
             $login  = $this->getParameter('loginDB');
             $pw     = $this->getParameter('PasswordDB');
 
-         
+           
      //  dd($idMa);
        $idl=$id->getId();
-       //      dd($idd);
+       $idMa=$idMa->getId();
+    //    $id = $user->getId();
+    //    $idApp= $idApp->getId();
+        // dd($idl); renvoie la ligne
         
-        $idApp = getSQLSingleAssoc(
-            $login,
-            $pw,
-        "SELECT a.id_apprenti FROM app_has_ma AS a WHERE a.id_ma = $idMa AND a.id = $idl ;");
-        // $idApp=$idApp[0]['id_apprenti'];
+            $idApp = getSQLSingleAssoc(
+                $login,
+                $pw,
+            "SELECT a.id_apprenti FROM app_has_ma AS a WHERE a.id_ma = $idMa AND a.id = $idl ;");
+
+         $idApp=$idApp['id_apprenti'];
         //  dd($idApp);
          //$deleteMA = "delete from app_has_ma where id_apprenti=$idApp and id_ma=$idMa";
 
@@ -178,9 +194,9 @@ class ProfilController extends AbstractController
         $entityManager->remove($id);
         $entityManager->flush();
 
-           return new JsonResponse("Maitre d'apprentissage supprimé");
+          // return new JsonResponse("Maitre d'apprentissage supprimé");
 
-      //  return $this->redirectToRoute('profilOF_APP',  ['user' => $idApp]) ;
+        return $this->redirectToRoute('profilOF_APP',  ['user' => $idApp]) ;
 
         //return $this->redirectToRoute('/profilOF_APP/{$idApp}');
         

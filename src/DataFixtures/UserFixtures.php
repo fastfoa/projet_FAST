@@ -66,7 +66,7 @@ class UserFixtures extends Fixture
             $manager->persist($user);
         }
 
-        // id 100
+        // id 101
         // Fixture Maître d'apprentissage
         for ($i = 0; $i < 90; $i++) 
         {
