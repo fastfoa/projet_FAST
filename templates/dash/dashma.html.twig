@@ -1,111 +1,122 @@
 {% extends 'base.html.twig' %}
+{% block myStylesheets %}
+	<style>
+.blacktablo{
+	color: black!important;
+}
+.clickable-row:hover {
+			background-color: white;
+		}
+.tableNormal{width: 100%;
+    height: 50%;
+    border: 1px solid black;}
+.textNormal{
+	color: white !important;
+    font-size: 20px!important;
+}
+.tableauborder{
+	border: 1px black solid!important;
+	padding: 5px;
+	background-color: #6c757d;
+	opacity:75%;
+}
+.row1{
+	display: flex;
+	flex-direction: row;
+	width: 100%;
+	justify-content: space-between;
+}
 
+.item{
+	width: 40%;
+	margin: 0!important;
+	padding: 0!important;
+}
+	</style>
+{% endblock %}
+{% block myJavascripts %}
+	<script src="https://code.jquery.com/jquery-3.6.0.slim.js" integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY=" crossorigin="anonymous"></script>
+
+	<script>
+
+		jQuery(document).ready(function ($) {
+$(".clickable-row").click(function () {
+window.location = $(this).data("href");
+});
+});
+	</script>
+{% endblock myJavascripts %}
 
 {% block body %}
-	<div class="container-fluid bg-workSpace">
-		<div
-			class="row bg-bar">
-			{# <h3>Entreprise {{entreprise.nom}}</h3> #}
-
-			<h3>Interface Maitre d'Apprentissage
-
-			</h3>
+ 
+<div class="container-fluid ">
+		<div class="row bg-bar">
+			<h3 class="p-2">Interface Entreprise</h3>
 		</div>
-		<div class="row">
-			<div class="col-12">
-
-				<div class="accordion" id="accordionPanelsStayOpenExample">
-					<div class="accordion-item">
-						<h2 class="accordion-header" id="panelsStayOpen-headingOne">
-							<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
-								<h2 class="txt-dark">Apprenti</h2
-							</button>
-
-						</h2>
-						<div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
-							<div class="accordion-body">
-								<div class="row">
-								
-								{% if apps %}
-									{% for app in apps %}							
-
-										<div class="col-5">
-											{{ app.prenom }} {{ app.nom }}
-											<br>
-											{{ app.email }}
-											<br>
-											{{ app.telephone }}
-											<br>
-											{{ app.adresse|default('adresse') }}
-										</div>	
-									{#	<div class="col-5">
-											{{ app.tel_urgence1|default('telephone urgence 1') }}
-											<br>
-											{{ app.tel_urgence2|default('telephone urgence 1') }}
-										</div>											        
-										<div class="col-1">
-											<a href="{{ path( 'dashEval',{'app':app.id } ) }}">
-                								<button class="boutonForm">EVAL</button>
-        									</a>
-
-										</div>	#}
-										<hr>										        										
-									{% endfor %}
-								 {% else %}
-									 
-										<div class="col-6">
-											<h2 class="txt-dark">PAS D'APPRENTI</h2>
-										</div>	
-								{% endif %}
-
+					<h2 class="text-light mt-2 ml-2 mb-2">Apprenti</h2>
+						<div class="row">
+							{% if apps %}
+								<div class="col-12" >
+									<table class="tableNormal  textNormal">
+                                        <tr class="bg-bar" >
+                                            <th class = " col-2">Prenom</th>
+                                            <th class = " col-2">nom</th>
+                                            <th class = " col-2">Tél</th>
+                                            <th class = " col-3">Mail</th>
+                                            <th class = " col-3">Adresse</th>
+                                        </tr>
+                                        <tbody>
+                                            {% for app in apps %}                            
+                                                <tr	class='clickable-row' data-href='{{ path( 'profilOF_APP',{'user':app.id} ) }}'>
+                                                    <td class = "textNormal tableauborder">{{app.prenom}}</td>
+                                                    <td class = "textNormal tableauborder">{{app.nom}}</td>
+                                                    <td class = "textNormal tableauborder">{{app.telephone}}</td>
+                                                    <td class = "textNormal tableauborder"><A HREF="mailto:{{app.email}}">{{app.email}}</A></td>
+                                                    <td class = "textNormal tableauborder">{{app.adresse|default('adresse')}}</td>
+                                                </tr>        
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
 								</div>	
-							</div>
-						</div>
-					</div>
-
-				
-						<div class="accordion-item">
-						<h2 class="accordion-header" id="panelsStayOpen-headingTwo">
-							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
-								<h2 class="txt-dark">Formateur</h2>
-							</button>
-						</h2>
-						<div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
-							<div class="accordion-body">
-								<div class="row">
-									{% if formateurs %}
-									{% for formateur in formateurs %}
-										
-									
-										<div class="col-12">
-											{{ formateur.prenom }} {{ formateur.nom }}
-											<br>
-											{{ formateur.email }}<hr>
-										</div>	
-										
-										<div class="col-6">
-										</div>	
-										{% endfor %}
-									{% else %}
-
-										<div class="col-12">
-											<h2 class="txt-dark">PAS DE MAITRE D'APPRENTISSAGE</h2>
-
-										</div>	
-
-									{% endif %}
+								<hr>										        							
+							{% else %}
+								<div class="col-12">
+									<h2 class="txt-dark">PAS D'APPRENTI</h2>
 								</div>	
-							</div>
+								<hr>
+							{% endif %}
 						</div>
-					</div>
-					{% include 'dash/dashOFInclude.html.twig' %}
-
-					{% set retour = 'dashEntreprise' %}
-
-				
-
-
-
+						<div class="row1"> 
+						<div class="item">
+							<h4 class="text-white">Organisme Formation</h4>
+							<div class="text-white">
+								{{ OF.prenom }}
+								{{ OF.nom }}<br>
+								<A HREF="mailto:{{OF.email}}">{{OF.email}}</A><br>
+								{{ OF.telephone }}<br>
+								{{ OF.adresse|default('adresse') }}
+								</div></div>
+							{% if formateurs %}
+							<div class="item">
+								<h2 class="text-light mt-1 ">Formateur</h2>
+								<hr class="text-black">
+								<div class="row">
+								{% for formateur in formateurs %}								
+									<div class="col- text-light">
+										{{ formateur.prenom }} {{ formateur.nom }} form
+										<br>
+										<A HREF="mailto:{{formateur.email}}">{{formateur.email}}</A>
+										<hr>
+									</div>																													
+								{% endfor %}
+								</div> 
+							{% else %}
+								<div >
+									<h2 class="text-light">PAS DE FORMATEUR</h2>
+								</div>	
+							{% endif %}
+							 </div>	 		
+						</div>	
 					</div>
 				</div>	
 			</div>
