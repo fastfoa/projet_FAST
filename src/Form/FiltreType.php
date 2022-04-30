@@ -20,23 +20,25 @@ class FiltreType extends AbstractType
                 'mapped'=> false,
            'required' => false,
                 'attr' => [
-                    'placeholder' => 'Recherche ...',
+                    'placeholder' => 'Rechercher',
                     'class' => 'form-control',
                     'type' => 'search',
                     'id' => 'form1',
 
                 ]
-                ]);
-            // ->add(
-            //     'save',
-            //     SubmitType::class,
-            //     [   'mapped'=> false,
-            //         'label' => "Enregistrer",
-            //         'attr' => [
-            //             'class' => "boutonForm"
-            //         ]
-            //     ]
-            // );
+                ])
+            //     ->add('submit', SubmitType::class, [
+            //         'icon' => '<i class="fas fa-search"></i>',
+            //         'attr' => ['class' => 'btn btn-primary']]
+
+            // )
+            ->add('submit', SubmitType::class, [
+                'attr' => [
+                    'class' => 'btn btn-primary',
+                ],
+                'label' => '<i class="fas fa-search"></i>',
+                'label_html' => true,
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

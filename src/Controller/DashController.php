@@ -165,7 +165,7 @@ class DashController extends AbstractController
                 for ($k = 0; $k < sizeof($appbis); $k++) {
                     array_push($appter, convertUserEntity2SQL($login, $pw, $appbis[$k]['id']));
                 }
-                //  dd($appter);
+                //   dd($appter);
 
                 for ($r = 0; $r < sizeof($appter); $r++) {
                     array_push($formateur, getFormateursFromApprenti($login, $pw, $appter[$r]['id']));
