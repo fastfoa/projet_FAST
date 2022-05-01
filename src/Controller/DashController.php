@@ -54,14 +54,19 @@ class DashController extends AbstractController
         $pw = $this->getParameter('PasswordDB');
 
         $listSession = getSQLArrayAssoc($login, $pw, 'SELECT session.id, formation.nom as f, session.debut, session.fin, session.nom 
-        FROM session, formation 
-        WHERE formation.id=session.id_formation');
+        FROM projet_fast.`session`, projet_fast.formation 
+        WHERE formation.id = session.id_formation AND session.archive = 0');
+
+        $listArchive = getSQLArrayAssoc($login, $pw, 'SELECT session.id, formation.nom as f, session.debut, session.fin, session.nom 
+        FROM projet_fast.`session`, projet_fast.formation 
+        WHERE formation.id = session.id_formation AND session.archive = 1');
 
 
         return $this->render(
             'dash/dashOFPrincipal.html.twig',
             [
                 'listSession' => $listSession,
+                'listArchive' => $listArchive,
                 'menu' => getMenuFromRole($this->getUser()->getRoleString()),
             ]
         );
@@ -79,6 +84,7 @@ class DashController extends AbstractController
         $form = $this->createForm(SessionType::class, $session);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+            $form = $session->setArchive('0');
             $doctrine = $this->getDoctrine();
             $em = $doctrine->getManager();
             $em->persist($session);
@@ -102,6 +108,24 @@ class DashController extends AbstractController
         ]);
     }
 
+    public function archivageSession(Session $session)
+    {
+        $ret = $this->checkRGPD();
+        if ($ret)
+            return $ret;
+            $doctrine = $this->getDoctrine();
+            $sessionID = $session->getId();
+            $login = $this->getParameter('loginDB');
+            $pw = $this->getParameter('PasswordDB');
+    
+             getSQLRaw(
+                $login,
+                $pw,
+                "UPDATE projet_fast.`session`SET ARCHIVE = TRUE WHERE session.id = $sessionID"
+            );
+      
+        return $this->redirectToRoute("dashOFPrincipal");
+    }
 
     public function deleteSession(Session $session)
     {
@@ -329,11 +353,7 @@ class DashController extends AbstractController
                 }
                 // dd($SESSIONBIS);
             //    dd($Sessionlistapp);
-                // $appbis = [];
-
-                // for ($j = 0; $j < sizeof($Sessionlistapp); $j++) {
-                //     $appbis = array_merge($appbis, $Sessionlistapp[$j]);
-                // }
+             
 
                 //   dd($appbis);
             }

@@ -169,6 +169,10 @@ deleteSession:
   path: /deleteSession/{session}
   controller: App\Controller\DashController::deleteSession
 
+archivageSession:
+  path: /archivageSession/{session}
+  controller: App\Controller\DashController::archivageSession
+
 dashOFSession:
   path: /dashOFSession/{session}
   controller: App\Controller\DashController::dashOFSession
