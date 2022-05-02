@@ -46,7 +46,7 @@ window.location = $(this).data("href");
 		
 		</div>
 		<div class="row">
-			<div>
+			<div>{% if listSession %}
 				<table class="table-normal">
 					<thead>
 						<tr>
@@ -58,7 +58,9 @@ window.location = $(this).data("href");
 
 						</tr>
 					</thead>
+					
 					<tbody>
+					
 						{% for session in listSession %}
 							<tr class='clickable-row' data-href='{{ path( 'dashOFSession',{'session':session.id} ) }}'>
 								<td class="text-center p-1">{{session.debut|date("d/m/y")}}</td>
@@ -70,9 +72,12 @@ window.location = $(this).data("href");
 
 					
 						{% endfor %}
+			
 
 					</tbody>
-				</table>
+				</table>					{% else %}
+							<h5>Pas de session en cours</h5>
+{% endif %}
 			</div>
 
 
@@ -100,6 +105,8 @@ window.location = $(this).data("href");
 						</tr>
 					</thead>
 					<tbody>
+					
+					
 						{% for session in listArchive %}
 							<tr class='clickable-row' data-href='{{ path( 'dashOFSession',{'session':session.id} ) }}'>
 								<td class="text-center p-1">{{session.debut|date("d/m/y")}}</td>
@@ -113,7 +120,7 @@ window.location = $(this).data("href");
 
 					
 						{% endfor %}
-
+				
 					</tbody>
 				</table>
 			</div>
