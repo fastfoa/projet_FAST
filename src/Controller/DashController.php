@@ -1061,7 +1061,7 @@ class DashController extends AbstractController
             'listMa' => $listMa,
             'ma' => $ma,
             'id' => $id,
-            'documents' => $listDoc,
+            // 'documents' => $listDoc,
             'menu' => getMenuFromRole( $this->getUser()->getRoleString() ),
             'OF'   => $infoOF,         
             'fonction' => "Apprenti", 

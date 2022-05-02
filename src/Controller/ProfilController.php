@@ -47,6 +47,7 @@ class ProfilController extends AbstractController
 
     public function profilOF_APP(User $user,UserInterface $userInterface, Request $request, SluggerInterface $slugger): Response
     { 
+        //dd($user);
         $ret = $this->checkRGPD();
         if ( $ret )
             return $ret;
@@ -204,6 +205,10 @@ class ProfilController extends AbstractController
                 $entityManager->flush();
                 $this->addFlash('message', "Document ajouté");
                 //dd( $retour );
+                $listDoc = getSQLArrayAssoc($this->getParameter('loginDB'), $this->getParameter('PasswordDB'),
+                "SELECT document.id AS d_id, document.titre AS d_titre, document.file_name AS d_fileName, document.date_create AS d_dateCreate
+                FROM document, user
+                WHERE user.id=document.id_owner AND user.id=".$user->getId());
             }
         }
 
@@ -261,7 +266,7 @@ class ProfilController extends AbstractController
             return $ret;
 
         $id = $id->getId();
-        dd($id);
+        // dd($id);
         $doctrine = $this->getDoctrine();
         $entityManager = $doctrine->getManager();
         $entityManager->remove($id);

@@ -45,7 +45,7 @@ class DocumentController extends AbstractController
     }
 
     public function upload( Request $request, SluggerInterface $slugger, User $user): Response
-    {
+    {dd($user);
         $ret = $this->checkRGPD();
         if ($ret)
             return $ret;
@@ -146,6 +146,7 @@ class DocumentController extends AbstractController
         $formulaire->handleRequest($request);
 
         if ($formulaire->isSubmitted() && $formulaire->isValid()) {
+            dd($formulaire);
             $file = $formulaire->get('fileName')->getData();
             if ($file) {
                 //return new Response( " fichier : $file ");
@@ -225,30 +226,28 @@ class DocumentController extends AbstractController
        
                     // return $this->redirectToRoute( $retour );
                     
-        
+       
         $id = $user->getId();
-        //   dd($id);
+            dd($id);
      
        
-        // dd($id);
+       
 
-        $listDoc = getSQLArrayAssoc($this->getParameter('loginDB'), $this->getParameter('PasswordDB'),
-        "SELECT document.id AS d_id, document.titre AS d_titre, document.file_name AS d_fileName, document.date_create AS d_dateCreate
-        FROM document, user
-        WHERE user.id=document.id_owner AND user.id=".$user->getId());
+
                     $listDoc = getSQLArrayAssoc($this->getParameter('loginDB'), $this->getParameter('PasswordDB'),
                     "SELECT document.id AS d_id, document.titre AS d_titre, document.file_name AS d_fileName, document.date_create AS d_dateCreate
                     FROM document, user
                     WHERE user.id=document.id_owner AND user.id=$id");
-            $this->redirectToRoute('profilOF_APP',  ['user' => $id]) ;
+            // $this->redirectToRoute('profilOF_APP',  ['user' => $id]) ;
                 // $this->redirectToRoute('profilOF_APP',  ['user' => $idapp]); 
-            }
-        }
+             
+         }
+    }
 
         return  $this->render(
             'profil/profilOF_APP.html.twig', 
             [
-                'documents' => $listDoc,
+                
                 'myform'            => $formulaire->createView(),
                 'role'              => $roleString,
                 'nameOF'            => $nameOF,
@@ -256,7 +255,7 @@ class DocumentController extends AbstractController
                 'nameFormateur'     => $nameFormateur,
                 'nameApprenti'      => $nameApprenti,
                 'nameEntreprise'    => $nameEntreprise,
-
+                'documents'         => $listDoc,
                 'menu'              => getMenuFromRole($this->getUser()->getRoleString()),
             ]
         );
