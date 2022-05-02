@@ -5,9 +5,11 @@
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
     path_upload: 'C:\wamp64a\projet_FAST\public\files'
+    #  path_upload: 'C:\symfony\projet_FAST\public\files'   
     loginDB: 'root'
     PasswordDB: ''
-
+    # PasswordDB: 'password'
+  
 
 
 

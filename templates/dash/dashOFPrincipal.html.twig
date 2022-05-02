@@ -31,7 +31,7 @@ window.location = $(this).data("href");
 	<div class="container-fluid bg-workSpace">
 		<!-- MAIN CARDS-->
 		<div class="row bg-bar">
-			<div class="col-12">
+			<div class="col-12 p-2">
 				<h4>Sessions en cours</h4>
 			</div>
 
@@ -46,26 +46,26 @@ window.location = $(this).data("href");
 		
 		</div>
 		<div class="row">
-			<div class="col-12">
+			<div>
 				<table class="table-normal">
 					<thead>
 						<tr>
-							<th class="txt-bar bg-bar">Début</th>
-							<th class="txt-bar bg-bar">Fin</th>
-							<th class="txt-bar bg-bar">Nom</th>
-							<th class="txt-bar bg-bar">Formation</th>
-							<th class="txt-bar bg-bar">Actions</th>
+							<th class="txt-bar bg-bar col-2 text-center">Début</th>
+							<th class="txt-bar bg-bar col-2 text-center">Fin</th>
+							<th class="txt-bar bg-bar col-2 text-center">Nom</th>
+							<th class="txt-bar bg-bar col-2 text-center">Formation</th>
+							<th class="txt-bar bg-bar col-4 text-center">Actions</th>
 
 						</tr>
 					</thead>
 					<tbody>
 						{% for session in listSession %}
 							<tr class='clickable-row' data-href='{{ path( 'dashOFSession',{'session':session.id} ) }}'>
-								<td>{{session.debut|date("d/m/y")}}</td>
-								<td>{{session.fin|date("d/m/y")}}</td>
-								<td>{{session.nom}}</td>
-								<td>{{session.f}}</td>
-								<td><a class="btn btn-success m-md-2" href="{{ path( 'archivageSession',{'session':session.id} ) }}" onclick="return confirm('confirmer l'archivage ?')" >Archiver</a><a class="btn btn-danger" onclick="return confirm('confirmer la suppression ?')" href="{{ path( 'deleteSession',{'session':session.id} ) }}">Supprimer</a></td>
+								<td class="text-center p-1">{{session.debut|date("d/m/y")}}</td>
+								<td class="text-center p-1">{{session.fin|date("d/m/y")}}</td>
+								<td class="text-center p-1">{{session.nom}}</td>
+								<td class="text-center p-1">{{session.f}}</td>
+								<td class="text-center p-1"><a class="btn btn-success m-md-2" href="{{ path( 'archivageSession',{'session':session.id} ) }}" onclick="return confirm('confirmer l\'archivage ?')" >Archiver</a><a class="btn btn-danger" onclick="return confirm('confirmer la suppression ?')" href="{{ path( 'deleteSession',{'session':session.id} ) }}">Supprimer</a></td>
 							</tr>
 
 					
@@ -80,7 +80,7 @@ window.location = $(this).data("href");
 
 	
 	<div class="row bg-bar">
-		<div class="col-12">
+				<div class="col-12 p-2">
 			<h4>Sessions archivées</h4>
 		</div>
 	</div>
@@ -88,25 +88,25 @@ window.location = $(this).data("href");
 			
 		</div>
 	<div class="row">
-			<div class="col-12">
+			<div class="col-12 mt-2">
 				<table class="table-normal">
 					<thead>
 						<tr>
-							<th class="txt-bar bg-bar">Début</th>
-							<th class="txt-bar bg-bar">Fin</th>
-							<th class="txt-bar bg-bar">Nom</th>
-							<th class="txt-bar bg-bar">Formation</th>
-							<th class="txt-bar bg-bar">Actions</th>
+							<th class="txt-bar bg-bar col-2 text-center">Début</th>
+							<th class="txt-bar bg-bar col-2 text-center">Fin</th>
+							<th class="txt-bar bg-bar col-2 text-center">Nom</th>
+							<th class="txt-bar bg-bar col-2 text-center">Formation</th>
+							<th class="txt-bar bg-bar col-4 text-center">Actions</th>
 						</tr>
 					</thead>
 					<tbody>
 						{% for session in listArchive %}
 							<tr class='clickable-row' data-href='{{ path( 'dashOFSession',{'session':session.id} ) }}'>
-								<td>{{session.debut|date("d/m/y")}}</td>
-								<td>{{session.fin|date("d/m/y")}}</td>
-								<td>{{session.nom}}</td>
-								<td>{{session.f}}</td>
-								<td><a class="btn btn-danger" onclick="return confirm('confirmer la suppression ?')" href="{{ path( 'deleteSession',{'session':session.id} ) }}">Supprimer</a></td>
+								<td class="text-center p-1">{{session.debut|date("d/m/y")}}</td>
+								<td class="text-center p-1">{{session.fin|date("d/m/y")}}</td>
+								<td class="text-center p-1">{{session.nom}}</td>
+								<td class="text-center p-1">{{session.f}}</td>
+								<td class="text-center p-1"><a class="btn btn-danger" onclick="return confirm('confirmer la suppression ?')" href="{{ path( 'deleteSession',{'session':session.id} ) }}">Supprimer</a></td>
 
 
 							</tr>
