@@ -45,7 +45,7 @@ class ProfilController extends AbstractController
 
 
 
-    public function profilOF_APP(User $user,UserInterface $userInterface, Request $request, SluggerInterface $slugger): Response
+    public function profilOF_APP(User $user  , Request $request, SluggerInterface $slugger)
     { 
         //dd($user);
         $ret = $this->checkRGPD();
@@ -58,11 +58,7 @@ class ProfilController extends AbstractController
         //$aut = $this->getUser();
         //$roleViewer = $aut->getRoles()[0];
       
-        $listFormateur=[];
-        $role       = $userInterface->getRoles();
-    
-
-        
+        $listFormateur=[];    
         $id = $user->getId();
         //   dd($id);
      
@@ -107,54 +103,9 @@ class ProfilController extends AbstractController
           and u.role_string='ROLE_FORMATEUR' 
           and us0.id_user='$sessionID'");
 
-
-
-
         $up = new Document();
         $user = $user;
         $roleString = $user->getRoleString();
-
-        $login = $this->getParameter('loginDB');
-        $pw = $this->getParameter('PasswordDB');
-
-        $nameMA = "";
-        $nameOF = "";
-        $nameFormateur = "";
-        $nameApprenti = "";
-        $nameEntreprise = "";
-        $resMA          = false;
-        $resApp         = false;
-        $resFormateur   = false;
-        $resENT         = false;
-
-        $nameOF = 'FOREACH';
-
-
-      
-
-            $resMA =  getMAFromApprenti($login, $pw, $id);
-            if( $resMA )
-            {
-                $nameMA = $resMA['prenom'] . " " . $resMA['nom'] . " (MA)";
-                $resENT =  getENTFromMA($login, $pw, $resMA['id']);
-                if ( $resENT )
-                {
-                    $resIdSession = getSessionFromApp($login, $pw, $id);
-                    if( $resIdSession )
-                    {
-                        $idSession = $resIdSession['id_session'];
-                        $resFormateur = getUsersFromRoleSession($login, $pw, "ROLE_FORMATEUR", $idSession);
-                        if ( $resFormateur )
-                            $nameFormateur = $resFormateur[0]['prenom'] . " " . $resFormateur[0]['nom'] . " (FOR)";
-                    }
-                }
-            }
-       
-
-        $nameOF = 'FOREACH';
-
-
-
 
         $formulaire = $this->createForm(DocumentExtType::class, $up);
         $formulaire->handleRequest($request);
@@ -215,26 +166,18 @@ class ProfilController extends AbstractController
 
         return $this->render('profil/profilOF_APP.html.twig', 
         [
-            'user' => $user,
-            'listMa' => $listMa,
-            'ma' => $ma,
-            'id' => $id,
+            'user'      => $user,
+            'listMa'    => $listMa,
+            'ma'        => $ma,
+            'id'        => $id,
             'documents' => $listDoc,
-            // 'docs' => $listDocbis,
-            'menu' => getMenuFromRole( $this->getUser()->getRoleString() ),
-            'OF'   => $infoOF,         
-            'fonction' => "Apprenti", 
+            'menu'      => getMenuFromRole( $this->getUser()->getRoleString() ),
+            'OF'        => $infoOF,         
+            'fonction'  => "Apprenti", 
             'listFormateur'=> $listFormateur,
             'entreprise'=>$entreprise,
-
-            'myform'            => $formulaire->createView(),
-            'role'              => $roleString,
-            'nameOF'            => $nameOF,
-            'nameMA'            => $nameMA,
-            'nameFormateur'     => $nameFormateur,
-            'nameApprenti'      => $nameApprenti,
-            'nameEntreprise'    => $nameEntreprise,
-
+            'myform'    => $formulaire->createView(),
+            'role'      => $roleString,
         ]);
     }    
 
