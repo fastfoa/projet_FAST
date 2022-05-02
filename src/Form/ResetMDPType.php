@@ -41,7 +41,7 @@ class ResetMDPType extends AbstractType
                     'required'   => false,
                     'label' => false,
                     'attr' => [
-                        'placeholder' => 'Merci de confirmer votre nouveau mot de passe.'
+                        'placeholder' => 'confirmer votre nouveau mot de passe.'
                     ]
                 ]
             ])
