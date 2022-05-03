@@ -48,36 +48,7 @@ class MonCompteOFType extends AbstractType
                     'placeholder' => 'Entrez votre numéro de téléphone',
                     'style'=> 'color: black !important'
                     ] ]
-            )
-            ->add('old_password', PasswordType::class,[
-                'required'   => false,
-                'mapped'=>false,
-                'label'=> false,
-                'attr' => [
-                    'placeholder' => 'Mot de passe actuel'
-                    
-                ] 
-            ])
-            ->add('new_password', RepeatedType::class, [
-                'type' => PasswordType::class,
-                'required'   => false,
-                'mapped' => false,
-                'invalid_message' => 'Le mot de passe et la confirmation doivent être identique.',
-                'required' => true,
-                'first_options' => [
-                    'label' => false,
-                    'attr' => [
-                        'placeholder' => 'Merci de saisir votre nouveau mot de passe.'
-                    ]
-                ],
-                'second_options' => [
-                    'required'   => false,
-                    'label' => false, 
-                    'attr' => [
-                        'placeholder' => 'Merci de confirmer votre nouveau mot de passe.'
-                    ]
-                ]
-            ])
+            ) 
             
             ->add('save', SubmitType::class,[ 
                 'label' => "Enregistrer", 

@@ -19,6 +19,7 @@ use App\Form\MonCompteFormateurType;
 use App\Form\MonCompteINDType;
 use App\Form\MonCompteMAType;
 use App\Form\MonCompteOFType;
+use App\Form\ResetMDPType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
@@ -74,35 +75,43 @@ class CompteController extends AbstractController
         $type =  null;
         $twig = '';
         $notification= '';
+        $notificationMDP= '';
 
         // définir le type de formaulaire et le twig en rapport 
         // au type du compte user
         if ($role == 'ROLE_APP') {
             $type =  MonCompteAppType::class;
+            $MDP=ResetMDPType::class;
             $twig = 'compte/mon_compte/monCompteApp.html.twig';
             $titre = "Apprenti";
         } elseif ($role == 'ROLE_MA') {
             $type =  MonCompteMAType::class;
+            $MDP=ResetMDPType::class;
             $twig = 'compte/mon_compte/monCompteMA.html.twig';
             $titre = "Maitre d'Apprentissage";
         } elseif ($role == 'ROLE_ENT') {
             $type =  MonCompteEntrepriseType::class;
+            $MDP=ResetMDPType::class;
             $twig = 'compte/mon_compte/monCompteEntreprise.html.twig';
             $titre = "Entreprise";
         } elseif ($role == 'ROLE_FORMATEUR') {
             $type =  MonCompteFormateurType::class;
+            $MDP=ResetMDPType::class;
             $twig = 'compte/mon_compte/monCompteFormateur.html.twig';
             $titre = "Formateur";
         } elseif ($role == 'ROLE_OF') {
             $type =  MonCompteOFType::class;
+            $MDP=ResetMDPType::class;
             $twig = 'compte/mon_compte/monCompteOF.html.twig';
             $titre = "Organisme de Formation";
         } elseif ($role == 'ROLE_IND') {
             $type =  MonCompteINDType::class;
+            $MDP=ResetMDPType::class;
             $twig = 'compte/mon_compte/monCompteIND.html.twig';
             $titre = "Formateur";
         } elseif ($role == 'ROLE_ADMIN') {
             $type =  MonCompteADMINType::class;
+            $MDP=ResetMDPType::class;
             $twig = 'compte/mon_compte/monCompteADMIN.html.twig';
             $titre = "Formateur";
         }
@@ -110,22 +119,39 @@ class CompteController extends AbstractController
         $form = $this->createForm($type, $contact);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        
 
-            $old_pwd= $form->get('old_password')->getData();
+        if ($form->isSubmitted() && $form->isValid()) {
+            $doctrine = $this->getDoctrine();
+            $entityManager = $doctrine->getManager();
+            $entityManager->persist($contact);
+            $entityManager->flush();
+            $notification= "vos informations sont mises à jour";
+            }
+            else{
+                $notification="";
+            }
+
+        $formMDP = $this->createForm($MDP, $contact);
+        $formMDP->handleRequest($request);
+
+        
+
+        if ($formMDP->isSubmitted() && $formMDP->isValid()) {
+            $old_pwd= $formMDP->get('old_password')->getData();
 
             if ($encoder->isPasswordValid($contact, $old_pwd)) {
-                $new_pwd= $form->get('new_password')->getData();
+                $new_pwd= $formMDP->get('new_password')->getData();
                 $password = $encoder->encodePassword($contact, $new_pwd);
 
                 $contact->setPassword($password);
                 $this->entityManager->flush();
                
-                $notification="vos informations ont bien été modifiées"; 
+                $notificationMDP="votre mot de passe a été modifié"; 
                /* return $this->redirectToRoute('compte');*/
             }
             else{
-                $notification= "vos informations sont erronées";
+                $notificationMDP= "vos informations sont erronées";
             }
                     
             // $doctrine = $this->getDoctrine();
@@ -139,6 +165,12 @@ class CompteController extends AbstractController
             'form' => $form->createView(),
             'menu' => getMenuFromRole($this->getUser()->getRoleString()), //envoye le menu part a port a son role
             'notification'=>$notification,
+            'notificationMDP'=>$notificationMDP,
+            'formMDP'=>$formMDP->createView(),
         ]);
     }
 }
+
+
+
+
