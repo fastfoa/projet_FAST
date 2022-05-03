@@ -35,6 +35,7 @@
 
 {% block body %}
 
+
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-5">
@@ -192,35 +193,38 @@
 
 				<hr class="text-light mt-3">
 
-				<div class="row">
-					<div id="ma" class="col-5">
-						<h3>Maitre D'apprentissage :</h3>
-						{% if ma == false %}
-							<h5>Vous n'avez pas de maitre d'apprentissage</h5>
-						{% else %}
-							{% for d in ma %}
-								<h5>Nom :
-									{{d.nom}}</h5>
-								<h5>Prénom :
-									{{d.prenom}}</h5>
-								<h5>Téléphone :
-									{{d.telephone}}</h5>
-								<br>
-							{% endfor %}
-						{% endif %}
-						<button class="boutonForm" onclick="showList()" style="font-size:large; padding:5px 9px 5px 9px;">Ajouter un maitre d'apprentissage</button>
-						<input class="invisible" list="maitre" type="text" id="listMa">
-						<datalist class="invisible" id="maitre">
-							{% for ma in listMa %}
-								<option id="{{ma.id}}" value="{{ma.nom}} {{ma.prenom}}">{{ma.email}}</option>
-							{% endfor %}
-						</datalist>
-						<button id="validation" class="invisible boutonForm" onclick='addMa({{id}})'>
-							Ok
-						</button>
-						<h5 id="result">
-							<h5>
-
+<div class="row 1bg-success">
+	<div id="ma" class="col-5">
+        <h3>Maitre D'apprentissage :</h3>
+        {% if ma == false %}
+            <h5>Vous n'avez pas de maitre d'apprentissage</h5>
+            {% else %}
+                {% for d in ma %} 
+                <div id="supMA"><h5>nom : {{ d.nom }}</h5> 
+                <h5>Prénom : {{d.prenom}}</h5>
+                <h5>Téléphone : {{d.telephone}}</h5>
+      {# <a href="{{path('deleteMA',{'idMa':d.id,'idApp':user.id} )}}"><img style="height:30px;" src={{asset("images/icons8-remove-48.png")}} alt="">supprimer</a> #}  
+      <a href="{{path('deleteMA',{'id':d.idl, 'idMa':d.id} )}}"><img style="height:30px;" src={{asset("images/icons8-remove-48.png")}} alt="">supprimer</a> 
+               </div>
+               {# {{dump(d.id)}} {{dump(user.id)}} #}
+                <br>
+                {% endfor %}    
+        {% endif %}
+       {#<button id="btn" type="button" onclick='{{path('deleteMA',{'id':ma.id} )}}' class="btn btn-warning  text-white mb-2" style="font-size:large; padding:5px 9px 5px 9px;">Supprimer maitre d'apprentissage</button> #}
+        <button class="boutonForm " onclick="showList()" style="font-size:large; padding:5px 9px 5px 9px;">Ajouter maitre d'apprentissage</button>
+        <input class="invisible" list="maitre" type="text" id="listMa">
+        <datalist  class="invisible" id="maitre"> 
+            {% for ma in listMa %}
+                <option id="{{ma.id}}" value="{{ma.nom}}  {{ma.prenom}}">{{ma.email}}</option> 
+               {# {{dump(ma.id)}} {{dump(user.id)}} #}
+            {% endfor %}
+            
+            
+        </datalist>
+        <button id="validation" class="invisible boutonForm" onclick='addMa({{id}})'>
+            Ok
+        </button>
+        <h5 id="result"><h5>
 								<div>
 									<h3>Entreprise :</h3>
 									<h5>{{ entreprise.nom }}</h5>
@@ -276,26 +280,47 @@
 					</div>
 
 
-					<script>
+				<script>
+/*
+$(document).ready(function(){
+        $("#btn").click(function(){
+        var conf = confirm("êtes-vous sur de vouloir supprimer le Maitre d'apprentissage ?");
+        if (conf){
+        $("#supMA").remove();
+       
+        }
+    });
+});             
+                    */
 
 
 
-						function showList() {
-$("#listMa, #maitre, #validation").removeClass("invisible");
-}
 
-function addMa(idApp) {
-var valueI = $('#listMa').val();
-var idMa = $('#maitre option[value="' + valueI + '"]').attr('id');
+    function showList()
+    {
+        $("#listMa, #maitre, #validation").removeClass("invisible");
+    }
 
-$.get("/insertMa/" + idMa + "/" + idApp, function (result) {
-$('#result').html(result);
-});
-}
-function deletedocumentjs() {
-let documentID = document.getElementById("listDoc").value;
-return documentID
-}
-					</script>
+    function addMa(idApp)
+    {
+        var valueI = $('#listMa').val();
+        var idMa = $('#maitre option[value="' + valueI +'"]').attr('id');
+
+        $.get( "/insertMa/" + idMa + "/" + idApp,
+                function(result)
+                {
+                    $('#result').html(result);
+                    const ma = [];
+                    ma.push.filtre(valueI);
+                    location.reload(true);
+                }
+            );
+           
+    }
+    
+
+
+</script>
 				{% endblock body %}
+
 

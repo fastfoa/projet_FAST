@@ -156,7 +156,8 @@ class DashController extends AbstractController
         $user       = $this->getUser();
         $role       = $user->getRoleString();
         $user       = convertUserEntity2SQL($login, $pw, $user->getId());
-        $entreprise = $user;
+       
+        
         $OF         = getInfoOF();
         $MA         = null;
         $app        = [];
@@ -953,7 +954,7 @@ class DashController extends AbstractController
             $entreprise = getENTFromMA($login, $pw, $MA['id']);
        if ( $entreprise )
            $entreprise = convertUserEntity2SQL($login, $pw, $entreprise['id'] );
-   }
+           }
 
     //dd($entreprise);
         $listMa = getSQLArrayAssoc($this->getParameter('loginDB'), $this->getParameter('PasswordDB'),
