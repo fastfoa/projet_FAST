@@ -893,12 +893,9 @@ class DashController extends AbstractController
         if ($ret)
             return $ret;
            
-
         return $this->listAll('ROLE_MA', "Maitre d'apprentissage",$request);
     }
 
-
-    // public function dashENTprincipalx(): Response
 
     public function dashApp(Request $request, SluggerInterface $slugger): Response
     { 
@@ -906,21 +903,14 @@ class DashController extends AbstractController
         if ( $ret )
             return $ret;
 
-           
             $login  = $this->getParameter('loginDB');
             $pw     = $this->getParameter('PasswordDB');
-
-        //$aut = $this->getUser();
-        //$roleViewer = $aut->getRoles()[0];
-      
+  
         $listFormateur=[];
       
          $user  = $this->getUser();
-
          $id = $user->getId();
-        //  dd($id);
-      
-       
+        //  dd($id);      
         $infoOF = getInfoOF();
     
         $sessionID = getIdSessionFromApprenti1($login, $pw,  $id );
@@ -956,51 +946,12 @@ class DashController extends AbstractController
           and u.role_string='ROLE_FORMATEUR' 
           and us0.id_user='$sessionID'");
 
-
-
-
         $up = new Document();
         $user = $user;
         $roleString = $user->getRoleString();
 
         $login = $this->getParameter('loginDB');
         $pw = $this->getParameter('PasswordDB');
-
-        $nameMA = "";
-        $nameOF = "";
-        $nameFormateur = "";
-        $nameApprenti = "";
-        $nameEntreprise = "";
-        $resMA          = false;
-        $resApp         = false;
-        $resFormateur   = false;
-        $resENT         = false;
-
-        $nameOF = 'FOREACH';
-
-            $resMA =  getMAFromApprenti($login, $pw, $id);
-            if( $resMA )
-            {
-                $nameMA = $resMA['prenom'] . " " . $resMA['nom'] . " (MA)";
-                $resENT =  getENTFromMA($login, $pw, $resMA['id']);
-                if ( $resENT )
-                {
-                    $resIdSession = getSessionFromApp($login, $pw, $id);
-                    if( $resIdSession )
-                    {
-                        $idSession = $resIdSession['id_session'];
-                        $resFormateur = getUsersFromRoleSession($login, $pw, "ROLE_FORMATEUR", $idSession);
-                        if ( $resFormateur )
-                            $nameFormateur = $resFormateur[0]['prenom'] . " " . $resFormateur[0]['nom'] . " (FOR)";
-                    }
-                }
-            }
-       
-
-        $nameOF = 'FOREACH';
-
-
-
 
         $formulaire = $this->createForm(DocumentExtType::class, $up);
         $formulaire->handleRequest($request);
@@ -1017,10 +968,7 @@ class DashController extends AbstractController
                 // this is needed to safely include the file name as part of the URL
                 $safeFilename = $slugger->slug($originalFilename);
                 $newFilename = $safeFilename . '-' . uniqid() . '.' . $originalExt;
-
-
                 // Move the file to the directory where brochures are stored
-
 
                 try {
                     $file->move(
@@ -1054,7 +1002,6 @@ class DashController extends AbstractController
             }
         }
 
-
         return $this->render('profil/profilOF_APP.html.twig', 
         [
             'user' => $user,
@@ -1069,73 +1016,9 @@ class DashController extends AbstractController
             'entreprise'=>$entreprise,
             'myform'            => $formulaire->createView(),
             'role'              => $roleString,
-            'nameOF'            => $nameOF,
-            'nameMA'            => $nameMA,
-            'nameFormateur'     => $nameFormateur,
-            'nameApprenti'      => $nameApprenti,
-            'nameEntreprise'    => $nameEntreprise,
         ]);
 
      
     }    
-
-    // public function filtrelistglobal($param, Request $request, User $user){
-
-    //     $login  = $this->getParameter('loginDB');
-    //     $pw     = $this->getParameter('PasswordDB');
-
-
-    //     $user       = $this->getUser();
-    //     $role       = $user->getRoleString();
-    //     $user       = convertUserEntity2SQL($login, $pw, $user->getId());
-    //     $app        = $user;
-    //     $OF         = getInfoOF();
-    //     $MA         = false;
-    //     $formateur  = false;
-    //     $entreprise = false;
-    //     $sessionID = getIdSessionFromApprenti($login, $pw, $user['id']);
-
-    //     if ($form->isSubmitted() && $form->isValid()) {
-
-
-    //     $MA = getMAFromApprenti($login, $pw, $app['id']);
-    //     if ($MA) {
-    //         $MA = convertUserEntity2SQL($login, $pw, $MA['id']);
-    //         $entreprise = getENTFromMA($login, $pw, $MA['id']);
-    //         if ($entreprise)
-    //             $entreprise = convertUserEntity2SQL($login, $pw, $entreprise['id']);
-    //     }
-
-
-    //     //    $formateur  = getFormateursFromApprenti($login, $pw, 
-    //     // $app['id']);
-
-    //     $listFormateur = getSQLArrayAssoc(
-    //         $login,
-    //         $pw,
-
-    //         "SELECT u.nom, u.prenom, u.email, u.id 
-    //     FROM user_in_session as us0, 
-    //         user_in_session as us1, 
-    //         user as u 
-    //     WHERE 
-    //     us0.id_session=us1.id_session and u.id=us1.id_user and u.role_string='ROLE_FORMATEUR' 
-    //     and us0.id_user='$sessionID'"
-    //     );
-    //     //    dd($listFormateur);
-
-    //     $uid = $app['id'];
-    //     $listDoc = getDocsFromUser($login, $pw, $uid);
-
-
-
-    //     }
-    //     return $this->render( 'dash/listUser.html.twig', [
-    //         'myForm' => $form->createView(),
-    //     ]);
-    //     }
-
-    // }
-
 
     }

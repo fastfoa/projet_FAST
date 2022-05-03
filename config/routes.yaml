@@ -34,9 +34,9 @@ test:
   path: /test
   controller: App\Controller\LanController::test
 
-upload:
-  path: /upload/{retour}/{iddd}
-  controller: App\Controller\DocumentController::upload
+# upload:
+#   path: /upload/{retour}/{iddd}
+#   controller: App\Controller\DocumentController::upload
 
 getInfoDoc:
   path: /getInfoDoc/{id}
