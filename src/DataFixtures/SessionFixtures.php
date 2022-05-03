@@ -22,6 +22,7 @@ class SessionFixtures extends Fixture
         $r->setDebut( new \DateTime('06/04/2014') );
         $r->setFin( new \DateTime('06/04/2014')  );
         $r->setIdFormation( 1  );
+        $r->setArchive('0');
         $manager->persist($r);
 
         $r = new Session();
@@ -29,6 +30,7 @@ class SessionFixtures extends Fixture
         $r->setDebut( new \DateTime('06/04/2014') );
         $r->setFin( new \DateTime('06/04/2014')  );
         $r->setIdFormation( 1  );
+        $r->setArchive('0');
         $manager->persist($r);
 
         $r = new Session();
@@ -36,14 +38,20 @@ class SessionFixtures extends Fixture
         $r->setDebut( new \DateTime('06/04/2014') );
         $r->setFin( new \DateTime('06/04/2014')  );
         $r->setIdFormation( 2  );
+        $r->setArchive('0');
+        $manager->persist($r);
+        
+
 
         $r = new Session();
         $r->setNom( 'Bachelor ');
         $r->setDebut( new \DateTime('06/04/2014') );
         $r->setFin( new \DateTime('06/04/2014')  );
         $r->setIdFormation( 3  );
-
+        $r->setArchive('0');
         $manager->persist($r);
+
+    
 
         for ( $s=1, $u=1, $ma=101, $f=201 ; $s <= 4 ; $s++ )
         {

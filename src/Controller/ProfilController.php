@@ -5,14 +5,20 @@ namespace App\Controller;
 
 
 use App\Entity\AppHasMA;
+use App\Entity\Document;
+use App\Entity\RecipientDocument;
 use App\Entity\User;
+use App\Form\DocumentExtType;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 
 
@@ -48,8 +54,9 @@ class ProfilController extends AbstractController
 
 
 
-    public function profilOF_APP(User $user,UserInterface $userInterface): Response
+    public function profilOF_APP(User $user  , Request $request, SluggerInterface $slugger)
     { 
+        //dd($user);
         $ret = $this->checkRGPD();
         if ( $ret )
             return $ret;
@@ -60,11 +67,7 @@ class ProfilController extends AbstractController
         //$aut = $this->getUser();
         //$roleViewer = $aut->getRoles()[0];
       
-        $listFormateur=[];
-        $role       = $userInterface->getRoles();
-    
-
-        
+        $listFormateur=[];    
         $id = $user->getId();
         //    dd($id);
      
@@ -72,10 +75,10 @@ class ProfilController extends AbstractController
         $infoOF = getInfoOF();
     
         $sessionID = getIdSessionFromApprenti1($login, $pw,  $id );
-        
+        // dd($id);
 
         $listDoc = getSQLArrayAssoc($this->getParameter('loginDB'), $this->getParameter('PasswordDB'),
-        "SELECT document.id AS d_id, document.titre AS d_titre, document.file_name AS d_fileName
+        "SELECT document.id AS d_id, document.titre AS d_titre, document.file_name AS d_fileName, document.date_create AS d_dateCreate
         FROM document, user
         WHERE user.id=document.id_owner AND user.id=".$user->getId());
 
@@ -113,22 +116,87 @@ class ProfilController extends AbstractController
           and u.role_string='ROLE_FORMATEUR' 
           and us0.id_user='$sessionID'");
 
+        $up = new Document();
+        $user = $user;
+        $roleString = $user->getRoleString();
+
+        $formulaire = $this->createForm(DocumentExtType::class, $up);
+        $formulaire->handleRequest($request);
+
+        if ($formulaire->isSubmitted() && $formulaire->isValid()) {
+            $file = $formulaire->get('fileName')->getData();
+            if ($file) {
+                //return new Response( " fichier : $file ");
+                $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+                $originalExt = pathinfo($file->getClientOriginalName(), PATHINFO_EXTENSION);
+                //return new Response( " fichier : $originalFilename . $originalExt uploadé ");
+                $fullOrigineFileName = $originalFilename . "." . $originalExt;
+
+                // this is needed to safely include the file name as part of the URL
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename . '-' . uniqid() . '.' . $originalExt;
+
+
+                // Move the file to the directory where brochures are stored
+
+
+                try {
+                    $file->move(
+                        $this->getParameter('path_upload'),
+                        $newFilename
+                    );
+                } catch (FileException $e) {
+                    // ... handle exception if something happens during file upload
+                }
+                $up->setFileName($newFilename);
+                $up->setIdOwner( $user->getId());
+                $up->setFileNameOriginal($fullOrigineFileName);
+                $up->setDateCreate(new \DateTime());
+
+                $doctrine = $this->getDoctrine();
+                $entityManager = $doctrine->getManager();
+
+                $entityManager->persist($up); // On confie notre entit&#xE9; &#xE0; l'entity manager (on persist l'entit&#xE9;)
+                $entityManager->flush();
+
+          
+                    $recipient = new RecipientDocument();
+                    $recipient->setIdDocument( $up->getId());
+                    $recipient->setIdRecipient( $id );
+                    $entityManager->persist($recipient); // On confie notre entit&#xE9; &#xE0; l'entity manager (on persist l'entit&#xE9;)    
+          
+           
+                $entityManager->flush();
+                $this->addFlash('message', "Document ajouté");
+                //dd( $retour );
+                $listDoc = getSQLArrayAssoc($this->getParameter('loginDB'), $this->getParameter('PasswordDB'),
+                "SELECT document.id AS d_id, document.titre AS d_titre, document.file_name AS d_fileName, document.date_create AS d_dateCreate
+                FROM document, user
+                WHERE user.id=document.id_owner AND user.id=".$user->getId());
+            }
+        }
+
+
         return $this->render('profil/profilOF_APP.html.twig', 
         [
-            'user' => $user,
-            'listMa' => $listMa,
-            'ma' => $ma,
-            'id' => $id,
-            'document' => $listDoc,
-            'menu' => getMenuFromRole( $this->getUser()->getRoleString() ),
-            'OF'   => $infoOF,         
-            'fonction' => "Apprenti", 
+            'user'      => $user,
+            'listMa'    => $listMa,
+            'ma'        => $ma,
+            'id'        => $id,
+            'documents' => $listDoc,
+            'menu'      => getMenuFromRole( $this->getUser()->getRoleString() ),
+            'OF'        => $infoOF,         
+            'fonction'  => "Apprenti", 
             'listFormateur'=> $listFormateur,
             'entreprise'=>$entreprise,
-            
-            /*'rolema'=>$rolema,*/
+
+            'myform'    => $formulaire->createView(),
+            'role'      => $roleString,
+
         ]);
     }    
+
+
 
     public function insertMA($idMa, User $idApp): Response
     {
@@ -166,6 +234,7 @@ class ProfilController extends AbstractController
         if ( $ret )
             return $ret;
 
+
         // dd($idMa);
         //   dd($id) ;
             $login  = $this->getParameter('loginDB');
@@ -189,6 +258,7 @@ class ProfilController extends AbstractController
          //$deleteMA = "delete from app_has_ma where id_apprenti=$idApp and id_ma=$idMa";
 
         
+
         $doctrine = $this->getDoctrine();
         $entityManager = $doctrine->getManager();
         $entityManager->remove($id);

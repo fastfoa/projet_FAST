@@ -259,6 +259,7 @@ class InscriptionController extends AbstractController
                 $user->setPassword($hashPW ); //0000
 
                 $doctrine = $this->getDoctrine();
+                
                 $entityManager = $doctrine->getManager();
 
                 $entityManager->persist($user);
