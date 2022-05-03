@@ -41,7 +41,12 @@ class Session
     /**
      * @ORM\Column(type="integer", nullable=true)
      */
-    private $nombreHeure; //durée de la formation
+    private $nombreHeure;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $archive; //durée de la formation
 
     public function getId(): ?int
     {
@@ -104,6 +109,18 @@ class Session
     public function setNombreHeure(?string $nombreHeure): self
     {
         $this->nombreHeure = $nombreHeure;
+
+        return $this;
+    }
+
+    public function getArchive(): ?bool
+    {
+        return $this->archive;
+    }
+
+    public function setArchive(bool $archive): self
+    {
+        $this->archive = $archive;
 
         return $this;
     }
