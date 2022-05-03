@@ -33,7 +33,7 @@ class MonCompteOFType extends AbstractType
             ->add('prenom', TextType::class,[
                 'disabled' => true,
                 'attr' => [ 
-                'placeholder' => 'Entrez votre prénom',
+                'placeholder' => 'Yanis SAIDANI',
                 'style'=> 'color: grey !important'
                 ]  
             ])
