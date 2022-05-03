@@ -44,7 +44,7 @@ class DocumentController extends AbstractController
         return null;
     }
 
-    public function upload( Request $request, SluggerInterface $slugger): Response
+    public function upload( Request $request, SluggerInterface $slugger, User $user): Response
     {
         $ret = $this->checkRGPD();
         if ($ret)
@@ -69,80 +69,78 @@ class DocumentController extends AbstractController
 
         $nameOF = 'FOREACH';
 
-
-        if ($roleString == 'ROLE_APP')   //App / MA / ENT / FOR / OF 
-        {
-            $idApp = $user->getId();
-
-            $resMA =  getMAFromApprenti($login, $pw, $idApp);
-            if( $resMA )
-            {
-                $nameMA = $resMA['prenom'] . " " . $resMA['nom'] . " (MA)";
-                $resENT =  getENTFromMA($login, $pw, $resMA['id']);
-                if ( $resENT )
-                {
-                    $resIdSession = getSessionFromApp($login, $pw, $idApp);
-                    if( $resIdSession )
-                    {
-                        $idSession = $resIdSession['id_session'];
-                        $resFormateur = getUsersFromRoleSession($login, $pw, "ROLE_FORMATEUR", $idSession);
-                        if ( $resFormateur )
-                            $nameFormateur = $resFormateur[0]['prenom'] . " " . $resFormateur[0]['nom'] . " (FOR)";
-                    }
-                }
+        // dd( $user );
+    //    dd($vf);
+    //     if ($roleString == 'ROLE_APP')   //App / MA / ENT / FOR / OF 
+    //     {
+    //         $idApp = $user->getId();
         
-            }
-        } 
-        else if ($roleString == 'ROLE_MA') // MA / ENT / FOR / OF /App 
-        {
-            $idMA = $user->getId();
-            $roleMA = $user->getRoles();
+    //         $resMA =  getMAFromApprenti($login, $pw, $idApp);
+    //         if( $resMA )
+    //         {
+    //             $nameMA = $resMA['prenom'] . " " . $resMA['nom'] . " (MA)";
+    //             $resENT =  getENTFromMA($login, $pw, $resMA['id']);
+    //             if ( $resENT )
+    //             {
+    //                 $resIdSession = getSessionFromApp($login, $pw, $idApp);
+    //                 if( $resIdSession )
+    //                 {
+    //                     $idSession = $resIdSession['id_session'];
+    //                     $resFormateur = getUsersFromRoleSession($login, $pw, "ROLE_FORMATEUR", $idSession);
+    //                     if ( $resFormateur )
+    //                         $nameFormateur = $resFormateur[0]['prenom'] . " " . $resFormateur[0]['nom'] . " (FOR)";
+    //                 }
+    //             }
+        
+    //         }
+    //     } 
+    //     else if ($roleString == 'ROLE_MA') // MA / ENT / FOR / OF /App 
+    //     {
+    //         $idMA = $user->getId();
+    //         $roleMA = $user->getRoles();
 
-            $resApp =  getAppFromMA($login, $pw, $idMA);
-            $nameApprenti = $resApp['prenom'] . " " . $resApp['nom'] . " (App)";
+    //         $resApp =  getAppFromMA($login, $pw, $idMA);
+    //         $nameApprenti = $resApp['prenom'] . " " . $resApp['nom'] . " (App)";
 
-            $resENT =  getENTFromMA($login, $pw, $idMA);
-            $nameEntreprise = $resENT['nom'] . " (ENT)";
+    //         $resENT =  getENTFromMA($login, $pw, $idMA);
+    //         $nameEntreprise = $resENT['nom'] . " (ENT)";
 
-            $resIdSession = getSessionFromApp($login, $pw, $resApp['id']);
-            $idSession = $resIdSession['id_session'];
-            $resFormateur = getUsersFromRoleSession($login, $pw, "ROLE_FORMATEUR", $idSession);
-            $nameFormateur = $resFormateur[0]['prenom'] . " " . $resFormateur[0]['nom'] . " (FOR)";
+    //         $resIdSession = getSessionFromApp($login, $pw, $resApp['id']);
+    //         $idSession = $resIdSession['id_session'];
+    //         $resFormateur = getUsersFromRoleSession($login, $pw, "ROLE_FORMATEUR", $idSession);
+    //         $nameFormateur = $resFormateur[0]['prenom'] . " " . $resFormateur[0]['nom'] . " (FOR)";
 
-            $nameMA = '';
+    //         $nameMA = '';
 
-            $nameOF = 'FOREACH';
-        } 
-        else if ($roleString == 'ROLE_ENT') //  ENT / FOR / OF /App/ MA
-        {
-            $idEnt = $user->getId();
-            $roleEnt = $user->getRoles();
+    //         $nameOF = 'FOREACH';
+    //     } 
+    //     else if ($roleString == 'ROLE_ENT') //  ENT / FOR / OF /App/ MA
+    //     {
+    //         $idEnt = $user->getId();
+    //         $roleEnt = $user->getRoles();
+  
+    //         $resMA =  getMAFromEnt($login, $pw, $idEnt);
+    //         if ( $resMA )
+    //         {
+    //             $nameMA = $resMA['prenom'] . " " . $resMA['nom'] . " (MA)";
+    //             //dd($resMA);
 
-            $resMA =  getMAFromEnt($login, $pw, $idEnt);
-            if ( $resMA )
-            {
-                $nameMA = $resMA['prenom'] . " " . $resMA['nom'] . " (MA)";
-                //dd($resMA);
-
-                $resApp =  getAppFromMA($login, $pw, $resMA['id']);
-                if ( $resApp )
-                {
-                    $nameApprenti = $resApp['prenom'] . " " . $resApp['nom'] . " (App)";
-                    $resIdSession = getSessionFromApp($login, $pw, $resApp['id']);
-                    if ( $resIdSession )
-                    {
-                        $idSession = $resIdSession['id_session'];
-                        $resFormateur = getUsersFromRoleSession($login, $pw, "ROLE_FORMATEUR", $idSession);
-                        $nameFormateur = $resFormateur[0]['prenom'] . " " . $resFormateur[0]['nom'] . " (FOR)";
-                    }
-                }
-            }
-        } 
+    //             $resApp =  getAppFromMA($login, $pw, $resMA['id']);
+    //             if ( $resApp )
+    //             {
+    //                 $nameApprenti = $resApp['prenom'] . " " . $resApp['nom'] . " (App)";
+    //                 $resIdSession = getSessionFromApp($login, $pw, $resApp['id']);
+    //                 if ( $resIdSession )
+    //                 {
+    //                     $idSession = $resIdSession['id_session'];
+    //                     $resFormateur = getUsersFromRoleSession($login, $pw, "ROLE_FORMATEUR", $idSession);
+    //                     $nameFormateur = $resFormateur[0]['prenom'] . " " . $resFormateur[0]['nom'] . " (FOR)";
+    //                 }
+    //             }
+    //         }
+    //     } 
 
         $nameOF = 'FOREACH';
-
-
-
 
         $formulaire = $this->createForm(DocumentExtType::class, $up);
         $formulaire->handleRequest($request);
@@ -183,61 +181,74 @@ class DocumentController extends AbstractController
                 $entityManager->persist($up); // On confie notre entit&#xE9; &#xE0; l'entity manager (on persist l'entit&#xE9;)
                 $entityManager->flush();
 
-                if( $up->getOFormation() )
-                {
-                    $recipient = new RecipientDocument();
-                    $recipient->setIdDocument( $up->getId());
-                    $recipient->setIdRecipient( getUserFromMail($login, $pw, 'foreach@academy.fr' )['id'] );
-                    $entityManager->persist($recipient); // On confie notre entit&#xE9; &#xE0; l'entity manager (on persist l'entit&#xE9;)    
-                }
+                // if( $up->getOFormation() )
+                // {
+                //     $recipient = new RecipientDocument();
+                //     $recipient->setIdDocument( $up->getId());
+                //     $recipient->setIdRecipient( getUserFromMail($login, $pw, 'foreach@academy.fr' )['id'] );
+                //     $entityManager->persist($recipient); // On confie notre entit&#xE9; &#xE0; l'entity manager (on persist l'entit&#xE9;)    
+                // }
 
-                if( $resMA && $up->getMA() )
-                {
-                    $recipient = new RecipientDocument();
-                    $recipient->setIdDocument( $up->getId());
-                    $recipient->setIdRecipient( $resMA['id'] );
-                    $entityManager->persist($recipient); // On confie notre entit&#xE9; &#xE0; l'entity manager (on persist l'entit&#xE9;)    
-                }
+                // if( $resMA && $up->getMA() )
+                // {
+                //     $recipient = new RecipientDocument();
+                //     $recipient->setIdDocument( $up->getId());
+                //     $recipient->setIdRecipient( $resMA['id'] );
+                //     $entityManager->persist($recipient); // On confie notre entit&#xE9; &#xE0; l'entity manager (on persist l'entit&#xE9;)    
+                // }
 
-                if( $resApp && $up->getApprenti() )
-                {
-                    $recipient = new RecipientDocument();
-                    $recipient->setIdDocument( $up->getId());
-                    $recipient->setIdRecipient( $resApp['id'] );
-                    $entityManager->persist($recipient); // On confie notre entit&#xE9; &#xE0; l'entity manager (on persist l'entit&#xE9;)    
-                }
-                //dd( )
-                if( $resFormateur && $up->getFormateur() )
-                {
-                    foreach ( $resFormateur as $key =>  $for) {
-                        $recipient = new RecipientDocument();
-                        $recipient->setIdDocument( $up->getId());
-                        $recipient->setIdRecipient( $for['id'] );
-                        $entityManager->persist($recipient); // On confie notre entit&#xE9; &#xE0; l'entity manager (on persist l'entit&#xE9;)                    }
-                    }
-                }
-                if( $resENT && $up->getEntreprise() )
-                {
-                    $recipient = new RecipientDocument();
-                    $recipient->setIdDocument( $up->getId());
-                    $recipient->setIdRecipient( $resENT['id'] );
-                    $entityManager->persist($recipient); // On confie notre entit&#xE9; &#xE0; l'entity manager (on persist l'entit&#xE9;)    
-                }
-                $entityManager->flush();
-                $this->addFlash('message', "Document ajouté");
-                //dd( $retour );
-      
+                // if( $resApp && $up->getApprenti() )
+                // {
+                //     $recipient = new RecipientDocument();
+                //     $recipient->setIdDocument( $up->getId());
+                //     $recipient->setIdRecipient( $resApp['id'] );
+                //     $entityManager->persist($recipient); // On confie notre entit&#xE9; &#xE0; l'entity manager (on persist l'entit&#xE9;)    
+                // }
+                // //dd( )
+                // if( $resFormateur && $up->getFormateur() )
+                // {
+                //     foreach ( $resFormateur as $key =>  $for) {
+                //         $recipient = new RecipientDocument();
+                //         $recipient->setIdDocument( $up->getId());
+                //         $recipient->setIdRecipient( $for['id'] );
+                //         $entityManager->persist($recipient); // On confie notre entit&#xE9; &#xE0; l'entity manager (on persist l'entit&#xE9;)                    }
+                //     }
+                // }
+                // if( $resENT && $up->getEntreprise() )
+                // {
+                //     $recipient = new RecipientDocument();
+                //     $recipient->setIdDocument( $up->getId());
+                //     $recipient->setIdRecipient( $resENT['id'] );
+                //     $entityManager->persist($recipient); // On confie notre entit&#xE9; &#xE0; l'entity manager (on persist l'entit&#xE9;)    
+                // }
+                // $entityManager->flush();
+       
                     // return $this->redirectToRoute( $retour );
-  
-                
-              
+                    
+        
+        $id = $user->getId();
+        //   dd($id);
+     
+       
+        // dd($id);
+
+        $listDoc = getSQLArrayAssoc($this->getParameter('loginDB'), $this->getParameter('PasswordDB'),
+        "SELECT document.id AS d_id, document.titre AS d_titre, document.file_name AS d_fileName, document.date_create AS d_dateCreate
+        FROM document, user
+        WHERE user.id=document.id_owner AND user.id=".$user->getId());
+                    $listDoc = getSQLArrayAssoc($this->getParameter('loginDB'), $this->getParameter('PasswordDB'),
+                    "SELECT document.id AS d_id, document.titre AS d_titre, document.file_name AS d_fileName, document.date_create AS d_dateCreate
+                    FROM document, user
+                    WHERE user.id=document.id_owner AND user.id=$id");
+            $this->redirectToRoute('profilOF_APP',  ['user' => $id]) ;
+                // $this->redirectToRoute('profilOF_APP',  ['user' => $idapp]); 
             }
         }
 
-        return $this->render(
+        return  $this->render(
             'profil/profilOF_APP.html.twig', 
             [
-
+                'documents' => $listDoc,
                 'myform'            => $formulaire->createView(),
                 'role'              => $roleString,
                 'nameOF'            => $nameOF,
@@ -245,7 +256,7 @@ class DocumentController extends AbstractController
                 'nameFormateur'     => $nameFormateur,
                 'nameApprenti'      => $nameApprenti,
                 'nameEntreprise'    => $nameEntreprise,
-                'idapp' => $idApp,
+
                 'menu'              => getMenuFromRole($this->getUser()->getRoleString()),
             ]
         );
@@ -297,15 +308,15 @@ class DocumentController extends AbstractController
         $ret = $this->checkRGPD();
         if ($ret)
             return $ret;
-
+//   dd($id);
             $login = $this->getParameter('loginDB');
             $pw = $this->getParameter('PasswordDB');
       $idd = $user->getid();
-        //   dd($id);
+        // 
        $idapp = getSQLArrayAssoc($login , $pw,
         "SELECT id_owner FROM document where id = $idd "); 
         $idapp = $idapp[0]['id_owner'];
-// dd($idapp);
+
         $doctrine = $this->getDoctrine();
         $om = $doctrine->getManager();
         $om->remove($id);

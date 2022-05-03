@@ -5,6 +5,10 @@
 		.clickable-row:hover {
 			background-color: #f37262;
 		}
+
+		.droitt{
+			justify-content: flex-end; 
+		}
 	</style>
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 {% endblock %}
@@ -21,21 +25,21 @@
 
 {% block body %}
 	<div class="container-fluid bg-workSpace">
-		<div class="row bg-bar">
-			<div class="col-12">
-
+		<div class="row bg-bar p-2">
+			<div class="col-9">
 				<h2>liste de tous les {{ roleName }}s</h2>
 		    </div>
-	    </div>
-		<div class="row bg">
-		
-			<div class="col-2">
-  			{{ form_start(myForm) }}
-			  {{ form_widget(myForm.filtretext) }}
-  				<button  type="submit" class="btn btn-primary ">
-    				<i class="fas fa-search"></i>
-  				</button>
-				  {{ form_end(myForm) }}
+			<div class="col-3">
+				<div class="droitt">
+  					{{ form_start(myForm) }}
+			 			<div class="input-group">
+  							<div class="form-outline">
+			  					{{ form_widget(myForm.filtretext) }}
+			  				</div>
+			 				{{ form_widget(myForm.submit) }}
+			  			</div>
+					{{ form_end(myForm) }}
+				</div>
 			</div>
 		</div>
 
