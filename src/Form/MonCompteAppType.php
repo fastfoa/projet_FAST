@@ -73,24 +73,26 @@ class MonCompteAppType extends AbstractType
                 'style'=> 'color: black !important'
             ]
         ])
-        ->add('TravailleurHandicape', ChoiceType::class,[
-            'label'=> false,
-            'attr' => [
-                'placeholder' => 'Travailleur Handicape'
-            ],
-            'choices'  => [
-                'OUI' => true,
-                'NON' => false,
-            ],
-        ])
-        ->add('SportifHautNiveau', ChoiceType::class,[
-            'label'=> 'Sportif de Haut Niveau',
-            'choices'  => [
-                'OUI' => true,
-                'NON' => false,
-            ],
+        // ->add('TravailleurHandicape', ChoiceType::class,[
+        //     'label'=> false,
+        //     'disabled' => false,
+        //     'attr' => [
+        //         'placeholder' => 'Travailleur Handicape'
+        //     ],
+        //     'choices'  => [
+        //         'OUI' => true,
+        //         'NON' => false,
+        //     ],
+        // ])
+        // ->add('SportifHautNiveau', ChoiceType::class,[
+        //     'label'=> 'Sportif de Haut Niveau',
+        //     'disabled' => false,
+        //     'choices'  => [
+        //         'OUI' => true,
+        //         'NON' => false,
+        //     ],
             
-        ])
+        // ])
         
         
         ->add('save', SubmitType::class,[
