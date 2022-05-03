@@ -943,7 +943,7 @@ class DashController extends AbstractController
         WHERE user.id=document.id_owner AND user.id=".$user->getId());
 
         $ma = getSQLArrayAssoc($this->getParameter('loginDB'), $this->getParameter('PasswordDB'),
-        "SELECT u.nom, u.prenom, u.telephone, u.id, u.role_string                   
+        "SELECT u.nom, u.prenom, u.telephone, u.id, u.role_string, a.id as idl                  
          FROM app_has_ma as a
          RIGHT JOIN user as u ON u.id=a.id_ma 
          WHERE a.id_apprenti=".$user->getId());
