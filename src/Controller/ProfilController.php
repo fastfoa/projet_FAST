@@ -158,17 +158,7 @@ class ProfilController extends AbstractController
 
                 $entityManager->persist($up); // On confie notre entit&#xE9; &#xE0; l'entity manager (on persist l'entit&#xE9;)
                 $entityManager->flush();
-
-          
-                    $recipient = new RecipientDocument();
-                    $recipient->setIdDocument( $up->getId());
-                    $recipient->setIdRecipient( $id );
-                    $entityManager->persist($recipient); // On confie notre entit&#xE9; &#xE0; l'entity manager (on persist l'entit&#xE9;)    
-          
-           
-                $entityManager->flush();
-                $this->addFlash('message', "Document ajouté");
-                //dd( $retour );
+                // raffraichie la liste
                 $listDoc = getSQLArrayAssoc($this->getParameter('loginDB'), $this->getParameter('PasswordDB'),
                 "SELECT document.id AS d_id, document.titre AS d_titre, document.file_name AS d_fileName, document.date_create AS d_dateCreate
                 FROM document, user

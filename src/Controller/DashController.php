@@ -43,24 +43,23 @@ class DashController extends AbstractController
 
     public function dashOFPrincipal(): Response
     {
-
+    // Check le rgpd et voie si il a bien etait valider. si refuse de valider retour au login.
         $ret = $this->checkRGPD();
         if ($ret)
             return $ret;
-
-        $doctrine = $this->getDoctrine();
-        //$listSession = $doctrine->getRepository(Session::class)->findAll();
+    // pour se connecter a PDO
         $login = $this->getParameter('loginDB');
         $pw = $this->getParameter('PasswordDB');
-
-        $listSession = getSQLArrayAssoc($login, $pw, 'SELECT session.id, formation.nom as f, session.debut, session.fin, session.nom 
+    // Donne le liste des ID de la session , le nom de la formation, la date de debut et de fin de formation des sessions en cours.
+        $listSession = getSQLArrayAssoc($login, $pw, 
+        'SELECT session.id, formation.nom as f, session.debut, session.fin, session.nom 
         FROM projet_fast.`session`, projet_fast.formation 
         WHERE formation.id = session.id_formation AND session.archive = 0');
-
-        $listArchive = getSQLArrayAssoc($login, $pw, 'SELECT session.id, formation.nom as f, session.debut, session.fin, session.nom 
+    // Donne le liste des ID de la session , le nom de la formation, la date de debut et de fin de formation des sessions archiver.
+        $listArchive = getSQLArrayAssoc($login, $pw, 
+        'SELECT session.id, formation.nom as f, session.debut, session.fin, session.nom 
         FROM projet_fast.`session`, projet_fast.formation 
         WHERE formation.id = session.id_formation AND session.archive = 1');
-
 
         return $this->render(
             'dash/dashOFPrincipal.html.twig',
@@ -74,34 +73,37 @@ class DashController extends AbstractController
 
     public function addSession(Request $request): Response
     {
-
+    // Check le rgpd et voie si il a bien etait valider. si refuse de valider retour au login.
         $ret = $this->checkRGPD();
         if ($ret)
             return $ret;
-
+    // créer une nouvelle session dans l'entity
         $session = new Session();
-
+    // créer le formulaire a partir du sessionType
         $form = $this->createForm(SessionType::class, $session);
+    // récupération de la requet envoyer part l'utilisateur 
         $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
+    //controle si la requet et bien valider et envoyer
+        if ($form->isSubmitted() && $form->isValid()){
+        // mes la session au boolean 0 pour dire ses une session en cours
             $form = $session->setArchive('0');
+        // permet de gérer la base de données.
             $doctrine = $this->getDoctrine();
+        // permet d'accéder à notre entityManager
             $em = $doctrine->getManager();
+        //  prépare $session pour la création
             $em->persist($session);
+        // enregistre en BDD la $session
             $em->flush();
+        // quand ses enregistrer nous sommes rediriger vers le dashOFPrincipal
             return $this->redirectToRoute("dashOFPrincipal");
         }
 
-        $menu =
-            [
-                'Sessions' => 'dashOFPrincipal',
-                'Apprentis' => 'listAllAprentis',
-                'Formateurs' => 'listAllFormateurs',
-                'Maitres d\'apprentissage' => 'listAllMA',
-                'Entreprises' => 'listAllEntreprises'
-            ];
+    
         return $this->render('dash/addSession.html.twig', [
+            // envoi le formulaire au twig
             'form' => $form->createView(),
+            // affiche la barre de menu
             'menu' => getMenuFromRole($this->getUser()->getRoleString()),
 
 
@@ -110,33 +112,42 @@ class DashController extends AbstractController
 
     public function archivageSession(Session $session)
     {
+         // Check le rgpd et voie si il a bien etait valider. si refuse de valider retour au login.
+
         $ret = $this->checkRGPD();
         if ($ret)
             return $ret;
-            $doctrine = $this->getDoctrine();
+    // recupere ID de la session
             $sessionID = $session->getId();
+              // pour se connecter a PDO
             $login = $this->getParameter('loginDB');
             $pw = $this->getParameter('PasswordDB');
-    
+    // fait un update pour passer le boolean de false 0 (session en cours) vers true 1 (session archiver)
              getSQLRaw(
                 $login,
                 $pw,
                 "UPDATE projet_fast.`session`SET ARCHIVE = TRUE WHERE session.id = $sessionID"
             );
-      
+    // quand update et fait nous sommes rediriger vers le dashOFPrincipal
         return $this->redirectToRoute("dashOFPrincipal");
     }
 
     public function deleteSession(Session $session)
     {
+                 // Check le rgpd et voie si il a bien etait valider. si refuse de valider retour au login.
+
         $ret = $this->checkRGPD();
         if ($ret)
             return $ret;
-
+    // permet de gérer la base de données.
         $doctrine = $this->getDoctrine();
+    // permet d'accéder à notre entityManager
         $om = $doctrine->getManager();
+    // permet de preparer le suppression $session
         $om->remove($session);
+    // Supprime de la BDD la $session
         $om->flush();
+    // quand la suppression et fait nous sommes rediriger vers le dashOFPrincipal
         return $this->redirectToRoute("dashOFPrincipal");
     }
 
@@ -166,7 +177,8 @@ class DashController extends AbstractController
         $MABIS = [];
         $formateurter = [];
 
-        $MA = getMAFromEnt($login, $pw, $entreprise['id']);
+        $MA = getMAFromEnt($login, $pw, $
+        ['id']);
 
         // dd($MA);
 
@@ -919,47 +931,45 @@ class DashController extends AbstractController
 
 
     public function dashApp(Request $request, SluggerInterface $slugger): Response
-    { 
+    {  // Check le rgpd et voie si il a bien etait valider. si refuse de valider retour au login.
         $ret = $this->checkRGPD();
         if ( $ret )
             return $ret;
-
+        // pour se connecter a PDO
             $login  = $this->getParameter('loginDB');
             $pw     = $this->getParameter('PasswordDB');
   
-        $listFormateur=[];
-      
-         $user  = $this->getUser();
-         $id = $user->getId();
-        //  dd($id);      
-        $infoOF = getInfoOF();
-    
-        $sessionID = getIdSessionFromApprenti1($login, $pw,  $id );
-        // dd($id);
-
-        $listDoc = getSQLArrayAssoc($this->getParameter('loginDB'), $this->getParameter('PasswordDB'),
-        "SELECT document.id AS d_id, document.titre AS d_titre, document.file_name AS d_fileName, document.date_create AS d_dateCreate
-        FROM document, user
-        WHERE user.id=document.id_owner AND user.id=".$user->getId());
-
-        $ma = getSQLArrayAssoc($this->getParameter('loginDB'), $this->getParameter('PasswordDB'),
-        "SELECT u.nom, u.prenom, u.telephone, u.id, u.role_string, a.id as idl                  
-         FROM app_has_ma as a
-         RIGHT JOIN user as u ON u.id=a.id_ma 
-         WHERE a.id_apprenti=".$user->getId());
-
-        $MA = getMAFromApprenti($login, $pw, $id);
-        if ( $MA ){
-            $MA = convertUserEntity2SQL($login, $pw, $MA['id'] );
-            $entreprise = getENTFromMA($login, $pw, $MA['id']);
-       if ( $entreprise )
-           $entreprise = convertUserEntity2SQL($login, $pw, $entreprise['id'] );
-           }
-
-    //dd($entreprise);
+            $listFormateur=[];
+            $user  = $this->getUser();
+            $id = $user->getId(); 
+            // Donne les information de organisme de formation    
+            $infoOF = getInfoOF();
+            // Donne ID de la session a partir de ID de l'apprenti
+            $sessionID = getIdSessionFromApprenti1($login, $pw,  $id );
+            // Donne le liste des ID, le titre,le nom du fichier et la date de creation des documents.
+            $listDoc = getSQLArrayAssoc($this->getParameter('loginDB'), $this->getParameter('PasswordDB'),
+            "SELECT document.id AS d_id, document.titre AS d_titre, document.file_name AS d_fileName, document.date_create AS d_dateCreate
+            FROM document, user
+            WHERE user.id=document.id_owner AND user.id=".$user->getId());
+            // Donne les apprentti et les MA qui sont rattacher ensemble
+            $ma = getSQLArrayAssoc($this->getParameter('loginDB'), $this->getParameter('PasswordDB'),
+            "SELECT u.nom, u.prenom, u.telephone, u.id, u.role_string, a.id as idl                  
+            FROM app_has_ma as a
+            RIGHT JOIN user as u ON u.id=a.id_ma 
+            WHERE a.id_apprenti=".$user->getId());
+            // Donne les MA a partir de ID de apprenti
+            $MA = getMAFromApprenti($login, $pw, $id);
+            if ( $MA ){
+                $MA = convertUserEntity2SQL($login, $pw, $MA['id'] );
+                // Donne l'Entreprise a partir de ID du MA
+                $entreprise = getENTFromMA($login, $pw, $MA['id']);
+            if ( $entreprise )
+                $entreprise = convertUserEntity2SQL($login, $pw, $entreprise['id'] );
+            }
+        // donne le nom , prenom, email de tous les MA
         $listMa = getSQLArrayAssoc($this->getParameter('loginDB'), $this->getParameter('PasswordDB'),
         "SELECT id, nom, prenom, email FROM user WHERE role_string='ROLE_MA'");
-
+        // donne le nom , prenom, email de tous les formateurs
         $listFormateur = getSQLArrayAssoc($this->getParameter('loginDB'), $this->getParameter('PasswordDB'),
           "SELECT u.nom, u.prenom, u.email, u.id 
           FROM user_in_session as us0, user_in_session as us1, user as u  
@@ -970,9 +980,6 @@ class DashController extends AbstractController
         $up = new Document();
         $user = $user;
         $roleString = $user->getRoleString();
-
-        $login = $this->getParameter('loginDB');
-        $pw = $this->getParameter('PasswordDB');
 
         $formulaire = $this->createForm(DocumentExtType::class, $up);
         $formulaire->handleRequest($request);
@@ -1007,19 +1014,14 @@ class DashController extends AbstractController
                 $doctrine = $this->getDoctrine();
                 $entityManager = $doctrine->getManager();
 
-                $entityManager->persist($up); // On confie notre entit&#xE9; &#xE0; l'entity manager (on persist l'entit&#xE9;)
+                $entityManager->persist($up); // On confie notre entite; $up; l'entity manager (on persist l'entite;)
                 $entityManager->flush();
-
-          
-                    $recipient = new RecipientDocument();
-                    $recipient->setIdDocument( $up->getId());
-                    $recipient->setIdRecipient( $id );
-                    $entityManager->persist($recipient); // On confie notre entit&#xE9; &#xE0; l'entity manager (on persist l'entit&#xE9;)    
-          
-           
-                $entityManager->flush();
-                $this->addFlash('message', "Document ajouté");
-                //dd( $retour );
+                // raffraichi la liste des ID, le titre,le nom du fichier et la date de creation des documents.
+                $listDoc = getSQLArrayAssoc($this->getParameter('loginDB'), $this->getParameter('PasswordDB'),
+                "SELECT document.id AS d_id, document.titre AS d_titre, document.file_name AS d_fileName, document.date_create AS d_dateCreate
+                FROM document, user
+                WHERE user.id=document.id_owner AND user.id=".$user->getId());         
+              
             }
         }
 
