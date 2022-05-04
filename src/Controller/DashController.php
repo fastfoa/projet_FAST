@@ -155,7 +155,7 @@ class DashController extends AbstractController
 
         $user       = $this->getUser();
         $role       = $user->getRoleString();
-        $user       = convertUserEntity2SQL($login, $pw, $user->getId());
+        $entreprise       = convertUserEntity2SQL($login, $pw, $user->getId());
        
         
         $OF         = getInfoOF();
@@ -214,19 +214,14 @@ class DashController extends AbstractController
             }
         }
 
-        $uid = $user['id'];
 
-
-
-
-        $listDoc = getDocsFromUser($login, $pw, $uid);
 
 
 
         return $this->render(
             'dash/dashEntreprise.html.twig',
             [
-                'document'      => $listDoc,
+               
                 'user'           => $user,
                 'entreprise'    => $entreprise,
                 'apps'           => $appter,
