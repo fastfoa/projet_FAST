@@ -72,10 +72,9 @@ class DashController extends AbstractController
     }
 
     public function addSession(Request $request): Response
-    {
-    // Check le rgpd et voie si il a bien etait valider. si refuse de valider retour au login.
+    { // Check le rgpd et voie si il a bien etait valider. si refuse de valider retour au login.
         $ret = $this->checkRGPD();
-        if ($ret)
+            if ($ret)
             return $ret;
     // créer une nouvelle session dans l'entity
         $session = new Session();
@@ -98,22 +97,17 @@ class DashController extends AbstractController
         // quand ses enregistrer nous sommes rediriger vers le dashOFPrincipal
             return $this->redirectToRoute("dashOFPrincipal");
         }
-
-    
         return $this->render('dash/addSession.html.twig', [
             // envoi le formulaire au twig
             'form' => $form->createView(),
             // affiche la barre de menu
             'menu' => getMenuFromRole($this->getUser()->getRoleString()),
-
-
         ]);
     }
 
     public function archivageSession(Session $session)
     {
-         // Check le rgpd et voie si il a bien etait valider. si refuse de valider retour au login.
-
+    // Check le rgpd et voie si il a bien etait valider. si refuse de valider retour au login.
         $ret = $this->checkRGPD();
         if ($ret)
             return $ret;
@@ -123,7 +117,7 @@ class DashController extends AbstractController
             $login = $this->getParameter('loginDB');
             $pw = $this->getParameter('PasswordDB');
     // fait un update pour passer le boolean de false 0 (session en cours) vers true 1 (session archiver)
-             getSQLRaw(
+            getSQLRaw(
                 $login,
                 $pw,
                 "UPDATE projet_fast.`session`SET ARCHIVE = TRUE WHERE session.id = $sessionID"
@@ -134,8 +128,7 @@ class DashController extends AbstractController
 
     public function deleteSession(Session $session)
     {
-                 // Check le rgpd et voie si il a bien etait valider. si refuse de valider retour au login.
-
+    // Check le rgpd et voie si il a bien etait valider. si refuse de valider retour au login.
         $ret = $this->checkRGPD();
         if ($ret)
             return $ret;
@@ -166,8 +159,8 @@ class DashController extends AbstractController
 
         $user       = $this->getUser();
         $role       = $user->getRoleString();
-        $user       = convertUserEntity2SQL($login, $pw, $user->getId());
-       
+
+        $entreprise = convertUserEntity2SQL($login, $pw, $user->getId());
         
         $OF         = getInfoOF();
         $MA         = null;
@@ -177,8 +170,7 @@ class DashController extends AbstractController
         $MABIS = [];
         $formateurter = [];
 
-        $MA = getMAFromEnt($login, $pw, $
-        ['id']);
+        $MA = getMAFromEnt($login, $pw, $entreprise['id']);
 
         // dd($MA);
 
@@ -226,19 +218,14 @@ class DashController extends AbstractController
             }
         }
 
-        $uid = $user['id'];
-
-
-
-
-        $listDoc = getDocsFromUser($login, $pw, $uid);
+        
 
 
 
         return $this->render(
             'dash/dashEntreprise.html.twig',
             [
-                'document'      => $listDoc,
+               
                 'user'           => $user,
                 'entreprise'    => $entreprise,
                 'apps'           => $appter,
@@ -918,6 +905,7 @@ class DashController extends AbstractController
                 'myForm' => $form->createView(),
             ]
         );
+        
     }
 
     public function listAllMA(Request $request): Response
@@ -937,6 +925,8 @@ class DashController extends AbstractController
             return $ret;
         // pour se connecter a PDO
             $login  = $this->getParameter('loginDB');
+
+            
             $pw     = $this->getParameter('PasswordDB');
   
             $listFormateur=[];

@@ -108,7 +108,7 @@ inscriptionFormateur:
 
 barSession:
   path: /barSession
-  controller: App\Controller\BarController::barSession
+  controller: App\Controller\BarController::bdaarSession
 
 addUser:
   path: /addUser/{role}/{roleName}
